@@ -1,6 +1,6 @@
-
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
+import { APP_INFO } from "../constants";
 
 // Mui imports
 import AppBar from '@mui/material/AppBar';
@@ -17,11 +17,13 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 }));
 
 function Header() {
+  const navigate = useNavigate();
+
   return (
     <StyledAppBar position="static">
       <Toolbar>
         {/* Logo */}
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}><MovieFilterIcon sx={{ fontSize: 26, mb: -0.75, mr: 0.5 }} /> Video Tools </Typography>
+        <Typography variant="h6" onClick={() => navigate('/')} sx={{ flexGrow: 1, cursor: 'pointer' }}><MovieFilterIcon sx={{ fontSize: 26, mb: -0.75, mr: 0.5 }} /> {APP_INFO.name} </Typography>
         {/* Navigation Links */}
         <Box>
           <Button color="inherit" component={Link} to="/">

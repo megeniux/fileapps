@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { APP_INFO } from "../constants";
 
 // MUI imports
 import Grid from '@mui/material/Grid';
@@ -25,6 +26,7 @@ const tools: {
   link: string;
   action: string;
   color: "primary" | "secondary" | "warning" | "info" | "success" | "error";
+  bgColor: "primary.light" | "secondary.light" | "warning.light" | "info.light" | "success.light" | "error.light";
 }[] = [
     {
       title: 'Compress Video',
@@ -32,7 +34,8 @@ const tools: {
       icon: <CompressIcon fontSize="large" color="primary" />,
       link: '/compress',
       action: 'Go to Compress',
-      color: 'primary'
+      color: 'primary',
+      bgColor: 'primary.light'
     },
     {
       title: 'Video Convert',
@@ -40,7 +43,8 @@ const tools: {
       icon: <SwapHorizIcon fontSize="large" color="secondary" />,
       link: '/convert',
       action: 'Go to Convert',
-      color: 'secondary'
+      color: 'secondary',
+      bgColor: 'secondary.light'
     },
     {
       title: 'Trim Video',
@@ -48,7 +52,8 @@ const tools: {
       icon: <ContentCutIcon fontSize="large" color="warning" />,
       link: '/trim',
       action: 'Go to Trim',
-      color: 'warning'
+      color: 'warning',
+      bgColor: 'warning.light'
     },
     {
       title: 'Merge Videos',
@@ -56,7 +61,8 @@ const tools: {
       icon: <MergeTypeIcon fontSize="large" color="info" />,
       link: '/merge',
       action: 'Go to Merge',
-      color: 'info'
+      color: 'info',
+      bgColor: 'info.light'
     },
     {
       title: 'Extract Audio',
@@ -64,7 +70,8 @@ const tools: {
       icon: <MusicNoteIcon fontSize="large" color="success" />,
       link: '/extract-audio',
       action: 'Go to Extract Audio',
-      color: 'success'
+      color: 'success',
+      bgColor: 'success.light'
     },
     {
       title: 'Thumbnail Generator',
@@ -72,20 +79,21 @@ const tools: {
       icon: <ImageIcon fontSize="large" color="error" />,
       link: '/thumbnail',
       action: 'Go to Thumbnail',
-      color: 'error'
+      color: 'error',
+      bgColor: 'error.light'
     }
   ];
 
 function Home() {
   return (
     <Container maxWidth="lg" sx={{ marginBlock: 'auto' }}>
-      <Typography variant="h3" align='center'> Welcome to the Video Tools Suite </Typography>
-      <Typography variant="h6" color="text.secondary" align='center'> A collection of powerful tools to help you manage, compress, and optimize your videos. </Typography>
+      <Typography variant="h1" gutterBottom align='center'> Welcome to {APP_INFO.name} </Typography>
+      <Typography variant="h2" color="text.secondary" align='center'> A collection of powerful tools to help you manage, compress, and optimize your videos. </Typography>
       <Divider sx={{ my: 4 }} />
       <Grid container spacing={{ sm: 2, md: 4 }}>
         {tools.map((tool) => (
           <Grid size={{ xs: 12, sm: 6, lg: 4 }} key={tool.title}>
-            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', border: 1, borderColor: tool.bgColor }}>
               <CardContent>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
                   {tool.icon}

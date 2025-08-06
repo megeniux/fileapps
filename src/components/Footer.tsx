@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { APP_INFO } from "../constants";
 
 // Mui imports
 import { styled } from '@mui/material/styles';
@@ -21,7 +22,7 @@ function Footer() {
   return (
     <FooterRoot>
       <Typography variant="body2" align="center">
-        &copy; {new Date().getFullYear()} Video Tools
+        {APP_INFO.name} &copy; {new Date().getFullYear()}
       </Typography>
 
       <Box display="flex">
