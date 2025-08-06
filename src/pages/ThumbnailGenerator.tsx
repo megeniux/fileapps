@@ -20,10 +20,8 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 
 import ImageIcon from '@mui/icons-material/Image'
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera'
 import CollectionsIcon from '@mui/icons-material/Collections'
 import FilterFramesIcon from '@mui/icons-material/FilterFrames'
-import TimerIcon from '@mui/icons-material/Timer'
 
 function ThumbnailGenerator() {
   const [file, setFile] = useState<File | null>(null)
@@ -37,12 +35,11 @@ function ThumbnailGenerator() {
   const [status, setStatus] = useState<string | null>(null)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null)
-  const [mode, setMode] = useState(0) // 0: Single, 1: Scrub, 2: Frames, 3: Interval
+  const [mode, setMode] = useState(0) // 0: Single, 1: Scrub, 2: Frames
   const [startTime, setStartTime] = useState(0)
   const [endTime, setEndTime] = useState(1)
   const [scrubInterval, setScrubInterval] = useState(1)
   const [frameInterval, setFrameInterval] = useState(10)
-  const [intervalSeconds, setIntervalSeconds] = useState(1)
   const [thumbnails, setThumbnails] = useState<string[]>([])
   const [consoleLogs, setConsoleLogs] = useState<string[]>([])
 
@@ -122,11 +119,6 @@ function ThumbnailGenerator() {
     if (!isNaN(val) && val > 0) setFrameInterval(val)
   }
 
-  const handleIntervalSecondsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const val = parseFloat(event.target.value)
-    if (!isNaN(val) && val > 0) setIntervalSeconds(val)
-  }
-
   const handleExtractThumbnail = async () => {
     if (!file) return
     setIsProcessing(true)
@@ -143,10 +135,41 @@ function ThumbnailGenerator() {
     try {
       await ffmpeg.load()
       await ffmpeg.writeFile(inputFileName, await fetchFile(file))
+      let totalScrubFrames = 0
+      let scrubFramesDone = 0
+      if (mode === 1) {
+        totalScrubFrames = Math.floor((endTime - startTime) / scrubInterval) + 1
+      }
       const logHandler = ({ message }: { message: string }) => {
         setConsoleLogs(logs => [...logs, message])
-        if (message.includes('frame=')) {
-          setProgress(prev => Math.min(prev + 10, 99))
+        if (mode === 1 && message.includes('frame=')) {
+          // Scrub mode: update progress by frames
+          scrubFramesDone++
+          setProgress(Math.min(100, (scrubFramesDone / totalScrubFrames) * 100))
+        } else {
+          // Extract time= from ffmpeg log (Single/Frames)
+          const timeMatch = message.match(/time=([0-9:.]+)/)
+          if (timeMatch) {
+            const timeStr = timeMatch[1]
+            const parts = timeStr.split(':').map(Number)
+            let seconds = 0
+            if (parts.length === 3) {
+              seconds = parts[0] * 3600 + parts[1] * 60 + parts[2]
+            } else if (parts.length === 2) {
+              seconds = parts[0] * 60 + parts[1]
+            } else if (parts.length === 1) {
+              seconds = parts[0]
+            }
+            const rangeStart = mode === 0 ? time : startTime
+            const rangeEnd = mode === 0 ? time : endTime
+            const totalRange = Math.max(rangeEnd - rangeStart, 0.01)
+            const percent = Math.min(100, ((seconds - rangeStart) / totalRange) * 100)
+            setProgress(percent)
+          }
+          // Fallback for frame= log (Frames mode)
+          if (mode === 2 && message.includes('frame=')) {
+            setProgress(prev => Math.min(prev + 10, 99))
+          }
         }
       }
       ffmpeg.on('log', logHandler)
@@ -169,7 +192,7 @@ function ThumbnailGenerator() {
         urls = [url]
         await ffmpeg.deleteFile(outputFileName)
       } else if (mode === 1) {
-        setStatus(`Extracting frames every ${scrubInterval}s from ${startTime}s to ${endTime}s`)
+        setStatus(`Generating Scrub from ${startTime}s to ${endTime}s`)
         let idx = 0
         let frameNames: string[] = []
         for (let t = startTime; t <= endTime; t += scrubInterval) {
@@ -203,7 +226,7 @@ function ThumbnailGenerator() {
         }
         await ffmpeg.deleteFile('scrub_joined.jpg')
       } else if (mode === 2) {
-        setStatus(`Extracting every ${frameInterval}th frame from ${startTime}s to ${endTime}s`)
+        setStatus(`Extracting frame after every ${frameInterval} frame(s) from ${startTime}s to ${endTime}s`)
         await ffmpeg.exec([
           '-i', inputFileName,
           '-ss', `${startTime}`,
@@ -216,37 +239,6 @@ function ThumbnailGenerator() {
         let idx = 1
         while (true) {
           const outName = `frames_${String(idx).padStart(3, '0')}.jpg`
-          try {
-            const data = await ffmpeg.readFile(outName)
-            const url = URL.createObjectURL(new Blob([data], { type: 'image/jpeg' }))
-            urls.push(url)
-            await ffmpeg.deleteFile(outName)
-            idx++
-          } catch {
-            break
-          }
-        }
-      } else if (mode === 3) {
-        // Interval mode: limit number of frames
-        const frameCount = Math.floor((endTime - startTime) / intervalSeconds) + 1
-        if (frameCount > MAX_INTERVAL_FRAMES) {
-          setErrorMsg(`Too many frames (${frameCount}). Please increase interval or reduce range (max ${MAX_INTERVAL_FRAMES}).`)
-          setIsProcessing(false)
-          ffmpeg.off('log', logHandler)
-          return
-        }
-        setStatus(`Extracting every ${intervalSeconds}s from ${startTime}s to ${endTime}s`)
-        await ffmpeg.exec([
-          '-i', inputFileName,
-          '-ss', `${startTime}`,
-          '-to', `${endTime}`,
-          '-vf', `fps=1/${intervalSeconds},scale=${width}:${height}`,
-          '-pix_fmt', 'yuv420p',
-          'interval_%03d.jpg'
-        ])
-        let idx = 1
-        while (true) {
-          const outName = `interval_${String(idx).padStart(3, '0')}.jpg`
           try {
             const data = await ffmpeg.readFile(outName)
             const url = URL.createObjectURL(new Blob([data], { type: 'image/jpeg' }))
@@ -358,10 +350,9 @@ function ThumbnailGenerator() {
               variant="fullWidth"
               sx={{ mb: 2 }}
             >
-              <Tab icon={<PhotoCameraIcon />} label="Single Frame" />
+              <Tab icon={<ImageIcon />} label="Single Frame" />
               <Tab icon={<CollectionsIcon />} label="Scrub" />
               <Tab icon={<FilterFramesIcon />} label="Frames" />
-              <Tab icon={<TimerIcon />} label="Interval" />
             </Tabs>
           )}
           {/* Start/End time slider for all modes except Single Frame */}
@@ -408,7 +399,6 @@ function ThumbnailGenerator() {
                       size="small"
                       value={width}
                       onChange={handleWidthChange}
-                      inputProps={{ min: 1 }}
                       sx={{ flex: 1 }}
                     />
                     <TextField
@@ -417,109 +407,65 @@ function ThumbnailGenerator() {
                       size="small"
                       value={height}
                       onChange={handleHeightChange}
-                      inputProps={{ min: 1 }}
                       sx={{ flex: 1 }}
                     />
                   </Box>
                 </Box>
               )}
               {mode === 1 && (
-                <Box mb={2}>
+                <Box display="flex" mb={2} gap={2}>
                   <TextField
                     label="Interval (s)"
                     type="number"
                     size="small"
                     value={scrubInterval}
                     onChange={handleScrubIntervalChange}
-                    inputProps={{ min: 0.1, step: 0.1 }}
-                    sx={{ mb: 2, width: '100%' }}
+                    sx={{ flex: 1 }}
                   />
-                  <Box display="flex" gap={2}>
-                    <TextField
-                      label="Width"
-                      type="number"
-                      size="small"
-                      value={width}
-                      onChange={handleWidthChange}
-                      inputProps={{ min: 1 }}
-                      sx={{ flex: 1 }}
-                    />
-                    <TextField
-                      label="Height"
-                      type="number"
-                      size="small"
-                      value={height}
-                      onChange={handleHeightChange}
-                      inputProps={{ min: 1 }}
-                      sx={{ flex: 1 }}
-                    />
-                  </Box>
+                  <TextField
+                    label="Width"
+                    type="number"
+                    size="small"
+                    value={width}
+                    onChange={handleWidthChange}
+                    sx={{ flex: 1 }}
+                  />
+                  <TextField
+                    label="Height"
+                    type="number"
+                    size="small"
+                    value={height}
+                    onChange={handleHeightChange}
+                    sx={{ flex: 1 }}
+                  />
                 </Box>
               )}
               {mode === 2 && (
-                <Box mb={2}>
+                <Box display="flex" mb={2} gap={2}>
                   <TextField
                     label="Frame Interval"
                     type="number"
                     size="small"
                     value={frameInterval}
                     onChange={handleFrameIntervalChange}
-                    inputProps={{ min: 1 }}
-                    sx={{ mb: 2, width: '100%' }}
+                    sx={{ flex: 1 }}
                   />
-                  <Box display="flex" gap={2}>
-                    <TextField
-                      label="Width"
-                      type="number"
-                      size="small"
-                      value={width}
-                      onChange={handleWidthChange}
-                      inputProps={{ min: 1 }}
-                      sx={{ flex: 1 }}
-                    />
-                    <TextField
-                      label="Height"
-                      type="number"
-                      size="small"
-                      value={height}
-                      onChange={handleHeightChange}
-                      inputProps={{ min: 1 }}
-                      sx={{ flex: 1 }}
-                    />
-                  </Box>
-                </Box>
-              )}
-              {mode === 3 && (
-                <Box mb={2}>
                   <TextField
-                    label="Interval (s)"
+                    label="Width"
                     type="number"
                     size="small"
-                    value={intervalSeconds}
-                    onChange={handleIntervalSecondsChange}
-                    inputProps={{ min: 0.1, step: 0.1 }}
-                    sx={{ mb: 2, width: '100%' }}
+                    value={width}
+                    onChange={handleWidthChange}
+                    sx={{ flex: 1 }}
                   />
-                  <Box display="flex" gap={2}>
-                    <TextField
-                      label="Width"
-                      type="number"
-                      size="small"
-                      value={width}
-                      onChange={handleWidthChange}
-                      inputProps={{ min: 1 }}
-                      sx={{ flex: 1 }}
-                    />
-                    <TextField
-                      label="Height"
-                      type="number"
-                      size="small"
-                      value={height}
-                      onChange={handleHeightChange}
-                      inputProps={{ min: 1 }}
-                      sx={{ flex: 1 }}
-                    />
-                  </Box>
+                  <TextField
+                    label="Height"
+                    type="number"
+                    size="small"
+                    value={height}
+                    onChange={handleHeightChange}
+                    sx={{ flex: 1 }}
+                  />
                 </Box>
               )}
             </>
