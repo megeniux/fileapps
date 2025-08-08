@@ -31,6 +31,8 @@ import { fetchFile } from '@ffmpeg/util'
 const ffmpeg = new FFmpeg()
 let isFFmpegLoaded = false
 
+export const description = "Merge multiple video files into one seamlessly. Combine clips online with VideoTools' fast and secure video merger—no downloads required.";
+
 function VideoMerge() {
   const [files, setFiles] = useState<File[]>([])
   const [errorMsg, setErrorMsg] = useState<string | null>(null)

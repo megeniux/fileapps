@@ -52,6 +52,8 @@ const defaultState = {
 const ffmpeg = new FFmpeg()
 let isFFmpegLoaded = false
 
+export const description = "Resize videos to custom dimensions or aspect ratios online. Optimize your videos for web, social media, and more with VideoTools' easy video resizer.";
+
 function VideoResize() {
   const [file, setFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)

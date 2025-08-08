@@ -23,6 +23,8 @@ import CloseIcon from '@mui/icons-material/Close';
 const ffmpeg = new FFmpeg()
 let isFFmpegLoaded = false
 
+export const description = "Trim and cut videos online with precision. Remove unwanted sections and create perfect clips instantly using VideoTools' free video trimmer.";
+
 function VideoTrim() {
   const [file, setFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)

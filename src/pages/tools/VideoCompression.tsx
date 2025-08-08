@@ -27,6 +27,8 @@ import CloseIcon from '@mui/icons-material/Close';
 const ffmpeg = new FFmpeg();
 let isFFmpegLoaded = false;
 
+export const description = "Compress video files online without losing quality. Reduce video file size quickly and securely in your browser with VideoTools' free video compressor.";
+
 function VideoCompression() {
   const [file, setFile] = useState<File | null>(null);
   const [crf, setCrf] = useState(18);

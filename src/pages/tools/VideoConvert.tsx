@@ -74,6 +74,8 @@ const presetValues = [
 const CRF_KEEP = 'keep';
 const PRESET_KEEP = 'keep';
 
+export const description = "Convert videos to MP4, AVI, MOV, and more formats online. Fast, secure, and easy video conversion with VideoTools—no software installation needed.";
+
 function VideoConvert() {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);

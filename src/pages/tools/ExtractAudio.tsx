@@ -23,6 +23,8 @@ import CloseIcon from '@mui/icons-material/Close';
 const ffmpeg = new FFmpeg()
 let isFFmpegLoaded = false
 
+export const description = "Extract audio tracks from any video file online. Convert video to MP3 or other audio formats easily with VideoTools' audio extractor.";
+
 function ExtractAudio() {
   const [file, setFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)

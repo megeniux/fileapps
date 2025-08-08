@@ -26,6 +26,8 @@ import CollectionsIcon from '@mui/icons-material/Collections'
 import FilterFramesIcon from '@mui/icons-material/FilterFrames'
 import CloseIcon from '@mui/icons-material/Close'
 
+export const description = "Generate high-quality thumbnails from your videos online. Capture and download video stills instantly with VideoTools' thumbnail generator.";
+
 function ThumbnailGenerator() {
   const [file, setFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)

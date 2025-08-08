@@ -32,63 +32,66 @@ const tools: {
     {
       title: 'Compress Video',
       description: 'Reduce video file size while maintaining quality. Fast and easy compression for all your videos.',
-      icon: <CompressIcon fontSize="large" color="primary" />,
+      icon: <CompressIcon fontSize="small" color="primary" />,
       link: '/compress',
       color: 'primary'
     },
     {
       title: 'Video Convert',
       description: 'Convert videos to different formats easily. Supports a wide range of formats for your convenience.',
-      icon: <SwapHorizIcon fontSize="large" color="secondary" />,
+      icon: <SwapHorizIcon fontSize="small" color="secondary" />,
       link: '/convert',
       color: 'secondary'
     },
     {
       title: 'Resize Video',
       description: 'Adjust video dimensions to fit your needs. Resize videos without losing quality.',
-      icon: <AspectRatioIcon fontSize="large" color='inherit' />,
+      icon: <AspectRatioIcon fontSize="small" color='inherit' />,
       link: '/resize',
       color: 'inherit'
     },
     {
       title: 'Trim Video',
       description: 'Cut unwanted parts from your video with precision. Simple trimming for quick edits.',
-      icon: <ContentCutIcon fontSize="large" color="warning" />,
+      icon: <ContentCutIcon fontSize="small" color="warning" />,
       link: '/trim',
       color: 'warning'
     },
     {
       title: 'Merge Videos',
       description: 'Combine multiple videos into one seamlessly. Perfect for creating compilations.',
-      icon: <MergeTypeIcon fontSize="large" color="info" />,
+      icon: <MergeTypeIcon fontSize="small" color="info" />,
       link: '/merge',
       color: 'info'
     },
     {
       title: 'Extract Audio',
       description: 'Extract audio tracks from your videos. Save audio as separate files easily.',
-      icon: <MusicNoteIcon fontSize="large" color="success" />,
+      icon: <MusicNoteIcon fontSize="small" color="success" />,
       link: '/extract-audio',
       color: 'success'
     },
     {
       title: 'Thumbnail Generator',
       description: 'Generate thumbnails from your videos for previews and sharing.',
-      icon: <ImageIcon fontSize="large" color="error" />,
+      icon: <ImageIcon fontSize="small" color="error" />,
       link: '/thumbnail',
       color: 'error'
     }
   ];
+
+// SEO-friendly description for the Home page
+export const description = "Your all-in-one online suite for video editing. compress, convert, trim, resize, merge videos, extract audio, and generate thumbnails quickly and securely in your browser. No downloads required.";
 
 function Home() {
   const navigate = useNavigate();
   return (
     <Container maxWidth="lg" sx={{ marginBlock: 'auto' }}>
       <Typography variant="h1" gutterBottom align='center'> Welcome to {APP_INFO.name} </Typography>
-      <Typography variant="h2" color="text.secondary" align='center'> A collection of powerful tools to help you manage, compress, and optimize your videos. </Typography>
+      <Typography variant="h6" component="h2" fontWeight={400} color="text.secondary" align='center'>{description}</Typography>
       <Divider sx={{ my: 4 }} />
       <TableContainer component={Paper}>
-        <Table>
+        <Table size='small'>
           <TableHead>
             <TableRow>
               <TableCell />
@@ -105,15 +108,15 @@ function Home() {
               <TableRow
                 key={tool.title}
                 hover
-                sx={{ cursor: 'pointer' }}
+                sx={{ cursor: 'pointer', '& > .MuiTableCell-root': { borderColor: 'divider' }, '&:last-child > .MuiTableCell-root': { borderBottom: 0 } }}
                 onClick={() => navigate(tool.link)}
               >
                 <TableCell width={64}>{tool.icon}</TableCell>
                 <TableCell>
-                  <Typography color="text.primary">{tool.title}</Typography>
+                  <Typography color="text.primary" noWrap>{tool.title}</Typography>
                 </TableCell>
                 <TableCell>
-                  <Typography color="text.secondary">{tool.description}</Typography>
+                  <Typography variant='body2' color="text.secondary">{tool.description}</Typography>
                 </TableCell>
               </TableRow>
             ))}
