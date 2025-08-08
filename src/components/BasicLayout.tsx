@@ -6,7 +6,7 @@ import Footer from './Footer';
 
 // MUI imports
 import { styled } from '@mui/material/styles';
-import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 
 type BasicLayoutProps = {
@@ -14,7 +14,6 @@ type BasicLayoutProps = {
 };
 
 const Root = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
   overflow: 'hidden',
   '& > .main-container': {
     display: 'flex',
@@ -30,9 +29,9 @@ function BasicLayout({ children }: BasicLayoutProps) {
   return (
     <Root>
       <Header />
-      <Container maxWidth="xl" className='main-container'>
+      <Paper square elevation={0} className='main-container'>
         {children}
-      </Container>
+      </Paper>
       <Footer />
     </Root>
   );

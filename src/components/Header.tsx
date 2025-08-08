@@ -13,7 +13,7 @@ import Box from '@mui/material/Box';
 import MovieFilterIcon from '@mui/icons-material/MovieFilter';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.main,
+  // Custom styles for the AppBar
 }));
 
 function Header() {

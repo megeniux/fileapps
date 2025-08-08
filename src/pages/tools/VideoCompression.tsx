@@ -22,6 +22,7 @@ import IconButton from '@mui/material/IconButton';
 // Icons
 import CompressIcon from '@mui/icons-material/Compress';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 
 const ffmpeg = new FFmpeg();
 let isFFmpegLoaded = false;
@@ -175,6 +176,17 @@ function VideoCompression() {
     setErrorMsg(null);
   };
 
+  const handleRemoveFile = () => {
+    setFile(null);
+    setPreviewUrl(null);
+    setDownloadUrl(null);
+    setDownloadSize(null);
+    setProgress(0);
+    setStatus(null);
+    setConsoleLogs([]);
+    totalDurationRef.current = 0;
+  };
+
   const handleDownload = () => {
     if (downloadUrl && file) {
       const a = document.createElement('a');
@@ -205,7 +217,7 @@ function VideoCompression() {
   ];
 
   return (
-    <Container maxWidth="sm" sx={{ my: 'auto' }}>
+    <Container maxWidth="md" sx={{ my: 'auto' }}>
       <Card sx={{ px: 2, py: 3 }}>
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
@@ -218,22 +230,37 @@ function VideoCompression() {
             </Typography>
           </Box>
           <Divider sx={{ my: 2 }} />
-          <Box display="flex" alignItems="center" mb={2} p={1} borderRadius={0.5} border={1} borderColor="divider" bgcolor="action.hover">
-            <Box display="flex" justifyContent="center" alignItems="center" width={120} height={72} border={1} borderColor="divider" mr={2}>
-              {previewUrl ? <video
-                ref={videoRef}
-                src={previewUrl}
-                controls={false}
-                style={{ width: 120, height: 72, background: '#000' }}
-                onLoadedMetadata={handleLoadedMetadata}
-              /> : <Typography variant="body2" color="text.secondary" textAlign="center">No video selected</Typography>}
+          <Box display="flex" alignItems="center" flexDirection="column" position="relative" p={2}>
+            <Box display="flex" justifyContent="center" alignItems="center" width={120} height={72} borderRadius={1} bgcolor="divider" mb={1}>
+              {previewUrl ? (
+                <video
+                  ref={videoRef}
+                  src={previewUrl}
+                  controls={false}
+                  style={{ width: 120, height: 72, background: '#000' }}
+                  onLoadedMetadata={handleLoadedMetadata}
+                />
+              ) : (
+                <Typography variant="body2" color="text.secondary" textAlign="center">No Preview</Typography>
+              )}
             </Box>
-            <Box flex={1}>
-              <input type="file" accept="video/*" onChange={handleFileChange} style={{ width: '100%' }} />
+            <Box flex={1} height={72} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+              {!file && <>
+                <Typography variant='body2' color='text.secondary'>Click or Drop a file to start the process</Typography>
+                <input type="file" accept="video/*" onChange={handleFileChange} style={{ width: '100%', height: '100%', top: 0, opacity: 0, position: 'absolute' }} />
+              </>}
+              {!!file &&
+                <Typography variant="body2" color="primary" noWrap>
+                  {file.name} ({formatBytes(file.size)})
+                  <IconButton size="small" color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
+                    <CloseIcon fontSize='small'/>
+                  </IconButton>
+                </Typography>
+              }
             </Box>
           </Box>
           {file && !isProcessing && (
-            <Grid container spacing={2}>
+            <Grid container spacing={2} mt={2}>
               <Grid size={{ xs: 12, md: 6 }}>
                 <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <Box display="flex" alignItems="center">
@@ -272,7 +299,7 @@ function VideoCompression() {
           )}
         </CardContent>
 
-        <CardActions sx={{display: !!file ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
+        <CardActions sx={{ display: !!file ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
           <Button variant="contained" onClick={handleProceed} disabled={!file || isProcessing}>
             {isProcessing ? 'Compressing' : 'Compress'}
           </Button>
@@ -290,7 +317,7 @@ function VideoCompression() {
 
         {isProcessing && (
           <Box textAlign="center" bgcolor="action.hover" p={2} mt={2} borderRadius={0.25} overflow="hidden">
-            <LinearProgress variant="determinate" value={progress} />
+            <LinearProgress color="success" variant="determinate" value={progress} />
             <Typography variant="body2" my={1}>{`${status} (${progress.toFixed(1)}%)`}</Typography>
             <Typography variant="caption" color="text.secondary" noWrap>
               {consoleLogs.length > 0 ? consoleLogs[consoleLogs.length - 1] : ""}

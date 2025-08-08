@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react'
+import React, { useState, useRef} from 'react'
 import { FFmpeg } from '@ffmpeg/ffmpeg'
 import { fetchFile } from '@ffmpeg/util'
 import JSZip from 'jszip'
@@ -18,10 +18,13 @@ import Divider from '@mui/material/Divider'
 import TextField from '@mui/material/TextField'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
+import IconButton from '@mui/material/IconButton'
 
+// Icons
 import ImageIcon from '@mui/icons-material/Image'
 import CollectionsIcon from '@mui/icons-material/Collections'
 import FilterFramesIcon from '@mui/icons-material/FilterFrames'
+import CloseIcon from '@mui/icons-material/Close'
 
 function ThumbnailGenerator() {
   const [file, setFile] = useState<File | null>(null)
@@ -46,8 +49,6 @@ function ThumbnailGenerator() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const ffmpegRef = useRef<FFmpeg | null>(null)
 
-  const MAX_INTERVAL_FRAMES = 50
-
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files?.[0]) {
       setFile(event.target.files[0])
@@ -63,6 +64,21 @@ function ThumbnailGenerator() {
       setThumbnails([])
       setConsoleLogs([])
     }
+  }
+
+  const handleRemoveFile = () => {
+    setFile(null)
+    setPreviewUrl(null)
+    setDuration(0)
+    setTime(0)
+    setStartTime(0)
+    setEndTime(1)
+    setProgress(0)
+    setStatus(null)
+    setErrorMsg(null)
+    setThumbnailUrl(null)
+    setThumbnails([])
+    setConsoleLogs([])
   }
 
   const handleLoadedMetadata = () => {
@@ -312,7 +328,7 @@ function ThumbnailGenerator() {
   }
 
   return (
-    <Container maxWidth="sm" sx={{ my: 'auto' }}>
+    <Container maxWidth="md" sx={{ my: 'auto' }}>
       <Card sx={{ px: 2, py: 3 }}>
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
@@ -324,8 +340,9 @@ function ThumbnailGenerator() {
             </Typography>
           </Box>
           <Divider sx={{ my: 2 }} />
-          <Box display="flex" alignItems="center" mb={2} p={1} borderRadius={0.5} border={1} borderColor="divider" bgcolor="action.hover">
-            <Box display="flex" justifyContent="center" alignItems="center" width={120} height={72} border={1} borderColor="divider" mr={2}>
+          {/* Unified Upload/Preview UI */}
+          <Box display="flex" alignItems="center" flexDirection="column" position="relative" p={2}>
+            <Box display="flex" justifyContent="center" alignItems="center" width={120} height={72} borderRadius={1} bgcolor="divider" mb={1}>
               {previewUrl ? (
                 <video
                   ref={videoRef}
@@ -335,13 +352,25 @@ function ThumbnailGenerator() {
                   onLoadedMetadata={handleLoadedMetadata}
                 />
               ) : (
-                <Typography variant="body2" color="text.secondary" textAlign="center">No video selected</Typography>
+                <Typography variant="body2" color="text.secondary" textAlign="center">No Preview</Typography>
               )}
             </Box>
-            <Box flex={1}>
-              <input type="file" accept="video/*" onChange={handleFileChange} style={{ width: '100%' }} />
+            <Box flex={1} height={72} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+              {!file && <>
+                <Typography variant='body2' color='text.secondary'>Click or Drop a file to start the process</Typography>
+                <input type="file" accept="video/*" onChange={handleFileChange} style={{ width: '100%', height: '100%', top: 0, opacity: 0, position: 'absolute' }} />
+              </>}
+              {!!file &&
+                <Typography variant="body2" color="error" noWrap>
+                  {file.name}
+                  <IconButton size="small" color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
+                    <CloseIcon fontSize='small'/>
+                  </IconButton>
+                </Typography>
+              }
             </Box>
           </Box>
+          {/* End Unified Upload/Preview UI */}
           {/* Tabs for extraction modes, only visible when video is loaded */}
           {file && !isProcessing && duration > 0 && (
             <Tabs
@@ -362,7 +391,6 @@ function ThumbnailGenerator() {
                 Select Range: <small>{`${startTime.toFixed(1)}s - ${endTime.toFixed(1)}s`}</small>
               </Typography>
               <Slider
-                color="error"
                 min={0}
                 max={Math.floor(duration)}
                 step={0.1}
@@ -383,7 +411,6 @@ function ThumbnailGenerator() {
                     Select Time: <small>{`${time.toFixed(1)}s`}</small>
                   </Typography>
                   <Slider
-                    color="error"
                     min={0}
                     max={Math.floor(duration)}
                     step={0.1}
@@ -490,7 +517,7 @@ function ThumbnailGenerator() {
           )}
         </CardContent>
         <CardActions sx={{ display: !!file ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" color="error" onClick={handleExtractThumbnail} disabled={!file || isProcessing}>
+          <Button variant="contained" onClick={handleExtractThumbnail} disabled={!file || isProcessing}>
             {isProcessing ? 'Extracting' : 'Extract'}
           </Button>
           {isProcessing && (
@@ -506,7 +533,7 @@ function ThumbnailGenerator() {
         </CardActions>
         {isProcessing && (
           <Box textAlign="center" bgcolor="action.hover" p={2} mt={2} borderRadius={0.25} overflow="hidden">
-            <LinearProgress color="error" variant="determinate" value={progress} />
+            <LinearProgress color="success" variant="determinate" value={progress} />
             <Typography variant="body2" my={1}>{`${status} (${progress.toFixed(1)}%)`}</Typography>
             <Typography variant="caption" color="text.secondary" noWrap>
               {consoleLogs.length > 0 ? consoleLogs[consoleLogs.length - 1] : ""}

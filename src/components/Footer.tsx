@@ -1,34 +1,30 @@
-import { Link } from 'react-router-dom';
 import { APP_INFO } from "../constants";
 
 // Mui imports
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
+import Link from '@mui/material/Link';
 
-const FooterRoot = styled(Box)(({ theme }) => ({
+const FooterRoot = styled(Paper)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
   paddingInline: theme.spacing(2),
   height: 30,
-  backgroundColor: theme.palette.divider,
   overflow: 'hidden',
 }));
 
 function Footer() {
   return (
-    <FooterRoot>
-      <Typography variant="body2" align="center">
-        {APP_INFO.name} &copy; {new Date().getFullYear()}
-      </Typography>
-
+    <FooterRoot square>
+      <Typography variant="body2" align="center"> {APP_INFO.name} &copy; {new Date().getFullYear()} </Typography>
       <Box display="flex">
-        <Button color="inherit" size='small' component={Link} to="/tos"> Terms of Service </Button>
+        <Link color="text.secondary" href="/tos" underline="none"><Typography variant="body2">Terms of Service</Typography></Link>
         <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
-        <Button color="inherit" size='small' component={Link} to="/privacy"> Privacy Policy </Button>
+        <Link color="text.secondary" href="/privacy" underline="none"><Typography variant="body2">Privacy Policy</Typography></Link>
       </Box>
     </FooterRoot>
   );

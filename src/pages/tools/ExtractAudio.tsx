@@ -14,9 +14,11 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 import Slider from '@mui/material/Slider';
+import IconButton from '@mui/material/IconButton';
 
 // Icons
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import CloseIcon from '@mui/icons-material/Close';
 
 const ffmpeg = new FFmpeg()
 let isFFmpegLoaded = false
@@ -62,6 +64,19 @@ function ExtractAudio() {
       setRange([0, 0])
     }
   }
+
+  const handleRemoveFile = () => {
+    setFile(null);
+    setPreviewUrl(null);
+    setProgress(0);
+    setStatus(null);
+    setErrorMsg(null);
+    setDownloadUrl(null);
+    setDownloadSize(null);
+    setConsoleLogs([]);
+    setDuration(0);
+    setRange([0, 0]);
+  };
 
   const handleExtract = async () => {
     if (!file) return
@@ -132,7 +147,7 @@ function ExtractAudio() {
   }
 
   return (
-    <Container maxWidth="sm" sx={{ my: 'auto' }}>
+    <Container maxWidth="md" sx={{ my: 'auto' }}>
       <Card sx={{ px: 2, py: 3 }}>
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
@@ -144,27 +159,43 @@ function ExtractAudio() {
             </Typography>
           </Box>
           <Divider sx={{ my: 2 }} />
-          <Box display="flex" alignItems="center" mb={2} p={1} borderRadius={0.5} border={1} borderColor="divider" bgcolor="action.hover">
-            <Box display="flex" justifyContent="center" alignItems="center" width={120} height={72} border={1} borderColor="divider" mr={2}>
-              {previewUrl ? <video
-                ref={videoRef}
-                src={previewUrl}
-                controls={false}
-                style={{ width: 120, height: 72, background: '#000' }}
-                onLoadedMetadata={handleLoadedMetadata}
-              /> : <Typography variant="body2" color="text.secondary" textAlign="center">No video selected</Typography>}
+          {/* Unified Upload/Preview UI */}
+          <Box display="flex" alignItems="center" flexDirection="column" position="relative" p={2}>
+            <Box display="flex" justifyContent="center" alignItems="center" width={120} height={72} borderRadius={1} bgcolor="divider" mb={1}>
+              {previewUrl ? (
+                <video
+                  ref={videoRef}
+                  src={previewUrl}
+                  controls={false}
+                  style={{ width: 120, height: 72, background: '#000' }}
+                  onLoadedMetadata={handleLoadedMetadata}
+                />
+              ) : (
+                <Typography variant="body2" color="text.secondary" textAlign="center">No Preview</Typography>
+              )}
             </Box>
-            <Box flex={1}>
-              <input type="file" accept="video/*" onChange={handleFileChange} style={{ width: '100%' }} />
+            <Box flex={1} height={72} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+              {!file && <>
+                <Typography variant='body2' color='text.secondary'>Click or Drop a file to start the process</Typography>
+                <input type="file" accept="video/*" onChange={handleFileChange} style={{ width: '100%', height: '100%', top: 0, opacity: 0, position: 'absolute' }} />
+              </>}
+              {!!file &&
+                <Typography variant="body2" color="success" noWrap>
+                  {file.name}
+                  <IconButton size="small" color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
+                    <CloseIcon fontSize='small'/>
+                  </IconButton>
+                </Typography>
+              }
             </Box>
           </Box>
+          {/* End Unified Upload/Preview UI */}
           {file && duration > 0 && !isProcessing && (
             <Box mb={2}>
               <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 Select Duration: <small>{`${range[0]}s - ${range[1]}s`}</small>
               </Typography>
               <Slider
-                color='success'
                 min={0}
                 max={Math.floor(duration)}
                 step={0.1}
@@ -178,7 +209,7 @@ function ExtractAudio() {
           )}
         </CardContent>
         <CardActions sx={{ display: !!file ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" color='success' onClick={handleExtract} disabled={!file || isProcessing || range[1] <= range[0]}>
+          <Button variant="contained" onClick={handleExtract} disabled={!file || isProcessing || range[1] <= range[0]}>
             {isProcessing ? 'Extracting' : 'Extract Audio'}
           </Button>
           {downloadUrl && downloadSize !== null && (

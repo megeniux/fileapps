@@ -1,16 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
 import BasicLayout from './components/BasicLayout';
 import Home from './pages/Home';
-import VideoCompression from './pages/VideoCompression/VideoCompression';
+import VideoCompression from './pages/tools/VideoCompression';
 import Contact from './pages/Contact';
 import AboutUs from './pages/AboutUs';
 import TOS from './pages/TOS';
 import PrivacyPolicy from './pages/PrivacyPolicy';
-import VideoConvert from './pages/VideoConvert';
-import VideoTrim from './pages/VideoTrim';
-import VideoMerge from './pages/VideoMerge';
-import ExtractAudio from './pages/ExtractAudio';
-import ThumbnailGenerator from './pages/ThumbnailGenerator';
+import VideoConvert from './pages/tools/VideoConvert';
+import VideoResize from './pages/tools/VideoResize';
+import VideoTrim from './pages/tools/VideoTrim';
+import VideoMerge from './pages/tools/VideoMerge';
+import ExtractAudio from './pages/tools/ExtractAudio';
+import ThumbnailGenerator from './pages/tools/ThumbnailGenerator';
 
 function AppRoutes() {
   return (
@@ -18,6 +19,7 @@ function AppRoutes() {
       <Route path="/" element={<BasicLayout><Home /></BasicLayout>} />
       <Route path="/compress" element={<BasicLayout><VideoCompression /></BasicLayout>} />
       <Route path="/convert" element={<BasicLayout><VideoConvert /></BasicLayout>} />
+      <Route path="/resize" element={<BasicLayout><VideoResize /></BasicLayout>} />
       <Route path="/trim" element={<BasicLayout><VideoTrim /></BasicLayout>} />
       <Route path="/merge" element={<BasicLayout><VideoMerge /></BasicLayout>} />
       <Route path="/extract-audio" element={<BasicLayout><ExtractAudio /></BasicLayout>} />

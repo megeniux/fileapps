@@ -212,16 +212,16 @@ function VideoMerge() {
                 <Typography variant="body2">{file.name}</Typography>
               </TableCell>
               <TableCell align="center">
-                <IconButton color="info" size="small" onClick={() => handleMoveUp(idx)} title="Move down" disabled={idx === 0 || isProcessing}>
+                <IconButton size="small" onClick={() => handleMoveUp(idx)} title="Move down" disabled={idx === 0 || isProcessing}>
                   <ArrowUpwardIcon />
                 </IconButton>
-                <IconButton color="info" size="small" onClick={() => handleMoveDown(idx)} title="Move up" disabled={idx === files.length - 1 || isProcessing}>
+                <IconButton size="small" onClick={() => handleMoveDown(idx)} title="Move up" disabled={idx === files.length - 1 || isProcessing}>
                   <ArrowDownwardIcon />
                 </IconButton>
-                <IconButton color="info" size="small" onClick={() => handleReplace(idx)} title="Replace video" disabled={isProcessing}>
+                <IconButton size="small" onClick={() => handleReplace(idx)} title="Replace video" disabled={isProcessing}>
                   <SwapHorizIcon />
                 </IconButton>
-                <IconButton color="info" size="small" onClick={() => handleRemove(idx)} title="Delete video" disabled={isProcessing}>
+                <IconButton color="error" size="small" onClick={() => handleRemove(idx)} title="Delete video" disabled={isProcessing}>
                   <DeleteIcon />
                 </IconButton>
               </TableCell>
@@ -248,17 +248,18 @@ function VideoMerge() {
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
             <MergeTypeIcon color="info" sx={{ fontSize: 40, mb: 2 }} />
-            <Typography variant="h5" color='info' gutterBottom>
+            <Typography color="info" variant="h5" gutterBottom>
               Merge Videos
             </Typography>
             <Typography variant="body1" color="text.secondary" align="center">
               Upload multiple videos, arrange their order, and merge them into one file.
             </Typography>
           </Box>
+          {/* Unified Upload/Preview UI for Add Videos */}
           <Box my={2} display="flex" justifyContent="center" alignItems="center" gap={2}>
             <Button
+              color='inherit'
               variant="contained"
-              color="info"
               startIcon={<AddIcon />}
               onClick={handleAddClick}
               disabled={isProcessing}
@@ -270,16 +271,17 @@ function VideoMerge() {
               type="file"
               accept="video/*"
               multiple
-              style={{ display: 'none' }}
+              style={{ width: '100%', height: '100%', top: 0, opacity: 0, position: 'absolute', display: 'none' }}
               onChange={handleFileChange}
             />
           </Box>
+          {/* End Unified Upload/Preview UI */}
           {files.length ? VideoTable : ""}
         </CardContent>
         <CardActions sx={{ display: files.length ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
           <Button
+            color='primary'
             variant="contained"
-            color="info"
             disabled={files.length < 2 || isProcessing}
             onClick={handleMerge}
           >
@@ -298,7 +300,7 @@ function VideoMerge() {
         </CardActions>
         {isProcessing && (
           <Box textAlign="center" bgcolor="action.hover" p={2} mt={2} borderRadius={0.25} overflow="hidden">
-            <LinearProgress color='info' variant="determinate" value={progress} />
+            <LinearProgress color='success' variant="determinate" value={progress} />
             <Typography variant="body2" my={1}>{`${status} (${progress.toFixed(1)}%)`}</Typography>
             <Typography variant="caption" color="text.secondary" noWrap>
               {consoleLogs.length > 0 ? consoleLogs[consoleLogs.length - 1] : ""}
