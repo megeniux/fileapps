@@ -1,9 +1,10 @@
-import React, { useState, useRef} from 'react'
+import React, { useState, useRef } from 'react'
 import { FFmpeg } from '@ffmpeg/ffmpeg'
 import { fetchFile } from '@ffmpeg/util'
 import JSZip from 'jszip'
 
 // MUI Imports
+import { useTheme } from '@mui/material/styles'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
@@ -25,10 +26,12 @@ import ImageIcon from '@mui/icons-material/Image'
 import CollectionsIcon from '@mui/icons-material/Collections'
 import FilterFramesIcon from '@mui/icons-material/FilterFrames'
 import CloseIcon from '@mui/icons-material/Close'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 
 export const description = "Generate high-quality thumbnails from your videos online. Capture and download video stills instantly with VideoTools' thumbnail generator.";
 
 function ThumbnailGenerator() {
+  const theme = useTheme()
   const [file, setFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [duration, setDuration] = useState<number>(0)
@@ -47,6 +50,7 @@ function ThumbnailGenerator() {
   const [frameInterval, setFrameInterval] = useState(10)
   const [thumbnails, setThumbnails] = useState<string[]>([])
   const [consoleLogs, setConsoleLogs] = useState<string[]>([])
+  const [isDragActive, setIsDragActive] = useState(false)
 
   const videoRef = useRef<HTMLVideoElement>(null)
   const ffmpegRef = useRef<FFmpeg | null>(null)
@@ -335,44 +339,103 @@ function ThumbnailGenerator() {
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <ImageIcon color="error" sx={{ fontSize: 40, mb: 2 }} />
-            <Typography variant="h5" color="error" gutterBottom>Thumbnail Generator</Typography>
-            <Typography variant="body1" color="text.secondary" align="center">
-              Select a video, choose the extraction mode and options.
+            <ImageIcon sx={{ fontSize: 40, mb: 2 }} />
+            <Typography variant="h5" gutterBottom>Thumbnail Generator</Typography>
+            <Typography variant="body1" align="center">
+              Generate thumbnails from your videos with custom options.
             </Typography>
           </Box>
           <Divider sx={{ my: 2 }} />
-          {/* Unified Upload/Preview UI */}
-          <Box display="flex" alignItems="center" flexDirection="column" position="relative" p={2}>
-            <Box display="flex" justifyContent="center" alignItems="center" width={120} height={72} borderRadius={1} bgcolor="divider" mb={1}>
-              {previewUrl ? (
+          {/* Upload area */}
+          <Box
+            onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}
+            onDragLeave={e => { e.preventDefault(); setIsDragActive(false); }}
+            onDrop={e => {
+              e.preventDefault();
+              setIsDragActive(false);
+              if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                const selectedFile = e.dataTransfer.files[0];
+                if (!selectedFile.type.startsWith('video/')) {
+                  setErrorMsg('Please select a video file.');
+                  return;
+                }
+                setFile(selectedFile);
+                setPreviewUrl(URL.createObjectURL(selectedFile));
+                setDuration(0)
+                setTime(0)
+                setStartTime(0)
+                setEndTime(1)
+                setProgress(0)
+                setStatus(null)
+                setErrorMsg(null)
+                setThumbnailUrl(null)
+                setThumbnails([])
+                setConsoleLogs([])
+              }
+            }}
+            position="relative"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+            width="100%"
+            height={220}
+            borderRadius={1}
+            bgcolor={isDragActive ? 'error.lighter' : 'divider'}
+            border={isDragActive ? `2px dashed ${theme.palette.primary.main}` : `2px dashed ${theme.palette.divider}`}
+            mb={2}
+            sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
+          >
+            {!file ? (
+              <Box textAlign="center">
+                <CloudUploadIcon sx={{ fontSize: 48, mb: 1 }} />
+                <Typography variant="body1">
+                  Drag & drop a video file here, or click to select
+                </Typography>
+                <Typography variant="body2" sx={{ mt: 1 }}>
+                  Supported: MP4, MOV, AVI, MKV, and more
+                </Typography>
+              </Box>
+            ) : (
+              <Box textAlign="center" width="100%">
                 <video
                   ref={videoRef}
-                  src={previewUrl}
-                  controls={false}
-                  style={{ width: 120, height: 72, background: '#000' }}
+                  src={previewUrl || undefined}
+                  controls
+                  style={{ width: '100%', maxWidth: 500, maxHeight: 180, background: '#000', borderRadius: 4 }}
                   onLoadedMetadata={handleLoadedMetadata}
                 />
-              ) : (
-                <Typography variant="body2" color="text.secondary" textAlign="center">No Preview</Typography>
-              )}
-            </Box>
-            <Box flex={1} height={72} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-              {!file && <>
-                <Typography variant='body2' color='text.secondary'>Click or Drop a file to start the process</Typography>
-                <input type="file" accept="video/*" onChange={handleFileChange} style={{ width: '100%', height: '100%', top: 0, opacity: 0, position: 'absolute' }} />
-              </>}
-              {!!file &&
-                <Typography variant="body2" color="error" noWrap>
-                  {file.name}
-                  <IconButton size="small" color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
-                    <CloseIcon fontSize='small'/>
-                  </IconButton>
-                </Typography>
-              }
-            </Box>
+              </Box>
+            )}
+            <input
+              accept="video/*"
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                left: 0,
+                top: 0,
+                opacity: 0,
+                cursor: 'pointer',
+                zIndex: 2
+              }}
+              id="video-file-input"
+              type="file"
+              onChange={handleFileChange}
+              tabIndex={-1}
+            />
           </Box>
-          {/* End Unified Upload/Preview UI */}
+          {/* Filename and remove button */}
+          {file && (
+            <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
+              <Typography variant="body2" noWrap>
+                {file.name}
+              </Typography>
+              <IconButton onClick={handleRemoveFile} size="small" color="error" sx={{ ml: 1 }}>
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            </Box>
+          )}
           {/* Tabs for extraction modes, only visible when video is loaded */}
           {file && !isProcessing && duration > 0 && (
             <Tabs
@@ -381,15 +444,15 @@ function ThumbnailGenerator() {
               variant="fullWidth"
               sx={{ mb: 2 }}
             >
-              <Tab icon={<ImageIcon />} label="Single Frame" />
-              <Tab icon={<CollectionsIcon />} label="Scrub" />
-              <Tab icon={<FilterFramesIcon />} label="Frames" />
+              <Tab icon={<ImageIcon fontSize="small" />} label="Single Frame" />
+              <Tab icon={<CollectionsIcon fontSize="small" />} label="Scrub" />
+              <Tab icon={<FilterFramesIcon fontSize="small" />} label="Frames" />
             </Tabs>
           )}
           {/* Start/End time slider for all modes except Single Frame */}
           {file && duration > 0 && !isProcessing && mode !== 0 && (
             <Box mb={2}>
-              <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Typography variant="subtitle2" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 Select Range: <small>{`${startTime.toFixed(1)}s - ${endTime.toFixed(1)}s`}</small>
               </Typography>
               <Slider
@@ -409,7 +472,7 @@ function ThumbnailGenerator() {
             <>
               {mode === 0 && (
                 <Box mb={2}>
-                  <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <Typography variant="subtitle2" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     Select Time: <small>{`${time.toFixed(1)}s`}</small>
                   </Typography>
                   <Slider
@@ -519,16 +582,19 @@ function ThumbnailGenerator() {
           )}
         </CardContent>
         <CardActions sx={{ display: !!file ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" onClick={handleExtractThumbnail} disabled={!file || isProcessing}>
+          <Button variant="contained" onClick={handleExtractThumbnail} disabled={!file || isProcessing} size="small">
             {isProcessing ? 'Extracting' : 'Extract'}
           </Button>
           {isProcessing && (
-            <Button variant="contained" color="error" onClick={handleStop}>
+            <Button color="error" variant="contained" onClick={handleStop} size="small">
               Stop
             </Button>
           )}
+          <Button variant="outlined" onClick={handleRemoveFile} disabled={isProcessing} size="small">
+            Reset to Default
+          </Button>
           {(thumbnailUrl || thumbnails.length > 0) && (
-            <Button variant="outlined" color="success" onClick={handleDownload}>
+            <Button color="success" variant="contained" onClick={handleDownload} size="small">
               {(thumbnails.length > 1 && mode !== 0 && mode !== 1) ? 'Download All' : 'Download'}
             </Button>
           )}

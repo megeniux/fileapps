@@ -23,6 +23,9 @@ import CloseIcon from '@mui/icons-material/Close';
 const ffmpeg = new FFmpeg()
 let isFFmpegLoaded = false
 
+// Add a ref to keep track of the current ffmpeg instance for termination
+const ffmpegRef = { current: ffmpeg };
+
 export const description = "Extract audio tracks from any video file online. Convert video to MP3 or other audio formats easily with VideoTools' audio extractor.";
 
 function ExtractAudio() {
@@ -88,11 +91,13 @@ function ExtractAudio() {
     }
     setIsProcessing(true)
     setProgress(0)
-    setStatus('Preparing...')
+    setStatus('Preparing')
     setErrorMsg(null)
     setDownloadUrl(null)
     setDownloadSize(null)
     setConsoleLogs([])
+
+    ffmpegRef.current = ffmpeg;
 
     const inputFileName = file.name
     const outputFileName = `audio_${inputFileName.replace(/\.[^/.]+$/, "")}.mp3`
@@ -138,6 +143,14 @@ function ExtractAudio() {
     }
   }
 
+  // Add stop handler
+  const handleStop = () => {
+    ffmpegRef.current?.terminate?.();
+    setStatus('Stopped');
+    setIsProcessing(false);
+    setErrorMsg(null);
+  };
+
   const handleDownload = () => {
     if (downloadUrl && file) {
       const a = document.createElement('a')
@@ -154,9 +167,9 @@ function ExtractAudio() {
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <MusicNoteIcon color="success" sx={{ fontSize: 40, mb: 2 }} />
-            <Typography variant="h5" color="success" gutterBottom>Extract Audio</Typography>
-            <Typography variant="body1" color="text.secondary" align="center">
+            <MusicNoteIcon sx={{ fontSize: 40, mb: 2 }} />
+            <Typography variant="h5" gutterBottom>Extract Audio</Typography>
+            <Typography variant="body1" align="center">
               Select a video, extract the audio track, and download the result.
             </Typography>
           </Box>
@@ -182,7 +195,7 @@ function ExtractAudio() {
                 <input type="file" accept="video/*" onChange={handleFileChange} style={{ width: '100%', height: '100%', top: 0, opacity: 0, position: 'absolute' }} />
               </>}
               {!!file &&
-                <Typography variant="body2" color="success" noWrap>
+                <Typography variant="body2" noWrap>
                   {file.name}
                   <IconButton size="small" color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
                     <CloseIcon fontSize='small'/>
@@ -205,17 +218,23 @@ function ExtractAudio() {
                 onChange={handleRangeChange}
                 valueLabelDisplay="auto"
                 disableSwap
-                size='small'
+                size="small"
               />
             </Box>
           )}
         </CardContent>
         <CardActions sx={{ display: !!file ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" onClick={handleExtract} disabled={!file || isProcessing || range[1] <= range[0]}>
+          <Button variant="contained" onClick={handleExtract} disabled={!file || isProcessing || range[1] <= range[0]} size="small">
             {isProcessing ? 'Extracting' : 'Extract Audio'}
           </Button>
+          {/* Add Stop button */}
+          {isProcessing && (
+            <Button variant="contained" color="error" onClick={handleStop} size="small">
+              Stop
+            </Button>
+          )}
           {downloadUrl && downloadSize !== null && (
-            <Button variant="outlined" color="success" onClick={handleDownload}>
+            <Button variant="outlined" color="success" onClick={handleDownload} size="small">
               Download ({(downloadSize / (1024 * 1024)).toFixed(2)} MB)
             </Button>
           )}

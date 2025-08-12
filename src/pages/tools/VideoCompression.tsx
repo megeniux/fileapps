@@ -23,6 +23,7 @@ import IconButton from '@mui/material/IconButton';
 import CompressIcon from '@mui/icons-material/Compress';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CloseIcon from '@mui/icons-material/Close';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 const ffmpeg = new FFmpeg();
 let isFFmpegLoaded = false;
@@ -41,6 +42,7 @@ function VideoCompression() {
   const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isDragActive, setIsDragActive] = useState(false);
 
   const [crfAnchor, setCrfAnchor] = useState<null | HTMLElement>(null);
   const [presetAnchor, setPresetAnchor] = useState<null | HTMLElement>(null);
@@ -102,7 +104,7 @@ function VideoCompression() {
 
     setIsProcessing(true);
     setProgress(0);
-    setStatus('Preparing...');
+    setStatus('Preparing');
     setConsoleLogs([]);
     setErrorMsg(null);
     setDownloadUrl(null);
@@ -213,6 +215,21 @@ function VideoCompression() {
     setPresetAnchor(null);
   };
 
+  // Add reset handler
+  const handleReset = () => {
+    setFile(null);
+    setPreviewUrl(null);
+    setDownloadUrl(null);
+    setDownloadSize(null);
+    setProgress(0);
+    setStatus(null);
+    setConsoleLogs([]);
+    setErrorMsg(null);
+    setCrf(18);
+    setPreset('slower');
+    totalDurationRef.current = 0;
+  };
+
   // Preset slider marks
   const presetValues = [
     'ultrafast', 'superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower', 'veryslow'
@@ -224,43 +241,102 @@ function VideoCompression() {
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <CompressIcon color="primary" sx={{ fontSize: 40, mb: 2 }} />
-            <Typography variant="h5" color='primary' gutterBottom>Video Compression</Typography>
-            <Typography variant="body1" color="text.secondary" align="center">
+            <CompressIcon sx={{ fontSize: 40, mb: 2 }} />
+            <Typography variant="h5" gutterBottom>Video Compression</Typography>
+            <Typography variant="body1" align="center">
               Reduce video file size while maintaining quality.
               <br />Simple, fast and easy compression for all your videos.
             </Typography>
           </Box>
           <Divider sx={{ my: 2 }} />
-          <Box display="flex" alignItems="center" flexDirection="column" position="relative" p={2}>
-            <Box display="flex" justifyContent="center" alignItems="center" width={120} height={72} borderRadius={1} bgcolor="divider" mb={1}>
-              {previewUrl ? (
+          {/* Upload area - refactored to match AudioConvert/VideoTrim */}
+          <Box
+            onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}
+            onDragLeave={e => { e.preventDefault(); setIsDragActive(false); }}
+            onDrop={e => {
+              e.preventDefault();
+              setIsDragActive(false);
+              if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                const selectedFile = e.dataTransfer.files[0];
+                if (!selectedFile.type.startsWith('video/')) {
+                  setErrorMsg('Please select a video file.');
+                  return;
+                }
+                setFile(selectedFile);
+                setPreviewUrl(URL.createObjectURL(selectedFile));
+                setDownloadUrl(null);
+                setDownloadSize(null);
+                setProgress(0);
+                setStatus(null);
+                setConsoleLogs([]);
+                setErrorMsg(null);
+                totalDurationRef.current = 0;
+              }
+            }}
+            position="relative"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+            width="100%"
+            height={220}
+            borderRadius={1}
+            bgcolor={isDragActive ? 'primary.lighter' : 'divider'}
+            border={isDragActive ? theme => `2px dashed ${theme.palette.primary.main}` : theme => `2px dashed ${theme.palette.divider}`}
+            mb={2}
+            sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
+          >
+            {!file ? (
+              <Box textAlign="center">
+                <CloudUploadIcon sx={{ fontSize: 48, mb: 1 }} />
+                <Typography variant="body1">
+                  Drag & drop a video file here, or click to select
+                </Typography>
+                <Typography variant="body2" sx={{ mt: 1 }}>
+                  Supported: MP4, MOV, AVI, MKV, and more
+                </Typography>
+              </Box>
+            ) : (
+              <Box textAlign="center" width="100%">
                 <video
                   ref={videoRef}
-                  src={previewUrl}
-                  controls={false}
-                  style={{ width: 120, height: 72, background: '#000' }}
+                  src={previewUrl || undefined}
+                  controls
+                  style={{ maxWidth: '100%', maxHeight: 220, background: '#000' }}
                   onLoadedMetadata={handleLoadedMetadata}
                 />
-              ) : (
-                <Typography variant="body2" color="text.secondary" textAlign="center">No Preview</Typography>
-              )}
-            </Box>
-            <Box flex={1} height={72} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-              {!file && <>
-                <Typography variant='body2' color='text.secondary'>Click or Drop a file to start the process</Typography>
-                <input type="file" accept="video/*" onChange={handleFileChange} style={{ width: '100%', height: '100%', top: 0, opacity: 0, position: 'absolute' }} />
-              </>}
-              {!!file &&
-                <Typography variant="body2" color="primary" noWrap>
-                  {file.name} ({formatBytes(file.size)})
-                  <IconButton size="small" color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
-                    <CloseIcon fontSize='small'/>
-                  </IconButton>
-                </Typography>
-              }
-            </Box>
+              </Box>
+            )}
+            <input
+              accept="video/*"
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                left: 0,
+                top: 0,
+                opacity: 0,
+                cursor: 'pointer',
+                zIndex: 2
+              }}
+              id="video-file-input"
+              type="file"
+              onChange={handleFileChange}
+              tabIndex={-1}
+            />
           </Box>
+          {/* Filename and remove button */}
+          {file && (
+            <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
+              <Typography variant="body2" noWrap>
+                {file.name} ({formatBytes(file.size)})
+              </Typography>
+              <IconButton size="small" color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
+                <CloseIcon fontSize='small'/>
+              </IconButton>
+            </Box>
+          )}
+          {/* Controls */}
           {file && !isProcessing && (
             <Grid container spacing={2} mt={2}>
               <Grid size={{ xs: 12, md: 6 }}>
@@ -278,7 +354,7 @@ function VideoCompression() {
                   </Box>
                   <small> {crf} CRF / Est. size: {estimateSizeMB(totalDurationRef.current, crf)} MB </small>
                 </Typography>
-                <Slider size='small' min={18} max={36} step={1} value={crf} onChange={(_, val) => setCrf(val as number)} valueLabelDisplay="auto" />
+                <Slider size="small" min={18} max={36} step={1} value={crf} onChange={(_, val) => setCrf(val as number)} valueLabelDisplay="auto" />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
                 <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -295,23 +371,26 @@ function VideoCompression() {
                   </Box>
                   <small>{preset}</small>
                 </Typography>
-                <Slider size='small' min={0} max={8} step={1} value={presetValues.indexOf(preset)} onChange={(_, val) => setPreset(presetValues[val as number])} valueLabelDisplay="off" />
+                <Slider size="small" min={0} max={8} step={1} value={presetValues.indexOf(preset)} onChange={(_, val) => setPreset(presetValues[val as number])} valueLabelDisplay="off" />
               </Grid>
             </Grid>
           )}
         </CardContent>
 
         <CardActions sx={{ display: !!file ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" onClick={handleProceed} disabled={!file || isProcessing}>
+          <Button variant="contained" onClick={handleProceed} disabled={!file || isProcessing} size="small">
             {isProcessing ? 'Compressing' : 'Compress'}
           </Button>
+          <Button variant="outlined" onClick={handleReset} disabled={isProcessing} size="small">
+            Reset to Default
+          </Button>
           {isProcessing && (
-            <Button variant="contained" color="error" onClick={handleStop}>
+            <Button variant="contained" color="error" onClick={handleStop} size="small">
               Stop
             </Button>
           )}
           {downloadUrl && downloadSize !== null && (
-            <Button variant="outlined" color="success" onClick={handleDownload}>
+            <Button variant="outlined" color="success" onClick={handleDownload} size="small">
               Download ({formatBytes(downloadSize)})
             </Button>
           )}

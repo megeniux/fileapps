@@ -19,9 +19,13 @@ import IconButton from '@mui/material/IconButton';
 // Icons
 import ContentCutIcon from '@mui/icons-material/ContentCut';
 import CloseIcon from '@mui/icons-material/Close';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 const ffmpeg = new FFmpeg()
 let isFFmpegLoaded = false
+
+// Add a ref to keep track of the current ffmpeg instance for termination
+const ffmpegRef = { current: ffmpeg };
 
 export const description = "Trim and cut videos online with precision. Remove unwanted sections and create perfect clips instantly using VideoTools' free video trimmer.";
 
@@ -37,6 +41,7 @@ function VideoTrim() {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null)
   const [downloadSize, setDownloadSize] = useState<number | null>(null)
   const [consoleLogs, setConsoleLogs] = useState<string[]>([])
+  const [isDragActive, setIsDragActive] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null)
 
@@ -56,6 +61,19 @@ function VideoTrim() {
   }
 
   const handleRemoveFile = () => {
+    setFile(null);
+    setPreviewUrl(null);
+    setDuration(0);
+    setRange([0, 0]);
+    setProgress(0);
+    setStatus(null);
+    setErrorMsg(null);
+    setDownloadUrl(null);
+    setDownloadSize(null);
+    setConsoleLogs([]);
+  };
+
+  const handleReset = () => {
     setFile(null);
     setPreviewUrl(null);
     setDuration(0);
@@ -88,11 +106,14 @@ function VideoTrim() {
     }
     setIsProcessing(true)
     setProgress(0)
-    setStatus('Preparing...')
+    setStatus('Preparing')
     setErrorMsg(null)
     setDownloadUrl(null)
     setDownloadSize(null)
     setConsoleLogs([])
+
+    // Assign ffmpeg to ref for stop functionality
+    ffmpegRef.current = ffmpeg;
 
     const inputFileName = file.name
     const outputFileName = `trimmed_${inputFileName}`
@@ -105,7 +126,7 @@ function VideoTrim() {
         }
       }
       ffmpeg.on('log', logHandler)
-      setStatus('Trimming...')
+      setStatus('Trimming')
       await ffmpeg.exec([
         '-i', inputFileName,
         '-ss', `${range[0]}`,
@@ -113,7 +134,7 @@ function VideoTrim() {
         '-c', 'copy',
         outputFileName
       ])
-      setStatus('Finalizing...')
+      setStatus('Finalizing')
       setProgress(99.9)
       const data = await ffmpeg.readFile(outputFileName)
       const url = URL.createObjectURL(new Blob([data], { type: 'video/mp4' }))
@@ -137,6 +158,14 @@ function VideoTrim() {
     }
   }
 
+  // Add stop handler
+  const handleStop = () => {
+    ffmpegRef.current?.terminate?.();
+    setStatus('Stopped');
+    setIsProcessing(false);
+    setErrorMsg(null);
+  };
+
   const handleDownload = () => {
     if (downloadUrl && file) {
       const a = document.createElement('a')
@@ -153,38 +182,102 @@ function VideoTrim() {
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <ContentCutIcon color="warning" sx={{ fontSize: 40, mb: 2 }} />
-            <Typography color="warning" variant="h5" gutterBottom>Video Trim</Typography>
-            <Typography variant="body1" color="text.secondary" align="center">
+            <ContentCutIcon sx={{ fontSize: 40, mb: 2 }} />
+            <Typography variant="h5" gutterBottom>Video Trim</Typography>
+            <Typography variant="body1" align="center">
               Select a video, choose the duration to trim, and download the result.
             </Typography>
           </Box>
           <Divider sx={{ my: 2 }} />
-          <Box display="flex" alignItems="center" flexDirection="column" position="relative" p={2}>
-            <Box display="flex" justifyContent="center" alignItems="center" width={120} height={72} borderRadius={1} bgcolor="divider" mb={1}>
-              {previewUrl ? <video
-                ref={videoRef}
-                src={previewUrl}
-                controls={false}
-                style={{ width: 120, height: 72, background: '#000' }}
-                onLoadedMetadata={handleLoadedMetadata}
-              /> : <Typography variant="body2" color="text.secondary" textAlign="center">No Preview</Typography>}
-            </Box>
-            <Box flex={1} height={72} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-              {!file && <>
-                <Typography variant='body2' color='text.secondary'>Click or Drop a file to start the process</Typography>
-                <input type="file" accept="video/*" onChange={handleFileChange} style={{ width: '100%', height: '100%', top: 0, opacity: 0, position: 'absolute' }} />
-              </>}
-              {!!file &&
-                <Typography variant="body2" noWrap>
-                  {file.name}
-                  <IconButton size="small" color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
-                    <CloseIcon fontSize='small'/>
-                  </IconButton>
-                </Typography>
+          {/* Upload area - refactored to match AudioConvert */}
+          <Box
+            onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}
+            onDragLeave={e => { e.preventDefault(); setIsDragActive(false); }}
+            onDrop={e => {
+              e.preventDefault();
+              setIsDragActive(false);
+              if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                const selectedFile = e.dataTransfer.files[0];
+                if (!selectedFile.type.startsWith('video/')) {
+                  setErrorMsg('Please select a video file.');
+                  return;
+                }
+                setFile(selectedFile);
+                setPreviewUrl(URL.createObjectURL(selectedFile));
+                setDuration(0);
+                setRange([0, 0]);
+                setProgress(0);
+                setStatus(null);
+                setErrorMsg(null);
+                setDownloadUrl(null);
+                setDownloadSize(null);
+                setConsoleLogs([]);
               }
-            </Box>
+            }}
+            position="relative"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+            width="100%"
+            height={220}
+            borderRadius={1}
+            bgcolor={isDragActive ? 'primary.lighter' : 'divider'}
+            border={isDragActive ? theme => `2px dashed ${theme.palette.primary.main}` : theme => `2px dashed ${theme.palette.divider}`}
+            mb={2}
+            sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
+          >
+            {!file ? (
+              <Box textAlign="center">
+                <CloudUploadIcon sx={{ fontSize: 48, mb: 1 }} />
+                <Typography variant="body1">
+                  Drag & drop a video file here, or click to select
+                </Typography>
+                <Typography variant="body2" sx={{ mt: 1 }}>
+                  Supported: MP4, MOV, AVI, MKV, and more
+                </Typography>
+              </Box>
+            ) : (
+              <Box textAlign="center" width="100%">
+                <video
+                  ref={videoRef}
+                  src={previewUrl || undefined}
+                  controls
+                  style={{ maxWidth: '100%', maxHeight: 220, background: '#000' }}
+                  onLoadedMetadata={handleLoadedMetadata}
+                />
+              </Box>
+            )}
+            <input
+              accept="video/*"
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                left: 0,
+                top: 0,
+                opacity: 0,
+                cursor: 'pointer',
+                zIndex: 2
+              }}
+              id="video-file-input"
+              type="file"
+              onChange={handleFileChange}
+              tabIndex={-1}
+            />
           </Box>
+          {/* Filename and remove button */}
+          {file && (
+            <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
+              <Typography variant="body2" noWrap>
+                {file.name}
+              </Typography>
+              <IconButton size="small" color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
+                <CloseIcon fontSize='small'/>
+              </IconButton>
+            </Box>
+          )}
+          {/* Range slider and controls */}
           {file && duration > 0 && !isProcessing && (
             <Box mb={2}>
               <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -198,17 +291,26 @@ function VideoTrim() {
                 onChange={handleRangeChange}
                 valueLabelDisplay="auto"
                 disableSwap
-                size='small'
+                size="small"
               />
             </Box>
           )}
         </CardContent>
         <CardActions sx={{ display: !!file ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" color='warning' onClick={handleTrim} disabled={!file || isProcessing || range[1] <= range[0]}>
+          <Button variant="contained" onClick={handleTrim} disabled={!file || isProcessing || range[1] <= range[0]} size="small">
             {isProcessing ? 'Trimming' : 'Trim'}
           </Button>
+          <Button variant="outlined" onClick={handleReset} disabled={isProcessing} size="small">
+            Reset to Default
+          </Button>
+          {/* Add Stop button */}
+          {isProcessing && (
+            <Button variant="contained" color="error" onClick={handleStop} size="small">
+              Stop
+            </Button>
+          )}
           {downloadUrl && downloadSize !== null && (
-            <Button variant="outlined" color="success" onClick={handleDownload}>
+            <Button variant="outlined" color="success" onClick={handleDownload} size="small">
               Download ({(downloadSize / (1024 * 1024)).toFixed(2)} MB)
             </Button>
           )}

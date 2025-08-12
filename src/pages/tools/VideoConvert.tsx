@@ -26,6 +26,7 @@ import TextField from '@mui/material/TextField';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CloseIcon from '@mui/icons-material/Close';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 const ffmpeg = new FFmpeg();
 let isFFmpegLoaded = false;
@@ -154,6 +155,8 @@ function VideoConvert() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const durationRef = useRef<number>(0);
 
+  const [isDragActive, setIsDragActive] = useState(false);
+
   // Parse duration from ffmpeg logs
   const parseDuration = (msg: string) => {
     const match = msg.match(/Duration:\s+(\d+):(\d+):(\d+\.\d+)/);
@@ -216,7 +219,7 @@ function VideoConvert() {
     }
     setIsProcessing(true);
     setProgress(0);
-    setStatus('Preparing...');
+    setStatus('Preparing');
     setConsoleLogs([]);
     setErrorMsg(null);
     setDownloadUrl(null);
@@ -347,42 +350,138 @@ function VideoConvert() {
     setAudioCodec(audioCodecs[fmt][0] || '');
   };
 
+  // Add reset handler
+  const handleReset = () => {
+    setFile(null);
+    setPreviewUrl(null);
+    setDownloadUrl(null);
+    setDownloadSize(null);
+    setProgress(0);
+    setStatus(null);
+    setConsoleLogs([]);
+    setErrorMsg(null);
+    setOutputFormat('mp4');
+    setVideoCodec('libx264');
+    setAudioCodec('aac');
+    setWidth('');
+    setHeight('');
+    setFps('');
+    setCrf('keep');
+    setPreset('keep');
+    setAudioBitrate('128k');
+    setResolutionRatio('custom');
+  };
+
   return (
     <Container maxWidth="md" sx={{ my: 'auto' }}>
       <Card sx={{ px: 2, py: 3 }}>
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <SwapHorizIcon color="secondary" sx={{ fontSize: 40, mb: 2 }} />
-            <Typography variant="h5" color='secondary' gutterBottom>Video Converter</Typography>
+            <SwapHorizIcon sx={{ fontSize: 40, mb: 2 }} />
+            <Typography variant="h5" gutterBottom>Video Converter</Typography>
             <Typography color="text.secondary" variant="body1" align="center">
               Convert videos to different formats, codecs, resolutions and more.<br />
               Advanced options for quality, speed, and compatibility.
             </Typography>
           </Box>
           <Divider sx={{ my: 2 }}/>
-          {/* New Upload UI */}
-          <Box display="flex" alignItems="center" flexDirection="column" position="relative" p={2}>
-            <Box display="flex" justifyContent="center" alignItems="center" width={120} height={72} borderRadius={1} bgcolor="divider" mb={1}>
-              {previewUrl ? <video
-                ref={videoRef}
-                src={previewUrl}
-                controls={false}
-                style={{ width: 120, height: 72, background: '#000' }}
-                onLoadedMetadata={handleLoadedMetadata}
-              /> : <Typography variant="body2" textAlign="center">No Preview</Typography>}
-            </Box>
-            <Box flex={1} height={72} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-              {!file && <>
-                <Typography variant='body2'>Click or Drop a file to start the process</Typography>
-                <input type="file" accept="video/*,audio/*" onChange={handleFileChange} style={{ width: '100%', height: '100%', top: 0, opacity: 0, position: 'absolute' }} />
-              </>}
-              {!!file &&
-                <Typography variant="body2" color="secondary" noWrap> {file.name} ({formatBytes(file.size)}) <IconButton size="small" color='error' onClick={handleRemoveFile}><CloseIcon fontSize='small'/></IconButton></Typography>
+          {/* Upload area - refactored to match AudioConvert/VideoTrim/VideoCompression/VideoResize */}
+          <Box
+            onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}
+            onDragLeave={e => { e.preventDefault(); setIsDragActive(false); }}
+            onDrop={e => {
+              e.preventDefault();
+              setIsDragActive(false);
+              if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                const selectedFile = e.dataTransfer.files[0];
+                if (!selectedFile.type.startsWith('video/') && !selectedFile.type.startsWith('audio/')) {
+                  setErrorMsg('Please select a video or audio file.');
+                  return;
+                }
+                setFile(selectedFile);
+                setPreviewUrl(URL.createObjectURL(selectedFile));
+                setDownloadUrl(null);
+                setDownloadSize(null);
+                setProgress(0);
+                setStatus(null);
+                setConsoleLogs([]);
+                setErrorMsg(null);
+                durationRef.current = 0;
               }
-            </Box>
+            }}
+            position="relative"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+            width="100%"
+            height={220}
+            borderRadius={1}
+            bgcolor={isDragActive ? 'primary.lighter' : 'divider'}
+            border={isDragActive ? theme => `2px dashed ${theme.palette.primary.main}` : theme => `2px dashed ${theme.palette.divider}`}
+            mb={2}
+            sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
+          >
+            {!file ? (
+              <Box textAlign="center">
+                <CloudUploadIcon sx={{ fontSize: 48, mb: 1 }} />
+                <Typography variant="body1">
+                  Drag & drop a video or audio file here, or click to select
+                </Typography>
+                <Typography variant="body2" sx={{ mt: 1 }}>
+                  Supported: MP4, MOV, AVI, MKV, MP3, WAV, and more
+                </Typography>
+              </Box>
+            ) : (
+              <Box textAlign="center" width="100%">
+                {file.type.startsWith('video/') ? (
+                  <video
+                    ref={videoRef}
+                    src={previewUrl || undefined}
+                    controls
+                    style={{ maxWidth: '100%', maxHeight: 220, background: '#000' }}
+                    onLoadedMetadata={handleLoadedMetadata}
+                  />
+                ) : (
+                  <audio
+                    src={previewUrl || undefined}
+                    controls
+                    style={{ width: '100%', maxWidth: 500 }}
+                  />
+                )}
+              </Box>
+            )}
+            <input
+              accept="video/*,audio/*"
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                left: 0,
+                top: 0,
+                opacity: 0,
+                cursor: 'pointer',
+                zIndex: 2
+              }}
+              id="video-file-input"
+              type="file"
+              onChange={handleFileChange}
+              tabIndex={-1}
+            />
           </Box>
-          {/* End New Upload UI */}
+          {/* Filename and remove button */}
+          {file && (
+            <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
+              <Typography variant="body2" noWrap>
+                {file.name} ({formatBytes(file.size)})
+              </Typography>
+              <IconButton size="small" color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
+                <CloseIcon fontSize='small'/>
+              </IconButton>
+            </Box>
+          )}
+          {/* End Upload UI */}
           {file && !isProcessing && (
             <Grid container spacing={2} mt={2}>
               <Grid size={{xs: 12, md: 6 }}>
@@ -412,7 +511,7 @@ function VideoConvert() {
                     sx={{ flex: 1 }}
                     disabled={false}
                   />
-                  <Typography color="secondary">x</Typography>
+                  <Typography color="text.secondary">x</Typography>
                   <TextField
                     size="small"
                     type="number"
@@ -434,7 +533,7 @@ function VideoConvert() {
                   </Select>
                 </Box>
                 {resolutionRatio !== 'custom' && (
-                  <Typography variant="caption" color="secondary" sx={{ ml: 1 }}>
+                  <Typography variant="caption" color="text.secondary" sx={{ ml: 1 }}>
                     Ratio locked: {ratioOptions.find(r => r.value === resolutionRatio)?.label}
                   </Typography>
                 )}
@@ -522,7 +621,7 @@ function VideoConvert() {
                 {/* Hide slider if "keep" is selected */}
                 {crf !== CRF_KEEP && (
                   <Slider
-                    size='small'
+                    size="small"
                     min={18}
                     max={36}
                     step={1}
@@ -564,7 +663,7 @@ function VideoConvert() {
                 {/* Hide slider if "keep" is selected */}
                 {preset !== PRESET_KEEP && (
                   <Slider
-                    size='small'
+                    size="small"
                     min={0}
                     max={8}
                     step={1}
@@ -578,16 +677,19 @@ function VideoConvert() {
           )}
         </CardContent>
         <CardActions sx={{display: !!file ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" color="secondary" onClick={handleProceed} disabled={!file || isProcessing}>
+          <Button variant="contained" onClick={handleProceed} disabled={!file || isProcessing} size="small">
             {isProcessing ? 'Converting' : 'Convert'}
           </Button>
+          <Button variant="outlined" onClick={handleReset} disabled={isProcessing} size="small">
+            Reset to Default
+          </Button>
           {isProcessing && (
-            <Button variant="contained" color="error" onClick={handleStop}>
+            <Button variant="contained" color="error" onClick={handleStop} size="small">
               Stop
             </Button>
           )}
           {downloadUrl && downloadSize !== null && (
-            <Button variant="outlined" color="success" onClick={handleDownload}>
+            <Button variant="outlined" color="success" onClick={handleDownload} size="small">
               Download ({formatBytes(downloadSize)})
             </Button>
           )}

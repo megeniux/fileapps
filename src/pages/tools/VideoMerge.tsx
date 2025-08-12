@@ -15,6 +15,7 @@ import TableRow from '@mui/material/TableRow'
 import IconButton from '@mui/material/IconButton'
 import Alert from '@mui/material/Alert'
 import LinearProgress from '@mui/material/LinearProgress'
+import Divider from '@mui/material/Divider'
 
 // Icons
 import MergeTypeIcon from '@mui/icons-material/MergeType'
@@ -23,6 +24,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz'
 import AddIcon from '@mui/icons-material/Add'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 
 // FFmpeg
 import { FFmpeg } from '@ffmpeg/ffmpeg'
@@ -42,6 +44,7 @@ function VideoMerge() {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null)
   const [downloadSize, setDownloadSize] = useState<number | null>(null)
   const [consoleLogs, setConsoleLogs] = useState<string[]>([])
+  const [isDragActive, setIsDragActive] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   // Add files
@@ -214,13 +217,13 @@ function VideoMerge() {
                 <Typography variant="body2">{file.name}</Typography>
               </TableCell>
               <TableCell align="center">
-                <IconButton size="small" onClick={() => handleMoveUp(idx)} title="Move down" disabled={idx === 0 || isProcessing}>
+                <IconButton size="small" color='primary' onClick={() => handleMoveUp(idx)} title="Move down" disabled={idx === 0 || isProcessing}>
                   <ArrowUpwardIcon />
                 </IconButton>
-                <IconButton size="small" onClick={() => handleMoveDown(idx)} title="Move up" disabled={idx === files.length - 1 || isProcessing}>
+                <IconButton size="small" color='secondary' onClick={() => handleMoveDown(idx)} title="Move up" disabled={idx === files.length - 1 || isProcessing}>
                   <ArrowDownwardIcon />
                 </IconButton>
-                <IconButton size="small" onClick={() => handleReplace(idx)} title="Replace video" disabled={isProcessing}>
+                <IconButton size="small" color='warning' onClick={() => handleReplace(idx)} title="Replace video" disabled={isProcessing}>
                   <SwapHorizIcon />
                 </IconButton>
                 <IconButton color="error" size="small" onClick={() => handleRemove(idx)} title="Delete video" disabled={isProcessing}>
@@ -249,53 +252,96 @@ function VideoMerge() {
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <MergeTypeIcon color="info" sx={{ fontSize: 40, mb: 2 }} />
-            <Typography color="info" variant="h5" gutterBottom>
+            <MergeTypeIcon sx={{ fontSize: 40, mb: 2 }} />
+            <Typography variant="h5" gutterBottom>
               Merge Videos
             </Typography>
-            <Typography variant="body1" color="text.secondary" align="center">
+            <Typography variant="body1" align="center" color="text.secondary">
               Upload multiple videos, arrange their order, and merge them into one file.
             </Typography>
           </Box>
-          {/* Unified Upload/Preview UI for Add Videos */}
-          <Box my={2} display="flex" justifyContent="center" alignItems="center" gap={2}>
-            <Button
-              color='inherit'
-              variant="contained"
-              startIcon={<AddIcon />}
-              onClick={handleAddClick}
-              disabled={isProcessing}
-            >
-              Add Videos
-            </Button>
+          <Divider sx={{ my: 2 }} />
+          {/* Drag-and-drop Upload/Preview UI */}
+          <Box
+            onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}
+            onDragLeave={e => { e.preventDefault(); setIsDragActive(false); }}
+            onDrop={e => {
+              e.preventDefault();
+              setIsDragActive(false);
+              if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                const validFiles = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('video/'));
+                if (validFiles.length === 0) {
+                  setErrorMsg('Please select video files.');
+                  return;
+                }
+                setFiles(prev => [...prev, ...validFiles]);
+                setErrorMsg(null);
+              }
+            }}
+            position="relative"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+            width="100%"
+            height={files.length === 0 ? 220 : 80}
+            borderRadius={1}
+            bgcolor={isDragActive ? 'primary.lighter' : 'divider'}
+            border={isDragActive ? theme => `2px dashed ${theme.palette.primary.main}` : theme => `2px dashed ${theme.palette.divider}`}
+            mb={2}
+            sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
+          >
+            {files.length === 0 ? (
+              <Box textAlign="center">
+                <CloudUploadIcon sx={{ fontSize: 48, mb: 1 }} />
+                <Typography variant="body1">
+                  Drag & drop video files here, or click to add
+                </Typography>
+                <Typography variant="body2" sx={{ mt: 1 }}>
+                  Supported: MP4, MOV, AVI, MKV, and more
+                </Typography>
+              </Box>
+            ) : (
+              <Button
+                variant="contained"
+                startIcon={<AddIcon />}
+                onClick={handleAddClick}
+                disabled={isProcessing}
+                size="small"
+                sx={{ mt: 1 }}
+              >
+                Add More Videos
+              </Button>
+            )}
             <input
               ref={fileInputRef}
               type="file"
               accept="video/*"
               multiple
-              style={{ width: '100%', height: '100%', top: 0, opacity: 0, position: 'absolute', display: 'none' }}
+              style={{ width: '100%', height: '100%', top: 0, opacity: 0, position: 'absolute' }}
               onChange={handleFileChange}
+              tabIndex={-1}
             />
           </Box>
-          {/* End Unified Upload/Preview UI */}
+          {/* End Drag-and-drop Upload/Preview UI */}
           {files.length ? VideoTable : ""}
         </CardContent>
         <CardActions sx={{ display: files.length ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
           <Button
-            color='primary'
             variant="contained"
             disabled={files.length < 2 || isProcessing}
             onClick={handleMerge}
+            size="small"
           >
             {isProcessing ? 'Merging' : 'Merge'}
           </Button>
           {isProcessing && (
-            <Button variant="contained" color="error" onClick={handleStop}>
+            <Button variant="contained" color="error" onClick={handleStop} size="small">
               Stop
             </Button>
           )}
           {downloadUrl && downloadSize !== null && (
-            <Button variant="outlined" color="success" onClick={handleDownload}>
+            <Button variant="outlined" color="success" onClick={handleDownload} size="small">
               Download ({(downloadSize / (1024 * 1024)).toFixed(2)} MB)
             </Button>
           )}

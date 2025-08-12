@@ -21,6 +21,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import CloseIcon from '@mui/icons-material/Close'
 import ReplayIcon from '@mui/icons-material/Replay'
 import AspectRatioIcon from '@mui/icons-material/AspectRatio';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 import { FFmpeg } from '@ffmpeg/ffmpeg'
 import { fetchFile } from '@ffmpeg/util'
@@ -52,6 +53,9 @@ const defaultState = {
 const ffmpeg = new FFmpeg()
 let isFFmpegLoaded = false
 
+// Add a ref to keep track of the current ffmpeg instance for termination
+const ffmpegRef = { current: ffmpeg };
+
 export const description = "Resize videos to custom dimensions or aspect ratios online. Optimize your videos for web, social media, and more with VideoTools' easy video resizer.";
 
 function VideoResize() {
@@ -70,6 +74,7 @@ function VideoResize() {
   const [consoleLogs, setConsoleLogs] = useState<string[]>([])
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null)
   const [downloadSize, setDownloadSize] = useState<number | null>(null)
+  const [isDragActive, setIsDragActive] = useState(false);
 
   // Handle file upload
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -184,7 +189,7 @@ function VideoResize() {
     setErrorMsg(null)
     setIsProcessing(true)
     setProgress(0)
-    setStatus('Preparing...')
+    setStatus('Preparing')
     setConsoleLogs([])
     setDownloadUrl(null)
     setDownloadSize(null)
@@ -193,6 +198,8 @@ function VideoResize() {
       await ffmpeg.load()
       isFFmpegLoaded = true
     }
+
+    ffmpegRef.current = ffmpeg;
 
     const inputFileName = file.name
     const outputFileName = `resized_${inputFileName.replace(/\.[^/.]+$/, '')}.mp4`
@@ -231,7 +238,7 @@ function VideoResize() {
       args.push('-b:a', '128k')
       args.push(outputFileName)
 
-      setStatus('Resizing...')
+      setStatus('Resizing')
       await ffmpeg.exec(args)
 
       setStatus('Finalizing')
@@ -261,6 +268,14 @@ function VideoResize() {
     }
   }
 
+  // Add stop handler
+  const handleStop = () => {
+    ffmpegRef.current?.terminate?.();
+    setStatus('Stopped');
+    setIsProcessing(false);
+    setErrorMsg(null);
+  };
+
   const handleDownload = () => {
     if (downloadUrl && file) {
       const a = document.createElement('a')
@@ -280,7 +295,7 @@ function VideoResize() {
             <Typography variant="h5" align="center" gutterBottom>
               Video Resize
             </Typography>
-            <Typography color="text.secondary" variant="body1" align="center" mb={2}>
+            <Typography variant="body1" align="center" mb={2}>
               Resize your video with custom resolution, aspect ratio, and advanced options.<br />
               Preview changes before applying. No upload required.
             </Typography>
@@ -288,18 +303,60 @@ function VideoResize() {
           {/* Error alert below top section, like VideoMerge */}
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Divider sx={{ my: 2 }} />
-          {/* Upload & Preview */}
-          <Box display="flex" alignItems="center" flexDirection="column" position="relative" p={2}>
-            <Box display="flex" justifyContent="center" alignItems="center" width="100%" height={300} borderRadius={1} bgcolor="divider" mb={1}>
-              {previewUrl ? (
+          {/* Upload & Preview - refactored to match AudioConvert/VideoTrim/VideoCompression */}
+          <Box
+            onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}
+            onDragLeave={e => { e.preventDefault(); setIsDragActive(false); }}
+            onDrop={e => {
+              e.preventDefault();
+              setIsDragActive(false);
+              if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                const selectedFile = e.dataTransfer.files[0];
+                if (!selectedFile.type.startsWith('video/')) {
+                  setErrorMsg('Please select a video file.');
+                  return;
+                }
+                setFile(selectedFile);
+                setPreviewUrl(URL.createObjectURL(selectedFile));
+                setErrorMsg(null);
+                setWidth('');
+                setHeight('');
+                setResolutionRatio('custom');
+              }
+            }}
+            position="relative"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+            width="100%"
+            height={220}
+            borderRadius={1}
+            bgcolor={isDragActive ? 'primary.lighter' : 'divider'}
+            border={isDragActive ? theme => `2px dashed ${theme.palette.primary.main}` : theme => `2px dashed ${theme.palette.divider}`}
+            mb={2}
+            sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
+          >
+            {!file ? (
+              <Box textAlign="center">
+                <CloudUploadIcon sx={{ fontSize: 48, mb: 1 }} />
+                <Typography variant="body1">
+                  Drag & drop a video file here, or click to select
+                </Typography>
+                <Typography variant="body2" sx={{ mt: 1 }}>
+                  Supported: MP4, MOV, AVI, MKV, and more
+                </Typography>
+              </Box>
+            ) : (
+              <Box textAlign="center" width="100%">
                 <video
                   ref={videoRef}
-                  src={previewUrl}
+                  src={previewUrl || undefined}
                   controls
                   style={{
                     aspectRatio: `${width || 16} / ${height || 9}`,
                     maxWidth: '100%',
-                    maxHeight: '100%',
+                    maxHeight: 220,
                     background: '#000',
                     objectFit: resizeMode === 'fit' ? 'contain'
                       : resizeMode === 'fill' ? 'cover'
@@ -308,24 +365,35 @@ function VideoResize() {
                   }}
                   onLoadedMetadata={handleLoadedMetadata}
                 />
-              ) : (
-                <Typography variant="body2" textAlign="center">Click or Drop a file to start</Typography>
-              )}
-            </Box>
-            <Box flex={1} height={72} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-              {!file && (
-                <>
-                  <input type="file" accept="video/*" onChange={handleFileChange} style={{ width: '100%', height: '100%', top: 0, opacity: 0, position: 'absolute' }} />
-                </>
-              )}
-              {!!file && (
-                <Typography variant="body2" noWrap>
-                  {file.name}
-                  <IconButton size="small" color='error' onClick={handleRemoveFile}><CloseIcon fontSize='small' /></IconButton>
-                </Typography>
-              )}
-            </Box>
+              </Box>
+            )}
+            <input
+              accept="video/*"
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                left: 0,
+                top: 0,
+                opacity: 0,
+                cursor: 'pointer',
+                zIndex: 2
+              }}
+              id="video-file-input"
+              type="file"
+              onChange={handleFileChange}
+              tabIndex={-1}
+            />
           </Box>
+          {/* Filename and remove button */}
+          {file && (
+            <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
+              <Typography variant="body2" noWrap>
+                {file.name}
+              </Typography>
+              <IconButton size="small" color="error" onClick={handleRemoveFile}><CloseIcon fontSize="small" /></IconButton>
+            </Box>
+          )}
           {/* Resize Controls */}
           {file && (
             <Grid container spacing={1} mt={2}>
@@ -362,7 +430,7 @@ function VideoResize() {
                     ))}
                   </Select>
                   <IconButton size="small" color="inherit" onClick={handleReset} title="Reset to default">
-                    <ReplayIcon />
+                    <ReplayIcon fontSize="small" />
                   </IconButton>
                 </Box>
                 {resolutionRatio !== 'custom' && (
@@ -406,14 +474,20 @@ function VideoResize() {
           )}
         </CardContent>
         <CardActions sx={{ display: !!file ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button color='inherit' variant="contained" onClick={handleResize} disabled={isProcessing}>
+          <Button variant="contained" onClick={handleResize} disabled={isProcessing} size="small">
             {isProcessing ? 'Resizing' : 'Resize'}
           </Button>
-          <Button color='inherit' variant="outlined" onClick={handleReset} startIcon={<ReplayIcon />} disabled={isProcessing}>
+          <Button variant="outlined" onClick={handleReset} disabled={isProcessing} size="small">
             Reset to Default
           </Button>
+          {/* Add Stop button */}
+          {isProcessing && (
+            <Button variant="contained" color="error" onClick={handleStop} size="small">
+              Stop
+            </Button>
+          )}
           {downloadUrl && downloadSize !== null && (
-            <Button variant="outlined" color="success" onClick={handleDownload}>
+            <Button variant="outlined" color="success" onClick={handleDownload} size="small">
               Download ({(downloadSize / 1024 / 1024).toFixed(2)} MB)
             </Button>
           )}
