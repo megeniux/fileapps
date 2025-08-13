@@ -373,7 +373,7 @@ function ThumbnailGenerator() {
             width="100%"
             height={220}
             borderRadius={1}
-            bgcolor={isDragActive ? 'error.lighter' : 'divider'}
+            bgcolor={isDragActive ? 'primary.lighter' : 'action.hover'}
             border={isDragActive ? `2px dashed ${theme.palette.primary.main}` : `2px dashed ${theme.palette.divider}`}
             sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
           >

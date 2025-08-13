@@ -177,7 +177,7 @@ function VideoTrim() {
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <ContentCutIcon sx={{ fontSize: 40, mb: 2 }} color="warning" />
+            <ContentCutIcon sx={{ fontSize: 40, mb: 2 }} color="info" />
             <Typography variant="h5" component="h1" gutterBottom>Video Trim</Typography>
             <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Select a video, choose the duration to trim, and download the result.

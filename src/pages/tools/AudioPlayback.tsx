@@ -17,27 +17,23 @@ import Alert from '@mui/material/Alert';
 import Slider from '@mui/material/Slider';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Grid from '@mui/material/Grid';
 
 // Icons
-import ContentCutIcon from '@mui/icons-material/ContentCut';
+import SpeedIcon from '@mui/icons-material/Speed';
 import CloseIcon from '@mui/icons-material/Close';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 const ffmpeg = new FFmpeg();
 let isFFmpegLoaded = false;
-
-// Add a ref to keep track of the current ffmpeg instance for termination
 const ffmpegRef = { current: ffmpeg };
 
-export const description = "Trim audio files to extract specific sections or remove unwanted parts. Fast and precise audio cutting with our online tool.";
+export const description = "Change audio playback speed online. Speed up or slow down audio files from -20x to +20x instantly with VideoTools.";
 
-function AudioTrim() {
+function AudioPlayback() {
   const theme = useTheme();
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [duration, setDuration] = useState<number>(0);
-  const [range, setRange] = useState<[number, number]>([0, 0]);
+  const [speed, setSpeed] = useState<number>(1);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState<string | null>(null);
@@ -58,8 +54,7 @@ function AudioTrim() {
       }
       setFile(selectedFile);
       setPreviewUrl(URL.createObjectURL(selectedFile));
-      setDuration(0);
-      setRange([0, 0]);
+      setSpeed(1);
       setProgress(0);
       setStatus(null);
       setErrorMsg(null);
@@ -88,8 +83,7 @@ function AudioTrim() {
       }
       setFile(selectedFile);
       setPreviewUrl(URL.createObjectURL(selectedFile));
-      setDuration(0);
-      setRange([0, 0]);
+      setSpeed(1);
       setProgress(0);
       setStatus(null);
       setErrorMsg(null);
@@ -102,8 +96,7 @@ function AudioTrim() {
   const handleRemoveFile = () => {
     setFile(null);
     setPreviewUrl(null);
-    setDuration(0);
-    setRange([0, 0]);
+    setSpeed(1);
     setProgress(0);
     setStatus(null);
     setErrorMsg(null);
@@ -112,34 +105,21 @@ function AudioTrim() {
     setConsoleLogs([]);
   };
 
-  // Remove handleRemoveFile logic and replace with reload for reset
   const handleReset = () => {
     window.location.reload();
   };
 
-  const handleLoadedMetadata = () => {
-    if (audioRef.current) {
-      const dur = audioRef.current.duration;
-      setDuration(dur);
-      setRange([0, Math.floor(dur)]);
-    }
+  const handleSpeedChange = (_: Event, value: number | number[]) => {
+    if (typeof value === 'number') setSpeed(value);
   };
 
-  const handleRangeChange = (_: Event, newValue: number | number[]) => {
-    if (Array.isArray(newValue)) {
-      setRange([Math.floor(newValue[0]), Math.ceil(newValue[1])]);
-    }
-  };
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
-
-  const handleTrim = async () => {
+  const handleProcess = async () => {
     if (!file) {
       setErrorMsg('Please select an audio file.');
+      return;
+    }
+    if (speed === 0) {
+      setErrorMsg('Speed cannot be zero.');
       return;
     }
     setIsProcessing(true);
@@ -156,7 +136,7 @@ function AudioTrim() {
       }
       ffmpegRef.current = ffmpeg;
       const inputFileName = file.name;
-      const outputFileName = `trimmed_${inputFileName}`;
+      const outputFileName = `speed_${speed}x_${inputFileName}`;
       await ffmpeg.writeFile(inputFileName, await fetchFile(file));
       const logHandler = ({ message }: { message: string }) => {
         setConsoleLogs(logs => [...logs, message]);
@@ -165,14 +145,29 @@ function AudioTrim() {
         }
       };
       ffmpeg.on('log', logHandler);
-      setStatus('Trimming');
-      await ffmpeg.exec([
-        '-i', inputFileName,
-        '-ss', `${range[0]}`,
-        '-to', `${range[1]}`,
-        '-c', 'copy',
-        outputFileName
-      ]);
+      setStatus('Processing');
+      // FFmpeg atempo filter supports 0.5-2.0, so for other speeds, chain filters
+      // For negative speed, reverse audio
+      let args = ['-i', inputFileName];
+      if (speed < 0) {
+        args.push('-filter_complex', `areverse,atempo=${Math.min(Math.abs(speed), 2)}`);
+      } else if (speed !== 1) {
+        // Chain atempo filters for >2 or <0.5
+        let s = speed;
+        let filters = [];
+        while (s > 2.0) {
+          filters.push('atempo=2.0');
+          s /= 2.0;
+        }
+        while (s < 0.5) {
+          filters.push('atempo=0.5');
+          s /= 0.5;
+        }
+        filters.push(`atempo=${s}`);
+        args.push('-filter:a', filters.join(','));
+      }
+      args.push(outputFileName);
+      await ffmpeg.exec(args);
       setStatus('Finalizing');
       setProgress(99.9);
       const data = await ffmpeg.readFile(outputFileName);
@@ -205,19 +200,18 @@ function AudioTrim() {
     if (downloadUrl && file) {
       const a = document.createElement('a');
       a.href = downloadUrl;
-      a.download = `trimmed_${file.name}`;
+      a.download = `speed_${speed}x_${file.name}`;
       a.click();
       setTimeout(() => URL.revokeObjectURL(downloadUrl), 5000);
     }
   };
 
-  // Update handleStop to terminate ffmpeg
   const handleStop = () => {
     ffmpegRef.current?.terminate?.();
     setIsProcessing(false);
     setStatus('Stopped');
     setProgress(0);
-    setErrorMsg(null); // Clear error on stop
+    setErrorMsg(null);
   };
 
   return (
@@ -226,14 +220,14 @@ function AudioTrim() {
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <ContentCutIcon color='warning' sx={{ fontSize: 40, mb: 2 }} />
-            <Typography variant="h5" component="h1" gutterBottom>Audio Trim</Typography>
+            <SpeedIcon color="error" sx={{ fontSize: 40, mb: 2 }} />
+            <Typography variant="h5" component="h1" gutterBottom>Audio Playback Speed</Typography>
             <Typography color="text.secondary" variant="body1" component="h2" align="center">
-              Trim and cut audio files online with precision.
+              Change audio playback speed from -20x (reverse) to +20x.
             </Typography>
           </Box>
           <Divider sx={{ my: 2 }} />
-          {/* Upload & Preview area, styled like ImageResize */}
+          {/* Upload & Preview area */}
           <Box
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
@@ -262,7 +256,7 @@ function AudioTrim() {
               </Box>
             ) : (
               <Box textAlign="center" width="100%">
-                <audio ref={audioRef} src={previewUrl || undefined} controls style={{ width: '100%', maxWidth: 500 }} onLoadedMetadata={handleLoadedMetadata} />
+                <audio ref={audioRef} src={previewUrl || undefined} controls style={{ width: '100%', maxWidth: 500 }} />
               </Box>
             )}
             <input
@@ -277,7 +271,7 @@ function AudioTrim() {
                 cursor: 'pointer',
                 zIndex: 2
               }}
-              id="audio-trim-file-input"
+              id="audio-playback-file-input"
               type="file"
               onChange={handleFileChange}
               tabIndex={-1}
@@ -294,38 +288,37 @@ function AudioTrim() {
               </IconButton>
             </Box>
           )}
-          {/* Controls */}
+          {/* Speed slider */}
           {file && (
-            <Grid container spacing={2} sx={{ mb: 3 }}>
-              <Box sx={{ mb: 3, width: '100%' }}>
-                <Typography variant="subtitle2" gutterBottom>
-                  Trim Range: {formatTime(range[0])} - {formatTime(range[1])} (Duration: {formatTime(range[1] - range[0])})
-                </Typography>
-                <Slider
-                  value={range}
-                  onChange={handleRangeChange}
-                  valueLabelDisplay="auto"
-                  valueLabelFormat={formatTime}
-                  min={0}
-                  max={duration}
-                  disabled={isProcessing || duration === 0}
-                  size="small"
-                />
-              </Box>
-            </Grid>
+            <Box sx={{ mb: 3, width: '100%' }}>
+              <Typography variant="subtitle2" gutterBottom>
+                Playback Speed: {speed}x
+              </Typography>
+              <Slider
+                value={speed}
+                min={-20}
+                max={20}
+                step={0.1}
+                onChange={handleSpeedChange}
+                valueLabelDisplay="auto"
+                disabled={isProcessing}
+                size="small"
+              />
+              <Typography variant="caption" color="text.secondary">
+                Negative values reverse audio. 1x is normal speed.
+              </Typography>
+            </Box>
           )}
         </CardContent>
         <CardActions sx={{ display: !!file ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" onClick={handleTrim} disabled={isProcessing || !file || duration === 0} size="small">
-            {isProcessing ? 'Trimming' : 'Trim Audio'}
+          <Button variant="contained" onClick={handleProcess} disabled={isProcessing || !file || speed === 0} size="small">
+            {isProcessing ? 'Processing' : 'Process'}
           </Button>
-          {/* Reset button only visible when not processing */}
           {!isProcessing && (
             <Button variant="outlined" onClick={handleReset} size="small">
               Reset
             </Button>
           )}
-          {/* Add Stop button */}
           {isProcessing && (
             <Button color="error" variant='contained' onClick={handleStop} disabled={!isProcessing} size="small">
               Stop
@@ -351,4 +344,4 @@ function AudioTrim() {
   );
 }
 
-export default AudioTrim;
+export default AudioPlayback;

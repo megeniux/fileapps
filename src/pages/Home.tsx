@@ -120,10 +120,10 @@ const audioTools: {
       color: 'info'
     },
     {
-      title: 'Change Speed',
-      description: 'Adjust the playback speed of your audio files without changing the pitch.',
+      title: 'Audio Playback',
+      description: 'Adjust the playback speed of audio files without altering pitch. Speed up or slow down audio easily.',
       icon: <SpeedIcon fontSize="small" color="success" />,
-      link: '/audio-speed',
+      link: '/audio-playback',
       color: 'success'
     }
   ];

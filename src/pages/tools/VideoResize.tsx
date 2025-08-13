@@ -284,7 +284,7 @@ function VideoResize() {
       <Card sx={{ px: 3, py: 3 }} elevation={3}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" flexDirection="column" alignItems="center">
-            <AspectRatioIcon sx={{ fontSize: 40, mb: 2 }} color="inherit" />
+            <AspectRatioIcon sx={{ fontSize: 40, mb: 2 }} color="warning" />
             <Typography variant="h5" align="center" gutterBottom>
               Video Resize
             </Typography>

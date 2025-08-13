@@ -172,7 +172,7 @@ function ExtractAudio() {
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <MusicNoteIcon sx={{ fontSize: 40, mb: 2 }} color="success" />
+            <MusicNoteIcon sx={{ fontSize: 40, mb: 2 }} color="error" />
             <Typography variant="h5" component="h1" gutterBottom>Extract Audio</Typography>
             <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Select a video, extract the audio track, and download the result.

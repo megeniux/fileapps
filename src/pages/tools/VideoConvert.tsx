@@ -384,7 +384,7 @@ function VideoConvert() {
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <SwapHorizIcon sx={{ fontSize: 40, mb: 2 }} color="secondary" />
+            <SwapHorizIcon sx={{ fontSize: 40, mb: 2 }} color="primary" />
             <Typography variant="h5" component="h1" gutterBottom>Video Converter</Typography>
             <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Convert videos to different formats, codecs, resolutions and more.<br />
