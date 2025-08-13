@@ -19,6 +19,7 @@ import IconButton from '@mui/material/IconButton';
 // Icons
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import CloseIcon from '@mui/icons-material/Close';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 const ffmpeg = new FFmpeg()
 let isFFmpegLoaded = false
@@ -40,6 +41,7 @@ function ExtractAudio() {
   const [consoleLogs, setConsoleLogs] = useState<string[]>([])
   const [duration, setDuration] = useState<number>(0)
   const [range, setRange] = useState<[number, number]>([0, 0])
+  const [isDragActive, setIsDragActive] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null)
 
@@ -163,48 +165,109 @@ function ExtractAudio() {
 
   return (
     <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Card sx={{ px: 2, py: 3 }}>
+      <Card sx={{ px: 3, py: 3 }}>
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <MusicNoteIcon sx={{ fontSize: 40, mb: 2 }} />
-            <Typography variant="h5" gutterBottom>Extract Audio</Typography>
-            <Typography variant="body1" align="center">
+            <MusicNoteIcon sx={{ fontSize: 40, mb: 2 }} color="success" />
+            <Typography variant="h5" component="h1" gutterBottom>Extract Audio</Typography>
+            <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Select a video, extract the audio track, and download the result.
             </Typography>
           </Box>
           <Divider sx={{ my: 2 }} />
-          {/* Unified Upload/Preview UI */}
-          <Box display="flex" alignItems="center" flexDirection="column" position="relative" p={2}>
-            <Box display="flex" justifyContent="center" alignItems="center" width={120} height={72} borderRadius={1} bgcolor="divider" mb={1}>
-              {previewUrl ? (
+          {/* Unified Upload/Preview UI - VideoResize style */}
+          <Box
+            onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}
+            onDragLeave={e => { e.preventDefault(); setIsDragActive(false); }}
+            onDrop={e => {
+              e.preventDefault();
+              setIsDragActive(false);
+              if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                const selectedFile = e.dataTransfer.files[0];
+                if (!selectedFile.type.startsWith('video/')) {
+                  setErrorMsg('Please select a video file.');
+                  return;
+                }
+                setFile(selectedFile);
+                setPreviewUrl(URL.createObjectURL(selectedFile));
+                setProgress(0);
+                setStatus(null);
+                setErrorMsg(null);
+                setDownloadUrl(null);
+                setDownloadSize(null);
+                setConsoleLogs([]);
+                setDuration(0);
+                setRange([0, 0]);
+              }
+            }}
+            position="relative"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+            width="100%"
+            height={220}
+            borderRadius={1}
+            bgcolor={isDragActive ? 'primary.lighter' : 'divider'}
+            border={isDragActive ? theme => `2px dashed ${theme.palette.primary.main}` : theme => `2px dashed ${theme.palette.divider}`}
+            sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
+          >
+            {!file ? (
+              <Box textAlign="center">
+                <CloudUploadIcon color="primary" sx={{ fontSize: 32, mb: 1 }} />
+                <Typography variant="subtitle1" gutterBottom>
+                  Drag & drop a video file here, or click to select
+                </Typography>
+                <Typography color="text.secondary" variant="caption">
+                  Supported: MP4, MOV, AVI, MKV, and more
+                </Typography>
+              </Box>
+            ) : (
+              <Box textAlign="center" width="100%">
                 <video
                   ref={videoRef}
-                  src={previewUrl}
-                  controls={false}
-                  style={{ width: 120, height: 72, background: '#000' }}
+                  src={previewUrl || undefined}
+                  controls
+                  style={{
+                    aspectRatio: '16 / 9',
+                    maxWidth: '100%',
+                    maxHeight: 220,
+                    background: '#000',
+                    objectFit: 'contain'
+                  }}
                   onLoadedMetadata={handleLoadedMetadata}
                 />
-              ) : (
-                <Typography variant="body2" color="text.secondary" textAlign="center">No Preview</Typography>
-              )}
-            </Box>
-            <Box flex={1} height={72} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-              {!file && <>
-                <Typography variant='body2' color='text.secondary'>Click or Drop a file to start the process</Typography>
-                <input type="file" accept="video/*" onChange={handleFileChange} style={{ width: '100%', height: '100%', top: 0, opacity: 0, position: 'absolute' }} />
-              </>}
-              {!!file &&
-                <Typography variant="body2" noWrap>
-                  {file.name}
-                  <IconButton size="small" color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
-                    <CloseIcon fontSize='small'/>
-                  </IconButton>
-                </Typography>
-              }
-            </Box>
+              </Box>
+            )}
+            <input
+              accept="video/*"
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                left: 0,
+                top: 0,
+                opacity: 0,
+                cursor: 'pointer',
+                zIndex: 2
+              }}
+              id="audio-file-input"
+              type="file"
+              onChange={handleFileChange}
+              tabIndex={-1}
+            />
           </Box>
-          {/* End Unified Upload/Preview UI */}
+          {/* Filename and remove button */}
+          {file && (
+            <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
+              <Typography variant="body2" noWrap>
+                {file.name}
+              </Typography>
+              <IconButton size="small" color="error" onClick={handleRemoveFile}><CloseIcon fontSize="small" /></IconButton>
+            </Box>
+          )}
+          {/* Duration slider */}
           {file && duration > 0 && !isProcessing && (
             <Box mb={2}>
               <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

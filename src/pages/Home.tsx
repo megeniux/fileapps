@@ -21,14 +21,11 @@ import ContentCutIcon from '@mui/icons-material/ContentCut';
 import MergeTypeIcon from '@mui/icons-material/MergeType';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import ImageIcon from '@mui/icons-material/Image';
-import AudiotrackIcon from '@mui/icons-material/Audiotrack';
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import SpeedIcon from '@mui/icons-material/Speed';
-import TuneIcon from '@mui/icons-material/Tune';
 import CropIcon from '@mui/icons-material/Crop';
 import FilterIcon from '@mui/icons-material/Filter';
 import RotateRightIcon from '@mui/icons-material/RotateRight';
-import ColorLensIcon from '@mui/icons-material/ColorLens';
 
 const videoTools: {
   title: string;
@@ -60,7 +57,7 @@ const videoTools: {
     },
     {
       title: 'Trim Video',
-      description: 'Cut unwanted parts from your video with precision. Simple trimming for quick edits.',
+      description: 'Cut and trim video files to extract specific sections',
       icon: <ContentCutIcon fontSize="small" color="warning" />,
       link: '/trim',
       color: 'warning'
@@ -104,7 +101,7 @@ const audioTools: {
     },
     {
       title: 'Audio Trim',
-      description: 'Cut and trim audio files to extract specific sections or remove unwanted parts.',
+      description: 'Cut and trim audio files to extract specific sections.',
       icon: <ContentCutIcon fontSize="small" color="secondary" />,
       link: '/audio-trim',
       color: 'secondary'

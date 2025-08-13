@@ -72,20 +72,9 @@ function ThumbnailGenerator() {
     }
   }
 
-  const handleRemoveFile = () => {
-    setFile(null)
-    setPreviewUrl(null)
-    setDuration(0)
-    setTime(0)
-    setStartTime(0)
-    setEndTime(1)
-    setProgress(0)
-    setStatus(null)
-    setErrorMsg(null)
-    setThumbnailUrl(null)
-    setThumbnails([])
-    setConsoleLogs([])
-  }
+  const handleReset = () => {
+    window.location.reload();
+  };
 
   const handleLoadedMetadata = () => {
     if (videoRef.current) {
@@ -335,13 +324,13 @@ function ThumbnailGenerator() {
 
   return (
     <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Card sx={{ px: 2, py: 3 }}>
+      <Card sx={{ px: 3, py: 3 }}>
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <ImageIcon sx={{ fontSize: 40, mb: 2 }} />
-            <Typography variant="h5" gutterBottom>Thumbnail Generator</Typography>
-            <Typography variant="body1" align="center">
+            <ImageIcon sx={{ fontSize: 40, mb: 2 }} color="error" />
+            <Typography variant="h5" component="h1" gutterBottom>Thumbnail Generator</Typography>
+            <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Generate thumbnails from your videos with custom options.
             </Typography>
           </Box>
@@ -383,16 +372,15 @@ function ThumbnailGenerator() {
             borderRadius={1}
             bgcolor={isDragActive ? 'error.lighter' : 'divider'}
             border={isDragActive ? `2px dashed ${theme.palette.primary.main}` : `2px dashed ${theme.palette.divider}`}
-            mb={2}
             sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
           >
             {!file ? (
               <Box textAlign="center">
-                <CloudUploadIcon sx={{ fontSize: 48, mb: 1 }} />
-                <Typography variant="body1">
+                <CloudUploadIcon color="primary" sx={{ fontSize: 32, mb: 1 }} />
+                <Typography variant="subtitle1" gutterBottom>
                   Drag & drop a video file here, or click to select
                 </Typography>
-                <Typography variant="body2" sx={{ mt: 1 }}>
+                <Typography color="text.secondary" variant="caption">
                   Supported: MP4, MOV, AVI, MKV, and more
                 </Typography>
               </Box>
@@ -431,7 +419,7 @@ function ThumbnailGenerator() {
               <Typography variant="body2" noWrap>
                 {file.name}
               </Typography>
-              <IconButton onClick={handleRemoveFile} size="small" color="error" sx={{ ml: 1 }}>
+              <IconButton onClick={handleReset} size="small" color="error" sx={{ ml: 1 }}>
                 <CloseIcon fontSize="small" />
               </IconButton>
             </Box>
@@ -590,9 +578,12 @@ function ThumbnailGenerator() {
               Stop
             </Button>
           )}
-          <Button variant="outlined" onClick={handleRemoveFile} disabled={isProcessing} size="small">
-            Reset to Default
-          </Button>
+          {/* Reset button only visible when not processing */}
+          {!isProcessing && (
+            <Button variant="outlined" onClick={handleReset} size="small">
+              Reset
+            </Button>
+          )}
           {(thumbnailUrl || thumbnails.length > 0) && (
             <Button color="success" variant="contained" onClick={handleDownload} size="small">
               {(thumbnails.length > 1 && mode !== 0 && mode !== 1) ? 'Download All' : 'Download'}

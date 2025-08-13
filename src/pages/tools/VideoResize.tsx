@@ -141,20 +141,10 @@ function VideoResize() {
     }
   }
 
-  // Reset all to default
+  // Remove handleReset logic and replace with reload
   const handleReset = () => {
-    setWidth(defaultState.width)
-    setHeight(defaultState.height)
-    setResolutionRatio(defaultState.ratio)
-    setResizeMode(defaultState.mode)
-    setFps(defaultState.fps)
-    setErrorMsg(null)
-    // Optionally reset preview to original
-    if (videoRef.current) {
-      setWidth(String(Math.round(videoRef.current.videoWidth)))
-      setHeight(String(Math.round(videoRef.current.videoHeight)))
-    }
-  }
+    window.location.reload();
+  };
 
   // Parse duration from ffmpeg logs
   const parseDuration = (msg: string) => {
@@ -288,14 +278,14 @@ function VideoResize() {
 
   return (
     <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Card sx={{ px: 2, py: 3 }}>
+      <Card sx={{ px: 3, py: 3 }}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" flexDirection="column" alignItems="center">
-            <AspectRatioIcon sx={{ fontSize: 40, mb: 2 }} />
+            <AspectRatioIcon sx={{ fontSize: 40, mb: 2 }} color="inherit" />
             <Typography variant="h5" align="center" gutterBottom>
               Video Resize
             </Typography>
-            <Typography variant="body1" align="center" mb={2}>
+            <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Resize your video with custom resolution, aspect ratio, and advanced options.<br />
               Preview changes before applying. No upload required.
             </Typography>
@@ -334,16 +324,15 @@ function VideoResize() {
             borderRadius={1}
             bgcolor={isDragActive ? 'primary.lighter' : 'divider'}
             border={isDragActive ? theme => `2px dashed ${theme.palette.primary.main}` : theme => `2px dashed ${theme.palette.divider}`}
-            mb={2}
             sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
           >
             {!file ? (
               <Box textAlign="center">
-                <CloudUploadIcon sx={{ fontSize: 48, mb: 1 }} />
-                <Typography variant="body1">
+                <CloudUploadIcon color="primary" sx={{ fontSize: 32, mb: 1 }} />
+                <Typography variant="subtitle1" gutterBottom>
                   Drag & drop a video file here, or click to select
                 </Typography>
-                <Typography variant="body2" sx={{ mt: 1 }}>
+                <Typography color="text.secondary" variant="caption">
                   Supported: MP4, MOV, AVI, MKV, and more
                 </Typography>
               </Box>
@@ -477,9 +466,12 @@ function VideoResize() {
           <Button variant="contained" onClick={handleResize} disabled={isProcessing} size="small">
             {isProcessing ? 'Resizing' : 'Resize'}
           </Button>
-          <Button variant="outlined" onClick={handleReset} disabled={isProcessing} size="small">
-            Reset to Default
-          </Button>
+          {/* Reset button only visible when not processing */}
+          {!isProcessing && (
+            <Button variant="outlined" onClick={handleReset} size="small">
+              Reset
+            </Button>
+          )}
           {/* Add Stop button */}
           {isProcessing && (
             <Button variant="contained" color="error" onClick={handleStop} size="small">

@@ -12,7 +12,6 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
-import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Popover from '@mui/material/Popover';
@@ -213,6 +212,25 @@ function VideoConvert() {
 
   const handleProceed = async () => {
     if (!file) return alert('Please select a video file.');
+    // Validate resolution
+    if ((width && (!/^\d+$/.test(width) || parseInt(width) <= 0)) ||
+        (height && (!/^\d+$/.test(height) || parseInt(height) <= 0))) {
+      alert('Please enter a valid positive integer for width and height.');
+      return;
+    }
+
+    // Ensure width and height are even numbers (required by most codecs)
+    let evenWidth = width;
+    let evenHeight = height;
+    if (width && /^\d+$/.test(width)) {
+      const w = parseInt(width, 10);
+      evenWidth = (w % 2 === 0) ? String(w) : String(w - 1);
+    }
+    if (height && /^\d+$/.test(height)) {
+      const h = parseInt(height, 10);
+      evenHeight = (h % 2 === 0) ? String(h) : String(h - 1);
+    }
+
     if (!isFFmpegLoaded) {
       await ffmpeg.load();
       isFFmpegLoaded = true;
@@ -261,8 +279,13 @@ function VideoConvert() {
         args.push('-preset', preset);
       }
       // Resolution
-      if (width && height) {
-        args.push('-s', `${width}x${height}`);
+      // Only add -s if both width and height are valid positive integers
+      if (
+        evenWidth && evenHeight &&
+        /^\d+$/.test(evenWidth) && /^\d+$/.test(evenHeight) &&
+        parseInt(evenWidth) > 0 && parseInt(evenHeight) > 0
+      ) {
+        args.push('-s', `${evenWidth}x${evenHeight}`);
       }
       // FPS
       if (fps) {
@@ -277,7 +300,7 @@ function VideoConvert() {
       }
       // GIF special
       if (outputFormat === 'gif') {
-        args.push('-vf', `fps=${fps || 15},scale=${width && height ? `${width}:${height}` : '320:-1'}`);
+        args.push('-vf', `fps=${fps || 15},scale=${(evenWidth && evenHeight && /^\d+$/.test(evenWidth) && /^\d+$/.test(evenHeight) && parseInt(evenWidth) > 0 && parseInt(evenHeight) > 0) ? `${evenWidth}:${evenHeight}` : '320:-1'}`);
       }
       args.push(outputFileName);
 
@@ -350,37 +373,20 @@ function VideoConvert() {
     setAudioCodec(audioCodecs[fmt][0] || '');
   };
 
-  // Add reset handler
+  // Remove handleReset logic and replace with reload
   const handleReset = () => {
-    setFile(null);
-    setPreviewUrl(null);
-    setDownloadUrl(null);
-    setDownloadSize(null);
-    setProgress(0);
-    setStatus(null);
-    setConsoleLogs([]);
-    setErrorMsg(null);
-    setOutputFormat('mp4');
-    setVideoCodec('libx264');
-    setAudioCodec('aac');
-    setWidth('');
-    setHeight('');
-    setFps('');
-    setCrf('keep');
-    setPreset('keep');
-    setAudioBitrate('128k');
-    setResolutionRatio('custom');
+    window.location.reload();
   };
 
   return (
     <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Card sx={{ px: 2, py: 3 }}>
+      <Card sx={{ px: 3, py: 3 }}>
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <SwapHorizIcon sx={{ fontSize: 40, mb: 2 }} />
-            <Typography variant="h5" gutterBottom>Video Converter</Typography>
-            <Typography color="text.secondary" variant="body1" align="center">
+            <SwapHorizIcon sx={{ fontSize: 40, mb: 2 }} color="secondary" />
+            <Typography variant="h5" component="h1" gutterBottom>Video Converter</Typography>
+            <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Convert videos to different formats, codecs, resolutions and more.<br />
               Advanced options for quality, speed, and compatibility.
             </Typography>
@@ -420,16 +426,15 @@ function VideoConvert() {
             borderRadius={1}
             bgcolor={isDragActive ? 'primary.lighter' : 'divider'}
             border={isDragActive ? theme => `2px dashed ${theme.palette.primary.main}` : theme => `2px dashed ${theme.palette.divider}`}
-            mb={2}
             sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
           >
             {!file ? (
               <Box textAlign="center">
-                <CloudUploadIcon sx={{ fontSize: 48, mb: 1 }} />
-                <Typography variant="body1">
+                <CloudUploadIcon color="primary" sx={{ fontSize: 32, mb: 1 }} />
+                <Typography variant="subtitle1" gutterBottom>
                   Drag & drop a video or audio file here, or click to select
                 </Typography>
-                <Typography variant="body2" sx={{ mt: 1 }}>
+                <Typography color="text.secondary" variant="caption">
                   Supported: MP4, MOV, AVI, MKV, MP3, WAV, and more
                 </Typography>
               </Box>
@@ -618,18 +623,6 @@ function VideoConvert() {
                     return <MenuItem key={val} value={val}>{val} (CRF)</MenuItem>;
                   })}
                 </Select>
-                {/* Hide slider if "keep" is selected */}
-                {crf !== CRF_KEEP && (
-                  <Slider
-                    size="small"
-                    min={18}
-                    max={36}
-                    step={1}
-                    value={typeof crf === 'number' ? crf : 23}
-                    onChange={(_, val) => setCrf(val as number)}
-                    valueLabelDisplay="auto"
-                  />
-                )}
               </Grid>
               <Grid size={{xs: 12, md: 6 }}>
                 <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -660,18 +653,6 @@ function VideoConvert() {
                     <MenuItem key={p} value={p}>{p}</MenuItem>
                   ))}
                 </Select>
-                {/* Hide slider if "keep" is selected */}
-                {preset !== PRESET_KEEP && (
-                  <Slider
-                    size="small"
-                    min={0}
-                    max={8}
-                    step={1}
-                    value={presetValues.indexOf(preset as string)}
-                    onChange={(_, val) => setPreset(presetValues[val as number])}
-                    valueLabelDisplay="off"
-                  />
-                )}
               </Grid>
             </Grid>
           )}
@@ -680,9 +661,12 @@ function VideoConvert() {
           <Button variant="contained" onClick={handleProceed} disabled={!file || isProcessing} size="small">
             {isProcessing ? 'Converting' : 'Convert'}
           </Button>
-          <Button variant="outlined" onClick={handleReset} disabled={isProcessing} size="small">
-            Reset to Default
-          </Button>
+          {/* Reset button only visible when not processing */}
+          {!isProcessing && (
+            <Button variant="outlined" onClick={handleReset} size="small">
+              Reset
+            </Button>
+          )}
           {isProcessing && (
             <Button variant="contained" color="error" onClick={handleStop} size="small">
               Stop

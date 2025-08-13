@@ -215,19 +215,9 @@ function VideoCompression() {
     setPresetAnchor(null);
   };
 
-  // Add reset handler
+  // Remove handleReset logic and replace with reload
   const handleReset = () => {
-    setFile(null);
-    setPreviewUrl(null);
-    setDownloadUrl(null);
-    setDownloadSize(null);
-    setProgress(0);
-    setStatus(null);
-    setConsoleLogs([]);
-    setErrorMsg(null);
-    setCrf(18);
-    setPreset('slower');
-    totalDurationRef.current = 0;
+    window.location.reload();
   };
 
   // Preset slider marks
@@ -237,13 +227,13 @@ function VideoCompression() {
 
   return (
     <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Card sx={{ px: 2, py: 3 }}>
+      <Card sx={{ px: 3, py: 3 }}>
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <CompressIcon sx={{ fontSize: 40, mb: 2 }} />
-            <Typography variant="h5" gutterBottom>Video Compression</Typography>
-            <Typography variant="body1" align="center">
+            <CompressIcon sx={{ fontSize: 40, mb: 2 }} color="primary" />
+            <Typography variant="h5" component="h1" gutterBottom>Video Compression</Typography>
+            <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Reduce video file size while maintaining quality.
               <br />Simple, fast and easy compression for all your videos.
             </Typography>
@@ -283,16 +273,15 @@ function VideoCompression() {
             borderRadius={1}
             bgcolor={isDragActive ? 'primary.lighter' : 'divider'}
             border={isDragActive ? theme => `2px dashed ${theme.palette.primary.main}` : theme => `2px dashed ${theme.palette.divider}`}
-            mb={2}
             sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
           >
             {!file ? (
               <Box textAlign="center">
-                <CloudUploadIcon sx={{ fontSize: 48, mb: 1 }} />
-                <Typography variant="body1">
+                <CloudUploadIcon color="primary" sx={{ fontSize: 32, mb: 1 }} />
+                <Typography variant="subtitle1" gutterBottom>
                   Drag & drop a video file here, or click to select
                 </Typography>
-                <Typography variant="body2" sx={{ mt: 1 }}>
+                <Typography color="text.secondary" variant="caption">
                   Supported: MP4, MOV, AVI, MKV, and more
                 </Typography>
               </Box>
@@ -381,9 +370,12 @@ function VideoCompression() {
           <Button variant="contained" onClick={handleProceed} disabled={!file || isProcessing} size="small">
             {isProcessing ? 'Compressing' : 'Compress'}
           </Button>
-          <Button variant="outlined" onClick={handleReset} disabled={isProcessing} size="small">
-            Reset to Default
-          </Button>
+          {/* Reset button only visible when not processing */}
+          {!isProcessing && (
+            <Button variant="outlined" onClick={handleReset} size="small">
+              Reset
+            </Button>
+          )}
           {isProcessing && (
             <Button variant="contained" color="error" onClick={handleStop} size="small">
               Stop

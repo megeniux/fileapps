@@ -112,6 +112,11 @@ function AudioTrim() {
     setConsoleLogs([]);
   };
 
+  // Remove handleRemoveFile logic and replace with reload for reset
+  const handleReset = () => {
+    window.location.reload();
+  };
+
   const handleLoadedMetadata = () => {
     if (audioRef.current) {
       const dur = audioRef.current.duration;
@@ -213,13 +218,13 @@ function AudioTrim() {
 
   return (
     <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Card sx={{ px: 2, py: 3 }}>
+      <Card sx={{ px: 3, py: 3 }}>
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
             <ContentCutIcon sx={{ fontSize: 40, mb: 2 }} />
-            <Typography variant="h5" gutterBottom>Audio Trim</Typography>
-            <Typography variant="body1" align="center">
+            <Typography color='secondary' variant="h5" component="h1" gutterBottom>Audio Trim</Typography>
+            <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Trim and cut audio files online with precision.
             </Typography>
           </Box>
@@ -239,16 +244,15 @@ function AudioTrim() {
             borderRadius={1}
             bgcolor={isDragActive ? 'primary.lighter' : 'divider'}
             border={isDragActive ? `2px dashed ${theme.palette.primary.main}` : `2px dashed ${theme.palette.divider}`}
-            mb={2}
             sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
           >
             {!file ? (
               <Box textAlign="center">
-                <CloudUploadIcon sx={{ fontSize: 48, mb: 1 }} />
-                <Typography variant="body1">
+                <CloudUploadIcon color="primary" sx={{ fontSize: 32, mb: 1 }} />
+                <Typography variant="subtitle1" gutterBottom>
                   Drag & drop an audio file here, or click to select
                 </Typography>
-                <Typography variant="body2" sx={{ mt: 1 }}>
+                <Typography color="text.secondary" variant="caption">
                   Supported: MP3, WAV, AAC, FLAC, OGG, and more
                 </Typography>
               </Box>
@@ -311,9 +315,12 @@ function AudioTrim() {
           <Button variant="contained" onClick={handleTrim} disabled={isProcessing || !file || duration === 0} size="small">
             {isProcessing ? 'Trimming' : 'Trim Audio'}
           </Button>
-          <Button variant="outlined" onClick={handleRemoveFile} disabled={isProcessing} size="small">
-            Reset to Default
-          </Button>
+          {/* Reset button only visible when not processing */}
+          {!isProcessing && (
+            <Button variant="outlined" onClick={handleReset} size="small">
+              Reset
+            </Button>
+          )}
           {/* Add Stop button */}
           {isProcessing && (
             <Button color="error" variant='contained' onClick={handleStop} disabled={!isProcessing} size="small">

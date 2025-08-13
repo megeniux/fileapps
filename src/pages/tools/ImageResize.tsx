@@ -30,7 +30,6 @@ import Slider from '@mui/material/Slider';
 // Icons
 import AspectRatioIcon from '@mui/icons-material/AspectRatio';
 import CloseIcon from '@mui/icons-material/Close';
-import ImageIcon from '@mui/icons-material/Image';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import LinkIcon from '@mui/icons-material/Link';
 import LinkOffIcon from '@mui/icons-material/LinkOff';
@@ -156,19 +155,7 @@ function ImageResize() {
   };
 
   const handleReset = () => {
-    setFile(null);
-    setPreviewUrl(null);
-    setDownloadUrl(null);
-    setDownloadSize(null);
-    setProgress(0);
-    setStatus(null);
-    setErrorMsg(null);
-    setOriginalDimensions(null);
-    setWidth(defaultState.width);
-    setHeight(defaultState.height);
-    setFormat(defaultState.format);
-    setQuality(defaultState.quality);
-    setMaintainAspectRatio(defaultState.maintainAspectRatio);
+    window.location.reload();
   };
 
   const handleImageLoad = () => {
@@ -332,13 +319,13 @@ function ImageResize() {
 
   return (
     <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Card sx={{ px: 2, py: 3 }}>
+      <Card sx={{ px: 3, py: 3 }}>
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <AspectRatioIcon sx={{ fontSize: 40, mb: 2 }} />
-            <Typography variant="h5" gutterBottom>Image Resize</Typography>
-            <Typography variant="body1" align="center">
+            <AspectRatioIcon sx={{ fontSize: 40, mb: 2 }} color="primary" />
+            <Typography variant="h5" component="h1" gutterBottom>Image Resize</Typography>
+            <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Resize images to specific dimensions while maintaining quality.
             </Typography>
           </Box>
@@ -358,7 +345,6 @@ function ImageResize() {
             borderRadius={1}
             bgcolor={isDragActive ? 'primary.lighter' : 'divider'}
             border={isDragActive ? `2px dashed ${theme.palette.primary.main}` : `2px dashed ${theme.palette.divider}`}
-            mb={2}
             sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
           >
             {previewUrl ? (
@@ -371,11 +357,11 @@ function ImageResize() {
               />
             ) : (
               <Box textAlign="center">
-                <CloudUploadIcon sx={{ fontSize: 48, mb: 1 }} />
-                <Typography variant="body1">
+                <CloudUploadIcon color="primary" sx={{ fontSize: 32, mb: 1 }} />
+                <Typography variant="subtitle1" gutterBottom>
                   Drag & drop an image here, or click to select
                 </Typography>
-                <Typography variant="body2" sx={{ mt: 1 }}>
+                <Typography color="text.secondary" variant="caption">
                   Supported: JPG, PNG, WebP, GIF, and more
                 </Typography>
               </Box>
@@ -490,9 +476,11 @@ function ImageResize() {
           <Button variant="contained" onClick={handleResize} disabled={isProcessing || !file || (!width && !height)} size="small">
             {isProcessing ? 'Resizing' : 'Resize'}
           </Button>
-          <Button variant="outlined" onClick={handleReset} disabled={isProcessing} size="small">
-            Reset to Default
-          </Button>
+          {!isProcessing && (
+            <Button variant="outlined" onClick={handleReset} size="small">
+              Reset
+            </Button>
+          )}
           {isProcessing && (
             <Button color="error" variant='contained' onClick={handleStop} disabled={!isProcessing} size="small">
               Stop

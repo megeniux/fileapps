@@ -73,17 +73,9 @@ function VideoTrim() {
     setConsoleLogs([]);
   };
 
+  // Remove handleReset logic and replace with reload
   const handleReset = () => {
-    setFile(null);
-    setPreviewUrl(null);
-    setDuration(0);
-    setRange([0, 0]);
-    setProgress(0);
-    setStatus(null);
-    setErrorMsg(null);
-    setDownloadUrl(null);
-    setDownloadSize(null);
-    setConsoleLogs([]);
+    window.location.reload();
   };
 
   const handleLoadedMetadata = () => {
@@ -178,13 +170,13 @@ function VideoTrim() {
 
   return (
     <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Card sx={{ px: 2, py: 3 }}>
+      <Card sx={{ px: 3, py: 3 }}>
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <ContentCutIcon sx={{ fontSize: 40, mb: 2 }} />
-            <Typography variant="h5" gutterBottom>Video Trim</Typography>
-            <Typography variant="body1" align="center">
+            <ContentCutIcon sx={{ fontSize: 40, mb: 2 }} color="warning" />
+            <Typography variant="h5" component="h1" gutterBottom>Video Trim</Typography>
+            <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Select a video, choose the duration to trim, and download the result.
             </Typography>
           </Box>
@@ -224,16 +216,15 @@ function VideoTrim() {
             borderRadius={1}
             bgcolor={isDragActive ? 'primary.lighter' : 'divider'}
             border={isDragActive ? theme => `2px dashed ${theme.palette.primary.main}` : theme => `2px dashed ${theme.palette.divider}`}
-            mb={2}
             sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
           >
             {!file ? (
               <Box textAlign="center">
-                <CloudUploadIcon sx={{ fontSize: 48, mb: 1 }} />
-                <Typography variant="body1">
+                <CloudUploadIcon color="primary" sx={{ fontSize: 32, mb: 1 }} />
+                <Typography variant="subtitle1" gutterBottom>
                   Drag & drop a video file here, or click to select
                 </Typography>
-                <Typography variant="body2" sx={{ mt: 1 }}>
+                <Typography color="text.secondary" variant="caption">
                   Supported: MP4, MOV, AVI, MKV, and more
                 </Typography>
               </Box>
@@ -300,9 +291,12 @@ function VideoTrim() {
           <Button variant="contained" onClick={handleTrim} disabled={!file || isProcessing || range[1] <= range[0]} size="small">
             {isProcessing ? 'Trimming' : 'Trim'}
           </Button>
-          <Button variant="outlined" onClick={handleReset} disabled={isProcessing} size="small">
-            Reset to Default
-          </Button>
+          {/* Reset button only visible when not processing */}
+          {!isProcessing && (
+            <Button variant="outlined" onClick={handleReset} size="small">
+              Reset
+            </Button>
+          )}
           {/* Add Stop button */}
           {isProcessing && (
             <Button variant="contained" color="error" onClick={handleStop} size="small">

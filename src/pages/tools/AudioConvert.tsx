@@ -211,29 +211,20 @@ function AudioConvert() {
     }
   };
 
-  // Add reset handler
+  // Remove handleReset logic and replace with reload
   const handleReset = () => {
-    setFile(null);
-    setPreviewUrl(null);
-    setDownloadUrl(null);
-    setDownloadSize(null);
-    setProgress(0);
-    setStatus(null);
-    setConsoleLogs([]);
-    setErrorMsg(null);
-    setOutputFormat('mp3');
-    setOutputQuality(1);
+    window.location.reload();
   };
 
   return (
     <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Card sx={{ px: 2, py: 3 }}>
+      <Card sx={{ px: 3, py: 3 }}>
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <SwapHorizIcon sx={{ fontSize: 40, mb: 2 }} />
-            <Typography variant="h5" gutterBottom>Audio Convert</Typography>
-            <Typography variant="body1" align="center">
+            <SwapHorizIcon sx={{ fontSize: 40, mb: 2 }} color="primary" />
+            <Typography variant="h5" component="h1" gutterBottom>Audio Convert</Typography>
+            <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Convert audio files to different formats with custom quality settings.
             </Typography>
           </Box>
@@ -271,16 +262,15 @@ function AudioConvert() {
             borderRadius={1}
             bgcolor={isDragActive ? 'primary.lighter' : 'divider'}
             border={isDragActive ? `2px dashed ${theme.palette.primary.main}` : `2px dashed ${theme.palette.divider}`}
-            mb={2}
             sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
           >
             {!file ? (
               <Box textAlign="center">
-                <CloudUploadIcon sx={{ fontSize: 48, mb: 1 }} />
-                <Typography variant="body1">
+                <CloudUploadIcon color="primary" sx={{ fontSize: 32, mb: 1 }} />
+                <Typography variant="subtitle1" gutterBottom>
                   Drag & drop an audio file here, or click to select
                 </Typography>
-                <Typography variant="body2" sx={{ mt: 1 }}>
+                <Typography color="text.secondary" variant="caption">
                   Supported: MP3, WAV, AAC, FLAC, OGG, and more
                 </Typography>
               </Box>
@@ -362,9 +352,12 @@ function AudioConvert() {
           <Button variant="contained" onClick={handleConvert} disabled={isProcessing || !file} size="small">
             {isProcessing ? 'Converting' : 'Convert'}
           </Button>
-          <Button variant="outlined" onClick={handleReset} disabled={isProcessing} size="small">
-            Reset to Default
-          </Button>
+          {/* Reset button only visible when not processing */}
+          {!isProcessing && (
+            <Button variant="outlined" onClick={handleReset} size="small">
+              Reset
+            </Button>
+          )}
           {/* Add Stop button */}
           {isProcessing && (
             <Button color="error" variant='contained' onClick={handleStop} disabled={!isProcessing} size="small">
