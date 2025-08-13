@@ -9,21 +9,20 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
-// Icons
-import MovieFilterIcon from '@mui/icons-material/MovieFilter';
-
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  // Custom styles for the AppBar
+  backgroundColor: theme.palette.background.default,
 }));
 
 function Header() {
   const navigate = useNavigate();
 
   return (
-    <StyledAppBar position="static">
+    <StyledAppBar position="sticky" color='default' elevation={3}>
       <Toolbar>
         {/* Logo */}
-        <Typography variant="h6" onClick={() => navigate('/')} sx={{ flexGrow: 1, cursor: 'pointer' }}><MovieFilterIcon sx={{ fontSize: 26, mb: -0.75, mr: 0.5 }} /> {APP_INFO.name} </Typography>
+        <Typography variant="h6" onClick={() => navigate('/')} sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, cursor: 'pointer' }}>
+          <img src="/images/branding/logo-small.svg" alt={APP_INFO.name} height={25} style={{ marginRight: 4 }} />{APP_INFO.name}
+        </Typography>
         {/* Navigation Links */}
         <Box>
           <Button color="inherit" component={Link} to="/">

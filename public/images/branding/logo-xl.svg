@@ -1,0 +1,49 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+	<title>Firefly i want a transparent logo with the text FileApps 310204</title>
+	<defs>
+		<linearGradient id="g1" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-830.698,102.696,-83.716,-677.168,921.539,282.529)">
+			<stop offset="0" stop-color="#f53e32"/>
+			<stop offset=".173" stop-color="#f87453"/>
+			<stop offset=".409" stop-color="#f88f4c"/>
+			<stop offset=".611" stop-color="#fba426"/>
+			<stop offset=".711" stop-color="#fba612"/>
+			<stop offset="1" stop-color="#fb7b2e"/>
+		</linearGradient>
+		<linearGradient id="g2" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-518.068,205.793,-208.803,-525.645,657.911,413.921)">
+			<stop offset="0" stop-color="#358be4"/>
+			<stop offset=".373" stop-color="#3ca5db"/>
+			<stop offset=".749" stop-color="#2ad7ae"/>
+			<stop offset="1" stop-color="#15baaa"/>
+		</linearGradient>
+		<linearGradient id="g3" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(438.035,8.345,-4.081,214.2,57.333,643.597)">
+			<stop offset=".21" stop-color="#1aafdf"/>
+			<stop offset="1" stop-color="#388ddf"/>
+		</linearGradient>
+		<linearGradient id="g4" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-220.302,45.859,-76.674,-368.333,983.262,764.213)">
+			<stop offset="0" stop-color="#dc0e68"/>
+			<stop offset="1" stop-color="#c601bd"/>
+		</linearGradient>
+		<linearGradient id="g5" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(397.188,3.343,-1.68,199.664,56.932,891.56)">
+			<stop offset="0" stop-color="#16adc4"/>
+			<stop offset=".772" stop-color="#41ce99"/>
+		</linearGradient>
+	</defs>
+	<style>
+		.s0 { fill: url(#g1) } 
+		.s1 { fill: url(#g2) } 
+		.s2 { fill: #49daf3 } 
+		.s3 { fill: url(#g3) } 
+		.s4 { fill: #4803c8 } 
+		.s5 { fill: url(#g4) } 
+		.s6 { fill: url(#g5) } 
+	</style>
+	<g id="Folder 1">
+		<path class="s0" d="m979.2 518.2c1.9 40-0.7 81 0 121.1-2.8 9.4-4.3 6.6-12.8 6.8-61.4 1.2-151.3-34.9-198.6-73.3-13.7-11.2-25.3-23.3-37.5-35.8-71.7-82.5-138.7-190.4-218.2-264.3-7.6-7-21.9-23-29.9-27.2-40.3-21.4-265.4-6.1-329-8.6-79.2-3-117.2-42.5-111.6-123.6 5.2-76.8 68.3-92.4 132.1-94.6 102.8-3.5 235.4-4.3 337.5 1.7 105.3 6.3 169.9 42.1 239.5 118.5 52.5 57.7 197.2 228.1 216.5 294.9 7.9 27.4 10.6 56.1 12 84.4z"/>
+		<path class="s1" d="m512.1 272.7c79.5 73.9 146.5 181.8 218.2 264.3l-1.7 88.6c-36.4-80.1-135.8-98.4-215.7-93.7-1.1 78.9-1.4 158-0.8 236.9l-12-10.2c3.4 1.1 5.9 3.9 8.6 2.5v-229.2c-2.9-16.4-26.2-34.3-41.8-37.5-94-19.4-244.4 11.2-344.4-1.8-111.3-14.4-112.1-197.6 1.7-218.2z"/>
+		<path class="s2" d="m979.2 927.4c11.9-76.4 1.3-206.6 0-288.1-0.7-40.1 1.9-81.1 0-121.1z"/>
+		<path class="s3" d="m508.7 531.9v229.2c-2.7 1.4-5.2-1.4-8.6-2.5-98.9-33.9-353.1 19.7-421.9-30.7-66.3-48.6-40-190 51.2-196z"/>
+		<path class="s4" d="m728.6 625.6l1.7 314.5c-31.3 96.8-206.4 88.1-218.2-15.3-5.2-45 0.3-108.7 0-156-0.6-78.9-0.3-158 0.8-236.9 79.9-4.7 179.3 13.6 215.7 93.7z"/>
+		<path class="s5" d="m979.2 639.3c1.3 81.5 11.9 211.7 0 288.1-14.8 94.1-188.3 96.3-209.7 2.5l-1.7-357.1c47.3 38.4 137.2 74.5 198.6 73.3 8.5-0.2 10 2.6 12.8-6.8z"/>
+		<path class="s6" d="m122.5 785.9c45.8-5.3 249.2-4.1 286.4 10.2 83.3 32.1 87 163.4 3.4 194.3-35.7 13.3-278.8 13.6-313.6 0-87.2-33.8-72.6-193.5 23.8-204.5z"/>
+	</g>
+</svg>

@@ -292,7 +292,10 @@ function ImageResize() {
       ffmpeg.off('log', logHandler);
     } catch (err) {
       setStatus('Failed');
-      setErrorMsg(err instanceof Error ? err.message : String(err));
+      // Only set errorMsg if not stopped
+      if (status !== 'Stopped') {
+        setErrorMsg(err instanceof Error ? err.message : String(err));
+      }
     } finally {
       setIsProcessing(false);
     }
@@ -315,11 +318,12 @@ function ImageResize() {
     setIsProcessing(false);
     setStatus('Stopped');
     setProgress(0);
+    setErrorMsg(null); // Clear error on stop
   };
 
   return (
     <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Card sx={{ px: 3, py: 3 }}>
+      <Card sx={{ px: 3, py: 3 }} elevation={3}>
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
@@ -343,7 +347,7 @@ function ImageResize() {
             width="100%"
             height={300}
             borderRadius={1}
-            bgcolor={isDragActive ? 'primary.lighter' : 'divider'}
+            bgcolor={isDragActive ? 'primary.lighter' : 'action.hover'}
             border={isDragActive ? `2px dashed ${theme.palette.primary.main}` : `2px dashed ${theme.palette.divider}`}
             sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
           >
@@ -357,7 +361,7 @@ function ImageResize() {
               />
             ) : (
               <Box textAlign="center">
-                <CloudUploadIcon color="primary" sx={{ fontSize: 32, mb: 1 }} />
+                <CloudUploadIcon sx={{ fontSize: 32, mb: 1 }} />
                 <Typography variant="subtitle1" gutterBottom>
                   Drag & drop an image here, or click to select
                 </Typography>

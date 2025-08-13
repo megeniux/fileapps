@@ -2,16 +2,15 @@ import { useNavigate } from 'react-router-dom'
 import { APP_INFO } from "../constants";
 
 // MUI imports
+import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardContent from '@mui/material/CardContent';
+import Box from '@mui/material/Box';
 
 // Icons
 import CompressIcon from '@mui/icons-material/Compress';
@@ -178,116 +177,72 @@ export const description = "Your all-in-one online suite for media. Compress, co
 
 function Home() {
   const navigate = useNavigate();
+  const theme = useTheme();
   return (
-    <Container maxWidth="lg" sx={{ marginBlock: 'auto' }}>
-      <Typography variant="h1" gutterBottom align='center'> Welcome to {APP_INFO.name} </Typography>
-      <Typography variant="body2" component="h2" fontWeight={400} color="text.secondary" align='center'>{description}</Typography>
-      <Divider sx={{ my: 4 }} />
-      
-      <Typography variant='h6' component="h3">Video Tools</Typography>
-      <TableContainer component={Paper} sx={{ mb: 4 }}>
-        <Table size='small'>
-          <TableHead>
-            <TableRow>
-              <TableCell />
-              <TableCell>
-                <Typography color="text.primary" fontWeight="bold">Tool</Typography>
-              </TableCell>
-              <TableCell>
-                <Typography color="text.primary" fontWeight="bold">Description</Typography>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {videoTools.map((tool) => (
-              <TableRow
-                key={tool.title}
-                hover
-                sx={{ cursor: 'pointer', '& > .MuiTableCell-root': { borderColor: 'divider' }, '&:last-child > .MuiTableCell-root': { borderBottom: 0 } }}
-                onClick={() => navigate(tool.link)}
-              >
-                <TableCell width={64}>{tool.icon}</TableCell>
-                <TableCell width={200}>
-                  <Typography color="text.primary" noWrap>{tool.title}</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography variant='body2' color="text.secondary">{tool.description}</Typography>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+    <Container maxWidth="lg" sx={{ marginBlock: 'auto', py: 5 }}>
+      <Box mb={4}>
+        <Typography variant="h1" gutterBottom align='center' fontSize={42} fontWeight="bold"> Welcome to <span className='gradient-text-primary'>{APP_INFO.name}</span> </Typography>
+        <Typography variant="body1" component="h2" fontWeight={400} color="text.secondary" align='center' marginInline="auto" maxWidth={660}>{description}</Typography>
+      </Box>
+      <Typography variant='h6' component="h3" gutterBottom>Video Tools</Typography>
+      <Divider sx={{ my: 2 }} />
+      <Grid container spacing={2} sx={{ mb: 4 }}>
+        {videoTools.map((tool) => (
+          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={tool.title}>
+            <Card sx={{ display: 'flex', height: '100%', alignItems: 'flex-start' }}>
+              <CardActionArea onClick={() => navigate(tool.link)} sx={{ height: '100%' }}>
+                <CardContent>
+                  <Box display="flex" alignItems="center" mb={1}>
+                    <Box width={30} height={30} p={0.5} borderRadius={4} sx={{ background: theme.palette.action.selected }}>{tool.icon}</Box>
+                    <Typography variant="subtitle1" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
+                  </Box>
+                  <Typography variant="body2" color="text.secondary">{tool.description}</Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
 
-      <Typography variant='h6' component="h3">Audio Tools</Typography>
-      <TableContainer component={Paper} sx={{ mb: 4 }}>
-        <Table size='small'>
-          <TableHead>
-            <TableRow>
-              <TableCell />
-              <TableCell>
-                <Typography color="text.primary" fontWeight="bold">Tool</Typography>
-              </TableCell>
-              <TableCell>
-                <Typography color="text.primary" fontWeight="bold">Description</Typography>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {audioTools.map((tool) => (
-              <TableRow
-                key={tool.title}
-                hover
-                sx={{ cursor: 'pointer', '& > .MuiTableCell-root': { borderColor: 'divider' }, '&:last-child > .MuiTableCell-root': { borderBottom: 0 } }}
-                onClick={() => navigate(tool.link)}
-              >
-                <TableCell width={64}>{tool.icon}</TableCell>
-                <TableCell width={200}>
-                  <Typography color="text.primary" noWrap>{tool.title}</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography variant='body2' color="text.secondary">{tool.description}</Typography>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Typography variant='h6' component="h3" gutterBottom>Audio Tools</Typography>
+      <Divider sx={{ my: 2 }} />
+      <Grid container spacing={2} sx={{ mb: 4 }}>
+        {audioTools.map((tool) => (
+          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={tool.title}>
+            <Card sx={{ display: 'flex', height: '100%', alignItems: 'flex-start' }}>
+              <CardActionArea onClick={() => navigate(tool.link)} sx={{ height: '100%' }}>
+                <CardContent>
+                  <Box display="flex" alignItems="center" mb={1}>
+                    <Box width={30} height={30} p={0.5} borderRadius={4} sx={{ background: theme.palette.action.selected }}>{tool.icon}</Box>
+                    <Typography variant="subtitle1" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
+                  </Box>
+                  <Typography variant="body2" color="text.secondary">{tool.description}</Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
 
-      <Typography variant='h6' component="h3">Image Tools</Typography>
-      <TableContainer component={Paper}>
-        <Table size='small'>
-          <TableHead>
-            <TableRow>
-              <TableCell />
-              <TableCell>
-                <Typography color="text.primary" fontWeight="bold">Tool</Typography>
-              </TableCell>
-              <TableCell>
-                <Typography color="text.primary" fontWeight="bold">Description</Typography>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {imageTools.map((tool) => (
-              <TableRow
-                key={tool.title}
-                hover
-                sx={{ cursor: 'pointer', '& > .MuiTableCell-root': { borderColor: 'divider' }, '&:last-child > .MuiTableCell-root': { borderBottom: 0 } }}
-                onClick={() => navigate(tool.link)}
-              >
-                <TableCell width={64}>{tool.icon}</TableCell>
-                <TableCell width={200}>
-                  <Typography color="text.primary" noWrap>{tool.title}</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography variant='body2' color="text.secondary">{tool.description}</Typography>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Typography variant='h6' component="h3" gutterBottom>Image Tools</Typography>
+      <Divider sx={{ my: 2 }} />
+      <Grid container spacing={2}>
+        {imageTools.map((tool) => (
+          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={tool.title}>
+            <Card sx={{ display: 'flex', height: '100%', alignItems: 'flex-start' }}>
+              <CardActionArea onClick={() => navigate(tool.link)} sx={{ height: '100%' }}>
+                <CardContent>
+                  <Box display="flex" alignItems="center" mb={1}>
+                    <Box width={30} height={30} p={0.5} borderRadius={4} sx={{ background: theme.palette.action.selected }}>{tool.icon}</Box>
+                    <Typography variant="subtitle1" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
+                  </Box>
+                  <Typography variant="body2" color="text.secondary">{tool.description}</Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
     </Container>
   )
 }

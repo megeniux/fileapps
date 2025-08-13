@@ -1,4 +1,4 @@
 export const APP_INFO = {
-    name: "ioTools",
+    name: "FileApps",
     version: "1.0.0"
 };

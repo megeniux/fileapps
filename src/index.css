@@ -1,10 +1,13 @@
 /* Basic Browser Styles with Box sizing, Margin etc */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   color: #fff;
   margin: 0;
   padding: 0;
@@ -15,20 +18,28 @@ html, body {
 /* Thin webkit Scroll styles everywhere for normal hover etc */
 
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.7);
-}
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-}
-::-webkit-scrollbar-track:hover {
-  background: rgba(0, 0, 0, 0.2);
+  width: 6px;
+  height: 6px;
 }
 
+::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  background: linear-gradient(35deg, #17aec4, #ca04ac, #fa9e30);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(55deg, #fa9e30, #ca04ac, #17aec4);
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Other */
+
+.gradient-text-primary {
+  background: linear-gradient(90deg, #17aec4, #ca04ac, #fa9e30);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

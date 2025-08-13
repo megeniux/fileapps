@@ -18,7 +18,8 @@ const Root = styled(Box)(({ theme }) => ({
   '& > .main-container': {
     display: 'flex',
     flexDirection: 'column',
-    height: 'calc(100vh - 64px - 30px)', // Adjust based on Header and Footer height
+    backgroundImage: 'linear-gradient(90deg, rgb(23 173 196 / 15%), rgb(200 4 171 / 15%), rgb(250 158 48 / 15%))',
+    height: 'calc(100vh - 64px - 30px)',
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
     overflowY: 'auto',

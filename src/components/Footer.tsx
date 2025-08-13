@@ -14,12 +14,11 @@ const FooterRoot = styled(Paper)(({ theme }) => ({
   alignItems: 'center',
   paddingInline: theme.spacing(2),
   height: 30,
-  overflow: 'hidden',
 }));
 
 function Footer() {
   return (
-    <FooterRoot square>
+    <FooterRoot>
       <Typography variant="body2" align="center"> {APP_INFO.name} &copy; {new Date().getFullYear()} </Typography>
       <Box display="flex">
         <Link color="text.secondary" href="/tos" underline="none"><Typography variant="body2">Terms of Service</Typography></Link>
