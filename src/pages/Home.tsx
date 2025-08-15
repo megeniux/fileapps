@@ -50,37 +50,37 @@ const videoTools: {
     {
       title: 'Resize Video',
       description: 'Adjust video dimensions to fit your needs. Resize videos without losing quality.',
-      icon: <AspectRatioIcon fontSize="small" color='inherit' />,
+      icon: <AspectRatioIcon fontSize="small" color='warning' />,
       link: '/resize',
-      color: 'inherit'
+      color: 'warning'
     },
     {
       title: 'Trim Video',
       description: 'Cut and trim video files to extract specific sections',
-      icon: <ContentCutIcon fontSize="small" color="warning" />,
+      icon: <ContentCutIcon fontSize="small" color="info" />,
       link: '/trim',
-      color: 'warning'
+      color: 'info'
     },
     {
       title: 'Merge Videos',
       description: 'Combine multiple videos into one seamlessly. Perfect for creating compilations.',
-      icon: <MergeTypeIcon fontSize="small" color="info" />,
+      icon: <MergeTypeIcon fontSize="small" color="success" />,
       link: '/merge',
-      color: 'info'
+      color: 'success'
     },
     {
       title: 'Extract Audio',
       description: 'Extract audio tracks from your videos. Save audio as separate files easily.',
-      icon: <MusicNoteIcon fontSize="small" color="success" />,
+      icon: <MusicNoteIcon fontSize="small" color="error" />,
       link: '/extract-audio',
-      color: 'success'
+      color: 'error'
     },
     {
       title: 'Thumbnail Generator',
       description: 'Generate thumbnails from your videos for previews and sharing.',
-      icon: <ImageIcon fontSize="small" color="error" />,
+      icon: <ImageIcon fontSize="small" color="inherit" />,
       link: '/thumbnail',
-      color: 'error'
+      color: 'inherit'
     }
   ];
 

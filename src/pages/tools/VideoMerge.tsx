@@ -255,7 +255,7 @@ function VideoMerge() {
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <MergeTypeIcon sx={{ fontSize: 40, mb: 2 }} color="info" />
+            <MergeTypeIcon sx={{ fontSize: 40, mb: 2 }} color="success" />
             <Typography variant="h5" component="h1" gutterBottom>
               Merge Videos
             </Typography>

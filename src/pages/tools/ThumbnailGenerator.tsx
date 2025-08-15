@@ -331,7 +331,7 @@ function ThumbnailGenerator() {
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <ImageIcon sx={{ fontSize: 40, mb: 2 }} color="error" />
+            <ImageIcon sx={{ fontSize: 40, mb: 2 }} color="inherit" />
             <Typography variant="h5" component="h1" gutterBottom>Thumbnail Generator</Typography>
             <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Generate thumbnails from your videos with custom options.
@@ -393,7 +393,15 @@ function ThumbnailGenerator() {
                   ref={videoRef}
                   src={previewUrl || undefined}
                   controls
-                  style={{ width: '100%', maxWidth: 500, maxHeight: 180, background: '#000', position: 'relative', zIndex: 10  }}
+                  style={{
+                    aspectRatio: '16 / 9',
+                    maxWidth: '100%',
+                    maxHeight: 220,
+                    background: '#000',
+                    objectFit: 'contain',
+                    position: 'relative',
+                    zIndex: 10
+                  }}
                   onLoadedMetadata={handleLoadedMetadata}
                 />
               </Box>
