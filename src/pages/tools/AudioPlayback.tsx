@@ -220,7 +220,7 @@ function AudioPlayback() {
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <SpeedIcon color="error" sx={{ fontSize: 40, mb: 2 }} />
+            <SpeedIcon color="success" sx={{ fontSize: 40, mb: 2 }} />
             <Typography variant="h5" component="h1" gutterBottom>Audio Playback Speed</Typography>
             <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Change audio playback speed from -20x (reverse) to +20x.

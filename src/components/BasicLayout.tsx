@@ -19,9 +19,9 @@ const Root = styled(Box)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     backgroundImage: 'linear-gradient(90deg, rgb(23 173 196 / 15%), rgb(200 4 171 / 15%), rgb(250 158 48 / 15%))',
-    height: 'calc(100vh - 64px - 30px)',
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
+    height: '100dvh',
+    paddingTop: 80,
+    paddingBottom: 40,
     overflowY: 'auto',
   }
 }));

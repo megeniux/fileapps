@@ -13,7 +13,11 @@ const FooterRoot = styled(Paper)(({ theme }) => ({
   justifyContent: 'space-between',
   alignItems: 'center',
   paddingInline: theme.spacing(2),
+  width: '100%',
   height: 30,
+  position: 'fixed',
+  bottom: 0,
+  zIndex: theme.zIndex.appBar,
 }));
 
 function Footer() {

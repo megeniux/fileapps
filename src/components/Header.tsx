@@ -17,7 +17,7 @@ function Header() {
   const navigate = useNavigate();
 
   return (
-    <StyledAppBar position="sticky" color='default' elevation={3}>
+    <StyledAppBar position="fixed" color='default' elevation={3}>
       <Toolbar>
         {/* Logo */}
         <Typography variant="h6" onClick={() => navigate('/')} sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, cursor: 'pointer' }}>

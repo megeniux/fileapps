@@ -25,6 +25,7 @@ import SpeedIcon from '@mui/icons-material/Speed';
 import CropIcon from '@mui/icons-material/Crop';
 import FilterIcon from '@mui/icons-material/Filter';
 import RotateRightIcon from '@mui/icons-material/RotateRight';
+import SubtitlesIcon from '@mui/icons-material/Subtitles';
 
 const videoTools: {
   title: string;
@@ -37,50 +38,57 @@ const videoTools: {
       title: 'Compress Video',
       description: 'Reduce video file size while maintaining quality. Fast and easy compression for all your videos.',
       icon: <CompressIcon fontSize="small" color="primary" />,
-      link: '/compress',
+      link: '/video-compress',
       color: 'primary'
     },
     {
       title: 'Video Convert',
       description: 'Convert videos to different formats easily. Supports a wide range of formats for your convenience.',
       icon: <SwapHorizIcon fontSize="small" color="secondary" />,
-      link: '/convert',
+      link: '/video-convert',
       color: 'secondary'
     },
     {
       title: 'Resize Video',
       description: 'Adjust video dimensions to fit your needs. Resize videos without losing quality.',
       icon: <AspectRatioIcon fontSize="small" color='warning' />,
-      link: '/resize',
+      link: '/video-resize',
       color: 'warning'
     },
     {
       title: 'Trim Video',
       description: 'Cut and trim video files to extract specific sections',
       icon: <ContentCutIcon fontSize="small" color="info" />,
-      link: '/trim',
+      link: '/video-trim',
       color: 'info'
     },
     {
       title: 'Merge Videos',
       description: 'Combine multiple videos into one seamlessly. Perfect for creating compilations.',
       icon: <MergeTypeIcon fontSize="small" color="success" />,
-      link: '/merge',
+      link: '/video-merge',
       color: 'success'
     },
     {
       title: 'Extract Audio',
       description: 'Extract audio tracks from your videos. Save audio as separate files easily.',
       icon: <MusicNoteIcon fontSize="small" color="error" />,
-      link: '/extract-audio',
+      link: '/video-extract-audio',
       color: 'error'
     },
     {
       title: 'Thumbnail Generator',
       description: 'Generate thumbnails from your videos for previews and sharing.',
       icon: <ImageIcon fontSize="small" color="inherit" />,
-      link: '/thumbnail',
+      link: '/video-thumbnail',
       color: 'inherit'
+    },
+    {
+      title: 'Burn Caption',
+      description: 'Burn captions/subtitles into your videos. Upload a video and subtitle file, customize style, and download the result.',
+      icon: <SubtitlesIcon fontSize="small" color="primary" />,
+      link: '/video-burn-caption',
+      color: 'primary'
     }
   ];
 
@@ -136,40 +144,12 @@ const imageTools: {
   color: "primary" | "secondary" | "warning" | "info" | "success" | "error" | "inherit";
 }[] = [
     {
-      title: 'Image Resize',
-      description: 'Resize images to specific dimensions while maintaining quality. Perfect for web and social media.',
-      icon: <AspectRatioIcon fontSize="small" color="primary" />,
-      link: '/image-resize',
-      color: 'primary'
-    },
-    {
       title: 'Image Convert',
       description: 'Convert images between formats like JPG, PNG, WebP, and more with quality control.',
-      icon: <SwapHorizIcon fontSize="small" color="secondary" />,
+      icon: <SwapHorizIcon fontSize="small" color="primary" />,
       link: '/image-convert',
-      color: 'secondary'
+      color: 'primary'
     },
-    {
-      title: 'Image Crop',
-      description: 'Crop images to remove unwanted areas or focus on specific parts of your photos.',
-      icon: <CropIcon fontSize="small" color="warning" />,
-      link: '/image-crop',
-      color: 'warning'
-    },
-    {
-      title: 'Image Filters',
-      description: 'Apply various filters and effects to enhance your images or create artistic styles.',
-      icon: <FilterIcon fontSize="small" color="info" />,
-      link: '/image-filters',
-      color: 'info'
-    },
-    {
-      title: 'Image Rotate',
-      description: 'Rotate and flip images to correct orientation or create mirror effects.',
-      icon: <RotateRightIcon fontSize="small" color="success" />,
-      link: '/image-rotate',
-      color: 'success'
-    }
   ];
 
 // SEO-friendly description for the Home page
