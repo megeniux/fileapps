@@ -61,7 +61,7 @@ const defaultState = {
   saturation: 100,
 };
 
-export const description = "Resize images to specific dimensions while maintaining quality. Perfect for web and social media.";
+export const description = "Convert images to specific dimensions while maintaining quality. Perfect for web and social media.";
 
 function ImageResize() {
   const theme = useTheme();
@@ -386,10 +386,10 @@ function ImageResize() {
       setProgress(100);
       setStatus('Completed');
       ffmpeg.off('log', logHandler);
-    } catch (err) {
+    } catch (err:any) {
       setStatus('Failed');
       // Only set errorMsg if not stopped
-      if (status !== 'Stopped') {
+      if (err.message !== 'called FFmpeg.terminate()') {
         setErrorMsg(err instanceof Error ? err.message : String(err));
       }
     } finally {
@@ -432,7 +432,7 @@ function ImageResize() {
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
             <AspectRatioIcon sx={{ fontSize: 40, mb: 2 }} color="primary" />
-            <Typography variant="h5" component="h1" gutterBottom>Image Resize</Typography>
+            <Typography variant="h5" component="h1" gutterBottom>Convert Image</Typography>
             <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Resize images to specific dimensions while maintaining quality.
             </Typography>

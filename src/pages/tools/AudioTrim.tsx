@@ -185,11 +185,11 @@ function AudioTrim() {
       setProgress(100);
       setStatus('Completed');
       ffmpeg.off('log', logHandler);
-    } catch (err) {
+    } catch (err:any) {
       setStatus('Failed');
       setConsoleLogs(logs => [...logs, String(err)]);
       // Only set errorMsg if not stopped
-      if (status !== 'Stopped') {
+      if (err.message !== 'called FFmpeg.terminate()') {
         setErrorMsg(err instanceof Error ? err.message : String(err));
       }
     } finally {
