@@ -42,7 +42,6 @@ function BurnCaption() {
     const [consoleLogs, setConsoleLogs] = useState<string[]>([])
     const [isDragActive, setIsDragActive] = useState(false)
     const videoRef = useRef<HTMLVideoElement>(null)
-    const [videoDuration, setVideoDuration] = useState<number>(0)
 
     // Subtitle style options
     const [fontSize, setFontSize] = useState<number>(24)
@@ -183,7 +182,6 @@ function BurnCaption() {
             const logHandler = ({ message }: { message: string }) => {
                 if (!durationParsed && message.includes('Duration:')) {
                     vidDuration = parseDuration(message);
-                    setVideoDuration(vidDuration);
                     durationParsed = true;
                 }
                 const current = parseCurrentTime(message);

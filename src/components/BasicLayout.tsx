@@ -13,7 +13,7 @@ type BasicLayoutProps = {
   children: React.ReactNode;
 };
 
-const Root = styled(Box)(({ theme }) => ({
+const Root = styled(Box)(() => ({
   overflow: 'hidden',
   '& > .main-container': {
     display: 'flex',

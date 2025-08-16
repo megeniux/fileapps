@@ -22,9 +22,6 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import ImageIcon from '@mui/icons-material/Image';
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import SpeedIcon from '@mui/icons-material/Speed';
-import CropIcon from '@mui/icons-material/Crop';
-import FilterIcon from '@mui/icons-material/Filter';
-import RotateRightIcon from '@mui/icons-material/RotateRight';
 import SubtitlesIcon from '@mui/icons-material/Subtitles';
 
 const videoTools: {
