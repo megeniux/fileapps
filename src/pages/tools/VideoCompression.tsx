@@ -160,7 +160,7 @@ function VideoCompression() {
       setProgress(100);
       setStatus('Completed');
       ffmpeg.off('log', logHandler);
-    } catch (err:any) {
+    } catch (err: any) {
       setStatus('Failed');
       setConsoleLogs((logs) => [...logs, String(err)]);
       // Only set errorMsg if not stopped
@@ -230,18 +230,17 @@ function VideoCompression() {
 
   return (
     <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Card sx={{ px: 3, py: 3 }} elevation={3}>
+      {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
+      <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
-          {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
-          <Box display="flex" flexDirection="column" alignItems="center">
-            <CompressIcon sx={{ fontSize: '3rem', mb: 2 }} color="primary" />
-            <Typography variant="h5" component="h1" gutterBottom>Video Compression</Typography>
-            <Typography color="text.secondary" variant="body1" component="h2" align="center">
-              Reduce video file size while maintaining quality.
-              <br />Simple, fast and easy compression for all your videos.
-            </Typography>
+          <Box display="flex" alignItems="center">
+            <CompressIcon color="primary" fontSize='small' sx={{ mr: 0.5 }} />
+            <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Video Compression</Typography>
           </Box>
-          <Divider sx={{ my: 2 }} />
+          <Divider sx={{ my: 0.5 }} />
+          <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
+            Reduce video file size while maintaining quality. Simple, fast and easy compression for all your videos.
+          </Typography>
           {/* Upload area - refactored to match AudioConvert/VideoTrim */}
           <Box
             onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}
@@ -282,7 +281,7 @@ function VideoCompression() {
               <Box textAlign="center">
                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
                 <Typography variant="subtitle1" gutterBottom>
-                  Drag & drop a video file here<br/>or<br/>Click to select
+                  Drag & drop a video file here<br />or<br />Click to select
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
                   Supported: MP4, MOV, AVI, MKV, and more
@@ -324,7 +323,7 @@ function VideoCompression() {
                 {file.name} ({formatBytes(file.size)})
               </Typography>
               <IconButton size="small" color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
-                <CloseIcon fontSize='small'/>
+                <CloseIcon fontSize='small' />
               </IconButton>
             </Box>
           )}

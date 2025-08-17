@@ -12,22 +12,19 @@ function Contact() {
   return (
     <Container maxWidth="md" sx={{ my: 'auto' }}>
       <Typography variant="h1" gutterBottom>
-        Contact Us
+        Contact
       </Typography>
       <Divider sx={{ mb: 4 }} />
       <Card sx={{ p: 2 }}>
         <CardContent>
-          <Typography variant="body1" mb={2}>
+          <Typography variant="body1">
             Thank you for using {APP_INFO.name}. If you have any questions, feedback, or require support, please feel free to reach out to us.
+            We value your input and strive to provide the best possible experience.
           </Typography>
-          <Typography variant="body2" color="text.secondary" mb={2}>
-            We value your input and strive to provide the best possible experience. For all inquiries, please use the contact information below:
-          </Typography>
-          <Typography variant="body1" color="primary">
-            Email: <Link color="primary" href="mailto:ayazullahburki@gmail.com">ayazullahburki@gmail.com</Link>
-          </Typography>
-          <Typography variant="body2" color="text.secondary" mt={2}>
-            Developed and maintained by Ayaz Ullah Burki.
+          <Divider sx={{ my: 2 }} />
+          <Typography variant="body2" color="text.secondary">
+            Developed and maintained by Ayaz Ullah Burki.<br />
+            For inquiries or support, please contact: <Link href="mailto:ayazullahburki@gmail.com">ayazullahburki@gmail.com</Link>
           </Typography>
         </CardContent>
       </Card>

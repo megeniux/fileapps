@@ -12,7 +12,7 @@ function AboutUs() {
   return (
     <Container maxWidth="md" sx={{ my: 'auto' }}>
       <Typography variant="h1" gutterBottom>
-        About Us
+        About
       </Typography>
       <Divider sx={{ mb: 4 }} />
       <Card sx={{ p: 2 }}>
@@ -22,14 +22,6 @@ function AboutUs() {
           </Typography>
           <Typography variant="body1">
             {APP_INFO.name} offers a suite of features designed to simplify the process of optimizing videos for various purposes, including sharing, storage, and professional editing. We are committed to maintaining high standards of quality, privacy, and accessibility for all our users.
-          </Typography>
-          <Divider sx={{ my: 2 }} />
-          <Typography variant="h6" color="primary" gutterBottom>
-            Contact Information
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Developed and maintained by Ayaz Ullah Burki.<br />
-            For inquiries or support, please contact: <Link color="primary" href="mailto:ayazullahburki@gmail.com">ayazullahburki@gmail.com</Link>
           </Typography>
         </CardContent>
       </Card>

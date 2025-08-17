@@ -214,7 +214,7 @@ function VideoConvert() {
     if (!file) return alert('Please select a video file.');
     // Validate resolution
     if ((width && (!/^\d+$/.test(width) || parseInt(width) <= 0)) ||
-        (height && (!/^\d+$/.test(height) || parseInt(height) <= 0))) {
+      (height && (!/^\d+$/.test(height) || parseInt(height) <= 0))) {
       alert('Please enter a valid positive integer for width and height.');
       return;
     }
@@ -321,7 +321,7 @@ function VideoConvert() {
       setProgress(100);
       setStatus('Completed');
       ffmpeg.off('log', logHandler);
-    } catch (err:any) {
+    } catch (err: any) {
       setStatus('Failed');
       setConsoleLogs((logs) => [...logs, String(err)]);
       setErrorMsg(err instanceof Error ? err.message : String(err));
@@ -380,18 +380,15 @@ function VideoConvert() {
 
   return (
     <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Card sx={{ px: 3, py: 3 }} elevation={5}>
+      {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
+      <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
-          {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
-          <Box display="flex" flexDirection="column" alignItems="center">
-            <SwapHorizIcon sx={{ fontSize: '3rem', mb: 2 }} color="secondary" />
-            <Typography variant="h5" component="h1" gutterBottom>Video Converter</Typography>
-            <Typography color="text.secondary" variant="body1" component="h2" align="center">
-              Convert videos to different formats, codecs, resolutions and more.<br />
-              Advanced options for quality, speed, and compatibility.
-            </Typography>
+          <Box display="flex" alignItems="center">
+            <SwapHorizIcon color="secondary" fontSize="small" sx={{ mr: 0.5 }} />
+            <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Video Converter</Typography>
           </Box>
-          <Divider sx={{ my: 2 }}/>
+          <Divider sx={{ my: 0.5 }} />
+          <Typography variant="body2" component="h2" color="text.secondary" mb={2}>Convert videos to different formats, codecs, resolutions and more. Advanced options for quality, speed, and compatibility.</Typography>
           {/* Upload area - refactored to match AudioConvert/VideoTrim/VideoCompression/VideoResize */}
           <Box
             onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}
@@ -432,7 +429,7 @@ function VideoConvert() {
               <Box textAlign="center">
                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
                 <Typography variant="subtitle1" gutterBottom>
-                  Drag & drop a video or audio file here<br/>or<br/>Click to select
+                  Drag & drop a video or audio file here<br />or<br />Click to select
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
                   Supported: MP4, MOV, AVI, MKV, MP3, WAV, and more
@@ -482,14 +479,14 @@ function VideoConvert() {
                 {file.name} ({formatBytes(file.size)})
               </Typography>
               <IconButton size="small" color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
-                <CloseIcon fontSize='small'/>
+                <CloseIcon fontSize='small' />
               </IconButton>
             </Box>
           )}
           {/* End Upload UI */}
           {file && !isProcessing && (
             <Grid container spacing={2} mt={2}>
-              <Grid size={{xs: 12, md: 6 }}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   Output Format:
                 </Typography>
@@ -504,7 +501,7 @@ function VideoConvert() {
                   ))}
                 </Select>
               </Grid>
-              <Grid size={{xs: 12, md: 6 }}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <Typography variant="subtitle1">Resolution: (in Pixels)</Typography>
                 <Box display="flex" alignItems="center" flex={1} gap={1}>
                   <TextField
@@ -543,7 +540,7 @@ function VideoConvert() {
                   </Typography>
                 )}
               </Grid>
-              <Grid size={{xs: 12, md: 6 }}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <Typography variant="subtitle1">Video Codec:</Typography>
                 <Select
                   size="small"
@@ -557,7 +554,7 @@ function VideoConvert() {
                   ))}
                 </Select>
               </Grid>
-              <Grid size={{xs: 12, md: 6 }}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <Typography variant="subtitle1">Audio Codec:</Typography>
                 <Select
                   size="small"
@@ -571,7 +568,7 @@ function VideoConvert() {
                   ))}
                 </Select>
               </Grid>
-              <Grid size={{xs: 12, md: 6 }}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <Typography variant="subtitle1">Audio Bitrate:</Typography>
                 <TextField
                   size="small"
@@ -582,7 +579,7 @@ function VideoConvert() {
                   disabled={audioCodecs[outputFormat].length === 0}
                 />
               </Grid>
-              <Grid size={{xs: 12, md: 6 }}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <Typography variant="subtitle1">FPS:</Typography>
                 <TextField
                   size="small"
@@ -593,7 +590,7 @@ function VideoConvert() {
                   placeholder="e.g. 30"
                 />
               </Grid>
-              <Grid size={{xs: 12, md: 6 }}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <Box display="flex" alignItems="center">
                     Quality:
@@ -624,7 +621,7 @@ function VideoConvert() {
                   })}
                 </Select>
               </Grid>
-              <Grid size={{xs: 12, md: 6 }}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <Box display="flex" alignItems="center">
                     Preset:
@@ -657,7 +654,7 @@ function VideoConvert() {
             </Grid>
           )}
         </CardContent>
-        <CardActions sx={{display: !!file ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
+        <CardActions sx={{ display: !!file ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
           <Button variant="contained" onClick={handleProceed} disabled={!file || isProcessing} size="small">
             {isProcessing ? 'Converting' : 'Convert'}
           </Button>

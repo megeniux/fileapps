@@ -15,8 +15,8 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Roboto, Arial, sans-serif',
     htmlFontSize: window.innerWidth < 600 ? 18 : 16,
+    fontFamily: `NataSans, Arial, sans-serif`,
     h1: {
       fontSize: '2rem',
       fontWeight: 500,
@@ -54,6 +54,13 @@ const theme = createTheme({
     borderRadius: 8,
   },
   components: {
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          lineHeight: 'initial',
+        },
+      },
+    },
     MuiButton: {
       defaultProps: {
         disableElevation: true,

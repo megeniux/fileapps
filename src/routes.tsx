@@ -3,7 +3,7 @@ import BasicLayout from './components/BasicLayout';
 import Home from './pages/Home';
 import VideoCompression from './pages/tools/VideoCompression';
 import Contact from './pages/Contact';
-import AboutUs from './pages/AboutUs';
+import AboutUs from './pages/About';
 import TOS from './pages/TOS';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import VideoConvert from './pages/tools/VideoConvert';

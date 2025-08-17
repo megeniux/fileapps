@@ -8,11 +8,69 @@
 
 html,
 body {
-  color: #fff;
   margin: 0;
   padding: 0;
-  height: 100%;
-  width: 100%;
+}
+
+/* NataSans Font Faces */
+@font-face {
+  font-family: 'NataSans';
+  src: url('/fonts/NataSans/NataSans-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NataSans';
+  src: url('/fonts/NataSans/NataSans-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NataSans';
+  src: url('/fonts/NataSans/NataSans-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NataSans';
+  src: url('/fonts/NataSans/NataSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NataSans';
+  src: url('/fonts/NataSans/NataSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NataSans';
+  src: url('/fonts/NataSans/NataSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NataSans';
+  src: url('/fonts/NataSans/NataSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NataSans';
+  src: url('/fonts/NataSans/NataSans-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NataSans';
+  src: url('/fonts/NataSans/NataSans-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Use NataSans as the default font */
+body {
+  font-family: 'NataSans', Arial, sans-serif;
 }
 
 /* Thin webkit Scroll styles everywhere for normal hover etc */

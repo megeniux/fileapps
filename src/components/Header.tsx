@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { APP_INFO } from "../constants";
 
@@ -6,34 +6,45 @@ import { APP_INFO } from "../constants";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
+  paddingBlock: theme.spacing(0.5),
+  '& > .MuiToolbar-root': {
+    minHeight: 0,
+    '& .nav-links': {
+      display: 'flex',
+      gap: theme.spacing(2),
+      '& > a': {
+        color: theme.palette.text.primary,
+        fontSize: theme.typography.caption.fontSize,
+        textDecoration: 'none',
+        '&.active': {
+          fontWeight: 'bold',
+        },
+      },
+    }
+  }
 }));
 
 function Header() {
   const navigate = useNavigate();
 
   return (
-    <StyledAppBar position="fixed" color='default' elevation={3}>
-      <Toolbar>
+    <StyledAppBar position="fixed" color='default' elevation={1}>
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
         {/* Logo */}
-        <Typography variant="h6" onClick={() => navigate('/')} sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, cursor: 'pointer' }}>
-          <img src="/images/branding/logo-small.svg" alt={APP_INFO.name} height={25} style={{ marginRight: 4 }} />{APP_INFO.name}
-        </Typography>
+        <Box onClick={() => navigate('/')} display="flex" alignItems="center" sx={{ cursor: 'pointer'}}>
+          <img src="/images/branding/logo-small.svg" alt={APP_INFO.name} height={15} style={{ marginRight: 4 }} />
+          <Typography variant="body2" fontWeight={600}> {APP_INFO.name} </Typography>
+        </Box>
+
         {/* Navigation Links */}
-        <Box>
-          <Button color="inherit" component={Link} to="/">
-            Home
-          </Button>
-          <Button color="inherit" component={Link} to="/about">
-            About
-          </Button>
-          <Button color="inherit" component={Link} to="/contact">
-            Contact
-          </Button>
+        <Box className="nav-links">
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/about">About</NavLink>
+          <NavLink to="/contact">Contact</NavLink>
         </Box>
       </Toolbar>
     </StyledAppBar>
