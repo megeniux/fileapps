@@ -384,7 +384,7 @@ function VideoConvert() {
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <SwapHorizIcon sx={{ fontSize: 40, mb: 2 }} color="secondary" />
+            <SwapHorizIcon sx={{ fontSize: '3rem', mb: 2 }} color="secondary" />
             <Typography variant="h5" component="h1" gutterBottom>Video Converter</Typography>
             <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Convert videos to different formats, codecs, resolutions and more.<br />
@@ -430,9 +430,9 @@ function VideoConvert() {
           >
             {!file ? (
               <Box textAlign="center">
-                <CloudUploadIcon sx={{ fontSize: 32, mb: 1 }} />
+                <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
                 <Typography variant="subtitle1" gutterBottom>
-                  Drag & drop a video or audio file here, or click to select
+                  Drag & drop a video or audio file here<br/>or<br/>Click to select
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
                   Supported: MP4, MOV, AVI, MKV, MP3, WAV, and more

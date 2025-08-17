@@ -295,7 +295,7 @@ function AudioEffects() {
                 <CardContent sx={{ p: 0 }}>
                     {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
                     <Box display="flex" flexDirection="column" alignItems="center">
-                        <GraphicEqIcon color="info" sx={{ fontSize: 40, mb: 2 }} />
+                        <GraphicEqIcon color="info" sx={{ fontSize: '3rem', mb: 2 }} />
                         <Typography variant="h5" component="h1" gutterBottom>Audio Effects</Typography>
                         <Typography color="text.secondary" variant="body1" component="h2" align="center">
                             Apply effects: fade in/out, normalize, speed, pitch, and volume.
@@ -321,9 +321,9 @@ function AudioEffects() {
                     >
                         {!file ? (
                             <Box textAlign="center">
-                                <CloudUploadIcon sx={{ fontSize: 32, mb: 1 }} />
+                                <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Drag & drop an audio file here, or click to select
+                                    Drag & drop an audio file here<br/>or<br/>Click to select
                                 </Typography>
                                 <Typography color="text.secondary" variant="caption">
                                     Supported: MP3, WAV, AAC, FLAC, OGG, and more
@@ -331,7 +331,7 @@ function AudioEffects() {
                             </Box>
                         ) : (
                             <Box textAlign="center" width="100%">
-                                <audio ref={audioRef} src={previewUrl || undefined} controls style={{ width: '100%', maxWidth: 500 }} onLoadedMetadata={handleLoadedMetadata} />
+                                <audio ref={audioRef} src={previewUrl || undefined} controls style={{ width: '100%', maxWidth: 500, position: 'relative', zIndex: 1000 }} onLoadedMetadata={handleLoadedMetadata} />
                             </Box>
                         )}
                         <input

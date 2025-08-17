@@ -386,7 +386,7 @@ function ImageResize() {
       setProgress(100);
       setStatus('Completed');
       ffmpeg.off('log', logHandler);
-    } catch (err:any) {
+    } catch (err: any) {
       setStatus('Failed');
       // Only set errorMsg if not stopped
       if (err.message !== 'called FFmpeg.terminate()') {
@@ -431,7 +431,7 @@ function ImageResize() {
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <AspectRatioIcon sx={{ fontSize: 40, mb: 2 }} color="primary" />
+            <AspectRatioIcon sx={{ fontSize: '3rem', mb: 2 }} color="primary" />
             <Typography variant="h5" component="h1" gutterBottom>Convert Image</Typography>
             <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Resize images to specific dimensions while maintaining quality.
@@ -456,18 +456,33 @@ function ImageResize() {
             sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
           >
             {previewUrl ? (
-              <img
-                ref={imageRef}
-                src={previewUrl}
-                alt="Preview"
-                style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
-                onLoad={handleImageLoad}
-              />
+              <Box sx={getCropWrapperStyle()}>
+                <img
+                  src={previewUrl}
+                  alt="Simulated Preview"
+                  onLoad={handleImageLoad}
+                  style={{
+                    ...getCropImageStyle(),
+                    filter: `
+                      ${grayscale ? 'grayscale(1)' : ''}
+                      ${blur ? `blur(${blur}px)` : ''}
+                      brightness(${brightness}%)
+                      contrast(${contrast}%)
+                      saturate(${saturation}%)
+                    `,
+                    transform: `
+                      rotate(${rotate}deg)
+                      scaleX(${flipH ? -1 : 1})
+                      scaleY(${flipV ? -1 : 1})
+                    `
+                  } as React.CSSProperties}
+                />
+              </Box>
             ) : (
               <Box textAlign="center">
-                <CloudUploadIcon sx={{ fontSize: 32, mb: 1 }} />
+                <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
                 <Typography variant="subtitle1" gutterBottom>
-                  Drag & drop an image here, or click to select
+                  Drag & drop an image here<br/>or<br/>Click to select
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
                   Supported: JPG, PNG, WebP, GIF, and more
@@ -508,6 +523,20 @@ function ImageResize() {
           {/* Controls */}
           {file && (
             <Grid container spacing={2} sx={{ mb: 3 }}>
+              {/* Quality */}
+              <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
+                <Typography variant="body2">Quality: {quality}%</Typography>
+                <Slider
+                  value={quality}
+                  onChange={(_, value) => setQuality(value as number)}
+                  min={10}
+                  max={100}
+                  step={1}
+                  disabled={isProcessing}
+                  size="small"
+                  valueLabelDisplay="auto"
+                />
+              </Grid>
               {/* Maintain aspect ratio */}
               <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
                 <FormControlLabel
@@ -549,20 +578,6 @@ function ImageResize() {
                   max={originalDimensions?.height || 4096}
                   step={1}
                   onChange={(_, v) => setHeight(String(v))}
-                  disabled={isProcessing}
-                  size="small"
-                  valueLabelDisplay="auto"
-                />
-              </Grid>
-              {/* Quality */}
-              <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
-                <Typography variant="body2">Quality: {quality}%</Typography>
-                <Slider
-                  value={quality}
-                  onChange={(_, value) => setQuality(value as number)}
-                  min={10}
-                  max={100}
-                  step={1}
                   disabled={isProcessing}
                   size="small"
                   valueLabelDisplay="auto"
@@ -654,7 +669,7 @@ function ImageResize() {
                 <Slider value={saturation} onChange={handleSaturationChange} min={0} max={200} step={1} disabled={isProcessing} size="small" valueLabelDisplay="auto" />
               </Grid>
               {/* Rotate Left/Right and Slider */}
-              <Grid size={{ xs: 6, sm: 4, lg: 3 }} display="flex" alignItems="center" gap={1}>
+              <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
                 <Typography variant="body2" noWrap>Rotate: {rotate}°</Typography>
                 <Slider
                   value={rotate}
@@ -727,41 +742,12 @@ function ImageResize() {
                 </FormControl>
               </Grid>
               {/* Crop Undo/Redo/Reset */}
-              <Grid size={{ xs: 6, sm: 4, lg: 3 }} display="flex" alignItems="center" gap={1} mx="auto">
+              <Grid size={{ xs: 12, sm: 4, lg: 3 }} display="flex" alignItems="center" justifyContent="center" gap={1} mx="auto">
                 <Tooltip title="Undo Crop"><IconButton onClick={handleUndoCrop} disabled={cropStack.length === 0}><UndoIcon /></IconButton></Tooltip>
+                <Button onClick={handleResetCrop} size="small" sx={{ whiteSpace: 'nowrap' }}>Reset Crop</Button>
                 <Tooltip title="Redo Crop"><IconButton onClick={handleRedoCrop} disabled={redoStack.length === 0}><RedoIcon /></IconButton></Tooltip>
-                <Button onClick={handleResetCrop} size="small">Reset Crop</Button>
               </Grid>
             </Grid>
-          )}
-          {/* Preview area */}
-          {previewUrl && (
-            <Box mt={1} textAlign="center">
-              <Box sx={getCropWrapperStyle()}>
-                <img
-                  src={previewUrl}
-                  alt="Simulated Preview"
-                  style={{
-                    ...getCropImageStyle(),
-                    filter: `
-                      ${grayscale ? 'grayscale(1)' : ''}
-                      ${blur ? `blur(${blur}px)` : ''}
-                      brightness(${brightness}%)
-                      contrast(${contrast}%)
-                      saturate(${saturation}%)
-                    `,
-                    transform: `
-                      rotate(${rotate}deg)
-                      scaleX(${flipH ? -1 : 1})
-                      scaleY(${flipV ? -1 : 1})
-                    `
-                  } as React.CSSProperties}
-                />
-              </Box>
-              <Typography variant="body2" color="text.secondary" mt={1}>
-                Edited preview (all effects)
-              </Typography>
-            </Box>
           )}
         </CardContent>
         <CardActions sx={{ display: !!file ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>

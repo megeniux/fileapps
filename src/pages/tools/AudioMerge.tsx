@@ -260,7 +260,7 @@ function AudioMerge() {
                 <CardContent sx={{ p: 0 }}>
                     {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
                     <Box display="flex" flexDirection="column" alignItems="center">
-                        <MergeTypeIcon sx={{ fontSize: 40, mb: 2 }} color="warning" />
+                        <MergeTypeIcon sx={{ fontSize: '3rem', mb: 2 }} color="warning" />
                         <Typography variant="h5" component="h1" gutterBottom>
                             Merge Audios
                         </Typography>
@@ -300,9 +300,9 @@ function AudioMerge() {
                     >
                         {files.length === 0 ? (
                             <Box textAlign="center">
-                                <CloudUploadIcon sx={{ fontSize: 32, mb: 1 }} />
+                                <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Drag & drop audio files here, or click to add
+                                    Drag & drop audio files here<br/>or<br/>Click to add
                                 </Typography>
                                 <Typography color="text.secondary" variant="caption">
                                     Supported: MP3, WAV, AAC, FLAC, OGG, and more

@@ -177,7 +177,7 @@ function VideoTrim() {
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" flexDirection="column" alignItems="center">
-            <ContentCutIcon sx={{ fontSize: 40, mb: 2 }} color="info" />
+            <ContentCutIcon sx={{ fontSize: '3rem', mb: 2 }} color="info" />
             <Typography variant="h5" component="h1" gutterBottom>Video Trim</Typography>
             <Typography color="text.secondary" variant="body1" component="h2" align="center">
               Select a video, choose the duration to trim, and download the result.
@@ -223,9 +223,9 @@ function VideoTrim() {
           >
             {!file ? (
               <Box textAlign="center">
-                <CloudUploadIcon sx={{ fontSize: 32, mb: 1 }} />
+                <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
                 <Typography variant="subtitle1" gutterBottom>
-                  Drag & drop a video file here, or click to select
+                  Drag & drop a video file here<br/>or<br/>Click to select
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
                   Supported: MP4, MOV, AVI, MKV, and more

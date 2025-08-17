@@ -35,56 +35,56 @@ const videoTools: {
       title: 'Compress Video',
       description: 'Reduce video file size while maintaining quality. Fast and easy compression for all your videos.',
       icon: <CompressIcon fontSize="small" color="primary" />,
-      link: '/video-compress',
+      link: '/tools/video-compress',
       color: 'primary'
     },
     {
       title: 'Video Convert',
       description: 'Convert videos to different formats easily. Supports a wide range of formats for your convenience.',
       icon: <SwapHorizIcon fontSize="small" color="secondary" />,
-      link: '/video-convert',
+      link: '/tools/video-convert',
       color: 'secondary'
     },
     {
       title: 'Resize Video',
       description: 'Adjust video dimensions to fit your needs. Resize videos without losing quality.',
       icon: <AspectRatioIcon fontSize="small" color='warning' />,
-      link: '/video-resize',
+      link: '/tools/video-resize',
       color: 'warning'
     },
     {
       title: 'Trim Video',
       description: 'Cut and trim video files to extract specific sections',
       icon: <ContentCutIcon fontSize="small" color="info" />,
-      link: '/video-trim',
+      link: '/tools/video-trim',
       color: 'info'
     },
     {
       title: 'Merge Videos',
       description: 'Combine multiple videos into one seamlessly. Perfect for creating compilations.',
       icon: <MergeTypeIcon fontSize="small" color="success" />,
-      link: '/video-merge',
+      link: '/tools/video-merge',
       color: 'success'
     },
     {
       title: 'Extract Audio',
       description: 'Extract audio tracks from your videos. Save audio as separate files easily.',
       icon: <MusicNoteIcon fontSize="small" color="error" />,
-      link: '/video-extract-audio',
+      link: '/tools/video-extract-audio',
       color: 'error'
     },
     {
       title: 'Thumbnail Generator',
       description: 'Generate thumbnails from your videos for previews and sharing.',
       icon: <ImageIcon fontSize="small" color="inherit" />,
-      link: '/video-thumbnail',
+      link: '/tools/video-thumbnail',
       color: 'inherit'
     },
     {
       title: 'Burn Caption',
       description: 'Burn captions/subtitles into your videos. Upload a video and subtitle file, customize style, and download the result.',
       icon: <SubtitlesIcon fontSize="small" color="primary" />,
-      link: '/video-burn-caption',
+      link: '/tools/video-burn-caption',
       color: 'primary'
     }
   ];
@@ -100,35 +100,35 @@ const audioTools: {
       title: 'Audio Convert',
       description: 'Convert audio files between different formats like MP3, WAV, AAC, FLAC, and more.',
       icon: <SwapHorizIcon fontSize="small" color="primary" />,
-      link: '/audio-convert',
+      link: '/tools/audio-convert',
       color: 'primary'
     },
     {
       title: 'Audio Trim',
       description: 'Cut and trim audio files to extract specific sections.',
       icon: <ContentCutIcon fontSize="small" color="secondary" />,
-      link: '/audio-trim',
+      link: '/tools/audio-trim',
       color: 'secondary'
     },
     {
       title: 'Audio Merge',
       description: 'Combine multiple audio files into a single track. Perfect for creating playlists or podcasts.',
       icon: <MergeTypeIcon fontSize="small" color="warning" />,
-      link: '/audio-merge',
+      link: '/tools/audio-merge',
       color: 'warning'
     },
     {
       title: 'Audio Effects',
       description: 'Apply various effects to your audio files including fade in/out, normalize, and more.',
       icon: <GraphicEqIcon fontSize="small" color="info" />,
-      link: '/audio-effects',
+      link: '/tools/audio-effects',
       color: 'info'
     },
     {
       title: 'Audio Playback',
       description: 'Adjust the playback speed of audio files without altering pitch. Speed up or slow down audio easily.',
       icon: <SpeedIcon fontSize="small" color="success" />,
-      link: '/audio-playback',
+      link: '/tools/audio-playback',
       color: 'success'
     }
   ];
@@ -144,7 +144,7 @@ const imageTools: {
       title: 'Image Convert',
       description: 'Convert images between formats like JPG, PNG, WebP, and more with quality control.',
       icon: <SwapHorizIcon fontSize="small" color="primary" />,
-      link: '/image-convert',
+      link: '/tools/image-convert',
       color: 'primary'
     },
   ];
@@ -161,8 +161,8 @@ function Home() {
         <Typography variant="h1" gutterBottom align='center' fontSize={42} fontWeight="bold"> Welcome to <span className='gradient-text-primary'>{APP_INFO.name}</span> </Typography>
         <Typography variant="body1" component="h2" fontWeight={400} color="text.secondary" align='center' marginInline="auto" maxWidth={660}>{description}</Typography>
       </Box>
-      <Typography variant='h6' component="h3" gutterBottom>Video Tools</Typography>
-      <Divider sx={{ my: 2 }} />
+      <Typography variant='h6' component="h3">Video Tools</Typography>
+      <Divider sx={{ mt: 1, mb: 2 }} />
       <Grid container spacing={2} sx={{ mb: 4 }}>
         {videoTools.map((tool) => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={tool.title}>
@@ -181,8 +181,8 @@ function Home() {
         ))}
       </Grid>
 
-      <Typography variant='h6' component="h3" gutterBottom>Audio Tools</Typography>
-      <Divider sx={{ my: 2 }} />
+      <Typography variant='h6' component="h3">Audio Tools</Typography>
+      <Divider sx={{ mt: 1, mb: 2 }} />
       <Grid container spacing={2} sx={{ mb: 4 }}>
         {audioTools.map((tool) => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={tool.title}>
@@ -201,8 +201,8 @@ function Home() {
         ))}
       </Grid>
 
-      <Typography variant='h6' component="h3" gutterBottom>Image Tools</Typography>
-      <Divider sx={{ my: 2 }} />
+      <Typography variant='h6' component="h3">Image Tools</Typography>
+      <Divider sx={{ mt: 1, mb: 2 }} />
       <Grid container spacing={2}>
         {imageTools.map((tool) => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={tool.title}>

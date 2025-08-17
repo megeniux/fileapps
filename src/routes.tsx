@@ -31,26 +31,26 @@ function AppRoutes() {
       
 
       {/* Audio Tools */}
-      <Route path="audio-convert" element={<BasicLayout><AudioConvert /></BasicLayout>} />
-      <Route path="audio-trim" element={<BasicLayout><AudioTrim /></BasicLayout>} />
-      <Route path="audio-playback" element={<BasicLayout><AudioPlayback /></BasicLayout>} />
-      <Route path="audio-merge" element={<BasicLayout><AudioMerge /></BasicLayout>} />
-      <Route path="audio-effects" element={<BasicLayout><AudioEffects /></BasicLayout>} />
+      <Route path="tools/audio-convert" element={<BasicLayout><AudioConvert /></BasicLayout>} />
+      <Route path="tools/audio-trim" element={<BasicLayout><AudioTrim /></BasicLayout>} />
+      <Route path="tools/audio-playback" element={<BasicLayout><AudioPlayback /></BasicLayout>} />
+      <Route path="tools/audio-merge" element={<BasicLayout><AudioMerge /></BasicLayout>} />
+      <Route path="tools/audio-effects" element={<BasicLayout><AudioEffects /></BasicLayout>} />
 
       {/* Video Tools */}
-      <Route path="video-compress" element={<BasicLayout><VideoCompression /></BasicLayout>} />
-      <Route path="video-convert" element={<BasicLayout><VideoConvert /></BasicLayout>} />
-      <Route path="video-resize" element={<BasicLayout><VideoResize /></BasicLayout>} />
-      <Route path="video-trim" element={<BasicLayout><VideoTrim /></BasicLayout>} />
-      <Route path="video-merge" element={<BasicLayout><VideoMerge /></BasicLayout>} />
-      <Route path="video-thumbnail" element={<BasicLayout><ThumbnailGenerator /></BasicLayout>} />
-      <Route path="video-extract-audio" element={<BasicLayout><ExtractAudio /></BasicLayout>} />
-      <Route path="video-playback" element={<BasicLayout><VideoPlayback /></BasicLayout>} />
-      <Route path="video-burn-caption" element={<BasicLayout><BurnCaption /></BasicLayout>} />
+      <Route path="tools/video-compress" element={<BasicLayout><VideoCompression /></BasicLayout>} />
+      <Route path="tools/video-convert" element={<BasicLayout><VideoConvert /></BasicLayout>} />
+      <Route path="tools/video-resize" element={<BasicLayout><VideoResize /></BasicLayout>} />
+      <Route path="tools/video-trim" element={<BasicLayout><VideoTrim /></BasicLayout>} />
+      <Route path="tools/video-merge" element={<BasicLayout><VideoMerge /></BasicLayout>} />
+      <Route path="tools/video-thumbnail" element={<BasicLayout><ThumbnailGenerator /></BasicLayout>} />
+      <Route path="tools/video-extract-audio" element={<BasicLayout><ExtractAudio /></BasicLayout>} />
+      <Route path="tools/video-playback" element={<BasicLayout><VideoPlayback /></BasicLayout>} />
+      <Route path="tools/video-burn-caption" element={<BasicLayout><BurnCaption /></BasicLayout>} />
 
       {/* Image Tools */}
-      <Route path="image-convert" element={<BasicLayout><ImageConvert /></BasicLayout>} />
-      
+      <Route path="tools/image-convert" element={<BasicLayout><ImageConvert /></BasicLayout>} />
+
       {/* Other pages */}
       <Route path="about" element={<BasicLayout><AboutUs /></BasicLayout>} />
       <Route path="contact" element={<BasicLayout><Contact /></BasicLayout>} />

@@ -16,7 +16,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: 'Roboto, Arial, sans-serif',
-    htmlFontSize: 14,
+    htmlFontSize: window.innerWidth < 600 ? 18 : 16,
     h1: {
       fontSize: '2rem',
       fontWeight: 500,

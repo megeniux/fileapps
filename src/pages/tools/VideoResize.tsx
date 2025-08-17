@@ -284,7 +284,7 @@ function VideoResize() {
       <Card sx={{ px: 3, py: 3 }} elevation={3}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" flexDirection="column" alignItems="center">
-            <AspectRatioIcon sx={{ fontSize: 40, mb: 2 }} color="warning" />
+            <AspectRatioIcon sx={{ fontSize: '3rem', mb: 2 }} color="warning" />
             <Typography variant="h5" align="center" gutterBottom>
               Video Resize
             </Typography>
@@ -331,9 +331,9 @@ function VideoResize() {
           >
             {!file ? (
               <Box textAlign="center">
-                <CloudUploadIcon sx={{ fontSize: 32, mb: 1 }} />
+                <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
                 <Typography variant="subtitle1" gutterBottom>
-                  Drag & drop a video file here, or click to select
+                  Drag & drop a video file here<br/>or<br/>Click to select
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
                   Supported: MP4, MOV, AVI, MKV, and more
