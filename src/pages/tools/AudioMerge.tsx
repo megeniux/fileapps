@@ -166,7 +166,7 @@ function AudioMerge() {
             setProgress(100);
             setStatus('Completed');
             ffmpeg.off('log', logHandler);
-        } catch (err:any) {
+        } catch (err: any) {
             setStatus('Failed');
             setConsoleLogs(logs => [...logs, String(err)]);
             if (err.message !== 'called FFmpeg.terminate()') {
@@ -224,7 +224,7 @@ function AudioMerge() {
                             <TableCell>
                                 <Typography color="text.secondary" variant="caption">{file.name}</Typography>
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell align="center" sx={{ whiteSpace: 'nowrap' }}>
                                 <IconButton size="small" color='primary' onClick={() => handleMoveUp(idx)} title="Move up" disabled={idx === 0 || isProcessing}>
                                     <ArrowUpwardIcon />
                                 </IconButton>
@@ -258,108 +258,108 @@ function AudioMerge() {
         <Container maxWidth="md" sx={{ my: 'auto' }}>
             {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
             <Card sx={{ p: 1.5 }}>
-              <CardContent sx={{ p: 0 }}>
-                <Box display="flex" alignItems="center">
-                  <MergeTypeIcon color="warning" fontSize="small" sx={{ mr: 0.5 }} />
-                  <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Merge Audios</Typography>
-                </Box>
-                <Divider sx={{ my: 0.5 }} />
-                <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-                  Upload multiple audio files, arrange their order, and merge them into one file.
-                </Typography>
-                {/* Drag-and-drop Upload/Preview UI */}
-                <Box
-                    onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}
-                    onDragLeave={e => { e.preventDefault(); setIsDragActive(false); }}
-                    onDrop={e => {
-                        e.preventDefault();
-                        setIsDragActive(false);
-                        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-                            const validFiles = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('audio/'));
-                            if (validFiles.length === 0) {
-                                setErrorMsg('Please select audio files.');
-                                return;
+                <CardContent sx={{ p: 0 }}>
+                    <Box display="flex" alignItems="center">
+                        <MergeTypeIcon color="warning" fontSize="small" sx={{ mr: 0.5 }} />
+                        <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Merge Audios</Typography>
+                    </Box>
+                    <Divider sx={{ my: 0.5 }} />
+                    <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
+                        Upload multiple audio files, arrange their order, and merge them into one file.
+                    </Typography>
+                    {/* Drag-and-drop Upload/Preview UI */}
+                    <Box
+                        onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}
+                        onDragLeave={e => { e.preventDefault(); setIsDragActive(false); }}
+                        onDrop={e => {
+                            e.preventDefault();
+                            setIsDragActive(false);
+                            if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                                const validFiles = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('audio/'));
+                                if (validFiles.length === 0) {
+                                    setErrorMsg('Please select audio files.');
+                                    return;
+                                }
+                                setFiles(prev => [...prev, ...validFiles]);
+                                setErrorMsg(null);
                             }
-                            setFiles(prev => [...prev, ...validFiles]);
-                            setErrorMsg(null);
-                        }
-                    }}
-                    position="relative"
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    flexDirection="column"
-                    width="100%"
-                    height={files.length === 0 ? 220 : 80}
-                    borderRadius={1}
-                    bgcolor={isDragActive ? 'primary.lighter' : 'action.hover'}
-                    border={isDragActive ? theme => `2px dashed ${theme.palette.primary.main}` : theme => `2px dashed ${theme.palette.divider}`}
-                    sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
-                >
-                    {files.length === 0 ? (
-                        <Box textAlign="center">
-                            <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                            <Typography variant="subtitle1" gutterBottom>
-                                Drag & drop audio files here<br/>or<br/>Click to add
-                            </Typography>
-                            <Typography color="text.secondary" variant="caption">
-                                Supported: MP3, WAV, AAC, FLAC, OGG, and more
-                            </Typography>
-                        </Box>
-                    ) : (
-                        <Button
-                            variant="contained"
-                            startIcon={<AddIcon />}
-                            onClick={handleAddClick}
-                            disabled={isProcessing}
-                            size="small"
-                            sx={{ mt: 1 }}
-                        >
-                            Add More Audios
+                        }}
+                        position="relative"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        flexDirection="column"
+                        width="100%"
+                        height={files.length === 0 ? 220 : 80}
+                        borderRadius={1}
+                        bgcolor={isDragActive ? 'primary.lighter' : 'action.hover'}
+                        border={isDragActive ? theme => `2px dashed ${theme.palette.primary.main}` : theme => `2px dashed ${theme.palette.divider}`}
+                        sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
+                    >
+                        {files.length === 0 ? (
+                            <Box textAlign="center">
+                                <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
+                                <Typography variant="subtitle1" gutterBottom>
+                                    Drag & drop audio files here<br />or<br />Click to add
+                                </Typography>
+                                <Typography color="text.secondary" variant="caption">
+                                    Supported: MP3, WAV, AAC, FLAC, OGG, and more
+                                </Typography>
+                            </Box>
+                        ) : (
+                            <Button
+                                variant="contained"
+                                startIcon={<AddIcon />}
+                                onClick={handleAddClick}
+                                disabled={isProcessing}
+                                size="small"
+                                sx={{ mt: 1 }}
+                            >
+                                Add More Audios
+                            </Button>
+                        )}
+                        <input
+                            ref={fileInputRef}
+                            type="file"
+                            accept="audio/*"
+                            multiple
+                            style={{ width: '100%', height: '100%', top: 0, opacity: 0, position: 'absolute' }}
+                            onChange={handleFileChange}
+                            tabIndex={-1}
+                        />
+                    </Box>
+                    {/* End Drag-and-drop Upload/Preview UI */}
+                    {files.length ? AudioTable : ""}
+                </CardContent>
+                <CardActions sx={{ display: files.length ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
+                    <Button
+                        variant="contained"
+                        disabled={files.length < 2 || isProcessing}
+                        onClick={handleMerge}
+                        size="small"
+                    >
+                        {isProcessing ? 'Merging' : 'Merge'}
+                    </Button>
+                    {isProcessing && (
+                        <Button variant="contained" color="error" onClick={handleStop} size="small">
+                            Stop
                         </Button>
                     )}
-                    <input
-                        ref={fileInputRef}
-                        type="file"
-                        accept="audio/*"
-                        multiple
-                        style={{ width: '100%', height: '100%', top: 0, opacity: 0, position: 'absolute' }}
-                        onChange={handleFileChange}
-                        tabIndex={-1}
-                    />
-                </Box>
-                {/* End Drag-and-drop Upload/Preview UI */}
-                {files.length ? AudioTable : ""}
-              </CardContent>
-              <CardActions sx={{ display: files.length ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-                  <Button
-                      variant="contained"
-                      disabled={files.length < 2 || isProcessing}
-                      onClick={handleMerge}
-                      size="small"
-                  >
-                      {isProcessing ? 'Merging' : 'Merge'}
-                  </Button>
-                  {isProcessing && (
-                      <Button variant="contained" color="error" onClick={handleStop} size="small">
-                          Stop
-                      </Button>
-                  )}
-                  {downloadUrl && downloadSize !== null && (
-                      <Button variant="outlined" color="success" onClick={handleDownload} size="small">
-                          Download ({formatBytes(downloadSize)})
-                      </Button>
-                  )}
-              </CardActions>
-              {isProcessing && (
-                  <Box textAlign="center" bgcolor="action.hover" p={2} mt={2} borderRadius={0.25} overflow="hidden">
-                      <LinearProgress color='success' variant="determinate" value={progress} />
-                      <Typography variant="body2" my={1}>{`${status} (${progress.toFixed(1)}%)`}</Typography>
-                      <Typography variant="caption" color="text.secondary" noWrap>
-                          {consoleLogs.length > 0 ? consoleLogs[consoleLogs.length - 1] : ""}
-                      </Typography>
-                  </Box>
-              )}
+                    {downloadUrl && downloadSize !== null && (
+                        <Button variant="outlined" color="success" onClick={handleDownload} size="small">
+                            Download ({formatBytes(downloadSize)})
+                        </Button>
+                    )}
+                </CardActions>
+                {isProcessing && (
+                    <Box textAlign="center" bgcolor="action.hover" p={2} mt={2} borderRadius={0.25} overflow="hidden">
+                        <LinearProgress color='success' variant="determinate" value={progress} />
+                        <Typography variant="body2" my={1}>{`${status} (${progress.toFixed(1)}%)`}</Typography>
+                        <Typography variant="caption" color="text.secondary" noWrap>
+                            {consoleLogs.length > 0 ? consoleLogs[consoleLogs.length - 1] : ""}
+                        </Typography>
+                    </Box>
+                )}
             </Card>
         </Container>
     );

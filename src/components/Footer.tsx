@@ -23,9 +23,8 @@ const FooterRoot = styled(Paper)(({ theme }) => ({
     '& > a': {
       color: theme.palette.text.primary,
       fontSize: theme.typography.caption.fontSize,
-      textDecoration: 'none',
-      '&.active': {
-        fontWeight: 'bold',
+      '&:not(:hover)': {
+        textDecoration: 'none',
       },
     },
   }

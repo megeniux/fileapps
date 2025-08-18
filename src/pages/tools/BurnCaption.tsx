@@ -411,7 +411,7 @@ function BurnCaption() {
                         </Grid>
                     )}
                 </CardContent>
-                <CardActions sx={{ display: !!file && !!subtitleFile ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
+                <CardActions sx={{ display: !!file && !!subtitleFile ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
                     <Button variant="contained" onClick={handleBurn} disabled={isProcessing || !file || !subtitleFile} size="small">
                         {isProcessing ? 'Burning...' : 'Burn Caption'}
                     </Button>

@@ -170,7 +170,7 @@ function Home() {
               <CardActionArea onClick={() => navigate(tool.link)} sx={{ height: '100%' }}>
                 <CardContent>
                   <Box display="flex" alignItems="center" mb={1}>
-                    <Box width={30} height={30} p={0.5} borderRadius={4} sx={{ background: theme.palette.action.selected }}>{tool.icon}</Box>
+                    <Box display="flex" alignItems="center" justifyContent="center" width={30} height={30} p={0.5} borderRadius={4} sx={{ background: theme.palette.action.selected }}>{tool.icon}</Box>
                     <Typography variant="subtitle1" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
                   </Box>
                   <Typography variant="body2" color="text.secondary">{tool.description}</Typography>

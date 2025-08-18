@@ -4,7 +4,8 @@ import { fetchFile } from '@ffmpeg/util';
 import { formatBytes } from '../../helpers';
 
 // MUI imports
-import { useTheme } from '@mui/material/styles';
+import type { Theme } from '@emotion/react';
+import { useTheme, type SxProps } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
@@ -36,6 +37,8 @@ import LinkIcon from '@mui/icons-material/Link';
 import LinkOffIcon from '@mui/icons-material/LinkOff';
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 const ffmpeg = new FFmpeg();
 let isFFmpegLoaded = false;
@@ -94,6 +97,51 @@ function ImageResize() {
   const [redoStack, setRedoStack] = useState<{ x: number, y: number, w: number, h: number }[]>([]);
 
   const imageRef = useRef<HTMLImageElement>(null);
+
+  // For crop selection
+  const [isSelectingCrop, setIsSelectingCrop] = useState(false);
+  const [cropStart, setCropStart] = useState<{ x: number, y: number } | null>(null);
+  const [drawingCrop, setDrawingCrop] = useState<{ x: number, y: number, w: number, h: number } | null>(null);
+
+  // Helper to get displayed image size (for overlay scaling)
+  const [displaySize, setDisplaySize] = useState<{ width: number, height: number }>({ width: 0, height: 0 });
+
+  // Mouse/touch crop handlers
+  const handleCropMouseDown = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
+    if (!originalDimensions) return;
+    setIsSelectingCrop(true);
+    const rect = (e.target as HTMLDivElement).getBoundingClientRect();
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    const x = Math.max(0, Math.round((clientX - rect.left) * (originalDimensions.width / displaySize.width)));
+    const y = Math.max(0, Math.round((clientY - rect.top) * (originalDimensions.height / displaySize.height)));
+    setCropStart({ x, y });
+    setDrawingCrop({ x, y, w: 0, h: 0 });
+  };
+
+  const handleCropMouseMove = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
+    if (!isSelectingCrop || !cropStart || !originalDimensions) return;
+    const rect = (e.target as HTMLDivElement).getBoundingClientRect();
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    let x2 = Math.max(0, Math.round((clientX - rect.left) * (originalDimensions.width / displaySize.width)));
+    let y2 = Math.max(0, Math.round((clientY - rect.top) * (originalDimensions.height / displaySize.height)));
+    let x = Math.min(cropStart.x, x2);
+    let y = Math.min(cropStart.y, y2);
+    let w = Math.abs(x2 - cropStart.x);
+    let h = Math.abs(y2 - cropStart.y);
+    setDrawingCrop({ x, y, w, h });
+  };
+
+  const handleCropMouseUp = () => {
+    if (isSelectingCrop && drawingCrop) {
+      setIsSelectingCrop(false);
+      setCropStack([...cropStack, crop]);
+      setCrop(drawingCrop);
+      setDrawingCrop(null);
+      setRedoStack([]);
+    }
+  };
 
   const pushCrop = (newCrop: typeof crop) => {
     setCropStack([...cropStack, crop]);
@@ -197,6 +245,15 @@ function ImageResize() {
       // Set width and height fields to original dimensions if not already set
       setWidth(String(imgWidth));
       setHeight(String(imgHeight));
+      // Get displayed size for overlay scaling
+      setTimeout(() => {
+        if (imageRef.current) {
+          setDisplaySize({
+            width: imageRef.current.width,
+            height: imageRef.current.height
+          });
+        }
+      }, 0);
     }
   };
 
@@ -239,36 +296,6 @@ function ImageResize() {
   const handleBrightnessChange = (_: any, v: number | number[]) => setBrightness(v as number);
   const handleContrastChange = (_: any, v: number | number[]) => setContrast(v as number);
   const handleSaturationChange = (_: any, v: number | number[]) => setSaturation(v as number);
-
-  // Calculate crop wrapper style and image style
-  const getCropWrapperStyle = () => {
-    if (!originalDimensions || crop.w <= 0 || crop.h <= 0) {
-      return { width: '100%', height: 200, display: 'inline-block', overflow: 'hidden', background: '#eee' };
-    }
-    return {
-      width: `${crop.w}px`,
-      height: `${crop.h}px`,
-      display: 'inline-block',
-      overflow: 'hidden',
-      background: '#eee',
-      maxWidth: '100%',
-      maxHeight: 200,
-      position: 'relative'
-    };
-  };
-  const getCropImageStyle = () => {
-    if (!originalDimensions || crop.w <= 0 || crop.h <= 0) {
-      return { width: '100%', height: '100%', objectFit: 'contain' };
-    }
-    return {
-      position: 'absolute',
-      left: -crop.x,
-      top: -crop.y,
-      width: originalDimensions.width,
-      height: originalDimensions.height,
-      objectFit: 'none'
-    };
-  };
 
   const handleResize = async () => {
     if (!file) {
@@ -458,13 +485,24 @@ function ImageResize() {
             sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
           >
             {previewUrl ? (
-              <Box sx={getCropWrapperStyle()}>
+              <Box sx={{
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                overflow: 'hidden'
+              }}>
                 <img
+                  ref={imageRef}
                   src={previewUrl}
                   alt="Simulated Preview"
                   onLoad={handleImageLoad}
                   style={{
-                    ...getCropImageStyle(),
+                    maxWidth: '100%',
+                    maxHeight: 300,
+                    width: 'auto',
+                    height: 'auto',
+                    display: 'block',
                     filter: `
                       ${grayscale ? 'grayscale(1)' : ''}
                       ${blur ? `blur(${blur}px)` : ''}
@@ -479,6 +517,57 @@ function ImageResize() {
                     `
                   } as React.CSSProperties}
                 />
+                {/* Crop selection overlay */}
+                {originalDimensions && displaySize.width > 0 && displaySize.height > 0 && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      left: 0, top: 0, width: displaySize.width, height: displaySize.height,
+                      pointerEvents: 'auto',
+                      cursor: 'crosshair',
+                      zIndex: 3,
+                      background: isSelectingCrop ? 'rgba(0,0,0,0.05)' : 'transparent'
+                    }}
+                    onMouseDown={handleCropMouseDown}
+                    onTouchStart={handleCropMouseDown}
+                    onMouseMove={isSelectingCrop ? handleCropMouseMove : undefined}
+                    onTouchMove={isSelectingCrop ? handleCropMouseMove : undefined}
+                    onMouseUp={handleCropMouseUp}
+                    onTouchEnd={handleCropMouseUp}
+                  >
+                    {/* Draw crop rectangle */}
+                    {(drawingCrop && drawingCrop.w > 0 && drawingCrop.h > 0)
+                      ? (
+                        <div
+                          style={{
+                            position: 'absolute',
+                            left: `${(drawingCrop.x / originalDimensions.width) * displaySize.width}px`,
+                            top: `${(drawingCrop.y / originalDimensions.height) * displaySize.height}px`,
+                            width: `${(drawingCrop.w / originalDimensions.width) * displaySize.width}px`,
+                            height: `${(drawingCrop.h / originalDimensions.height) * displaySize.height}px`,
+                            border: '2px dashed #1976d2',
+                            background: 'rgba(25, 118, 210, 0.1)',
+                            pointerEvents: 'none'
+                          }}
+                        />
+                      )
+                      : (crop.w > 0 && crop.h > 0 && (
+                        <div
+                          style={{
+                            position: 'absolute',
+                            left: `${(crop.x / originalDimensions.width) * displaySize.width}px`,
+                            top: `${(crop.y / originalDimensions.height) * displaySize.height}px`,
+                            width: `${(crop.w / originalDimensions.width) * displaySize.width}px`,
+                            height: `${(crop.h / originalDimensions.height) * displaySize.height}px`,
+                            border: '2px dashed #1976d2',
+                            background: 'rgba(25, 118, 210, 0.1)',
+                            pointerEvents: 'none'
+                          }}
+                        />
+                      ))
+                    }
+                  </div>
+                )}
               </Box>
             ) : (
               <Box textAlign="center">
@@ -585,105 +674,70 @@ function ImageResize() {
                   valueLabelDisplay="auto"
                 />
               </Grid>
-              {/* Crop X */}
-              <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
-                <Typography variant="body2">Crop X: {crop.x}</Typography>
-                <Slider
-                  value={crop.x}
-                  min={0}
-                  max={originalDimensions?.width || cropMax}
-                  step={1}
-                  onChange={(_, v) => pushCrop({ ...crop, x: v as number })}
-                  disabled={isProcessing}
-                  size="small"
-                  valueLabelDisplay="auto"
-                />
-              </Grid>
-              {/* Crop Y */}
-              <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
-                <Typography variant="body2">Crop Y: {crop.y}</Typography>
-                <Slider
-                  value={crop.y}
-                  min={0}
-                  max={originalDimensions?.height || cropMax}
-                  step={1}
-                  onChange={(_, v) => pushCrop({ ...crop, y: v as number })}
-                  disabled={isProcessing}
-                  size="small"
-                  valueLabelDisplay="auto"
-                />
-              </Grid>
-              {/* Crop Width */}
-              <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
-                <Typography variant="body2">Crop Width: {crop.w}</Typography>
-                <Slider
-                  value={crop.w}
-                  min={0}
-                  max={originalDimensions?.width || cropMax}
-                  step={1}
-                  onChange={(_, v) => pushCrop({ ...crop, w: v as number })}
-                  disabled={isProcessing}
-                  size="small"
-                  valueLabelDisplay="auto"
-                />
-              </Grid>
-              {/* Crop Height */}
-              <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
-                <Typography variant="body2">Crop Height: {crop.h}</Typography>
-                <Slider
-                  value={crop.h}
-                  min={0}
-                  max={originalDimensions?.height || cropMax}
-                  step={1}
-                  onChange={(_, v) => pushCrop({ ...crop, h: v as number })}
-                  disabled={isProcessing}
-                  size="small"
-                  valueLabelDisplay="auto"
-                />
-              </Grid>
               {/* Blur */}
               <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
                 <Typography variant="body2">Blur: {blur}</Typography>
-                <Slider
-                  value={blur}
-                  min={blurMin}
-                  max={blurMax}
-                  step={1}
-                  onChange={(_, v) => setBlur(v as number)}
-                  disabled={isProcessing}
-                  size="small"
-                  valueLabelDisplay="auto"
-                />
+                <Box display="flex" alignItems="center">
+                  <IconButton size="small" onClick={() => setBlur(Math.max(blurMin, blur - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                  <Slider
+                    value={blur}
+                    min={blurMin}
+                    max={blurMax}
+                    step={1}
+                    onChange={(_, v) => setBlur(v as number)}
+                    disabled={isProcessing}
+                    size="small"
+                    valueLabelDisplay="auto"
+                    sx={{ mx: 1, flex: 1 }}
+                  />
+                  <IconButton size="small" onClick={() => setBlur(Math.min(blurMax, blur + 1))} disabled={isProcessing}><AddIcon /></IconButton>
+                </Box>
               </Grid>
               {/* Brightness */}
               <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
                 <Typography variant="body2">Brightness: {brightness}%</Typography>
-                <Slider value={brightness} onChange={handleBrightnessChange} min={0} max={200} step={1} disabled={isProcessing} size="small" valueLabelDisplay="auto" />
+                <Box display="flex" alignItems="center">
+                  <IconButton size="small" onClick={() => setBrightness(Math.max(0, brightness - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                  <Slider value={brightness} onChange={handleBrightnessChange} min={0} max={200} step={1} disabled={isProcessing} size="small" valueLabelDisplay="auto" sx={{ mx: 1, flex: 1 }} />
+                  <IconButton size="small" onClick={() => setBrightness(Math.min(200, brightness + 1))} disabled={isProcessing}><AddIcon /></IconButton>
+                </Box>
               </Grid>
               {/* Contrast */}
               <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
                 <Typography variant="body2">Contrast: {contrast}%</Typography>
-                <Slider value={contrast} onChange={handleContrastChange} min={0} max={200} step={1} disabled={isProcessing} size="small" valueLabelDisplay="auto" />
+                <Box display="flex" alignItems="center">
+                  <IconButton size="small" onClick={() => setContrast(Math.max(0, contrast - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                  <Slider value={contrast} onChange={handleContrastChange} min={0} max={200} step={1} disabled={isProcessing} size="small" valueLabelDisplay="auto" sx={{ mx: 1, flex: 1 }} />
+                  <IconButton size="small" onClick={() => setContrast(Math.min(200, contrast + 1))} disabled={isProcessing}><AddIcon /></IconButton>
+                </Box>
               </Grid>
               {/* Saturation */}
               <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
                 <Typography variant="body2">Saturation: {saturation}%</Typography>
-                <Slider value={saturation} onChange={handleSaturationChange} min={0} max={200} step={1} disabled={isProcessing} size="small" valueLabelDisplay="auto" />
+                <Box display="flex" alignItems="center">
+                  <IconButton size="small" onClick={() => setSaturation(Math.max(0, saturation - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                  <Slider value={saturation} onChange={handleSaturationChange} min={0} max={200} step={1} disabled={isProcessing} size="small" valueLabelDisplay="auto" sx={{ mx: 1, flex: 1 }} />
+                  <IconButton size="small" onClick={() => setSaturation(Math.min(200, saturation + 1))} disabled={isProcessing}><AddIcon /></IconButton>
+                </Box>
               </Grid>
-              {/* Rotate Left/Right and Slider */}
+              {/* Rotate */}
               <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
                 <Typography variant="body2" noWrap>Rotate: {rotate}°</Typography>
-                <Slider
-                  value={rotate}
-                  min={rotateMin}
-                  max={rotateMax}
-                  step={1}
-                  onChange={(_, v) => setRotate(v as number)}
-                  disabled={isProcessing}
-                  size="small"
-                  valueLabelDisplay="auto"
-                  sx={{ flex: 1 }}
-                />
+                <Box display="flex" alignItems="center">
+                  <IconButton size="small" onClick={() => setRotate(Math.max(rotateMin, rotate - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                  <Slider
+                    value={rotate}
+                    min={rotateMin}
+                    max={rotateMax}
+                    step={1}
+                    onChange={(_, v) => setRotate(v as number)}
+                    disabled={isProcessing}
+                    size="small"
+                    valueLabelDisplay="auto"
+                    sx={{ mx: 1, flex: 1 }}
+                  />
+                  <IconButton size="small" onClick={() => setRotate(Math.min(rotateMax, rotate + 1))} disabled={isProcessing}><AddIcon /></IconButton>
+                </Box>
               </Grid>
               {/* Flip Horizontal */}
               <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
@@ -752,7 +806,7 @@ function ImageResize() {
             </Grid>
           )}
         </CardContent>
-        <CardActions sx={{ display: !!file ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
+        <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
           <Button variant="contained" onClick={handleResize} disabled={isProcessing || !file || (!width && !height)} size="small">
             {isProcessing ? 'Resizing' : 'Resize'}
           </Button>

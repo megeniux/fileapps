@@ -219,7 +219,7 @@ function VideoMerge() {
               <TableCell>
                 <Typography color="text.secondary" variant="caption">{file.name}</Typography>
               </TableCell>
-              <TableCell align="center">
+              <TableCell align="center" sx={{ whiteSpace: 'nowrap' }}>
                 <IconButton size="small" color='primary' onClick={() => handleMoveUp(idx)} title="Move down" disabled={idx === 0 || isProcessing}>
                   <ArrowUpwardIcon />
                 </IconButton>
@@ -328,7 +328,7 @@ function VideoMerge() {
           {/* End Drag-and-drop Upload/Preview UI */}
           {files.length ? VideoTable : ""}
         </CardContent>
-        <CardActions sx={{ display: files.length ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
+        <CardActions sx={{ display: files.length ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
           <Button
             variant="contained"
             disabled={files.length < 2 || isProcessing}

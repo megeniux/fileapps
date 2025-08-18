@@ -453,7 +453,7 @@ function AudioEffects() {
                         </Grid>
                     )}
                 </CardContent>
-                <CardActions sx={{ display: !!file ? 'flex' : 'none', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
+                <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
                     <Button variant="contained" onClick={handleProcess} disabled={isProcessing || !file} size="small">
                         {isProcessing ? 'Processing' : 'Apply Effects'}
                     </Button>
