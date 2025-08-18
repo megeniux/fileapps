@@ -251,17 +251,19 @@ function VideoPlayback() {
 
     return (
         <Container maxWidth="md" sx={{ my: 'auto' }}>
-            <Card sx={{ px: 3, py: 3 }} elevation={3}>
+            {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
+            <Card sx={{ p: 1.5 }} elevation={3}>
                 <CardContent sx={{ p: 0 }}>
-                    {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
-                    <Box display="flex" flexDirection="column" alignItems="center">
-                        <SpeedIcon color="primary" sx={{ fontSize: '3rem', mb: 2 }} />
-                        <Typography variant="h5" component="h1" gutterBottom>Video Playback Speed</Typography>
-                        <Typography color="text.secondary" variant="body1" component="h2" align="center">
-                            Change video playback speed from -20x (reverse) to +20x.
+                    <Box display="flex" alignItems="center">
+                        <SpeedIcon color="primary" fontSize="small" sx={{ mr: 0.5 }} />
+                        <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
+                            Video Playback Speed
                         </Typography>
                     </Box>
-                    <Divider sx={{ my: 2 }} />
+                    <Divider sx={{ my: 0.5 }} />
+                    <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
+                        Change video playback speed from -20x (reverse) to +20x.
+                    </Typography>
                     {/* Upload & Preview area */}
                     <Box
                         onDragOver={handleDragOver}

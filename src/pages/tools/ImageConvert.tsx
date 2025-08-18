@@ -427,17 +427,19 @@ function ImageResize() {
 
   return (
     <Container maxWidth="lg" sx={{ my: 'auto' }}>
-      <Card sx={{ px: 3, py: 3 }} elevation={3}>
+      {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
+      <Card sx={{ p: 1.5 }} elevation={3}>
         <CardContent sx={{ p: 0 }}>
-          {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
-          <Box display="flex" flexDirection="column" alignItems="center">
-            <AspectRatioIcon sx={{ fontSize: '3rem', mb: 2 }} color="primary" />
-            <Typography variant="h5" component="h1" gutterBottom>Convert Image</Typography>
-            <Typography color="text.secondary" variant="body1" component="h2" align="center">
-              Resize images to specific dimensions while maintaining quality.
+          <Box display="flex" alignItems="center">
+            <AspectRatioIcon color="primary" fontSize="small" sx={{ mr: 0.5 }} />
+            <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
+              Convert Image
             </Typography>
           </Box>
-          <Divider sx={{ my: 2 }} />
+          <Divider sx={{ my: 0.5 }} />
+          <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
+            Resize images to specific dimensions while maintaining quality.
+          </Typography>
           {/* Upload & Preview area */}
           <Box
             onDragOver={handleDragOver}
