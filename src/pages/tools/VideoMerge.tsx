@@ -33,7 +33,6 @@ import { fetchFile } from '@ffmpeg/util'
 const ffmpeg = new FFmpeg()
 let isFFmpegLoaded = false
 
-export const description = "Merge multiple video files into one seamlessly. Combine clips online with VideoTools' fast and secure video merger—no downloads required.";
 
 function VideoMerge() {
   const [files, setFiles] = useState<File[]>([])
@@ -146,9 +145,10 @@ function VideoMerge() {
       ])
       setStatus('Finalizing')
       setProgress(99.9)
-      const data = await ffmpeg.readFile(outputFileName)
-      const url = URL.createObjectURL(new Blob([data], { type: 'video/mp4' }))
-      setDownloadUrl(url)
+  const data = await ffmpeg.readFile(outputFileName)
+  const blob = new Blob([new Uint8Array(data as any)], { type: 'video/mp4' })
+  const url = URL.createObjectURL(blob)
+  setDownloadUrl(url)
       setDownloadSize(data.length)
       // Clean up
       for (const file of files) {
@@ -196,7 +196,7 @@ function VideoMerge() {
   // Memoized video preview table
   const VideoTable = React.useMemo(() => (
     <TableContainer>
-      <Table size="small">
+  <Table>
         <TableHead>
           <TableRow>
             <TableCell>Preview</TableCell>
@@ -220,16 +220,16 @@ function VideoMerge() {
                 <Typography color="text.secondary" variant="caption">{file.name}</Typography>
               </TableCell>
               <TableCell align="center" sx={{ whiteSpace: 'nowrap' }}>
-                <IconButton size="small" color='primary' onClick={() => handleMoveUp(idx)} title="Move down" disabled={idx === 0 || isProcessing}>
+                <IconButton color='primary' onClick={() => handleMoveUp(idx)} title="Move down" disabled={idx === 0 || isProcessing}>
                   <ArrowUpwardIcon />
                 </IconButton>
-                <IconButton size="small" color='secondary' onClick={() => handleMoveDown(idx)} title="Move up" disabled={idx === files.length - 1 || isProcessing}>
+                <IconButton color='secondary' onClick={() => handleMoveDown(idx)} title="Move up" disabled={idx === files.length - 1 || isProcessing}>
                   <ArrowDownwardIcon />
                 </IconButton>
-                <IconButton size="small" color='warning' onClick={() => handleReplace(idx)} title="Replace video" disabled={isProcessing}>
+                <IconButton color='warning' onClick={() => handleReplace(idx)} title="Replace video" disabled={isProcessing}>
                   <SwapHorizIcon />
                 </IconButton>
-                <IconButton color="error" size="small" onClick={() => handleRemove(idx)} title="Delete video" disabled={isProcessing}>
+                <IconButton color="error" onClick={() => handleRemove(idx)} title="Delete video" disabled={isProcessing}>
                   <DeleteIcon />
                 </IconButton>
               </TableCell>
@@ -250,20 +250,17 @@ function VideoMerge() {
   ), [files, isProcessing])
 
   return (
-    <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Card sx={{ px: 3, py: 3 }} elevation={3}>
+    <Container maxWidth="lg" sx={{ my: 'auto' }}>
+      <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
-          {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
-          <Box display="flex" flexDirection="column" alignItems="center">
-            <MergeTypeIcon sx={{ fontSize: '3rem', mb: 2 }} color="success" />
-            <Typography variant="h5" component="h1" gutterBottom>
-              Merge Videos
-            </Typography>
-            <Typography color="text.secondary" variant="body1" component="h2" align="center">
-              Upload multiple videos, arrange their order, and merge them into one file.
-            </Typography>
+          <Box display="flex" alignItems="center">
+            <MergeTypeIcon color="success" fontSize="small" sx={{ mr: 0.5 }} />
+            <Typography variant="body1" component="h1" fontWeight={600} mb={0.5}>Video Merger</Typography>
           </Box>
-          <Divider sx={{ my: 2 }} />
+          <Divider sx={{ my: 0.5 }} />
+          <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
+            Upload multiple videos, arrange their order, and merge them into one file.
+          </Typography>
           {/* Drag-and-drop Upload/Preview UI */}
           <Box
             onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}
@@ -296,7 +293,7 @@ function VideoMerge() {
             {files.length === 0 ? (
               <Box textAlign="center">
                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                <Typography variant="subtitle1" gutterBottom>
+                <Typography variant="subtitle2" gutterBottom>
                   Drag & drop video files here<br/>or<br/>Click to add
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
@@ -309,7 +306,6 @@ function VideoMerge() {
                 startIcon={<AddIcon />}
                 onClick={handleAddClick}
                 disabled={isProcessing}
-                size="small"
                 sx={{ mt: 1 }}
               >
                 Add More Videos
@@ -327,23 +323,22 @@ function VideoMerge() {
           </Box>
           {/* End Drag-and-drop Upload/Preview UI */}
           {files.length ? VideoTable : ""}
-        </CardContent>
+  </CardContent>
         <CardActions sx={{ display: files.length ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
           <Button
             variant="contained"
             disabled={files.length < 2 || isProcessing}
             onClick={handleMerge}
-            size="small"
           >
             {isProcessing ? 'Merging' : 'Merge'}
           </Button>
           {isProcessing && (
-            <Button variant="contained" color="error" onClick={handleStop} size="small">
+            <Button variant="contained" color="error" onClick={handleStop}>
               Stop
             </Button>
           )}
           {downloadUrl && downloadSize !== null && (
-            <Button variant="outlined" color="success" onClick={handleDownload} size="small">
+            <Button variant="contained" color="success" onClick={handleDownload}>
               Download ({(downloadSize / (1024 * 1024)).toFixed(2)} MB)
             </Button>
           )}
@@ -358,6 +353,7 @@ function VideoMerge() {
           </Box>
         )}
       </Card>
+      {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
     </Container>
   )
 }

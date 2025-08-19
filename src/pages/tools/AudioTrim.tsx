@@ -17,6 +17,8 @@ import Alert from '@mui/material/Alert';
 import Slider from '@mui/material/Slider';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import Grid from '@mui/material/Grid';
 
 // Icons
@@ -30,7 +32,6 @@ let isFFmpegLoaded = false;
 // Add a ref to keep track of the current ffmpeg instance for termination
 const ffmpegRef = { current: ffmpeg };
 
-export const description = "Trim audio files to extract specific sections or remove unwanted parts. Fast and precise audio cutting with our online tool.";
 
 function AudioTrim() {
   const theme = useTheme();
@@ -177,7 +178,9 @@ function AudioTrim() {
       setProgress(99.9);
       const data = await ffmpeg.readFile(outputFileName);
       const mimeType = file.type;
-      const url = URL.createObjectURL(new Blob([data], { type: mimeType }));
+      const blob = new Blob([data.slice()], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      
       setDownloadUrl(url);
       setDownloadSize(data.length);
       await ffmpeg.deleteFile(inputFileName);
@@ -221,21 +224,21 @@ function AudioTrim() {
   };
 
   return (
-    <Container maxWidth="md" sx={{ my: 'auto' }}>
-      {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
+    <Container maxWidth="lg" sx={{ my: 'auto' }}>
+      {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
       <Card sx={{ p: 1.5 }} elevation={3}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
             <ContentCutIcon color="secondary" fontSize="small" sx={{ mr: 0.5 }} />
             <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
-              Audio Trim
+              Audio Trimmer
             </Typography>
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
             Trim and cut audio files online with precision.
           </Typography>
-          {/* Upload & Preview area, styled like ImageResize */}
+          {/* Upload & Preview area, styled like ImageConvert */}
           <Box
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
@@ -255,7 +258,7 @@ function AudioTrim() {
             {!file ? (
               <Box textAlign="center">
                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                <Typography variant="subtitle1" gutterBottom>
+                <Typography variant="subtitle2" gutterBottom>
                   Drag & drop an audio file here<br/>or<br/>Click to select
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
@@ -301,18 +304,23 @@ function AudioTrim() {
             <Grid container spacing={2} sx={{ mb: 3 }}>
               <Box sx={{ mb: 3, width: '100%' }}>
                 <Typography variant="subtitle2" gutterBottom>
-                  Trim Range: {formatTime(range[0])} - {formatTime(range[1])} (Duration: {formatTime(range[1] - range[0])})
-                </Typography>
-                <Slider
-                  value={range}
-                  onChange={handleRangeChange}
-                  valueLabelDisplay="auto"
-                  valueLabelFormat={formatTime}
-                  min={0}
-                  max={duration}
-                  disabled={isProcessing || duration === 0}
-                  size="small"
-                />
+                    Trim Range: {formatTime(range[0])} - {formatTime(range[1])} (Duration: {formatTime(range[1] - range[0])})
+                  </Typography>
+                <Box display="flex" alignItems="center">
+                  <IconButton size="small" onClick={() => setRange([Math.max(0, range[0] - 1), range[1]])} disabled={isProcessing}><RemoveIcon /></IconButton>
+                  <Slider
+                    value={range}
+                    onChange={handleRangeChange}
+                    valueLabelDisplay="auto"
+                    valueLabelFormat={formatTime}
+                    min={0}
+                    max={duration}
+                    disabled={isProcessing || duration === 0}
+                    size="small"
+                    sx={{ mx: 1, flex: 1 }}
+                  />
+                  <IconButton size="small" onClick={() => setRange([range[0], Math.min(duration, range[1] + 1)])} disabled={isProcessing}><AddIcon /></IconButton>
+                </Box>
               </Box>
             </Grid>
           )}

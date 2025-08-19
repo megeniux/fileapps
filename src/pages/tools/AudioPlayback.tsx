@@ -17,6 +17,8 @@ import Alert from '@mui/material/Alert';
 import Slider from '@mui/material/Slider';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 // Icons
 import SpeedIcon from '@mui/icons-material/Speed';
@@ -27,7 +29,6 @@ const ffmpeg = new FFmpeg();
 let isFFmpegLoaded = false;
 const ffmpegRef = { current: ffmpeg };
 
-export const description = "Change audio playback speed online. Speed up or slow down audio files from -20x to +20x instantly with VideoTools.";
 
 function AudioPlayback() {
   const theme = useTheme();
@@ -170,10 +171,11 @@ function AudioPlayback() {
       await ffmpeg.exec(args);
       setStatus('Finalizing');
       setProgress(99.9);
-      const data = await ffmpeg.readFile(outputFileName);
-      const mimeType = file.type;
-      const url = URL.createObjectURL(new Blob([data], { type: mimeType }));
-      setDownloadUrl(url);
+  const data = await ffmpeg.readFile(outputFileName);
+  const mimeType = file.type;
+  const blob = new Blob([new Uint8Array(data as any)], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  setDownloadUrl(url);
       setDownloadSize(data.length);
       await ffmpeg.deleteFile(inputFileName);
       await ffmpeg.deleteFile(outputFileName);
@@ -215,8 +217,7 @@ function AudioPlayback() {
   };
 
   return (
-    <Container maxWidth="md" sx={{ my: 'auto' }}>
-      {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
+    <Container maxWidth="lg" sx={{ my: 'auto' }}>
       <Card sx={{ p: 1.5 }} elevation={3}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
@@ -249,7 +250,7 @@ function AudioPlayback() {
             {!file ? (
               <Box textAlign="center">
                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                <Typography variant="subtitle1" gutterBottom>
+                <Typography variant="subtitle2" gutterBottom>
                   Drag & drop an audio file here<br/>or<br/>Click to select
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
@@ -296,16 +297,21 @@ function AudioPlayback() {
               <Typography variant="subtitle2" gutterBottom>
                 Playback Speed: {speed}x
               </Typography>
-              <Slider
-                value={speed}
-                min={-20}
-                max={20}
-                step={0.1}
-                onChange={handleSpeedChange}
-                valueLabelDisplay="auto"
-                disabled={isProcessing}
-                size="small"
-              />
+              <Box display="flex" alignItems="center">
+                <IconButton size="small" onClick={() => setSpeed(prev => Math.max(-20, Number((prev - 0.1).toFixed(1))))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                <Slider
+                  value={speed}
+                  min={-20}
+                  max={20}
+                  step={0.1}
+                  onChange={handleSpeedChange}
+                  valueLabelDisplay="auto"
+                  disabled={isProcessing}
+                  size="small"
+                  sx={{ mx: 1, flex: 1 }}
+                />
+                <IconButton size="small" onClick={() => setSpeed(prev => Math.min(20, Number((prev + 0.1).toFixed(1))))} disabled={isProcessing}><AddIcon /></IconButton>
+              </Box>
               <Typography variant="caption" color="text.secondary">
                 Negative values reverse audio. 1x is normal speed.
               </Typography>
@@ -342,6 +348,7 @@ function AudioPlayback() {
           </Box>
         )}
       </Card>
+      {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
     </Container>
   );
 }

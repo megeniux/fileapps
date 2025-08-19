@@ -37,7 +37,6 @@ import { formatBytes } from '../../helpers';
 const ffmpeg = new FFmpeg();
 let isFFmpegLoaded = false;
 
-export const description = "Merge multiple audio files into one seamlessly. Combine tracks online with fast and secure audio merger—no downloads required.";
 
 function AudioMerge() {
     const [files, setFiles] = useState<File[]>([]);
@@ -154,7 +153,8 @@ function AudioMerge() {
             setProgress(99.9);
             const data = await ffmpeg.readFile(outputFileName);
             const mimeType = files[0].type || 'audio/mpeg';
-            const url = URL.createObjectURL(new Blob([data], { type: mimeType }));
+            const blob = new Blob([new Uint8Array(data as any)], { type: mimeType });
+            const url = URL.createObjectURL(blob);
             setDownloadUrl(url);
             setDownloadSize(data.length);
             // Clean up
@@ -202,7 +202,7 @@ function AudioMerge() {
     // Memoized audio preview table
     const AudioTable = React.useMemo(() => (
         <TableContainer>
-            <Table size="small">
+            <Table>
                 <TableHead>
                     <TableRow>
                         <TableCell>Preview</TableCell>
@@ -225,16 +225,16 @@ function AudioMerge() {
                                 <Typography color="text.secondary" variant="caption">{file.name}</Typography>
                             </TableCell>
                             <TableCell align="center" sx={{ whiteSpace: 'nowrap' }}>
-                                <IconButton size="small" color='primary' onClick={() => handleMoveUp(idx)} title="Move up" disabled={idx === 0 || isProcessing}>
+                                <IconButton color='primary' onClick={() => handleMoveUp(idx)} title="Move up" disabled={idx === 0 || isProcessing}>
                                     <ArrowUpwardIcon />
                                 </IconButton>
-                                <IconButton size="small" color='secondary' onClick={() => handleMoveDown(idx)} title="Move down" disabled={idx === files.length - 1 || isProcessing}>
+                                <IconButton color='secondary' onClick={() => handleMoveDown(idx)} title="Move down" disabled={idx === files.length - 1 || isProcessing}>
                                     <ArrowDownwardIcon />
                                 </IconButton>
-                                <IconButton size="small" color='warning' onClick={() => handleReplace(idx)} title="Replace audio" disabled={isProcessing}>
+                                <IconButton color='warning' onClick={() => handleReplace(idx)} title="Replace audio" disabled={isProcessing}>
                                     <SwapHorizIcon />
                                 </IconButton>
-                                <IconButton color="error" size="small" onClick={() => handleRemove(idx)} title="Delete audio" disabled={isProcessing}>
+                                <IconButton color="error" onClick={() => handleRemove(idx)} title="Delete audio" disabled={isProcessing}>
                                     <DeleteIcon />
                                 </IconButton>
                             </TableCell>
@@ -255,13 +255,12 @@ function AudioMerge() {
     ), [files, isProcessing]);
 
     return (
-        <Container maxWidth="md" sx={{ my: 'auto' }}>
-            {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
+        <Container maxWidth="lg" sx={{ my: 'auto' }}>
             <Card sx={{ p: 1.5 }}>
                 <CardContent sx={{ p: 0 }}>
                     <Box display="flex" alignItems="center">
                         <MergeTypeIcon color="warning" fontSize="small" sx={{ mr: 0.5 }} />
-                        <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Merge Audios</Typography>
+                        <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Audio Merger</Typography>
                     </Box>
                     <Divider sx={{ my: 0.5 }} />
                     <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
@@ -299,9 +298,9 @@ function AudioMerge() {
                         {files.length === 0 ? (
                             <Box textAlign="center">
                                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                                <Typography variant="subtitle1" gutterBottom>
-                                    Drag & drop audio files here<br />or<br />Click to add
-                                </Typography>
+                                <Typography variant="subtitle2" gutterBottom>
+                                                    Drag & drop audio files here<br />or<br />Click to add
+                                                </Typography>
                                 <Typography color="text.secondary" variant="caption">
                                     Supported: MP3, WAV, AAC, FLAC, OGG, and more
                                 </Typography>
@@ -312,7 +311,6 @@ function AudioMerge() {
                                 startIcon={<AddIcon />}
                                 onClick={handleAddClick}
                                 disabled={isProcessing}
-                                size="small"
                                 sx={{ mt: 1 }}
                             >
                                 Add More Audios
@@ -332,21 +330,21 @@ function AudioMerge() {
                     {files.length ? AudioTable : ""}
                 </CardContent>
                 <CardActions sx={{ display: files.length ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-                    <Button
+                        <Button
                         variant="contained"
                         disabled={files.length < 2 || isProcessing}
                         onClick={handleMerge}
-                        size="small"
+                            
                     >
                         {isProcessing ? 'Merging' : 'Merge'}
                     </Button>
                     {isProcessing && (
-                        <Button variant="contained" color="error" onClick={handleStop} size="small">
+                        <Button variant="contained" color="error" onClick={handleStop}>
                             Stop
                         </Button>
                     )}
                     {downloadUrl && downloadSize !== null && (
-                        <Button variant="outlined" color="success" onClick={handleDownload} size="small">
+                        <Button variant="contained" color="success" onClick={handleDownload}>
                             Download ({formatBytes(downloadSize)})
                         </Button>
                     )}
@@ -360,8 +358,9 @@ function AudioMerge() {
                         </Typography>
                     </Box>
                 )}
-            </Card>
-        </Container>
+                </Card>
+                {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
+            </Container>
     );
 }
 

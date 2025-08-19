@@ -35,7 +35,7 @@ function Header() {
     <StyledAppBar position="fixed" color='default' elevation={1}>
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         {/* Logo */}
-        <Box onClick={() => navigate('/')} display="flex" alignItems="center" sx={{ cursor: 'pointer'}}>
+        <Box onClick={() => navigate('/')} display="flex" alignItems="center" sx={{ cursor: 'pointer' }}>
           <img src="/images/branding/logo-small.svg" alt={APP_INFO.name} height={15} style={{ marginRight: 4 }} />
           <Typography variant="body2" fontWeight={600}> {APP_INFO.name} </Typography>
         </Box>
@@ -45,6 +45,8 @@ function Header() {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/about">About</NavLink>
           <NavLink to="/contact">Contact</NavLink>
+          <NavLink to="/privacy">Privacy</NavLink>
+          <NavLink to="/terms">Terms</NavLink>
         </Box>
       </Toolbar>
     </StyledAppBar>

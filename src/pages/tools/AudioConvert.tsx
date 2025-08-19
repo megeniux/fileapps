@@ -43,7 +43,6 @@ const outputFormats = [
   { label: 'M4A (AAC)', value: 'm4a', codec: 'aac', bitrate: '256k' },
 ];
 
-export const description = "Convert audio files between different formats like MP3, WAV, AAC, FLAC, and more. Fast and secure audio conversion with no quality loss.";
 
 function AudioConvert() {
   const theme = useTheme();
@@ -59,7 +58,7 @@ function AudioConvert() {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [downloadSize, setDownloadSize] = useState<number | null>(null);
   const [isDragActive, setIsDragActive] = useState(false);
-  
+
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,7 +69,7 @@ function AudioConvert() {
         setErrorMsg('Please select an audio file.');
         return;
       }
-      
+
       setFile(selectedFile);
       setPreviewUrl(URL.createObjectURL(selectedFile));
       setDownloadUrl(null);
@@ -141,44 +140,45 @@ function AudioConvert() {
           setProgress(prev => Math.min(prev + 5, 99));
         }
       };
-      
+
       ffmpeg.on('log', logHandler);
 
       setStatus('Converting');
-      
+
       // Build ffmpeg command based on selected format and quality
       const args = ['-i', inputFileName];
-      
+
       if (selectedFormat.codec) {
         args.push('-c:a', selectedFormat.codec);
       }
-      
+
       if (selectedFormat.bitrate) {
         args.push('-b:a', selectedFormat.bitrate);
       }
-      
+
       args.push(outputFileName);
-      
+
       await ffmpeg.exec(args);
-      
+
       setStatus('Finalizing');
       setProgress(99.9);
-      
+
       const data = await ffmpeg.readFile(outputFileName);
       const mimeType = `audio/${outputExtension}`;
-      const url = URL.createObjectURL(new Blob([data], { type: mimeType }));
-      
+    const blob = new Blob([new Uint8Array(data as any)], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+
       setDownloadUrl(url);
       setDownloadSize(data.length);
-      
+
       // Clean up
       await ffmpeg.deleteFile(inputFileName);
       await ffmpeg.deleteFile(outputFileName);
-      
+
       setProgress(100);
       setStatus('Completed');
       ffmpeg.off('log', logHandler);
-    } catch (err:any) {
+    } catch (err: any) {
       setStatus('Failed');
       setConsoleLogs(logs => [...logs, String(err)]);
       // Only set errorMsg if not stopped
@@ -221,13 +221,12 @@ function AudioConvert() {
   };
 
   return (
-    <Container maxWidth="md" sx={{ my: 'auto' }}>
-      {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
+    <Container maxWidth="lg" sx={{ my: 'auto' }}>
       <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
             <SwapHorizIcon color="primary" fontSize="small" sx={{ mr: 0.5 }} />
-            <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Audio Convert</Typography>
+            <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Audio Converter</Typography>
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
@@ -271,8 +270,8 @@ function AudioConvert() {
             {!file ? (
               <Box textAlign="center">
                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                <Typography variant="subtitle1" gutterBottom>
-                  Drag & drop an audio file here<br/>or<br/>Click to select
+                <Typography variant="subtitle2" gutterBottom>
+                  Drag & drop an audio file here<br />or<br />Click to select
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
                   Supported: MP3, WAV, AAC, FLAC, OGG, and more
@@ -307,7 +306,7 @@ function AudioConvert() {
               <Typography variant="body2" noWrap>
                 {file.name} ({formatBytes(file.size)})
               </Typography>
-              <IconButton onClick={handleRemoveFile} size="small" color="error" sx={{ ml: 1 }}>
+              <IconButton onClick={handleRemoveFile} color="error" sx={{ ml: 1 }}>
                 <CloseIcon fontSize="small" />
               </IconButton>
             </Box>
@@ -322,7 +321,7 @@ function AudioConvert() {
                   value={outputFormat}
                   onChange={handleFormatChange}
                   disabled={isProcessing}
-                  size="small"
+                  
                 >
                   {Array.from(new Set(outputFormats.map(f => f.value))).map((format) => (
                     <MenuItem key={format} value={format}>
@@ -338,7 +337,7 @@ function AudioConvert() {
                   value={outputQuality}
                   onChange={handleQualityChange}
                   disabled={isProcessing}
-                  size="small"
+                  
                 >
                   {outputFormats
                     .filter(f => f.value === outputFormat)
@@ -353,23 +352,23 @@ function AudioConvert() {
           )}
         </CardContent>
         <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" onClick={handleConvert} disabled={isProcessing || !file} size="small">
+          <Button variant="contained" onClick={handleConvert} disabled={isProcessing || !file}>
             {isProcessing ? 'Converting' : 'Convert'}
           </Button>
           {/* Reset button only visible when not processing */}
           {!isProcessing && (
-            <Button variant="outlined" onClick={handleReset} size="small">
+            <Button variant="outlined" onClick={handleReset}>
               Reset
             </Button>
           )}
           {/* Add Stop button */}
           {isProcessing && (
-            <Button color="error" variant='contained' onClick={handleStop} disabled={!isProcessing} size="small">
+            <Button color="error" variant='contained' onClick={handleStop} disabled={!isProcessing}>
               Stop
             </Button>
           )}
           {downloadUrl && downloadSize !== null && (
-            <Button color="success" variant='contained' onClick={handleDownload} size="small">
+            <Button color="success" variant='contained' onClick={handleDownload}>
               Download ({formatBytes(downloadSize)})
             </Button>
           )}
@@ -384,6 +383,7 @@ function AudioConvert() {
           </Box>
         )}
       </Card>
+      {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
     </Container>
   );
 }

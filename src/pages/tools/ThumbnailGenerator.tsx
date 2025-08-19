@@ -20,6 +20,8 @@ import TextField from '@mui/material/TextField'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import IconButton from '@mui/material/IconButton'
+import AddIcon from '@mui/icons-material/Add'
+import RemoveIcon from '@mui/icons-material/Remove'
 
 // Icons
 import ImageIcon from '@mui/icons-material/Image'
@@ -28,7 +30,6 @@ import FilterFramesIcon from '@mui/icons-material/FilterFrames'
 import CloseIcon from '@mui/icons-material/Close'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 
-export const description = "Generate high-quality thumbnails from your videos online. Capture and download video stills instantly with VideoTools' thumbnail generator.";
 
 function ThumbnailGenerator() {
   const theme = useTheme()
@@ -197,8 +198,9 @@ function ThumbnailGenerator() {
           '-pix_fmt', 'yuv420p',
           outputFileName
         ])
-        const data = await ffmpeg.readFile(outputFileName)
-        const url = URL.createObjectURL(new Blob([data], { type: 'image/jpeg' }))
+  const data = await ffmpeg.readFile(outputFileName)
+  const blob = new Blob([new Uint8Array(data as any)], { type: 'image/jpeg' })
+  const url = URL.createObjectURL(blob)
         setThumbnailUrl(url)
         urls = [url]
         await ffmpeg.deleteFile(outputFileName)
@@ -227,8 +229,9 @@ function ThumbnailGenerator() {
           '-pix_fmt', 'yuv420p',
           'scrub_joined.jpg'
         ])
-        const data = await ffmpeg.readFile('scrub_joined.jpg')
-        const url = URL.createObjectURL(new Blob([data], { type: 'image/jpeg' }))
+  const data = await ffmpeg.readFile('scrub_joined.jpg')
+  const blob = new Blob([new Uint8Array(data as any)], { type: 'image/jpeg' })
+  const url = URL.createObjectURL(blob)
         setThumbnailUrl(url)
         urls = [url]
         // Cleanup
@@ -252,7 +255,8 @@ function ThumbnailGenerator() {
           const outName = `frames_${String(idx).padStart(3, '0')}.jpg`
           try {
             const data = await ffmpeg.readFile(outName)
-            const url = URL.createObjectURL(new Blob([data], { type: 'image/jpeg' }))
+            const blob = new Blob([new Uint8Array(data as any)], { type: 'image/jpeg' })
+            const url = URL.createObjectURL(blob)
             urls.push(url)
             await ffmpeg.deleteFile(outName)
             idx++
@@ -326,13 +330,13 @@ function ThumbnailGenerator() {
   }
 
   return (
-    <Container maxWidth="md" sx={{ my: 'auto' }}>
-      {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
+    <Container maxWidth="lg" sx={{ my: 'auto' }}>
+      {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
       <Card sx={{ p: 1.5 }} elevation={3}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
             <ImageIcon color="inherit" fontSize="small" sx={{ mr: 0.5 }} />
-            <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
+                <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
               Thumbnail Generator
             </Typography>
           </Box>
@@ -381,7 +385,7 @@ function ThumbnailGenerator() {
             {!file ? (
               <Box textAlign="center">
                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                <Typography variant="subtitle1" gutterBottom>
+                <Typography variant="subtitle2" gutterBottom>
                   Drag & drop a video file here<br/>or<br/>Click to select
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
@@ -431,7 +435,7 @@ function ThumbnailGenerator() {
               <Typography variant="body2" noWrap>
                 {file.name}
               </Typography>
-              <IconButton onClick={handleReset} size="small" color="error" sx={{ ml: 1 }}>
+              <IconButton onClick={handleReset} color="error" sx={{ ml: 1 }}>
                 <CloseIcon fontSize="small" />
               </IconButton>
             </Box>
@@ -455,16 +459,21 @@ function ThumbnailGenerator() {
               <Typography variant="subtitle2" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 Select Range: <small>{`${startTime.toFixed(1)}s - ${endTime.toFixed(1)}s`}</small>
               </Typography>
-              <Slider
-                min={0}
-                max={Math.floor(duration)}
-                step={0.1}
-                value={[startTime, endTime]}
-                onChange={handleRangeChange}
-                valueLabelDisplay="auto"
-                disableSwap
-                size="small"
-              />
+              <Box display="flex" alignItems="center">
+                <IconButton onClick={() => setStartTime(prev => Math.max(0, Number((prev - 1).toFixed(1))))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                <Slider
+                  min={0}
+                  max={Math.floor(duration)}
+                  step={0.1}
+                  value={[startTime, endTime]}
+                  onChange={handleRangeChange}
+                  valueLabelDisplay="auto"
+                  disableSwap
+                  
+                  sx={{ mx: 1, flex: 1 }}
+                />
+                <IconButton onClick={() => setEndTime(prev => Math.min(Math.floor(duration), Number((prev + 1).toFixed(1))))} disabled={isProcessing}><AddIcon /></IconButton>
+              </Box>
             </Box>
           )}
           {/* Controls for each mode */}
@@ -475,20 +484,24 @@ function ThumbnailGenerator() {
                   <Typography variant="subtitle2" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     Select Time: <small>{`${time.toFixed(1)}s`}</small>
                   </Typography>
-                  <Slider
-                    min={0}
-                    max={Math.floor(duration)}
-                    step={0.1}
-                    value={time}
-                    onChange={handleTimeChange}
-                    valueLabelDisplay="auto"
-                    size="small"
-                  />
+                  <Box display="flex" alignItems="center">
+                    <IconButton onClick={() => setTime(prev => Math.max(0, Number((prev - 0.5).toFixed(1))))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                    <Slider
+                      min={0}
+                      max={Math.floor(duration)}
+                      step={0.1}
+                      value={time}
+                      onChange={handleTimeChange}
+                      valueLabelDisplay="auto"
+                      
+                      sx={{ mx: 1, flex: 1 }}
+                    />
+                    <IconButton onClick={() => setTime(prev => Math.min(Math.floor(duration), Number((prev + 0.5).toFixed(1))))} disabled={isProcessing}><AddIcon /></IconButton>
+                  </Box>
                   <Box display="flex" gap={2} mt={2}>
                     <TextField
                       label="Width"
                       type="number"
-                      size="small"
                       value={width}
                       onChange={handleWidthChange}
                       sx={{ flex: 1 }}
@@ -496,7 +509,6 @@ function ThumbnailGenerator() {
                     <TextField
                       label="Height"
                       type="number"
-                      size="small"
                       value={height}
                       onChange={handleHeightChange}
                       sx={{ flex: 1 }}
@@ -509,7 +521,6 @@ function ThumbnailGenerator() {
                   <TextField
                     label="Interval (s)"
                     type="number"
-                    size="small"
                     value={scrubInterval}
                     onChange={handleScrubIntervalChange}
                     sx={{ flex: 1 }}
@@ -517,7 +528,6 @@ function ThumbnailGenerator() {
                   <TextField
                     label="Width"
                     type="number"
-                    size="small"
                     value={width}
                     onChange={handleWidthChange}
                     sx={{ flex: 1 }}
@@ -525,7 +535,6 @@ function ThumbnailGenerator() {
                   <TextField
                     label="Height"
                     type="number"
-                    size="small"
                     value={height}
                     onChange={handleHeightChange}
                     sx={{ flex: 1 }}
@@ -537,7 +546,6 @@ function ThumbnailGenerator() {
                   <TextField
                     label="Frame Interval"
                     type="number"
-                    size="small"
                     value={frameInterval}
                     onChange={handleFrameIntervalChange}
                     sx={{ flex: 1 }}
@@ -545,7 +553,6 @@ function ThumbnailGenerator() {
                   <TextField
                     label="Width"
                     type="number"
-                    size="small"
                     value={width}
                     onChange={handleWidthChange}
                     sx={{ flex: 1 }}
@@ -553,7 +560,6 @@ function ThumbnailGenerator() {
                   <TextField
                     label="Height"
                     type="number"
-                    size="small"
                     value={height}
                     onChange={handleHeightChange}
                     sx={{ flex: 1 }}
@@ -582,22 +588,22 @@ function ThumbnailGenerator() {
           )}
         </CardContent>
         <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" onClick={handleExtractThumbnail} disabled={!file || isProcessing} size="small">
+          <Button variant="contained" onClick={handleExtractThumbnail} disabled={!file || isProcessing}>
             {isProcessing ? 'Extracting' : 'Extract'}
           </Button>
           {isProcessing && (
-            <Button color="error" variant="contained" onClick={handleStop} size="small">
+            <Button color="error" variant="contained" onClick={handleStop}>
               Stop
             </Button>
           )}
           {/* Reset button only visible when not processing */}
           {!isProcessing && (
-            <Button variant="outlined" onClick={handleReset} size="small">
+            <Button variant="outlined" onClick={handleReset}>
               Reset
             </Button>
           )}
           {(thumbnailUrl || thumbnails.length > 0) && (
-            <Button color="success" variant="contained" onClick={handleDownload} size="small">
+            <Button color="success" variant="contained" onClick={handleDownload}>
               {(thumbnails.length > 1 && mode !== 0 && mode !== 1) ? 'Download All' : 'Download'}
             </Button>
           )}

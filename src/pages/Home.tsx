@@ -35,58 +35,66 @@ const videoTools: {
       title: 'Compress Video',
       description: 'Reduce video file size while maintaining quality. Fast and easy compression for all your videos.',
       icon: <CompressIcon fontSize="small" color="primary" />,
-      link: '/tools/video-compress',
+      link: '/tools/video/compress',
       color: 'primary'
     },
     {
-      title: 'Video Convert',
-      description: 'Convert videos to different formats easily. Supports a wide range of formats for your convenience.',
+      title: 'Video Converter',
+      description: 'Convert videos between MP4, WebM, MKV, MOV and more. Preserve quality and choose codecs, resolution and bitrate.',
       icon: <SwapHorizIcon fontSize="small" color="secondary" />,
-      link: '/tools/video-convert',
+      link: '/tools/video/convert',
       color: 'secondary'
     },
     {
-      title: 'Resize Video',
-      description: 'Adjust video dimensions to fit your needs. Resize videos without losing quality.',
+      title: 'Video Resizer',
+      description: 'Resize videos to custom dimensions or common aspect ratios for web and social platforms.',
       icon: <AspectRatioIcon fontSize="small" color='warning' />,
-      link: '/tools/video-resize',
+      link: '/tools/video/resize',
       color: 'warning'
     },
     {
-      title: 'Trim Video',
-      description: 'Cut and trim video files to extract specific sections',
+      title: 'Video Trimmer',
+      description: 'Quickly trim and cut unwanted parts from videos with frame-accurate trimming.',
       icon: <ContentCutIcon fontSize="small" color="info" />,
-      link: '/tools/video-trim',
+      link: '/tools/video/trim',
       color: 'info'
     },
     {
-      title: 'Merge Videos',
-      description: 'Combine multiple videos into one seamlessly. Perfect for creating compilations.',
+      title: 'Video Merger',
+      description: 'Combine multiple clips into a single video file while preserving order and quality.',
       icon: <MergeTypeIcon fontSize="small" color="success" />,
-      link: '/tools/video-merge',
+      link: '/tools/video/merge',
       color: 'success'
     },
     {
       title: 'Extract Audio',
-      description: 'Extract audio tracks from your videos. Save audio as separate files easily.',
+      description: 'Extract high-quality audio from video files and save as MP3, WAV or AAC for reuse.',
       icon: <MusicNoteIcon fontSize="small" color="error" />,
-      link: '/tools/video-extract-audio',
+      link: '/tools/video/extract-audio',
       color: 'error'
     },
     {
       title: 'Thumbnail Generator',
-      description: 'Generate thumbnails from your videos for previews and sharing.',
+      description: 'Capture clean, high-resolution thumbnails from video frames for previews and social sharing.',
       icon: <ImageIcon fontSize="small" color="inherit" />,
-      link: '/tools/video-thumbnail',
+      link: '/tools/video/thumbnail',
       color: 'inherit'
     },
     {
-      title: 'Burn Caption',
-      description: 'Burn captions/subtitles into your videos. Upload a video and subtitle file, customize style, and download the result.',
+      title: 'Burn Captions',
+      description: 'Embed subtitles into video files (SRT/VTT). Customize font, size and color before burning in.',
       icon: <SubtitlesIcon fontSize="small" color="primary" />,
-      link: '/tools/video-burn-caption',
+      link: '/tools/video/burn-caption',
       color: 'primary'
+    },
+    {
+      title: 'Video Playback Speed',
+      description: 'Speed up, slow down or reverse video playback and export the processed file at the chosen speed.',
+      icon: <SpeedIcon fontSize="small" color="secondary" />,
+      link: '/tools/video/playback',
+      color: 'secondary'
     }
+
   ];
 
 const audioTools: {
@@ -97,38 +105,38 @@ const audioTools: {
   color: "primary" | "secondary" | "warning" | "info" | "success" | "error" | "inherit";
 }[] = [
     {
-      title: 'Audio Convert',
-      description: 'Convert audio files between different formats like MP3, WAV, AAC, FLAC, and more.',
+      title: 'Audio Converter',
+      description: 'Convert audio between MP3, WAV, AAC, FLAC and more. Keep bitrate and quality control options.',
       icon: <SwapHorizIcon fontSize="small" color="primary" />,
-      link: '/tools/audio-convert',
+      link: '/tools/audio/convert',
       color: 'primary'
     },
     {
-      title: 'Audio Trim',
-      description: 'Cut and trim audio files to extract specific sections.',
+      title: 'Audio Trimmer',
+      description: 'Trim and cut audio files to extract clips for podcasts, music or voiceovers.',
       icon: <ContentCutIcon fontSize="small" color="secondary" />,
-      link: '/tools/audio-trim',
+      link: '/tools/audio/trim',
       color: 'secondary'
     },
     {
-      title: 'Audio Merge',
-      description: 'Combine multiple audio files into a single track. Perfect for creating playlists or podcasts.',
+      title: 'Audio Merger',
+      description: 'Join multiple audio tracks into one file quickly and reliably in your browser.',
       icon: <MergeTypeIcon fontSize="small" color="warning" />,
-      link: '/tools/audio-merge',
+      link: '/tools/audio/merge',
       color: 'warning'
     },
     {
       title: 'Audio Effects',
-      description: 'Apply various effects to your audio files including fade in/out, normalize, and more.',
+      description: 'Apply fades, normalization, pitch, speed and volume adjustments to audio files.',
       icon: <GraphicEqIcon fontSize="small" color="info" />,
-      link: '/tools/audio-effects',
+      link: '/tools/audio/effects',
       color: 'info'
     },
     {
-      title: 'Audio Playback',
-      description: 'Adjust the playback speed of audio files without altering pitch. Speed up or slow down audio easily.',
+      title: 'Audio Playback Speed',
+      description: 'Change audio speed (with pitch correction) or reverse tracks. Export processed audio quickly.',
       icon: <SpeedIcon fontSize="small" color="success" />,
-      link: '/tools/audio-playback',
+      link: '/tools/audio/playback',
       color: 'success'
     }
   ];
@@ -141,16 +149,13 @@ const imageTools: {
   color: "primary" | "secondary" | "warning" | "info" | "success" | "error" | "inherit";
 }[] = [
     {
-      title: 'Image Convert',
-      description: 'Convert images between formats like JPG, PNG, WebP, and more with quality control.',
+      title: 'Image Converter & Editor',
+      description: 'Convert, resize and optimize images for web and social platforms. Adjust quality, crop and more.',
       icon: <SwapHorizIcon fontSize="small" color="primary" />,
-      link: '/tools/image-convert',
+      link: '/tools/image/convert',
       color: 'primary'
     },
   ];
-
-// SEO-friendly description for the Home page
-export const description = "Your all-in-one online suite for media. Compress, convert, trim, resize, merge, extract audio, and generate thumbnails quickly and securely in your browser.";
 
 function Home() {
   const navigate = useNavigate();
@@ -159,7 +164,16 @@ function Home() {
     <Container maxWidth="lg" sx={{ marginBlock: 'auto', py: 5 }}>
       <Box mb={4}>
         <Typography variant="h1" gutterBottom align='center' fontSize={42} fontWeight="bold"> Welcome to <span className='gradient-text-primary'>{APP_INFO.name}</span> </Typography>
-        <Typography variant="body1" component="h2" fontWeight={400} color="text.secondary" align='center' marginInline="auto" maxWidth={660}>{description}</Typography>
+        <Typography
+          variant="body1"
+          component="h2"
+          fontWeight={400}
+          color="text.secondary"
+          align='center'
+          marginInline="auto"
+        >
+          Explore our browser-based suite for video, audio and images: compress, convert, resize, trim, merge and adjust playback speed for videos; extract high-quality audio and generate thumbnails; burn captions into videos; convert, trim, merge and apply effects to audio; and convert, resize and optimize images — all fast, secure and privacy-first with no installs required.
+        </Typography>
       </Box>
       <Typography variant='h6' component="h3">Video Tools</Typography>
       <Divider sx={{ mt: 1, mb: 2 }} />

@@ -15,6 +15,8 @@ import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 import Slider from '@mui/material/Slider';
 import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 // Icons
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
@@ -27,7 +29,6 @@ let isFFmpegLoaded = false
 // Add a ref to keep track of the current ffmpeg instance for termination
 const ffmpegRef = { current: ffmpeg };
 
-export const description = "Extract audio tracks from any video file online. Convert video to MP3 or other audio formats easily with VideoTools' audio extractor.";
 
 function ExtractAudio() {
   const [file, setFile] = useState<File | null>(null)
@@ -123,9 +124,10 @@ function ExtractAudio() {
       ])
       setStatus('Finalizing')
       setProgress(99.9)
-      const data = await ffmpeg.readFile(outputFileName)
-      const url = URL.createObjectURL(new Blob([data], { type: 'audio/mp3' }))
-      setDownloadUrl(url)
+  const data = await ffmpeg.readFile(outputFileName)
+  const blob = new Blob([new Uint8Array(data as any)], { type: 'audio/mp3' })
+  const url = URL.createObjectURL(blob)
+  setDownloadUrl(url)
       setDownloadSize(data.length)
       await ffmpeg.deleteFile(inputFileName)
       await ffmpeg.deleteFile(outputFileName)
@@ -167,18 +169,18 @@ function ExtractAudio() {
   }
 
   return (
-    <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Card sx={{ px: 3, py: 3 }} elevation={3}>
+    <Container maxWidth="lg" sx={{ my: 'auto' }}>
+      <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
-          {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
-          <Box display="flex" flexDirection="column" alignItems="center">
-            <MusicNoteIcon sx={{ fontSize: '3rem', mb: 2 }} color="error" />
-            <Typography variant="h5" component="h1" gutterBottom>Extract Audio</Typography>
-            <Typography color="text.secondary" variant="body1" component="h2" align="center">
-              Select a video, extract the audio track, and download the result.
-            </Typography>
+          {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
+          <Box display="flex" alignItems="center">
+            <MusicNoteIcon color="warning" fontSize="small" sx={{ mr: 0.5 }} />
+            <Typography variant="body1" component="h1" fontWeight={600} mb={0.5}>Extract Audio</Typography>
           </Box>
-          <Divider sx={{ my: 2 }} />
+          <Divider sx={{ my: 0.5 }} />
+          <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
+            Select a video, extract the audio track, and download the result.
+          </Typography>
           {/* Unified Upload/Preview UI - VideoResize style */}
           <Box
             onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}
@@ -219,7 +221,7 @@ function ExtractAudio() {
             {!file ? (
               <Box textAlign="center">
                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                <Typography variant="subtitle1" gutterBottom>
+                <Typography variant="subtitle2" gutterBottom>
                   Drag & drop a video file here<br/>or<br/>Click to select
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
@@ -275,19 +277,24 @@ function ExtractAudio() {
           {/* Duration slider */}
           {file && duration > 0 && !isProcessing && (
             <Box mb={2}>
-              <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Typography variant="subtitle2" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 Select Duration: <small>{`${range[0]}s - ${range[1]}s`}</small>
               </Typography>
-              <Slider
-                min={0}
-                max={Math.floor(duration)}
-                step={0.1}
-                value={range}
-                onChange={handleRangeChange}
-                valueLabelDisplay="auto"
-                disableSwap
-                size="small"
-              />
+              <Box display="flex" alignItems="center">
+                <IconButton size="small" onClick={() => setRange([Math.max(0, range[0] - 1), range[1]])} disabled={isProcessing}><RemoveIcon /></IconButton>
+                <Slider
+                  min={0}
+                  max={Math.floor(duration)}
+                  step={0.1}
+                  value={range}
+                  onChange={handleRangeChange}
+                  valueLabelDisplay="auto"
+                  disableSwap
+                  size="small"
+                  sx={{ mx: 1, flex: 1 }}
+                />
+                <IconButton size="small" onClick={() => setRange([range[0], Math.min(Math.floor(duration), range[1] + 1)])} disabled={isProcessing}><AddIcon /></IconButton>
+              </Box>
             </Box>
           )}
         </CardContent>
@@ -302,7 +309,7 @@ function ExtractAudio() {
             </Button>
           )}
           {downloadUrl && downloadSize !== null && (
-            <Button variant="outlined" color="success" onClick={handleDownload} size="small">
+            <Button variant="contained" color="success" onClick={handleDownload} size="small">
               Download ({(downloadSize / (1024 * 1024)).toFixed(2)} MB)
             </Button>
           )}

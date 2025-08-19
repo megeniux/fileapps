@@ -16,6 +16,8 @@ import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import Slider from '@mui/material/Slider'
 import Grid from '@mui/material/Grid'
+import AddIcon from '@mui/icons-material/Add'
+import RemoveIcon from '@mui/icons-material/Remove'
 
 // Icons
 import SubtitlesIcon from '@mui/icons-material/Subtitles'
@@ -26,7 +28,6 @@ const ffmpeg = new FFmpeg()
 let isFFmpegLoaded = false
 const ffmpegRef = { current: ffmpeg }
 
-export const description = "Burn captions/subtitles into your videos. Upload a video and a subtitle file (SRT/VTT), customize style, and download the result instantly."
 
 function BurnCaption() {
     const [file, setFile] = useState<File | null>(null)
@@ -209,7 +210,8 @@ function BurnCaption() {
             setStatus('Finalizing')
             setProgress(99.9)
             const data = await ffmpeg.readFile(outputFileName)
-            const url = URL.createObjectURL(new Blob([data], { type: 'video/mp4' }))
+            const blob = new Blob([new Uint8Array(data as any)], { type: 'video/mp4' })
+            const url = URL.createObjectURL(blob)
             setDownloadUrl(url)
             setDownloadSize(data.length)
             await ffmpeg.deleteFile(inputFileName)
@@ -252,15 +254,15 @@ function BurnCaption() {
     }
 
     return (
-        <Container maxWidth="md" sx={{ my: 'auto' }}>
+        <Container maxWidth="lg" sx={{ my: 'auto' }}>
             {/* Move error message above Card */}
-            {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
+            {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
             <Card sx={{ p: 1.5 }} elevation={3}>
                 <CardContent sx={{ p: 0 }}>
                     <Box display="flex" alignItems="center">
                         <SubtitlesIcon color="primary" fontSize="small" sx={{ mr: 0.5 }} />
                         <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
-                            Burn Caption
+                            Burn Captions
                         </Typography>
                     </Box>
                     <Divider sx={{ my: 0.5 }} />
@@ -287,7 +289,7 @@ function BurnCaption() {
                         {!file ? (
                             <Box textAlign="center">
                                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                                <Typography variant="subtitle1" gutterBottom>
+                                <Typography variant="subtitle2" gutterBottom>
                                     Drag & drop a video file here<br/>or<br/>Click to select
                                 </Typography>
                                 <Typography color="text.secondary" variant="caption">
@@ -371,15 +373,20 @@ function BurnCaption() {
                                     Font Size
                                     <small> ({fontSize}px)</small>
                                 </Typography>
-                                <Slider
-                                    value={fontSize}
-                                    min={12}
-                                    max={48}
-                                    step={1}
-                                    onChange={(_, val) => setFontSize(val as number)}
-                                    valueLabelDisplay="auto"
-                                    size="small"
-                                />
+                                <Box display="flex" alignItems="center">
+                                    <IconButton size="small" onClick={() => setFontSize(prev => Math.max(12, prev - 1))}><RemoveIcon /></IconButton>
+                                    <Slider
+                                        value={fontSize}
+                                        min={12}
+                                        max={48}
+                                        step={1}
+                                        onChange={(_, val) => setFontSize(val as number)}
+                                        valueLabelDisplay="auto"
+                                        size="small"
+                                        sx={{ mx: 1, flex: 1 }}
+                                    />
+                                    <IconButton size="small" onClick={() => setFontSize(prev => Math.min(48, prev + 1))}><AddIcon /></IconButton>
+                                </Box>
                             </Grid>
                             <Grid size={{ xs: 3, sm: 2 }}>
                                 <Typography variant="subtitle2" gutterBottom>
@@ -392,15 +399,20 @@ function BurnCaption() {
                                     Outline Width
                                     <small> ({outlineWidth}px)</small>
                                 </Typography>
-                                <Slider
-                                    value={outlineWidth}
-                                    min={0}
-                                    max={6}
-                                    step={1}
-                                    onChange={(_, val) => setOutlineWidth(val as number)}
-                                    valueLabelDisplay="auto"
-                                    size="small"
-                                />
+                                <Box display="flex" alignItems="center">
+                                    <IconButton size="small" onClick={() => setOutlineWidth(prev => Math.max(0, prev - 1))}><RemoveIcon /></IconButton>
+                                    <Slider
+                                        value={outlineWidth}
+                                        min={0}
+                                        max={6}
+                                        step={1}
+                                        onChange={(_, val) => setOutlineWidth(val as number)}
+                                        valueLabelDisplay="auto"
+                                        size="small"
+                                        sx={{ mx: 1, flex: 1 }}
+                                    />
+                                    <IconButton size="small" onClick={() => setOutlineWidth(prev => Math.min(6, prev + 1))}><AddIcon /></IconButton>
+                                </Box>
                             </Grid>
                             <Grid size={{ xs: 9, sm: 2 }}>
                                 <Typography variant="subtitle2" gutterBottom>
@@ -426,7 +438,7 @@ function BurnCaption() {
                         </Button>
                     )}
                     {downloadUrl && downloadSize !== null && (
-                        <Button variant="outlined" color="success" onClick={handleDownload} size="small">
+                        <Button variant="contained" color="success" onClick={handleDownload} size="small">
                             Download ({(downloadSize / (1024 * 1024)).toFixed(2)} MB)
                         </Button>
                     )}

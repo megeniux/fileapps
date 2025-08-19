@@ -17,6 +17,8 @@ import Alert from '@mui/material/Alert';
 import Slider from '@mui/material/Slider';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 // Icons
 import SpeedIcon from '@mui/icons-material/Speed';
@@ -27,7 +29,6 @@ const ffmpeg = new FFmpeg();
 let isFFmpegLoaded = false;
 const ffmpegRef = { current: ffmpeg };
 
-export const description = "Change video playback speed online. Speed up or slow down videos from -20x to +20x instantly with VideoTools.";
 
 function VideoPlayback() {
     const theme = useTheme();
@@ -208,7 +209,8 @@ function VideoPlayback() {
             setProgress(99.9);
             const data = await ffmpeg.readFile(outputFileName);
             const mimeType = file.type;
-            const url = URL.createObjectURL(new Blob([data], { type: mimeType }));
+            const blob = new Blob([new Uint8Array(data as any)], { type: mimeType });
+            const url = URL.createObjectURL(blob);
             setDownloadUrl(url);
             setDownloadSize(data.length);
             await ffmpeg.deleteFile(inputFileName);
@@ -216,7 +218,7 @@ function VideoPlayback() {
             setProgress(100);
             setStatus('Completed');
             ffmpeg.off('log', logHandler);
-        } catch (err:any) {
+        } catch (err: any) {
             setStatus('Failed');
             setConsoleLogs(logs => [...logs, String(err)]);
             if (err.message !== 'called FFmpeg.terminate()') {
@@ -250,8 +252,7 @@ function VideoPlayback() {
     };
 
     return (
-        <Container maxWidth="md" sx={{ my: 'auto' }}>
-            {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
+        <Container maxWidth="lg" sx={{ my: 'auto' }}>
             <Card sx={{ p: 1.5 }} elevation={3}>
                 <CardContent sx={{ p: 0 }}>
                     <Box display="flex" alignItems="center">
@@ -284,8 +285,8 @@ function VideoPlayback() {
                         {!file ? (
                             <Box textAlign="center">
                                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                                <Typography variant="subtitle1" gutterBottom>
-                                    Drag & drop a video file here<br/>or<br/>Click to select
+                                <Typography variant="subtitle2" gutterBottom>
+                                    Drag & drop a video file here<br />or<br />Click to select
                                 </Typography>
                                 <Typography color="text.secondary" variant="caption">
                                     Supported: MP4, MOV, AVI, MKV, and more
@@ -326,7 +327,7 @@ function VideoPlayback() {
                             <Typography variant="body2" noWrap>
                                 {file.name} ({formatBytes(file.size)})
                             </Typography>
-                            <IconButton onClick={handleRemoveFile} size="small" color="error" sx={{ ml: 1 }}>
+                            <IconButton onClick={handleRemoveFile} color="error" sx={{ ml: 1 }}>
                                 <CloseIcon fontSize="small" />
                             </IconButton>
                         </Box>
@@ -337,16 +338,21 @@ function VideoPlayback() {
                             <Typography variant="subtitle2" gutterBottom>
                                 Playback Speed: {speed}x
                             </Typography>
-                            <Slider
-                                value={speed}
-                                min={-20}
-                                max={20}
-                                step={0.1}
-                                onChange={handleSpeedChange}
-                                valueLabelDisplay="auto"
-                                disabled={isProcessing}
-                                size="small"
-                            />
+                            <Box display="flex" alignItems="center">
+                                <IconButton onClick={() => setSpeed(prev => Math.max(-20, Number((prev - 0.1).toFixed(1))))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                                <Slider
+                                    value={speed}
+                                    min={-20}
+                                    max={20}
+                                    step={0.1}
+                                    onChange={handleSpeedChange}
+                                    valueLabelDisplay="auto"
+                                    disabled={isProcessing}
+                                    
+                                    sx={{ mx: 1, flex: 1 }}
+                                />
+                                <IconButton onClick={() => setSpeed(prev => Math.min(20, Number((prev + 0.1).toFixed(1))))} disabled={isProcessing}><AddIcon /></IconButton>
+                            </Box>
                             <Typography variant="caption" color="text.secondary">
                                 Negative values reverse video and audio. 1x is normal speed.
                             </Typography>
@@ -354,21 +360,21 @@ function VideoPlayback() {
                     )}
                 </CardContent>
                 <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-                    <Button variant="contained" onClick={handleProcess} disabled={isProcessing || !file || speed === 0} size="small">
+                    <Button variant="contained" onClick={handleProcess} disabled={isProcessing || !file || speed === 0}>
                         {isProcessing ? 'Processing' : 'Process'}
                     </Button>
                     {!isProcessing && (
-                        <Button variant="outlined" onClick={handleReset} size="small">
+                        <Button variant="outlined" onClick={handleReset}>
                             Reset
                         </Button>
                     )}
                     {isProcessing && (
-                        <Button color="error" variant='contained' onClick={handleStop} disabled={!isProcessing} size="small">
+                        <Button color="error" variant='contained' onClick={handleStop} disabled={!isProcessing}>
                             Stop
                         </Button>
                     )}
                     {downloadUrl && downloadSize !== null && (
-                        <Button color="success" variant='contained' onClick={handleDownload} size="small">
+                        <Button color="success" variant='contained' onClick={handleDownload}>
                             Download ({formatBytes(downloadSize)})
                         </Button>
                     )}
@@ -383,6 +389,7 @@ function VideoPlayback() {
                     </Box>
                 )}
             </Card>
+            {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
         </Container>
     );
 }

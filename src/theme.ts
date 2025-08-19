@@ -39,11 +39,11 @@ const theme = createTheme({
     },
     subtitle1: {
       fontSize: '1rem',
-      fontWeight: 400,
+      fontWeight: 500,
     },
     subtitle2: {
       fontSize: '0.875rem',
-      fontWeight: 400,
+      fontWeight: 500,
     },
     caption: {
       fontSize: '0.75rem',
@@ -71,7 +71,6 @@ const theme = createTheme({
         root: {
           minWidth: 80,
           textTransform: 'none',
-          borderRadius: 16,
         },
       },
     },
@@ -88,6 +87,52 @@ const theme = createTheme({
       },
     },
     MuiFormControl: {
+      defaultProps: {
+        size: 'small',
+      },
+    },
+    MuiIconButton: {
+      defaultProps: {
+        size: 'small',
+      },
+    },
+    MuiOutlinedInput: {
+      defaultProps: {
+        notched: true,
+        size: 'small' as any,
+      },
+    },
+    MuiInputBase: {
+      defaultProps: {
+        size: 'small' as any,
+      },
+    },
+    MuiCheckbox: {
+      defaultProps: {
+        size: 'small' as any,
+      },
+    },
+    MuiRadio: {
+      defaultProps: {
+        size: 'small' as any,
+      },
+    },
+    MuiSwitch: {
+      defaultProps: {
+        size: 'small' as any,
+      },
+    },
+    MuiChip: {
+      defaultProps: {
+        size: 'small' as any,
+      },
+    },
+    MuiAutocomplete: {
+      defaultProps: {
+        size: 'small' as any,
+      },
+    },
+    MuiTable: {
       defaultProps: {
         size: 'small',
       },

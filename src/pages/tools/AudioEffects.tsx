@@ -23,12 +23,13 @@ import Grid from '@mui/material/Grid';
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import CloseIcon from '@mui/icons-material/Close';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 const ffmpeg = new FFmpeg();
 let isFFmpegLoaded = false;
 const ffmpegRef = { current: ffmpeg };
 
-export const description = "Apply effects to your audio: fade in/out, normalize, change speed, pitch, and volume. All processing is done in your browser.";
 
 function AudioEffects() {
     const theme = useTheme();
@@ -248,7 +249,8 @@ function AudioEffects() {
             setProgress(99.9);
             const data = await ffmpeg.readFile(outputFileName);
             const mimeType = file.type || 'audio/mpeg';
-            const url = URL.createObjectURL(new Blob([data], { type: mimeType }));
+            const blob = new Blob([new Uint8Array(data as any)], { type: mimeType });
+            const url = URL.createObjectURL(blob);
             setDownloadUrl(url);
             setDownloadSize(data.length);
             await ffmpeg.deleteFile(inputFileName);
@@ -256,7 +258,7 @@ function AudioEffects() {
             setProgress(100);
             setStatus('Completed');
             ffmpeg.off('log', logHandler);
-        } catch (err:any) {
+        } catch (err: any) {
             setStatus('Failed');
             setConsoleLogs(logs => [...logs, String(err)]);
             if (err.message !== 'called FFmpeg.terminate()') {
@@ -290,8 +292,7 @@ function AudioEffects() {
     };
 
     return (
-        <Container maxWidth="md" sx={{ my: 'auto' }}>
-            {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
+        <Container maxWidth="lg" sx={{ my: 'auto' }}>
             <Card sx={{ p: 1.5 }}>
                 <CardContent sx={{ p: 0 }}>
                     <Box display="flex" alignItems="center">
@@ -322,8 +323,8 @@ function AudioEffects() {
                         {!file ? (
                             <Box textAlign="center">
                                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                                <Typography variant="subtitle1" gutterBottom>
-                                    Drag & drop an audio file here<br/>or<br/>Click to select
+                                <Typography variant="subtitle2" gutterBottom>
+                                    Drag & drop an audio file here<br />or<br />Click to select
                                 </Typography>
                                 <Typography color="text.secondary" variant="caption">
                                     Supported: MP3, WAV, AAC, FLAC, OGG, and more
@@ -358,7 +359,7 @@ function AudioEffects() {
                             <Typography variant="body2" noWrap>
                                 {file.name} ({formatBytes(file.size)})
                             </Typography>
-                            <IconButton onClick={handleRemoveFile} size="small" color="error" sx={{ ml: 1 }}>
+                            <IconButton onClick={handleRemoveFile} color="error" sx={{ ml: 1 }}>
                                 <CloseIcon fontSize="small" />
                             </IconButton>
                         </Box>
@@ -371,77 +372,102 @@ function AudioEffects() {
                                     Speed
                                     <small> ({speed}x)</small>
                                 </Typography>
-                                <Slider
-                                    value={speed}
-                                    min={-3}
-                                    max={3}
-                                    step={0.01}
-                                    onChange={handleSpeedChange}
-                                    valueLabelDisplay="auto"
-                                    disabled={isProcessing}
-                                    size="small"
-                                />
+                                <Box display="flex" alignItems="center">
+                                    <IconButton onClick={() => setSpeed(prev => Math.max(-3, Number((prev - 0.01).toFixed(2))))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                                    <Slider
+                                        value={speed}
+                                        min={-3}
+                                        max={3}
+                                        step={0.01}
+                                        onChange={handleSpeedChange}
+                                        valueLabelDisplay="auto"
+                                        disabled={isProcessing}
+                                        
+                                        sx={{ mx: 1, flex: 1 }}
+                                    />
+                                    <IconButton onClick={() => setSpeed(prev => Math.min(3, Number((prev + 0.01).toFixed(2))))} disabled={isProcessing}><AddIcon /></IconButton>
+                                </Box>
                             </Grid>
                             <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
                                 <Typography variant="subtitle2" gutterBottom>
                                     Pitch
                                     <small> ({pitch} semitones)</small>
                                 </Typography>
-                                <Slider
-                                    value={pitch}
-                                    min={-12}
-                                    max={12}
-                                    step={1}
-                                    onChange={handlePitchChange}
-                                    valueLabelDisplay="auto"
-                                    disabled={isProcessing}
-                                    size="small"
-                                />
+                                <Box display="flex" alignItems="center">
+                                    <IconButton onClick={() => setPitch(prev => Math.max(-12, prev - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                                    <Slider
+                                        value={pitch}
+                                        min={-12}
+                                        max={12}
+                                        step={1}
+                                        onChange={handlePitchChange}
+                                        valueLabelDisplay="auto"
+                                        disabled={isProcessing}
+                                        
+                                        sx={{ mx: 1, flex: 1 }}
+                                    />
+                                    <IconButton onClick={() => setPitch(prev => Math.min(12, prev + 1))} disabled={isProcessing}><AddIcon /></IconButton>
+                                </Box>
                             </Grid>
                             <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
                                 <Typography variant="subtitle2" gutterBottom>Volume</Typography>
-                                <Slider
-                                    value={volume}
-                                    min={0}
-                                    max={3}
-                                    step={0.01}
-                                    onChange={handleVolumeChange}
-                                    valueLabelDisplay="auto"
-                                    disabled={isProcessing}
-                                    size="small"
-                                />
+                                <Box display="flex" alignItems="center">
+                                    <IconButton onClick={() => setVolume(prev => Math.max(0, Number((prev - 0.01).toFixed(2))))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                                    <Slider
+                                        value={volume}
+                                        min={0}
+                                        max={3}
+                                        step={0.01}
+                                        onChange={handleVolumeChange}
+                                        valueLabelDisplay="auto"
+                                        disabled={isProcessing}
+                                        
+                                        sx={{ mx: 1, flex: 1 }}
+                                    />
+                                    <IconButton onClick={() => setVolume(prev => Math.min(3, Number((prev + 0.01).toFixed(2))))} disabled={isProcessing}><AddIcon /></IconButton>
+                                </Box>
                             </Grid>
                             <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
                                 <Typography variant="subtitle2" gutterBottom>
                                     Fade In
                                     <small> ({fadeIn} seconds)</small>
                                 </Typography>
-                                <Slider
-                                    value={fadeIn}
-                                    min={0}
-                                    max={Math.floor(duration)}
-                                    step={0.1}
-                                    onChange={handleFadeInChange}
-                                    valueLabelDisplay="auto"
-                                    disabled={isProcessing}
-                                    size="small"
-                                />
+                                <Box display="flex" alignItems="center">
+                                    <IconButton onClick={() => setFadeIn(prev => Math.max(0, Number((prev - 0.5).toFixed(1))))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                                    <Slider
+                                        value={fadeIn}
+                                        min={0}
+                                        max={Math.floor(duration)}
+                                        step={0.1}
+                                        onChange={handleFadeInChange}
+                                        valueLabelDisplay="auto"
+                                        disabled={isProcessing}
+                                        
+                                        sx={{ mx: 1, flex: 1 }}
+                                    />
+                                    <IconButton onClick={() => setFadeIn(prev => Math.min(Math.floor(duration), Number((prev + 0.5).toFixed(1))))} disabled={isProcessing}><AddIcon /></IconButton>
+                                </Box>
                             </Grid>
                             <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
                                 <Typography variant="subtitle2" gutterBottom >
                                     Fade Out
                                     <small> ({fadeOut} seconds)</small>
                                 </Typography>
-                                <Slider
-                                    value={fadeOut}
-                                    min={0}
-                                    max={Math.floor(duration)}
-                                    step={0.1}
-                                    onChange={handleFadeOutChange}
-                                    valueLabelDisplay="auto"
-                                    disabled={isProcessing}
-                                    size="small"
-                                />
+                                <Box display="flex" alignItems="center">
+                                    <IconButton onClick={() => setFadeOut(prev => Math.max(0, Number((prev - 0.5).toFixed(1))))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                                    <Slider
+                                        value={fadeOut}
+                                        min={0}
+                                        max={Math.floor(duration)}
+                                        step={0.1}
+                                        onChange={handleFadeOutChange}
+                                        valueLabelDisplay="auto"
+                                        disabled={isProcessing}
+                                        
+                                        sx={{ mx: 1, flex: 1 }}
+                                    />
+                                    <IconButton onClick={() => setFadeOut(prev => Math.min(Math.floor(duration), Number((prev + 0.5).toFixed(1))))} disabled={isProcessing}><AddIcon /></IconButton>
+                                </Box>
                             </Grid>
                             <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
                                 <Typography variant="subtitle2" gutterBottom>Normalize</Typography>
@@ -454,21 +480,21 @@ function AudioEffects() {
                     )}
                 </CardContent>
                 <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-                    <Button variant="contained" onClick={handleProcess} disabled={isProcessing || !file} size="small">
+                    <Button variant="contained" onClick={handleProcess} disabled={isProcessing || !file}>
                         {isProcessing ? 'Processing' : 'Apply Effects'}
                     </Button>
                     {!isProcessing && (
-                        <Button variant="outlined" onClick={handleReset} size="small">
+                        <Button variant="outlined" onClick={handleReset}>
                             Reset
                         </Button>
                     )}
                     {isProcessing && (
-                        <Button color="error" variant='contained' onClick={handleStop} disabled={!isProcessing} size="small">
+                        <Button color="error" variant='contained' onClick={handleStop} disabled={!isProcessing}>
                             Stop
                         </Button>
                     )}
                     {downloadUrl && downloadSize !== null && (
-                        <Button color="success" variant='contained' onClick={handleDownload} size="small">
+                        <Button color="success" variant='contained' onClick={handleDownload}>
                             Download ({formatBytes(downloadSize)})
                         </Button>
                     )}
@@ -483,6 +509,7 @@ function AudioEffects() {
                     </Box>
                 )}
             </Card>
+            {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
         </Container>
     );
 }

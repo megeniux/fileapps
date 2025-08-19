@@ -11,13 +11,13 @@ function TOS() {
   return (
     <Container maxWidth="md" sx={{ my: 'auto' }}>
       <Typography variant="h1" gutterBottom>
-        Terms of Service
+        Terms and Conditions
       </Typography>
       <Divider sx={{ mb: 4 }} />
       <Card sx={{ p: 2 }}>
         <CardContent>
           <Typography variant="body1" mb={2}>
-            By accessing and using {APP_INFO.name}, you agree to the following terms and conditions. {APP_INFO.name} is a browser-based platform that provides free tools for video compression and editing. All processing is performed locally on your device, and no files or personal data are stored or transmitted to our servers.
+            By accessing and using {APP_INFO.name}, you agree to the following terms and conditions. {APP_INFO.name} is a browser-based platform that provides free tools for files. All processing is performed locally on your device, and no files or personal data are stored or transmitted to our servers.
           </Typography>
           <Typography variant="body1" mb={2}>
             The service is provided "as is" and "as available." We do not guarantee the accuracy, reliability, or suitability of the tools for any particular purpose. You use {APP_INFO.name} at your own risk, and we are not responsible for any loss, damage, or consequences resulting from the use of our platform.

@@ -4,8 +4,7 @@ import { fetchFile } from '@ffmpeg/util';
 import { formatBytes } from '../../helpers';
 
 // MUI imports
-import type { Theme } from '@emotion/react';
-import { useTheme, type SxProps } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
@@ -35,16 +34,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import LinkIcon from '@mui/icons-material/Link';
 import LinkOffIcon from '@mui/icons-material/LinkOff';
-import UndoIcon from '@mui/icons-material/Undo';
-import RedoIcon from '@mui/icons-material/Redo';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import CropIcon from '@mui/icons-material/Crop';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
-const ffmpeg = new FFmpeg();
-let isFFmpegLoaded = false;
-
-// Add a ref to keep track of the current ffmpeg instance for termination
-const ffmpegRef = { current: ffmpeg };
+// FFmpeg instance ref (per run)
+const ffmpegRef = { current: null as FFmpeg | null };
 
 const defaultState = {
   width: '',
@@ -64,15 +60,16 @@ const defaultState = {
   saturation: 100,
 };
 
-export const description = "Convert images to specific dimensions while maintaining quality. Perfect for web and social media.";
 
-function ImageResize() {
+function ImageConvert() {
   const theme = useTheme();
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [width, setWidth] = useState<string>(defaultState.width);
   const [height, setHeight] = useState<string>(defaultState.height);
   const [maintainAspectRatio, setMaintainAspectRatio] = useState<boolean>(defaultState.maintainAspectRatio);
+  const widthRef = useRef<string>(defaultState.width);
+  const heightRef = useRef<string>(defaultState.height);
   const [quality, setQuality] = useState<number>(defaultState.quality);
   const [format, setFormat] = useState<string>(defaultState.format);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -93,12 +90,18 @@ function ImageResize() {
   const [brightness, setBrightness] = useState<number>(defaultState.brightness);
   const [contrast, setContrast] = useState<number>(defaultState.contrast);
   const [saturation, setSaturation] = useState<number>(defaultState.saturation);
-  const [cropStack, setCropStack] = useState<{ x: number, y: number, w: number, h: number }[]>([]);
-  const [redoStack, setRedoStack] = useState<{ x: number, y: number, w: number, h: number }[]>([]);
+
+  // Keep the original file/preview so we can restore on Reset Crop
+  const originalFileRef = useRef<File | null>(null);
+  const originalPreviewUrlRef = useRef<string | null>(null);
 
   const imageRef = useRef<HTMLImageElement>(null);
+  const applyTimerRef = useRef<number | null>(null);
+  const applyCounterRef = useRef(0);
+  // Keep the true original dimensions (base file) so reset/restore can use them
+  const baseOriginalDimensionsRef = useRef<{ width: number, height: number } | null>(null);
 
-  // For crop selection
+  // Crop selection state
   const [isSelectingCrop, setIsSelectingCrop] = useState(false);
   const [cropStart, setCropStart] = useState<{ x: number, y: number } | null>(null);
   const [drawingCrop, setDrawingCrop] = useState<{ x: number, y: number, w: number, h: number } | null>(null);
@@ -136,17 +139,9 @@ function ImageResize() {
   const handleCropMouseUp = () => {
     if (isSelectingCrop && drawingCrop) {
       setIsSelectingCrop(false);
-      setCropStack([...cropStack, crop]);
       setCrop(drawingCrop);
       setDrawingCrop(null);
-      setRedoStack([]);
     }
-  };
-
-  const pushCrop = (newCrop: typeof crop) => {
-    setCropStack([...cropStack, crop]);
-    setCrop(newCrop);
-    setRedoStack([]);
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -158,18 +153,33 @@ function ImageResize() {
         return;
       }
 
+      // Revoke any existing working preview (not the original)
+      if (previewUrl && previewUrl !== originalPreviewUrlRef.current) {
+        try { URL.revokeObjectURL(previewUrl); } catch { }
+      }
+
+      // Set working and original references
       setFile(selectedFile);
-      setPreviewUrl(URL.createObjectURL(selectedFile));
+      const nextUrl = URL.createObjectURL(selectedFile);
+      setPreviewUrl(nextUrl);
+      originalFileRef.current = selectedFile;
+      originalPreviewUrlRef.current = nextUrl;
       setDownloadUrl(null);
       setDownloadSize(null);
       setProgress(0);
       setStatus(null);
       setErrorMsg(null);
       setOriginalDimensions(null);
+      // Default output name to the original file base (user can edit it)
+      const base = (selectedFile.name || 'image').replace(/\.[^/.]+$/, '');
+      setOutputName(base);
 
-      // Reset dimensions
+      // Reset dimensions and crop state
       setWidth('');
       setHeight('');
+      widthRef.current = '';
+      heightRef.current = '';
+      setCrop(defaultState.crop);
 
       // Set format to original by default
       const fileExtension = selectedFile.name.split('.').pop()?.toLowerCase() || '';
@@ -197,16 +207,28 @@ function ImageResize() {
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       const file = e.dataTransfer.files[0];
       if (file.type.startsWith('image/')) {
+        if (previewUrl && previewUrl !== originalPreviewUrlRef.current) {
+          try { URL.revokeObjectURL(previewUrl); } catch { }
+        }
         setFile(file);
-        setPreviewUrl(URL.createObjectURL(file));
+        const nextUrl = URL.createObjectURL(file);
+        setPreviewUrl(nextUrl);
+        originalFileRef.current = file;
+        originalPreviewUrlRef.current = nextUrl;
         setDownloadUrl(null);
         setDownloadSize(null);
         setProgress(0);
         setStatus(null);
         setErrorMsg(null);
         setOriginalDimensions(null);
+        // Default output name to the original file base (user can edit it)
+        const base = (file.name || 'image').replace(/\.[^/.]+$/, '');
+        setOutputName(base);
         setWidth('');
         setHeight('');
+        widthRef.current = '';
+        heightRef.current = '';
+        setCrop(defaultState.crop);
         const fileExtension = file.name.split('.').pop()?.toLowerCase() || '';
         if (['jpg', 'jpeg', 'png', 'webp', 'gif'].includes(fileExtension)) {
           setFormat(fileExtension === 'jpeg' ? 'jpg' : fileExtension);
@@ -220,6 +242,13 @@ function ImageResize() {
   };
 
   const handleRemoveFile = () => {
+    // Revoke any working preview URL (and original)
+    if (previewUrl) {
+      try { URL.revokeObjectURL(previewUrl); } catch { }
+    }
+    if (originalPreviewUrlRef.current && originalPreviewUrlRef.current !== previewUrl) {
+      try { URL.revokeObjectURL(originalPreviewUrlRef.current); } catch { }
+    }
     setFile(null);
     setPreviewUrl(null);
     setDownloadUrl(null);
@@ -230,7 +259,13 @@ function ImageResize() {
     setOriginalDimensions(null);
     setWidth(defaultState.width);
     setHeight(defaultState.height);
+    widthRef.current = defaultState.width;
+    heightRef.current = defaultState.height;
     setFormat(defaultState.format);
+    setCrop(defaultState.crop);
+    originalFileRef.current = null;
+    originalPreviewUrlRef.current = null;
+    setOutputName(defaultState.outputName);
   };
 
   const handleReset = () => {
@@ -241,10 +276,24 @@ function ImageResize() {
     if (imageRef.current) {
       const imgWidth = imageRef.current.naturalWidth;
       const imgHeight = imageRef.current.naturalHeight;
-      setOriginalDimensions({ width: imgWidth, height: imgHeight });
-      // Set width and height fields to original dimensions if not already set
-      setWidth(String(imgWidth));
-      setHeight(String(imgHeight));
+      // Remember the base/original dimensions on first load
+      if (!baseOriginalDimensionsRef.current) {
+        baseOriginalDimensionsRef.current = { width: imgWidth, height: imgHeight };
+      }
+      // If no crop has been applied (originalDimensions not set), initialize it to the base dimensions
+      if (!originalDimensions) {
+        setOriginalDimensions({ width: imgWidth, height: imgHeight });
+      }
+      // Initialize width/height inputs only when empty
+      if (!width) {
+        setWidth(String(imgWidth));
+        widthRef.current = String(imgWidth);
+      }
+      if (!height) {
+        setHeight(String(imgHeight));
+        heightRef.current = String(imgHeight);
+      }
+      // initialize dimension inputs
       // Get displayed size for overlay scaling
       setTimeout(() => {
         if (imageRef.current) {
@@ -257,34 +306,186 @@ function ImageResize() {
     }
   };
 
-  const handleAspectRatioToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setMaintainAspectRatio(event.target.checked);
+
+  // Aspect ratio is toggled via the IconButton in the UI
+
+  // Width/height handlers for individual inputs
+  const handleWidthInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = e.target.value.replace(/[^0-9]/g, '');
+    if (maintainAspectRatio && originalDimensions && Number(v)) {
+      const ratio = originalDimensions.width / originalDimensions.height;
+      const computedH = Math.round(Number(v) / ratio);
+      setWidth(v);
+      setHeight(String(computedH));
+      widthRef.current = v;
+      heightRef.current = String(computedH);
+    } else {
+      setWidth(v);
+      widthRef.current = v;
+    }
+    scheduleApply();
   };
+
+  const handleHeightInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = e.target.value.replace(/[^0-9]/g, '');
+    if (maintainAspectRatio && originalDimensions && Number(v)) {
+      const ratio = originalDimensions.width / originalDimensions.height;
+      const computedW = Math.round(Number(v) * ratio);
+      setHeight(v);
+      setWidth(String(computedW));
+      heightRef.current = v;
+      widthRef.current = String(computedW);
+    } else {
+      setHeight(v);
+      heightRef.current = v;
+    }
+    scheduleApply();
+  };
+
+  // Apply width/height to preview by drawing to canvas and replacing preview
+  const applyDimensionsToPreview = async (runId?: number) => {
+    if (!previewUrl || !file) return;
+    // Read from refs so we always use latest typed values (avoid stale closures)
+    const wNum = Number(widthRef.current);
+    const hNum = Number(heightRef.current);
+    if (!wNum && !hNum) return;
+
+    const img = new Image();
+    // Use the current working file as the source (guarantees full-resolution source and avoids cascading downsizes)
+    const tempSrc = URL.createObjectURL(file);
+    img.src = tempSrc;
+    await new Promise<void>((resolve, reject) => {
+      img.onload = () => resolve();
+      img.onerror = () => reject(new Error('Failed to load image for resize'));
+    });
+
+    const canvas = document.createElement('canvas');
+    canvas.width = wNum || img.naturalWidth;
+    canvas.height = hNum || img.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    const blob: Blob | null = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+    if (!blob) return;
+
+    // If a newer scheduled run exists, abort this result
+    if (runId != null && runId !== applyCounterRef.current) {
+      // drop blob
+      return;
+    }
+
+    // revoke any previous working preview URL (but keep originalPreviewUrlRef for reset)
+    if (previewUrl && previewUrl !== originalPreviewUrlRef.current) {
+      try { URL.revokeObjectURL(previewUrl); } catch { }
+    }
+    const nextUrl = URL.createObjectURL(blob);
+    // Update preview only; do NOT overwrite the working `file` to avoid cascaded resizes
+    setPreviewUrl(nextUrl);
+    // Keep originalDimensions unchanged (so lock-ratio stays based on original/cropped source)
+    // Ensure width/height fields reflect applied size
+    setWidth(String(canvas.width));
+    setHeight(String(canvas.height));
+    widthRef.current = String(canvas.width);
+    heightRef.current = String(canvas.height);
+    // cleanup temporary source
+    try { URL.revokeObjectURL(tempSrc); } catch { }
+  };
+
+  // debounce scheduler: waits 600ms after last change before applying
+  const scheduleApply = () => {
+    if (applyTimerRef.current) {
+      window.clearTimeout(applyTimerRef.current);
+    }
+    applyCounterRef.current += 1;
+    const myId = applyCounterRef.current;
+    applyTimerRef.current = window.setTimeout(() => {
+      applyDimensionsToPreview(myId).catch(() => { });
+      applyTimerRef.current = null;
+    }, 600);
+  };
+
+  // Cleanup on unmount: clear timer and revoke created preview URL if needed
+  React.useEffect(() => {
+    return () => {
+      if (applyTimerRef.current) {
+        window.clearTimeout(applyTimerRef.current);
+      }
+      if (previewUrl && previewUrl !== originalPreviewUrlRef.current) {
+        try { URL.revokeObjectURL(previewUrl); } catch { }
+      }
+    };
+  }, []);
 
   const handleFormatChange = (event: SelectChangeEvent) => {
     setFormat(event.target.value as string || 'original');
   };
 
-  const handleUndoCrop = () => {
-    if (cropStack.length > 0) {
-      setRedoStack([crop, ...redoStack]);
-      setCrop(cropStack[cropStack.length - 1]);
-      setCropStack(cropStack.slice(0, -1));
-    }
-  };
+  // Apply crop by baking the selected crop into the working image/preview
+  const handleApplyCrop = async () => {
+    if (!previewUrl || !file || crop.w <= 0 || crop.h <= 0) return;
+    // Load current preview image
+    const img = new Image();
+    img.src = previewUrl;
+    await new Promise<void>((resolve, reject) => {
+      img.onload = () => resolve();
+      img.onerror = () => reject(new Error('Failed to load image for cropping'));
+    });
 
-  const handleRedoCrop = () => {
-    if (redoStack.length > 0) {
-      setCropStack([...cropStack, crop]);
-      setCrop(redoStack[0]);
-      setRedoStack(redoStack.slice(1));
+    const canvas = document.createElement('canvas');
+    canvas.width = crop.w;
+    canvas.height = crop.h;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    // Draw the selected region from the current image
+    ctx.drawImage(
+      img,
+      crop.x, crop.y, crop.w, crop.h,
+      0, 0, crop.w, crop.h
+    );
+
+    const blob: Blob | null = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+    if (!blob) return;
+
+    // Revoke previous working preview URL (but keep original for reset)
+    if (previewUrl && previewUrl !== originalPreviewUrlRef.current) {
+      try { URL.revokeObjectURL(previewUrl); } catch { }
     }
+
+    const nextUrl = URL.createObjectURL(blob);
+    setPreviewUrl(nextUrl);
+    // Update working "file" to the cropped image using a proper .png filename (content must match extension)
+    const originalBase = (originalFileRef.current?.name || file.name || 'image').replace(/\.[^/.]+$/, '');
+    const croppedFileName = `${originalBase}.png`;
+    const croppedFile = new File([blob], croppedFileName, { type: 'image/png' });
+    setFile(croppedFile);
+
+    // Update dimensions and clear crop selection
+    setOriginalDimensions({ width: crop.w, height: crop.h });
+    setWidth(String(crop.w));
+    setHeight(String(crop.h));
+    setCrop(defaultState.crop);
   };
 
   const handleResetCrop = () => {
-    setCrop(defaultState.crop);
-    setCropStack([]);
-    setRedoStack([]);
+    // Restore original file and preview
+    if (originalFileRef.current && originalPreviewUrlRef.current) {
+      // Revoke current working preview URL if it differs from original
+      if (previewUrl && previewUrl !== originalPreviewUrlRef.current) {
+        try { URL.revokeObjectURL(previewUrl); } catch { }
+      }
+      setFile(originalFileRef.current);
+      setPreviewUrl(originalPreviewUrlRef.current);
+      setCrop(defaultState.crop);
+      // Restore original dimensions from the base values
+      if (baseOriginalDimensionsRef.current) {
+        setOriginalDimensions(baseOriginalDimensionsRef.current);
+      } else {
+        setOriginalDimensions(null);
+      }
+      setDisplaySize({ width: 0, height: 0 });
+    } else {
+      setCrop(defaultState.crop);
+    }
   };
 
   const handleOutputNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -316,22 +517,31 @@ function ImageResize() {
     setDownloadSize(null);
 
     try {
-      if (!isFFmpegLoaded) {
-        await ffmpeg.load();
-        isFFmpegLoaded = true;
-      }
-
-      ffmpegRef.current = ffmpeg;
+      // Create a fresh FFmpeg instance per run to reduce memory fragmentation
+      const localFFmpeg = new FFmpeg();
+      ffmpegRef.current = localFFmpeg;
+      await localFFmpeg.load();
 
       const inputFileName = file.name;
       const fileExtension = format === 'original'
         ? inputFileName.split('.').pop()?.toLowerCase() || 'jpg'
         : format;
-      const outName = outputName
+      const baseInputName = originalFileRef.current?.name || inputFileName;
+      const baseNoExt = baseInputName.replace(/\.[^/.]+$/, '');
+      // Default out name uses outputName when provided; otherwise use original base name.
+      // Prevent writing output with the same name as the input (which causes FS collisions in wasm FS).
+      let outName = outputName
         ? `${outputName}.${fileExtension}`
-        : `resized_${inputFileName.replace(/\.[^/.]+$/, '')}.${fileExtension}`;
+        : `${baseNoExt}.${fileExtension}`;
+      if (outName === inputFileName) {
+        outName = `${baseNoExt}_resized.${fileExtension}`;
+      }
 
-      await ffmpeg.writeFile(inputFileName, await fetchFile(file));
+      try {
+        await localFFmpeg.writeFile(inputFileName, await fetchFile(file));
+      } catch (werr) {
+        throw new Error(`Failed to write input file to FFmpeg FS: ${(werr as Error).message || String(werr)}`);
+      }
 
       const logHandler = ({ message }: { message: string }) => {
         if (message.includes('frame=')) {
@@ -339,7 +549,7 @@ function ImageResize() {
         }
       };
 
-      ffmpeg.on('log', logHandler);
+      localFFmpeg.on('log', logHandler);
 
       setStatus('Resizing');
 
@@ -376,12 +586,27 @@ function ImageResize() {
         filters.push(`boxblur=${blur}:1`);
       }
       // Brightness/contrast/saturation
-      if (brightness !== 100 || contrast !== 100 || saturation !== 100) {
-        filters.push(`eq=brightness=${(brightness - 100) / 100}:contrast=${contrast / 100}:saturation=${saturation / 100}`);
+      // FFmpeg's eq brightness is additive while CSS brightness is multiplicative. Use a lut to multiply RGB channels for brightness
+      if (brightness !== 100) {
+        const m = (brightness / 100).toFixed(3);
+        // Use colorchannelmixer to multiply RGB channels (avoids quoting issues with lut expressions)
+        filters.push(`colorchannelmixer=rr=${m}:gg=${m}:bb=${m}`);
+      }
+      // Use eq for contrast and saturation (multiplicative)
+      const eqParts: string[] = [];
+      if (contrast !== 100) eqParts.push(`contrast=${(contrast / 100).toFixed(3)}`);
+      if (saturation !== 100) eqParts.push(`saturation=${(saturation / 100).toFixed(3)}`);
+      if (eqParts.length) {
+        filters.push(`eq=${eqParts.join(':')}`);
       }
       if (filters.length) {
         args.push('-vf', filters.join(','));
       }
+
+      // Debug: surface filter list so users can see what will be applied
+      const filterDebug = filters.length ? filters.join(',') : 'none';
+      setStatus(`Resizing (filters: ${filterDebug})`);
+      try { console.log('FFmpeg args:', args); } catch { }
 
       // Add quality settings
       if (fileExtension === 'jpg' || fileExtension === 'jpeg') {
@@ -389,30 +614,35 @@ function ImageResize() {
       } else if (fileExtension === 'png') {
         args.push('-compression_level', (Math.floor(10 - (quality * 0.1))).toString());
       } else if (fileExtension === 'webp') {
-        args.push('-quality', quality.toString());
+        // Use quantizer for WebP 0-100 where higher is better
+        args.push('-q:v', quality.toString());
       }
+
+      // Restrict threads to reduce wasm memory pressure
+      args.push('-threads', '1');
 
       args.push(outName);
 
-      await ffmpeg.exec(args);
+      await localFFmpeg.exec(args);
 
       setStatus('Finalizing');
       setProgress(99.9);
 
-      const data = await ffmpeg.readFile(outName);
+      const data = await localFFmpeg.readFile(outName);
       const mimeType = `image/${fileExtension === 'jpg' ? 'jpeg' : fileExtension}`;
-      const url = URL.createObjectURL(new Blob([data], { type: mimeType }));
+      const blob = new Blob([data.slice()], { type: mimeType });
+      const url = URL.createObjectURL(blob);
 
       setDownloadUrl(url);
       setDownloadSize(data.length);
 
       // Clean up
-      await ffmpeg.deleteFile(inputFileName);
-      await ffmpeg.deleteFile(outName);
+      await localFFmpeg.deleteFile(inputFileName);
+      await localFFmpeg.deleteFile(outName);
 
       setProgress(100);
       setStatus('Completed');
-      ffmpeg.off('log', logHandler);
+      localFFmpeg.off('log', logHandler);
     } catch (err: any) {
       setStatus('Failed');
       // Only set errorMsg if not stopped
@@ -420,6 +650,9 @@ function ImageResize() {
         setErrorMsg(err instanceof Error ? err.message : String(err));
       }
     } finally {
+      // Terminate to free memory
+      try { ffmpegRef.current?.terminate?.(); } catch { }
+      ffmpegRef.current = null;
       setIsProcessing(false);
     }
   };
@@ -431,7 +664,7 @@ function ImageResize() {
         : format;
       const name = outputName
         ? `${outputName}.${fileExtension}`
-        : `resized_${file.name.replace(/\.[^/.]+$/, '')}.${fileExtension}`;
+        : `${file.name.replace(/\.[^/.]+$/, '')}.${fileExtension}`;
       const a = document.createElement('a');
       a.href = downloadUrl;
       a.download = name;
@@ -448,73 +681,98 @@ function ImageResize() {
   };
 
   // Slider ranges
-  const cropMax = originalDimensions ? Math.max(originalDimensions.width, originalDimensions.height) : 4096;
   const rotateMin = -180, rotateMax = 180;
   const blurMin = 0, blurMax = 10;
 
   return (
     <Container maxWidth="lg" sx={{ my: 'auto' }}>
-      {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
       <Card sx={{ p: 1.5 }} elevation={3}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
             <AspectRatioIcon color="primary" fontSize="small" sx={{ mr: 0.5 }} />
             <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
-              Convert Image
+              Image Converter & Editor
             </Typography>
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-            Resize images to specific dimensions while maintaining quality.
+            Convert, resize, crop, rotate and optimize images for web and social: adjust quality, apply filters and crop interactively — export in popular formats, all processed in your browser.
           </Typography>
-          {/* Upload & Preview area */}
-          <Box
-            onDragOver={handleDragOver}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
-            position="relative"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            flexDirection="column"
-            width="100%"
-            height={300}
-            borderRadius={1}
-            bgcolor={isDragActive ? 'primary.lighter' : 'action.hover'}
-            border={isDragActive ? `2px dashed ${theme.palette.primary.main}` : `2px dashed ${theme.palette.divider}`}
-            sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
-          >
-            {previewUrl ? (
-              <Box sx={{
-                position: 'relative',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden'
-              }}>
+          {/* Drag area (shown only before file is selected) */}
+          {!file && (
+            <Box
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              position="relative"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              flexDirection="column"
+              width="100%"
+              height={300}
+              borderRadius={1}
+              bgcolor={isDragActive ? 'primary.lighter' : 'action.hover'}
+              border={isDragActive ? `2px dashed ${theme.palette.primary.main}` : `2px dashed ${theme.palette.divider}`}
+              sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
+            >
+              <Box textAlign="center">
+                <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Drag & drop an image here<br />or<br />Click to select
+                </Typography>
+                <Typography color="text.secondary" variant="caption">
+                  Supported: JPG, PNG, WebP, GIF, and more
+                </Typography>
+              </Box>
+              {/* Overlay file input */}
+              <input
+                accept="image/*"
+                style={{
+                  position: 'absolute',
+                  width: '100%',
+                  height: '100%',
+                  left: 0,
+                  top: 0,
+                  opacity: 0,
+                  cursor: 'pointer',
+                  zIndex: 2
+                }}
+                id="image-file-input"
+                type="file"
+                onChange={handleFileChange}
+                tabIndex={-1}
+              />
+            </Box>
+          )}
+
+          {/* Converter workspace (appears after file is selected) */}
+          {file && (
+            <Box flex={1} minHeight={320} display="flex" alignItems="center" justifyContent="center" position="relative" bgcolor="action.hover" borderRadius={1}>
+              <Box sx={{ position: 'relative', display: 'inline-block' }}>
                 <img
                   ref={imageRef}
-                  src={previewUrl}
-                  alt="Simulated Preview"
+                  src={previewUrl || ''}
+                  alt="Preview"
                   onLoad={handleImageLoad}
                   style={{
                     maxWidth: '100%',
-                    maxHeight: 300,
+                    maxHeight: 480,
                     width: 'auto',
                     height: 'auto',
                     display: 'block',
                     filter: `
-                      ${grayscale ? 'grayscale(1)' : ''}
-                      ${blur ? `blur(${blur}px)` : ''}
-                      brightness(${brightness}%)
-                      contrast(${contrast}%)
-                      saturate(${saturation}%)
-                    `,
+                        ${grayscale ? 'grayscale(1)' : ''}
+                        ${blur ? `blur(${blur}px)` : ''}
+                        brightness(${brightness}%)
+                        contrast(${contrast}%)
+                        saturate(${saturation}%)
+                      `,
                     transform: `
-                      rotate(${rotate}deg)
-                      scaleX(${flipH ? -1 : 1})
-                      scaleY(${flipV ? -1 : 1})
-                    `
+                        rotate(${rotate}deg)
+                        scaleX(${flipH ? -1 : 1})
+                        scaleY(${flipV ? -1 : 1})
+                      `
                   } as React.CSSProperties}
                 />
                 {/* Crop selection overlay */}
@@ -535,7 +793,6 @@ function ImageResize() {
                     onMouseUp={handleCropMouseUp}
                     onTouchEnd={handleCropMouseUp}
                   >
-                    {/* Draw crop rectangle */}
                     {(drawingCrop && drawingCrop.w > 0 && drawingCrop.h > 0)
                       ? (
                         <div
@@ -569,116 +826,135 @@ function ImageResize() {
                   </div>
                 )}
               </Box>
-            ) : (
-              <Box textAlign="center">
-                <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                <Typography variant="subtitle1" gutterBottom>
-                  Drag & drop an image here<br/>or<br/>Click to select
-                </Typography>
-                <Typography color="text.secondary" variant="caption">
-                  Supported: JPG, PNG, WebP, GIF, and more
-                </Typography>
-              </Box>
-            )}
-            {/* Overlay file input */}
-            <input
-              accept="image/*"
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                left: 0,
-                top: 0,
-                opacity: 0,
-                cursor: 'pointer',
-                zIndex: 2
-              }}
-              id="image-file-input"
-              type="file"
-              onChange={handleFileChange}
-              tabIndex={-1}
-            />
-          </Box>
+            </Box>
+          )}
           {/* Filename and remove button */}
           {file && (
             <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
               <Typography variant="body2" noWrap>
                 {file.name} ({formatBytes(file.size)})
               </Typography>
-              <IconButton onClick={handleRemoveFile} size="small" color="error" sx={{ ml: 1 }}>
+              {originalDimensions &&
+                <Typography variant="body2" sx={{ ml: 0.5 }}>
+                  ({originalDimensions.width}x{originalDimensions.height})
+                </Typography>
+              }
+              <IconButton onClick={handleRemoveFile} color="error" sx={{ ml: 1 }}>
                 <CloseIcon fontSize="small" />
               </IconButton>
             </Box>
           )}
-
           {/* Controls */}
           {file && (
             <Grid container spacing={2} sx={{ mb: 3 }}>
+              {/* Crop Apply/Reset */}
+              <Grid size={{ xs: 12, sm: 6, lg: 3 }} display="flex" alignItems="center" gap={1}>
+                <Button
+                  variant="contained"
+                    
+                  onClick={handleApplyCrop}
+                  disabled={isProcessing || !(crop.w > 0 && crop.h > 0)}
+                  sx={{ mr: 1 }}
+                  fullWidth
+                  startIcon={<CropIcon />}
+                >
+                  Crop
+                </Button>
+                <Button
+                  variant='outlined'
+                  onClick={handleResetCrop}
+                  
+                  sx={{ whiteSpace: 'nowrap' }}
+                  disabled={isProcessing}
+                  fullWidth
+                  startIcon={<RestartAltIcon />}
+                >
+                  Reset
+                </Button>
+              </Grid>
+              {/* Width & Height inputs + apply button */}
+              <Grid size={{ xs: 12, sm: 6, lg: 3 }} position="relative">
+                <Box display="flex" alignItems="center">
+                  <TextField
+                    label="Width (px)"
+                    value={width}
+                    onChange={handleWidthInput}
+                    disabled={isProcessing}
+                  />
+                  {/* Aspect ratio lock */}
+                  <Tooltip title={maintainAspectRatio ? 'Lock aspect ratio' : 'Unlock aspect ratio'}>
+                    <span>
+                      <IconButton
+                        onClick={() => setMaintainAspectRatio(m => !m)}
+                        disabled={isProcessing}
+                        color={maintainAspectRatio ? 'primary' : 'default'}
+                        aria-label={maintainAspectRatio ? 'Unlock aspect ratio' : 'Lock aspect ratio'}
+                      >
+                        {maintainAspectRatio ? <LinkIcon fontSize="small" /> : <LinkOffIcon fontSize="small" />}
+                      </IconButton>
+                    </span>
+                  </Tooltip>
+                  <TextField
+                    label="Height (px)"
+                    value={height}
+                    onChange={handleHeightInput}
+                    disabled={isProcessing}
+                  />
+                </Box>
+              </Grid>
+              {/* Output Filename */}
+              <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
+                <TextField
+                  label="Output Filename (optional)"
+                  fullWidth
+                  value={outputName}
+                  onChange={handleOutputNameChange}
+                  disabled={isProcessing}
+                />
+              </Grid>
+              {/* Output Format */}
+              <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
+                <FormControl fullWidth>
+                  <InputLabel>Output Format</InputLabel>
+                  <Select
+                    value={format}
+                    onChange={handleFormatChange}
+                    label="Output Format"
+                    disabled={isProcessing}
+                    
+                  >
+                    <MenuItem value="original">Original Format</MenuItem>
+                    <MenuItem value="jpg">JPG</MenuItem>
+                    <MenuItem value="png">PNG</MenuItem>
+                    <MenuItem value="webp">WebP</MenuItem>
+                    <MenuItem value="gif">GIF</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
               {/* Quality */}
               <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
                 <Typography variant="body2">Quality: {quality}%</Typography>
-                <Slider
-                  value={quality}
-                  onChange={(_, value) => setQuality(value as number)}
-                  min={10}
-                  max={100}
-                  step={1}
-                  disabled={isProcessing}
-                  size="small"
-                  valueLabelDisplay="auto"
-                />
-              </Grid>
-              {/* Maintain aspect ratio */}
-              <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={maintainAspectRatio}
-                      onChange={handleAspectRatioToggle}
-                      size="small"
-                    />
-                  }
-                  label={
-                    <Box display="flex" alignItems="center">
-                      <Typography variant="body2" sx={{ mr: 1 }}>Lock ratio</Typography>
-                      {maintainAspectRatio ? <LinkIcon fontSize="small" /> : <LinkOffIcon fontSize="small" />}
-                    </Box>
-                  }
-                />
-              </Grid>
-              {/* Width */}
-              <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
-                <Typography variant="body2">Width (px): {width}</Typography>
-                <Slider
-                  value={Number(width) || 0}
-                  min={1}
-                  max={originalDimensions?.width || 4096}
-                  step={1}
-                  onChange={(_, v) => setWidth(String(v))}
-                  disabled={isProcessing}
-                  size="small"
-                  valueLabelDisplay="auto"
-                />
-              </Grid>
-              {/* Height */}
-              <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
-                <Typography variant="body2">Height (px): {height}</Typography>
-                <Slider
-                  value={Number(height) || 0}
-                  min={1}
-                  max={originalDimensions?.height || 4096}
-                  step={1}
-                  onChange={(_, v) => setHeight(String(v))}
-                  disabled={isProcessing}
-                  size="small"
-                  valueLabelDisplay="auto"
-                />
+                <Box display="flex" alignItems="center">
+                  <IconButton onClick={() => setQuality(Math.max(10, quality - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                  <Slider
+                    value={quality}
+                    onChange={(_, value) => setQuality(value as number)}
+                    min={10}
+                    max={100}
+                    step={1}
+                    disabled={isProcessing}
+                    
+                    valueLabelDisplay="auto"
+                    sx={{ mx: 1, flex: 1 }}
+                  />
+                  <IconButton onClick={() => setQuality(Math.min(100, quality + 1))} disabled={isProcessing}><AddIcon /></IconButton>
+                </Box>
               </Grid>
               {/* Blur */}
               <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
                 <Typography variant="body2">Blur: {blur}</Typography>
                 <Box display="flex" alignItems="center">
-                  <IconButton size="small" onClick={() => setBlur(Math.max(blurMin, blur - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                  <IconButton onClick={() => setBlur(Math.max(blurMin, blur - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
                   <Slider
                     value={blur}
                     min={blurMin}
@@ -686,45 +962,45 @@ function ImageResize() {
                     step={1}
                     onChange={(_, v) => setBlur(v as number)}
                     disabled={isProcessing}
-                    size="small"
+                    
                     valueLabelDisplay="auto"
                     sx={{ mx: 1, flex: 1 }}
                   />
-                  <IconButton size="small" onClick={() => setBlur(Math.min(blurMax, blur + 1))} disabled={isProcessing}><AddIcon /></IconButton>
+                  <IconButton onClick={() => setBlur(Math.min(blurMax, blur + 1))} disabled={isProcessing}><AddIcon /></IconButton>
                 </Box>
               </Grid>
               {/* Brightness */}
               <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
                 <Typography variant="body2">Brightness: {brightness}%</Typography>
                 <Box display="flex" alignItems="center">
-                  <IconButton size="small" onClick={() => setBrightness(Math.max(0, brightness - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
-                  <Slider value={brightness} onChange={handleBrightnessChange} min={0} max={200} step={1} disabled={isProcessing} size="small" valueLabelDisplay="auto" sx={{ mx: 1, flex: 1 }} />
-                  <IconButton size="small" onClick={() => setBrightness(Math.min(200, brightness + 1))} disabled={isProcessing}><AddIcon /></IconButton>
+                  <IconButton onClick={() => setBrightness(Math.max(0, brightness - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                  <Slider value={brightness} onChange={handleBrightnessChange} min={0} max={200} step={1} disabled={isProcessing} valueLabelDisplay="auto" sx={{ mx: 1, flex: 1 }} />
+                  <IconButton onClick={() => setBrightness(Math.min(200, brightness + 1))} disabled={isProcessing}><AddIcon /></IconButton>
                 </Box>
               </Grid>
               {/* Contrast */}
               <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
                 <Typography variant="body2">Contrast: {contrast}%</Typography>
                 <Box display="flex" alignItems="center">
-                  <IconButton size="small" onClick={() => setContrast(Math.max(0, contrast - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
-                  <Slider value={contrast} onChange={handleContrastChange} min={0} max={200} step={1} disabled={isProcessing} size="small" valueLabelDisplay="auto" sx={{ mx: 1, flex: 1 }} />
-                  <IconButton size="small" onClick={() => setContrast(Math.min(200, contrast + 1))} disabled={isProcessing}><AddIcon /></IconButton>
+                  <IconButton onClick={() => setContrast(Math.max(0, contrast - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                  <Slider value={contrast} onChange={handleContrastChange} min={0} max={200} step={1} disabled={isProcessing} valueLabelDisplay="auto" sx={{ mx: 1, flex: 1 }} />
+                  <IconButton onClick={() => setContrast(Math.min(200, contrast + 1))} disabled={isProcessing}><AddIcon /></IconButton>
                 </Box>
               </Grid>
               {/* Saturation */}
               <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
                 <Typography variant="body2">Saturation: {saturation}%</Typography>
                 <Box display="flex" alignItems="center">
-                  <IconButton size="small" onClick={() => setSaturation(Math.max(0, saturation - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
-                  <Slider value={saturation} onChange={handleSaturationChange} min={0} max={200} step={1} disabled={isProcessing} size="small" valueLabelDisplay="auto" sx={{ mx: 1, flex: 1 }} />
-                  <IconButton size="small" onClick={() => setSaturation(Math.min(200, saturation + 1))} disabled={isProcessing}><AddIcon /></IconButton>
+                  <IconButton onClick={() => setSaturation(Math.max(0, saturation - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                  <Slider value={saturation} onChange={handleSaturationChange} min={0} max={200} step={1} disabled={isProcessing} valueLabelDisplay="auto" sx={{ mx: 1, flex: 1 }} />
+                  <IconButton onClick={() => setSaturation(Math.min(200, saturation + 1))} disabled={isProcessing}><AddIcon /></IconButton>
                 </Box>
               </Grid>
               {/* Rotate */}
               <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
                 <Typography variant="body2" noWrap>Rotate: {rotate}°</Typography>
                 <Box display="flex" alignItems="center">
-                  <IconButton size="small" onClick={() => setRotate(Math.max(rotateMin, rotate - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                  <IconButton onClick={() => setRotate(Math.max(rotateMin, rotate - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
                   <Slider
                     value={rotate}
                     min={rotateMin}
@@ -732,24 +1008,23 @@ function ImageResize() {
                     step={1}
                     onChange={(_, v) => setRotate(v as number)}
                     disabled={isProcessing}
-                    size="small"
                     valueLabelDisplay="auto"
                     sx={{ mx: 1, flex: 1 }}
                   />
-                  <IconButton size="small" onClick={() => setRotate(Math.min(rotateMax, rotate + 1))} disabled={isProcessing}><AddIcon /></IconButton>
+                  <IconButton onClick={() => setRotate(Math.min(rotateMax, rotate + 1))} disabled={isProcessing}><AddIcon /></IconButton>
                 </Box>
               </Grid>
               {/* Flip Horizontal */}
               <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
                 <FormControlLabel
-                  control={<Switch checked={flipH} onChange={handleFlipH} size="small" disabled={isProcessing} />}
+                  control={<Switch checked={flipH} onChange={handleFlipH} disabled={isProcessing} />}
                   label={<Typography variant="body2">Flip Horizontal</Typography>}
                 />
               </Grid>
               {/* Flip Vertical */}
               <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
                 <FormControlLabel
-                  control={<Switch checked={flipV} onChange={handleFlipV} size="small" disabled={isProcessing} />}
+                  control={<Switch checked={flipV} onChange={handleFlipV} disabled={isProcessing} />}
                   label={<Typography variant="body2">Flip Vertical</Typography>}
                 />
               </Grid>
@@ -760,68 +1035,31 @@ function ImageResize() {
                     <Switch
                       checked={grayscale}
                       onChange={e => setGrayscale(e.target.checked)}
-                      size="small"
                       disabled={isProcessing}
                     />
                   }
                   label={<Typography variant="body2">Grayscale</Typography>}
                 />
               </Grid>
-              {/* Output Filename */}
-              <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
-                <TextField
-                  fullWidth
-                  label="Output Filename (optional)"
-                  value={outputName}
-                  onChange={handleOutputNameChange}
-                  size="small"
-                  disabled={isProcessing}
-                />
-              </Grid>
-              {/* Output Format */}
-              <Grid size={{ xs: 6, sm: 4, lg: 3 }}>
-                <FormControl fullWidth size="small">
-                  <InputLabel>Output Format</InputLabel>
-                  <Select
-                    value={format}
-                    onChange={handleFormatChange}
-                    label="Output Format"
-                    disabled={isProcessing}
-                    size="small"
-                  >
-                    <MenuItem value="original">Original Format</MenuItem>
-                    <MenuItem value="jpg">JPG</MenuItem>
-                    <MenuItem value="png">PNG</MenuItem>
-                    <MenuItem value="webp">WebP</MenuItem>
-                    <MenuItem value="gif">GIF</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              {/* Crop Undo/Redo/Reset */}
-              <Grid size={{ xs: 12, sm: 4, lg: 3 }} display="flex" alignItems="center" justifyContent="center" gap={1} mx="auto">
-                <Tooltip title="Undo Crop"><IconButton onClick={handleUndoCrop} disabled={cropStack.length === 0}><UndoIcon /></IconButton></Tooltip>
-                <Button onClick={handleResetCrop} size="small" sx={{ whiteSpace: 'nowrap' }}>Reset Crop</Button>
-                <Tooltip title="Redo Crop"><IconButton onClick={handleRedoCrop} disabled={redoStack.length === 0}><RedoIcon /></IconButton></Tooltip>
-              </Grid>
             </Grid>
           )}
         </CardContent>
         <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" onClick={handleResize} disabled={isProcessing || !file || (!width && !height)} size="small">
+          <Button variant="contained" onClick={handleResize} disabled={isProcessing || !file || (!width && !height)}>
             {isProcessing ? 'Resizing' : 'Resize'}
           </Button>
           {!isProcessing && (
-            <Button variant="outlined" onClick={handleReset} size="small">
+            <Button variant="outlined" onClick={handleReset}>
               Reset
             </Button>
           )}
           {isProcessing && (
-            <Button color="error" variant='contained' onClick={handleStop} disabled={!isProcessing} size="small">
+            <Button color="error" variant='contained' onClick={handleStop} disabled={!isProcessing}>
               Stop
             </Button>
           )}
           {downloadUrl && downloadSize !== null && (
-            <Button color="success" variant='contained' onClick={handleDownload} size="small">
+            <Button color="success" variant='contained' onClick={handleDownload}>
               Download ({formatBytes(downloadSize)})
             </Button>
           )}
@@ -833,8 +1071,9 @@ function ImageResize() {
           </Box>
         )}
       </Card>
+      {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
     </Container>
   );
 }
 
-export default ImageResize;
+export default ImageConvert;

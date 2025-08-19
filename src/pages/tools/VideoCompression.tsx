@@ -18,6 +18,8 @@ import Alert from '@mui/material/Alert';
 import Popover from '@mui/material/Popover';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 // Icons
 import CompressIcon from '@mui/icons-material/Compress';
@@ -28,7 +30,6 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 const ffmpeg = new FFmpeg();
 let isFFmpegLoaded = false;
 
-export const description = "Compress video files online without losing quality. Reduce video file size quickly and securely in your browser with VideoTools' free video compressor.";
 
 function VideoCompression() {
   const [file, setFile] = useState<File | null>(null);
@@ -148,10 +149,11 @@ function VideoCompression() {
       setStatus('Finalizing');
       setProgress(99.9);
 
-      const data = await ffmpeg.readFile(outputFileName);
-      const url = URL.createObjectURL(new Blob([data], { type: 'video/mp4' }));
+  const data = await ffmpeg.readFile(outputFileName);
+  const blob = new Blob([new Uint8Array(data as any)], { type: 'video/mp4' });
+  const url = URL.createObjectURL(blob);
 
-      setDownloadUrl(url);
+  setDownloadUrl(url);
       setDownloadSize(data.length);
 
       await ffmpeg.deleteFile(inputFileName);
@@ -229,13 +231,13 @@ function VideoCompression() {
   ];
 
   return (
-    <Container maxWidth="md" sx={{ my: 'auto' }}>
-      {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
+    <Container maxWidth="lg" sx={{ my: 'auto' }}>
+      {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
       <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
             <CompressIcon color="primary" fontSize='small' sx={{ mr: 0.5 }} />
-            <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Video Compression</Typography>
+            <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Video Compressor</Typography>
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
@@ -280,7 +282,7 @@ function VideoCompression() {
             {!file ? (
               <Box textAlign="center">
                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                <Typography variant="subtitle1" gutterBottom>
+                <Typography variant="subtitle2" gutterBottom>
                   Drag & drop a video file here<br />or<br />Click to select
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
@@ -322,7 +324,7 @@ function VideoCompression() {
               <Typography variant="body2" noWrap>
                 {file.name} ({formatBytes(file.size)})
               </Typography>
-              <IconButton size="small" color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
+                <IconButton color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
                 <CloseIcon fontSize='small' />
               </IconButton>
             </Box>
@@ -331,11 +333,10 @@ function VideoCompression() {
           {file && !isProcessing && (
             <Grid container spacing={2} mt={2}>
               <Grid size={{ xs: 12, md: 6 }}>
-                <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Typography variant="subtitle2" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <Box display="flex" alignItems="center">
                     Quality:
                     <IconButton
-                      size="small"
                       sx={{ ml: 0.5 }}
                       onClick={handleCrfInfoClick}
                       aria-label="CRF info"
@@ -345,14 +346,17 @@ function VideoCompression() {
                   </Box>
                   <small> {crf} CRF / Est. size: {estimateSizeMB(totalDurationRef.current, crf)} MB </small>
                 </Typography>
-                <Slider size="small" min={18} max={36} step={1} value={crf} onChange={(_, val) => setCrf(val as number)} valueLabelDisplay="auto" />
+                <Box display="flex" alignItems="center">
+                    <IconButton onClick={() => setCrf(prev => Math.max(18, prev - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                    <Slider min={18} max={36} step={1} value={crf} onChange={(_, val) => setCrf(val as number)} valueLabelDisplay="auto" sx={{ mx: 1, flex: 1 }} />
+                    <IconButton onClick={() => setCrf(prev => Math.min(36, prev + 1))} disabled={isProcessing}><AddIcon /></IconButton>
+                </Box>
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
-                <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Typography variant="subtitle2" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <Box display="flex" alignItems="center">
                     Preset:
                     <IconButton
-                      size="small"
                       sx={{ ml: 0.5 }}
                       onClick={handlePresetInfoClick}
                       aria-label="Preset info"
@@ -362,29 +366,29 @@ function VideoCompression() {
                   </Box>
                   <small>{preset}</small>
                 </Typography>
-                <Slider size="small" min={0} max={8} step={1} value={presetValues.indexOf(preset)} onChange={(_, val) => setPreset(presetValues[val as number])} valueLabelDisplay="off" />
+                  <Slider min={0} max={8} step={1} value={presetValues.indexOf(preset)} onChange={(_, val) => setPreset(presetValues[val as number])} valueLabelDisplay="off" />
               </Grid>
             </Grid>
           )}
         </CardContent>
 
         <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" onClick={handleProceed} disabled={!file || isProcessing} size="small">
+            <Button variant="contained" onClick={handleProceed} disabled={!file || isProcessing}>
             {isProcessing ? 'Compressing' : 'Compress'}
           </Button>
           {/* Reset button only visible when not processing */}
           {!isProcessing && (
-            <Button variant="outlined" onClick={handleReset} size="small">
+              <Button variant="outlined" onClick={handleReset}>
               Reset
             </Button>
           )}
           {isProcessing && (
-            <Button variant="contained" color="error" onClick={handleStop} size="small">
+              <Button variant="contained" color="error" onClick={handleStop}>
               Stop
             </Button>
           )}
           {downloadUrl && downloadSize !== null && (
-            <Button variant="outlined" color="success" onClick={handleDownload} size="small">
+              <Button variant="contained" color="success" onClick={handleDownload}>
               Download ({formatBytes(downloadSize)})
             </Button>
           )}

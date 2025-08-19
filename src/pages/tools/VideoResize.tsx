@@ -56,7 +56,6 @@ let isFFmpegLoaded = false
 // Add a ref to keep track of the current ffmpeg instance for termination
 const ffmpegRef = { current: ffmpeg };
 
-export const description = "Resize videos to custom dimensions or aspect ratios online. Optimize your videos for web, social media, and more with VideoTools' easy video resizer.";
 
 function VideoResize() {
   const [file, setFile] = useState<File | null>(null)
@@ -234,10 +233,11 @@ function VideoResize() {
       setStatus('Finalizing')
       setProgress(99.9)
 
-      const data = await ffmpeg.readFile(outputFileName)
-      const url = URL.createObjectURL(new Blob([data], { type: 'video/mp4' }))
-      setDownloadUrl(url)
-      setDownloadSize(data.length)
+  const data = await ffmpeg.readFile(outputFileName)
+  const blob = new Blob([new Uint8Array(data as any)], { type: 'video/mp4' })
+  const url = URL.createObjectURL(blob)
+  setDownloadUrl(url)
+  setDownloadSize(data.length)
 
       await ffmpeg.deleteFile(inputFileName)
       await ffmpeg.deleteFile(outputFileName)
@@ -280,19 +280,18 @@ function VideoResize() {
   }
 
   return (
-    <Container maxWidth="md" sx={{ my: 'auto' }}>
-      {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
+    <Container maxWidth="lg" sx={{ my: 'auto' }}>
       <Card sx={{ p: 1.5 }} elevation={3}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
             <AspectRatioIcon color="warning" fontSize="small" sx={{ mr: 0.5 }} />
             <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
-              Video Resize
+              Video Resizer
             </Typography>
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-            Resize your video with custom resolution, aspect ratio, and advanced options. Preview changes before applying. No upload required.
+            Resize videos to custom resolutions and aspect ratios. Choose fit/fill/stretch modes, change FPS, and preview before exporting — processed locally in your browser.
           </Typography>
           <Box
             onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}
@@ -329,7 +328,7 @@ function VideoResize() {
             {!file ? (
               <Box textAlign="center">
                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                <Typography variant="subtitle1" gutterBottom>
+                <Typography variant="subtitle2" gutterBottom>
                   Drag & drop a video file here<br/>or<br/>Click to select
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
@@ -380,17 +379,16 @@ function VideoResize() {
               <Typography variant="body2" noWrap>
                 {file.name}
               </Typography>
-              <IconButton size="small" color="error" onClick={handleRemoveFile}><CloseIcon fontSize="small" /></IconButton>
+              <IconButton color="error" onClick={handleRemoveFile}><CloseIcon fontSize="small" /></IconButton>
             </Box>
           )}
           {/* Resize Controls */}
           {file && (
             <Grid container spacing={1} mt={2}>
               <Grid size={{xs: 12}}>
-                <Typography variant="subtitle1">Resolution (px):</Typography>
+                <Typography variant="subtitle2">Resolution (px):</Typography>
                 <Box display="flex" alignItems="center" gap={1}>
                   <TextField
-                    size="small"
                     type="number"
                     value={width}
                     onChange={resolutionRatio === 'custom' ? e => setWidth(e.target.value) : handleWidthChange}
@@ -399,7 +397,6 @@ function VideoResize() {
                   />
                   <Typography color="text.secondary">x</Typography>
                   <TextField
-                    size="small"
                     type="number"
                     value={height}
                     onChange={resolutionRatio === 'custom' ? e => setHeight(e.target.value) : handleHeightChange}
@@ -407,7 +404,6 @@ function VideoResize() {
                     sx={{ flex: 1 }}
                   />
                   <Select
-                    size="small"
                     value={resolutionRatio}
                     onChange={handleRatioChange}
                     sx={{ minWidth: 100 }}
@@ -418,7 +414,7 @@ function VideoResize() {
                       </MenuItem>
                     ))}
                   </Select>
-                  <IconButton size="small" color="inherit" onClick={handleReset} title="Reset to default">
+                  <IconButton color="inherit" onClick={handleReset} title="Reset to default">
                     <ReplayIcon fontSize="small" />
                   </IconButton>
                 </Box>
@@ -429,9 +425,8 @@ function VideoResize() {
                 )}
               </Grid>
               <Grid size={{xs: 12, md: 6}}>
-                <Typography variant="subtitle1">Resize Mode:</Typography>
+                <Typography variant="subtitle2">Resize Mode:</Typography>
                 <Select
-                  size="small"
                   fullWidth
                   value={resizeMode}
                   onChange={e => setResizeMode(e.target.value)}
@@ -448,9 +443,8 @@ function VideoResize() {
                 </Typography>
               </Grid>
               <Grid size={{xs: 12, md: 6}}>
-                <Typography variant="subtitle1">FPS (optional):</Typography>
+                <Typography variant="subtitle2">FPS (optional):</Typography>
                 <TextField
-                  size="small"
                   fullWidth
                   type="number"
                   value={fps}
@@ -463,23 +457,23 @@ function VideoResize() {
           )}
         </CardContent>
         <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" onClick={handleResize} disabled={isProcessing} size="small">
+          <Button variant="contained" onClick={handleResize} disabled={isProcessing}>
             {isProcessing ? 'Resizing' : 'Resize'}
           </Button>
           {/* Reset button only visible when not processing */}
           {!isProcessing && (
-            <Button variant="outlined" onClick={handleReset} size="small">
+            <Button variant="outlined" onClick={handleReset}>
               Reset
             </Button>
           )}
           {/* Add Stop button */}
           {isProcessing && (
-            <Button variant="contained" color="error" onClick={handleStop} size="small">
+            <Button variant="contained" color="error" onClick={handleStop}>
               Stop
             </Button>
           )}
           {downloadUrl && downloadSize !== null && (
-            <Button variant="outlined" color="success" onClick={handleDownload} size="small">
+            <Button variant="contained" color="success" onClick={handleDownload}>
               Download ({(downloadSize / 1024 / 1024).toFixed(2)} MB)
             </Button>
           )}
@@ -494,6 +488,7 @@ function VideoResize() {
           </Box>
         )}
       </Card>
+      {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
     </Container>
   )
 }

@@ -74,7 +74,6 @@ const presetValues = [
 const CRF_KEEP = 'keep';
 const PRESET_KEEP = 'keep';
 
-export const description = "Convert videos to MP4, AVI, MOV, and more formats online. Fast, secure, and easy video conversion with VideoTools—no software installation needed.";
 
 function VideoConvert() {
   const [file, setFile] = useState<File | null>(null);
@@ -310,8 +309,10 @@ function VideoConvert() {
       setStatus('Finalizing');
       setProgress(99.9);
 
-      const data = await ffmpeg.readFile(outputFileName);
-      const url = URL.createObjectURL(new Blob([data], { type: outputFormat === 'gif' ? 'image/gif' : outputFormat.startsWith('mp3') ? 'audio/mp3' : outputFormat.startsWith('wav') ? 'audio/wav' : 'video/' + outputFormat }));
+  const data = await ffmpeg.readFile(outputFileName);
+  const mime = outputFormat === 'gif' ? 'image/gif' : outputFormat.startsWith('mp3') ? 'audio/mp3' : outputFormat.startsWith('wav') ? 'audio/wav' : 'video/' + outputFormat;
+  const blob = new Blob([new Uint8Array(data as any)], { type: mime });
+  const url = URL.createObjectURL(blob);
       setDownloadUrl(url);
       setDownloadSize(data.length);
 
@@ -379,8 +380,8 @@ function VideoConvert() {
   };
 
   return (
-    <Container maxWidth="md" sx={{ my: 'auto' }}>
-      {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
+    <Container maxWidth="lg" sx={{ my: 'auto' }}>
+      {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
       <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
@@ -428,7 +429,7 @@ function VideoConvert() {
             {!file ? (
               <Box textAlign="center">
                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                <Typography variant="subtitle1" gutterBottom>
+                <Typography variant="subtitle2" gutterBottom>
                   Drag & drop a video or audio file here<br />or<br />Click to select
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
@@ -478,7 +479,7 @@ function VideoConvert() {
               <Typography variant="body2" noWrap>
                 {file.name} ({formatBytes(file.size)})
               </Typography>
-              <IconButton size="small" color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
+                <IconButton color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
                 <CloseIcon fontSize='small' />
               </IconButton>
             </Box>
@@ -487,11 +488,10 @@ function VideoConvert() {
           {file && !isProcessing && (
             <Grid container spacing={2} mt={2}>
               <Grid size={{ xs: 12, md: 6 }}>
-                <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Typography variant="subtitle2" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   Output Format:
                 </Typography>
                 <Select
-                  size="small"
                   fullWidth
                   value={outputFormat}
                   onChange={handleFormatChange}
@@ -502,10 +502,9 @@ function VideoConvert() {
                 </Select>
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
-                <Typography variant="subtitle1">Resolution: (in Pixels)</Typography>
+                <Typography variant="subtitle2">Resolution: (in Pixels)</Typography>
                 <Box display="flex" alignItems="center" flex={1} gap={1}>
                   <TextField
-                    size="small"
                     type="number"
                     value={width}
                     onChange={resolutionRatio === 'custom' ? e => setWidth(e.target.value) : handleWidthChange}
@@ -515,7 +514,6 @@ function VideoConvert() {
                   />
                   <Typography color="text.secondary">x</Typography>
                   <TextField
-                    size="small"
                     type="number"
                     value={height}
                     onChange={resolutionRatio === 'custom' ? e => setHeight(e.target.value) : handleHeightChange}
@@ -524,7 +522,6 @@ function VideoConvert() {
                     disabled={false}
                   />
                   <Select
-                    size="small"
                     value={resolutionRatio}
                     onChange={handleRatioChange}
                     sx={{ minWidth: 100 }}
@@ -541,9 +538,8 @@ function VideoConvert() {
                 )}
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
-                <Typography variant="subtitle1">Video Codec:</Typography>
+                <Typography variant="subtitle2">Video Codec:</Typography>
                 <Select
-                  size="small"
                   fullWidth
                   value={videoCodec}
                   onChange={e => setVideoCodec(e.target.value)}
@@ -555,9 +551,8 @@ function VideoConvert() {
                 </Select>
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
-                <Typography variant="subtitle1">Audio Codec:</Typography>
+                <Typography variant="subtitle2">Audio Codec:</Typography>
                 <Select
-                  size="small"
                   fullWidth
                   value={audioCodec}
                   onChange={e => setAudioCodec(e.target.value)}
@@ -569,9 +564,8 @@ function VideoConvert() {
                 </Select>
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
-                <Typography variant="subtitle1">Audio Bitrate:</Typography>
+                <Typography variant="subtitle2">Audio Bitrate:</Typography>
                 <TextField
-                  size="small"
                   fullWidth
                   value={audioBitrate}
                   onChange={e => setAudioBitrate(e.target.value)}
@@ -580,9 +574,8 @@ function VideoConvert() {
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
-                <Typography variant="subtitle1">FPS:</Typography>
+                <Typography variant="subtitle2">FPS:</Typography>
                 <TextField
-                  size="small"
                   fullWidth
                   type="number"
                   value={fps}
@@ -591,11 +584,10 @@ function VideoConvert() {
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
-                <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Typography variant="subtitle2" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <Box display="flex" alignItems="center">
                     Quality:
                     <IconButton
-                      size="small"
                       sx={{ ml: 0.5 }}
                       onClick={handleCrfInfoClick}
                       aria-label="CRF info"
@@ -608,7 +600,6 @@ function VideoConvert() {
                   </small>
                 </Typography>
                 <Select
-                  size="small"
                   fullWidth
                   value={crf}
                   onChange={e => setCrf(e.target.value as number | typeof CRF_KEEP)}
@@ -622,11 +613,10 @@ function VideoConvert() {
                 </Select>
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
-                <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Typography variant="subtitle2" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <Box display="flex" alignItems="center">
                     Preset:
                     <IconButton
-                      size="small"
                       sx={{ ml: 0.5 }}
                       onClick={handlePresetInfoClick}
                       aria-label="Preset info"
@@ -639,7 +629,6 @@ function VideoConvert() {
                   </small>
                 </Typography>
                 <Select
-                  size="small"
                   fullWidth
                   value={preset}
                   onChange={e => setPreset(e.target.value as string | typeof PRESET_KEEP)}
@@ -655,22 +644,22 @@ function VideoConvert() {
           )}
         </CardContent>
         <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" onClick={handleProceed} disabled={!file || isProcessing} size="small">
+          <Button variant="contained" onClick={handleProceed} disabled={!file || isProcessing}>
             {isProcessing ? 'Converting' : 'Convert'}
           </Button>
           {/* Reset button only visible when not processing */}
           {!isProcessing && (
-            <Button variant="outlined" onClick={handleReset} size="small">
+            <Button variant="outlined" onClick={handleReset}>
               Reset
             </Button>
           )}
           {isProcessing && (
-            <Button variant="contained" color="error" onClick={handleStop} size="small">
+            <Button variant="contained" color="error" onClick={handleStop}>
               Stop
             </Button>
           )}
           {downloadUrl && downloadSize !== null && (
-            <Button variant="outlined" color="success" onClick={handleDownload} size="small">
+            <Button variant="contained" color="success" onClick={handleDownload}>
               Download ({formatBytes(downloadSize)})
             </Button>
           )}

@@ -15,6 +15,8 @@ import Alert from '@mui/material/Alert';
 import Slider from '@mui/material/Slider';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 // Icons
 import ContentCutIcon from '@mui/icons-material/ContentCut';
@@ -27,7 +29,6 @@ let isFFmpegLoaded = false
 // Add a ref to keep track of the current ffmpeg instance for termination
 const ffmpegRef = { current: ffmpeg };
 
-export const description = "Trim and cut videos online with precision. Remove unwanted sections and create perfect clips instantly using VideoTools' free video trimmer.";
 
 function VideoTrim() {
   const [file, setFile] = useState<File | null>(null)
@@ -128,9 +129,10 @@ function VideoTrim() {
       ])
       setStatus('Finalizing')
       setProgress(99.9)
-      const data = await ffmpeg.readFile(outputFileName)
-      const url = URL.createObjectURL(new Blob([data], { type: 'video/mp4' }))
-      setDownloadUrl(url)
+  const data = await ffmpeg.readFile(outputFileName)
+  const blob = new Blob([new Uint8Array(data as any)], { type: 'video/mp4' })
+  const url = URL.createObjectURL(blob)
+  setDownloadUrl(url)
       setDownloadSize(data.length)
       await ffmpeg.deleteFile(inputFileName)
       await ffmpeg.deleteFile(outputFileName)
@@ -172,13 +174,12 @@ function VideoTrim() {
   }
 
   return (
-    <Container maxWidth="md" sx={{ my: 'auto' }}>
-      {errorMsg && <Alert severity="error" sx={{ mb: 2 }}>{errorMsg}</Alert>}
+    <Container maxWidth="lg" sx={{ my: 'auto' }}>
       <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
             <ContentCutIcon color="info" fontSize="small" sx={{ mr: 0.5 }} />
-            <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Video Trim</Typography>
+            <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Video Trimmer</Typography>
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <Typography variant="body2" component="h2" color="text.secondary" mb={2}>Select a video, choose the duration to trim, and download the result.</Typography>
@@ -221,7 +222,7 @@ function VideoTrim() {
             {!file ? (
               <Box textAlign="center">
                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                <Typography variant="subtitle1" gutterBottom>
+                <Typography variant="subtitle2" gutterBottom>
                   Drag & drop a video file here<br/>or<br/>Click to select
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
@@ -263,7 +264,7 @@ function VideoTrim() {
               <Typography variant="body2" noWrap>
                 {file.name}
               </Typography>
-              <IconButton size="small" color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
+              <IconButton color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
                 <CloseIcon fontSize='small'/>
               </IconButton>
             </Box>
@@ -271,40 +272,45 @@ function VideoTrim() {
           {/* Range slider and controls */}
           {file && duration > 0 && !isProcessing && (
             <Box mb={2}>
-              <Typography variant="subtitle1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Typography variant="subtitle2" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 Select Duration: <small>{`${range[0]}s - ${range[1]}s`}</small>
               </Typography>
-              <Slider
-                min={0}
-                max={Math.floor(duration)}
-                step={0.1}
-                value={range}
-                onChange={handleRangeChange}
-                valueLabelDisplay="auto"
-                disableSwap
-                size="small"
-              />
+              <Box display="flex" alignItems="center">
+                <IconButton onClick={() => setRange([Math.max(0, Math.floor(range[0] - 1)), range[1]])} disabled={isProcessing}><RemoveIcon /></IconButton>
+                <Slider
+                  min={0}
+                  max={Math.floor(duration)}
+                  step={0.1}
+                  value={range}
+                  onChange={handleRangeChange}
+                  valueLabelDisplay="auto"
+                  disableSwap
+                  
+                  sx={{ mx: 1, flex: 1 }}
+                />
+                <IconButton onClick={() => setRange([range[0], Math.min(Math.floor(duration), Math.ceil(range[1] + 1))])} disabled={isProcessing}><AddIcon /></IconButton>
+              </Box>
             </Box>
           )}
         </CardContent>
         <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" onClick={handleTrim} disabled={!file || isProcessing || range[1] <= range[0]} size="small">
+          <Button variant="contained" onClick={handleTrim} disabled={!file || isProcessing || range[1] <= range[0]}>
             {isProcessing ? 'Trimming' : 'Trim'}
           </Button>
           {/* Reset button only visible when not processing */}
           {!isProcessing && (
-            <Button variant="outlined" onClick={handleReset} size="small">
+            <Button variant="outlined" onClick={handleReset}>
               Reset
             </Button>
           )}
           {/* Add Stop button */}
           {isProcessing && (
-            <Button variant="contained" color="error" onClick={handleStop} size="small">
+            <Button variant="contained" color="error" onClick={handleStop}>
               Stop
             </Button>
           )}
           {downloadUrl && downloadSize !== null && (
-            <Button variant="outlined" color="success" onClick={handleDownload} size="small">
+            <Button variant="contained" color="success" onClick={handleDownload}>
               Download ({(downloadSize / (1024 * 1024)).toFixed(2)} MB)
             </Button>
           )}
@@ -319,6 +325,7 @@ function VideoTrim() {
           </Box>
         )}
       </Card>
+      {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
     </Container>
   )
 }
