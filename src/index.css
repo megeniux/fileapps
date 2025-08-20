@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 16px;
+}
+
 html,
 body {
   margin: 0;
@@ -100,4 +104,12 @@ body {
   background: linear-gradient(90deg, #17aec4, #ca04ac, #fa9e30);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Media Query */
+
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 14px;
+  }
 }

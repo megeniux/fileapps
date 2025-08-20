@@ -148,9 +148,9 @@ export default function BurnCaptionLanding() {
                             <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>
                                 Add subtitles to your videos easily with our browser-based caption burner. Upload your video, choose an SRT or VTT subtitle file, customize your caption style, and burn captions directly into your video — no uploads, no watermarks, no sign-ups. Everything runs client-side for maximum privacy.
                             </Typography>
-                            <Box display="flex" gap={1}>
+                            <Box display="flex" justifyContent={{ xs: 'center', sm: 'flex-start' }} gap={1}>
                                 <Button color='primary' size='large' href="/tools/video/burn-caption" variant="contained">Upload Now</Button>
-                                <Button size='large' href="/tools/video/burn-captions-blog" variant="text">Learn More</Button>
+                                <Button size='large' href="/tools/video/burn-captions-blog" variant="text">Read Guide</Button>
                             </Box>
                         </Grid>
                         <Grid size={{ xs: 12, sm: 8, md: 6 }} order={{ xs: -1, sm: 1 }}>
@@ -406,7 +406,7 @@ export default function BurnCaptionLanding() {
                         </Grid>
                         <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
                             <Button color='inherit' variant="contained" size='large' href="/tools/video/burn-caption">Upload Now</Button>
-                            <Button size='large' href="/tools/video/burn-captions-blog" sx={{ color: 'common.white' }}>Learn More</Button>
+                            <Button size='large' href="/tools/video/burn-captions-blog" sx={{ color: 'common.white' }}>Read Guide</Button>
                         </Grid>
                     </Grid>
                 </Container>

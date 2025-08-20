@@ -5,14 +5,18 @@ import BasicLayout from './components/BasicLayout';
 
 // Pages
 import Home from './pages/Home';
-import VideoCompression from './pages/tools/VideoCompression';
 import Contact from './pages/Contact';
 import AboutUs from './pages/About';
 import TOS from './pages/Terms';
 import PrivacyPolicy from './pages/Policy';
 
 // Tool, Landing and Blog
+import VideoCompression from './pages/tools/VideoCompression';
+import VideoCompressionLanding from './pages/landings/VideoCompressionLanding';
+import VideoCompressionBlog from './pages/blogs/VideoCompressionBlog';
 import VideoConvert from './pages/tools/VideoConvert';
+import VideoConvertLanding from './pages/landings/VideoConvertLanding';
+import VideoConvertBlog from './pages/blogs/VideoConvertBlog';
 import VideoResize from './pages/tools/VideoResize';
 import VideoTrim from './pages/tools/VideoTrim';
 import VideoMerge from './pages/tools/VideoMerge';
@@ -22,6 +26,7 @@ import VideoPlayback from './pages/tools/VideoPlayback';
 import BurnCaption from './pages/tools/BurnCaption';
 import BurnCaptionLanding from './pages/landings/BurnCaptionLanding';
 import BurnCaptionsBlog from './pages/blogs/BurnCaptionsBlog';
+
 
 import ImageEditor from './pages/tools/ImageConvert';
 
@@ -46,7 +51,11 @@ function AppRoutes() {
 
       {/* Video Tools */}
       <Route path="tools/video/compress" element={<BasicLayout><VideoCompression /></BasicLayout>} />
+  <Route path="tools/video/compress-landing" element={<BasicLayout><VideoCompressionLanding /></BasicLayout>} />
+  <Route path="tools/video/compress-blog" element={<BasicLayout><VideoCompressionBlog /></BasicLayout>} />
       <Route path="tools/video/convert" element={<BasicLayout><VideoConvert /></BasicLayout>} />
+      <Route path="tools/video/convert-landing" element={<BasicLayout><VideoConvertLanding /></BasicLayout>} />
+      <Route path="tools/video/convert-blog" element={<BasicLayout><VideoConvertBlog /></BasicLayout>} />
       <Route path="tools/video/resize" element={<BasicLayout><VideoResize /></BasicLayout>} />
       <Route path="tools/video/trim" element={<BasicLayout><VideoTrim /></BasicLayout>} />
       <Route path="tools/video/merge" element={<BasicLayout><VideoMerge /></BasicLayout>} />

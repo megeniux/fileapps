@@ -35,14 +35,14 @@ const videoTools: {
       title: 'Compress Video',
       description: 'Reduce video file size while maintaining quality. Fast and easy compression for all your videos.',
       icon: <CompressIcon fontSize="small" color="primary" />,
-      link: '/tools/video/compress',
+      link: '/tools/video/compress-landing',
       color: 'primary'
     },
     {
       title: 'Video Converter',
       description: 'Convert videos between MP4, WebM, MKV, MOV and more. Preserve quality and choose codecs, resolution and bitrate.',
       icon: <SwapHorizIcon fontSize="small" color="secondary" />,
-      link: '/tools/video/convert',
+      link: '/tools/video/convert-landing',
       color: 'secondary'
     },
     {
@@ -163,7 +163,7 @@ function Home() {
   return (
     <Container maxWidth="lg" sx={{ marginBlock: 'auto', py: 5 }}>
       <Box mb={4}>
-        <Typography variant="h1" gutterBottom align='center' fontSize={42} fontWeight="bold"> Welcome to <span className='gradient-text-primary'>{APP_INFO.name}</span> </Typography>
+        <Typography variant="h2" component="h1" gutterBottom align='center' fontWeight="bold"> Welcome to <span className='gradient-text-primary'>{APP_INFO.name}</span> </Typography>
         <Typography
           variant="body1"
           component="h2"

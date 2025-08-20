@@ -15,7 +15,6 @@ const theme = createTheme({
     },
   },
   typography: {
-    htmlFontSize: window.innerWidth < 600 ? 18 : 16,
     fontFamily: `NataSans, Arial, sans-serif`,
     h1: {
       fontSize: '2.5rem',
