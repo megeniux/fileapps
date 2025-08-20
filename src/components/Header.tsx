@@ -36,7 +36,7 @@ function Header() {
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         {/* Logo */}
         <Box onClick={() => navigate('/')} display="flex" alignItems="center" sx={{ cursor: 'pointer' }}>
-          <img src="/images/branding/logo-small.svg" alt={APP_INFO.name} height={15} style={{ marginRight: 4 }} />
+          <img src="/images/branding/logo-small.svg" alt={APP_INFO.name} title={APP_INFO.name} loading='lazy' width={15} height={15} style={{ marginRight: 4 }} />
           <Typography variant="body2" fontWeight={600}> {APP_INFO.name} </Typography>
         </Box>
 

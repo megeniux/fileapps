@@ -84,7 +84,7 @@ const videoTools: {
       title: 'Burn Captions',
       description: 'Embed subtitles into video files (SRT/VTT). Customize font, size and color before burning in.',
       icon: <SubtitlesIcon fontSize="small" color="primary" />,
-      link: '/tools/video/burn-caption',
+      link: '/tools/video/burn-caption-landing',
       color: 'primary'
     },
     {
