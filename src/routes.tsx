@@ -23,6 +23,8 @@ import VideoResizerLanding from './pages/landings/VideoResizerLanding';
 import VideoResizerBlog from './pages/blogs/VideoResizerBlog';
 import VideoTrim from './pages/tools/VideoTrim';
 import VideoMerge from './pages/tools/VideoMerge';
+import VideoMergerLanding from './pages/landings/VideoMergerLanding';
+import VideoMergerBlog from './pages/blogs/VideoMergerBlog';
 import ExtractAudio from './pages/tools/ExtractAudio';
 import ThumbnailGenerator from './pages/tools/ThumbnailGenerator';
 import VideoPlayback from './pages/tools/VideoPlayback';
@@ -62,6 +64,8 @@ function AppRoutes() {
   <Route path="tools/video/how-to-resize-video-online" element={<BasicLayout><VideoResizerBlog /></BasicLayout>} />
   <Route path="tools/video/trim" element={<BasicLayout><VideoTrim /></BasicLayout>} />
   <Route path="tools/video/merge" element={<BasicLayout><VideoMerge /></BasicLayout>} />
+  <Route path="tools/video/merge-videos-online" element={<BasicLayout><VideoMergerLanding /></BasicLayout>} />
+  <Route path="tools/video/how-to-merge-videos-online" element={<BasicLayout><VideoMergerBlog /></BasicLayout>} />
   <Route path="tools/video/extract-audio" element={<BasicLayout><ExtractAudio /></BasicLayout>} />
   <Route path="tools/video/thumbnail" element={<BasicLayout><ThumbnailGenerator /></BasicLayout>} />
   <Route path="tools/video/burn-caption" element={<BasicLayout><BurnCaption /></BasicLayout>} />

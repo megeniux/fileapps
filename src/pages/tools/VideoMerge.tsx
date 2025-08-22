@@ -145,10 +145,10 @@ function VideoMerge() {
       ])
       setStatus('Finalizing')
       setProgress(99.9)
-  const data = await ffmpeg.readFile(outputFileName)
-  const blob = new Blob([new Uint8Array(data as any)], { type: 'video/mp4' })
-  const url = URL.createObjectURL(blob)
-  setDownloadUrl(url)
+      const data = await ffmpeg.readFile(outputFileName)
+      const blob = new Blob([new Uint8Array(data as any)], { type: 'video/mp4' })
+      const url = URL.createObjectURL(blob)
+      setDownloadUrl(url)
       setDownloadSize(data.length)
       // Clean up
       for (const file of files) {
@@ -159,7 +159,7 @@ function VideoMerge() {
       setProgress(100)
       setStatus('Completed')
       ffmpeg.off('log', logHandler)
-    } catch (err:any) {
+    } catch (err: any) {
       setStatus('Failed')
       setConsoleLogs(logs => [...logs, String(err)])
       // Only set errorMsg if not stopped
@@ -196,7 +196,7 @@ function VideoMerge() {
   // Memoized video preview table
   const VideoTable = React.useMemo(() => (
     <TableContainer>
-  <Table>
+      <Table>
         <TableHead>
           <TableRow>
             <TableCell>Preview</TableCell>
@@ -294,7 +294,7 @@ function VideoMerge() {
               <Box textAlign="center">
                 <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
                 <Typography variant="subtitle2" gutterBottom>
-                  Drag & drop video files here<br/>or<br/>Click to add
+                  Drag & drop video files here<br />or<br />Click to add
                 </Typography>
                 <Typography color="text.secondary" variant="caption">
                   Supported: MP4, MOV, AVI, MKV, and more
@@ -323,7 +323,7 @@ function VideoMerge() {
           </Box>
           {/* End Drag-and-drop Upload/Preview UI */}
           {files.length ? VideoTable : ""}
-  </CardContent>
+        </CardContent>
         <CardActions sx={{ display: files.length ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
           <Button
             variant="contained"

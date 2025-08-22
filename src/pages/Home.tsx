@@ -63,7 +63,7 @@ const videoTools: {
       title: 'Video Merger',
       description: 'Combine multiple clips into a single video file while preserving order and quality.',
       icon: <MergeTypeIcon fontSize="small" color="success" />,
-      link: '/tools/video/merge',
+  link: '/tools/video/merge-videos-online',
       color: 'success'
     },
     {
