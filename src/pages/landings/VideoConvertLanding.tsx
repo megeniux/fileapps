@@ -78,11 +78,11 @@ export default function VideoConvertLanding() { // corrected component name to m
         <meta name="keywords" content="convert video online free, convert video to mp4, free online video converter, no signup video converter, change video resolution online, convert mov to mp4 free, convert mkv to mp4 online, video codec converter online, convert video without losing quality" />
         <meta property="og:title" content="Convert Videos Online Free – MP4, AVI, MKV, MOV (No Signup)" />
         <meta property="og:description" content="Free video converter in your browser. Convert to MP4, AVI, MOV, MKV and more. No signups, no uploads, no watermarks. Full customization – resolution, codec, bitrate." />
-        <meta property="og:image" content="/images/landing/video-converter-landing.png" />
-        <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://fileapps.click/tools/video/convert-landing" />
+  <meta property="og:image" content="/images/landing/video-convert-hero.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/tools/video/convert-video-online" />
         <meta property="og:site_name" content="FileApps" />
-  <link rel="canonical" href="https://fileapps.click/tools/video/convert-landing" />
+  <link rel="canonical" href="/tools/video/convert-video-online" />
         <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
@@ -93,8 +93,8 @@ export default function VideoConvertLanding() { // corrected component name to m
               <Typography variant="h2" component="h1">Convert Videos Online – Free, Fast & No Signup</Typography>
               <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Convert your videos to MP4, MOV, MKV, AVI, and more directly in your browser. Customize resolution, FPS, bitrate, and codec. No signups, no credit card, no watermarks – 100% private.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
-                <Button color='primary' size='large' href="/tools/video/convert" variant="contained">Upload Video</Button>
-                <Button size='large' href="/tools/video/convert-blog" variant="text" sx={{ color: 'text.secondary' }}>Read Guide</Button>
+                <Button color='primary' size='large' href="/tools/video/convert" variant="contained">Upload</Button>
+                <Button size='large' href="/tools/video/how-to-convert-video-online" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
               </Box>
             </Grid>
             <Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -106,7 +106,7 @@ export default function VideoConvertLanding() { // corrected component name to m
 
       <section className='why-us'>
         <Container maxWidth="lg">
-          <Grid container spacing={3}>
+          <Grid container spacing={3} justifyContent="center">
             <Grid size={12}>
               <Typography variant='h2'>Why Use Our Online Video Converter?</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
@@ -215,8 +215,8 @@ export default function VideoConvertLanding() { // corrected component name to m
             <Grid size={12}><Typography variant='h2' align='center'>Ready to convert a video?</Typography></Grid>
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Upload your file and convert it instantly — private & free.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-              <Button color='inherit' variant='contained' size='large' href='/tools/video/convert'>Upload Video</Button>
-              <Button size='large' href='/tools/video/convert-blog' sx={{ color: 'common.white' }}>Read Guide</Button>
+              <Button color='inherit' variant='contained' size='large' href='/tools/video/convert'>Upload</Button>
+              <Button size='large' href='/tools/video/how-to-convert-video-online' sx={{ color: 'common.white' }}>Learn More</Button>
             </Grid>
           </Grid>
         </Container>

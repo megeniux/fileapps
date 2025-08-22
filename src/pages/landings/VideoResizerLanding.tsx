@@ -105,11 +105,11 @@ export default function VideoResizerLanding() {
                 <meta name="keywords" content="resize video online free, online video resizer no signup, resize mp4 video online, change video resolution online, video aspect ratio changer, resize MOV AVI MKV online, private video resizer browser, no credit card video tool" />
                 <meta property="og:title" content="Resize Videos Online Free (Privacy-First, No Uploads)" />
                 <meta property="og:description" content="Fast, free, and private online video resizer. Change resolution, aspect ratio, and FPS directly in your browser. No uploads, no signups, no watermarks." />
-                <meta property="og:image" content="/images/branding/logo-xl.svg" />
+                <meta property="og:image" content="/images/landing/video-resizer-hero.jpg" />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://fileapps.click/tools/video/resize-landing" />
+                <meta property="og:url" content="/tools/video/resize-video-online" />
                 <meta property="og:site_name" content="FileApps" />
-                <link rel="canonical" href="https://fileapps.click/tools/video/resize-landing" />
+                <link rel="canonical" href="/tools/video/resize-video-online" />
                 <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
             </Helmet>
 
@@ -120,8 +120,8 @@ export default function VideoResizerLanding() {
                             <Typography variant="h2" component="h1">Resize Videos Online Free — 100% Private & Secure</Typography>
                             <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Adjust resolution, aspect ratio, width, height and FPS in your browser. No uploads, no watermarks, no signups — everything stays on your device.</Typography>
                             <Box display="flex" gap={1}>
-                                <Button color='warning' size='large' href="/tools/video/resize" variant="contained">Upload Now</Button>
-                                <Button size='large' href="/tools/video/resize-blog" variant="text" sx={{ color: 'text.secondary' }}>Read Guide</Button>
+                                <Button color='warning' size='large' href="/tools/video/resize" variant="contained">Upload</Button>
+                                <Button size='large' href="/tools/video/how-to-resize-video-online" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
                             </Box>
                         </Grid>
                         <Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -133,7 +133,7 @@ export default function VideoResizerLanding() {
 
             <section className='why-us'>
                 <Container maxWidth="lg">
-                    <Grid container spacing={3}>
+                    <Grid container spacing={3} justifyContent='center'>
                         <Grid size={12}>
                             <Typography variant='h2'>Why Use Our Online Video Resizer?</Typography>
                             <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
@@ -262,8 +262,8 @@ export default function VideoResizerLanding() {
                         <Grid size={12}><Typography variant='h2' align='center'>Ready to resize your video?</Typography></Grid>
                         <Grid size={12}><Typography variant='h6' component="p" color='common.white'>Fast, private and free video resizing — right in your browser.</Typography></Grid>
                         <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-                            <Button color='inherit' variant="contained" size='large' href="/tools/video/resize">Upload Now</Button>
-                            <Button size='large' href="/tools/video/resize-blog" sx={{ color: 'common.white' }}>Read Guide</Button>
+                            <Button color='inherit' variant="contained" size='large' href="/tools/video/resize">Upload</Button>
+                            <Button size='large' href="/tools/video/how-to-resize-video-online" sx={{ color: 'common.white' }}>Learn More</Button>
                         </Grid>
                     </Grid>
                 </Container>

@@ -29,10 +29,10 @@ export default function VideoConvertBlog() {
         <meta property='og:title' content='How to Convert Videos Online Free (No Signup, No Watermarks)' />
         <meta property='og:description' content='Convert videos privately in your browser – MP4, MOV, MKV, AVI, and more. No uploads, no signup, no watermark.' />
         <meta property='og:type' content='article' />
-        <meta property='og:image' content='/images/landing/video-converter-landing.png' />
-        <meta property='og:url' content='https://fileapps.click/tools/video/convert-blog' />
+  <meta property='og:image' content='/images/landing/video-convert-hero.jpg' />
+  <meta property='og:url' content='/tools/video/how-to-convert-video-online' />
         <meta property='og:site_name' content='FileApps' />
-        <link rel='canonical' href='https://fileapps.click/tools/video/convert-blog' />
+  <link rel='canonical' href='/tools/video/how-to-convert-video-online' />
         <script type='application/ld+json'>{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
@@ -49,7 +49,7 @@ export default function VideoConvertBlog() {
           <Typography variant='h4' component='h2' gutterBottom>Why Convert Videos?</Typography>
           <Typography variant='body1' mb={2}>Ensure compatibility across devices and platforms.<br />Reduce file size for faster sharing and uploads.<br />Adjust quality for social media (YouTube, Instagram, TikTok).<br />Convert for professional editing or archiving.</Typography>
 
-          <Typography variant='h4' component='h2' mt={2}>Step-by-Step: Convert Video in Browser</Typography>
+          <Typography variant='h4' component='h2' my={2}>Step-by-Step: Convert Video in Browser</Typography>
           <Typography variant='body1'>1. <strong>Upload your video</strong> (drag &amp; drop supported).<br />2. <strong>Select output format</strong> (MP4, MOV, MKV, AVI).<br />3. <strong>Customize settings</strong> (resolution, codec, bitrate, FPS).<br />4. <strong>Click Convert &amp; Download</strong> – your converted file will be ready instantly.</Typography>
 
           <Typography variant='h4' component='h2' mt={3} gutterBottom>Tips for Best Results</Typography>
@@ -62,8 +62,8 @@ export default function VideoConvertBlog() {
           <Typography variant='body1' mb={2}>Video conversion doesn’t require signups, uploads, or expensive software. With our free browser-based video converter, you can instantly convert videos to MP4, MOV, MKV, AVI, and more — while keeping your files private.</Typography>
 
           <Box mt={4} textAlign='center'>
-            <Button color='primary' size='large' href='/tools/video/convert' variant='contained'>Upload Video</Button>
-            <Button color='primary' size='large' href='/tools/video/convert-landing' variant='outlined' sx={{ ml: 2 }}>Landing Page</Button>
+            <Button color='primary' size='large' href='/tools/video/convert' variant='contained'>Upload</Button>
+            <Button color='primary' size='large' href='/tools/video/convert-video-online' variant='outlined' sx={{ ml: 2 }}>Features</Button>
           </Box>
         </Box>
       </Paper>

@@ -35,21 +35,21 @@ const videoTools: {
       title: 'Video Converter',
       description: 'Convert videos between MP4, WebM, MKV, MOV and more. Preserve quality and choose codecs, resolution and bitrate.',
       icon: <SwapHorizIcon fontSize="small" color="primary" />,
-      link: '/tools/video/convert-landing',
+  link: '/tools/video/convert-video-online',
       color: 'primary'
     },
     {
       title: 'Compress Video',
       description: 'Reduce video file size while maintaining quality. Fast and easy compression for all your videos.',
       icon: <CompressIcon fontSize="small" color="secondary" />,
-      link: '/tools/video/compress-landing',
+  link: '/tools/video/compress-video-online',
       color: 'secondary'
     },
     {
       title: 'Video Resizer',
       description: 'Resize videos to custom dimensions or common aspect ratios for web and social platforms.',
       icon: <AspectRatioIcon fontSize="small" color='warning' />,
-  link: '/tools/video/resize-landing',
+  link: '/tools/video/resize-video-online',
       color: 'warning'
     },
     {
@@ -84,7 +84,7 @@ const videoTools: {
       title: 'Burn Captions',
       description: 'Embed subtitles into video files (SRT/VTT). Customize font, size and color before burning in.',
       icon: <SubtitlesIcon fontSize="small" color="primary" />,
-      link: '/tools/video/burn-caption-landing',
+  link: '/tools/video/burn-captions-into-video-online',
       color: 'primary'
     },
     {
@@ -108,7 +108,7 @@ const audioTools: {
       title: 'Audio Converter',
       description: 'Convert audio between MP3, WAV, AAC, FLAC and more. Keep bitrate and quality control options.',
       icon: <SwapHorizIcon fontSize="small" color="primary" />,
-      link: '/tools/audio/convert-landing',
+  link: '/tools/audio/convert-audio-online',
       color: 'primary'
     },
     {
@@ -129,7 +129,7 @@ const audioTools: {
       title: 'Audio Effects',
       description: 'Apply fades, normalization, pitch, speed and volume adjustments to audio files.',
       icon: <GraphicEqIcon fontSize="small" color="info" />,
-  link: '/tools/audio/effects-landing',
+  link: '/tools/audio/audio-effects-online',
       color: 'info'
     },
     {

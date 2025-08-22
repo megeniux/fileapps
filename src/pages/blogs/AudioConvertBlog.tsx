@@ -50,10 +50,10 @@ export default function AudioConvertBlog() {
                 <meta property="og:title" content="How to Convert Audio Files Online Free (No Signup, No Uploads)" />
                 <meta property="og:description" content="This guide explains how to convert audio files to MP3, WAV, AAC, FLAC, OGG, and more without installing software, without uploading to servers, and with full privacy." />
                 <meta property="og:type" content="article" />
-                <meta property="og:image" content="/images/branding/logo-xl.svg" />
+                <meta property="og:image" content="/images/landing/audio-convert-hero.jpg" />
                 <meta property="og:site_name" content="FileApps" />
-                <meta property="og:url" content="https://fileapps.click/tools/audio/convert-blog" />
-                <link rel="canonical" href="https://fileapps.click/tools/audio/convert-blog" />
+                <meta property="og:url" content="/tools/audio/how-to-convert-audio-online" />
+                <link rel="canonical" href="/tools/audio/how-to-convert-audio-online" />
                 <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
             </Helmet>
 
@@ -89,8 +89,8 @@ export default function AudioConvertBlog() {
                     <Typography variant="body1" mb={2}>Audio conversion doesn't need signups, uploads, or software installs. With our free browser-based tool, you can instantly convert audio files to MP3, WAV, AAC, FLAC, OGG, or M4A — all while keeping your files private on your device.</Typography>
 
                     <Box mt={4} textAlign="center">
-                        <Button color='primary' size='large' href="/tools/audio/convert" variant="contained">Upload Now</Button>
-                        <Button color='primary' size='large' href="/tools/audio/convert-landing" variant="outlined" sx={{ ml: 2 }}>Features</Button>
+                        <Button color='primary' size='large' href="/tools/audio/convert" variant="contained">Upload</Button>
+                        <Button color='primary' size='large' href="/tools/audio/convert-audio-online" variant="outlined" sx={{ ml: 2 }}>Features</Button>
                     </Box>
                 </Box>
             </Paper>

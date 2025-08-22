@@ -131,10 +131,10 @@ export default function AudioConvertLanding() {
 				<meta property="og:title" content="Convert Audio to MP3 & More Online Free (Privacy-First, No Uploads)" />
 				<meta property="og:description" content="Fast, free, and private online audio converter. Convert to MP3, WAV, AAC, FLAC, OGG directly in your browser. No uploads, no signups, no watermarks." />
 				<meta property="og:type" content="website" />
-				<meta property="og:image" content="/images/branding/logo-xl.svg" />
-				<meta property="og:url" content="https://fileapps.click/tools/audio/convert-landing" />
+				<meta property="og:image" content="/images/landing/audio-convert-hero.jpg" />
+				<meta property="og:url" content="/tools/audio/convert-audio-online" />
 				<meta property="og:site_name" content="FileApps" />
-				<link rel="canonical" href="https://fileapps.click/tools/audio/convert-landing" />
+				<link rel="canonical" href="/tools/audio/convert-audio-online" />
 				<script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
 			</Helmet>
 			<section className='hero-section'>
@@ -148,8 +148,8 @@ export default function AudioConvertLanding() {
 								Easily convert your audio files to MP3, WAV, AAC, FLAC, OGG and more directly in your browser. Choose quality (320kbps, 192kbps, 128kbps, lossless) and convert instantly — no uploads, no watermarks, no sign‑ups required.
 							</Typography>
 							<Box display="flex" justifyContent={{ xs: 'center', md: 'flex-start' }} gap={1}>
-								<Button color='primary' size='large' href="/tools/audio/convert" variant="contained">Upload Now</Button>
-								<Button size='large' href="/tools/audio/convert-blog" variant="text">Read Guide</Button>
+								<Button color='primary' size='large' href="/tools/audio/convert" variant="contained">Upload</Button>
+								<Button size='large' href="/tools/audio/how-to-convert-audio-online" variant="text">Learn More</Button>
 							</Box>
 						</Grid>
 						<Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -160,7 +160,7 @@ export default function AudioConvertLanding() {
 			</section>
 			<section className='why-us'>
 				<Container maxWidth="lg">
-					<Grid container spacing={3}>
+					<Grid container spacing={3} justifyContent='center'>
 						<Grid container size={12}>
 							<Grid size={12}>
 								<Typography variant='h2'>Why Use Our Online Audio Converter?</Typography>
@@ -377,8 +377,8 @@ export default function AudioConvertLanding() {
 							</Typography>
 						</Grid>
 						<Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-							<Button color='inherit' variant="contained" size='large' href="/tools/audio/convert">Upload Now</Button>
-							<Button size='large' href="/tools/audio/convert-blog" sx={{ color: 'common.white' }}>Read Guide</Button>
+							<Button color='inherit' variant="contained" size='large' href="/tools/audio/convert">Upload</Button>
+							<Button size='large' href="/tools/audio/how-to-convert-audio-online" sx={{ color: 'common.white' }}>Learn More</Button>
 						</Grid>
 					</Grid>
 				</Container>

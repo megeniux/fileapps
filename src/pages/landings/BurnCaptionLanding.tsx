@@ -78,11 +78,11 @@ export default function BurnCaptionLanding() {
                 <meta name="keywords" content="burn captions online free, add subtitles to video online, hardcode subtitles online, embed captions in video free, no signup subtitle burner, drag & drop caption tool, burn captions to MP4 online, add SRT to video free, customize subtitle font online" />
                 <meta property="og:title" content="Burn Captions into Videos Online – Free & Private (No Signup)" />
                 <meta property="og:description" content="Add subtitles to any video and burn them permanently online. Free, no watermark, no signup, full customization. Runs in your browser for privacy." />
-                <meta property="og:image" content="/images/landing/burn-caption-landing.png" />
+                <meta property="og:image" content="/images/landing/burn-caption-hero.jpg" />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://fileapps.click/tools/video/burn-caption-landing" />
+                <meta property="og:url" content="/tools/video/burn-captions-into-video-online" />
                 <meta property="og:site_name" content="FileApps" />
-                <link rel="canonical" href="https://fileapps.click/tools/video/burn-caption-landing" />
+                <link rel="canonical" href="/tools/video/burn-captions-into-video-online" />
                 <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
             </Helmet>
 
@@ -93,8 +93,8 @@ export default function BurnCaptionLanding() {
                             <Typography variant="h2" component="h1">Burn Captions into Your Videos Online – Free, Fast & No Signup</Typography>
                             <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Add subtitles (SRT, VTT) to your video and burn them permanently in the browser. Customize font, color, and outline. No uploads, no watermarks, no credit card required.</Typography>
                             <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
-                                <Button color='primary' size='large' href="/tools/video/burn-caption" variant="contained">Upload Video</Button>
-                                <Button size='large' href="/tools/video/burn-captions-blog" variant="text" sx={{ color: 'text.secondary' }}>Read Guide</Button>
+                                <Button color='primary' size='large' href="/tools/video/burn-caption" variant="contained">Upload</Button>
+                                <Button size='large' href="/tools/video/how-to-burn-captions-into-video-online" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
                             </Box>
                         </Grid>
                         <Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -106,7 +106,7 @@ export default function BurnCaptionLanding() {
 
             <section className='why-us'>
                 <Container maxWidth="lg">
-                    <Grid container spacing={3}>
+                    <Grid container spacing={3} justifyContent='center'>
                         <Grid size={12}>
                             <Typography variant='h2'>Why Use Our Online Caption Burner?</Typography>
                             <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
@@ -213,8 +213,8 @@ export default function BurnCaptionLanding() {
                         <Grid size={12}><Typography variant='h2' align='center'>Ready to burn captions?</Typography></Grid>
                         <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Upload your video now — free, fast & private.</Typography></Grid>
                         <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-                            <Button color='inherit' variant='contained' size='large' href='/tools/video/burn-caption'>Upload Video</Button>
-                            <Button size='large' href='/tools/video/burn-captions-blog' sx={{ color: 'common.white' }}>Read Guide</Button>
+                            <Button color='inherit' variant='contained' size='large' href='/tools/video/burn-caption'>Upload</Button>
+                            <Button size='large' href='/tools/video/how-to-burn-captions-into-video-online' sx={{ color: 'common.white' }}>Learn More</Button>
                         </Grid>
                     </Grid>
                 </Container>

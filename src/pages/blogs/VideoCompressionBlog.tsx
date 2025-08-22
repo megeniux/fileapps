@@ -29,10 +29,10 @@ export default function VideoCompressionBlog() {
         <meta property='og:title' content='Compress Videos Online Free – High Quality & No Signup' />
         <meta property='og:description' content='Free and private online video compressor – reduce video size without losing quality. Customize CRF, presets and resolution.' />
         <meta property='og:type' content='article' />
-        <meta property='og:image' content='/images/landing/video-compressor-landing.png' />
-        <meta property='og:url' content='https://fileapps.click/tools/video/compress-blog' />
+  <meta property='og:image' content='/images/landing/video-compression-hero.jpg' />
+  <meta property='og:url' content='/tools/video/compress-blog' />
         <meta property='og:site_name' content='FileApps' />
-        <link rel='canonical' href='https://fileapps.click/tools/video/compress-blog' />
+  <link rel='canonical' href='/tools/video/compress-blog' />
         <script type='application/ld+json'>{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
@@ -76,10 +76,11 @@ export default function VideoCompressionBlog() {
         </ul>
 
         <Typography variant='h4' component='h2' gutterBottom mt={4}>Conclusion</Typography>
-        <Typography variant='body1'>Compressing videos doesn’t require premium software or online uploads. With our free online video compressor, you can shrink video sizes instantly in your browser, without losing quality and without watermarks.</Typography>
+        <Typography variant='body1'>Compressing videos doesn’t require premium software or online uploads. With our Free Video Compressor Online , you can shrink video sizes instantly in your browser, without losing quality and without watermarks.</Typography>
 
         <Box mt={5} textAlign='center'>
-          <Button color='secondary' size='large' variant='contained' href='/tools/video/compress'>Start Compressing</Button>
+          <Button color='secondary' size='large' variant='contained' href='/tools/video/compress'>Upload</Button>
+          <Button color='secondary' size='large' variant='outlined' href='/tools/video/compress-landing' sx={{ ml: 2 }}>Features</Button>
         </Box>
       </Paper>
     </Container>

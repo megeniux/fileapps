@@ -18,10 +18,10 @@ export default function BurnCaptionsBlog() {
         <meta property="og:title" content="How to Burn Captions into Videos Online Free (No Signup)" />
         <meta property="og:description" content="Add subtitles permanently to video with full privacy – free, no uploads, no watermark." />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="/images/landing/burn-caption-landing.png" />
-        <meta property="og:url" content="https://fileapps.click/tools/video/burn-captions-blog" />
-        <meta property="og:site_name" content="FileApps" />
-        <link rel="canonical" href="https://fileapps.click/tools/video/burn-captions-blog" />
+  <meta property="og:image" content="/images/landing/burn-caption-hero.jpg" />
+  <meta property="og:url" content="/tools/video/how-to-burn-captions-into-video-online" />
+  <meta property="og:site_name" content="FileApps" />
+  <link rel="canonical" href="/tools/video/how-to-burn-captions-into-video-online" />
       </Helmet>
 
       <Paper sx={{ p: 4 }}>
@@ -37,7 +37,7 @@ export default function BurnCaptionsBlog() {
           <Typography variant="h4" component="h2" gutterBottom>Why Burn Captions into Videos?</Typography>
           <Typography variant="body1" mb={2}>Improve accessibility for hearing-impaired viewers.<br />Add translations for international audiences.<br />Make videos understandable without sound.<br />Create professional content for social media platforms.</Typography>
 
-          <Typography variant="h4" component="h2" mt={2}>Step-by-Step: Add Subtitles to Video in Browser</Typography>
+          <Typography variant="h4" component="h2" my={2}>Step-by-Step: Add Subtitles to Video in Browser</Typography>
           <Typography variant="body1">1. <strong>Upload your video file</strong> (drag &amp; drop supported).<br />2. <strong>Add subtitle file</strong> (SRT or VTT).<br />3. <strong>Customize styling</strong> (font size, color, outline).<br />4. <strong>Click Burn Captions &amp; Download</strong> – your video will be ready instantly.</Typography>
 
           <Typography variant="h4" component="h2" mt={3} gutterBottom>Tips for Best Results</Typography>
@@ -50,8 +50,8 @@ export default function BurnCaptionsBlog() {
           <Typography variant="body1" mb={2}>Burning captions into videos doesn’t require signups, uploads, or paid software. With our free online tool, you can instantly hardcode subtitles (SRT or VTT) into MP4, MOV, MKV, AVI, and more — all while keeping your files private on your device.</Typography>
 
           <Box mt={4} textAlign="center">
-            <Button color='primary' size='large' href="/tools/video/burn-caption" variant="contained">Upload Video</Button>
-            <Button color='primary' size='large' href="/tools/video/burn-caption-landing" variant="outlined" sx={{ ml: 2 }}>Landing Page</Button>
+            <Button color='primary' size='large' href="/tools/video/burn-caption" variant="contained">Upload</Button>
+            <Button color='primary' size='large' href="/tools/video/burn-captions-into-video-online" variant="outlined" sx={{ ml: 2 }}>Features</Button>
           </Box>
         </Box>
       </Paper>

@@ -81,11 +81,11 @@ export default function AudioEffectsLanding() {
                 <meta name="keywords" content="edit audio online free, add effects to audio online free, pitch shifter online free, speed up audio online, slow down music online, normalize audio free, fade in fade out audio online, online audio editor no signup, free browser audio effects tool" />
                 <meta property="og:title" content="Edit Audio Online Free - Add Effects Instantly (No Signup, Privacy-First)" />
                 <meta property="og:description" content="Apply audio effects like pitch shift, speed change, fade in/out, normalize, and volume boost online. Free, browser-based, and private — no uploads, no signup, no credit card." />
-                <meta property="og:image" content="/images/branding/logo-xl.svg" />
+                <meta property="og:image" content="/images/landing/audio-effect-hero.jpg" />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://fileapps.click/tools/audio/effects-landing" />
+                <meta property="og:url" content="/tools/audio/audio-effects-online" />
                 <meta property="og:site_name" content="FileApps" />
-                <link rel="canonical" href="https://fileapps.click/tools/audio/effects-landing" />
+                <link rel="canonical" href="/tools/audio/audio-effects-online" />
                 <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
             </Helmet>
 
@@ -96,8 +96,8 @@ export default function AudioEffectsLanding() {
                             <Typography variant="h2" component="h1">Edit Audio Online Free — Apply Effects Instantly</Typography>
                             <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Change pitch, adjust speed, normalize volume, and apply fade in/out — all without uploading files, signing up, or paying. 100% private and secure.</Typography>
                             <Box display="flex" gap={1}>
-                                <Button color='info' size='large' href="/tools/audio/effects" variant="contained">Upload Now</Button>
-                                <Button size='large' href="/tools/audio/effects-blog" variant="text" sx={{ color: 'text.secondary' }}>Read Guide</Button>
+                                <Button color='info' size='large' href="/tools/audio/effects" variant="contained">Upload</Button>
+                                <Button size='large' href="/tools/audio/how-to-audio-effects-online" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
                             </Box>
                         </Grid>
                         <Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -109,7 +109,7 @@ export default function AudioEffectsLanding() {
 
             <section className='why-us'>
                 <Container maxWidth="lg">
-                    <Grid container spacing={3}>
+                    <Grid container spacing={3} justifyContent='center'>
                         <Grid size={12}>
                             <Typography variant='h2'>Why Use Our Online Audio Effects Tool?</Typography>
                             <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
@@ -216,8 +216,8 @@ export default function AudioEffectsLanding() {
                         <Grid size={12}><Typography variant='h2' align='center'>Ready to enhance your audio?</Typography></Grid>
                         <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Apply pitch, speed, fades, normalization and more — all locally.</Typography></Grid>
                         <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-                            <Button color='inherit' variant='contained' size='large' href='/tools/audio/effects'>Upload Now</Button>
-                            <Button size='large' href='/tools/audio/effects-blog' sx={{ color: 'common.white' }}>Read Guide</Button>
+                            <Button color='inherit' variant='contained' size='large' href='/tools/audio/effects'>Upload</Button>
+                            <Button size='large' href='/tools/audio/how-to-audio-effects-online' sx={{ color: 'common.white' }}>Learn More</Button>
                         </Grid>
                     </Grid>
                 </Container>

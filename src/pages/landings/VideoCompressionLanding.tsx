@@ -97,15 +97,15 @@ export default function VideoCompressionLanding() {
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Free Online Video Compressor – Compress Videos Without Losing Quality (No Signup)</title>
+        <title>Free Video Compressor Online – Compress Videos Without Losing Quality (No Signup)</title>
         <meta name='description' content='Compress videos online for free without losing quality. No signup, no watermark, no credit card. Reduce video file size with custom CRF, presets, and resolution control – 100% browser-based and private.' />
         <meta name='keywords' content='compress video online free, reduce video size without losing quality, compress mp4 online, free video compressor no watermark, compress video for whatsapp, compress 4k video online, compress video for youtube, online video compression without signup' />
         <meta property='og:title' content='Compress Videos Online Free – High Quality & No Signup' />
         <meta property='og:description' content='Free and private online video compressor. Reduce video size without losing quality. Customize CRF, presets, resolution – no signup, no watermarks.' />
-        <meta property='og:image' content='/images/landing/video-compressor-landing.png' />
+        <meta property='og:image' content='/images/landing/video-compression-hero.jpg' />
         <meta property='og:type' content='website' />
-        <meta property='og:url' content='https://fileapps.click/tools/video/compress-landing' />
-        <link rel='canonical' href='https://fileapps.click/tools/video/compress-landing' />
+        <meta property='og:url' content='/tools/video/compress-video-online' />
+        <link rel='canonical' href='/tools/video/compress-video-online' />
         <script type='application/ld+json'>{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
@@ -116,8 +116,8 @@ export default function VideoCompressionLanding() {
               <Typography variant='h2' component='h1'>Compress Videos Online – Free, Fast & High Quality</Typography>
               <Typography variant='h6' component='p' color='text.secondary' mt={3} mb={4}>Reduce video file size without losing quality. Adjust CRF, resolution, and compression speed with advanced options. 100% browser-based, no signup, no watermark.</Typography>
               <Box display='flex' gap={1} flexWrap='wrap'>
-                <Button color='secondary' size='large' variant='contained' href='/tools/video/compress'>Upload Video</Button>
-                <Button size='large' variant='outlined' color='secondary' href='/tools/video/compress'>Start Compressing</Button>
+                <Button color='secondary' size='large' variant='contained' href='/tools/video/compress'>Upload</Button>
+                <Button size='large' variant='outlined' color='secondary' href='/tools/video/how-to-compress-video-online'>Learn More</Button>
               </Box>
             </Grid>
             <Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -129,7 +129,7 @@ export default function VideoCompressionLanding() {
 
       <section className='why-us'>
         <Container maxWidth='lg'>
-          <Grid container spacing={3}> 
+          <Grid container spacing={3} justifyContent='center'>
             <Grid size={12}>
               <Typography variant='h2'>Why Use Our Online Video Compressor?</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
@@ -147,7 +147,7 @@ export default function VideoCompressionLanding() {
 
       <section className='how-it-works'>
         <Container maxWidth='lg'>
-          <Grid container spacing={3}> 
+          <Grid container spacing={3}>
             <Grid size={12}>
               <Typography variant='h2'>How It Works</Typography>
               <Divider sx={{ width: 100, borderColor: 'text.primary', mx: 'auto', my: 2 }} />
@@ -171,7 +171,7 @@ export default function VideoCompressionLanding() {
 
       <section className='key-features'>
         <Container maxWidth='lg'>
-          <Grid container spacing={3}> 
+          <Grid container spacing={3}>
             <Grid size={12}>
               <Typography variant='h2'>Key Features</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
@@ -216,8 +216,8 @@ export default function VideoCompressionLanding() {
             <Grid size={12}><Typography variant='h2' align='center'>Ready to compress a video?</Typography></Grid>
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Upload your file and shrink it instantly — private & free.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1, flexWrap: 'wrap' }}>
-              <Button color='inherit' variant='contained' size='large' href='/tools/video/compress'>Upload Video</Button>
-              <Button size='large' href='/tools/video/compress-blog' sx={{ color: 'common.white' }}>Read Guide</Button>
+              <Button color='inherit' variant='contained' size='large' href='/tools/video/compress'>Upload</Button>
+              <Button size='large' href='/tools/video/how-to-compress-video-online' sx={{ color: 'common.white' }}>Learn More</Button>
             </Grid>
           </Grid>
         </Container>

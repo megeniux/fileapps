@@ -30,10 +30,10 @@ export default function AudioEffectsBlog() {
         <meta property="og:title" content="How to Edit Audio Online Free with Effects (No Signup, No Uploads)" />
         <meta property="og:description" content="Apply effects like pitch shift, speed change, fade in/out, normalize, and volume adjustment entirely in your browser." />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="/images/branding/logo-xl.svg" />
-        <meta property="og:url" content="https://fileapps.click/tools/audio/effects-blog" />
-        <meta property="og:site_name" content="FileApps" />
-        <link rel="canonical" href="https://fileapps.click/tools/audio/effects-blog" />
+  <meta property="og:image" content="/images/landing/audio-effect-hero.jpg" />
+  <meta property="og:url" content="/tools/audio/how-to-audio-effects-online" />
+  <meta property="og:site_name" content="FileApps" />
+  <link rel="canonical" href="/tools/audio/how-to-audio-effects-online" />
         <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
@@ -50,7 +50,7 @@ export default function AudioEffectsBlog() {
           <Typography variant="h4" component="h2" gutterBottom>Why Add Effects to Audio?</Typography>
           <Typography variant="body1" mb={2}>Improve clarity and loudness with normalization.<br />Create smooth transitions with fade in/out.<br />Adjust pitch for creative effects or corrections.<br />Speed up or slow down music for different use-cases.<br />Boost volume for quiet recordings.</Typography>
 
-          <Typography variant="h4" component="h2" mt={2}>Step-by-Step: Edit Audio in Browser</Typography>
+          <Typography variant="h4" component="h2" my={2}>Step-by-Step: Edit Audio in Browser</Typography>
           <Typography variant="body1">1. <strong>Upload your audio file</strong> (drag &amp; drop supported).<br />2. <strong>Choose your effects</strong> (pitch, speed, fade, normalize, volume).<br />3. <strong>Preview changes</strong> instantly before processing.<br />4. <strong>Apply effects</strong> – conversion happens locally in your browser.<br />5. <strong>Download edited audio</strong> with one click.</Typography>
 
           <Divider sx={{ my: 3 }} />
@@ -65,8 +65,8 @@ export default function AudioEffectsBlog() {
           <Typography variant="body1" mb={2}>Editing audio doesn't need complex software. With our free browser-based tool, you can apply effects like pitch shift, speed change, fade in/out, normalize, and volume boost instantly — while keeping all your files private on your device.</Typography>
 
           <Box mt={4} textAlign="center">
-            <Button color='info' size='large' href="/tools/audio/effects" variant="contained">Upload Now</Button>
-            <Button color='info' size='large' href="/tools/audio/effects-landing" variant="outlined" sx={{ ml: 2 }}>Features</Button>
+            <Button color='info' size='large' href="/tools/audio/effects" variant="contained">Upload</Button>
+            <Button color='info' size='large' href="/tools/audio/audio-effects-online" variant="outlined" sx={{ ml: 2 }}>Features</Button>
           </Box>
         </Box>
       </Paper>
