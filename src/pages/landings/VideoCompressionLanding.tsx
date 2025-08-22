@@ -1,8 +1,6 @@
 // React import intentionally omitted to use the new JSX transform
 import { Helmet } from 'react-helmet-async'
-
-// MUI Components
-import { styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
@@ -16,286 +14,194 @@ import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-
-// Icons
-import CompressIcon from '@mui/icons-material/Compress';
-import SecurityOutlinedIcon from '@mui/icons-material/SecurityOutlined';
-import SpeedIcon from '@mui/icons-material/Speed';
-import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
-import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
+// Icons for new rich content
+import CompressIcon from '@mui/icons-material/Compress'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+import TuneIcon from '@mui/icons-material/Tune'
+import DownloadIcon from '@mui/icons-material/Download'
+import UploadFileIcon from '@mui/icons-material/UploadFile'
+import SpeedIcon from '@mui/icons-material/Speed'
+import HighQualityIcon from '@mui/icons-material/HighQuality'
+import PrivacyTipIcon from '@mui/icons-material/PrivacyTip'
 
 const FAQ_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Can I compress videos without uploading my files?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. The compressor runs FFmpeg compiled to WebAssembly in your browser so files remain on your device."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do CRF and presets affect compression?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "CRF controls visual quality (lower = higher quality). Presets trade encoding speed for compression efficiency (ultrafast -> veryslow)."
-      }
-    }
+    { "@type": "Question", "name": "How does the video compressor work?", "acceptedAnswer": { "@type": "Answer", "text": "It uses FFmpeg WebAssembly in your browser. No file uploads, everything stays private on your device." } },
+    { "@type": "Question", "name": "Can I compress large videos like 4K?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, but the speed depends on your device's processing power and memory." } },
+    { "@type": "Question", "name": "What is CRF and how does it affect quality?", "acceptedAnswer": { "@type": "Answer", "text": "CRF (Constant Rate Factor) controls quality. Lower CRF = higher quality and bigger size. Higher CRF = smaller size but lower quality." } },
+    { "@type": "Question", "name": "Can I compress videos without changing resolution?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, keep the original resolution while reducing file size using CRF and bitrate adjustments." } },
+    { "@type": "Question", "name": "Is this free and watermark-free?", "acceptedAnswer": { "@type": "Answer", "text": "100% free, no signup, no watermark, no credit card required." } },
+    { "@type": "Question", "name": "Does it work on mobile?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, it works in any modern mobile browser on Android and iOS." } }
   ]
 }
 
 const Root = styled(Paper)(({ theme }) => ({
-  '& img': {
-    maxWidth: '100%'
-  },
+  '& img': { maxWidth: '100%' },
   '& .hero-section': {
     minHeight: 500,
     paddingTop: theme.spacing(6),
     '& .hero-image img': { marginBottom: theme.spacing(2) },
     [theme.breakpoints.down('md')]: {
-      '& .hero-text': {
-        textAlign: 'center',
-        paddingBottom: theme.spacing(6)
-      },
-      '& .hero-image img': {
-        display: 'table',
-        marginInline: 'auto'
-      }
-    }
-  },
-  '& .how-it-works': {
-    paddingBlock: theme.spacing(8),
-    textAlign: 'center',
-    '& .MuiTypography-h2': {
-      color: theme.palette.text.primary,
-    }
-  },
-  '& .faq-section': {
-    paddingBlock: theme.spacing(8),
-    '& .MuiTypography-h2': {
-      color: theme.palette.text.primary,
-    },
-    '& .MuiAccordionSummary-root': {
-      padding: theme.spacing(0, 2, 0, 2)
-    },
-    '& .MuiAccordionDetails-root': {
-      padding: theme.spacing(0, 2, 2, 2)
+      '& .hero-text': { textAlign: 'center', paddingBottom: theme.spacing(6) },
+      '& .hero-image img': { display: 'table', marginInline: 'auto' }
     }
   },
   '& .why-us, & .key-features, & .cta-section': {
     paddingBlock: theme.spacing(8),
     background: `radial-gradient(circle at 50% 0%, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary.dark} 100%)`,
     textAlign: 'center',
-    '& .MuiTypography-h2': {
-      color: theme.palette.common.white
-    }
+    '& .MuiTypography-h2': { color: theme.palette.common.white }
   },
-}));
+  '& .how-it-works': {
+    paddingBlock: theme.spacing(8),
+    textAlign: 'center'
+  },
+  '& .faq-section': {
+    paddingBlock: theme.spacing(8),
+    '& .MuiAccordionSummary-root': { padding: theme.spacing(0, 2) },
+    '& .MuiAccordionDetails-root': { padding: theme.spacing(0, 2, 2) }
+  }
+}))
 
 export default function VideoCompressionLanding() {
+  const whyCards = [
+    { icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: '100% Private', desc: 'All processing happens in your browser. No uploads, no data leaks.' },
+    { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Free Forever', desc: 'No signup, no credit card, no watermark.' },
+    { icon: <CompressIcon fontSize='large' color='secondary' />, title: 'Advanced Compression', desc: 'Adjust CRF, preset, and bitrate for best results.' },
+    { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'Keep Quality', desc: 'Reduce file size without making your video blurry.' },
+    { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Cross-Platform', desc: 'Works on Chrome, Firefox, Safari, Edge, and mobile browsers.' }
+  ]
+
+  const steps = [
+    { icon: <CloudUploadIcon />, title: 'Upload Video File', desc: 'Drag & drop or click to select.' },
+    { icon: <TuneIcon />, title: 'Choose Compression Level', desc: 'Adjust CRF and preset (speed vs quality).' },
+    { icon: <TuneIcon />, title: 'Set Advanced Options', desc: 'Customize resolution, bitrate, and format if needed.' },
+    { icon: <CompressIcon />, title: 'Compress Video', desc: 'Processing happens in your browser with FFmpeg WASM.' },
+    { icon: <DownloadIcon />, title: 'Download Video', desc: 'Get your compressed file instantly without uploads.' }
+  ]
+
+  const features = [
+    { icon: <UploadFileIcon fontSize='large' color='secondary' />, title: 'Drag & Drop Upload', desc: 'Easily select your videos.' },
+    { icon: <CompressIcon fontSize='large' color='secondary' />, title: 'CRF Control', desc: 'Fine-tune quality vs. file size (lower CRF = higher quality).' },
+    { icon: <TuneIcon fontSize='large' color='secondary' />, title: 'Preset Options', desc: 'Choose faster or slower compression to fit your needs.' },
+    { icon: <TuneIcon fontSize='large' color='secondary' />, title: 'Resolution Adjustment', desc: 'Downscale to 1080p, 720p, 480p, or custom.' },
+    { icon: <TuneIcon fontSize='large' color='secondary' />, title: 'Bitrate Management', desc: 'Control audio and video bitrate precisely.' },
+    { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'Estimate Size Preview', desc: 'See expected size before starting compression.' },
+    { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Cross-Browser Support', desc: 'Works on desktop & mobile without software.' },
+    { icon: <DownloadIcon fontSize='large' color='secondary' />, title: 'Instant Download', desc: 'Export compressed video immediately.' },
+    { icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: 'Free Forever', desc: 'No signups, watermarks, or hidden charges.' }
+  ]
+
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Browser-based Video Compressor — Compress MP4 Online Without Uploads</title>
-        <meta name="description" content="Compress MP4 and other videos in your browser using FFmpeg WASM. Private, fast, and free — CRF and preset controls, live progress, estimated file size." />
-        <meta property="og:title" content="Browser-based Video Compressor — Compress MP4 Online Without Uploads" />
-        <meta property="og:description" content="Reduce MP4 file size in your browser with CRF control and presets. No uploads, privacy-first video compression for social and web." />
-        <meta property="og:image" content="/images/branding/logo-xl.svg" />
-        <meta property="og:url" content="https://fileapps.click/tools/video/compress-landing" />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://fileapps.click/tools/video/compress-landing" />
-        <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
+        <title>Free Online Video Compressor – Compress Videos Without Losing Quality (No Signup)</title>
+        <meta name='description' content='Compress videos online for free without losing quality. No signup, no watermark, no credit card. Reduce video file size with custom CRF, presets, and resolution control – 100% browser-based and private.' />
+        <meta name='keywords' content='compress video online free, reduce video size without losing quality, compress mp4 online, free video compressor no watermark, compress video for whatsapp, compress 4k video online, compress video for youtube, online video compression without signup' />
+        <meta property='og:title' content='Compress Videos Online Free – High Quality & No Signup' />
+        <meta property='og:description' content='Free and private online video compressor. Reduce video size without losing quality. Customize CRF, presets, resolution – no signup, no watermarks.' />
+        <meta property='og:image' content='/images/landing/video-compressor-landing.png' />
+        <meta property='og:type' content='website' />
+        <meta property='og:url' content='https://fileapps.click/tools/video/compress-landing' />
+        <link rel='canonical' href='https://fileapps.click/tools/video/compress-landing' />
+        <script type='application/ld+json'>{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
       <section className='hero-section'>
-        <Container maxWidth="lg">
-          <Grid container spacing={3} alignItems="center">
-            <Grid size={{ xs: 12,  md: 6 }} className='hero-text'>
-              <Typography variant="h2" component="h1">Compress Videos Online — Private, Fast & Free</Typography>
-              <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>
-                Compress MP4 and other videos directly in your browser using FFmpeg WebAssembly — no uploads, no sign-ups, full control over quality and speed.
-              </Typography>
-              <Box display="flex" gap={1}>
-                <Button color='secondary' size='large' href="/tools/video/compress" variant="contained">Compress Now</Button>
-                <Button size='large' href="/tools/video/compress-blog" variant="text" sx={{ color: 'text.secondary' }}>Read Guide</Button>
+        <Container maxWidth='lg'>
+          <Grid container spacing={3} alignItems='center'>
+            <Grid size={{ xs: 12, md: 6 }} className='hero-text'>
+              <Typography variant='h2' component='h1'>Compress Videos Online – Free, Fast & High Quality</Typography>
+              <Typography variant='h6' component='p' color='text.secondary' mt={3} mb={4}>Reduce video file size without losing quality. Adjust CRF, resolution, and compression speed with advanced options. 100% browser-based, no signup, no watermark.</Typography>
+              <Box display='flex' gap={1} flexWrap='wrap'>
+                <Button color='secondary' size='large' variant='contained' href='/tools/video/compress'>Upload Video</Button>
+                <Button size='large' variant='outlined' color='secondary' href='/tools/video/compress'>Start Compressing</Button>
               </Box>
             </Grid>
-            <Grid size={{ xs: 12,  md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
-              <img src='/images/landing/video-compression-hero.jpg' alt='Compress Video' title='Compress Video' loading='lazy' width="auto" height="auto" />
+            <Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
+              <img src='/images/landing/video-compression-hero.jpg' alt='Laptop with video compression interface' title='Online Video Compressor' loading='lazy' />
             </Grid>
           </Grid>
         </Container>
       </section>
 
       <section className='why-us'>
-        <Container maxWidth="lg">
-          <Grid container spacing={3}>
+        <Container maxWidth='lg'>
+          <Grid container spacing={3}> 
             <Grid size={12}>
-              <Typography variant='h2'>Why use our video compressor?</Typography>
+              <Typography variant='h2'>Why Use Our Online Video Compressor?</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-
-            <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
-              <Card sx={{ height: '100%' }}>
-                <CardContent sx={{ p: 2 }}>
-                  <SecurityOutlinedIcon fontSize='large' color="secondary" />
-                  <Typography variant='h5' component="h3">Privacy-first</Typography>
-                  <Typography variant='body1'>Compression runs in your browser — your files never leave your device.</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
-              <Card sx={{ height: '100%' }}>
-                <CardContent sx={{ p: 2 }}>
-                  <SpeedIcon fontSize='large' color="secondary" />
-                  <Typography variant='h5' component="h3">Fast & Free</Typography>
-                  <Typography variant='body1'>No installs or sign-ups — compress videos quickly from your browser.</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
-              <Card sx={{ height: '100%' }}>
-                <CardContent sx={{ p: 2 }}>
-                  <SettingsSuggestIcon fontSize='large' color="secondary" />
-                  <Typography variant='h5' component="h3">Precision Controls</Typography>
-                  <Typography variant='body1'>Adjust CRF and presets to balance quality, speed and file size.</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
-              <Card sx={{ height: '100%' }}>
-                <CardContent sx={{ p: 2 }}>
-                  <DriveFolderUploadIcon fontSize='large' color="secondary" />
-                  <Typography variant='h5' component="h3">Drag & Drop</Typography>
-                  <Typography variant='body1'>Easily add videos and preview before compressing.</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
+            {whyCards.map((c, i) => (
+              <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 4, xl: 3 }}>
+                <Card sx={{ height: '100%' }}>
+                  <CardContent sx={{ p: 2 }}> {c.icon} <Typography variant='h5' component='h3'>{c.title}</Typography> <Typography variant='body1'>{c.desc}</Typography> </CardContent>
+                </Card>
+              </Grid>
+            ))}
           </Grid>
         </Container>
       </section>
 
       <section className='how-it-works'>
-        <Container maxWidth="lg">
-          <Grid container spacing={3}>
-            <Grid size={12}><Typography variant='h2'>How compression works</Typography>
-              <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} /></Grid>
-
-            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center">
-              <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                  <Box sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <DriveFolderUploadIcon />
+        <Container maxWidth='lg'>
+          <Grid container spacing={3}> 
+            <Grid size={12}>
+              <Typography variant='h2'>How It Works</Typography>
+              <Divider sx={{ width: 100, borderColor: 'text.primary', mx: 'auto', my: 2 }} />
+            </Grid>
+            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent='center'>
+              {steps.map((s, i) => (
+                <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+                    <Box sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{s.icon}</Box>
+                    <Box>
+                      <Typography variant='h5' component='h3'>{s.title}</Typography>
+                      <Typography variant='body1'>{s.desc}</Typography>
+                    </Box>
                   </Box>
-                  <Box>
-                    <Typography variant='h5' component='h3'>Upload your video</Typography>
-                    <Typography variant='body1'>Drag & drop or select a video to compress.</Typography>
-                  </Box>
-                </Box>
-              </Grid>
-
-              <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                  <Box sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <SettingsSuggestIcon />
-                  </Box>
-                  <Box>
-                    <Typography variant='h5' component='h3'>Choose CRF & Presets</Typography>
-                    <Typography variant='body1'>Set quality and speed preferences for the best tradeoff.</Typography>
-                  </Box>
-                </Box>
-              </Grid>
-
-              <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                  <Box sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <SpeedIcon />
-                  </Box>
-                  <Box>
-                    <Typography variant='h5' component='h3'>Compress in browser</Typography>
-                    <Typography variant='body1'>FFmpeg WASM performs compression and shows live progress.</Typography>
-                  </Box>
-                </Box>
-              </Grid>
+                </Grid>
+              ))}
             </Grid>
           </Grid>
         </Container>
       </section>
 
       <section className='key-features'>
-        <Container maxWidth="lg">
-          <Grid container spacing={3}>
-            <Grid size={12}><Typography variant='h2' mb={4}>Key Features</Typography>
-              <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} /></Grid>
-
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
-              <Card sx={{ height: '100%' }}>
-                <CardContent sx={{ p: 2 }}>
-                  <CompressIcon fontSize='large' color="secondary" />
-                  <Typography variant='h5' component="h3">CRF control</Typography>
-                  <Typography variant='body1'>Adjust constant rate factor to control quality and file size.</Typography>
-                </CardContent>
-              </Card>
+        <Container maxWidth='lg'>
+          <Grid container spacing={3}> 
+            <Grid size={12}>
+              <Typography variant='h2'>Key Features</Typography>
+              <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
-              <Card sx={{ height: '100%' }}>
-                <CardContent sx={{ p: 2 }}>
-                  <SettingsSuggestIcon fontSize='large' color="secondary" />
-                  <Typography variant='h5' component="h3">Preset slider</Typography>
-                  <Typography variant='body1'>Choose encoding presets to balance speed and efficiency.</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
-              <Card sx={{ height: '100%' }}>
-                <CardContent sx={{ p: 2 }}>
-                  <DriveFolderUploadIcon fontSize='large' color="secondary" />
-                  <Typography variant='h5' component="h3">Estimated output size</Typography>
-                  <Typography variant='body1'>See an estimated compressed file size before you start.</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
+            {features.map((f, i) => (
+              <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+                <Card sx={{ height: '100%' }}>
+                  <CardContent sx={{ p: 2 }}> {f.icon} <Typography variant='h5' component='h3'>{f.title}</Typography> <Typography variant='body1'>{f.desc}</Typography> </CardContent>
+                </Card>
+              </Grid>
+            ))}
           </Grid>
         </Container>
       </section>
 
       <section className='faq-section'>
-        <Container maxWidth="lg">
-          <Grid container spacing={3} justifyContent="center">
-            <Grid size={12}><Typography variant='h2' mb={4} align='center'>FAQs</Typography>
-              <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} /></Grid>
-            {FAQ_SCHEMA.mainEntity.map((faq, idx) => (
+        <Container maxWidth='lg'>
+          <Grid container spacing={3} justifyContent='center'>
+            <Grid size={12}>
+              <Typography variant='h2' align='center'>FAQs</Typography>
+              <Divider sx={{ width: 100, borderColor: 'text.primary', mx: 'auto', my: 2 }} />
+            </Grid>
+            {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
               <Grid key={idx} size={{ xs: 12 }}>
-                <Accordion
-                  square
-                  disableGutters
-                  elevation={3}
-                  sx={{
-                    '& .MuiAccordionSummary-root': { px: 1, py: 0.5 },
-                    '& .MuiAccordionDetails-root': { px: 1, py: 1 },
-                  }}
-                >
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls={`faq-${idx}-content`}
-                    id={`faq-${idx}-header`}
-                  >
-                    <Typography variant='h6' component="h3">{faq.name}</Typography>
+                <Accordion square disableGutters elevation={3}>
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`vcfaq-${idx}-content`} id={`vcfaq-${idx}-header`}>
+                    <Typography variant='h6' component='h3'>{faq.name}</Typography>
                   </AccordionSummary>
-                  <AccordionDetails sx={{ p: 2 }}>
-                    <Typography variant='body1'>
-                      {faq.acceptedAnswer?.text}
-                    </Typography>
+                  <AccordionDetails>
+                    <Typography variant='body1'>{faq.acceptedAnswer.text}</Typography>
                   </AccordionDetails>
                 </Accordion>
               </Grid>
@@ -305,13 +211,13 @@ export default function VideoCompressionLanding() {
       </section>
 
       <section className='cta-section'>
-        <Container maxWidth="lg">
-          <Grid container spacing={3} justifyContent="center">
-            <Grid size={12}><Typography variant='h2' align='center'>Ready to shrink your files?</Typography></Grid>
-            <Grid size={12}><Typography variant='h6' component="p" color='common.white'>Compress video quickly and privately in your browser — free to use.</Typography></Grid>
-            <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-              <Button color='inherit' variant="contained" size='large' href="/tools/video/compress">Compress Now</Button>
-              <Button size='large' href="/tools/video/compress-blog" sx={{ color: 'common.white' }}>Read Guide</Button>
+        <Container maxWidth='lg'>
+          <Grid container spacing={3} justifyContent='center'>
+            <Grid size={12}><Typography variant='h2' align='center'>Ready to compress a video?</Typography></Grid>
+            <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Upload your file and shrink it instantly — private & free.</Typography></Grid>
+            <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1, flexWrap: 'wrap' }}>
+              <Button color='inherit' variant='contained' size='large' href='/tools/video/compress'>Upload Video</Button>
+              <Button size='large' href='/tools/video/compress-blog' sx={{ color: 'common.white' }}>Read Guide</Button>
             </Grid>
           </Grid>
         </Container>

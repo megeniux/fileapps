@@ -82,24 +82,24 @@ const FAQ_SCHEMA = {
 const Root = styled(Paper)(({ theme }) => ({
 	'& img': { maxWidth: '100%' },
 	'& .hero-section': {
-        minHeight: 500,
+		minHeight: 500,
 		paddingTop: theme.spacing(6),
-        '& .hero-image': {
-            '& > img': {
-                marginBottom: theme.spacing(2)
-            }
-        },
+		'& .hero-image': {
+			'& > img': {
+				marginBottom: theme.spacing(2)
+			}
+		},
 		[theme.breakpoints.down('md')]: {
-			'& .hero-text': { 
-                textAlign: 'center', 
-                paddingBottom: theme.spacing(6) 
-            },
-            '& .hero-image': {
-                '& > img': {
-                    display: 'table',
-                    marginInline: 'auto',
-                }
-            }
+			'& .hero-text': {
+				textAlign: 'center',
+				paddingBottom: theme.spacing(6)
+			},
+			'& .hero-image': {
+				'& > img': {
+					display: 'table',
+					marginInline: 'auto',
+				}
+			}
 		}
 	},
 	'& .how-it-works': {
@@ -220,7 +220,7 @@ export default function AudioConvertLanding() {
 						<Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center">
 							<Grid size={{ xs: 12, sm: 6, lg: 4 }}>
 								<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-									<Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width:56, height:56, display:'flex', alignItems:'center', justifyContent:'center' }}>
+									<Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 										<CloudUploadIcon />
 									</Box>
 									<Box>
@@ -231,7 +231,7 @@ export default function AudioConvertLanding() {
 							</Grid>
 							<Grid size={{ xs: 12, sm: 6, lg: 4 }}>
 								<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-									<Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width:56, height:56, display:'flex', alignItems:'center', justifyContent:'center' }}>
+									<Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 										<SwapHorizIcon />
 									</Box>
 									<Box>
@@ -242,7 +242,7 @@ export default function AudioConvertLanding() {
 							</Grid>
 							<Grid size={{ xs: 12, sm: 6, lg: 4 }}>
 								<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-									<Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width:56, height:56, display:'flex', alignItems:'center', justifyContent:'center' }}>
+									<Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 										<TuneIcon />
 									</Box>
 									<Box>
@@ -253,7 +253,7 @@ export default function AudioConvertLanding() {
 							</Grid>
 							<Grid size={{ xs: 12, sm: 6, lg: 4 }}>
 								<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-									<Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width:56, height:56, display:'flex', alignItems:'center', justifyContent:'center' }}>
+									<Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 										<SpeedIcon />
 									</Box>
 									<Box>
@@ -264,7 +264,7 @@ export default function AudioConvertLanding() {
 							</Grid>
 							<Grid size={{ xs: 12, sm: 6, lg: 4 }}>
 								<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-									<Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width:56, height:56, display:'flex', alignItems:'center', justifyContent:'center' }}>
+									<Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 										<DownloadIcon />
 									</Box>
 									<Box>
@@ -279,7 +279,7 @@ export default function AudioConvertLanding() {
 			</section>
 			<section className='key-features'>
 				<Container maxWidth="lg">
-					<Grid container spacing={3}>
+					<Grid container spacing={3} justifyContent="center">
 						<Grid container size={12} justifyContent="center">
 							<Grid size={12}>
 								<Typography variant='h2' mb={4}>Key Features</Typography>
