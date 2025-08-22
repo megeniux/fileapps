@@ -60,10 +60,19 @@ const Root = styled(Paper)(({ theme }) => ({
         maxWidth: '100%'
     },
     '& .hero-section': {
-        paddingBlock: theme.spacing(6),
-        [theme.breakpoints.only('xs')]: {
+        minHeight: 500,
+        paddingTop: theme.spacing(6),
+        '& .hero-image img': {
+            marginBottom: theme.spacing(2)
+        },
+        [theme.breakpoints.down('md')]: {
             '& .hero-text': {
                 textAlign: 'center',
+                paddingBottom: theme.spacing(6)
+            },
+            '& .hero-image img': {
+                display: 'table',
+                marginInline: 'auto'
             }
         }
     },
@@ -105,7 +114,7 @@ export default function VideoConvertLanding() {
                 <meta property="og:title" content="Browser-based Video Converter — Convert Video Without Uploading" />
                 <meta property="og:description" content="Fast, secure video conversion in the browser. No uploads, no server — privacy-first FFmpeg WASM converter for creators." />
                 <meta property="og:image" content="/images/branding/logo-xl.svg" />
-                <meta property="og:url" content="https://fileapps.click/tools/video/convert-landing" />
+                <meta property="og:url" content="/images/branding/logo-xl.svg" />
                 <meta property="og:type" content="website" />
                 <link rel="canonical" href="https://fileapps.click/tools/video/convert-landing" />
                 <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
@@ -114,17 +123,17 @@ export default function VideoConvertLanding() {
             <section className='hero-section'>
                 <Container maxWidth="lg">
                     <Grid container spacing={3} alignItems="center">
-                        <Grid size={{ xs: 12, sm: 8, md: 6 }} className='hero-text'>
+                        <Grid size={{ xs: 12,  md: 6 }} className='hero-text'>
                             <Typography variant="h2" component="h1">Convert Video in Your Browser — Fast & Private</Typography>
                             <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>
                                 Convert to MP4, WebM, GIF or extract MP3 — all in your browser using FFmpeg WebAssembly. No uploads, no accounts, and full control over codecs, resolution and quality.
                             </Typography>
-                            <Box display="flex" justifyContent={{ xs: 'center', sm: 'flex-start' }} gap={1}>
+                            <Box display="flex" justifyContent={{ xs: 'center', md: 'flex-start' }} gap={1}>
                                 <Button color='primary' size='large' href="/tools/video/convert" variant="contained">Convert Now</Button>
                                 <Button size='large' href="/tools/video/convert-blog" variant="text">Read Guide</Button>
                             </Box>
                         </Grid>
-                        <Grid size={{ xs: 12, sm: 8, md: 6 }} order={{ xs: -1, sm: 1 }}>
+                        <Grid size={{ xs: 12,  md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
                             <img src='/images/landing/video-convert-hero.jpg' alt='Browser-based video converter' title='Convert Video in Browser' loading='lazy' width="auto" height="auto" />
                         </Grid>
                     </Grid>

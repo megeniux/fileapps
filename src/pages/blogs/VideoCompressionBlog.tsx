@@ -61,10 +61,11 @@ export default function VideoCompressionBlog() {
       <Helmet>
         <title>How to Compress Video Online — CRF, Presets & Best Practices</title>
         <meta name="description" content="Guide to compressing video in the browser using FFmpeg WASM. Learn CRF, presets, trade-offs and best settings for web and social." />
+        <meta name="keywords" content="compress video online, reduce mp4 size, crf video compression, ffmpeg wasm compressor, browser video compressor, shrink video file" />
         <meta property="og:title" content="How to Compress Video Online — CRF, Presets & Best Practices" />
         <meta property="og:description" content="Guide to compressing video in the browser using FFmpeg WASM. Learn CRF, presets, trade-offs and best settings for web and social." />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="/images/landing/video-compression-hero.jpg" />
+        <meta property="og:image" content="/images/branding/logo-xl.svg" />
         <meta property="og:url" content="https://fileapps.click/tools/video/compress-blog" />
         <meta property="og:site_name" content="FileApps" />
         <link rel="canonical" href="https://fileapps.click/tools/video/compress-blog" />

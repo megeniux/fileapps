@@ -254,7 +254,7 @@ function BurnCaption() {
     }
 
     return (
-        <Container maxWidth="lg" sx={{ my: 'auto' }}>
+        <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
             {/* Move error message above Card */}
             {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
             <Card sx={{ p: 1.5 }} elevation={3}>

@@ -28,6 +28,10 @@ import VideoPlayback from './pages/tools/VideoPlayback';
 import BurnCaption from './pages/tools/BurnCaption';
 import BurnCaptionLanding from './pages/landings/BurnCaptionLanding';
 import BurnCaptionsBlog from './pages/blogs/BurnCaptionsBlog';
+import VideoResizerLanding from './pages/landings/VideoResizerLanding';
+import VideoResizerBlog from './pages/blogs/VideoResizerBlog';
+import AudioEffectsLanding from './pages/landings/AudioEffectsLanding';
+import AudioEffectsBlog from './pages/blogs/AudioEffectsBlog';
 
 
 import ImageEditor from './pages/tools/ImageConvert';
@@ -52,6 +56,8 @@ function AppRoutes() {
       <Route path="tools/audio/playback" element={<BasicLayout><AudioPlayback /></BasicLayout>} />
       <Route path="tools/audio/merge" element={<BasicLayout><AudioMerge /></BasicLayout>} />
       <Route path="tools/audio/effects" element={<BasicLayout><AudioEffects /></BasicLayout>} />
+  <Route path="tools/audio/effects-landing" element={<BasicLayout><AudioEffectsLanding /></BasicLayout>} />
+  <Route path="tools/audio/effects-blog" element={<BasicLayout><AudioEffectsBlog /></BasicLayout>} />
 
       {/* Video Tools */}
       <Route path="tools/video/compress" element={<BasicLayout><VideoCompression /></BasicLayout>} />
@@ -61,6 +67,8 @@ function AppRoutes() {
       <Route path="tools/video/convert-landing" element={<BasicLayout><VideoConvertLanding /></BasicLayout>} />
       <Route path="tools/video/convert-blog" element={<BasicLayout><VideoConvertBlog /></BasicLayout>} />
       <Route path="tools/video/resize" element={<BasicLayout><VideoResize /></BasicLayout>} />
+  <Route path="tools/video/resize-landing" element={<BasicLayout><VideoResizerLanding /></BasicLayout>} />
+  <Route path="tools/video/resize-blog" element={<BasicLayout><VideoResizerBlog /></BasicLayout>} />
       <Route path="tools/video/trim" element={<BasicLayout><VideoTrim /></BasicLayout>} />
       <Route path="tools/video/merge" element={<BasicLayout><VideoMerge /></BasicLayout>} />
       <Route path="tools/video/thumbnail" element={<BasicLayout><ThumbnailGenerator /></BasicLayout>} />

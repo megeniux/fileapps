@@ -52,10 +52,17 @@ const Root = styled(Paper)(({ theme }) => ({
     maxWidth: '100%'
   },
   '& .hero-section': {
-    paddingBlock: theme.spacing(6),
-    [theme.breakpoints.only('xs')]: {
+    minHeight: 500,
+    paddingTop: theme.spacing(6),
+    '& .hero-image img': { marginBottom: theme.spacing(2) },
+    [theme.breakpoints.down('md')]: {
       '& .hero-text': {
         textAlign: 'center',
+        paddingBottom: theme.spacing(6)
+      },
+      '& .hero-image img': {
+        display: 'table',
+        marginInline: 'auto'
       }
     }
   },
@@ -96,7 +103,7 @@ export default function VideoCompressionLanding() {
         <meta name="description" content="Compress MP4 and other videos in your browser using FFmpeg WASM. Private, fast, and free — CRF and preset controls, live progress, estimated file size." />
         <meta property="og:title" content="Browser-based Video Compressor — Compress MP4 Online Without Uploads" />
         <meta property="og:description" content="Reduce MP4 file size in your browser with CRF control and presets. No uploads, privacy-first video compression for social and web." />
-        <meta property="og:image" content="/images/landing/video-compression-hero.jpg" />
+        <meta property="og:image" content="/images/branding/logo-xl.svg" />
         <meta property="og:url" content="https://fileapps.click/tools/video/compress-landing" />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://fileapps.click/tools/video/compress-landing" />
@@ -106,7 +113,7 @@ export default function VideoCompressionLanding() {
       <section className='hero-section'>
         <Container maxWidth="lg">
           <Grid container spacing={3} alignItems="center">
-            <Grid size={{ xs: 12, sm: 8, md: 6 }} className='hero-text'>
+            <Grid size={{ xs: 12,  md: 6 }} className='hero-text'>
               <Typography variant="h2" component="h1">Compress Videos Online — Private, Fast & Free</Typography>
               <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>
                 Compress MP4 and other videos directly in your browser using FFmpeg WebAssembly — no uploads, no sign-ups, full control over quality and speed.
@@ -116,7 +123,7 @@ export default function VideoCompressionLanding() {
                 <Button size='large' href="/tools/video/compress-blog" variant="text" sx={{ color: 'text.secondary' }}>Read Guide</Button>
               </Box>
             </Grid>
-            <Grid size={{ xs: 12, sm: 8, md: 6 }} order={{ xs: -1, sm: 1 }}>
+            <Grid size={{ xs: 12,  md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
               <img src='/images/landing/video-compression-hero.jpg' alt='Compress Video' title='Compress Video' loading='lazy' width="auto" height="auto" />
             </Grid>
           </Grid>

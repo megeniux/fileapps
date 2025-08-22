@@ -252,7 +252,7 @@ function VideoPlayback() {
     };
 
     return (
-        <Container maxWidth="lg" sx={{ my: 'auto' }}>
+        <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
             <Card sx={{ p: 1.5 }} elevation={3}>
                 <CardContent sx={{ p: 0 }}>
                     <Box display="flex" alignItems="center">

@@ -37,6 +37,7 @@ export default function VideoConvertBlog() {
       <Helmet>
         <title>How to Convert Video Online — Fast, Private & No Uploads</title>
         <meta name="description" content="Step-by-step guide to converting video in the browser using FFmpeg WASM. Learn format choices, quality settings, and tips for social video exports." />
+  <meta name="keywords" content="convert video online, webm to mp4, mp4 converter, video to gif, extract audio from video, browser video converter, ffmpeg wasm convert" />
         <meta property="og:title" content="How to Convert Video Online — Fast, Private & No Uploads" />
         <meta property="og:description" content="Step-by-step guide to converting video in the browser using FFmpeg WASM. Learn format choices, quality settings, and tips for social video exports." />
         <meta property="og:type" content="article" />

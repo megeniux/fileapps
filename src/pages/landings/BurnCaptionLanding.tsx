@@ -83,14 +83,22 @@ const Root = styled(Paper)(({ theme }) => ({
         maxWidth: '100%'
     },
     '& .hero-section': {
+        minHeight: 500,
         paddingTop: theme.spacing(6),
         '& img': {
             filter: 'hue-rotate(60deg)',
         },
-        [theme.breakpoints.only('xs')]: {
+        '& .hero-image img': {
+            marginBottom: theme.spacing(2)
+        },
+        [theme.breakpoints.down('md')]: {
             '& .hero-text': {
                 textAlign: 'center',
                 paddingBottom: theme.spacing(6)
+            },
+            '& .hero-image img': {
+                display: 'table',
+                marginInline: 'auto'
             }
         }
     },
@@ -141,19 +149,19 @@ export default function BurnCaptionLanding() {
             <section className='hero-section'>
                 <Container maxWidth="lg">
                     <Grid container spacing={3} alignItems="center">
-                        <Grid size={{ xs: 12, sm: 8, md: 6 }} className='hero-text'>
+                        <Grid size={{ xs: 12,  md: 6 }} className='hero-text'>
                             <Typography variant="h2" component="h1">
                                 Burn Captions into Videos Online 100% Private & Free
                             </Typography>
                             <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>
                                 Add subtitles to your videos easily with our browser-based caption burner. Upload your video, choose an SRT or VTT subtitle file, customize your caption style, and burn captions directly into your video — no uploads, no watermarks, no sign-ups. Everything runs client-side for maximum privacy.
                             </Typography>
-                            <Box display="flex" justifyContent={{ xs: 'center', sm: 'flex-start' }} gap={1}>
+                            <Box display="flex" justifyContent={{ xs: 'center', md: 'flex-start' }} gap={1}>
                                 <Button color='primary' size='large' href="/tools/video/burn-caption" variant="contained">Upload Now</Button>
                                 <Button size='large' href="/tools/video/burn-captions-blog" variant="text">Read Guide</Button>
                             </Box>
                         </Grid>
-                        <Grid size={{ xs: 12, sm: 8, md: 6 }} order={{ xs: -1, sm: 1 }}>
+                        <Grid size={{ xs: 12,  md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
                             <img src='/images/landing/burn-caption-hero.jpg' alt='Burn Captions' title='Burn Captions' loading='lazy' width="auto" height="auto" />
                         </Grid>
                     </Grid>

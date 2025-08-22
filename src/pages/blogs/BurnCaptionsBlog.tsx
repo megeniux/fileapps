@@ -37,6 +37,7 @@ export default function BurnCaptionsBlog() {
       <Helmet>
         <title>How to Burn Captions into Video Online — Ultimate Guide</title>
         <meta name="description" content="Step-by-step guide to burning captions into video in the browser. Learn best practices, troubleshooting and how to style subtitles before export." />
+  <meta name="keywords" content="burn captions into video, add subtitles online, hardcode subtitles, embed srt into mp4, browser caption burner, ffmpeg wasm subtitles" />
         <meta property="og:title" content="How to Burn Captions into Video Online — Ultimate Guide" />
         <meta property="og:description" content="Step-by-step guide to burning captions into video in the browser. Learn best practices, troubleshooting and how to style subtitles before export." />
         <meta property="og:type" content="article" />

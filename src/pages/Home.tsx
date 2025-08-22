@@ -32,24 +32,24 @@ const videoTools: {
   color: "primary" | "secondary" | "warning" | "info" | "success" | "error" | "inherit";
 }[] = [
     {
-      title: 'Compress Video',
-      description: 'Reduce video file size while maintaining quality. Fast and easy compression for all your videos.',
-      icon: <CompressIcon fontSize="small" color="primary" />,
-      link: '/tools/video/compress-landing',
+      title: 'Video Converter',
+      description: 'Convert videos between MP4, WebM, MKV, MOV and more. Preserve quality and choose codecs, resolution and bitrate.',
+      icon: <SwapHorizIcon fontSize="small" color="primary" />,
+      link: '/tools/video/convert-landing',
       color: 'primary'
     },
     {
-      title: 'Video Converter',
-      description: 'Convert videos between MP4, WebM, MKV, MOV and more. Preserve quality and choose codecs, resolution and bitrate.',
-      icon: <SwapHorizIcon fontSize="small" color="secondary" />,
-      link: '/tools/video/convert-landing',
+      title: 'Compress Video',
+      description: 'Reduce video file size while maintaining quality. Fast and easy compression for all your videos.',
+      icon: <CompressIcon fontSize="small" color="secondary" />,
+      link: '/tools/video/compress-landing',
       color: 'secondary'
     },
     {
       title: 'Video Resizer',
       description: 'Resize videos to custom dimensions or common aspect ratios for web and social platforms.',
       icon: <AspectRatioIcon fontSize="small" color='warning' />,
-      link: '/tools/video/resize',
+  link: '/tools/video/resize-landing',
       color: 'warning'
     },
     {
@@ -107,9 +107,9 @@ const audioTools: {
     {
       title: 'Audio Converter',
       description: 'Convert audio between MP3, WAV, AAC, FLAC and more. Keep bitrate and quality control options.',
-  icon: <SwapHorizIcon fontSize="small" color="primary" />,
-  link: '/tools/audio/convert-landing',
-  color: 'primary'
+      icon: <SwapHorizIcon fontSize="small" color="primary" />,
+      link: '/tools/audio/convert-landing',
+      color: 'primary'
     },
     {
       title: 'Audio Trimmer',
@@ -129,7 +129,7 @@ const audioTools: {
       title: 'Audio Effects',
       description: 'Apply fades, normalization, pitch, speed and volume adjustments to audio files.',
       icon: <GraphicEqIcon fontSize="small" color="info" />,
-      link: '/tools/audio/effects',
+  link: '/tools/audio/effects-landing',
       color: 'info'
     },
     {
