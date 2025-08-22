@@ -107,9 +107,9 @@ const audioTools: {
     {
       title: 'Audio Converter',
       description: 'Convert audio between MP3, WAV, AAC, FLAC and more. Keep bitrate and quality control options.',
-      icon: <SwapHorizIcon fontSize="small" color="primary" />,
-      link: '/tools/audio/convert',
-      color: 'primary'
+  icon: <SwapHorizIcon fontSize="small" color="primary" />,
+  link: '/tools/audio/convert-landing',
+  color: 'primary'
     },
     {
       title: 'Audio Trimmer',

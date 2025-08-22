@@ -17,6 +17,8 @@ import VideoCompressionBlog from './pages/blogs/VideoCompressionBlog';
 import VideoConvert from './pages/tools/VideoConvert';
 import VideoConvertLanding from './pages/landings/VideoConvertLanding';
 import VideoConvertBlog from './pages/blogs/VideoConvertBlog';
+import AudioConvertLanding from './pages/landings/AudioConvertLanding';
+import AudioConvertBlog from './pages/blogs/AudioConvertBlog';
 import VideoResize from './pages/tools/VideoResize';
 import VideoTrim from './pages/tools/VideoTrim';
 import VideoMerge from './pages/tools/VideoMerge';
@@ -44,6 +46,8 @@ function AppRoutes() {
 
       {/* Audio Tools */}
       <Route path="tools/audio/convert" element={<BasicLayout><AudioConvert /></BasicLayout>} />
+  <Route path="tools/audio/convert-landing" element={<BasicLayout><AudioConvertLanding /></BasicLayout>} />
+  <Route path="tools/audio/convert-blog" element={<BasicLayout><AudioConvertBlog /></BasicLayout>} />
       <Route path="tools/audio/trim" element={<BasicLayout><AudioTrim /></BasicLayout>} />
       <Route path="tools/audio/playback" element={<BasicLayout><AudioPlayback /></BasicLayout>} />
       <Route path="tools/audio/merge" element={<BasicLayout><AudioMerge /></BasicLayout>} />
