@@ -51,6 +51,8 @@ import AudioMergerLanding from './pages/landings/AudioMergerLanding';
 import AudioMergerBlog from './pages/blogs/AudioMergerBlog';
 import AudioEffects from './pages/tools/AudioEffects';
 import AudioEffectsLanding from './pages/landings/AudioEffectsLanding';
+import ThumbnailGeneratorLanding from './pages/landings/ThumbnailGeneratorLanding';
+import ThumbnailGeneratorBlog from './pages/blogs/ThumbnailGeneratorBlog';
 import AudioEffectsBlog from './pages/blogs/AudioEffectsBlog';
 import AudioPlayback from './pages/tools/AudioPlayback';
 import AudioPlaybackLanding from './pages/landings/AudioPlaybackLanding';
@@ -58,6 +60,8 @@ import AudioPlaybackBlog from './pages/blogs/AudioPlaybackBlog';
 
 
 import ImageEditor from './pages/tools/ImageConvert';
+import ImageConverterLanding from './pages/landings/ImageConverterLanding';
+import ImageConverterBlog from './pages/blogs/ImageConverterBlog';
 
 
 function AppRoutes() {
@@ -75,6 +79,7 @@ function AppRoutes() {
       <Route path="tools/video/resize" element={<BasicLayout><VideoResize /></BasicLayout>} />
       <Route path="tools/video/resize-video-online" element={<BasicLayout><VideoResizerLanding /></BasicLayout>} />
       <Route path="tools/video/how-to-resize-video-online" element={<BasicLayout><VideoResizerBlog /></BasicLayout>} />
+      <Route path="tools/video/how-to-generate-thumbnail" element={<BasicLayout><ThumbnailGeneratorBlog /></BasicLayout>} />
       <Route path="tools/video/trim" element={<BasicLayout><VideoTrim /></BasicLayout>} />
       <Route path="tools/video/trim-video-online" element={<BasicLayout><VideoTrimLanding /></BasicLayout>} />
       <Route path="tools/video/how-to-trim-video-online" element={<BasicLayout><VideoTrimBlog /></BasicLayout>} />
@@ -83,10 +88,9 @@ function AppRoutes() {
       <Route path="tools/video/how-to-merge-videos-online" element={<BasicLayout><VideoMergerBlog /></BasicLayout>} />
       <Route path="tools/video/extract-audio" element={<BasicLayout><ExtractAudio /></BasicLayout>} />
       <Route path="tools/video/thumbnail" element={<BasicLayout><ThumbnailGenerator /></BasicLayout>} />
-
       <Route path="tools/video/extract-audio-from-video" element={<BasicLayout><ExtractAudioLanding /></BasicLayout>} />
       <Route path="tools/video/how-to-extract-audio-from-video" element={<BasicLayout><ExtractAudioBlog /></BasicLayout>} />
-
+      <Route path="tools/video/extract-thumbnail-from-video" element={<BasicLayout><ThumbnailGeneratorLanding /></BasicLayout>} />
       <Route path="tools/video/video-playback-speed-editor" element={<BasicLayout><VideoPlaybackLanding /></BasicLayout>} />
       <Route path="tools/video/how-to-video-playback-speed-editor" element={<BasicLayout><VideoPlaybackBlog /></BasicLayout>} />
       <Route path="tools/video/burn-caption" element={<BasicLayout><BurnCaption /></BasicLayout>} />
@@ -112,7 +116,9 @@ function AppRoutes() {
       <Route path="tools/audio/how-to-audio-playback-speed-editor" element={<BasicLayout><AudioPlaybackBlog /></BasicLayout>} />
 
       {/* Image Tools */}
-      <Route path="tools/image/convert" element={<BasicLayout><ImageEditor /></BasicLayout>} />
+    <Route path="tools/image/convert" element={<BasicLayout><ImageEditor /></BasicLayout>} />
+  <Route path="tools/image/convert-image-online" element={<BasicLayout><ImageConverterLanding /></BasicLayout>} />
+    <Route path="tools/image/how-to-convert-image-online" element={<BasicLayout><ImageConverterBlog /></BasicLayout>} />
 
       {/* Other pages */}
       <Route path="about" element={<BasicLayout><AboutUs /></BasicLayout>} />

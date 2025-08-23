@@ -1,3 +1,4 @@
+import ImageIcon from '@mui/icons-material/Image';
 import { useNavigate } from 'react-router-dom'
 import { APP_INFO } from "../constants";
 
@@ -19,10 +20,10 @@ import AspectRatioIcon from '@mui/icons-material/AspectRatio';
 import ContentCutIcon from '@mui/icons-material/ContentCut';
 import MergeTypeIcon from '@mui/icons-material/MergeType';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
-import ImageIcon from '@mui/icons-material/Image';
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import SpeedIcon from '@mui/icons-material/Speed';
 import SubtitlesIcon from '@mui/icons-material/Subtitles';
+import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual';
 
 const videoTools: {
   title: string;
@@ -82,17 +83,10 @@ const videoTools: {
     },
     {
       title: 'Thumbnail Generator',
-      description: 'Capture clean, high-resolution thumbnails from video frames for previews and social sharing.',
-      icon: <ImageIcon fontSize="small" color="inherit" />,
-      link: '/tools/video/thumbnail',
+      description: 'Extract high-quality thumbnails from your videos instantly in your browser. No watermark, no downloads, and no credit card required.',
+      icon: <PhotoSizeSelectActualIcon fontSize="small" color="inherit" />,
+      link: '/tools/video/extract-thumbnail-from-video',
       color: 'inherit'
-    },
-    {
-      title: 'Extract Audio',
-      description: 'Extract high-quality audio from video files and save as MP3, WAV or AAC for reuse.',
-      icon: <MusicNoteIcon fontSize="small" color="error" />,
-      link: '/tools/video/extract-audio-from-video',
-      color: 'error'
     },
     {
       title: 'Burn Captions',
@@ -164,10 +158,10 @@ const imageTools: {
 }[] = [
     {
       title: 'Image Converter & Editor',
-      description: 'Convert, resize and optimize images for web and social platforms. Adjust quality, crop and more.',
-      icon: <SwapHorizIcon fontSize="small" color="primary" />,
-      link: '/tools/image/convert',
-      color: 'primary'
+      description: 'Convert, resize, crop, rotate, and apply filters to images online for free. Supports JPG, PNG, WebP, GIF formats. Fast, secure, and works entirely in your browser.',
+      icon: <ImageIcon fontSize="small" color="secondary" />,
+      link: '/tools/image/convert-image-online',
+      color: 'secondary'
     },
   ];
 

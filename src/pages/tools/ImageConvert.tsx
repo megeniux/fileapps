@@ -60,7 +60,6 @@ const defaultState = {
   saturation: 100,
 };
 
-
 function ImageConvert() {
   const theme = useTheme();
   const [file, setFile] = useState<File | null>(null);
