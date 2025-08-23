@@ -35,36 +35,43 @@ const videoTools: {
       title: 'Video Converter',
       description: 'Convert videos between MP4, WebM, MKV, MOV and more. Preserve quality and choose codecs, resolution and bitrate.',
       icon: <SwapHorizIcon fontSize="small" color="primary" />,
-  link: '/tools/video/convert-video-online',
+      link: '/tools/video/convert-video-online',
       color: 'primary'
     },
     {
       title: 'Compress Video',
       description: 'Reduce video file size while maintaining quality. Fast and easy compression for all your videos.',
       icon: <CompressIcon fontSize="small" color="secondary" />,
-  link: '/tools/video/compress-video-online',
+      link: '/tools/video/compress-video-online',
       color: 'secondary'
     },
     {
       title: 'Video Resizer',
       description: 'Resize videos to custom dimensions or common aspect ratios for web and social platforms.',
       icon: <AspectRatioIcon fontSize="small" color='warning' />,
-  link: '/tools/video/resize-video-online',
+      link: '/tools/video/resize-video-online',
       color: 'warning'
     },
     {
       title: 'Video Trimmer',
       description: 'Quickly trim and cut unwanted parts from videos with frame-accurate trimming.',
       icon: <ContentCutIcon fontSize="small" color="info" />,
-      link: '/tools/video/trim',
+      link: '/tools/video/trim-video-online',
       color: 'info'
     },
     {
       title: 'Video Merger',
       description: 'Combine multiple clips into a single video file while preserving order and quality.',
       icon: <MergeTypeIcon fontSize="small" color="success" />,
-  link: '/tools/video/merge-videos-online',
+      link: '/tools/video/merge-videos-online',
       color: 'success'
+    },
+    {
+      title: 'Video Playback Speed Editor',
+      description: 'Change video playback speed from -20x (reverse) to +20x online. No watermark, no signup, 100% browser-based.',
+      icon: <SpeedIcon fontSize="small" color="secondary" />,
+      link: '/tools/video/video-playback-speed-editor',
+      color: 'secondary'
     },
     {
       title: 'Extract Audio',
@@ -81,10 +88,17 @@ const videoTools: {
       color: 'inherit'
     },
     {
+      title: 'Extract Audio',
+      description: 'Extract high-quality audio from video files and save as MP3, WAV or AAC for reuse.',
+      icon: <MusicNoteIcon fontSize="small" color="error" />,
+      link: '/tools/video/extract-audio-from-video',
+      color: 'error'
+    },
+    {
       title: 'Burn Captions',
       description: 'Embed subtitles into video files (SRT/VTT). Customize font, size and color before burning in.',
       icon: <SubtitlesIcon fontSize="small" color="primary" />,
-  link: '/tools/video/burn-captions-into-video-online',
+      link: '/tools/video/burn-captions-into-video-online',
       color: 'primary'
     },
     {
@@ -108,35 +122,35 @@ const audioTools: {
       title: 'Audio Converter',
       description: 'Convert audio between MP3, WAV, AAC, FLAC and more. Keep bitrate and quality control options.',
       icon: <SwapHorizIcon fontSize="small" color="primary" />,
-  link: '/tools/audio/convert-audio-online',
+      link: '/tools/audio/convert-audio-online',
       color: 'primary'
     },
     {
       title: 'Audio Trimmer',
       description: 'Trim and cut audio files to extract clips for podcasts, music or voiceovers.',
       icon: <ContentCutIcon fontSize="small" color="secondary" />,
-      link: '/tools/audio/trim',
+      link: '/tools/audio/trim-audio-online',
       color: 'secondary'
     },
     {
       title: 'Audio Merger',
       description: 'Join multiple audio tracks into one file quickly and reliably in your browser.',
       icon: <MergeTypeIcon fontSize="small" color="warning" />,
-      link: '/tools/audio/merge',
+      link: '/tools/audio/merge-audio-online',
       color: 'warning'
     },
     {
       title: 'Audio Effects',
       description: 'Apply fades, normalization, pitch, speed and volume adjustments to audio files.',
       icon: <GraphicEqIcon fontSize="small" color="info" />,
-  link: '/tools/audio/audio-effects-online',
+      link: '/tools/audio/audio-effects-online',
       color: 'info'
     },
     {
       title: 'Audio Playback Speed',
       description: 'Change audio speed (with pitch correction) or reverse tracks. Export processed audio quickly.',
       icon: <SpeedIcon fontSize="small" color="success" />,
-      link: '/tools/audio/playback',
+      link: '/tools/audio/audio-playback-speed-editor',
       color: 'success'
     }
   ];
