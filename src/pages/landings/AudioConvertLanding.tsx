@@ -82,8 +82,9 @@ const FAQ_SCHEMA = {
 const Root = styled(Paper)(({ theme }) => ({
 	'& img': { maxWidth: '100%' },
 	'& .hero-section': {
+		display: 'flex',
+		alignItems: 'center',
 		minHeight: 500,
-		paddingTop: theme.spacing(6),
 		'& .hero-image': {
 			'& > img': {
 				marginBottom: theme.spacing(2)
