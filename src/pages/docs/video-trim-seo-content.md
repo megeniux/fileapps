@@ -1,138 +1,103 @@
-SEO Meta & OG Tags
-==================
+---
+title: Free Online Video Trimmer – Cut & Trim MP4, MOV, AVI, MKV (No Signup)
+description: Trim and cut videos precisely in your browser. Select start/end points for MP4, MOV, AVI, MKV & more. No uploads, no watermark, fast & private.
+keywords:
+	- video trimmer online free
+	- trim video in browser
+	- cut mp4 video
+	- free video cutter no watermark
+	- shorten video length online
+	- remove intro outro video
+	- precise video trim tool
+	- clip extractor video
+	- video segment cutter
+	- instant video trimming
+	- no signup video editor
+	- private video trimmer
+	- local video trimming tool
+	- trim mov file online
+	- mkv video cutter
+	- avi trim editor
+	- social media clip trimmer
+	- highlight video maker
+	- cut large video locally
+	- frame accurate trimming (future)
+	- multi segment trim (future)
+	- batch trim videos (future)
+ogTitle: Trim Videos Online Free – Fast, Private & Watermark-Free
+ogDescription: Cut MP4, MOV, AVI & MKV locally with start/end selection. Free, private and watermark‑free.
+ogImage: /images/landing/video-trim-hero.jpg
+canonical: /tools/video/trim-video-online
+slug: video-trim
+type: landing+blog
+---
 
-**Title:** Free Online Video Trimmer – Trim, Cut, and Edit Your Videos
+# Trim videos online – fast, precise & private
 
-**Description:** Trim your videos online for free. Select the start and end points to cut MP4, MOV, AVI, MKV, and other formats. 100% browser-based, no signup required, no watermark.
+Remove unwanted intros, end cards, dead air or mistakes from your clips entirely in the browser. No signup, no watermark and no file upload risk.
 
-**Keywords:** video trimmer online free, trim video online free, cut video online, free video cutter, video editor trim, video trimming tool, online video trim, cut video in browser, free video cutting tool, trim video for free, free online video editor, trim MP4, MOV, AVI, MKV, free video cutter no watermark, online video cutter, trim video online, video editor free, no signup video trimmer, online video cut tool, free browser video trimmer
+## Why use this video trimmer?
+- **Speed:** Immediate processing for short edits.  
+- **Format support:** MP4, MOV, AVI, MKV and more.  
+- **Privacy:** Local WebAssembly execution.  
+- **Clean output:** No logos or overlays.  
+- **Free:** Unlimited usage.  
 
-**OG Title:** Free Online Video Trimmer – Trim, Cut, and Edit Videos Instantly
+## How it works
+1. Upload video.  
+2. Set start & end markers.  
+3. Preview selection.  
+4. Export trimmed clip.  
 
-**OG Description:** Trim, cut, or edit your videos online for free. Supports MP4, MOV, AVI, MKV, and more. No signup required, no watermark, 100% private, browser-based.
+## Key features
+- **Start/End marker slider** for quick selection.  
+- **Instant preview** validation.  
+- **Multi-format decoding** via FFmpeg WASM.  
+- **Accurate time parsing** for consistent segment boundaries.  
 
-**OG Image:** video-trimmer-hero.jpg
+## Use cases
+| Persona | Goal | Benefit |
+| ------- | ---- | ------- |
+| Creator | Remove filler | Tighter pacing |
+| Student | Extract lecture segment | Focused review |
+| Marketer | Produce teaser clip | Faster promotion |
+| Business | Trim webinar | On‑demand snippet |
 
-Landing Page Content
-====================
+## FAQs
+### How do I trim a video?
+Load the file, drag start/end markers to desired range, preview, then export.
 
-Header Section
---------------
+### Does trimming re-encode the whole video?
+Currently a re-encode for compatibility; stream copy optimization may be added later.
 
-**Headline:** Free Online Video Trimmer – Trim, Cut & Edit Videos InstantlyTrim, cut, or adjust the duration of your video files online for free. No signup, no watermark, and fully browser-based. Works with MP4, MOV, AVI, MKV, and more!
+### Are my videos uploaded?
+No—processing is local.
 
-**CTA Buttons:** Upload Video | Learn How to Trim
+### Is there a watermark?
+No branding is added.
 
-**Top Header Image Alt:** Interface for trimming and cutting videos online
+### What if I need multiple segments?
+Export each segment individually now; multi‑segment batch is on the roadmap.
 
-Why Use Our Free Online Video Trimmer?
---------------------------------------
+## Blog guide – how to trim video online
+### Why trim?
+Improve engagement, reduce file size, repurpose content and meet platform time constraints.
 
-*   **100% Free:** No signup, no charges, and no watermark on your videos.
-    
-*   **Simple & Easy:** Upload a video, set the trim points, and download the result.
-    
-*   **Works with All Major Formats:** MP4, MOV, AVI, MKV, and many more.
-    
-*   **Fast & Instant:** Trim your video and download it in seconds.
-    
-*   **No Software Needed:** Browser-based—no downloads or installations.
-    
-*   **100% Private:** Your files remain private—everything happens locally.
-    
+### Steps
+1. Upload.  
+2. Mark selection.  
+3. Preview.  
+4. Download.  
 
-How It Works
-------------
+### Tips
+Keep action centered near the cut points and avoid mid‑word dialogue cuts.
 
-1.  **Upload Your Video** – Drag and drop or click to select your video file.
-    
-2.  **Set the Trim Points** – Use the slider to select the start and end points for your trim.
-    
-3.  **Preview the Trim** – Watch the preview to confirm your selection.
-    
-4.  **Download the Edited Video** – Click "Download" once you're satisfied with your video trim.
-    
+### Conclusion
+Browser-based trimming delivers quick edits without handing footage to third parties.
 
-Key Features
-------------
+## MUI icon suggestions
+`ContentCutIcon`, `PrivacyTipIcon`, `PlayCircleIcon`, `SpeedIcon`, `HighQualityIcon`.
 
-*   **Trim Videos Instantly:** Select the start and end points for your video trim.
-    
-*   **No Software Required:** Fully browser-based, no downloads needed.
-    
-*   **No Watermarks:** Your trimmed video is clean with no branding.
-    
-*   **Multiple Format Support:** Works with MP4, MOV, AVI, MKV, and more.
-    
-*   **Fast & Simple:** Upload, trim, and download in a few clicks.
-    
-*   **Free & No Signup:** No need to create an account or sign up.
-    
+---
+JSON-LD: derive FAQ schema from FAQ block.
 
-FAQs
-----
-
-**Q: How do I trim my video?**A: Upload your video, use the slider to select the start and end points, then click "Trim" to process and download the file.
-
-**Q: What video formats are supported?**A: We support MP4, MOV, AVI, MKV, and many other popular video formats.
-
-**Q: Do I need to sign up?**A: No, the tool is completely free and doesn’t require any signup.
-
-**Q: Is the trimming process private?**A: Yes! All processing is done locally in your browser; your video is never uploaded to a server.
-
-**Q: Is there a watermark on the trimmed video?**A: No, your trimmed video will have no watermark or branding.
-
-Blog Content
-------------
-
-### How to Trim Your Video Online for Free
-
-Trimming videos has never been easier. With our **free online video trimmer**, you can select the start and end points to cut your videos instantly—no software, no sign-up, and no watermark.
-
-#### Why Trim Your Videos?
-
-*   **Remove unwanted sections**: Cut out intros, outros, or irrelevant parts.
-    
-*   **Create highlights**: Perfect for trimming highlights for social media.
-    
-*   **Adjust length for uploading**: Make your video shorter for quicker uploads.
-    
-*   **Trim multiple videos quickly**: Save time on editing with a fast online tool.
-    
-
-#### How to Trim Video Online for Free
-
-1.  **Upload Your Video**: Drag and drop your file, or click to choose one from your device.
-    
-2.  **Set the Trim Points**: Use the slider to define the section you want to keep.
-    
-3.  **Preview**: Check the preview to ensure the trim looks perfect.
-    
-4.  **Download the Trimmed Video**: Once you're happy, hit "Download" to save your edited file.
-    
-
-#### Best Use Cases for Video Trimming
-
-*   **Social Media Creators**: Trim videos for Instagram, YouTube, TikTok, etc.
-    
-*   **Vloggers**: Cut out unnecessary parts of your vlogs.
-    
-*   **Students**: Remove irrelevant parts from lecture or tutorial videos.
-    
-*   **Businesses**: Edit promotional videos for presentations.
-    
-
-#### Why Choose Our Free Video Trimmer?
-
-*   **No Watermarks**: Your trimmed videos come out clean, no branding.
-    
-*   **No Software Needed**: Works completely in your browser.
-    
-*   **Supports All Major Formats**: MP4, MOV, AVI, MKV, and more.
-    
-*   **Fast and Easy**: Get your trimmed video within seconds.
-    
-*   **Free & Private**: Completely free, with no sign-ups required, and your data stays private.
-    
-
-With our **free online video trimmer**, you can trim your videos in seconds, without the hassle of installing software or creating an account. Get started now and trim your videos instantly!

@@ -1,142 +1,124 @@
-# SEO Meta & OG Tags
+---
+title: Free Online Video Resizer – Change Resolution & Aspect Ratio (No Signup)
+description: Resize videos (MP4, MOV, MKV, AVI) to custom or preset dimensions (16:9, 9:16, 1:1) in your browser. Adjust width, height & FPS privately with no watermark.
+keywords:
+	- resize video online free
+	- change video resolution online
+	- video aspect ratio changer
+	- resize mp4 video browser
+	- 16:9 to 9:16 converter
+	- make vertical video from horizontal
+	- crop video for tiktok
+	- youtube video resizer tool
+	- instagram video size
+	- reels video dimensions
+	- square video converter
+	- widescreen to vertical convert
+	- adjust video width height
+	- fps adjuster online
+	- scale video without quality loss
+	- downscale 4k to 1080p
+	- 1080p to 720p converter
+	- private video resizer
+	- browser video resize tool
+	- no watermark video resizer
+	- letterbox vs crop video
+	- fit fill stretch crop modes
+	- maintain aspect ratio video
+	- change aspect ratio mp4
+	- responsive social video size
+	- resize mov online
+	- mkv aspect ratio change
+	- rotate & resize (future)
+	- batch resize videos (future)
+	- free hd video resizer
+	- vertical video generator
+ogTitle: Resize Videos Online Free – Fast Aspect Ratio & Resolution Editor
+ogDescription: Resize & reformat video dimensions locally in your browser. No uploads, no signup, no watermark.
+ogImage: /images/landing/video-resizer-hero.jpg
+canonical: /tools/video/resize-video-online
+slug: video-resizer
+type: landing+blog
+---
 
-Title: Free Online Video Resizer - Resize Videos in Browser (No Signup,
-No Uploads)
+# Resize videos online – instant aspect ratio & resolution control
 
-Description: Resize videos online free with our browser-based video
-resizer. No signup, no uploads, no credit card required. Adjust
-resolution, aspect ratio, FPS, and export instantly with full data
-privacy.
+Change width, height, aspect ratio and frame rate for MP4, MOV, MKV, AVI and more. All processing happens locally with privacy‑first WebAssembly — no uploads or watermarks.
 
-Keywords: resize video online free, online video resizer no signup,
-resize mp4 video online, change video resolution online, video aspect
-ratio changer, resize MOV AVI MKV online, private video resizer browser,
-no credit card video tool
+## Why use this video resizer?
+- **Aspect presets:** 16:9, 9:16, 1:1, 4:3, 21:9.  
+- **Multiple modes:** Fit, Fill, Crop (future UI), Stretch.  
+- **Social ready:** Quick presets for TikTok/Reels/YouTube/Instagram.  
+- **Private & offline friendly:** Works even with intermittent connection.  
+- **Free forever:** No branding, no login.  
 
-OG Title: Resize Videos Online Free (Privacy-First, No Uploads)
+## How it works
+1. Upload video.  
+2. Select target resolution or choose preset.  
+3. Pick resize mode (fit vs crop).  
+4. Adjust FPS if needed.  
+5. Resize & download MP4.  
 
-OG Description: Fast, free, and private online video resizer. Change
-resolution, aspect ratio, and FPS directly in your browser. No uploads,
-no signups, no watermarks.
+## Key features
+- **Drag & drop** simplified input.  
+- **Live dimension preview** before processing.  
+- **FPS adjust** to lower size or improve smoothness.  
+- **High quality scaling** with FFmpeg filters.  
+- **Zero watermarks** professional outputs.  
 
-OG Image: video-resizer-landing.png
-
-# Landing Page Content
-
-## Header Section
-
-\*\*Headline:\*\* Resize Videos Online Free -- 100% Private & Secure\
-Add subtitles to your videos easily with our browser-based caption
-burner. Upload your video, choose an SRT or VTT subtitle file, customize
-your caption style, and burn captions directly into your video --- no
-uploads, no watermarks, no sign-ups. Everything runs client-side for
-maximum privacy.
-
-\*\*CTA Buttons:\*\* Upload Now \| Read Guide
-
-\*\*Top Header Image Alt:\*\* Laptop with video editing UI (use
-\`AspectRatioIcon\` or \`CloudUploadIcon\`)
-
-## Why Use Our Online Video Resizer?
-
-Icons suggestion (MUI): \`PrivacyTipIcon\`, \`FlashOnIcon\`,
-\`TuneIcon\`, \`ShareIcon\`
-
-\- \*\*Privacy First:\*\* All processing is in your browser. No uploads,
-no data leaks.\
-- \*\*Free & Fast:\*\* No signup, no credit card. Resize videos quickly
-without watermarks.\
-- \*\*Custom Resizing:\*\* Adjust resolution, aspect ratio, width,
-height, and FPS.\
-- \*\*Social Ready:\*\* Perfect dimensions for YouTube, TikTok,
-Instagram, and more.
-
-## How It Works
-
-Icons suggestion (MUI): \`CloudUploadIcon\`, \`AspectRatioIcon\`,
-\`TuneIcon\`, \`MovieIcon\`, \`DownloadIcon\`
-
-1\. \*\*Upload Video\*\* -- Drag and drop or select your video file.\
-2. \*\*Choose Settings\*\* -- Enter width, height, or pick aspect ratios
-(16:9, 1:1, 9:16, etc.).\
-3. \*\*Select Mode\*\* -- Fit, Fill, Stretch, or Crop.\
-4. \*\*Resize Video\*\* -- Processing happens in your browser with
-FFmpeg WASM.\
-5. \*\*Download\*\* -- Export resized video in MP4 instantly.
-
-## Key Features
-
-Icons suggestion (MUI): \`UploadFileIcon\`, \`PreviewIcon\`,
-\`SettingsIcon\`, \`SpeedIcon\`, \`VideoFileIcon\`, \`LanguageIcon\`
-
-\- \*\*Drag & Drop Upload:\*\* Quick video importing.\
-- \*\*Live Preview:\*\* See resolution and ratio before exporting.\
-- \*\*Aspect Ratio Presets:\*\* 16:9, 9:16, 4:3, 1:1, 21:9.\
-- \*\*FPS Control:\*\* Adjust frame rate for smoother playback.\
-- \*\*Cross-Browser:\*\* Works on Chrome, Safari, Firefox, Edge.\
-- \*\*Instant Download:\*\* Export resized MP4 in one click.
+## Use cases
+| Scenario | Setting Tip |
+| -------- | ----------- |
+| Vertical Reel from 16:9 | 1080×1920 + crop center |
+| Square social feed | 1080×1080 fit or crop |
+| Email optimization | 720p + lower FPS |
+| Widescreen cinematic | 2560×1080 (21:9) |
+| Mobile preview prototype | 540×960 reduced size |
 
 ## FAQs
+### How does resizing stay private?
+All processing is in-browser; media never leaves your device.
 
-\*\*Q: How does the browser-based video resizer work?\*\*\
-A: It uses FFmpeg compiled to WebAssembly inside your browser. No
-uploads --- everything stays on your device.\
-\
-\*\*Q: Which video formats are supported?\*\*\
-A: MP4, MOV, AVI, MKV, and more common video formats.\
-\
-\*\*Q: Can I resize videos for social platforms?\*\*\
-A: Yes, presets are available for YouTube, TikTok, Instagram, and
-Reels.\
-\
-\*\*Q: Is it really free?\*\*\
-A: Yes --- no signup, no credit card required, and no watermarks.\
-\
-\*\*Q: What if my video is too large?\*\*\
-A: Processing depends on your browser's memory. For very large files,
-consider compressing first.
+### What formats are supported?
+Most standard containers (MP4, MOV, MKV, AVI) and codecs decodable by FFmpeg WASM.
 
-# Blog Content
+### Does resizing reduce quality?
+Scaling inevitably resamples pixels; choosing even dimensions and appropriate filters keeps quality high.
 
-## How to Resize Videos Online Free (No Signup, No Uploads)
+### Can I convert vertical to horizontal?
+Yes—fit with pillarboxing or crop strategically.
 
-This guide explains how to resize videos online without installing
-software, without uploading files to servers, and with full privacy.
-We'll walk through step-by-step instructions using our free
-browser-based video resizer.
+### Is there a watermark?
+No branding or watermark is added.
 
-### Why Resize Videos?
+### File too large after resize?
+Combine with compression (use the compressor tool) for additional reduction.
 
-\- Match platform requirements (TikTok 9:16, YouTube 16:9, Instagram
-1:1).\
-- Improve video playback performance by lowering resolution or FPS.\
-- Save storage and bandwidth by compressing large files.\
-- Create consistent video content across devices.
+## Blog guide – how to resize video online
+### Why resize?
+Platform aspect compliance, playback performance, bandwidth savings, visual consistency and repurposing.
 
-### Step-by-Step: Resize Videos in Browser
+### Step-by-step
+1. Upload file.  
+2. Pick preset or custom size.  
+3. Choose mode (fit vs crop).  
+4. Adjust FPS (optional).  
+5. Export MP4.  
 
-1\. \*\*Upload your video file\*\* (drag & drop supported).\
-2. \*\*Select resolution or aspect ratio\*\* (custom size or presets).\
-3. \*\*Choose resize mode\*\* (Fit, Fill, Stretch).\
-4. \*\*Adjust FPS if needed\*\* for smoother playback.\
-5. \*\*Click Resize & Download\*\* -- your resized MP4 will be ready
-instantly.
+### Social platform quick reference
+- **TikTok/Reels/Shorts:** 1080×1920 9:16.  
+- **YouTube Landscape:** 1920×1080 16:9.  
+- **Instagram Feed:** 1080×1080 1:1.  
 
-### Troubleshooting & Tips
-
-\- For smoother performance, use shorter video clips.\
-- If resizing large 4K videos, lower resolution to 1080p or 720p.\
-- Ensure browser (Chrome/Firefox/Safari/Edge) is up to date.
-
-### Best Practices for Social Platforms
-
-\- \*\*TikTok/Reels:\*\* Use 9:16 vertical ratio.\
-- \*\*YouTube:\*\* Stick to 16:9 widescreen.\
-- \*\*Instagram Feed:\*\* Square 1:1 works best.\
-- \*\*Stories/Shorts:\*\* Opt for vertical full-screen 9:16.
+### Tips
+Keep key subjects centered if cropping vertical from horizontal footage.
 
 ### Conclusion
+Fast, local resizing gives creators and marketers immediate control over deliverable formats—privacy intact.
 
-Resizing videos doesn't need signups, uploads, or watermarks. With our
-free browser-based tool, you can adjust resolution, ratio, and FPS
-instantly --- while keeping all your files private on your device.
+## MUI icon suggestions
+`AspectRatioIcon`, `PrivacyTipIcon`, `TuneIcon`, `CloudUploadIcon`, `CropIcon` (future), `SpeedIcon`.
+
+---
+JSON-LD: auto-generate from FAQ block.
+

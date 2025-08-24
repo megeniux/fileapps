@@ -1,144 +1,91 @@
-# SEO Meta & OG Tags
+---
+title: Free Online Audio Effects Editor – Pitch, Speed, Normalize, Fade (No Signup)
+description: Apply pitch shift, speed change, fade in/out, normalize & volume boost to MP3, WAV, FLAC, AAC & OGG in-browser. Private, free & watermark‑free.
+keywords:
+	- edit audio online free
+	- audio effects tool
+	- pitch shifter online
+	- change audio speed
+	- normalize audio volume
+	- fade in fade out audio
+	- boost audio volume
+	- mp3 pitch change
+	- flac audio effects
+	- browser audio editor
+	- no upload audio editor
+	- private audio effects
+	- waveform effects editor (future)
+ogTitle: Edit Audio Online Free – Pitch, Speed, Normalize & Fade
+ogDescription: Apply pitch, tempo, fades & normalization locally. Free, private & no watermark.
+ogImage: /images/landing/audio-effect-hero.jpg
+canonical: /tools/audio/audio-effects-online
+slug: audio-effects
+type: landing+blog
+---
 
-Title: Free Online Audio Effects Editor - Edit Audio with Pitch, Speed,
-Fade, Normalize (No Signup)
+# Edit audio with effects – free & private
 
-Description: Edit audio online free with effects like pitch shift, speed
-change, fade in/out, normalize, and volume adjustment. No signup, no
-credit card, no uploads required --- browser-based and private.
+Apply pitch shift, speed adjustment, fades, normalization and volume changes to audio files completely in-browser—no uploads, accounts or watermarks.
 
-Keywords: edit audio online free, add effects to audio online free,
-pitch shifter online free, speed up audio online, slow down music
-online, normalize audio free, fade in fade out audio online, online
-audio editor no signup, free browser audio effects tool
+## Why use this audio effects tool?
+- **Multi-effect pipeline:** Chain pitch, speed, fade, normalize.  
+- **Local privacy:** WebAssembly processing.  
+- **Format flexibility:** MP3, WAV, FLAC, AAC, OGG.  
+- **Fast iteration:** Immediate preview loop.  
 
-OG Title: Edit Audio Online Free - Add Effects Instantly (No Signup,
-Privacy-First)
+## How it works
+1. Upload audio.  
+2. Select effects & parameters.  
+3. Preview adjusted output.  
+4. Export processed file.  
 
-OG Description: Apply audio effects like pitch shift, speed change, fade
-in/out, normalize, and volume boost online. Free, browser-based, and
-private --- no uploads, no signup, no credit card.
+## Key features
+- **Pitch shift (semitones)** natural or extreme.  
+- **Speed / tempo change** (linked pitch currently).  
+- **Fade in/out** for clean starts/ends.  
+- **Normalization** for consistent loudness.  
+- **Volume gain** boost or attenuation.  
 
-OG Image: audio-effects-landing.png
-
-# Landing Page Content
-
-## Header Section
-
-**Headline:** Edit Audio Online Free -- Apply Effects Instantly
-Enhance your audio files directly in your browser with free effects.
-Change pitch, adjust speed, normalize volume, and apply fade in/out ---
-all without uploading files, signing up, or paying. 100% private and
-secure.
-
-**CTA Buttons:** Upload Now | Read Guide
-
-**Top Header Image Alt:** Audio waveform with sliders for pitch,
-speed, and volume (use `GraphicEqIcon` or `CloudUploadIcon`)
-
-## Why Use Our Online Audio Effects Tool?
-
-Icons suggestion (MUI): `PrivacyTipIcon`, `GraphicEqIcon`,
-`FlashOnIcon`, `MusicNoteIcon`
-
-- **Privacy First:** All processing is done locally in your
-browser. No uploads or servers.
-- **Free & Easy:** No signup, no credit card, no watermarks.
-- **Multiple Effects:** Adjust pitch, change speed, fade in/out,
-normalize, and boost volume.
-- **Universal Formats:** Works with MP3, WAV, AAC, FLAC, OGG, and
-more.
-- **Cross-Platform:** Works on Chrome, Firefox, Safari, and Edge.
-
-## How It Works
-
-Icons suggestion (MUI): `CloudUploadIcon`, `GraphicEqIcon`,
-`TuneIcon`, `DownloadIcon`
-
-1. **Upload Audio File** -- Drag and drop or click to select.
-2. **Choose Effects** -- Adjust pitch, speed, fade in/out,
-normalize, or volume.
-3. **Preview Changes** -- Hear your audio with effects applied.
-4. **Process in Browser** -- Everything runs instantly using FFmpeg
-WASM.
-5. **Download Audio** -- Save your edited audio in one click.
-
-## Key Features
-
-Icons suggestion (MUI): `LibraryMusicIcon`, `HighQualityIcon`,
-`SpeedIcon`, `VolumeUpIcon`
-
-- **Pitch Control:** Shift audio up or down semitones.
-- **Speed Control:** Speed up or slow down music and voice.
-- **Fade In/Out:** Smooth transitions for tracks.
-- **Normalize:** Auto-adjust volume for consistency.
-- **Volume Boost:** Increase or decrease audio levels.
-- **Instant Download:** Export effects-applied audio quickly.
+## Effect guidance
+| Effect | Typical Range | Notes |
+| ------ | ------------- | ----- |
+| Pitch | -7 to +7 semitones | Beyond ±12 may artifact |
+| Speed | 0.5× – 2× | Extreme values reduce quality |
+| Fade | 0.5–3s | Longer for ambient tracks |
+| Normalize | -1 dB peak | Avoid clipping |
 
 ## FAQs
+### Are files uploaded?
+No—they stay local.
 
-**Q: How does the audio effects editor work?**
-A: It uses FFmpeg compiled to WebAssembly inside your browser. No
-uploads --- everything stays on your device.
+### Can I preserve pitch while changing speed?
+Pitch preservation roadmap item; current version ties pitch to speed.
 
-**Q: Which audio formats are supported?**
-A: MP3, WAV, AAC, FLAC, OGG, M4A, and more.
+### Safe pitch range?
+Within ±7 semitones for natural tone; ±12 for stylized.
 
-**Q: Can I change pitch and speed together?**
-A: Yes --- you can adjust both pitch (semitones) and speed (tempo
-multiplier) at the same time.
+### Supported formats?
+Common compressed & lossless (MP3, WAV, FLAC, AAC, OGG, M4A when decodable).
 
-**Q: Is it really free?**
-A: Yes --- no signup, no credit card required, and no watermarks.
+### Watermark or signup?
+None—fully free.
 
-**Q: Can I use it for music and podcasts?**
-A: Absolutely --- ideal for quick edits, volume balancing, and enhancing
-audio for content creation.
+## Blog guide – how to apply audio effects
+### Why add effects?
+Enhance clarity, creative manipulation, platform readiness, tonal correction, dynamic consistency.
 
-# Blog Content
+### Steps
+Upload → Select effects → Preview → Export.
 
-## How to Edit Audio Online Free with Effects (No Signup, No Uploads)
-
-This guide shows how to edit audio files online and apply effects like
-pitch shift, speed change, fade in/out, normalize, and volume adjustment
---- without installing software, without uploading to servers, and with
-full privacy. Our free browser-based tool makes audio editing quick and
-secure.
-
-### Why Add Effects to Audio?
-
-- Improve clarity and loudness with normalization.
-- Create smooth transitions with fade in/out.
-- Adjust pitch for creative effects or corrections.
-- Speed up or slow down music for different use-cases.
-- Boost volume for quiet recordings.
-
-### Step-by-Step: Edit Audio in Browser
-
-1. **Upload your audio file** (drag & drop supported).
-2. **Choose your effects** (pitch, speed, fade, normalize, volume).
-3. **Preview changes** instantly before processing.
-4. **Apply effects** --- conversion happens locally in your
-browser.
-5. **Download edited audio** with one click.
-
-### Troubleshooting & Tips
-
-- Keep pitch changes within ±12 semitones for best results.
-- Use fade in/out for smooth transitions in music.
-- Normalize recordings for consistent podcast audio.
-- Ensure your browser is up to date for best performance.
-
-### Best Practices for Audio Editing
-
-- **For podcasts:** Normalize volume and add fade in/out for
-professional sound.
-- **For music remixes:** Adjust pitch and speed creatively.
-- **For voice recordings:** Boost volume and normalize for clarity.
+### Tips
+Normalize before volume boost; apply fades after timing edits.
 
 ### Conclusion
+Browser effects editing accelerates creative iteration while safeguarding privacy.
 
-Editing audio doesn't need complex software. With our free browser-based
-tool, you can apply effects like pitch shift, speed change, fade in/out,
-normalize, and volume boost instantly --- while keeping all your files
-private on your device.
+## MUI icon suggestions
+`GraphicEqIcon`, `MusicNoteIcon`, `TuneIcon`, `VolumeUpIcon`, `SpeedIcon`, `PrivacyTipIcon`.
+
+---
+JSON-LD: derive from FAQ entries.
+

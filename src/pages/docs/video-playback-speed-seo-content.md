@@ -1,140 +1,90 @@
-SEO Meta & OG Tags
-==================
+---
+title: Free Online Video Speed Changer – Slow Down, Speed Up & Reverse (No Signup)
+description: Change video playback speed (0.1×–20×) or reverse MP4, MOV, AVI, MKV locally. Fast, private & watermark‑free.
+keywords:
+	- video speed changer online
+	- change video speed
+	- slow down video tool
+	- speed up video free
+	- reverse video online
+	- video playback speed editor
+	- adjust video speed mp4
+	- fast forward video
+	- slow motion video maker
+	- browser video speed tool
+	- no upload video speed change
+	- private video speed editor
+	- speed multiplier video
+	- playback acceleration
+	- decelerate video
+	- reverse playback generator
+	- timeline speed adjust (future)
+	- batch speed change (future)
+	- export slowed video mp4
+	- export fast video mp4
+ogTitle: Change Video Speed or Reverse Online – Fast & Private
+ogDescription: Adjust or reverse video speed (0.1×–20×) in-browser. Free, private & no watermark.
+ogImage: /images/landing/video-playback-speed-hero.jpg
+canonical: /tools/video/video-playback-speed-editor
+slug: video-playback-speed
+type: landing+blog
+---
 
-**Title:** Free Online Video Playback Speed Changer – Speed Up or Slow Down Videos
+# Change video speed or reverse – instantly in your browser
 
-**Description:** Change video playback speed from -20x (reverse) to +20x for free. Adjust the speed of MP4, MOV, AVI, MKV, and other video formats online with no downloads or sign-ups.
+Speed up, slow down or reverse MP4, MOV, AVI, MKV locally with precise multiplier control—no uploads, accounts or watermarks.
 
-**Keywords:** free online video playback speed, change video speed online, adjust video playback speed, free video speed changer, video speed up or slow down, reverse video online, video speed editor free, free video playback speed changer, adjust video speed, video playback speed online, online video speed changer, MP4 speed change online, MOV video speed adjust, free video reverse speed, video speed tool free, slow motion video tool, online video speed adjustment, change video speed MP4, free video speed up, video playback adjustment, video speed settings online, free online speed editor, reverse video free, online change video speed
+## Why use this video speed changer?
+- **Local processing** protects privacy.  
+- **Wide range** 0.1× ultra slow to 20× fast; reverse playback.  
+- **Format support** common containers & codecs (browser compatible).  
+- **Clean output** no branding.  
 
-**OG Title:** Free Online Video Playback Speed Changer – Adjust Video Speed Instantly
+## How it works
+1. Upload video.  
+2. Select speed multiplier (or reverse).  
+3. Preview playback.  
+4. Process & download.  
 
-**OG Description:** Change video playback speed from -20x to +20x online for free. No sign-up, no download, and supports multiple formats like MP4, MOV, AVI, MKV, and more.
+## Key features
+- **High range multipliers (0.1×–20×).**  
+- **Reverse direction** generation.  
+- **Instant preview** before export.  
+- **No watermark/signup.**  
+- **Cross‑device support.**  
 
-**OG Image:** video-playback-speed-hero.jpg
+## FAQs
+### How do I change speed?
+Upload, set multiplier, preview, export.
 
-Landing Page Content
-====================
+### Can I reverse a video?
+Yes—choose reverse option (internally decodes & reorders frames).
 
-**Header Section**
-------------------
+### Supported formats?
+MP4, MOV, AVI, MKV (codec must be decodable in browser environment).
 
-**Headline:** Free Online Video Playback Speed Changer – Speed Up or Slow Down Videos
+### Are files uploaded?
+No—processing happens locally via WebAssembly.
 
-Adjust your video playback speed with ease. Change speeds from -20x (reverse) to +20x for free. Works with MP4, MOV, AVI, MKV, and more—no sign-up required.
+### Quality loss?
+Re-encoding may introduce minimal loss with lossy codecs; future copy‑stream when only timestamp changes is planned.
 
-**CTA Buttons:** Upload Video | How to Change Video Speed
+## Blog guide – how to change video playback speed
+### Why adjust speed?
+Emphasize detail (slow), compress dead time (fast), stylistic motion effects, tutorial clarity, meme/reverse effects.
 
-**Top Header Image Alt:** Video speed changer interface
+### Steps
+Upload → Choose multiplier / reverse → Preview → Export.
 
-**Why Use Our Free Online Video Playback Speed Changer?**
----------------------------------------------------------
+### Tips
+Use moderate speeds (0.5×–2×) to retain intelligibility; extreme values for stylized effects. Reverse can accent motion aesthetics.
 
-*   **Completely Free:** No sign-ups or charges.
-    
-*   **Wide Format Support:** Works with MP4, MOV, AVI, MKV, and more.
-    
-*   **Simple to Use:** Adjust video speed from -20x to +20x in seconds.
-    
-*   **No Watermark:** Edit and download your video with no branding.
-    
-*   **100% Browser-Based:** No need to download any software.
-    
-*   **Instant Processing:** Apply playback speed changes and download the file quickly.
-    
+### Conclusion
+Client-side playback speed editing accelerates creative iteration without privacy tradeoffs.
 
-**How It Works**
-----------------
+## MUI icon suggestions
+`SlowMotionVideoIcon`, `SpeedIcon`, `ReplayIcon`, `CloudUploadIcon`, `PrivacyTipIcon`.
 
-1.  **Upload Your Video:** Drag and drop or select a video file.
-    
-2.  **Adjust Playback Speed:** Use the slider to change the playback speed from -20x (reverse) to +20x.
-    
-3.  **Preview and Process:** Watch your video preview at the adjusted speed.
-    
-4.  **Download the Edited Video:** Once you're happy, click "Download" to save your adjusted video.
-    
+---
+JSON-LD: derive from FAQ list.
 
-**Key Features**
-----------------
-
-*   **Adjust Playback Speed:** Change your video speed from -20x (reverse) to +20x.
-    
-*   **Supports Popular Video Formats:** MP4, MOV, AVI, MKV, and more.
-    
-*   **No Software Needed:** Fully online and browser-based.
-    
-*   **Free & No Watermark:** No sign-ups, charges, or watermarks.
-    
-*   **Instant Processing:** Edit and download videos instantly.
-    
-*   **Easy to Use:** Simple interface for quick video speed adjustments.
-    
-
-**FAQs**
---------
-
-**Q: How do I change the playback speed of my video?**A: Upload your video, adjust the speed using the slider, and click "Process" to apply the changes.
-
-**Q: Which video formats are supported?**A: We support MP4, MOV, AVI, MKV, and many other popular video formats.
-
-**Q: Do I need to sign up?**A: No, our tool is free to use and doesn’t require any sign-up.
-
-**Q: Is the process private?**A: Yes! The tool is completely browser-based, and your video is not uploaded to any server.
-
-**Q: Does the video have a watermark after editing?**A: No, your video will have no watermark or branding.
-
-**Blog Content**
-----------------
-
-### How to Change Video Playback Speed Online
-
-Changing the playback speed of your videos has never been easier with our **free online video speed changer**. Whether you want to speed up your video or slow it down, we’ve got you covered with an easy-to-use tool that lets you adjust the speed from -20x (reverse) to +20x.
-
-#### **Why Adjust Video Speed?**
-
-*   **Speed Up Videos:** Fast-forward content for a quick overview or for social media posts.
-    
-*   **Slow Down Videos:** Slow motion for tutorials, educational content, or creative projects.
-    
-*   **Reverse Video:** Use negative values to play videos backward.
-    
-*   **Custom Speed Adjustments:** Perfect for fine-tuning the speed of your video.
-    
-
-#### **How to Change Video Speed Online for Free**
-
-1.  **Upload Your Video:** Drag and drop your file, or click to choose one from your device.
-    
-2.  **Adjust the Speed:** Use the slider to set the desired playback speed.
-    
-3.  **Preview the Changes:** Watch the video with the new speed settings.
-    
-4.  **Download the Video:** Once you're satisfied with the speed adjustment, hit "Download."
-    
-
-#### **Best Use Cases for Changing Video Speed**
-
-*   **Creators & Vloggers:** Speed up boring intros or slow down important moments.
-    
-*   **Educational Content:** Slow down for better understanding of detailed content.
-    
-*   **Social Media Marketers:** Speed up videos for fast-paced content or slow them for dramatic effect.
-    
-*   **Teachers & Trainers:** Reverse videos or slow down content for better learning.
-    
-
-#### **Why Choose Our Free Online Video Speed Changer?**
-
-*   **No Watermark:** Your video comes out clean, with no branding.
-    
-*   **No Software Needed:** Works entirely in your browser.
-    
-*   **Supports Multiple Formats:** MP4, MOV, AVI, MKV, and more.
-    
-*   **Fast and Free:** Process and download your video instantly.
-    
-*   **100% Private:** Your video stays on your device—no uploads required.
-    
-
-Try it now and change your video playback speed with just a few clicks—no downloads, no sign-ups, and completely free!
