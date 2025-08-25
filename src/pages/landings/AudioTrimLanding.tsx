@@ -25,18 +25,6 @@ import SpeedIcon from '@mui/icons-material/Speed'
 import DownloadIcon from '@mui/icons-material/Download'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 
-const FAQ_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "Can I cut or trim MP3 files online?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, our tool works perfectly with MP3 files, as well as WAV, FLAC, AAC, and more." } },
-    { "@type": "Question", "name": "Do I need to sign up to use this tool?", "acceptedAnswer": { "@type": "Answer", "text": "No, it's completely free to use with no signup or account required." } },
-    { "@type": "Question", "name": "Is this tool completely free to use?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, you can trim your audio for free, without any hidden charges or watermarks." } },
-    { "@type": "Question", "name": "How do I download the trimmed audio?", "acceptedAnswer": { "@type": "Answer", "text": "Once you’re satisfied with the trim, just click the “Download” button to save your audio." } },
-    { "@type": "Question", "name": "Are my files private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, everything happens locally in your browser—nothing is uploaded to a server." } }
-  ]
-}
-
 const Root = styled(Paper)(({ theme }) => ({
   '& img': { maxWidth: '100%' },
   '& .hero-section': {
@@ -56,6 +44,7 @@ minHeight: 500,
   },
   '& .faq-section': {
     paddingBlock: theme.spacing(8),
+    background: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
     '& .MuiTypography-h2': { color: theme.palette.text.primary },
     '& .MuiAccordionSummary-root': { padding: theme.spacing(0, 2, 0, 2) },
     '& .MuiAccordionDetails-root': { padding: theme.spacing(0, 2, 2, 2) }
@@ -66,23 +55,25 @@ minHeight: 500,
     textAlign: 'center',
     '& .MuiTypography-h2': { color: theme.palette.common.white }
   },
+  '& .use-cases': {
+    paddingBlock: theme.spacing(8),
+    '& .MuiTypography-h2': { textAlign: 'center', marginBottom: theme.spacing(2) }
+  },
 }))
 
 export default function AudioTrimLanding() {
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Free Online Audio Trimmer – Cut & Trim MP3, WAV, FLAC, AAC Online</title>
-        <meta name="description" content="Trim your audio files online for free. Cut MP3, WAV, FLAC, AAC, and more with precision. No signup, no watermark, 100% browser-based." />
-        <meta name="keywords" content="audio trimmer online free, cut audio online, trim audio online free, online audio cutter, trim MP3 file free, audio trimming tool, free audio editor, trim WAV files, cut music online, audio cut tool, free audio cutter" />
-        <meta property="og:title" content="Free Online Audio Trimmer – Cut & Trim MP3, WAV, FLAC Online" />
-        <meta property="og:description" content="Cut audio files online for free with our easy-to-use tool. Trim MP3, WAV, FLAC, AAC, and more without watermark or signup." />
+        <title>Free Online Audio Trimmer – Cut & Trim MP3, WAV, FLAC (No Signup)</title>
+        <meta name="description" content="Trim MP3, WAV, FLAC, AAC, OGG & M4A locally in your browser. Free, private, no uploads or watermark." />
+        <meta property="og:title" content="Free Online Audio Trimmer – Cut & Trim MP3, WAV, FLAC" />
+        <meta property="og:description" content="Cut audio privately in your browser. MP3, WAV, FLAC, AAC support. No signup or watermark." />
         <meta property="og:image" content="/images/landing/audio-trimmer-hero.jpg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="/tools/audio/trim-audio-online" />
         <meta property="og:site_name" content="FileApps" />
         <link rel="canonical" href="/tools/audio/trim-audio-online" />
-        <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
       <section className='hero-section'>
@@ -90,7 +81,7 @@ export default function AudioTrimLanding() {
           <Grid container spacing={3} alignItems="center">
             <Grid size={{ xs: 12, md: 6 }} className='hero-text'>
               <Typography variant="h2" component="h1">Trim Audio Files Online – Free & No Signup</Typography>
-              <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Trim and cut audio files like MP3, WAV, FLAC, and more with precision—directly in your browser. Fast, free, and no watermark!</Typography>
+              <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Cut MP3, WAV, FLAC, AAC, OGG & M4A precisely in your browser — free, private & watermark‑free.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
                 <Button color='secondary' size='large' href="/tools/audio/trim" variant="contained">Upload Audio</Button>
                 <Button size='large' href="/tools/audio/how-to-trim-audio-online" variant="text" sx={{ color: 'text.secondary' }}>Learn How to Use</Button>
@@ -110,22 +101,48 @@ export default function AudioTrimLanding() {
               <Typography variant='h2'>Why Use Our Online Audio Trimmer?</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            {[{ icon: <ContentCutIcon fontSize='large' color='secondary' />, title: '100% Free', desc: 'No signup, no hidden fees, no watermark.' },
-            { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Fast & Easy', desc: 'Drag, drop, and trim—done in seconds.' },
-            { icon: <AudiotrackIcon fontSize='large' color='secondary' />, title: 'Supports Multiple Formats', desc: 'MP3, WAV, FLAC, AAC, OGG, and more.' },
-            { icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: 'Complete Privacy', desc: 'No uploads—everything happens in your browser.' },
-            { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'Precise Audio Cutting', desc: 'Trim audio files with accuracy and ease.' },
-            { icon: <CloudUploadIcon fontSize='large' color='secondary' />, title: 'Cross-Platform Compatibility', desc: 'Works seamlessly on desktop and mobile.' }].map((item, i) => (
-              <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
-                <Card sx={{ height: '100%' }}>
-                  <CardContent sx={{ p: 2 }}>
-                    {item.icon}
-                    <Typography variant='h5' component='h3'>{item.title}</Typography>
-                    <Typography variant='body1'>{item.desc}</Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
+            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
+                <ContentCutIcon fontSize='large' color='secondary' />
+                <Typography variant='h5' component='h3'>100% Free</Typography>
+                <Typography variant='body1'>No signup, fees or watermark.</Typography>
+              </CardContent></Card>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
+                <PrivacyTipIcon fontSize='large' color='secondary' />
+                <Typography variant='h5' component='h3'>Private</Typography>
+                <Typography variant='body1'>All processing stays local.</Typography>
+              </CardContent></Card>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
+                <AudiotrackIcon fontSize='large' color='secondary' />
+                <Typography variant='h5' component='h3'>Format Support</Typography>
+                <Typography variant='body1'>MP3, WAV, FLAC, AAC, OGG.</Typography>
+              </CardContent></Card>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
+                <HighQualityIcon fontSize='large' color='secondary' />
+                <Typography variant='h5' component='h3'>Accurate</Typography>
+                <Typography variant='body1'>Precise region selection.</Typography>
+              </CardContent></Card>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
+                <SpeedIcon fontSize='large' color='secondary' />
+                <Typography variant='h5' component='h3'>Fast Preview</Typography>
+                <Typography variant='body1'>Instant in‑browser play.</Typography>
+              </CardContent></Card>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
+                <CloudUploadIcon fontSize='large' color='secondary' />
+                <Typography variant='h5' component='h3'>Cross‑Platform</Typography>
+                <Typography variant='body1'>Desktop & mobile browsers.</Typography>
+              </CardContent></Card>
+            </Grid>
           </Grid>
         </Container>
       </section>
@@ -137,21 +154,47 @@ export default function AudioTrimLanding() {
               <Typography variant='h2'>How It Works</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
-            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center">
-              {[{ icon: <CloudUploadIcon />, title: 'Upload Your Audio File', desc: 'Drag and drop or click to select.' },
-              { icon: <ContentCutIcon />, title: 'Trim Your Audio', desc: 'Use the slider to adjust the trim range.' },
-              { icon: <PrivacyTipIcon />, title: 'No Installation Needed', desc: 'Trim audio directly in your browser—no software required.' },
-              { icon: <DownloadIcon />, title: 'Download Your Trimmed Audio', desc: 'One click to save your trimmed file.' }].map((step, i) => (
-                <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                    <Box sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
-                    <Box>
-                      <Typography variant='h5' component='h3'>{step.title}</Typography>
-                      <Typography variant='body1'>{step.desc}</Typography>
-                    </Box>
+            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent='center' flexGrow={1}>
+              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                <Box sx={{ textAlign: 'center' }}>
+                  <Box sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <CloudUploadIcon />
                   </Box>
-                </Grid>
-              ))}
+                  <Typography variant='h5' component='h3' gutterBottom>1. Upload</Typography>
+                  <Typography variant='body1'>Drag & drop audio.</Typography>
+                </Box>
+              </Grid>
+              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                <Box sx={{ textAlign: 'center' }}>
+                  <Box sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <ContentCutIcon />
+                  </Box>
+                  <Typography variant='h5' component='h3' gutterBottom>2. Set Range</Typography>
+                  <Typography variant='body1'>Adjust start & end.</Typography>
+                </Box>
+              </Grid>
+              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                <Box sx={{ textAlign: 'center' }}>
+                  <Box sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <PlayArrowIcon />
+                  </Box>
+                  <Typography variant='h5' component='h3' gutterBottom>3. Preview</Typography>
+                  <Typography variant='body1'>Confirm selection.</Typography>
+                </Box>
+              </Grid>
+              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                <Box sx={{ textAlign: 'center' }}>
+                  <Box sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <DownloadIcon />
+                  </Box>
+                  <Typography variant='h5' component='h3' gutterBottom>4. Download</Typography>
+                  <Typography variant='body1'>Export trimmed file.</Typography>
+                </Box>
+              </Grid>
             </Grid>
           </Grid>
         </Container>
@@ -164,22 +207,90 @@ export default function AudioTrimLanding() {
               <Typography variant='h2' mb={4}>Key Features</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            {[{ icon: <ContentCutIcon fontSize='large' color='secondary' />, title: 'Precise Trimming', desc: 'Trim audio from any point with ease.' },
-            { icon: <AudiotrackIcon fontSize='large' color='secondary' />, title: 'Wide Format Support', desc: 'Works with MP3, WAV, AAC, FLAC, OGG, and more.' },
-            { icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: 'No Installation Needed', desc: 'Trim audio directly in your browser—no software required.' },
-            { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'Free & No Watermarks', desc: 'Clean audio without branding.' },
-            { icon: <CloudUploadIcon fontSize='large' color='secondary' />, title: 'Cross-Device Compatibility', desc: 'Accessible on both desktop and mobile browsers.' },
-            { icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: 'Browser-Based', desc: 'All processing happens locally—no uploads necessary.' }].map((feat, i) => (
-              <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
-                <Card sx={{ height: '100%' }}>
-                  <CardContent sx={{ p: 2 }}>
-                    {feat.icon}
-                    <Typography variant='h5' component='h3'>{feat.title}</Typography>
-                    <Typography variant='body1'>{feat.desc}</Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
+            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
+                <ContentCutIcon fontSize='large' color='secondary' />
+                <Typography variant='h5' component='h3'>Precise Trimming</Typography>
+                <Typography variant='body1'>Accurate start/end control.</Typography>
+              </CardContent></Card>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
+                <AudiotrackIcon fontSize='large' color='secondary' />
+                <Typography variant='h5' component='h3'>Format Support</Typography>
+                <Typography variant='body1'>MP3, WAV, FLAC, AAC, OGG.</Typography>
+              </CardContent></Card>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
+                <PrivacyTipIcon fontSize='large' color='secondary' />
+                <Typography variant='h5' component='h3'>Local Only</Typography>
+                <Typography variant='body1'>No uploads required.</Typography>
+              </CardContent></Card>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
+                <HighQualityIcon fontSize='large' color='secondary' />
+                <Typography variant='h5' component='h3'>Clean Output</Typography>
+                <Typography variant='body1'>No watermark branding.</Typography>
+              </CardContent></Card>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
+                <SpeedIcon fontSize='large' color='secondary' />
+                <Typography variant='h5' component='h3'>Instant Preview</Typography>
+                <Typography variant='body1'>Check result quickly.</Typography>
+              </CardContent></Card>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
+                <CloudUploadIcon fontSize='large' color='secondary' />
+                <Typography variant='h5' component='h3'>Cross‑Device</Typography>
+                <Typography variant='body1'>Desktop & mobile ready.</Typography>
+              </CardContent></Card>
+            </Grid>
+          </Grid>
+        </Container>
+      </section>
+
+      <section className='use-cases'>
+        <Container maxWidth="lg">
+          <Typography variant='h2'>Use Cases & Tips</Typography>
+          <Divider sx={{ width: 100, mx: 'auto', my: 2 }} />
+          <Grid container spacing={3}>
+            <Grid size={{ xs: 12, md: 4 }}>
+              <Card sx={{ height: '100%' }}><CardContent>
+                <Typography variant='h5' component='h3' gutterBottom>Common Scenarios</Typography>
+                <Typography component='ul' sx={{ pl: 3, m: 0 }}>
+                  <li>Create ringtones/snippets</li>
+                  <li>Podcast ad removal</li>
+                  <li>Lecture segment extraction</li>
+                  <li>Music practice loops</li>
+                </Typography>
+              </CardContent></Card>
+            </Grid>
+            <Grid size={{ xs: 12, md: 4 }}>
+              <Card sx={{ height: '100%' }}><CardContent>
+                <Typography variant='h5' component='h3' gutterBottom>Tips</Typography>
+                <Typography component='ul' sx={{ pl: 3, m: 0 }}>
+                  <li>Export lossless if re‑editing</li>
+                  <li>Add tiny fades to avoid clicks</li>
+                  <li>Keep originals for lossy edits</li>
+                  <li>Trim on zero crossings (future)</li>
+                </Typography>
+              </CardContent></Card>
+            </Grid>
+            <Grid size={{ xs: 12, md: 4 }}>
+              <Card sx={{ height: '100%' }}><CardContent>
+                <Typography variant='h5' component='h3' gutterBottom>Who It’s For</Typography>
+                <Typography component='ul' sx={{ pl: 3, m: 0 }}>
+                  <li>Musicians & learners</li>
+                  <li>Podcasters & editors</li>
+                  <li>Content creators</li>
+                  <li>Students & speakers</li>
+                </Typography>
+              </CardContent></Card>
+            </Grid>
           </Grid>
         </Container>
       </section>
@@ -191,18 +302,28 @@ export default function AudioTrimLanding() {
               <Typography variant='h2' mb={4} align='center'>FAQs</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
-            {FAQ_SCHEMA.mainEntity.map((faq, idx) => (
-              <Grid key={idx} size={{ xs: 12 }}>
-                <Accordion square disableGutters elevation={3} sx={{ '& .MuiAccordionSummary-root': { px: 1, py: 0.5 }, '& .MuiAccordionDetails-root': { px: 1, py: 1 } }}>
-                  <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`faq-at-${idx}-content`} id={`faq-at-${idx}-header`}>
-                    <Typography variant="subtitle1">{faq.name}</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails sx={{ p: 2 }}>
-                    <Typography variant="body2">{faq.acceptedAnswer.text}</Typography>
-                  </AccordionDetails>
-                </Accordion>
-              </Grid>
-            ))}
+            <Grid size={{ xs: 12 }}>
+              <Accordion square disableGutters elevation={3}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Can I trim MP3 files?</Typography></AccordionSummary>
+                <AccordionDetails><Typography variant='body1'>Yes — MP3 plus WAV, FLAC, AAC, OGG & more.</Typography></AccordionDetails>
+              </Accordion>
+              <Accordion square disableGutters elevation={3}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Are files uploaded?</Typography></AccordionSummary>
+                <AccordionDetails><Typography variant='body1'>No — everything stays in your browser.</Typography></AccordionDetails>
+              </Accordion>
+              <Accordion square disableGutters elevation={3}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Is it free & watermark‑free?</Typography></AccordionSummary>
+                <AccordionDetails><Typography variant='body1'>Completely free — no watermark or signup.</Typography></AccordionDetails>
+              </Accordion>
+              <Accordion square disableGutters elevation={3}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Will quality degrade?</Typography></AccordionSummary>
+                <AccordionDetails><Typography variant='body1'>Lossless sources can stay lossless; lossy may re‑encode.</Typography></AccordionDetails>
+              </Accordion>
+              <Accordion square disableGutters elevation={3}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Do I need an account?</Typography></AccordionSummary>
+                <AccordionDetails><Typography variant='body1'>No account required.</Typography></AccordionDetails>
+              </Accordion>
+            </Grid>
           </Grid>
         </Container>
       </section>
@@ -219,6 +340,19 @@ export default function AudioTrimLanding() {
           </Grid>
         </Container>
       </section>
+
+      {/* FAQ Schema moved to bottom */}
+      <script type="application/ld+json">{JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Can I trim MP3 files?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — MP3 plus WAV, FLAC, AAC, OGG and other browser‑decodable formats." } },
+          { "@type": "Question", "name": "Are files uploaded?", "acceptedAnswer": { "@type": "Answer", "text": "No. All trimming runs locally in your browser for privacy." } },
+          { "@type": "Question", "name": "Is it free and watermark‑free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The trimmer is fully free with no watermark or signup." } },
+          { "@type": "Question", "name": "Will quality degrade?", "acceptedAnswer": { "@type": "Answer", "text": "Lossless inputs can stay lossless; lossy formats may re‑encode when exporting." } },
+          { "@type": "Question", "name": "Do I need an account?", "acceptedAnswer": { "@type": "Answer", "text": "No account required — completely browser‑based." } }
+        ]
+      })}</script>
     </Root>
   )
 }

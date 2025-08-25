@@ -55,6 +55,7 @@ minHeight: 500,
   },
   '& .faq-section': {
     paddingBlock: theme.spacing(8),
+    background: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
     '& .MuiTypography-h2': { color: theme.palette.text.primary },
     '& .MuiAccordionSummary-root': { padding: theme.spacing(0, 2, 0, 2) },
     '& .MuiAccordionDetails-root': { padding: theme.spacing(0, 2, 2, 2) }
@@ -71,11 +72,10 @@ export default function ExtractAudioLanding() {
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Free Online Audio Extractor – Extract Audio from Video Files</title>
-        <meta name="description" content="Extract audio from video files online for free. Grab MP3, WAV, AAC, and more from MP4, MOV, AVI, MKV. No signup, no installation, 100% browser-based." />
-        <meta name="keywords" content="free online audio extractor, extract audio from video online free, get audio from video free online, video to audio converter free online, extract mp3 from video online free, video audio extractor browser, free tool to extract sound from video" />
-        <meta property="og:title" content="Free Online Tool to Extract Audio from Video – Download Voice & Music Easily" />
-        <meta property="og:description" content="Extract audio from video files online—grab MP3, WAV, AAC tracks from MP4, MOV, AVI, MKV and more. No signup or installs, 100% free and browser-based." />
+        <title>Extract Audio from Video – Free Online Audio Extractor (No Signup)</title>
+        <meta name="description" content="Extract audio (MP3, WAV, AAC) from MP4, MOV, MKV, WebM in your browser. Select a time range & download — fast, private & watermark‑free." />
+        <meta property="og:title" content="Extract Audio from Video – Free Online Tool" />
+        <meta property="og:description" content="Pull MP3, WAV or AAC from MP4, MOV, MKV, WebM locally. Select range & export – no uploads or watermark." />
         <meta property="og:image" content="/images/landing/audio-extract-hero.jpg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="/tools/video/extract-audio-from-video" />
@@ -83,13 +83,12 @@ export default function ExtractAudioLanding() {
         <link rel="canonical" href="/tools/video/extract-audio-from-video" />
         <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
-
       <section className='hero-section'>
         <Container maxWidth="lg">
           <Grid container spacing={3} alignItems="center">
             <Grid size={{ xs: 12, md: 6 }} className='hero-text'>
-              <Typography variant="h2" component="h1">Free Online Audio Extractor – Extract Audio from Video Files Instantly</Typography>
-              <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Extract audio tracks from your videos—MP3, WAV, AAC, and more—with this free, browser-based tool. Just upload, select the duration, and download. No signup, no watermark.</Typography>
+              <Typography variant="h2" component="h1">Extract Audio from Video – Free & Private</Typography>
+              <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Pull MP3, WAV or AAC from MP4, MOV, MKV, WebM. Select a time range & export locally — no signup or watermark.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
                 <Button color='error' size='large' href="/tools/video/extract-audio" variant="contained">Upload Video</Button>
                 <Button size='large' href="/tools/video/how-to-extract-audio-from-video" variant="text" sx={{ color: 'text.secondary' }}>How to Extract Audio</Button>
@@ -101,7 +100,6 @@ export default function ExtractAudioLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='why-us'>
         <Container maxWidth="lg">
           <Grid container spacing={3} justifyContent='center'>
@@ -109,9 +107,9 @@ export default function ExtractAudioLanding() {
               <Typography variant='h2'>Why Use Our Free Online Audio Extractor?</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            {[{ icon: <HighQualityIcon fontSize='large' color='error' />, title: 'Completely Free', desc: 'No hidden fees, signups, or watermarking.' },
+            {[{ icon: <HighQualityIcon fontSize='large' color='error' />, title: 'Free & Clean', desc: 'No fees, signup or watermark.' },
             { icon: <CloudUploadIcon fontSize='large' color='error' />, title: 'Fast & Easy', desc: 'Upload your video, select time range, and download audio in seconds.' },
-            { icon: <MovieIcon fontSize='large' color='error' />, title: 'Wide Format Support', desc: 'MP4, MOV, AVI, MKV (video) and MP3, WAV, AAC (audio).' },
+            { icon: <MovieIcon fontSize='large' color='error' />, title: 'Format Support', desc: 'MP4, MOV, MKV, WebM → MP3, WAV, AAC.' },
             { icon: <PrivacyTipIcon fontSize='large' color='error' />, title: 'Browser-Based & Secure', desc: 'No downloads—everything runs right in your browser.' },
             { icon: <ContentCutIcon fontSize='large' color='error' />, title: 'Precise Range Extraction', desc: 'Trim audio by specifying start and end times before extraction.' },
             { icon: <MusicNoteIcon fontSize='large' color='error' />, title: 'No Software Needed', desc: 'Works on desktop and mobile – accessible from any modern browser.' }].map((item, i) => (
@@ -128,7 +126,6 @@ export default function ExtractAudioLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='how-it-works'>
         <Container maxWidth="lg">
           <Grid container spacing={3}>
@@ -136,11 +133,11 @@ export default function ExtractAudioLanding() {
               <Typography variant='h2'>How It Works</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
-            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center">
-              {[{ icon: <CloudUploadIcon />, title: 'Upload Your Video File', desc: 'Drag and drop or click to select your video (MP4, MOV, AVI, MKV).' },
-              { icon: <ContentCutIcon />, title: 'Select the Audio Duration', desc: 'Use the range slider to pick the exact portion of audio you want to extract.' },
-              { icon: <HighQualityIcon />, title: 'Process & Extract', desc: 'Click “Extract Audio” to convert and extract the audio track from the selected segment.' },
-              { icon: <DownloadIcon />, title: 'Download Your Audio', desc: 'Once processed, download your audio file in MP3, WAV, or AAC format.' }].map((step, i) => (
+            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center" flexGrow={1}>
+              {[{ icon: <CloudUploadIcon />, title: 'Upload Video', desc: 'Drag & drop MP4, MOV, MKV, WebM.' },
+              { icon: <ContentCutIcon />, title: 'Set Range (Optional)', desc: 'Adjust start & end markers.' },
+              { icon: <HighQualityIcon />, title: 'Extract Locally', desc: 'Convert to MP3 / WAV / AAC.' },
+              { icon: <DownloadIcon />, title: 'Download Audio', desc: 'Instant, watermark‑free export.' }].map((step, i) => (
                 <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
                     <Box sx={{ bgcolor: 'error.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
@@ -155,7 +152,6 @@ export default function ExtractAudioLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='key-features'>
         <Container maxWidth="lg">
           <Grid container spacing={3} justifyContent="center">
@@ -182,7 +178,6 @@ export default function ExtractAudioLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='faq-section'>
         <Container maxWidth="lg">
           <Grid container spacing={3} justifyContent="center">
@@ -205,7 +200,6 @@ export default function ExtractAudioLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='cta-section'>
         <Container maxWidth="lg">
           <Grid container spacing={3} justifyContent="center">

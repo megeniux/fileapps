@@ -140,7 +140,7 @@ export default function ThumbnailGeneratorLanding() {
               <Typography variant='h2'>How It Works</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
-            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center">
+            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center" flexGrow={1}>
               {[{ icon: <CloudUploadIcon />, title: 'Upload Your Video File', desc: 'Drag & drop or browse to select your video.' },
               { icon: <CameraAltIcon />, title: 'Choose Thumbnail Frame', desc: 'Pick the exact frame or time you want as a thumbnail.' },
               { icon: <TuneIcon />, title: 'Customize Size', desc: 'Select from preset dimensions or enter a custom size.' },

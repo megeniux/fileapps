@@ -1,4 +1,3 @@
-  <Typography variant="body1">1. <strong>Upload Your Audio File</strong> – Drag and drop or click to select your file.<br />2. <strong>Set Your Trim Range</strong> – Use the slider to adjust where the trim should begin and end.<br />3. <strong>No Installation Needed</strong> – Trim audio directly in your browser—no software required.<br />4. <strong>Download the Trimmed File</strong> – Click the download button to save your trimmed audio.</Typography>
 import { Helmet } from 'react-helmet-async'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
@@ -6,28 +5,19 @@ import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
-
-const FAQ_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "Can I cut or trim MP3 files online?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, our tool works perfectly with MP3 files, as well as WAV, FLAC, AAC, and more." } },
-    { "@type": "Question", "name": "Do I need to sign up to use this tool?", "acceptedAnswer": { "@type": "Answer", "text": "No, it's completely free to use with no signup or account required." } },
-    { "@type": "Question", "name": "Is this tool completely free to use?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, you can trim your audio for free, without any hidden charges or watermarks." } },
-    { "@type": "Question", "name": "How do I download the trimmed audio?", "acceptedAnswer": { "@type": "Answer", "text": "Once you’re satisfied with the trim, just click the “Download” button to save your audio." } },
-    { "@type": "Question", "name": "Are my files private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, everything happens locally in your browser—nothing is uploaded to a server." } }
-  ]
-}
+import Accordion from '@mui/material/Accordion'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 export default function AudioTrimBlog() {
   return (
     <Container maxWidth="lg" sx={{ py: 6 }}>
       <Helmet>
-        <title>How to Trim Audio Files Online for Free</title>
-        <meta name="description" content="Trim audio files online for free. Cut MP3, WAV, FLAC, AAC, and more with precision. No signup, no watermark, 100% browser-based. Step-by-step guide." />
-        <meta name="keywords" content="audio trimmer online free, cut audio online, trim audio online free, online audio cutter, trim MP3 file free, audio trimming tool, free audio editor, trim WAV files, cut music online, audio cut tool, free audio cutter" />
-        <meta property="og:title" content="How to Trim Audio Files Online for Free" />
-        <meta property="og:description" content="Cut audio files online for free with our easy-to-use tool. Trim MP3, WAV, FLAC, AAC, and more without watermark or signup." />
+        <title>How to Trim Audio Files Online Free (No Signup, No Uploads)</title>
+        <meta name="description" content="Free online audio trimmer – cut MP3, WAV, FLAC, AAC, OGG & M4A privately in your browser. No signup, no watermark." />
+        <meta property="og:title" content="Trim Audio Online Free – MP3, WAV, FLAC (No Signup)" />
+        <meta property="og:description" content="Cut & preview audio locally (MP3, WAV, FLAC, AAC). Private, fast & watermark‑free." />
         <meta property="og:type" content="article" />
         <meta property="og:image" content="/images/landing/audio-trimmer-hero.jpg" />
         <meta property="og:url" content="/tools/audio/how-to-trim-audio-online" />
@@ -39,26 +29,83 @@ export default function AudioTrimBlog() {
       <Paper sx={{ p: 4 }}>
         <Box mb={4}>
           <img src='/images/landing/audio-trimmer-hero.jpg' alt='Audio Trimmer' title='Audio Trimmer' loading='lazy' width="400px" height="auto" style={{ maxWidth: '100%', display: 'table', margin: '0 auto 16px' }} />
-          <Typography variant="h3" component="h1" gutterBottom> How to Trim Audio Files Online for Free </Typography>
-          <Typography variant="body1">Trimming audio files is easier than ever. Whether you need to cut a song, extract a clip from a podcast, or shorten an audiobook, our <strong>free online audio trimmer</strong> allows you to trim MP3, WAV, FLAC, and more directly in your browser.</Typography>
+          <Typography variant="h3" component="h1" gutterBottom>Trim Audio Files Online — Free, Private & No Watermark</Typography>
+          <Typography variant="body1">Cut MP3, WAV, FLAC, AAC, OGG & M4A directly in your browser — no uploads, signup or watermark. Ideal for ringtones, loops, podcast cleanup & excerpts.</Typography>
         </Box>
 
         <Divider sx={{ mb: 3 }} />
 
         <Box>
-          <Typography variant="h4" component="h2" gutterBottom>Why Trim Audio Files?</Typography>
-          <Typography variant="body1" mb={2}>Remove unwanted sections from songs or podcasts.<br />Extract key moments from longer recordings.<br />Perfect for editing sound clips for videos or presentations.<br />Cut large audio files into smaller pieces for easier sharing.</Typography>
+          <Typography variant="h4" component="h2" gutterBottom>Why Trim Audio?</Typography>
+          <Box component='ul' sx={{ pl: 3, mb: 2 }}>
+            <li><Typography variant='body1'>Create ringtones or highlights.</Typography></li>
+            <li><Typography variant='body1'>Remove silence, ads or mistakes.</Typography></li>
+            <li><Typography variant='body1'>Extract study or rehearsal sections.</Typography></li>
+            <li><Typography variant='body1'>Shorten voice notes for sharing.</Typography></li>
+          </Box>
 
-          <Typography variant="h4" component="h2" my={2}>How to Trim Audio Files Online:</Typography>
-          <Typography variant="body1">1. <strong>Upload Your Audio File</strong> – Drag and drop or click to select your file.<br />2. <strong>Set Your Trim Range</strong> – Use the slider to adjust where the trim should begin and end.<br />3. <strong>Preview the Trimmed Audio</strong> – Play the audio instantly to ensure the trim is accurate.<br />4. <strong>Download the Trimmed File</strong> – Click the download button to save your trimmed audio.</Typography>
+          <Typography variant="h4" component="h2" gutterBottom>How It Works (4 Steps)</Typography>
+          <Box component='ol' sx={{ pl: 3, mb: 2 }}>
+            <li><Typography variant='body1' component='span'><strong>Upload</strong> (drag & drop supported).</Typography></li>
+            <li><Typography variant='body1' component='span'><strong>Select range</strong> by adjusting start & end markers.</Typography></li>
+            <li><Typography variant='body1' component='span'><strong>Preview</strong> to confirm accuracy.</Typography></li>
+            <li><Typography variant='body1' component='span'><strong>Download</strong> trimmed audio — watermark‑free.</Typography></li>
+          </Box>
 
-          <Typography variant="h4" component="h2" mt={3} gutterBottom>Best Use Cases</Typography>
-          <Typography variant="body1" mb={2}>Musicians: Trim and extract sections of songs for practice or sampling.<br />Podcasters: Cut out pauses, ads, or mistakes in your episodes.<br />Video Creators: Extract sound clips for video editing.<br />Students: Trim recorded lectures for easier review.</Typography>
+          <Divider sx={{ my: 3 }} />
 
-          <Typography variant="h4" component="h2" gutterBottom>Why Choose Our Free Audio Trimmer?</Typography>
-          <Typography variant="body1" mb={2}>No software to install—use it directly in your browser.<br />Completely free and watermark-free—no hidden fees.<br />Multiple format support—trim MP3, WAV, FLAC, AAC, and more.<br />Privacy guaranteed—everything stays on your device.</Typography>
+          <Typography variant="h4" component="h2" gutterBottom>Key Features</Typography>
+          <Box component='ul' sx={{ pl: 3, mb: 2 }}>
+            <li><Typography variant='body1'><strong>Local trimming:</strong> privacy by design.</Typography></li>
+            <li><Typography variant='body1'><strong>Multi‑format:</strong> MP3, WAV, FLAC, AAC, OGG, M4A.</Typography></li>
+            <li><Typography variant='body1'><strong>Instant preview:</strong> no waiting.</Typography></li>
+            <li><Typography variant='body1'><strong>Clean output:</strong> no watermark or branding.</Typography></li>
+            <li><Typography variant='body1'><strong>Fast export:</strong> browser WebAssembly pipeline.</Typography></li>
+          </Box>
 
-          <Typography variant="body1" mb={2}>With our <strong>online audio trimmer</strong>, you can trim audio files fast, free, and with full control—right from your browser. No installations, no signups, just simple, precise audio cutting.</Typography>
+          <Typography variant="h4" component="h2" gutterBottom>Use Cases</Typography>
+          <Box component='ul' sx={{ pl: 3, mb: 2 }}>
+            <li><Typography variant='body1'>Ringtones & notifications.</Typography></li>
+            <li><Typography variant='body1'>Podcast segment cleanup.</Typography></li>
+            <li><Typography variant='body1'>Practice loops for music.</Typography></li>
+            <li><Typography variant='body1'>Lecture excerpt extraction.</Typography></li>
+          </Box>
+
+          <Typography variant="h4" component="h2" gutterBottom>Tips</Typography>
+          <Box component='ul' sx={{ pl: 3, mb: 2 }}>
+            <li><Typography variant='body1'>Export WAV/FLAC if you will re‑edit.</Typography></li>
+            <li><Typography variant='body1'>Keep originals for lossy formats.</Typography></li>
+            <li><Typography variant='body1'>Add tiny fades (when available) to avoid clicks.</Typography></li>
+            <li><Typography variant='body1'>Trim on zero crossings for clean loops (future feature).</Typography></li>
+          </Box>
+
+          <Divider sx={{ my: 3 }} />
+
+          <Typography variant="h4" component="h2" gutterBottom>FAQs</Typography>
+          <Accordion disableGutters square>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant="h6" component="h3">Can I cut MP3 files?</Typography></AccordionSummary>
+            <AccordionDetails><Typography variant="body1">Yes — MP3 plus WAV, FLAC, AAC, OGG, M4A and other browser‑supported formats.</Typography></AccordionDetails>
+          </Accordion>
+          <Accordion disableGutters square>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant="h6" component="h3">Do I need to upload?</Typography></AccordionSummary>
+            <AccordionDetails><Typography variant="body1">No. Trimming runs entirely in your browser for privacy.</Typography></AccordionDetails>
+          </Accordion>
+          <Accordion disableGutters square>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant="h6" component="h3">Is it free & watermark‑free?</Typography></AccordionSummary>
+            <AccordionDetails><Typography variant="body1">Yes — fully free with no watermark or signup.</Typography></AccordionDetails>
+          </Accordion>
+          <Accordion disableGutters square>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant="h6" component="h3">Will quality drop?</Typography></AccordionSummary>
+            <AccordionDetails><Typography variant="body1">Lossless inputs can remain lossless; lossy formats may re‑encode.</Typography></AccordionDetails>
+          </Accordion>
+          <Accordion disableGutters square>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant="h6" component="h3">Any size limits?</Typography></AccordionSummary>
+            <AccordionDetails><Typography variant="body1">Only constrained by available device memory.</Typography></AccordionDetails>
+          </Accordion>
+
+          <Divider sx={{ my: 3 }} />
+          <Typography variant="h4" component="h2" gutterBottom>Conclusion</Typography>
+          <Typography variant="body1" mb={2}>Trim audio quickly & privately — upload locally, set range, preview, and export a clean, watermark‑free file in seconds.</Typography>
 
           <Box mt={4} textAlign="center">
             <Button color='secondary' size='large' href="/tools/audio/trim" variant="contained">Upload Audio</Button>
@@ -68,4 +115,16 @@ export default function AudioTrimBlog() {
       </Paper>
     </Container>
   )
+}
+
+const FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Can I cut MP3 files?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — MP3 plus WAV, FLAC, AAC, OGG, M4A and other browser‑supported formats." } },
+    { "@type": "Question", "name": "Do I need to upload?", "acceptedAnswer": { "@type": "Answer", "text": "No. Trimming runs entirely in your browser for privacy." } },
+    { "@type": "Question", "name": "Is it free & watermark‑free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — fully free with no watermark or signup." } },
+    { "@type": "Question", "name": "Will quality drop?", "acceptedAnswer": { "@type": "Answer", "text": "Lossless inputs can remain lossless; lossy formats may re‑encode." } },
+    { "@type": "Question", "name": "Any size limits?", "acceptedAnswer": { "@type": "Answer", "text": "Only constrained by available device memory." } }
+  ]
 }

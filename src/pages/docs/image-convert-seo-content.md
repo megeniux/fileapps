@@ -1,85 +1,84 @@
 ---
-title: Free Online Image Converter & Editor – Resize, Crop, Rotate, Filters (No Signup)
-description: Convert, resize, crop, rotate & apply filters to images (PNG, JPG, WebP, GIF) locally. Private, free & watermark‑free with quality control.
-keywords:
-	- online image converter free
-	- resize image in browser
-	- crop image online
-	- rotate image tool
-	- jpg to png converter
-	- png to webp convert
-	- webp to jpg
-	- compress image webp
-	- image editor no upload
-	- private image converter
-	- change image quality
-	- image aspect ratio lock
-	- browser photo editor
-ogTitle: Convert & Edit Images Online – Fast, Private & Free
-ogDescription: Resize, crop, rotate, filter & convert PNG, JPG, WebP & GIF locally—no uploads or watermark.
-ogImage: /images/landing/image-convert-hero.jpg
-canonical: /tools/image/convert-image-online
-slug: image-convert
+title: "Free Online Audio Pitch Shifter – Change Pitch Without Affecting Tempo (No Signup)"
+description: "Use our free online audio pitch shifter to raise or lower pitch while preserving tempo. Browser-based, fast, no signup, watermark-free."
+keywords: "free online pitch shifter, pitch editor browser, free online pitch changer, change pitch online free, transpose songs free online"
+ogTitle: "Free Online Audio Pitch Shifter – Shift Key, Leave Tempo"
+ogDescription: "Shift your audio’s pitch freely online without altering speed. Works in browser with MP3/WAV support. No signup, watermark-free."
+ogType: "website"
+ogImage: "/images/landing/audio-pitch-shifter-hero.jpg"
+ogUrl: "/tools/audio/pitch-shifter-online"
+ogSiteName: "FileApps"
+canonical: "/tools/audio/pitch-shifter-online"
+slug: audio-pitch-shifter
 type: landing+blog
 ---
 
-# Convert & edit images online – private & fast
+# Free Online Audio Pitch Shifter — Keep Tempo While Changing Key
 
-Resize, crop, rotate, flip, adjust quality and apply basic filters to images (PNG, JPG, WebP, GIF) fully in your browser—no uploads or signups.
-
-## Why use this image converter?
-- **Local privacy:** Processing stays on device.  
-- **Format flexibility:** Convert among PNG/JPG/WebP/GIF.  
-- **Precision resizing & crop.**  
-- **Filter adjustments** brightness, contrast, saturation, blur, grayscale.  
-
-## How it works
-1. Upload image.  
-2. Adjust size / crop / rotate.  
-3. Apply filters (optional).  
-4. Choose output format & quality.  
-5. Download.  
-
-## Key features
-- **Aspect ratio lock toggle.**  
-- **Lossless formats (PNG/WebP lossless).**  
-- **Quality slider for JPG/WebP.**  
-- **Flip & rotate controls.**  
-- **Live preview.**  
-- **No watermark.**  
-
-## FAQs
-### Are images uploaded?
-No—processing local only.
-
-### Supported formats?
-PNG, JPG, WebP, GIF (input/output combos vary by browser codec support).
-
-### Can I compress images?
-Yes—lower quality slider for JPG/WebP reduces size.
-
-### Maintain aspect ratio?
-Use the lock toggle while resizing.
-
-### Mobile support?
-Works in modern mobile browsers with sufficient memory.
-
-## Blog guide – how to convert & edit images locally
-### Why local editing?
-Privacy, speed, offline-friendly workflow, reduced bandwidth.
-
-### Steps
-Upload → Resize/Crop → Filter (optional) → Choose format/quality → Download.
-
-### Tips
-Use WebP for best quality/size tradeoff; preserve original by downloading edited copy, not overwriting.
-
-### Conclusion
-Browser-based editing covers most everyday tasks without heavyweight software.
-
-## MUI icon suggestions
-`ImageIcon`, `CropIcon`, `PhotoSizeSelectLargeIcon`, `TuneIcon`, `CloudUploadIcon`, `HighQualityIcon`.
+Adjust audio’s key—semitones, cents, or octaves—**without altering tempo**, using our **free online pitch shifter**. Browser-based, no registration, fully private, watermark-free.
 
 ---
-JSON-LD: derive from FAQ list.
 
+## Why Choose This Free Online Pitch Shifter?
+
+- **100% free online**—absolutely no signup, no ads, no watermark. :contentReference[oaicite:15]{index=15}  
+- **Preserves tempo with precision**, thanks to advanced audio processing. :contentReference[oaicite:16]{index=16}  
+- **Works with popular formats**—MP3, WAV, plus others depending on browser support. :contentReference[oaicite:17]{index=17}  
+- **Use semitones, cents, or octave adjustments** for granular control. :contentReference[oaicite:18]{index=18}  
+- **Instant preview and download**, no waiting. :contentReference[oaicite:19]{index=19}  
+
+**MUI icons:** `MusicNoteIcon`, `TuneIcon`, `PrivacyTipIcon`, `HighQualityIcon`, `CloudDownloadIcon`
+
+---
+
+## How It Works (Free Online Workflow)
+
+1. **Upload or drag & drop** your audio (MP3 or WAV).  
+2. **Adjust pitch**: select semitones, cents, or octaves.  
+3. **Maintain tempo** toggled on by default.  
+4. **Preview instantly** and download the result.
+
+**MUI icons:** `UploadFileIcon`, `TuneIcon`, `SpeedIcon`, `PlayArrowIcon`, `DownloadIcon`
+
+---
+
+## Features & Use Cases
+
+- **Pitch shift ±12 semitones (±1 octave)** — for key changes and vocal range matching. :contentReference[oaicite:20]{index=20}  
+- **Precision adjustment** in semitones and cents for fine tuning. :contentReference[oaicite:21]{index=21}  
+- **Ideal for singers, musicians, podcasters, creators** who need pitch edits without time change.  
+- **Perfect for accessibility** — adjust pitch for hearing clarity or audience preference.
+
+---
+
+## Best Practices
+
+- Use **+12 / –12 semitones** to transpose by an octave.  
+- When artifacts appear at extremes, try smaller increments.  
+- Always preview before downloading to confirm quality.
+
+---
+
+## FAQs
+
+**Is this really free online?**  
+Yes—fully free, no signup, & processor runs locally in the browser. :contentReference[oaicite:22]{index=22}
+
+**Will pitch shift change speed?**  
+No—tempo is preserved by default using advanced algorithms. :contentReference[oaicite:23]{index=23}
+
+**What file types can I use?**  
+MP3, WAV, and others your browser supports. :contentReference[oaicite:24]{index=24}
+
+**Can I adjust pitch in cents?**  
+Yes—options include semitones, cents, and octaves. :contentReference[oaicite:25]{index=25}
+
+---
+
+### SEO Integration Summary
+
+This markdown organically incorporates targeted “free online” SEO terms reinforced by live quotes from tools like ToneGenerator, Maztr, OnlineToneGenerator, and Voicss. It balances readability and search value for optimal on-page content.
+
+---
+
+Let me know if you'd like the FAQ JSON-LD or help mapping this into your React components next!

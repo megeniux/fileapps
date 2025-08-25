@@ -21,30 +21,32 @@ import BrushIcon from '@mui/icons-material/Brush'
 import PrivacyTipIcon from '@mui/icons-material/PrivacyTip'
 import FlashOnIcon from '@mui/icons-material/FlashOn'
 import ColorLensIcon from '@mui/icons-material/ColorLens'
-import TuneIcon from '@mui/icons-material/Tune'
 import DownloadIcon from '@mui/icons-material/Download'
 import UploadFileIcon from '@mui/icons-material/UploadFile'
 import HighQualityIcon from '@mui/icons-material/HighQuality'
 import SpeedIcon from '@mui/icons-material/Speed'
+import PreviewIcon from '@mui/icons-material/Preview'
 
 const FAQ_SCHEMA = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        { "@type": "Question", "name": "How does the online caption burner work?", "acceptedAnswer": { "@type": "Answer", "text": "It uses FFmpeg WASM inside your browser – no uploads, no data sharing." } },
-        { "@type": "Question", "name": "Which video and subtitle formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "MP4, MOV, MKV, AVI for videos; SRT and VTT for subtitles." } },
-        { "@type": "Question", "name": "Can I customize subtitle font and color?", "acceptedAnswer": { "@type": "Answer", "text": "Yes – choose font size, color, and outline before burning." } },
-        { "@type": "Question", "name": "Is this really free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes – no signups, no credit card, no watermark, 100% free." } },
-        { "@type": "Question", "name": "Does it work on mobile?", "acceptedAnswer": { "@type": "Answer", "text": "Yes – works on Android and iOS in modern browsers." } }
-    ]
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Is it private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. All processing is local — no uploads or data collection." } },
+    { "@type": "Question", "name": "Which subtitle formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "Standard SRT and VTT (WebVTT) files." } },
+    { "@type": "Question", "name": "Which video formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "MP4, MOV, MKV, WebM and others the browser can decode." } },
+    { "@type": "Question", "name": "Can I change caption position?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can choose top or bottom placement before burning." } },
+    { "@type": "Question", "name": "Can I preview before burning?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Review timing & styling, then burn the final video." } },
+    { "@type": "Question", "name": "Are captions removable after burning?", "acceptedAnswer": { "@type": "Answer", "text": "No. Hardsubbed captions become part of the video frames." } },
+    { "@type": "Question", "name": "Is there any watermark or signup?", "acceptedAnswer": { "@type": "Answer", "text": "No. The tool is free, watermark‑free and needs no account." } }
+  ]
 }
 
 const Root = styled(Paper)(({ theme }) => ({
     '& img': { maxWidth: '100%' },
     '& .hero-section': {
         display: 'flex',
-alignItems: 'center',
-minHeight: 500,
+        alignItems: 'center',
+        minHeight: 500,
         '& .hero-image img': { marginBottom: theme.spacing(2) },
         [theme.breakpoints.down('md')]: {
             '& .hero-text': { textAlign: 'center', paddingBottom: theme.spacing(6) },
@@ -58,6 +60,7 @@ minHeight: 500,
     },
     '& .faq-section': {
         paddingBlock: theme.spacing(8),
+        background: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
         '& .MuiTypography-h2': { color: theme.palette.text.primary },
         '& .MuiAccordionSummary-root': { padding: theme.spacing(0, 2, 0, 2) },
         '& .MuiAccordionDetails-root': { padding: theme.spacing(0, 2, 2, 2) }
@@ -68,17 +71,20 @@ minHeight: 500,
         textAlign: 'center',
         '& .MuiTypography-h2': { color: theme.palette.common.white }
     },
+    '& .use-cases': {
+        paddingBlock: theme.spacing(8),
+        '& .MuiTypography-h2': { textAlign: 'center', marginBottom: theme.spacing(2) }
+    },
 }));
 
 export default function BurnCaptionLanding() {
     return (
         <Root elevation={0}>
             <Helmet>
-                <title>Free Online Caption Burner – Burn Subtitles into Video (No Signup, No Watermark)</title>
-                <meta name="description" content="Burn captions (SRT, VTT) into videos online for free. Customize font, color, and outline. No signup, no credit card, no watermark – 100% browser-based and private." />
-                <meta name="keywords" content="burn captions online free, add subtitles to video online, hardcode subtitles online, embed captions in video free, no signup subtitle burner, drag & drop caption tool, burn captions to MP4 online, add SRT to video free, customize subtitle font online" />
-                <meta property="og:title" content="Burn Captions into Videos Online – Free & Private (No Signup)" />
-                <meta property="og:description" content="Add subtitles to any video and burn them permanently online. Free, no watermark, no signup, full customization. Runs in your browser for privacy." />
+                <title>Burn Subtitles into Video – Free Online Caption Burner (No Signup)</title>
+                <meta name="description" content="Hardcode SRT, VTT subtitles into MP4, MOV, MKV or WebM in‑browser. Style font, size, color & position. Fast, private & watermark‑free." />
+                <meta property="og:title" content="Burn Captions into Video Online – Fast, Private & Free" />
+                <meta property="og:description" content="Hardcode SRT/VTT with styling (font, color, outline, position). Local, no upload, no watermark." />
                 <meta property="og:image" content="/images/landing/burn-caption-hero.jpg" />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="/tools/video/burn-captions-into-video-online" />
@@ -91,8 +97,8 @@ export default function BurnCaptionLanding() {
                 <Container maxWidth="lg">
                     <Grid container spacing={3} alignItems="center">
                         <Grid size={{ xs: 12, md: 6 }} className='hero-text'>
-                            <Typography variant="h2" component="h1">Burn Captions into Your Videos Online – Free, Fast & No Signup</Typography>
-                            <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Add subtitles (SRT, VTT) to your video and burn them permanently in the browser. Customize font, color, and outline. No uploads, no watermarks, no credit card required.</Typography>
+                            <Typography variant="h2" component="h1">Burn Subtitles into Video – Free, Fast & Private</Typography>
+                            <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Hardcode SRT/VTT into MP4, MOV, MKV or WebM locally. Customize font, size, color, outline & position. No uploads, signup or watermark.</Typography>
                             <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
                                 <Button color='primary' size='large' href="/tools/video/burn-caption" variant="contained">Upload</Button>
                                 <Button size='large' href="/tools/video/how-to-burn-captions-into-video-online" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
@@ -137,22 +143,67 @@ export default function BurnCaptionLanding() {
                             <Typography variant='h2'>How It Works</Typography>
                             <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
                         </Grid>
-                        <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center">
-                            {[{ icon: <CloudUploadIcon />, title: 'Upload Video File', desc: 'Drag & drop or click to select.' },
-                            { icon: <SubtitlesIcon />, title: 'Add Subtitle File', desc: 'Upload SRT or VTT.' },
-                            { icon: <BrushIcon />, title: 'Customize Captions', desc: 'Adjust font size, color, outline.' },
-                            { icon: <TuneIcon />, title: 'Burn Captions', desc: 'Processing happens in your browser.' },
-                            { icon: <DownloadIcon />, title: 'Download Video', desc: 'Get your captioned video instantly.' }].map((step, i) => (
-                                <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
-                                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                                        <Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
-                                        <Box>
-                                            <Typography variant='h5' component='h3'>{step.title}</Typography>
-                                            <Typography variant='body1'>{step.desc}</Typography>
-                                        </Box>
+                        <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent='center' flexGrow={1}>
+                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                                <Box sx={{ textAlign: 'center' }}>
+                                    <Box sx={{
+                                        bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                    }}>
+                                        <CloudUploadIcon />
                                     </Box>
-                                </Grid>
-                            ))}
+                                    <Typography variant='h5' component='h3' gutterBottom>1. Upload</Typography>
+                                    <Typography variant='body1'>Add your video file.</Typography>
+                                </Box>
+                            </Grid>
+                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                                <Box sx={{ textAlign: 'center' }}>
+                                    <Box sx={{
+                                        bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                    }}>
+                                        <SubtitlesIcon />
+                                    </Box>
+                                    <Typography variant='h5' component='h3' gutterBottom>2. Add Subtitles</Typography>
+                                    <Typography variant='body1'>Load SRT or VTT file.</Typography>
+                                </Box>
+                            </Grid>
+                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                                <Box sx={{ textAlign: 'center' }}>
+                                    <Box sx={{
+                                        bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                    }}>
+                                        <BrushIcon />
+                                    </Box>
+                                    <Typography variant='h5' component='h3' gutterBottom>3. Style</Typography>
+                                    <Typography variant='body1'>Font size, color, outline.</Typography>
+                                </Box>
+                            </Grid>
+                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                                <Box sx={{ textAlign: 'center' }}>
+                                    <Box sx={{
+                                        bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                    }}>
+                                        <PreviewIcon />
+                                    </Box>
+                                    <Typography variant='h5' component='h3' gutterBottom>4. Preview</Typography>
+                                    <Typography variant='body1'>Check timing & styling.</Typography>
+                                </Box>
+                            </Grid>
+                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                                <Box sx={{ textAlign: 'center' }}>
+                                    <Box sx={{
+                                        bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56,
+                                        mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                    }}>
+                                        <DownloadIcon />
+                                    </Box>
+                                    <Typography variant='h5' component='h3' gutterBottom>5. Burn & Download</Typography>
+                                    <Typography variant='body1'>Process locally & save.</Typography>
+                                </Box>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Container>
@@ -165,12 +216,16 @@ export default function BurnCaptionLanding() {
                             <Typography variant='h2' mb={4}>Key Features</Typography>
                             <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
                         </Grid>
-                        {[{ icon: <UploadFileIcon fontSize='large' color='primary' />, title: 'Drag & Drop Upload', desc: 'Add video files easily.' },
-                        { icon: <SubtitlesIcon fontSize='large' color='primary' />, title: 'Subtitle Support', desc: 'SRT and VTT formats supported.' },
-                        { icon: <ColorLensIcon fontSize='large' color='primary' />, title: 'Custom Fonts & Colors', desc: 'Adjust size, font color, and outline width.' },
-                        { icon: <HighQualityIcon fontSize='large' color='primary' />, title: 'Cross-Browser', desc: 'Works without installing any app.' },
-                        { icon: <DownloadIcon fontSize='large' color='primary' />, title: 'Instant Download', desc: 'Export captioned video without waiting.' },
-                        { icon: <SpeedIcon fontSize='large' color='primary' />, title: 'Free Forever', desc: 'No signup, no credit card, no watermark.' }].map((feat, i) => (
+                        {[ // updated & expanded
+                        { icon: <UploadFileIcon fontSize='large' color='primary' />, title: 'Drag & Drop Upload', desc: 'Add video files easily.' },
+                        { icon: <SubtitlesIcon fontSize='large' color='primary' />, title: 'SRT / VTT Support', desc: 'Standard caption formats.' },
+                        { icon: <ColorLensIcon fontSize='large' color='primary' />, title: 'Styling Controls', desc: 'Font size, color & outline.' },
+                        { icon: <BrushIcon fontSize='large' color='primary' />, title: 'Position Control', desc: 'Toggle top / bottom placement.' },
+                        { icon: <HighQualityIcon fontSize='large' color='primary' />, title: 'Resolution Preserved', desc: 'No quality loss on burn.' },
+                        { icon: <DownloadIcon fontSize='large' color='primary' />, title: 'Preview & Export', desc: 'Check timing before burn.' },
+                        { icon: <SpeedIcon fontSize='large' color='primary' />, title: 'Instant Download', desc: 'Local WASM processing.' },
+                        { icon: <PrivacyTipIcon fontSize='large' color='primary' />, title: 'Private & Free', desc: 'No upload. No watermark.' },
+                        ].map((feat, i) => (
                             <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
                                 <Card sx={{ height: '100%' }}>
                                     <CardContent sx={{ p: 2 }}>
@@ -185,6 +240,48 @@ export default function BurnCaptionLanding() {
                 </Container>
             </section>
 
+            <section className='use-cases'>
+                <Container maxWidth="lg">
+                    <Typography variant='h2'>Use Cases & Tips</Typography>
+                    <Divider sx={{ width: 100, mx: 'auto', my: 2 }} />
+                    <Grid container spacing={3}>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                            <Card sx={{ height: '100%' }}><CardContent>
+                                <Typography variant='h5' component='h3' gutterBottom>Common Scenarios</Typography>
+                                <Typography component='ul' sx={{ pl: 3, m: 0 }}>
+                                    <li>Social media clips</li>
+                                    <li>Course/tutorial exports</li>
+                                    <li>Accessibility compliance</li>
+                                    <li>Marketing promos</li>
+                                </Typography>
+                            </CardContent></Card>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                            <Card sx={{ height: '100%' }}><CardContent>
+                                <Typography variant='h5' component='h3' gutterBottom>Tips</Typography>
+                                <Typography component='ul' sx={{ pl: 3, m: 0 }}>
+                                    <li>Use high contrast text</li>
+                                    <li>Keep lines concise</li>
+                                    <li>Pre‑sync SRT timing</li>
+                                    <li>Outline improves legibility</li>
+                                </Typography>
+                            </CardContent></Card>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                            <Card sx={{ height: '100%' }}><CardContent>
+                                <Typography variant='h5' component='h3' gutterBottom>Who It’s For</Typography>
+                                <Typography component='ul' sx={{ pl: 3, m: 0 }}>
+                                    <li>Creators & editors</li>
+                                    <li>Educators & trainers</li>
+                                    <li>Social media teams</li>
+                                    <li>Accessibility advocates</li>
+                                </Typography>
+                            </CardContent></Card>
+                        </Grid>
+                    </Grid>
+                </Container>
+            </section>
+
             <section className='faq-section'>
                 <Container maxWidth="lg">
                     <Grid container spacing={3} justifyContent="center">
@@ -192,18 +289,36 @@ export default function BurnCaptionLanding() {
                             <Typography variant='h2' mb={4} align='center'>FAQs</Typography>
                             <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
                         </Grid>
-                        {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
-                            <Grid key={idx} size={{ xs: 12 }}>
-                                <Accordion square disableGutters elevation={3} sx={{ '& .MuiAccordionSummary-root': { px: 1, py: 0.5 }, '& .MuiAccordionDetails-root': { px: 1, py: 1 } }}>
-                                    <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`faq-bc-${idx}-content`} id={`faq-bc-${idx}-header`}>
-                                        <Typography variant='h6' component='h3'>{faq.name}</Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails sx={{ p: 2 }}>
-                                        <Typography variant='body1'>{faq.acceptedAnswer.text}</Typography>
-                                    </AccordionDetails>
-                                </Accordion>
-                            </Grid>
-                        ))}
+                        <Grid size={{ xs: 12 }}>
+                            <Accordion square disableGutters elevation={3}>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Is it private?</Typography></AccordionSummary>
+                                <AccordionDetails><Typography variant='body1'>Yes — all burning runs locally (WebAssembly FFmpeg).</Typography></AccordionDetails>
+                            </Accordion>
+                            <Accordion square disableGutters elevation={3}>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Which subtitle formats?</Typography></AccordionSummary>
+                                <AccordionDetails><Typography variant='body1'>SRT & VTT (WebVTT).</Typography></AccordionDetails>
+                            </Accordion>
+                            <Accordion square disableGutters elevation={3}>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Which video formats?</Typography></AccordionSummary>
+                                <AccordionDetails><Typography variant='body1'>MP4, MOV, MKV, WebM (others if the browser decodes them).</Typography></AccordionDetails>
+                            </Accordion>
+                            <Accordion square disableGutters elevation={3}>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Can I position captions?</Typography></AccordionSummary>
+                                <AccordionDetails><Typography variant='body1'>Yes — toggle top or bottom before burning.</Typography></AccordionDetails>
+                            </Accordion>
+                            <Accordion square disableGutters elevation={3}>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Can I preview first?</Typography></AccordionSummary>
+                                <AccordionDetails><Typography variant='body1'>Yes — preview timing & styling before final burn.</Typography></AccordionDetails>
+                            </Accordion>
+                            <Accordion square disableGutters elevation={3}>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Removable after burning?</Typography></AccordionSummary>
+                                <AccordionDetails><Typography variant='body1'>No — hardsubs are permanent (by design).</Typography></AccordionDetails>
+                            </Accordion>
+                            <Accordion square disableGutters elevation={3}>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Any watermark or signup?</Typography></AccordionSummary>
+                                <AccordionDetails><Typography variant='body1'>None — fully free & watermark‑free.</Typography></AccordionDetails>
+                            </Accordion>
+                        </Grid>
                     </Grid>
                 </Container>
             </section>

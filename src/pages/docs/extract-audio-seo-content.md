@@ -1,141 +1,99 @@
 ---
-title: Free Online Audio Extractor – Extract MP3, WAV, AAC from Video (No Signup)
-description: Extract audio tracks from MP4, MOV, AVI, MKV in your browser. Output MP3, WAV or AAC. Fast, private, no watermark or signup.
-keywords:
-	- extract audio from video online
-	- video to mp3 converter free
-	- get audio track from mp4
-	- extract wav from video
-	- mp4 to aac audio
-	- video audio extractor browser
-	- no upload audio extraction
-	- private audio extractor
-	- trim extract audio segment
-	- soundtrack extractor
-	- dialogue audio extraction
-	- lecture audio extractor
-	- music from video tool
-	- free video to audio converter
-ogTitle: Extract Audio from Video Online – Fast, Private & Free
-ogDescription: Pull MP3, WAV or AAC from MP4, MOV, AVI & MKV locally—no uploads, signup or watermark.
-ogImage: /images/landing/extract-audio-hero.jpg
-canonical: /tools/video/extract-audio-from-video
+title: "Free Online Audio Extractor – Extract MP3 from Video (No Signup)"
+description: "Extract audio from MP4, MOV, AVI, MKV directly in your browser. Select a time range and export MP3 instantly. Free, private, no watermark or signup."
+# You can safely drop 'keywords'; kept short here if you want parity.
+keywords: "free online audio extractor, video to mp3 free online, extract audio from mp4 online, browser audio extractor, no upload video to mp3"
+ogTitle: "Extract Audio from Video Online – Fast, Private & Free"
+ogDescription: "Pull MP3 from MP4, MOV, AVI & MKV locally—no uploads, signup, or watermark. Select a range and export in seconds."
+ogType: "website"
+ogImage: "/images/landing/extract-audio-hero.jpg"
+ogUrl: "/tools/video/extract-audio-from-video"
+ogSiteName: "FileApps"
+canonical: "/tools/video/extract-audio-from-video"
 slug: extract-audio
 type: landing+blog
 ---
 
-Landing Page Content
---------------------
+# Free Online Audio Extractor — Convert Video to MP3 in Your Browser
 
-### Header
-
-**Headline:** Extract audio from video – fast & private
-
-Capture MP3, WAV or AAC directly from MP4, MOV, AVI, MKV in your browser. Select a range, extract only what you need, download instantly—no signup, no watermark.
-
-**CTA Buttons:** Upload Video | How to Extract
-
-**Top Header Image Alt:** Interface for selecting audio range from video timeline
-
-### Why use this audio extractor?
-
-- **Local privacy:** In-browser processing—no server upload.  
-- **Segment extraction:** Define exact in/out times.  
-- **Multiple outputs:** MP3, WAV (lossless), AAC.  
-- **Fast workflow:** Minimal UI, instant export.  
-- **Format coverage:** Common video containers decoded.  
-    
-
-### How it works
-1. Upload video.  
-2. Mark start & end (optional).  
-3. Choose output format (MP3 / WAV / AAC).  
-4. Extract & download.  
-    
-
-### Key features
-- **Selective range extraction** for concise outputs.  
-- **Lossless WAV option** for editing.  
-- **Lightweight MP3/AAC** for distribution.  
-- **Fast decoding** via WASM.  
-- **No watermark** clean output.  
-    
-
-### FAQs
-### Can I extract only part of the audio?
-Yes—set the start and end range before extraction.
-
-### Which formats can I export?
-MP3 (compressed), WAV (lossless) or AAC (efficient, wide support).
-
-### Are files private?
-Yes—processed locally; nothing transmitted to servers.
-
-### Do I need an account?
-No signup required.
-
-### Can I preview extracted audio?
-Preview uses original track; download to audit final encoded version.
-
-Blog Section
-------------
-
-### How to Extract Audio from a Video File Online (Free)
-
-Extracting audio is now easier than ever. With our **free online audio extractor**, you can effortlessly grab music, dialogue, or any sound from your video in a few simple steps—no software installation required!
-
-#### Why Extract Audio from Video?
-
-*   **Save the soundtrack or dialogue** from a video without re-encoding the entire clip.
-    
-*   **Create voiceovers or podcasts** using existing videos.
-    
-*   **Capture music or sound effects** from your videos to use in other projects.
-    
-*   **Include lecture or tutorial audio** in your study materials or presentations.
-    
-*   **Trim audio precisely** to the exact section you need for full control over length and content.
-    
-
-### Step-by-step tutorial
-1. Upload video (MP4/MOV/AVI/MKV).  
-2. Set optional time range.  
-3. Choose target audio format.  
-4. Extract & download.  
-    
-
-#### Best Use Cases for Audio Extraction
-
-*   **Content Creators:** Grab music or voiceover from video for editing or repurposing.
-    
-*   **Educators & Students:** Extract lecture, tutorial, or presentation audio for notes.
-    
-*   **Musicians & Remixers:** Isolate musical segments or sound effects.
-    
-*   **Podcasters:** Build podcast segments from existing video content.
-    
-*   **Legal or Archival Work:** Archive conversations or speeches as audio files.
-    
-
-#### Why Choose Our Free Online Audio Extractor?
-
-*   **Precise Audio Segment Extraction** – Trim and capture exactly what you need.
-    
-*   **Fast and Easy** – Upload, extract, and download—all done in seconds.
-    
-*   **Wide Format Support** – Works with multiple video formats and outputs in various audio types.
-    
-*   **No Sign-Up Needed** – Just use it, instantly.
-    
-*   **Clean Output** – Audio without watermarks or ads.
-    
-
-### Call to action
-
-Upload a video now and extract the audio you need—free & private.
+Grab the soundtrack, dialogue, or a precise clip from your video with our **free online audio extractor**. Works entirely on your device — **no uploads, no signup, no watermark**. Supports **MP4, MOV, AVI, MKV** input and **MP3** export. :contentReference[oaicite:2]{index=2}
 
 ---
-MUI icon suggestions: `MusicNoteIcon`, `CloudUploadIcon`, `AudioFileIcon`, `PrivacyTipIcon`, `DownloadIcon`.
 
-JSON-LD: derive from FAQs list.
+## Why use this free online audio extractor?
+- **Privacy‑first:** all processing runs locally in your browser (WebAssembly). :contentReference[oaicite:3]{index=3}
+- **Precise range selection:** set **start/end** to extract only what you need. :contentReference[oaicite:4]{index=4}
+- **Fast workflow:** minimal UI with instant export to **MP3**. :contentReference[oaicite:5]{index=5}
+- **Multi‑container input:** MP4, MOV, AVI, MKV and more supported by your browser. :contentReference[oaicite:6]{index=6}
+- **No watermark or signup:** clean results, no accounts. :contentReference[oaicite:7]{index=7}
 
+**MUI icons:** `MusicNoteIcon`, `PrivacyTipIcon`, `CloudUploadIcon`, `PlayCircleIcon`, `DownloadIcon` :contentReference[oaicite:8]{index=8}
+
+---
+
+## How it works
+1. **Upload or drag & drop** a video (MP4/MOV/AVI/MKV). :contentReference[oaicite:9]{index=9}  
+2. **Set the time range** (start/end) with the slider. :contentReference[oaicite:10]{index=10}  
+3. Click **Extract Audio** to process locally. :contentReference[oaicite:11]{index=11}  
+4. **Download** the generated **MP3** file. :contentReference[oaicite:12]{index=12}
+
+**MUI icons:** `CloudUploadIcon`, `Slider` (UI), `PlayCircleIcon`, `DownloadIcon` :contentReference[oaicite:13]{index=13}
+
+---
+
+## Key features
+- **Video → MP3** extraction (current version). :contentReference[oaicite:14]{index=14}  
+- **Range trimming** before export. :contentReference[oaicite:15]{index=15}  
+- **Progress + status** feedback during processing. :contentReference[oaicite:16]{index=16}  
+- **Clean output:** no watermark. :contentReference[oaicite:17]{index=17}
+
+> **Roadmap:** optional WAV/AAC outputs & waveform preview. :contentReference[oaicite:18]{index=18}
+
+---
+
+## Popular use cases
+| User            | Goal                               | Benefit                          |
+|-----------------|------------------------------------|----------------------------------|
+| Content creators| Save soundtrack or voiceover       | Reuse audio across projects      |
+| Educators       | Extract lecture/presentation audio | Easier study & sharing           |
+| Podcasters      | Pull segments from video archives  | Faster episode assembly          |
+| Editors         | Grab dialogue/SFX snippets         | Quick asset prep                 |
+
+---
+
+## FAQs
+**Can I extract only part of the audio?**  
+Yes — set a **start and end** time before exporting. :contentReference[oaicite:19]{index=19}
+
+**Which format do I get?**  
+**MP3** (today). Lossless/other formats are planned. :contentReference[oaicite:20]{index=20}:contentReference[oaicite:21]{index=21}
+
+**Do I need to upload files?**  
+No — processing happens locally in your browser for privacy. :contentReference[oaicite:22]{index=22}
+
+**Is there a watermark or signup?**  
+Neither — it’s free, no signup, no watermark. :contentReference[oaicite:23]{index=23}
+
+**Which inputs work best?**  
+Common containers your browser can play: **MP4, MOV, AVI, MKV**. :contentReference[oaicite:24]{index=24}
+
+---
+
+## Blog guide — How to extract audio from a video (free online)
+**Why extract?** Save music/voice tracks, repurpose dialogue, create podcast segments, archive speeches.  
+**Steps:** Upload → Set range → Extract → Download. :contentReference[oaicite:25]{index=25}  
+**Tips:**  
+- For speech, consider smaller ranges to keep files compact.  
+- Keep originals for backup; export MP3 for sharing.
+
+---
+
+## MUI icon suggestions (section map)
+- **Hero/Why Us** → `MusicNoteIcon`, `PrivacyTipIcon`  
+- **How It Works** → `CloudUploadIcon`, `PlayCircleIcon`, `DownloadIcon`  
+- **Use Cases** → `LibraryMusicIcon`, `MicIcon`  
+- **FAQ** → `HelpOutlineIcon`, `QuestionAnswerIcon`
+
+---
+
+JSON‑LD: generate an FAQ schema from the Q&A above and embed it via `<Helmet>`.

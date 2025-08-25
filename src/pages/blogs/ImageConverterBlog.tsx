@@ -6,6 +6,10 @@ import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
+import Accordion from '@mui/material/Accordion'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 const FAQ_SCHEMA = {
   "@context": "https://schema.org",
@@ -23,11 +27,10 @@ export default function ImageConverterBlog() {
   return (
     <Container maxWidth='lg' sx={{ py: 6 }}>
       <Helmet>
-        <title>Free Online Image Converter & Editor – Resize, Crop, Rotate, and More (No Signup)</title>
-        <meta name='description' content='Convert, resize, crop, rotate, and edit images online for free. Change image format (JPG, PNG, WebP, GIF), adjust brightness, blur, contrast, saturation, and more. No signup, no watermark – fully browser-based.' />
-        <meta name='keywords' content='free image converter, resize image online, crop image free, rotate image online, image editor in browser, jpg to png converter, adjust brightness online, add blur to image, grayscale filter image, convert image to webp, flip image horizontally, change image quality online, online image resizer free, compress image online, photo editor in browser, privacy-safe image tool, no signup image converter, image editing no watermark, image optimization free tool' />
-        <meta property='og:title' content='Free Online Image Converter & Editor – Convert, Crop, Resize (Private & Fast)' />
-        <meta property='og:description' content='Convert and edit images in your browser with zero uploads. Resize, crop, rotate, and apply filters – all free, with no signup or watermark.' />
+        <title>Convert & Edit Images Online Free – Resize, Crop, Rotate (Private)</title>
+        <meta name='description' content='Resize, crop, rotate & convert JPG, PNG, WebP, GIF locally in your browser. Apply filters & quality settings. Free, private, no watermark.' />
+        <meta property='og:title' content='Free Online Image Converter – Private Resize, Crop & Convert' />
+        <meta property='og:description' content='Convert & edit images (JPG, PNG, WebP, GIF) without uploads. Resize, crop, rotate, filter & export — free & watermark‑free.' />
         <meta property='og:type' content='article' />
   <meta property='og:image' content='/images/landing/image-converter-hero.jpg' />
   <meta property='og:url' content='/tools/image/how-to-convert-image-online' />
@@ -47,19 +50,74 @@ export default function ImageConverterBlog() {
 
         <Box>
           <Typography variant='h4' component='h2' gutterBottom>Why Use a Browser-Based Image Converter?</Typography>
-          <Typography variant='body1' mb={2}>Privacy: No uploads = full control.<br />Speed: Instantly process images without waiting.<br />Convenience: No need to install or download any app.</Typography>
+          <Box component='ul' sx={{ pl: 3, mb: 2 }}>
+            <li><Typography variant='body1'>Privacy: fully local — no uploads.</Typography></li>
+            <li><Typography variant='body1'>Speed: instant operations in memory.</Typography></li>
+            <li><Typography variant='body1'>Convenience: no installs or accounts.</Typography></li>
+          </Box>
 
-          <Typography variant='h4' component='h2' my={2}>Step-by-Step: Convert, Crop & Resize Images Online</Typography>
-          <Typography variant='body1'>1. <strong>Upload an Image</strong> — Drag &amp; drop or select from your device.<br />2. <strong>Resize the Image</strong> — Enter width and height manually, or keep aspect ratio locked.<br />3. <strong>Crop the Image</strong> — Drag to select a crop region and hit Crop.<br />4. <strong>Apply Filters & Adjustments</strong> — Modify brightness, contrast, saturation, and blur.<br />5. <strong>Rotate & Flip</strong> — Rotate by degrees or flip horizontally/vertically.<br />6. <strong>Choose File Format</strong> — Export to JPG, PNG, WebP, or GIF.<br />7. <strong>Download</strong> — Instantly download your edited image – no watermark.</Typography>
+          <Typography variant='h4' component='h2' gutterBottom>How It Works (4 Steps)</Typography>
+          <Box component='ol' sx={{ pl: 3, mb: 2 }}>
+            <li><Typography variant='body1' component='span'><strong>Upload</strong> JPG / PNG / WebP / GIF.</Typography></li>
+            <li><Typography variant='body1' component='span'><strong>Resize or crop</strong> (lock aspect if needed).</Typography></li>
+            <li><Typography variant='body1' component='span'><strong>Adjust</strong> filters, rotate, quality.</Typography></li>
+            <li><Typography variant='body1' component='span'><strong>Export</strong> desired format — watermark‑free.</Typography></li>
+          </Box>
 
-          <Typography variant='h4' component='h2' mt={3} gutterBottom>Pro Tips for Better Results</Typography>
-          <Typography variant='body1' mb={2}>Use WebP for smaller file sizes with good quality.<br />Reduce quality to compress for web use.<br />Crop with attention to aspect ratio if posting to Instagram or Facebook.<br />Flip selfies horizontally for natural orientation.</Typography>
+          <Divider sx={{ my: 3 }} />
 
-          <Typography variant='h4' component='h2' gutterBottom>Best Use Cases</Typography>
-          <Typography variant='body1' mb={2}>Social Media Optimization<br />Blog & Website Image Preparation<br />Quick Resizing for Thumbnails<br />Adding Filters for Aesthetic Touches<br />Lightweight Image Compression for Performance</Typography>
+          <Typography variant='h4' component='h2' gutterBottom>Key Features</Typography>
+          <Box component='ul' sx={{ pl: 3, mb: 2 }}>
+            <li><Typography variant='body1'>Local conversion (privacy‑first).</Typography></li>
+            <li><Typography variant='body1'>Resize & crop with aspect lock toggle.</Typography></li>
+            <li><Typography variant='body1'>Rotate & flip (horizontal / vertical).</Typography></li>
+            <li><Typography variant='body1'>Filters: brightness, contrast, saturation, blur, grayscale.</Typography></li>
+            <li><Typography variant='body1'>Format switching: JPG ⇄ PNG ⇄ WebP ⇄ GIF.</Typography></li>
+            <li><Typography variant='body1'>Quality / compression control.</Typography></li>
+          </Box>
 
+          <Typography variant='h4' component='h2' gutterBottom>Use Cases</Typography>
+          <Box component='ul' sx={{ pl: 3, mb: 2 }}>
+            <li><Typography variant='body1'>Social media & thumbnail prep.</Typography></li>
+            <li><Typography variant='body1'>Blog / CMS image optimization.</Typography></li>
+            <li><Typography variant='body1'>Lightweight compression for performance.</Typography></li>
+            <li><Typography variant='body1'>Quick edits on shared machines.</Typography></li>
+          </Box>
+
+            <Typography variant='h4' component='h2' gutterBottom>Tips</Typography>
+            <Box component='ul' sx={{ pl: 3, mb: 2 }}>
+              <li><Typography variant='body1'>Use WebP for quality + smaller size.</Typography></li>
+              <li><Typography variant='body1'>Keep aspect ratio locked for platform specs.</Typography></li>
+              <li><Typography variant='body1'>Lower quality slider for faster page loads.</Typography></li>
+              <li><Typography variant='body1'>Flip selfies horizontally for natural perspective.</Typography></li>
+            </Box>
+
+          <Divider sx={{ my: 3 }} />
+          <Typography variant='h4' component='h2' gutterBottom>FAQs</Typography>
+          <Accordion disableGutters square>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Is processing private?</Typography></AccordionSummary>
+            <AccordionDetails><Typography variant='body1'>Yes — all actions run locally; nothing uploads.</Typography></AccordionDetails>
+          </Accordion>
+          <Accordion disableGutters square>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Which formats can I convert?</Typography></AccordionSummary>
+            <AccordionDetails><Typography variant='body1'>JPG, PNG, WebP, GIF — convert between any of them.</Typography></AccordionDetails>
+          </Accordion>
+          <Accordion disableGutters square>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Can I keep aspect ratio?</Typography></AccordionSummary>
+            <AccordionDetails><Typography variant='body1'>Yes — enable the aspect lock toggle when resizing.</Typography></AccordionDetails>
+          </Accordion>
+          <Accordion disableGutters square>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Are crop & rotate supported?</Typography></AccordionSummary>
+            <AccordionDetails><Typography variant='body1'>Interactive crop, rotate and flip are included.</Typography></AccordionDetails>
+          </Accordion>
+          <Accordion disableGutters square>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Is it free & watermark‑free?</Typography></AccordionSummary>
+            <AccordionDetails><Typography variant='body1'>Completely free — no watermark, no signup.</Typography></AccordionDetails>
+          </Accordion>
+
+          <Divider sx={{ my: 3 }} />
           <Typography variant='h4' component='h2' gutterBottom>Conclusion</Typography>
-          <Typography variant='body1' mb={2}>You don’t need Photoshop or Sketch to quickly convert and edit images. Our online image editor gives you all the essential tools right in your browser — fast, free, and private.</Typography>
+          <Typography variant='body1' mb={2}>Convert & edit images quickly without installs or uploads. Resize, crop, adjust and export a clean file — private, fast and free.</Typography>
 
           <Box mt={4} textAlign='center'>
             <Button color='primary' size='large' href='/tools/image/convert' variant='contained'>Upload Image</Button>
@@ -70,3 +128,4 @@ export default function ImageConverterBlog() {
     </Container>
   )
 }
+// (Optional) Could update FAQ schema to include only displayed FAQs

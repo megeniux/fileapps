@@ -142,7 +142,7 @@ export default function VideoMergerLanding() {
               <Typography variant='h2'>How It Works</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
-            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center">
+            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center" flexGrow={1}>
               {[{ icon: <CloudUploadIcon />, title: 'Upload Video Files', desc: 'Drag & drop or click to select.' },
               { icon: <ReorderIcon />, title: 'Arrange Order', desc: 'Move clips up or down.' },
               { icon: <MovieIcon />, title: 'Preview Merge', desc: 'Check sequence before combining.' },

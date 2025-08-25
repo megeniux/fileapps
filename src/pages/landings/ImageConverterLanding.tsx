@@ -14,9 +14,8 @@ import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-
 // Icons
-import SecurityTipIcon from '@mui/icons-material/Security'
+import PrivacyTipIcon from '@mui/icons-material/PrivacyTip'
 import CompareIcon from '@mui/icons-material/Compare'
 import PhotoSizeSelectLargeIcon from '@mui/icons-material/PhotoSizeSelectLarge'
 import ImageIcon from '@mui/icons-material/Image'
@@ -29,19 +28,17 @@ import ImageSearchIcon from '@mui/icons-material/ImageSearch'
 import ColorLensIcon from '@mui/icons-material/ColorLens'
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone'
 
+// FAQ schema moved to bottom (updated list)
 const FAQ_SCHEMA = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        { "@type": "Question", "name": "Is my image uploaded to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. All image processing is done in your browser using WebAssembly. Nothing gets uploaded." } },
-        { "@type": "Question", "name": "Which image formats can I upload and export?", "acceptedAnswer": { "@type": "Answer", "text": "JPG, PNG, WebP, GIF. You can upload one and export in another." } },
-        { "@type": "Question", "name": "Can I maintain aspect ratio while resizing?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. There’s a toggle to lock or unlock the aspect ratio." } },
-        { "@type": "Question", "name": "Does it support cropping?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can click and drag to create a custom crop selection, or reset it anytime." } },
-        { "@type": "Question", "name": "Can I change the image quality and size?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. You can reduce quality for web optimization and set pixel dimensions." } },
-        { "@type": "Question", "name": "What filters are available?", "acceptedAnswer": { "@type": "Answer", "text": "Grayscale, blur, brightness, contrast, saturation, and rotate/flip." } },
-        { "@type": "Question", "name": "Can I use it on mobile?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It works on Android, iOS, and all modern browsers." } },
-        { "@type": "Question", "name": "Is it really free?", "acceptedAnswer": { "@type": "Answer", "text": "100% free. No hidden charges, no login, no credit card required." } }
-    ]
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Is processing private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. All image conversion & editing execute locally in your browser — nothing is uploaded." } },
+    { "@type": "Question", "name": "Which formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "You can load and export JPG, PNG, WebP and GIF." } },
+    { "@type": "Question", "name": "Can I maintain aspect ratio while resizing?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Use the aspect ratio lock toggle to keep proportions consistent." } },
+    { "@type": "Question", "name": "Are crop & rotate tools included?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can crop interactively and rotate or flip the image before exporting." } },
+    { "@type": "Question", "name": "Is it free and watermark‑free?", "acceptedAnswer": { "@type": "Answer", "text": "Completely free — no watermark, signup or usage limits." } }
+  ]
 }
 
 const Root = styled(Paper)(({ theme }) => ({
@@ -63,6 +60,7 @@ minHeight: 500,
     },
     '& .faq-section': {
         paddingBlock: theme.spacing(8),
+        background: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
         '& .MuiTypography-h2': { color: theme.palette.text.primary },
         '& .MuiAccordionSummary-root': { padding: theme.spacing(0, 2, 0, 2) },
         '& .MuiAccordionDetails-root': { padding: theme.spacing(0, 2, 2, 2) }
@@ -73,17 +71,20 @@ minHeight: 500,
         textAlign: 'center',
         '& .MuiTypography-h2': { color: theme.palette.common.white }
     },
+    '& .use-cases': {
+        paddingBlock: theme.spacing(8),
+        '& .MuiTypography-h2': { textAlign: 'center', marginBottom: theme.spacing(2) }
+    },
 }))
 
 export default function ImageConverterLanding() {
     return (
         <Root elevation={0}>
             <Helmet>
-                <title>Free Online Image Converter & Editor – Resize, Crop, Rotate, Adjust Filters (No Signup)</title>
-                <meta name="description" content="Convert, resize, crop, rotate, and edit images online for free. Change image format (JPG, PNG, WebP, GIF), adjust brightness, blur, contrast, saturation, and more. No signup, no watermark – fully browser-based." />
-                <meta name="keywords" content="free image converter, resize image online, crop image free, rotate image online, image editor in browser, jpg to png converter, adjust brightness online, add blur to image, grayscale filter image, convert image to webp, flip image horizontally, change image quality online, online image resizer free, compress image online, photo editor in browser, privacy-safe image tool, no signup image converter, image editing no watermark, image optimization free tool" />
-                <meta property="og:title" content="Free Online Image Converter & Editor – Convert, Crop, Resize (Private & Fast)" />
-                <meta property="og:description" content="Convert and edit images in your browser with zero uploads. Resize, crop, rotate, and apply filters – all free, with no signup or watermark." />
+                <title>Free Online Image Converter – Resize, Crop, Rotate & Convert (Private)</title>
+                <meta name="description" content="Convert & edit images (JPG, PNG, WebP, GIF) locally in your browser: resize, crop, rotate, adjust filters & quality. Free, private & watermark‑free." />
+                <meta property="og:title" content="Free Online Image Converter – Convert, Resize & Edit Privately" />
+                <meta property="og:description" content="Resize, crop, rotate & convert images (JPG, PNG, WebP, GIF) with local processing. No uploads, no signup, no watermark." />
                 <meta property="og:image" content="/images/landing/image-converter-hero.jpg" />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="/tools/image/convert-image-online" />
@@ -117,20 +118,34 @@ export default function ImageConverterLanding() {
                             <Typography variant='h2'>Why Use Our Image Converter?</Typography>
                             <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
                         </Grid>
-                        {[{ icon: <SecurityTipIcon fontSize='large' color='primary' />, title: 'No Uploads, 100% Private', desc: 'All editing happens in your browser. Your files never leave your device.' },
-                            { icon: <CompareIcon fontSize='large' color='primary' />, title: 'Free & No Signup', desc: 'No registration required. No watermarks, no limits.' },
-                            { icon: <ImageIcon fontSize='large' color='primary' />, title: 'Supports All Major Formats', desc: 'JPG, PNG, WebP, and GIF.' },
-                            { icon: <PhotoSizeSelectLargeIcon fontSize='large' color='primary' />, title: 'Resize & Crop with Precision', desc: 'Adjust dimensions and select exact regions interactively.' }].map((item, i) => (
-                                <Grid key={i} size={{ xs: 12, sm: 6, lg: 3 }}>
-                                    <Card sx={{ height: '100%' }}>
-                                        <CardContent sx={{ p: 2 }}>
-                                            {item.icon}
-                                            <Typography variant='h5' component='h3'>{item.title}</Typography>
-                                            <Typography variant='body1'>{item.desc}</Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                            ))}
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+                            <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
+                                <PrivacyTipIcon fontSize='large' color='primary' />
+                                <Typography variant='h5' component='h3'>Private</Typography>
+                                <Typography variant='body1'>Local processing — no uploads.</Typography>
+                            </CardContent></Card>
+                        </Grid>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+                            <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
+                                <CompareIcon fontSize='large' color='primary' />
+                                <Typography variant='h5' component='h3'>Free & Fast</Typography>
+                                <Typography variant='body1'>No signup. No watermark.</Typography>
+                            </CardContent></Card>
+                        </Grid>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+                            <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
+                                <ImageIcon fontSize='large' color='primary' />
+                                <Typography variant='h5' component='h3'>Format Support</Typography>
+                                <Typography variant='body1'>JPG, PNG, WebP, GIF.</Typography>
+                            </CardContent></Card>
+                        </Grid>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+                            <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
+                                <PhotoSizeSelectLargeIcon fontSize='large' color='primary' />
+                                <Typography variant='h5' component='h3'>Resize & Crop</Typography>
+                                <Typography variant='body1'>Precise dimension control.</Typography>
+                            </CardContent></Card>
+                        </Grid>
                     </Grid>
                 </Container>
             </section>
@@ -142,22 +157,47 @@ export default function ImageConverterLanding() {
                             <Typography variant='h2'>How It Works</Typography>
                             <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
                         </Grid>
-                        <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent='center'>
-                            {[{ icon: <CloudUploadIcon />, title: 'Upload Your Image', desc: 'Drag & drop or browse from your device.' },
-                                { icon: <CropIcon />, title: 'Resize or Crop', desc: 'Enter dimensions manually or drag to crop.' },
-                                { icon: <TuneIcon />, title: 'Adjust Filters', desc: 'Fine-tune brightness, contrast, saturation, and more.' },
-                                { icon: <PhotoSizeSelectLargeIcon />, title: 'Choose Output Format', desc: 'Convert to JPG, PNG, WebP, or GIF.' },
-                                { icon: <DownloadIcon />, title: 'Download Instantly', desc: 'Save your new image with no watermark.' }].map((step, i) => (
-                                    <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
-                                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                                            <Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
-                                            <Box>
-                                                <Typography variant='h5' component='h3'>{step.title}</Typography>
-                                                <Typography variant='body1'>{step.desc}</Typography>
-                                            </Box>
-                                        </Box>
-                                    </Grid>
-                                ))}
+                        <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent='center' flexGrow={1}>
+                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                                <Box sx={{ textAlign: 'center' }}>
+                                    <Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        <CloudUploadIcon />
+                                    </Box>
+                                    <Typography variant='h5' component='h3' gutterBottom>1. Upload</Typography>
+                                    <Typography variant='body1'>Drag & drop image.</Typography>
+                                </Box>
+                            </Grid>
+                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                                <Box sx={{ textAlign: 'center' }}>
+                                    <Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        <CropIcon />
+                                    </Box>
+                                    <Typography variant='h5' component='h3' gutterBottom>2. Resize / Crop</Typography>
+                                    <Typography variant='body1'>Adjust size & area.</Typography>
+                                </Box>
+                            </Grid>
+                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                                <Box sx={{ textAlign: 'center' }}>
+                                    <Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        <TuneIcon />
+                                    </Box>
+                                    <Typography variant='h5' component='h3' gutterBottom>3. Adjust</Typography>
+                                    <Typography variant='body1'>Filters & quality.</Typography>
+                                </Box>
+                            </Grid>
+                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                                <Box sx={{ textAlign: 'center' }}>
+                                    <Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        <DownloadIcon />
+                                    </Box>
+                                    <Typography variant='h5' component='h3' gutterBottom>4. Export</Typography>
+                                    <Typography variant='body1'>JPG / PNG / WebP / GIF.</Typography>
+                                </Box>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Container>
@@ -190,6 +230,48 @@ export default function ImageConverterLanding() {
                 </Container>
             </section>
 
+            <section className='use-cases'>
+                <Container maxWidth="lg">
+                    <Typography variant='h2'>Use Cases & Tips</Typography>
+                    <Divider sx={{ width: 100, mx: 'auto', my: 2 }} />
+                    <Grid container spacing={3}>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                            <Card sx={{ height: '100%' }}><CardContent>
+                                <Typography variant='h5' component='h3' gutterBottom>Common Scenarios</Typography>
+                                <Typography component='ul' sx={{ pl: 3, m: 0 }}>
+                                    <li>Social media optimization</li>
+                                    <li>Blog / article assets</li>
+                                    <li>Thumbnail prep</li>
+                                    <li>Light compression</li>
+                                </Typography>
+                            </CardContent></Card>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                            <Card sx={{ height: '100%' }}><CardContent>
+                                <Typography variant='h5' component='h3' gutterBottom>Tips</Typography>
+                                <Typography component='ul' sx={{ pl: 3, m: 0 }}>
+                                    <li>Use WebP for small size</li>
+                                    <li>Lock aspect for ratios</li>
+                                    <li>High contrast after darken</li>
+                                    <li>Reduce quality for web</li>
+                                </Typography>
+                            </CardContent></Card>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                            <Card sx={{ height: '100%' }}><CardContent>
+                                <Typography variant='h5' component='h3' gutterBottom>Who It’s For</Typography>
+                                <Typography component='ul' sx={{ pl: 3, m: 0 }}>
+                                    <li>Creators & bloggers</li>
+                                    <li>Marketing teams</li>
+                                    <li>Developers</li>
+                                    <li>Students & educators</li>
+                                </Typography>
+                            </CardContent></Card>
+                        </Grid>
+                    </Grid>
+                </Container>
+            </section>
+
             <section className='faq-section'>
                 <Container maxWidth='lg'>
                     <Grid container spacing={3} justifyContent='center'>
@@ -197,18 +279,28 @@ export default function ImageConverterLanding() {
                             <Typography variant='h2' mb={4} align='center'>FAQs</Typography>
                             <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
                         </Grid>
-                        {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
-                            <Grid key={idx} size={{ xs: 12 }}>
-                                <Accordion square disableGutters elevation={3} sx={{ '& .MuiAccordionSummary-root': { px: 1, py: 0.5 }, '& .MuiAccordionDetails-root': { px: 1, py: 1 } }}>
-                                    <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`faq-ic-${idx}-content`} id={`faq-ic-${idx}-header`}>
-                                        <Typography variant='h6' component='h3'>{faq.name}</Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails sx={{ p: 2 }}>
-                                        <Typography variant='body1'>{faq.acceptedAnswer.text}</Typography>
-                                    </AccordionDetails>
-                                </Accordion>
-                            </Grid>
-                        ))}
+                        <Grid size={{ xs: 12 }}>
+                            <Accordion square disableGutters elevation={3}>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Is processing private?</Typography></AccordionSummary>
+                                <AccordionDetails><Typography variant='body1'>Yes — runs locally; no uploads.</Typography></AccordionDetails>
+                            </Accordion>
+                            <Accordion square disableGutters elevation={3}>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Which formats?</Typography></AccordionSummary>
+                                <AccordionDetails><Typography variant='body1'>JPG, PNG, WebP, GIF input & output.</Typography></AccordionDetails>
+                            </Accordion>
+                            <Accordion square disableGutters elevation={3}>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Maintain aspect ratio?</Typography></AccordionSummary>
+                                <AccordionDetails><Typography variant='body1'>Yes — toggle lock to preserve proportions.</Typography></AccordionDetails>
+                            </Accordion>
+                            <Accordion square disableGutters elevation={3}>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Crop & rotate supported?</Typography></AccordionSummary>
+                                <AccordionDetails><Typography variant='body1'>Yes — interactive crop, rotate & flip tools.</Typography></AccordionDetails>
+                            </Accordion>
+                            <Accordion square disableGutters elevation={3}>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Free & watermark‑free?</Typography></AccordionSummary>
+                                <AccordionDetails><Typography variant='body1'>Completely free — no signup or watermark.</Typography></AccordionDetails>
+                            </Accordion>
+                        </Grid>
                     </Grid>
                 </Container>
             </section>

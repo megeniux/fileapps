@@ -135,7 +135,7 @@ export default function VideoPlaybackLanding() {
               <Typography variant='h2'>How It Works</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
-            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center">
+            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center" flexGrow={1}>
               {/* Remove preview step, replace with browser-based benefit */}
               {[{ icon: <CloudUploadIcon />, title: 'Upload Your Video', desc: 'Drag and drop or select a video file.' },
               { icon: <SpeedIcon />, title: 'Adjust Playback Speed', desc: 'Use the slider to change the playback speed from -20x (reverse) to +20x.' },

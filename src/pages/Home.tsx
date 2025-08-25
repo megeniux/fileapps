@@ -78,7 +78,7 @@ const videoTools: {
       title: 'Extract Audio',
       description: 'Extract high-quality audio from video files and save as MP3, WAV or AAC for reuse.',
       icon: <MusicNoteIcon fontSize="small" color="error" />,
-      link: '/tools/video/extract-audio',
+      link: '/tools/video/extract-audio-from-video',
       color: 'error'
     },
     {

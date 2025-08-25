@@ -186,7 +186,7 @@ export default function VideoResizerLanding() {
                             <Typography variant='h2'>How It Works</Typography>
                             <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
                         </Grid>
-                        <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center">
+                        <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center" flexGrow={1}>
                             {[{ icon: <CloudUploadIcon />, title: 'Upload Video', desc: 'Drag and drop or select your video file.' },
                             { icon: <AspectRatioIcon />, title: 'Choose Settings', desc: 'Enter width, height, or pick aspect ratios.' },
                             { icon: <TuneIcon />, title: 'Select Mode', desc: 'Fit, Fill, Stretch, or Crop.' },

@@ -153,7 +153,7 @@ export default function VideoCompressionLanding() {
               <Typography variant='h2'>How It Works</Typography>
               <Divider sx={{ width: 100, borderColor: 'text.primary', mx: 'auto', my: 2 }} />
             </Grid>
-            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent='center'>
+            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center" flexGrow={1}>
               {steps.map((s, i) => (
                 <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>

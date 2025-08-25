@@ -138,7 +138,7 @@ export default function VideoConvertLanding() { // corrected component name to m
               <Typography variant='h2'>How It Works</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
-            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent='center'>
+            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center" flexGrow={1}>
               {[{ icon: <CloudUploadIcon />, title: 'Upload Video File', desc: 'Drag & drop or click to select.' },
                 { icon: <SwapHorizIcon />, title: 'Choose Output Format', desc: 'MP4, MOV, MKV, AVI, etc.' },
                 { icon: <TuneIcon />, title: 'Customize Settings', desc: 'Resolution, codec, bitrate, FPS.' },

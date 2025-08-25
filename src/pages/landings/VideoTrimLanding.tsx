@@ -136,7 +136,7 @@ export default function VideoTrimLanding() {
               <Typography variant='h2'>How It Works</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
-            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center">
+            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center" flexGrow={1}>
               {[{ icon: <CloudUploadIcon />, title: 'Upload Your Video', desc: 'Drag and drop or click to select your video file.' },
               { icon: <ContentCutIcon />, title: 'Set the Trim Points', desc: 'Use the slider to select the start and end points for your trim.' },
               { icon: <PrivacyTipIcon />, title: 'No Installation Needed', desc: 'Trim videos directly in your browser—no software required.' },

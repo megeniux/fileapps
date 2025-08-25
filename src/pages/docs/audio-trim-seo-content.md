@@ -1,91 +1,115 @@
 ---
-title: Free Online Audio Trimmer – Cut & Trim MP3, WAV, FLAC (No Signup)
-description: Trim audio files quickly in your browser. Cut MP3, WAV, FLAC, AAC, OGG & more with precise in/out selection. No uploads, no watermark.
+title: "Free Online Audio Trimmer – Cut & Trim MP3, WAV, FLAC (No Signup)"
+description: "Trim audio files (MP3, WAV, FLAC, AAC, OGG, M4A) privately in your browser. Free online audio trimmer – no signup, no upload, no watermark."
 keywords:
-	- audio trimmer online free
-	- cut mp3 file browser
-	- trim wav audio
-	- trim flac online
-	- cut song intro outro
-	- remove silence audio
-	- extract audio clip
-	- audio clip cutter
-	- shorten audio track
-	- precise audio trimming
-	- no signup audio cutter
-	- private audio trimmer
-	- waveform audio trim (future)
-	- batch audio trimming (future)
-ogTitle: Trim Audio Online Free – Fast, Private & Watermark-Free
-ogDescription: Cut MP3, WAV, FLAC & AAC locally with start/end selection. Free, private, watermark‑free.
-ogImage: /images/landing/audio-trim-hero.jpg
-canonical: /tools/audio/trim-audio-online
-slug: audio-trim
+  - free online audio trimmer
+  - trim audio online free
+  - cut mp3 online
+  - trim wav flac aac
+  - no upload audio cutter
+  - watermark free audio trimmer
+ogTitle: "Free Online Audio Trimmer – Cut & Trim MP3, WAV, FLAC"
+ogDescription: "Cut & trim audio locally (MP3, WAV, FLAC, AAC) – private, fast & watermark‑free. No signup."
+ogImage: "/images/landing/audio-trimmer-hero.jpg"
+ogType: "website"
+ogUrl: "/tools/audio/trim-audio-online"
+ogSiteName: "FileApps"
+canonical: "/tools/audio/trim-audio-online"
+slug: trim-audio
 type: landing+blog
 ---
 
-# Trim audio online – fast & precise
+# Trim audio online — free, fast & private
 
-Cut intros, outros, silence or unwanted sections from MP3, WAV, FLAC, AAC & more—entirely in your browser with no uploads or watermarks.
-
-## Why use this audio trimmer?
-- **Local privacy:** Files never leave device.  
-- **Multi-format:** Lossless + compressed formats.  
-- **Instant preview:** Verify selection before export.  
-- **Clean output:** No branding.  
-
-## How it works
-1. Upload audio.  
-2. Set start/end markers.  
-3. Preview segment.  
-4. Download trimmed file.  
-
-## Key features
-- **Marker slider** for quick selection.  
-- **Accurate time parsing.**  
-- **Flexible format output.**  
-- **Lightweight interface.**  
-
-## Use cases
-| User | Goal | Benefit |
-| ---- | ---- | ------- |
-| Musician | Loop practice / isolate solo | Focused rehearsal |
-| Podcaster | Remove ads & pauses | Tighter pacing |
-| Editor | Extract sound bite | Faster production |
-| Student | Shorten lecture segment | Easier review |
-
-## FAQs
-### Can I trim MP3, WAV, FLAC?
-Yes—most common formats supported.
-
-### Are files uploaded?
-No. All logic runs in-browser.
-
-### Is there a watermark or signup?
-Neither—fully free.
-
-### Can I remove silence automatically?
-Planned enhancement; current version manual selection.
-
-### How accurate is trimming?
-Depends on keyframe boundaries; fine granularity planned with waveform assist.
-
-## Blog guide – how to trim audio online
-### Why trim?
-Highlight creation, file size reduction, content repurposing, focus extraction.
-
-### Steps
-Upload → Mark → Preview → Export.
-
-### Tips
-Zoom/waveform feature (future) will aid sub‑second precision. For now, adjust by ear using preview.
-
-### Conclusion
-Local trimming keeps creative workflow private and efficient.
-
-## MUI icon suggestions
-`ContentCutIcon`, `MusicNoteIcon`, `PrivacyTipIcon`, `PlayCircleIcon`, `SpeedIcon`.
+Cut **MP3, WAV, FLAC, AAC, OGG, M4A** precisely in your browser. No uploads, no signup, no watermark — just a fast, privacy‑first audio trimmer.
 
 ---
-JSON-LD: derive from FAQ block.
+
+## Why use this audio trimmer?
+
+- **100% private** — all processing stays local.
+- **No signup / no watermark** — permanently free.
+- **Multi‑format support** — MP3, WAV, FLAC, AAC, OGG, M4A.
+- **Accurate selection** — fine start/end control.
+- **Instant preview** — verify before exporting.
+
+**MUI icons:** `PrivacyTipIcon`, `ContentCutIcon`, `AudiotrackIcon`, `SpeedIcon`
+
+---
+
+## How it works (4 steps)
+
+1. **Upload** (drag & drop supported).  
+2. **Select range** — adjust start & end markers.  
+3. **Preview** to confirm accuracy.  
+4. **Download** trimmed file (clean & watermark‑free).  
+
+**MUI icons:** `CloudUploadIcon`, `ContentCutIcon`, `PlayArrowIcon`, `DownloadIcon`
+
+---
+
+## Key features
+
+- **Local trimming** (WebAssembly / Audio APIs).
+- **Multi‑format decoding** (browser supported).
+- **Lossless friendly** (retain WAV/FLAC if desired).
+- **Instant waveform preview** (where implemented).
+- **No ads, queues or bandwidth usage.**
+
+---
+
+## Use cases
+
+- Ringtones & notification sounds  
+- Podcast ad / silence removal  
+- Lecture or meeting excerpt extraction  
+- Music practice loops & samples  
+- Voice memo shortening  
+
+---
+
+## Tips
+
+- Export **lossless** (WAV/FLAC) if you’ll edit again.  
+- Keep originals when trimming **lossy** files (MP3/AAC).  
+- Add tiny fades (if available) to avoid clicks at cut points.  
+- For looping practice, trim on zero crossings (future enhancement).  
+
+---
+
+## FAQs
+
+**Is trimming private?**  
+Yes — nothing leaves your device.
+
+**Which formats can I trim?**  
+Any the browser decodes: MP3, WAV, FLAC, AAC, OGG, M4A.
+
+**Do I lose quality?**  
+Lossless inputs can stay lossless; lossy may re‑encode.
+
+**Is it really free & watermark‑free?**  
+Yes — no signup, no watermark, no usage cap.
+
+**Any file size limits?**  
+Only practical device memory limits.
+
+---
+
+## SEO keyword recap
+
+Integrated naturally: *free online audio trimmer*, *trim audio online free*, *cut mp3 online*, *no upload audio cutter*, *watermark free audio trimmer*.
+
+---
+
+## MUI icon mapping
+
+- **Hero / Why**: `ContentCutIcon`, `PrivacyTipIcon`, `AudiotrackIcon`, `SpeedIcon`  
+- **How It Works**: `CloudUploadIcon`, `ContentCutIcon`, `PlayArrowIcon`, `DownloadIcon`  
+
+---
+
+JSON-LD: derive FAQPage schema from FAQ section.
+
+Generate FAQ JSON-LD from the above Q&A and embed in `<Helmet>` for structured SEO.
 
