@@ -73,7 +73,7 @@ export default function AudioPlaybackLanding() {
 
       <section className='why-us'>
         <Container maxWidth="lg">
-          <Grid container spacing={3} justifyContent='center'>
+          <Grid container spacing={3} justifyContent='center' flexGrow={1}>
             <Grid size={12}>
               <Typography variant='h2'>Why Use This Speed Editor?</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
@@ -131,7 +131,7 @@ export default function AudioPlaybackLanding() {
               <Typography variant='h2'>How It Works</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
-            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent='center'>
+            <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent='center' flexGrow={1}>
               <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                 <Box sx={{ textAlign: 'center' }}>
                   <Box sx={{ bgcolor: 'success.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -175,7 +175,7 @@ export default function AudioPlaybackLanding() {
 
       <section className='key-features'>
         <Container maxWidth="lg">
-          <Grid container spacing={3} justifyContent='center'>
+          <Grid container spacing={3} justifyContent='center' flexGrow={1}>
             <Grid size={12}>
               <Typography variant='h2' mb={4}>Key Features</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />

@@ -30,23 +30,23 @@ import DownloadDoneIcon from '@mui/icons-material/DownloadDone'
 
 // FAQ schema moved to bottom (updated list)
 const FAQ_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "Is processing private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. All image conversion & editing execute locally in your browser — nothing is uploaded." } },
-    { "@type": "Question", "name": "Which formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "You can load and export JPG, PNG, WebP and GIF." } },
-    { "@type": "Question", "name": "Can I maintain aspect ratio while resizing?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Use the aspect ratio lock toggle to keep proportions consistent." } },
-    { "@type": "Question", "name": "Are crop & rotate tools included?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can crop interactively and rotate or flip the image before exporting." } },
-    { "@type": "Question", "name": "Is it free and watermark‑free?", "acceptedAnswer": { "@type": "Answer", "text": "Completely free — no watermark, signup or usage limits." } }
-  ]
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        { "@type": "Question", "name": "Is processing private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. All image conversion & editing execute locally in your browser — nothing is uploaded." } },
+        { "@type": "Question", "name": "Which formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "You can load and export JPG, PNG, WebP and GIF." } },
+        { "@type": "Question", "name": "Can I maintain aspect ratio while resizing?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Use the aspect ratio lock toggle to keep proportions consistent." } },
+        { "@type": "Question", "name": "Are crop & rotate tools included?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can crop interactively and rotate or flip the image before exporting." } },
+        { "@type": "Question", "name": "Is it free and watermark‑free?", "acceptedAnswer": { "@type": "Answer", "text": "Completely free — no watermark, signup or usage limits." } }
+    ]
 }
 
 const Root = styled(Paper)(({ theme }) => ({
     '& img': { maxWidth: '100%' },
     '& .hero-section': {
         display: 'flex',
-alignItems: 'center',
-minHeight: 500,
+        alignItems: 'center',
+        minHeight: 500,
         '& .hero-image img': { marginBottom: theme.spacing(2) },
         [theme.breakpoints.down('md')]: {
             '& .hero-text': { textAlign: 'center', paddingBottom: theme.spacing(6) },
@@ -160,8 +160,10 @@ export default function ImageConverterLanding() {
                         <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent='center' flexGrow={1}>
                             <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                                 <Box sx={{ textAlign: 'center' }}>
-                                    <Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
-                                        display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Box sx={{
+                                        bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                    }}>
                                         <CloudUploadIcon />
                                     </Box>
                                     <Typography variant='h5' component='h3' gutterBottom>1. Upload</Typography>
@@ -170,8 +172,10 @@ export default function ImageConverterLanding() {
                             </Grid>
                             <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                                 <Box sx={{ textAlign: 'center' }}>
-                                    <Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
-                                        display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Box sx={{
+                                        bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                    }}>
                                         <CropIcon />
                                     </Box>
                                     <Typography variant='h5' component='h3' gutterBottom>2. Resize / Crop</Typography>
@@ -180,8 +184,10 @@ export default function ImageConverterLanding() {
                             </Grid>
                             <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                                 <Box sx={{ textAlign: 'center' }}>
-                                    <Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
-                                        display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Box sx={{
+                                        bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                    }}>
                                         <TuneIcon />
                                     </Box>
                                     <Typography variant='h5' component='h3' gutterBottom>3. Adjust</Typography>
@@ -190,8 +196,10 @@ export default function ImageConverterLanding() {
                             </Grid>
                             <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                                 <Box sx={{ textAlign: 'center' }}>
-                                    <Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
-                                        display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Box sx={{
+                                        bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                    }}>
                                         <DownloadIcon />
                                     </Box>
                                     <Typography variant='h5' component='h3' gutterBottom>4. Export</Typography>
@@ -211,21 +219,21 @@ export default function ImageConverterLanding() {
                             <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
                         </Grid>
                         {[{ icon: <PhotoSizeSelectLargeIcon fontSize='large' color='primary' />, title: 'Image Resizing', desc: 'Enter custom width and height or lock aspect ratio.' },
-                            { icon: <CropIcon fontSize='large' color='primary' />, title: 'Interactive Crop Tool', desc: 'Click and drag to crop with real-time preview.' },
-                            { icon: <Rotate90DegreesCcwIcon fontSize='large' color='primary' />, title: 'Rotate & Flip', desc: 'Rotate 90°, 180°, or flip horizontally/vertically.' },
-                            { icon: <ImageSearchIcon fontSize='large' color='primary' />, title: 'File Format Converter', desc: 'Convert images to JPG, PNG, WebP, or GIF.' },
-                            { icon: <ColorLensIcon fontSize='large' color='primary' />, title: 'Filter Controls', desc: 'Adjust brightness, contrast, saturation, and blur.' },
-                            { icon: <DownloadDoneIcon fontSize='large' color='primary' />, title: 'Instant Download', desc: 'Export without delay and no watermark.' }].map((feat, i) => (
-                                <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
-                                    <Card sx={{ height: '100%' }}>
-                                        <CardContent sx={{ p: 2 }}>
-                                            {feat.icon}
-                                            <Typography variant='h5' component='h3'>{feat.title}</Typography>
-                                            <Typography variant='body1'>{feat.desc}</Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                            ))}
+                        { icon: <CropIcon fontSize='large' color='primary' />, title: 'Interactive Crop Tool', desc: 'Click and drag to crop with real-time preview.' },
+                        { icon: <Rotate90DegreesCcwIcon fontSize='large' color='primary' />, title: 'Rotate & Flip', desc: 'Rotate 90°, 180°, or flip horizontally/vertically.' },
+                        { icon: <ImageSearchIcon fontSize='large' color='primary' />, title: 'File Format Converter', desc: 'Convert images to JPG, PNG, WebP, or GIF.' },
+                        { icon: <ColorLensIcon fontSize='large' color='primary' />, title: 'Filter Controls', desc: 'Adjust brightness, contrast, saturation, and blur.' },
+                        { icon: <DownloadDoneIcon fontSize='large' color='primary' />, title: 'Instant Download', desc: 'Export without delay and no watermark.' }].map((feat, i) => (
+                            <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+                                <Card sx={{ height: '100%' }}>
+                                    <CardContent sx={{ p: 2 }}>
+                                        {feat.icon}
+                                        <Typography variant='h5' component='h3'>{feat.title}</Typography>
+                                        <Typography variant='body1'>{feat.desc}</Typography>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        ))}
                     </Grid>
                 </Container>
             </section>
@@ -274,7 +282,7 @@ export default function ImageConverterLanding() {
 
             <section className='faq-section'>
                 <Container maxWidth='lg'>
-                    <Grid container spacing={3} justifyContent='center'>
+                    <Grid container spacing={3} justifyContent='center' flexGrow={1}>
                         <Grid size={{ xs: 12 }}>
                             <Typography variant='h2' mb={4} align='center'>FAQs</Typography>
                             <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
@@ -307,7 +315,7 @@ export default function ImageConverterLanding() {
 
             <section className='cta-section'>
                 <Container maxWidth='lg'>
-                    <Grid container spacing={3} justifyContent='center'>
+                    <Grid container spacing={3} justifyContent='center' flexGrow={1}>
                         <Grid size={{ xs: 12 }}><Typography variant='h2' align='center'>Ready to convert an image?</Typography></Grid>
                         <Grid size={{ xs: 12 }}><Typography variant='h6' component='p' color='common.white'>Drag & drop an image, edit it instantly — private & free.</Typography></Grid>
                         <Grid size={{ xs: 12 }} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>

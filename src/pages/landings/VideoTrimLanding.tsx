@@ -104,7 +104,7 @@ export default function VideoTrimLanding() {
 
       <section className='why-us'>
         <Container maxWidth="lg">
-          <Grid container spacing={3} justifyContent='center'>
+          <Grid container spacing={3} justifyContent='center' flexGrow={1}>
             <Grid size={12}>
               <Typography variant='h2'>Why Use Our Free Online Video Trimmer?</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />

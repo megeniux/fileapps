@@ -67,7 +67,7 @@ export default function AudioMergerLanding() {
       {/* Why Us */}
       <section className='why-us'>
         <Container maxWidth="lg">
-          <Grid container spacing={3} justifyContent='center'>
+          <Grid container spacing={3} justifyContent='center' flexGrow={1}>
             <Grid size={12}>
               <Typography variant='h2'>Why Use Our Online Audio Merger?</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
@@ -157,7 +157,7 @@ export default function AudioMergerLanding() {
       {/* Key Features */}
       <section className='key-features'>
         <Container maxWidth="lg">
-          <Grid container spacing={3} justifyContent='center'>
+          <Grid container spacing={3} justifyContent='center' flexGrow={1}>
             <Grid size={12}>
               <Typography variant='h2' mb={4}>Key Features</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
@@ -308,7 +308,7 @@ export default function AudioMergerLanding() {
       {/* CTA */}
       <section className='cta-section'>
         <Container maxWidth="lg">
-          <Grid container spacing={3} justifyContent='center'>
+          <Grid container spacing={3} justifyContent='center' flexGrow={1}>
             <Grid size={12}><Typography variant='h2' align='center'>Ready to merge your audio?</Typography></Grid>
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Fast, private & watermark‑free merging — all local.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>

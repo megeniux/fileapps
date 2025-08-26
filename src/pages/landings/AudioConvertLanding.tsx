@@ -69,7 +69,7 @@ export default function AudioConvertLanding() {
 			</section>
 			<section className='why-us'>
 				<Container maxWidth="lg">
-					<Grid container spacing={3} justifyContent='center'>
+					<Grid container spacing={3} justifyContent='center' flexGrow={1}>
 						<Grid container size={12}>
 							<Grid size={12}>
 								<Typography variant='h2'>Why Use Our Online Audio Converter?</Typography>

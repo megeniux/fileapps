@@ -189,7 +189,7 @@ export default function VideoConvertLanding() { // corrected component name to m
 
       <section className='faq-section'>
         <Container maxWidth='lg'>
-          <Grid container spacing={3} justifyContent='center'>
+          <Grid container spacing={3} justifyContent='center' flexGrow={1}>
             <Grid size={12}>
               <Typography variant='h2' mb={4} align='center'>FAQs</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
@@ -212,7 +212,7 @@ export default function VideoConvertLanding() { // corrected component name to m
 
       <section className='cta-section'>
         <Container maxWidth='lg'>
-          <Grid container spacing={3} justifyContent='center'>
+          <Grid container spacing={3} justifyContent='center' flexGrow={1}>
             <Grid size={12}><Typography variant='h2' align='center'>Ready to convert a video?</Typography></Grid>
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Upload your file and convert it instantly — private & free.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>

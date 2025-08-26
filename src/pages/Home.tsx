@@ -82,13 +82,6 @@ const videoTools: {
       color: 'error'
     },
     {
-      title: 'Thumbnail Generator',
-      description: 'Extract high-quality thumbnails from your videos instantly in your browser. No watermark, no downloads, and no credit card required.',
-      icon: <PhotoSizeSelectActualIcon fontSize="small" color="inherit" />,
-      link: '/tools/video/extract-thumbnail-from-video',
-      color: 'inherit'
-    },
-    {
       title: 'Burn Captions',
       description: 'Embed subtitles into video files (SRT/VTT). Customize font, size and color before burning in.',
       icon: <SubtitlesIcon fontSize="small" color="primary" />,
@@ -101,8 +94,14 @@ const videoTools: {
       icon: <SpeedIcon fontSize="small" color="secondary" />,
       link: '/tools/video/playback',
       color: 'secondary'
-    }
-
+    },
+    {
+      title: 'Thumbnail Generator',
+      description: 'Extract high-quality thumbnails from your videos instantly in your browser. No watermark, no downloads, and no credit card required.',
+      icon: <PhotoSizeSelectActualIcon fontSize="small" color="warning" />,
+      link: '/tools/video/extract-thumbnail-from-video',
+      color: 'warning'
+    },
   ];
 
 const audioTools: {

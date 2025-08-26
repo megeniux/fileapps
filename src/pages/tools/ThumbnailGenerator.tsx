@@ -335,7 +335,7 @@ function ThumbnailGenerator() {
       <Card sx={{ p: 1.5 }} elevation={3}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
-            <ImageIcon color="inherit" fontSize="small" sx={{ mr: 0.5 }} />
+            <ImageIcon color="warning" fontSize="small" sx={{ mr: 0.5 }} />
                 <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
               Thumbnail Generator
             </Typography>

@@ -66,7 +66,7 @@ export default function AudioEffectsLanding() {
 
 			<section className='why-us'>
 				<Container maxWidth="lg">
-					<Grid container spacing={3} justifyContent='center'>
+					<Grid container spacing={3} justifyContent='center' flexGrow={1}>
 						<Grid size={12}>
 							<Typography variant='h2'>Why Use Our Audio Effects Tool?</Typography>
 							<Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
@@ -251,7 +251,7 @@ export default function AudioEffectsLanding() {
 
 			<section className='faq-section'>
 				<Container maxWidth="lg">
-					<Grid container spacing={3} justifyContent='center'>
+					<Grid container spacing={3} justifyContent='center' flexGrow={1}>
 						<Grid size={12}>
 							<Typography variant='h2' mb={4} align='center'>FAQs</Typography>
 							<Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
@@ -304,7 +304,7 @@ export default function AudioEffectsLanding() {
 
 			<section className='cta-section'>
 				<Container maxWidth="lg">
-					<Grid container spacing={3} justifyContent='center'>
+					<Grid container spacing={3} justifyContent='center' flexGrow={1}>
 						<Grid size={12}><Typography variant='h2' align='center'>Ready to enhance your audio?</Typography></Grid>
 						<Grid size={12}><Typography variant='h6' component='p' color='common.white'>Apply pitch, speed, fades, normalization & more — all locally.</Typography></Grid>
 						<Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
