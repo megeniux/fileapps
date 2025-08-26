@@ -71,11 +71,10 @@ export default function VideoTrimLanding() {
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Free Online Video Trimmer – Trim, Cut, and Edit Your Videos</title>
-        <meta name="description" content="Trim your videos online for free. Select the start and end points to cut MP4, MOV, AVI, MKV, and other formats. 100% browser-based, no signup required, no watermark." />
-        <meta name="keywords" content="video trimmer online free, trim video online free, cut video online, free video cutter, video editor trim, video trimming tool, online video trim, cut video in browser, free video cutting tool, trim video for free, free online video editor, trim MP4, MOV, AVI, MKV, free video cutter no watermark, online video cutter, trim video online, video editor free, no signup video trimmer, online video cut tool, free browser video trimmer" />
-        <meta property="og:title" content="Free Online Video Trimmer – Trim, Cut, and Edit Videos Instantly" />
-        <meta property="og:description" content="Trim, cut, or edit your videos online for free. Supports MP4, MOV, AVI, MKV, and more. No signup required, no watermark, 100% private, browser-based." />
+        <title>Trim Video Online Free – Private No‑Signup Video Trimmer (No Watermark)</title>
+        <meta name="description" content="Free online video trimmer: cut MP4, MOV, MKV, WebM segments locally. Set start/end, preview & export – private, fast & watermark‑free." />
+        <meta property="og:title" content="Free Online Video Trimmer – Fast, Private & No Watermark" />
+        <meta property="og:description" content="Trim video clips in your browser (MP4, MOV, MKV, WebM). No uploads, signup or watermark." />
         <meta property="og:image" content="/images/landing/video-trimmer-hero.jpg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="/tools/video/trim-video-online" />
@@ -83,13 +82,12 @@ export default function VideoTrimLanding() {
         <link rel="canonical" href="/tools/video/trim-video-online" />
         <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
-
       <section className='hero-section'>
         <Container maxWidth="lg">
           <Grid container spacing={3} alignItems="center">
             <Grid size={{ xs: 12, md: 6 }} className='hero-text'>
-              <Typography variant="h2" component="h1">Free Online Video Trimmer – Trim, Cut & Edit Videos Instantly</Typography>
-              <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Trim, cut, or adjust the duration of your video files online for free. No signup, no watermark, and fully browser-based. Works with MP4, MOV, AVI, MKV, and more!</Typography>
+              <Typography variant="h2" component="h1">Trim Video Online – Free, Private & No Watermark</Typography>
+              <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Cut unwanted sections from MP4, MOV, MKV, WebM locally — no signup, uploads or watermark.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
                 <Button color='info' size='large' href="/tools/video/trim" variant="contained">Upload Video</Button>
                 <Button size='large' href="/tools/video/how-to-trim-video-online" variant="text" sx={{ color: 'text.secondary' }}>Learn How to Trim</Button>
@@ -101,7 +99,6 @@ export default function VideoTrimLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='why-us'>
         <Container maxWidth="lg">
           <Grid container spacing={3} justifyContent='center' flexGrow={1}>
@@ -109,12 +106,12 @@ export default function VideoTrimLanding() {
               <Typography variant='h2'>Why Use Our Free Online Video Trimmer?</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            {[{ icon: <ContentCutIcon fontSize='large' color='info' />, title: '100% Free', desc: 'No signup, no charges, and no watermark on your videos.' },
-            { icon: <PlayArrowIcon fontSize='large' color='info' />, title: 'Simple & Easy', desc: 'Upload a video, set the trim points, and download the result.' },
-            { icon: <MovieIcon fontSize='large' color='info' />, title: 'Works with All Major Formats', desc: 'MP4, MOV, AVI, MKV, and many more.' },
-            { icon: <DownloadIcon fontSize='large' color='info' />, title: 'Fast & Instant', desc: 'Trim your video and download it in seconds.' },
-            { icon: <PrivacyTipIcon fontSize='large' color='info' />, title: 'No Software Needed', desc: 'Browser-based—no downloads or installations.' },
-            { icon: <HighQualityIcon fontSize='large' color='info' />, title: '100% Private', desc: 'Your files remain private—everything happens locally.' }].map((item, i) => (
+            {[{ icon: <PrivacyTipIcon fontSize='large' color='info' />, title: 'Local & Private', desc: 'Processing stays on device.' },
+            { icon: <ContentCutIcon fontSize='large' color='info' />, title: 'Free & Clean', desc: 'No signup or watermark.' },
+            { icon: <MovieIcon fontSize='large' color='info' />, title: 'Format Support', desc: 'MP4, MOV, MKV, WebM.' },
+            { icon: <DownloadIcon fontSize='large' color='info' />, title: 'Fast Export', desc: 'Trim & download quickly.' },
+            { icon: <PlayArrowIcon fontSize='large' color='info' />, title: 'Instant Preview', desc: 'Check cut before saving.' },
+            { icon: <HighQualityIcon fontSize='large' color='info' />, title: 'Quality Retained', desc: 'Efficient single pass.' }].map((item, i) => (
               <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
@@ -128,7 +125,6 @@ export default function VideoTrimLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='how-it-works'>
         <Container maxWidth="lg">
           <Grid container spacing={3}>
@@ -137,10 +133,10 @@ export default function VideoTrimLanding() {
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
             <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center" flexGrow={1}>
-              {[{ icon: <CloudUploadIcon />, title: 'Upload Your Video', desc: 'Drag and drop or click to select your video file.' },
-              { icon: <ContentCutIcon />, title: 'Set the Trim Points', desc: 'Use the slider to select the start and end points for your trim.' },
-              { icon: <PrivacyTipIcon />, title: 'No Installation Needed', desc: 'Trim videos directly in your browser—no software required.' },
-              { icon: <DownloadIcon />, title: 'Download the Edited Video', desc: 'Click "Download" once you\'re satisfied with your video trim.' }].map((step, i) => (
+              {[{ icon: <CloudUploadIcon />, title: 'Upload', desc: 'Drag & drop video.' },
+              { icon: <ContentCutIcon />, title: 'Set Range', desc: 'Choose start & end.' },
+              { icon: <PlayArrowIcon />, title: 'Preview', desc: 'Verify the segment.' },
+              { icon: <DownloadIcon />, title: 'Trim & Download', desc: 'Clean MP4 output.' }].map((step, i) => (
                 <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
                     <Box sx={{ bgcolor: 'info.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
@@ -155,7 +151,6 @@ export default function VideoTrimLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='key-features'>
         <Container maxWidth="lg">
           <Grid container spacing={3} justifyContent="center">
@@ -163,12 +158,12 @@ export default function VideoTrimLanding() {
               <Typography variant='h2' mb={4}>Key Features</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            {[{ icon: <ContentCutIcon fontSize='large' color='info' />, title: 'Trim Videos Instantly', desc: 'Select the start and end points for your video trim.' },
-            { icon: <PrivacyTipIcon fontSize='large' color='info' />, title: 'No Installation Needed', desc: 'Trim videos directly in your browser—no software required.' },
-            { icon: <HighQualityIcon fontSize='large' color='info' />, title: 'No Watermarks', desc: 'Your trimmed video is clean with no branding.' },
-            { icon: <MovieIcon fontSize='large' color='info' />, title: 'Multiple Format Support', desc: 'Works with MP4, MOV, AVI, MKV, and more.' },
-            { icon: <DownloadIcon fontSize='large' color='info' />, title: 'Fast & Simple', desc: 'Upload, trim, and download in a few clicks.' },
-            { icon: <CloudUploadIcon fontSize='large' color='info' />, title: 'Free & No Signup', desc: 'No need to create an account or sign up.' }].map((feat, i) => (
+            {[{ icon: <ContentCutIcon fontSize='large' color='info' />, title: 'Precise Cutting', desc: 'Accurate range selection.' },
+            { icon: <PlayArrowIcon fontSize='large' color='info' />, title: 'Instant Preview', desc: 'Check result quickly.' },
+            { icon: <MovieIcon fontSize='large' color='info' />, title: 'Format Support', desc: 'MP4, MOV, MKV, WebM.' },
+            { icon: <PrivacyTipIcon fontSize='large' color='info' />, title: 'Local Privacy', desc: 'No uploads needed.' },
+            { icon: <DownloadIcon fontSize='large' color='info' />, title: 'Fast Export', desc: 'Clean MP4 output.' },
+            { icon: <HighQualityIcon fontSize='large' color='info' />, title: 'Free & Clean', desc: 'No signup or watermark.' }].map((feat, i) => (
               <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
@@ -182,7 +177,6 @@ export default function VideoTrimLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='faq-section'>
         <Container maxWidth="lg">
           <Grid container spacing={3} justifyContent="center">
@@ -205,7 +199,6 @@ export default function VideoTrimLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='cta-section'>
         <Container maxWidth="lg">
           <Grid container spacing={3} justifyContent="center">

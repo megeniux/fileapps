@@ -79,11 +79,10 @@ export default function VideoMergerLanding() {
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Free Online Video Merger – Merge MP4, MOV, AVI (No Signup, No Watermark)</title>
-        <meta name="description" content="Merge multiple videos online for free. No signup, no watermark. Drag & drop clips, reorder, and combine them directly in your browser – 100% private." />
-        <meta name="keywords" content="merge videos online free, combine videos online, join video clips free, merge mp4 videos, no signup video merger, video combiner online, no watermark video merger, merge mov and avi, browser-based video merger, video joiner tool" />
-        <meta property="og:title" content="Merge Videos Online Free – MP4, MOV, AVI (No Signup)" />
-        <meta property="og:description" content="Free online video merger – combine MP4, MOV, AVI & more. No signup, no watermark. Drag, reorder, merge, and download instantly." />
+        <title>Merge Videos Online Free – Private No‑Signup Video Merger</title>
+        <meta name="description" content="Free online video merger: combine MP4, MOV, MKV, AVI, WebM clips locally. Drag, reorder, preview & export — private, fast & watermark‑free." />
+        <meta property="og:title" content="Free Online Video Merger – Fast, Private & No Watermark" />
+        <meta property="og:description" content="Merge multiple video clips (MP4, MOV, MKV, AVI, WebM) in your browser. Reorder, preview & export clean output — no uploads or signup." />
         <meta property="og:image" content="/images/landing/video-merge-hero.png" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="/tools/video/merge-videos-online" />
@@ -91,13 +90,12 @@ export default function VideoMergerLanding() {
         <link rel="canonical" href="/tools/video/merge-videos-online" />
         <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
-
       <section className='hero-section'>
         <Container maxWidth="lg">
           <Grid container spacing={3} alignItems="center">
             <Grid size={{ xs: 12, md: 6 }} className='hero-text'>
-              <Typography variant="h2" component="h1">Merge Videos Online – Free, Fast & No Signup</Typography>
-              <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Combine multiple video clips (MP4, MOV, AVI, MKV & more) directly in your browser. Drag, reorder, preview, and export — no watermark, no uploads, full privacy.</Typography>
+              <Typography variant="h2" component="h1">Merge Video Online – Free, Private & No Watermark</Typography>
+              <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Combine MP4, MOV, MKV, AVI, WebM clips. Drag, reorder, preview & export locally — no signup, uploads or watermark.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
                 <Button color='success' size='large' href="/tools/video/merge" variant="contained">Upload</Button>
                 <Button size='large' href="/tools/video/how-to-merge-videos-online" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
@@ -109,7 +107,6 @@ export default function VideoMergerLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='why-us'>
         <Container maxWidth="lg">
           <Grid container spacing={3} justifyContent='center' flexGrow={1}>
@@ -117,10 +114,10 @@ export default function VideoMergerLanding() {
               <Typography variant='h2'>Why Use Our Online Video Merger?</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            {[{ icon: <PrivacyTipIcon fontSize='large' color='success' />, title: '100% Private', desc: 'Everything processes locally — nothing uploaded.' },
-            { icon: <FlashOnIcon fontSize='large' color='success' />, title: 'Free & No Signup', desc: 'No watermark, no credit card, unlimited merges.' },
-            { icon: <MergeTypeIcon fontSize='large' color='success' />, title: 'Drag & Reorder', desc: 'Add clips and arrange order easily.' },
-            { icon: <HighQualityIcon fontSize='large' color='success' />, title: 'Format Support', desc: 'MP4, MOV, AVI, MKV, WebM & more.' }].map((item, i) => (
+            {[{ icon: <PrivacyTipIcon fontSize='large' color='success' />, title: 'Local & Private', desc: 'Processing stays in your browser.' },
+            { icon: <FlashOnIcon fontSize='large' color='success' />, title: 'Free & Clean', desc: 'No signup, fees or watermark.' },
+            { icon: <MergeTypeIcon fontSize='large' color='success' />, title: 'Drag & Reorder', desc: 'Arrange clip order easily.' },
+            { icon: <HighQualityIcon fontSize='large' color='success' />, title: 'Format Support', desc: 'MP4, MOV, MKV, AVI, WebM.' }].map((item, i) => (
               <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
@@ -134,7 +131,6 @@ export default function VideoMergerLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='how-it-works'>
         <Container maxWidth="lg">
           <Grid container spacing={3}>
@@ -143,11 +139,11 @@ export default function VideoMergerLanding() {
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
             <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center" flexGrow={1}>
-              {[{ icon: <CloudUploadIcon />, title: 'Upload Video Files', desc: 'Drag & drop or click to select.' },
-              { icon: <ReorderIcon />, title: 'Arrange Order', desc: 'Move clips up or down.' },
-              { icon: <MovieIcon />, title: 'Preview Merge', desc: 'Check sequence before combining.' },
-              { icon: <MergeTypeIcon />, title: 'Click Merge', desc: 'FFmpeg WASM stitches locally.' },
-              { icon: <DownloadIcon />, title: 'Download Video', desc: 'Export merged MP4 instantly.' }].map((step, i) => (
+              {[{ icon: <CloudUploadIcon />, title: 'Upload', desc: 'Add multiple clips.' },
+              { icon: <ReorderIcon />, title: 'Arrange', desc: 'Drag to set order.' },
+              { icon: <MovieIcon />, title: 'Preview', desc: 'Optional sequence check.' },
+              { icon: <MergeTypeIcon />, title: 'Merge Locally', desc: 'WASM FFmpeg combine.' },
+              { icon: <DownloadIcon />, title: 'Download', desc: 'Clean MP4 export.' }].map((step, i) => (
                 <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
                     <Box sx={{ bgcolor: 'success.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
@@ -162,7 +158,6 @@ export default function VideoMergerLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='key-features'>
         <Container maxWidth="lg">
           <Grid container spacing={3} justifyContent="center">
@@ -170,12 +165,12 @@ export default function VideoMergerLanding() {
               <Typography variant='h2' mb={4}>Key Features</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            {[{ icon: <UploadFileIcon fontSize='large' color='success' />, title: 'Multi-File Upload', desc: 'Add several clips at once.' },
-            { icon: <PlaylistAddIcon fontSize='large' color='success' />, title: 'Reorder Friendly', desc: 'Adjust sequence anytime.' },
-            { icon: <SmartDisplayIcon fontSize='large' color='success' />, title: 'Instant Preview', desc: 'Validate order visually.' },
-            { icon: <SpeedIcon fontSize='large' color='success' />, title: 'Fast Processing', desc: 'Local merging, no queue.' },
-            { icon: <MergeTypeIcon fontSize='large' color='success' />, title: 'Format Agnostic', desc: 'Different codecs accepted.' },
-            { icon: <HighQualityIcon fontSize='large' color='success' />, title: 'No Watermarks', desc: 'Clean output every time.' }].map((feat, i) => (
+            {[{ icon: <UploadFileIcon fontSize='large' color='success' />, title: 'Multi‑File Upload', desc: 'Add clips together.' },
+            { icon: <PlaylistAddIcon fontSize='large' color='success' />, title: 'Reorder Control', desc: 'Drag & arrange order.' },
+            { icon: <SmartDisplayIcon fontSize='large' color='success' />, title: 'Preview Sequence', desc: 'Confirm before merge.' },
+            { icon: <SpeedIcon fontSize='large' color='success' />, title: 'Local Processing', desc: 'Fast WASM merging.' },
+            { icon: <MergeTypeIcon fontSize='large' color='success' />, title: 'Format Flexible', desc: 'Mixed compatible inputs.' },
+            { icon: <HighQualityIcon fontSize='large' color='success' />, title: 'Watermark‑Free', desc: 'Clean final output.' }].map((feat, i) => (
               <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
@@ -189,7 +184,6 @@ export default function VideoMergerLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='faq-section'>
         <Container maxWidth="lg">
           <Grid container spacing={3} justifyContent="center">
@@ -212,7 +206,6 @@ export default function VideoMergerLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='cta-section'>
         <Container maxWidth="lg">
           <Grid container spacing={3} justifyContent="center">

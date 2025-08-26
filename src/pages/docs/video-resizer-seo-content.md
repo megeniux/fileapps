@@ -1,38 +1,27 @@
 ---
 title: Free Online Video Resizer – Change Resolution & Aspect Ratio (No Signup)
-description: Resize videos (MP4, MOV, MKV, AVI) to custom or preset dimensions (16:9, 9:16, 1:1) in your browser. Adjust width, height & FPS privately with no watermark.
+description: Resize videos online for free — locally in your browser with FFmpeg WebAssembly. Change width, height, aspect ratio (16:9, 9:16, 1:1, 4:3, 21:9) and FPS. Private, fast & watermark-free.
 keywords:
-	- resize video online free
-	- change video resolution online
-	- video aspect ratio changer
-	- resize mp4 video browser
-	- 16:9 to 9:16 converter
-	- make vertical video from horizontal
-	- crop video for tiktok
-	- youtube video resizer tool
-	- instagram video size
-	- reels video dimensions
-	- square video converter
-	- widescreen to vertical convert
-	- adjust video width height
-	- fps adjuster online
-	- scale video without quality loss
-	- downscale 4k to 1080p
-	- 1080p to 720p converter
-	- private video resizer
-	- browser video resize tool
-	- no watermark video resizer
-	- letterbox vs crop video
-	- fit fill stretch crop modes
-	- maintain aspect ratio video
-	- change aspect ratio mp4
-	- responsive social video size
-	- resize mov online
-	- mkv aspect ratio change
-	- rotate & resize (future)
-	- batch resize videos (future)
-	- free hd video resizer
-	- vertical video generator
+  - resize video online free
+  - free online video resizer
+  - change video resolution online
+  - video aspect ratio changer
+  - resize mp4 video
+  - 16:9 to 9:16 converter
+  - make vertical video from horizontal
+  - instagram reels size 1080x1920
+  - youtube video size 1920x1080
+  - square video 1080x1080
+  - downscale 4k to 1080p
+  - 1080p to 720p converter
+  - maintain aspect ratio video
+  - fit fill crop stretch modes
+  - letterbox vs crop video
+  - fps adjuster online
+  - no upload video resizer
+  - private video resizer
+  - browser video resize tool
+  - webassembly video resizer
 ogTitle: Resize Videos Online Free – Fast Aspect Ratio & Resolution Editor
 ogDescription: Resize & reformat video dimensions locally in your browser. No uploads, no signup, no watermark.
 ogImage: /images/landing/video-resizer-hero.jpg
@@ -41,84 +30,73 @@ slug: video-resizer
 type: landing+blog
 ---
 
-# Resize videos online – instant aspect ratio & resolution control
+# Resize videos online — instant aspect ratio & resolution control
 
-Change width, height, aspect ratio and frame rate for MP4, MOV, MKV, AVI and more. All processing happens locally with privacy‑first WebAssembly — no uploads or watermarks.
+Change **width, height, aspect ratio,** and **frame rate** for MP4, MOV, MKV, AVI and more. All processing runs **locally in your browser** with FFmpeg WebAssembly — your files never upload, and exports are **watermark-free**. :contentReference[oaicite:3]{index=3}
 
-## Why use this video resizer?
-- **Aspect presets:** 16:9, 9:16, 1:1, 4:3, 21:9.  
-- **Multiple modes:** Fit, Fill, Crop (future UI), Stretch.  
-- **Social ready:** Quick presets for TikTok/Reels/YouTube/Instagram.  
-- **Private & offline friendly:** Works even with intermittent connection.  
-- **Free forever:** No branding, no login.  
+> **Why this video resizer**
+> - **Aspect presets:** 16:9, 9:16, 1:1, 4:3, 21:9.  
+> - **Resize modes:** **Fit** (letterbox), **Fill** (crop), **Stretch** (and **Crop** roadmap).  
+> - **FPS control:** optionally set a target frame rate.  
+> - **Social-ready:** quick sizes for Reels/Shorts/YouTube/Instagram.  
+> - **Private by design:** runs entirely in browser; no watermark.
 
 ## How it works
-1. Upload video.  
-2. Select target resolution or choose preset.  
-3. Pick resize mode (fit vs crop).  
-4. Adjust FPS if needed.  
-5. Resize & download MP4.  
+1. **Upload** your video (drag & drop supported).  
+2. Pick a **preset ratio** or enter **custom width/height**.  
+3. Choose **Fit, Fill, Stretch** (Crop planned).  
+4. (Optional) set **FPS**.  
+5. Click **Resize** to process locally and **download** MP4. :contentReference[oaicite:4]{index=4}
 
-## Key features
-- **Drag & drop** simplified input.  
-- **Live dimension preview** before processing.  
-- **FPS adjust** to lower size or improve smoothness.  
-- **High quality scaling** with FFmpeg filters.  
-- **Zero watermarks** professional outputs.  
+## Feature highlights
+- **Live dimension preview** and aspect-ratio locks (1:1, 4:3, 16:9, 9:16, 21:9). :contentReference[oaicite:5]{index=5}  
+- **Fit vs Fill vs Stretch** — control letterboxing/cropping behavior. :contentReference[oaicite:6]{index=6}  
+- **FPS adjust** to optimize smoothness or file size. :contentReference[oaicite:7]{index=7}  
+- **Instant MP4 export** with no watermark or signup. :contentReference[oaicite:8]{index=8}
 
-## Use cases
-| Scenario | Setting Tip |
-| -------- | ----------- |
-| Vertical Reel from 16:9 | 1080×1920 + crop center |
-| Square social feed | 1080×1080 fit or crop |
-| Email optimization | 720p + lower FPS |
-| Widescreen cinematic | 2560×1080 (21:9) |
-| Mobile preview prototype | 540×960 reduced size |
+## Quick presets for social
+- **TikTok / Reels / Shorts:** 1080×1920 (9:16).  
+- **YouTube landscape:** 1920×1080 (16:9).  
+- **Instagram feed:** 1080×1080 (1:1).  
+Use **Fill** for full-bleed or **Fit** to avoid cropping important subjects.
+
+## Best practices
+| Challenge | Recommendation |
+| --- | --- |
+| Mixed orientations | Use **Fill (crop)** and keep the subject centered. |
+| Black bars | **Fit** adds bars; **Fill** removes them by cropping. |
+| Email/share size | Downscale to **720p** and consider lowering FPS. |
+| Cinematic look | Try **2560×1080 (21:9)** for ultra-wide framing. |
 
 ## FAQs
-### How does resizing stay private?
-All processing is in-browser; media never leaves your device.
+### Is resizing private?
+Yes. Processing happens locally via WebAssembly; your media doesn’t leave your device. :contentReference[oaicite:9]{index=9}
 
-### What formats are supported?
-Most standard containers (MP4, MOV, MKV, AVI) and codecs decodable by FFmpeg WASM.
+### Which formats are supported?
+Common containers like **MP4, MOV, MKV, AVI** that FFmpeg (WASM) can decode. :contentReference[oaicite:10]{index=10}
 
-### Does resizing reduce quality?
-Scaling inevitably resamples pixels; choosing even dimensions and appropriate filters keeps quality high.
+### Will resizing reduce quality?
+Any scaling resamples pixels. Use even dimensions and appropriate presets for best results.
 
-### Can I convert vertical to horizontal?
-Yes—fit with pillarboxing or crop strategically.
+### Can I convert horizontal to vertical?
+Yes — choose **9:16** and **Fill** (crop) or **Fit** (pillarbox) depending on the composition.
 
-### Is there a watermark?
-No branding or watermark is added.
+### Is there a watermark or signup?
+No — it’s free and watermark-free. :contentReference[oaicite:11]{index=11}
 
-### File too large after resize?
-Combine with compression (use the compressor tool) for additional reduction.
-
-## Blog guide – how to resize video online
-### Why resize?
-Platform aspect compliance, playback performance, bandwidth savings, visual consistency and repurposing.
-
-### Step-by-step
-1. Upload file.  
-2. Pick preset or custom size.  
-3. Choose mode (fit vs crop).  
-4. Adjust FPS (optional).  
-5. Export MP4.  
-
-### Social platform quick reference
-- **TikTok/Reels/Shorts:** 1080×1920 9:16.  
-- **YouTube Landscape:** 1920×1080 16:9.  
-- **Instagram Feed:** 1080×1080 1:1.  
-
-### Tips
-Keep key subjects centered if cropping vertical from horizontal footage.
-
-### Conclusion
-Fast, local resizing gives creators and marketers immediate control over deliverable formats—privacy intact.
+## Blog guide — how to resize video online (with examples)
+- **Vertical Reel from 16:9:** 1080×1920 + **Fill (crop)** centered subject.  
+- **Square feed post:** 1080×1080 + **Fit** or **Fill** based on framing.  
+- **Performance/bandwidth:** Downscale **4K → 1080p** or **1080p → 720p**; consider FPS 24–30.  
+- **Consistent branding:** Lock a house preset for each platform.
 
 ## MUI icon suggestions
-`AspectRatioIcon`, `PrivacyTipIcon`, `TuneIcon`, `CloudUploadIcon`, `CropIcon` (future), `SpeedIcon`.
+- Aspect/Resolution: `AspectRatioIcon`  
+- Privacy/Local: `PrivacyTipIcon`  
+- Controls/Settings: `TuneIcon`  
+- Upload: `CloudUploadIcon`  
+- Cropping (future): `CropIcon`  
+- Performance/FPS: `SpeedIcon`
 
 ---
-JSON-LD: auto-generate from FAQ block.
-
+**FAQ JSON-LD:** Generate a `FAQPage` schema from the FAQs above (Question/acceptedAnswer) to improve eligibility for rich results.

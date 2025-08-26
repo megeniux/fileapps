@@ -34,11 +34,11 @@ export default function AudioConvertLanding() {
 	return (
 		<Root elevation={0}>
 			<Helmet>
-				<title>Free Online Audio Converter - Convert Audio to MP3, WAV, AAC, FLAC, OGG</title>
-				<meta name="description" content="Convert audio files to MP3, WAV, AAC, FLAC, OGG and more online free. No signup, no uploads, no credit card required. Browser-based audio converter ensures data privacy." />
+				<title>Convert Audio Online Free – MP3, WAV, AAC, FLAC (Private No Signup)</title>
+				<meta name="description" content="Free online audio converter: convert MP3, WAV, AAC, FLAC, OGG, M4A locally. Set bitrate or lossless — private, fast & watermark‑free." />
 				<meta name="keywords" content="convert audio to mp3, convert audio to mp3 online free, free online audio converter, wav to mp3 converter, flac to mp3 converter online, ogg to mp3, m4a to mp3 online, browser audio converter, no signup mp3 converter" />
-				<meta property="og:title" content="Convert Audio to MP3 & More Online Free (Privacy-First, No Uploads)" />
-				<meta property="og:description" content="Fast, free, and private online audio converter. Convert to MP3, WAV, AAC, FLAC, OGG directly in your browser. No uploads, no signups, no watermarks." />
+				<meta property="og:title" content="Free Online Audio Converter – Fast, Private & No Watermark" />
+				<meta property="og:description" content="Convert audio (MP3, WAV, AAC, FLAC, OGG, M4A) in your browser. Choose bitrate or lossless. No uploads or signup." />
 				<meta property="og:type" content="website" />
 				<meta property="og:image" content="/images/landing/audio-convert-hero.jpg" />
 				<meta property="og:url" content="/tools/audio/convert-audio-online" />
@@ -50,12 +50,8 @@ export default function AudioConvertLanding() {
 				<Container maxWidth="lg">
 					<Grid container spacing={3} alignItems="center">
 						<Grid size={{ xs: 12, md: 6 }} className='hero-text'>
-							<Typography variant="h2" component="h1">
-								Convert Audio Files Online Free — 100% Private & Secure
-							</Typography>
-							<Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>
-								Easily convert your audio files to MP3, WAV, AAC, FLAC, OGG and more directly in your browser. Choose quality (320kbps, 192kbps, 128kbps, lossless) and convert instantly — no uploads, no watermarks, no sign‑ups required.
-							</Typography>
+							<Typography variant="h2" component="h1">Convert Audio Online – Free, Private & No Watermark</Typography>
+							<Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Convert MP3, WAV, AAC, FLAC, OGG, M4A locally. Select bitrate (128k–320k) or lossless — no uploads, signup or watermark.</Typography>
 							<Box display="flex" justifyContent={{ xs: 'center', md: 'flex-start' }} gap={1}>
 								<Button color='primary' size='large' href="/tools/audio/convert" variant="contained">Upload</Button>
 								<Button size='large' href="/tools/audio/how-to-convert-audio-online" variant="text">Learn More</Button>
@@ -80,8 +76,8 @@ export default function AudioConvertLanding() {
 								<Card sx={{ height: '100%' }}>
 									<CardContent sx={{ p: 2 }}>
 										<PrivacyTipIcon fontSize='large' color="primary" />
-										<Typography variant='h5' component="h3" gutterBottom>Privacy First</Typography>
-										<Typography variant='body1'>All processing happens locally in your browser — nothing is uploaded.</Typography>
+										<Typography variant='h5' component="h3" gutterBottom>Local & Private</Typography>
+										<Typography variant='body1'>In‑browser FFmpeg — files never leave.</Typography>
 									</CardContent>
 								</Card>
 							</Grid>

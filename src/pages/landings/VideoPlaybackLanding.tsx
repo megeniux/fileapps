@@ -70,11 +70,10 @@ export default function VideoPlaybackLanding() {
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Free Online Video Playback Speed Changer – Speed Up or Slow Down Videos</title>
-        <meta name="description" content="Change video playback speed from -20x (reverse) to +20x for free. Adjust the speed of MP4, MOV, AVI, MKV, and other video formats online with no downloads or sign-ups." />
-        <meta name="keywords" content="free online video playback speed, change video speed online, adjust video playback speed, free video speed changer, video speed up or slow down, reverse video online, video speed editor free, free video playback speed changer, adjust video speed, video playback speed online, online video speed changer, MP4 speed change online, MOV video speed adjust, free video reverse speed, video speed tool free, slow motion video tool, online video speed adjustment, change video speed MP4, free video speed up, video playback adjustment, video speed settings online, free online speed editor, reverse video free, online change video speed" />
-        <meta property="og:title" content="Free Online Video Playback Speed Changer – Adjust Video Speed Instantly" />
-        <meta property="og:description" content="Change video playback speed from -20x to +20x online for free. No sign-up, no download, and supports multiple formats like MP4, MOV, AVI, MKV, and more." />
+        <title>Change Video Speed Online Free – Reverse / Fast Playback (No Signup)</title>
+        <meta name="description" content="Adjust or reverse video playback speed from -20x to +20x in your browser. MP4, MOV, MKV, AVI supported. Private, fast & watermark‑free." />
+        <meta property="og:title" content="Free Online Video Speed Changer – -20x to +20x" />
+        <meta property="og:description" content="Change or reverse video speed locally ( -20x to +20x ). No uploads, signup or watermark." />
         <meta property="og:image" content="/images/landing/video-playback-speed-hero.jpg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="/tools/video/video-playback-speed-editor" />
@@ -82,13 +81,12 @@ export default function VideoPlaybackLanding() {
         <link rel="canonical" href="/tools/video/video-playback-speed-editor" />
         <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
-
       <section className='hero-section'>
         <Container maxWidth="lg">
           <Grid container spacing={3} alignItems="center">
             <Grid size={{ xs: 12, md: 6 }} className='hero-text'>
-              <Typography variant="h2" component="h1">Free Online Video Playback Speed Changer – Speed Up or Slow Down Videos</Typography>
-              <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Adjust your video playback speed with ease. Change speeds from -20x (reverse) to +20x for free. Works with MP4, MOV, AVI, MKV, and more—no sign-up required.</Typography>
+              <Typography variant="h2" component="h1">Change Video Speed Online – Reverse to 20× Faster</Typography>
+              <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Set playback from -20x (reverse) to +20x locally. MP4, MOV, MKV, AVI supported — free, private & watermark‑free.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
                 <Button color='secondary' size='large' href="/tools/video/playback" variant="contained">Upload Video</Button>
                 <Button size='large' href="/tools/video/how-to-video-playback-speed-editor" variant="text" sx={{ color: 'text.secondary' }}>How to Change Video Speed</Button>
@@ -100,7 +98,6 @@ export default function VideoPlaybackLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='why-us'>
         <Container maxWidth="lg">
           <Grid container spacing={3} justifyContent='center' flexGrow={1}>
@@ -108,12 +105,12 @@ export default function VideoPlaybackLanding() {
               <Typography variant='h2'>Why Use Our Free Online Video Playback Speed Changer?</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            {[{ icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Completely Free', desc: 'No sign-ups or charges.' },
-            { icon: <MovieIcon fontSize='large' color='secondary' />, title: 'Wide Format Support', desc: 'Works with MP4, MOV, AVI, MKV, and more.' },
-            { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Simple to Use', desc: 'Adjust video speed from -20x to +20x in seconds.' },
-            { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'No Watermark', desc: 'Edit and download your video with no branding.' },
-            { icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: '100% Browser-Based', desc: 'No need to download any software.' },
-            { icon: <DownloadIcon fontSize='large' color='secondary' />, title: 'Instant Processing', desc: 'Apply playback speed changes and download the file quickly.' }].map((item, i) => (
+            {[{ icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Free & Clean', desc: 'No signup or watermark.' },
+            { icon: <MovieIcon fontSize='large' color='secondary' />, title: 'Format Support', desc: 'MP4, MOV, MKV, AVI.' },
+            { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Wide Range', desc: '-20x reverse to +20x.' },
+            { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'Quality Preserved', desc: 'Local re-encode only as needed.' },
+            { icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: 'Private Processing', desc: 'Runs entirely in browser.' },
+            { icon: <DownloadIcon fontSize='large' color='secondary' />, title: 'Fast Export', desc: 'Immediate MP4 output.' }].map((item, i) => (
               <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
@@ -127,7 +124,6 @@ export default function VideoPlaybackLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='how-it-works'>
         <Container maxWidth="lg">
           <Grid container spacing={3}>
@@ -136,11 +132,10 @@ export default function VideoPlaybackLanding() {
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
             <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center" flexGrow={1}>
-              {/* Remove preview step, replace with browser-based benefit */}
-              {[{ icon: <CloudUploadIcon />, title: 'Upload Your Video', desc: 'Drag and drop or select a video file.' },
-              { icon: <SpeedIcon />, title: 'Adjust Playback Speed', desc: 'Use the slider to change the playback speed from -20x (reverse) to +20x.' },
-              { icon: <PrivacyTipIcon />, title: 'No Installation Needed', desc: 'Change video speed directly in your browser—no software required.' },
-              { icon: <DownloadIcon />, title: 'Download the Edited Video', desc: 'Once you\'re happy, click "Download" to save your adjusted video.' }].map((step, i) => (
+              {[{ icon: <CloudUploadIcon />, title: 'Upload', desc: 'Drag & drop video.' },
+              { icon: <SpeedIcon />, title: 'Set Speed', desc: '-20x to +20x (reverse / fast).' },
+              { icon: <MovieIcon />, title: 'Preview', desc: 'Play locally — no uploads.' },
+              { icon: <DownloadIcon />, title: 'Export', desc: 'Download clean MP4.' }].map((step, i) => (
                 <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
                     <Box sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
@@ -155,7 +150,6 @@ export default function VideoPlaybackLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='key-features'>
         <Container maxWidth="lg">
           <Grid container spacing={3} justifyContent="center">
@@ -163,12 +157,12 @@ export default function VideoPlaybackLanding() {
               <Typography variant='h2' mb={4}>Key Features</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            {[{ icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Adjust Playback Speed', desc: 'Change your video speed from -20x (reverse) to +20x.' },
-            { icon: <MovieIcon fontSize='large' color='secondary' />, title: 'Supports Popular Video Formats', desc: 'MP4, MOV, AVI, MKV, and more.' },
-            { icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: 'No Software Needed', desc: 'Fully online and browser-based.' },
-            { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'Free & No Watermark', desc: 'No sign-ups, charges, or watermarks.' },
-            { icon: <DownloadIcon fontSize='large' color='secondary' />, title: 'Instant Processing', desc: 'Edit and download videos instantly.' },
-            { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Easy to Use', desc: 'Simple interface for quick video speed adjustments.' }].map((feat, i) => (
+            {[{ icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Speed Range', desc: '-20x to +20x (reverse / fast).' },
+            { icon: <MovieIcon fontSize='large' color='secondary' />, title: 'Format Support', desc: 'MP4, MOV, MKV, AVI.' },
+            { icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: 'Private', desc: 'Local WASM engine.' },
+            { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'Clean Output', desc: 'No watermark ever.' },
+            { icon: <DownloadIcon fontSize='large' color='secondary' />, title: 'Fast Export', desc: 'Immediate MP4 result.' },
+            { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Simple UI', desc: 'Slider + instant preview.' }].map((feat, i) => (
               <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
@@ -182,7 +176,6 @@ export default function VideoPlaybackLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='faq-section'>
         <Container maxWidth="lg">
           <Grid container spacing={3} justifyContent="center">
@@ -205,7 +198,6 @@ export default function VideoPlaybackLanding() {
           </Grid>
         </Container>
       </section>
-
       <section className='cta-section'>
         <Container maxWidth="lg">
           <Grid container spacing={3} justifyContent="center">

@@ -5,65 +5,110 @@ import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
+import Accordion from '@mui/material/Accordion'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 const FAQ_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "How do I trim my video?", "acceptedAnswer": { "@type": "Answer", "text": "Upload your video, use the slider to select the start and end points, then click 'Trim' to process and download the file." } },
-    { "@type": "Question", "name": "What video formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "We support MP4, MOV, AVI, MKV, and many other popular video formats." } },
-    { "@type": "Question", "name": "Do I need to sign up?", "acceptedAnswer": { "@type": "Answer", "text": "No, the tool is completely free and doesn’t require any signup." } },
-    { "@type": "Question", "name": "Is the trimming process private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! All processing is done locally in your browser; your video is never uploaded to a server." } },
-    { "@type": "Question", "name": "Is there a watermark on the trimmed video?", "acceptedAnswer": { "@type": "Answer", "text": "No, your trimmed video will have no watermark or branding." } }
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    { "@type":"Question","name":"Is trimming private?","acceptedAnswer":{ "@type":"Answer","text":"Yes. All processing runs locally in your browser with WebAssembly — files are never uploaded." } },
+    { "@type":"Question","name":"Which formats are supported?","acceptedAnswer":{ "@type":"Answer","text":"Typical browser‑decodable containers: MP4, MOV, MKV, WebM, AVI (device dependent)." } },
+    { "@type":"Question","name":"Does trimming re‑encode?","acceptedAnswer":{ "@type":"Answer","text":"Some trims may re‑encode depending on cut accuracy and codec; quality impact is minimal for a single pass." } },
+    { "@type":"Question","name":"Is there a watermark or signup?","acceptedAnswer":{ "@type":"Answer","text":"No. The tool is free, watermark‑free and requires no account." } },
+    { "@type":"Question","name":"Can I trim large / 4K files?","acceptedAnswer":{ "@type":"Answer","text":"Yes—limited only by available memory and CPU. For huge clips consider trimming a proxy first." } }
   ]
 }
 
 export default function VideoTrimBlog() {
   return (
-    <Container maxWidth="lg" sx={{ py: 6 }}>
+    <Container maxWidth='lg' sx={{ py: 6 }}>
       <Helmet>
-        <title>How to Trim Your Video Online for Free</title>
-        <meta name="description" content="Trim your videos online for free. Select the start and end points to cut MP4, MOV, AVI, MKV, and other formats. 100% browser-based, no signup required, no watermark. Step-by-step guide." />
-        <meta name="keywords" content="video trimmer online free, trim video online free, cut video online, free video cutter, video editor trim, video trimming tool, online video trim, cut video in browser, free video cutting tool, trim video for free, free online video editor, trim MP4, MOV, AVI, MKV, free video cutter no watermark, online video cutter, trim video online, video editor free, no signup video trimmer, online video cut tool, free browser video trimmer" />
-        <meta property="og:title" content="How to Trim Your Video Online for Free" />
-        <meta property="og:description" content="Trim, cut, or edit your videos online for free. Supports MP4, MOV, AVI, MKV, and more. No signup required, no watermark, 100% private, browser-based." />
-        <meta property="og:type" content="article" />
-        <meta property="og:image" content="/images/landing/video-trimmer-hero.jpg" />
-        <meta property="og:url" content="/tools/video/how-to-trim-video-online" />
-        <meta property="og:site_name" content="FileApps" />
-        <link rel="canonical" href="/tools/video/how-to-trim-video-online" />
+        <title>Trim Video Online Free – Private No‑Signup Video Trimmer (No Watermark)</title>
+        <meta name='description' content='Free online video trimmer: cut MP4, MOV, MKV, WebM clips locally. Set start/end, preview & export – private, fast & watermark‑free.' />
+        <meta property='og:title' content='Free Online Video Trimmer – Fast, Private & No Watermark' />
+        <meta property='og:description' content='Trim video segments (MP4, MOV, MKV, WebM) in your browser. No uploads, signup or watermark.' />
+        <meta property='og:type' content='article' />
+        <meta property='og:image' content='/images/landing/video-trimmer-hero.jpg' />
+        <meta property='og:url' content='/tools/video/how-to-trim-video-online' />
+        <meta property='og:site_name' content='FileApps' />
+        <link rel='canonical' href='/tools/video/how-to-trim-video-online' />
         <script type='application/ld+json'>{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
-      <Paper sx={{ p: 4 }}>
+      <Paper sx={{ p:{ xs:3, md:5 } }}>
         <Box mb={4}>
-          <img src='/images/landing/video-trimmer-hero.jpg' alt='Video Trimmer' title='Video Trimmer' loading='lazy' width="400px" height="auto" style={{ maxWidth: '100%', display: 'table', margin: '0 auto 16px' }} />
-          <Typography variant="h3" component="h1" gutterBottom> How to Trim Your Video Online for Free </Typography>
-          <Typography variant="body1">Trimming videos has never been easier. With our <strong>free online video trimmer</strong>, you can select the start and end points to cut your videos instantly—no software, no sign-up, and no watermark.</Typography>
+          <img src='/images/landing/video-trimmer-hero.jpg' alt='Video Trimmer' title='Video Trimmer' loading='lazy' width='480' height='auto' style={{ maxWidth:'100%',display:'table',margin:'0 auto 16px' }} />
+          <Typography variant='h3' component='h1' gutterBottom>Trim Videos Online — Free, Private & Watermark‑Free</Typography>
+          <Typography variant='body1'>Cut unwanted intros, outros, pauses or mistakes from MP4, MOV, MKV or WebM directly in your browser — no uploads, signup or watermark. Local FFmpeg WebAssembly ensures privacy.</Typography>
         </Box>
 
-        <Divider sx={{ mb: 3 }} />
+        <Divider sx={{ mb:4 }} />
 
-        <Box>
-          <Typography variant="h4" component="h2" gutterBottom>Why Trim Your Videos?</Typography>
-          <Typography variant="body1" mb={2}>Remove unwanted sections: Cut out intros, outros, or irrelevant parts.<br />Create highlights: Perfect for trimming highlights for social media.<br />Adjust length for uploading: Make your video shorter for quicker uploads.<br />Trim multiple videos quickly: Save time on editing with a fast online tool.</Typography>
+        <Typography variant='h4' component='h2' gutterBottom>Why Trim Video?</Typography>
+        <Box component='ul' sx={{ pl:3, mb:2 }}>
+          <li><Typography variant='body1'>Remove dead time, ads or mistakes.</Typography></li>
+          <li><Typography variant='body1'>Create highlight or teaser clips.</Typography></li>
+          <li><Typography variant='body1'>Shorten length for platform limits.</Typography></li>
+          <li><Typography variant='body1'>Prep segments for further editing.</Typography></li>
+        </Box>
 
-          <Typography variant="h4" component="h2" my={2}>How to Trim Video Online for Free</Typography>
-          <Typography variant="body1">1. <strong>Upload Your Video</strong>: Drag and drop your file, or click to choose one from your device.<br />2. <strong>Set the Trim Points</strong>: Use the slider to define the section you want to keep.<br />3. <strong>Preview</strong>: Check the preview to ensure the trim looks perfect.<br />4. <strong>Download the Trimmed Video</strong>: Once you're happy, hit "Download" to save your edited file.</Typography>
-  <Typography variant="body1">1. <strong>Upload Your Video</strong>: Drag and drop your file, or click to choose one from your device.<br />2. <strong>Set the Trim Points</strong>: Use the slider to define the section you want to keep.<br />3. <strong>No Installation Needed</strong>: Trim videos directly in your browser—no software required.<br />4. <strong>Download the Trimmed Video</strong>: Once you're happy, hit "Download" to save your edited file.</Typography>
+        <Typography variant='h4' component='h2' gutterBottom mt={4}>How It Works (4 Steps)</Typography>
+        <Box component='ol' sx={{ pl:3, mb:2 }}>
+          <li><Typography variant='body1' component='span'><strong>Upload</strong> (drag & drop video file).</Typography></li>
+          <li><Typography variant='body1' component='span'><strong>Select range</strong> (set start & end markers).</Typography></li>
+          <li><Typography variant='body1' component='span'><strong>Preview</strong> trimmed segment locally.</Typography></li>
+          <li><Typography variant='body1' component='span'><strong>Export & download</strong> clean MP4 (no watermark).</Typography></li>
+        </Box>
 
-          <Typography variant="h4" component="h2" mt={3} gutterBottom>Best Use Cases for Video Trimming</Typography>
-          <Typography variant="body1" mb={2}>Social Media Creators: Trim videos for Instagram, YouTube, TikTok, etc.<br />Vloggers: Cut out unnecessary parts of your vlogs.<br />Students: Remove irrelevant parts from lecture or tutorial videos.<br />Businesses: Edit promotional videos for presentations.</Typography>
+        <Typography variant='h4' component='h2' gutterBottom mt={4}>Key Features</Typography>
+        <Box component='ul' sx={{ pl:3, mb:2 }}>
+          <li><Typography variant='body1'>Local private processing (no uploads).</Typography></li>
+          <li><Typography variant='body1'>Precise start / end selection.</Typography></li>
+          <li><Typography variant='body1'>Instant in‑browser preview.</Typography></li>
+          <li><Typography variant='body1'>Multi‑format support (MP4, MOV, MKV, WebM).</Typography></li>
+          <li><Typography variant='body1'>Watermark‑free export.</Typography></li>
+          <li><Typography variant='body1'>Fast one‑pass trimming workflow.</Typography></li>
+        </Box>
 
-          <Typography variant="h4" component="h2" gutterBottom>Why Choose Our Free Video Trimmer?</Typography>
-          <Typography variant="body1" mb={2}>No Watermarks: Your trimmed videos come out clean, no branding.<br />No Software Needed: Works completely in your browser.<br />Supports All Major Formats: MP4, MOV, AVI, MKV, and more.<br />Fast and Easy: Get your trimmed video within seconds.<br />Free & Private: Completely free, with no sign-ups required, and your data stays private.</Typography>
+        <Typography variant='h4' component='h2' gutterBottom mt={4}>Use Cases</Typography>
+        <Box component='ul' sx={{ pl:3, mb:2 }}>
+          <li><Typography variant='body1'>Social media highlight reels.</Typography></li>
+          <li><Typography variant='body1'>Lecture / webinar excerpt extraction.</Typography></li>
+          <li><Typography variant='body1'>Gameplay or reaction clip cutting.</Typography></li>
+          <li><Typography variant='body1'>Removing mistakes before merging.</Typography></li>
+        </Box>
 
-          <Typography variant="body1" mb={2}>With our <strong>free online video trimmer</strong>, you can trim your videos in seconds, without the hassle of installing software or creating an account. Get started now and trim your videos instantly!</Typography>
+        <Typography variant='h4' component='h2' gutterBottom mt={4}>Tips</Typography>
+        <Box component='ul' sx={{ pl:3, mb:2 }}>
+          <li><Typography variant='body1'>Trim first, then compress for maximum quality.</Typography></li>
+          <li><Typography variant='body1'>Keep an untouched original for future edits.</Typography></li>
+          <li><Typography variant='body1'>Cut on scene boundaries to avoid abrupt transitions.</Typography></li>
+          <li><Typography variant='body1'>Consider exporting MP4 (H.264) for wide compatibility.</Typography></li>
+        </Box>
 
-          <Box mt={4} textAlign="center">
-            <Button color='info' size='large' href="/tools/video/trim" variant="contained">Upload Video</Button>
-            <Button color='info' size='large' href="/tools/video/trim-video-online" variant="outlined" sx={{ ml: 2 }}>Features</Button>
-          </Box>
+        <Divider sx={{ my:4 }} />
+        <Typography variant='h4' component='h2' gutterBottom>FAQs</Typography>
+        {FAQ_SCHEMA.mainEntity.map((faq:any,i:number)=>(
+          <Accordion key={i} disableGutters square>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography variant='h6' component='h3'>{faq.name}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography variant='body1'>{faq.acceptedAnswer.text}</Typography>
+            </AccordionDetails>
+          </Accordion>
+        ))}
+
+        <Divider sx={{ my:4 }} />
+        <Typography variant='h4' component='h2' gutterBottom>Conclusion</Typography>
+        <Typography variant='body1' mb={2}>Trim video clips quickly and privately — upload locally, mark start & end, preview, then export a clean, watermark‑free result.</Typography>
+
+        <Box mt={4} textAlign='center'>
+          <Button size='large' variant='contained' color='info' href='/tools/video/trim'>Upload Video</Button>
+          <Button size='large' variant='outlined' color='info' href='/tools/video/trim-video-online' sx={{ ml:2 }}>Features</Button>
         </Box>
       </Paper>
     </Container>

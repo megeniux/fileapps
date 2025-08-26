@@ -29,10 +29,10 @@ export default function AudioPlaybackLanding() {
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Free Online Audio Playback Speed Editor – Slow Down, Speed Up, Reverse</title>
-        <meta name="description" content="Change audio playback speed or reverse audio online free. Works locally with MP3, WAV, FLAC, AAC & more. No signup, no watermark, private processing." />
-        <meta property="og:title" content="Free Online Audio Playback Speed Editor – Change Tempo or Reverse Audio" />
-        <meta property="og:description" content="Slow down, speed up, or reverse audio in your browser. Fast, private & watermark‑free." />
+        <title>Change Audio Playback Speed Online – Slow, Fast or Reverse (Free & Private)</title>
+        <meta name="description" content="Free audio speed changer: slow down, speed up or reverse MP3, WAV, FLAC, AAC, OGG, M4A locally. No uploads, signup or watermark." />
+        <meta property="og:title" content="Audio Speed Changer – Slow Down, Speed Up or Reverse (Free)" />
+        <meta property="og:description" content="Adjust or reverse audio speed privately in your browser. Multi‑format, fast & watermark‑free." />
         <meta property="og:image" content="/images/landing/audio-speed-editor-hero.jpg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="/tools/audio/audio-playback-speed-editor" />
@@ -45,13 +45,8 @@ export default function AudioPlaybackLanding() {
         <Container maxWidth="lg">
           <Grid container spacing={3} alignItems="center">
             <Grid size={{ xs: 12, md: 6 }} className='hero-text'>
-              <Typography variant="h2" component="h1">
-                Change Audio Playback Speed Online – Free & Private
-              </Typography>
-              <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>
-                Slow down, speed up or reverse audio (MP3, WAV, FLAC, AAC, OGG, M4A) directly in your browser — no uploads,
-                no signup, no watermark.
-              </Typography>
+              <Typography variant="h2" component="h1">Change Audio Playback Speed – Slow, Fast or Reverse</Typography>
+              <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Slow down, speed up or reverse MP3, WAV, FLAC, AAC, OGG, M4A locally — free, private & watermark‑free.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
                 <Button color='success' size='large' href="/tools/audio/playback" variant="contained">Upload Audio</Button>
                 <Button size='large' href="/tools/audio/how-to-audio-playback-speed-editor" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
@@ -357,4 +352,4 @@ const Root = styled(Paper)(({ theme }) => ({
     paddingBlock: theme.spacing(8),
     '& .MuiTypography-h2': { textAlign: 'center', marginBottom: theme.spacing(2) }
   },
-}))
+}));

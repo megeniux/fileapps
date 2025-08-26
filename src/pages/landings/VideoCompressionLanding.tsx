@@ -68,41 +68,40 @@ minHeight: 500,
 
 export default function VideoCompressionLanding() {
   const whyCards = [
-    { icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: '100% Private', desc: 'All processing happens in your browser. No uploads, no data leaks.' },
-    { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Free Forever', desc: 'No signup, no credit card, no watermark.' },
-    { icon: <CompressIcon fontSize='large' color='secondary' />, title: 'Advanced Compression', desc: 'Adjust CRF, preset, and bitrate for best results.' },
-    { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'Keep Quality', desc: 'Reduce file size without making your video blurry.' },
-    { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Cross-Platform', desc: 'Works on Chrome, Firefox, Safari, Edge, and mobile browsers.' }
+    { icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: 'Local & Private', desc: 'Runs in your browser — no uploads.' },
+    { icon: <CompressIcon fontSize='large' color='secondary' />, title: 'CRF + Presets', desc: 'Fine‑tune quality vs speed.' },
+    { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'Quality Retained', desc: 'Smaller size, crisp visuals.' },
+    { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Free & No Signup', desc: 'No watermark, no account.' },
+    { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'Resolution Control', desc: 'Optional downscale (4K→1080p).' }
   ]
 
   const steps = [
-    { icon: <CloudUploadIcon />, title: 'Upload Video File', desc: 'Drag & drop or click to select.' },
-    { icon: <TuneIcon />, title: 'Choose Compression Level', desc: 'Adjust CRF and preset (speed vs quality).' },
-    { icon: <TuneIcon />, title: 'Set Advanced Options', desc: 'Customize resolution, bitrate, and format if needed.' },
-    { icon: <CompressIcon />, title: 'Compress Video', desc: 'Processing happens in your browser with FFmpeg WASM.' },
-    { icon: <DownloadIcon />, title: 'Download Video', desc: 'Get your compressed file instantly without uploads.' }
+    { icon: <CloudUploadIcon />, title: 'Upload', desc: 'Drag & drop video.' },
+    { icon: <TuneIcon />, title: 'Set CRF & Preset', desc: 'Quality / speed balance.' },
+    { icon: <TuneIcon />, title: 'Adjust Resolution (Optional)', desc: 'Downscale if needed.' },
+    { icon: <CompressIcon />, title: 'Compress Locally', desc: 'WASM FFmpeg processing.' },
+    { icon: <DownloadIcon />, title: 'Download', desc: 'Watermark‑free output.' }
   ]
 
   const features = [
-    { icon: <UploadFileIcon fontSize='large' color='secondary' />, title: 'Drag & Drop Upload', desc: 'Easily select your videos.' },
-    { icon: <CompressIcon fontSize='large' color='secondary' />, title: 'CRF Control', desc: 'Fine-tune quality vs. file size (lower CRF = higher quality).' },
-    { icon: <TuneIcon fontSize='large' color='secondary' />, title: 'Preset Options', desc: 'Choose faster or slower compression to fit your needs.' },
-    { icon: <TuneIcon fontSize='large' color='secondary' />, title: 'Resolution Adjustment', desc: 'Downscale to 1080p, 720p, 480p, or custom.' },
-    { icon: <TuneIcon fontSize='large' color='secondary' />, title: 'Bitrate Management', desc: 'Control audio and video bitrate precisely.' },
-    { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'Estimate Size Preview', desc: 'See expected size before starting compression.' },
-    { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Cross-Browser Support', desc: 'Works on desktop & mobile without software.' },
-    { icon: <DownloadIcon fontSize='large' color='secondary' />, title: 'Instant Download', desc: 'Export compressed video immediately.' },
-    { icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: 'Free Forever', desc: 'No signups, watermarks, or hidden charges.' }
+    { icon: <UploadFileIcon fontSize='large' color='secondary' />, title: 'Local Processing', desc: 'Private in‑browser compression.' },
+    { icon: <CompressIcon fontSize='large' color='secondary' />, title: 'CRF Control', desc: 'Adjust quality vs size (lower = higher quality).' },
+    { icon: <TuneIcon fontSize='large' color='secondary' />, title: 'Presets', desc: 'Fast → small trade‑offs.' },
+    { icon: <TuneIcon fontSize='large' color='secondary' />, title: 'Resolution Scaling', desc: 'Downscale or keep original.' },
+    { icon: <TuneIcon fontSize='large' color='secondary' />, title: 'Bitrate Tuning', desc: 'Video & audio bitrate control.' },
+    { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'Size Estimate', desc: 'Preview before running.' },
+    { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Cross‑Browser', desc: 'Desktop & mobile supported.' },
+    { icon: <DownloadIcon fontSize='large' color='secondary' />, title: 'Instant Export', desc: 'No queue, no watermark.' },
+    { icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: 'Free & No Signup', desc: 'No account or fees.' }
   ]
 
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Free Video Compressor Online – Compress Videos Without Losing Quality (No Signup)</title>
-        <meta name='description' content='Compress videos online for free without losing quality. No signup, no watermark, no credit card. Reduce video file size with custom CRF, presets, and resolution control – 100% browser-based and private.' />
-        <meta name='keywords' content='compress video online free, reduce video size without losing quality, compress mp4 online, free video compressor no watermark, compress video for whatsapp, compress 4k video online, compress video for youtube, online video compression without signup' />
-        <meta property='og:title' content='Compress Videos Online Free – High Quality & No Signup' />
-        <meta property='og:description' content='Free and private online video compressor. Reduce video size without losing quality. Customize CRF, presets, resolution – no signup, no watermarks.' />
+        <title>Compress Video Online Free – Private No‑Signup Video Compressor</title>
+        <meta name='description' content='Free online video compressor: reduce MP4 / MOV / MKV size with CRF, bitrate & resolution control. 100% in‑browser, private, no signup, no watermark.' />
+        <meta property='og:title' content='Free Video Compressor Online – Reduce Size Without Quality Loss' />
+        <meta property='og:description' content='Compress videos locally with CRF, bitrate, resolution & preset control. Fast, private & watermark‑free.' />
         <meta property='og:image' content='/images/landing/video-compression-hero.jpg' />
         <meta property='og:type' content='website' />
         <meta property='og:url' content='/tools/video/compress-video-online' />
@@ -114,8 +113,8 @@ export default function VideoCompressionLanding() {
         <Container maxWidth='lg'>
           <Grid container spacing={3} alignItems='center'>
             <Grid size={{ xs: 12, md: 6 }} className='hero-text'>
-              <Typography variant='h2' component='h1'>Compress Videos Online – Free, Fast & High Quality</Typography>
-              <Typography variant='h6' component='p' color='text.secondary' mt={3} mb={4}>Reduce video file size without losing quality. Adjust CRF, resolution, and compression speed with advanced options. 100% browser-based, no signup, no watermark.</Typography>
+              <Typography variant='h2' component='h1'>Compress Video Online – Free, Private & No Watermark</Typography>
+              <Typography variant='h6' component='p' color='text.secondary' mt={3} mb={4}>Shrink file size using CRF, bitrate & resolution controls — processed locally. No signup, no uploads, no watermark.</Typography>
               <Box display='flex' gap={1} flexWrap='wrap'>
                 <Button color='secondary' size='large' variant='contained' href='/tools/video/compress'>Upload</Button>
                 <Button size='large' variant='outlined' color='secondary' href='/tools/video/how-to-compress-video-online'>Learn More</Button>
@@ -172,7 +171,7 @@ export default function VideoCompressionLanding() {
 
       <section className='key-features'>
         <Container maxWidth='lg'>
-          <Grid container spacing={3}>
+          <Grid container spacing={3} justifyContent='center'>
             <Grid size={12}>
               <Typography variant='h2'>Key Features</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
@@ -214,8 +213,8 @@ export default function VideoCompressionLanding() {
       <section className='cta-section'>
         <Container maxWidth='lg'>
           <Grid container spacing={3} justifyContent='center' flexGrow={1}>
-            <Grid size={12}><Typography variant='h2' align='center'>Ready to compress a video?</Typography></Grid>
-            <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Upload your file and shrink it instantly — private & free.</Typography></Grid>
+            <Grid size={12}><Typography variant='h2' align='center'>Ready to compress your video?</Typography></Grid>
+            <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Upload, set CRF & download a smaller file — private & free.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1, flexWrap: 'wrap' }}>
               <Button color='inherit' variant='contained' size='large' href='/tools/video/compress'>Upload</Button>
               <Button size='large' href='/tools/video/how-to-compress-video-online' sx={{ color: 'common.white' }}>Learn More</Button>

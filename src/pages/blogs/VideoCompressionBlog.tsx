@@ -5,17 +5,21 @@ import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
+import Accordion from '@mui/material/Accordion'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 const FAQ_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "How does the video compressor work?", "acceptedAnswer": { "@type": "Answer", "text": "It uses FFmpeg WebAssembly in your browser. No file uploads, everything stays private on your device." } },
-    { "@type": "Question", "name": "Can I compress large videos like 4K?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, but the speed depends on your device's processing power and memory." } },
-    { "@type": "Question", "name": "What is CRF and how does it affect quality?", "acceptedAnswer": { "@type": "Answer", "text": "CRF (Constant Rate Factor) controls quality. Lower CRF = higher quality and bigger size. Higher CRF = smaller size but lower quality." } },
-    { "@type": "Question", "name": "Can I compress videos without changing resolution?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, keep the original resolution while reducing file size using CRF and bitrate adjustments." } },
-    { "@type": "Question", "name": "Is this free and watermark-free?", "acceptedAnswer": { "@type": "Answer", "text": "100% free, no signup, no watermark, no credit card required." } },
-    { "@type": "Question", "name": "Does it work on mobile?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, it works in any modern mobile browser on Android and iOS." } }
+    { "@type": "Question", "name": "How does the video compressor work?", "acceptedAnswer": { "@type": "Answer", "text": "It uses FFmpeg WebAssembly locally in your browser—no uploads, fully private." } },
+    { "@type": "Question", "name": "Can I compress 4K videos?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Performance depends on your device CPU/RAM. You can also downscale to 1080p for big savings." } },
+    { "@type": "Question", "name": "What is CRF?", "acceptedAnswer": { "@type": "Answer", "text": "CRF (Constant Rate Factor) balances quality and size. Lower CRF = higher quality & larger file. Typical range 18–28." } },
+    { "@type": "Question", "name": "Can I keep original resolution?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Leave resolution unchanged and just adjust CRF / bitrate / preset." } },
+    { "@type": "Question", "name": "Is it free and watermark‑free?", "acceptedAnswer": { "@type": "Answer", "text": "Completely free: no signup, no watermark, no credit card." } },
+    { "@type": "Question", "name": "Does it work on mobile?", "acceptedAnswer": { "@type": "Answer", "text": "Yes—modern mobile browsers on Android and iOS are supported (large files may be slower)." } }
   ]
 }
 
@@ -23,64 +27,99 @@ export default function VideoCompressionBlog() {
   return (
     <Container maxWidth='lg' sx={{ py: 6 }}>
       <Helmet>
-        <title>How to Compress Videos Online Free Without Losing Quality</title>
-        <meta name='description' content='Learn how to compress videos online for free using CRF, presets, bitrate and resolution control. Private, in-browser video compression with no signup or watermark.' />
-        <meta name='keywords' content='compress video online free, reduce video size without losing quality, compress mp4 online, free video compressor no watermark, compress video for whatsapp, compress 4k video online, compress video for youtube, online video compression without signup' />
-        <meta property='og:title' content='Compress Videos Online Free – High Quality & No Signup' />
-        <meta property='og:description' content='Free and private online video compressor – reduce video size without losing quality. Customize CRF, presets and resolution.' />
+        <title>Compress Video Online Free – Private No‑Signup Video Compressor (No Watermark)</title>
+        <meta name='description' content='Free online video compressor: reduce MP4 / MOV / MKV size with CRF, bitrate & resolution control. Private in‑browser processing, no signup, no watermark.' />
+        <meta property='og:title' content='Free Video Compressor Online – Reduce Size Without Quality Loss' />
+        <meta property='og:description' content='Compress videos locally: CRF, bitrate, resolution, presets & size estimate. Fast, private, watermark‑free.' />
         <meta property='og:type' content='article' />
-  <meta property='og:image' content='/images/landing/video-compression-hero.jpg' />
-  <meta property='og:url' content='/tools/video/compress-blog' />
+        <meta property='og:image' content='/images/landing/video-compression-hero.jpg' />
+        <meta property='og:url' content='/tools/video/compress-blog' />
         <meta property='og:site_name' content='FileApps' />
-  <link rel='canonical' href='/tools/video/compress-blog' />
+        <link rel='canonical' href='/tools/video/compress-blog' />
         <script type='application/ld+json'>{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
       <Paper sx={{ p: { xs: 3, md: 5 } }}>
         <Box mb={4}>
           <img src='/images/landing/video-compression-hero.jpg' alt='Video compression interface demo' title='Online Video Compression' loading='lazy' width='480' height='auto' style={{ maxWidth: '100%', display: 'table', margin: '0 auto 16px' }} />
-          <Typography variant='h3' component='h1' gutterBottom>How to Compress Videos Online Free Without Losing Quality</Typography>
-          <Typography variant='body1'>Want to reduce video file size without installing software? This guide shows you how to compress videos online for free while keeping them in high quality.</Typography>
+          <Typography variant='h3' component='h1' gutterBottom>Compress Videos Online — Free, Private & No Watermark</Typography>
+          <Typography variant='body1'>Shrink MP4, MOV, MKV or WebM file size using CRF, bitrate and resolution controls — all processed locally in your browser. No uploads, no signup, no watermark.</Typography>
         </Box>
 
         <Divider sx={{ mb: 4 }} />
 
-        <Typography variant='h4' component='h2' gutterBottom>Why Compress Videos?</Typography>
-        <ul>
-          <li>Save storage space on your device.</li>
-          <li>Share videos faster on WhatsApp, Instagram, and email.</li>
-          <li>Upload videos quicker to YouTube, TikTok, or social media.</li>
-          <li>Reduce file size for emailing (under 25MB).</li>
-        </ul>
+        <Typography variant='h4' component='h2' gutterBottom>Why Compress Video?</Typography>
+        <Box component='ul' sx={{ pl: 3, mb: 2 }}>
+          <li><Typography variant='body1'>Faster sharing (chat/email limits).</Typography></li>
+          <li><Typography variant='body1'>Quicker uploads to YouTube / Shorts / Reels.</Typography></li>
+          <li><Typography variant='body1'>Save local / cloud storage space.</Typography></li>
+          <li><Typography variant='body1'>Bandwidth‑efficient archiving.</Typography></li>
+        </Box>
 
-        <Typography variant='h4' component='h2' gutterBottom mt={4}>Step-by-Step: Compress Video in Browser</Typography>
-        <ol>
-          <li><strong>Upload your video file</strong> (drag & drop supported).</li>
-          <li><strong>Adjust compression settings</strong> (CRF, preset, resolution).</li>
-          <li><strong>Preview estimated file size</strong> before starting.</li>
-          <li><strong>Click Compress & Download</strong> – your compressed file is ready instantly.</li>
-        </ol>
+        <Typography variant='h4' component='h2' gutterBottom mt={4}>How It Works (5 Steps)</Typography>
+        <Box component='ol' sx={{ pl: 3, mb: 2 }}>
+          <li><Typography variant='body1' component='span'><strong>Upload</strong> (drag & drop).</Typography></li>
+          <li><Typography variant='body1' component='span'><strong>Set CRF & preset</strong> (quality vs speed).</Typography></li>
+          <li><Typography variant='body1' component='span'><strong>Adjust resolution</strong> (optional downscale).</Typography></li>
+          <li><Typography variant='body1' component='span'><strong>Estimate size</strong> (preview expected output).</Typography></li>
+          <li><Typography variant='body1' component='span'><strong>Compress & download</strong> — processed locally.</Typography></li>
+        </Box>
 
-        <Typography variant='h4' component='h2' gutterBottom mt={4}>Tips for Best Results</Typography>
-        <ul>
-          <li>CRF between 18–24 keeps good quality with smaller sizes.</li>
-          <li>Use slower presets for better compression if you have time.</li>
-          <li>Downscale 4K to 1080p for huge size reduction without big quality loss.</li>
-        </ul>
+        <Typography variant='h4' component='h2' gutterBottom mt={4}>Key Features</Typography>
+        <Box component='ul' sx={{ pl: 3, mb: 2 }}>
+          <li><Typography variant='body1'>Local FFmpeg WebAssembly (no uploads).</Typography></li>
+          <li><Typography variant='body1'>CRF quality control & encoder presets.</Typography></li>
+          <li><Typography variant='body1'>Resolution scaling & aspect preservation.</Typography></li>
+          <li><Typography variant='body1'>Bitrate & audio stream tuning.</Typography></li>
+          <li><Typography variant='body1'>Estimated size preview.</Typography></li>
+          <li><Typography variant='body1'>Watermark‑free output.</Typography></li>
+        </Box>
 
-        <Typography variant='h4' component='h2' gutterBottom mt={4}>Best Compression Settings for Social Media</Typography>
-        <ul>
-          <li><strong>WhatsApp:</strong> 720p or lower, CRF ~28.</li>
-          <li><strong>YouTube:</strong> 1080p, CRF ~23, bitrate optimized.</li>
-          <li><strong>Instagram/TikTok:</strong> 720p vertical format, CRF 26.</li>
-        </ul>
+        <Typography variant='h4' component='h2' gutterBottom mt={4}>Use Cases</Typography>
+        <Box component='ul' sx={{ pl: 3, mb: 2 }}>
+          <li><Typography variant='body1'>Social media optimization.</Typography></li>
+          <li><Typography variant='body1'>Email / messaging limits (≤25MB).</Typography></li>
+          <li><Typography variant='body1'>Mobile storage reduction.</Typography></li>
+          <li><Typography variant='body1'>Preview proxy generation.</Typography></li>
+          <li><Typography variant='body1'>Archiving & backups.</Typography></li>
+        </Box>
 
-        <Typography variant='h4' component='h2' gutterBottom mt={4}>Conclusion</Typography>
-        <Typography variant='body1'>Compressing videos doesn’t require premium software or online uploads. With our Free Video Compressor Online , you can shrink video sizes instantly in your browser, without losing quality and without watermarks.</Typography>
+        <Typography variant='h4' component='h2' gutterBottom mt={4}>Tips</Typography>
+        <Box component='ul' sx={{ pl: 3, mb: 2 }}>
+          <li><Typography variant='body1'>CRF 18–22 for quality, 23–28 for smaller social clips.</Typography></li>
+          <li><Typography variant='body1'>Use slower preset for better compression if time allows.</Typography></li>
+          <li><Typography variant='body1'>Downscale 4K→1080p or 1080p→720p for large savings.</Typography></li>
+          <li><Typography variant='body1'>Keep aspect ratio to avoid distortion.</Typography></li>
+          <li><Typography variant='body1'>Test on a short segment first.</Typography></li>
+        </Box>
 
-        <Box mt={5} textAlign='center'>
+        <Typography variant='h4' component='h2' gutterBottom mt={4}>Social Platform Targets</Typography>
+        <Box component='ul' sx={{ pl: 3, mb: 2 }}>
+          <li><Typography variant='body1'><strong>WhatsApp:</strong> 720p, CRF 26–30.</Typography></li>
+          <li><Typography variant='body1'><strong>YouTube:</strong> 1080p, CRF 22–24, audio 128–192 kbps.</Typography></li>
+          <li><Typography variant='body1'><strong>Instagram / TikTok:</strong> 720p vertical, CRF 24–27.</Typography></li>
+        </Box>
+
+        <Divider sx={{ my: 4 }} />
+        <Typography variant='h4' component='h2' gutterBottom>FAQs</Typography>
+        {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
+          <Accordion key={idx} disableGutters square>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography variant='h6' component='h3'>{faq.name}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography variant='body1'>{faq.acceptedAnswer.text}</Typography>
+            </AccordionDetails>
+          </Accordion>
+        ))}
+
+        <Divider sx={{ my: 4 }} />
+        <Typography variant='h4' component='h2' gutterBottom>Conclusion</Typography>
+        <Typography variant='body1' mb={2}>Compress video privately: adjust CRF, preset, bitrate and resolution locally, preview estimated size, then export a clean, watermark‑free file.</Typography>
+
+        <Box mt={4} textAlign='center'>
           <Button color='secondary' size='large' variant='contained' href='/tools/video/compress'>Upload</Button>
-          <Button color='secondary' size='large' variant='outlined' href='/tools/video/compress-landing' sx={{ ml: 2 }}>Features</Button>
+          <Button color='secondary' size='large' variant='outlined' href='/tools/video/compress-video-online' sx={{ ml: 2 }}>Features</Button>
         </Box>
       </Paper>
     </Container>

@@ -42,9 +42,9 @@ const FAQ_SCHEMA = {
 const Root = styled(Paper)(({ theme }) => ({
   '& img': { maxWidth: '100%' },
   '& .hero-section': {
-display: 'flex',
-alignItems: 'center',
-minHeight: 500,
+    display: 'flex',
+    alignItems: 'center',
+    minHeight: 500,
     '& .hero-image img': { marginBottom: theme.spacing(2) },
     [theme.breakpoints.down('md')]: {
       '& .hero-text': { textAlign: 'center', paddingBottom: theme.spacing(6) },
@@ -74,25 +74,24 @@ export default function VideoConvertLanding() { // corrected component name to m
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Free Online Video Converter – Convert Videos to MP4, AVI, MKV (No Signup, No Watermark)</title>
-        <meta name="description" content="Convert videos to MP4, AVI, MKV, MOV, and more online for free. No signup, no credit card, no watermark. Customize resolution, codec, bitrate, and FPS – browser-based." />
+        <title>Convert Video Online Free – Private No‑Signup Video Converter</title>
+        <meta name="description" content="Free online video converter: convert MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free." />
         <meta name="keywords" content="convert video online free, convert video to mp4, free online video converter, no signup video converter, change video resolution online, convert mov to mp4 free, convert mkv to mp4 online, video codec converter online, convert video without losing quality" />
-        <meta property="og:title" content="Convert Videos Online Free – MP4, AVI, MKV, MOV (No Signup)" />
-        <meta property="og:description" content="Free video converter in your browser. Convert to MP4, AVI, MOV, MKV and more. No signups, no uploads, no watermarks. Full customization – resolution, codec, bitrate." />
-  <meta property="og:image" content="/images/landing/video-convert-hero.jpg" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="/tools/video/convert-video-online" />
+        <meta property="og:title" content="Free Online Video Converter – Fast, Private & No Watermark" />
+        <meta property="og:description" content="Convert video formats (MP4, MOV, MKV, AVI, WebM) in your browser. Customize resolution, codec, bitrate & FPS. No signup or uploads." />
+        <meta property="og:image" content="/images/landing/video-convert-hero.jpg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="/tools/video/convert-video-online" />
         <meta property="og:site_name" content="FileApps" />
-  <link rel="canonical" href="/tools/video/convert-video-online" />
+        <link rel="canonical" href="/tools/video/convert-video-online" />
         <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
-
       <section className='hero-section'>
         <Container maxWidth="lg">
           <Grid container spacing={3} alignItems="center">
             <Grid size={{ xs: 12, md: 6 }} className='hero-text'>
-              <Typography variant="h2" component="h1">Convert Videos Online – Free, Fast & No Signup</Typography>
-              <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Convert your videos to MP4, MOV, MKV, AVI, and more directly in your browser. Customize resolution, FPS, bitrate, and codec. No signups, no credit card, no watermarks – 100% private.</Typography>
+              <Typography variant="h2" component="h1">Convert Video Online – Free, Private & No Watermark</Typography>
+              <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Convert MP4, MOV, MKV, AVI, WebM & more. Adjust resolution, codec, bitrate & FPS locally — no signup, uploads or watermark.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
                 <Button color='primary' size='large' href="/tools/video/convert" variant="contained">Upload</Button>
                 <Button size='large' href="/tools/video/how-to-convert-video-online" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
@@ -113,20 +112,20 @@ export default function VideoConvertLanding() { // corrected component name to m
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
             {[{ icon: <PrivacyTipIcon fontSize='large' color='primary' />, title: '100% Private', desc: 'Runs in your browser with FFmpeg WASM. No uploads, no data leaks.' },
-              { icon: <FlashOnIcon fontSize='large' color='primary' />, title: 'Free & No Signup', desc: 'Convert videos instantly – no credit card, no registration, no watermarks.' },
-              { icon: <SwapHorizIcon fontSize='large' color='primary' />, title: 'Multiple Formats', desc: 'MP4, MOV, MKV, AVI, and more.' },
-              { icon: <HighQualityIcon fontSize='large' color='primary' />, title: 'Custom Conversion', desc: 'Change resolution, codec, bitrate, and FPS.' },
-              { icon: <PublicIcon fontSize='large' color='primary' />, title: 'Cross-Browser', desc: 'Works on Chrome, Firefox, Safari, Edge – even on mobile.' }].map((item, i) => (
-                <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-                  <Card sx={{ height: '100%' }}>
-                    <CardContent sx={{ p: 2 }}>
-                      {item.icon}
-                      <Typography variant='h5' component='h3'>{item.title}</Typography>
-                      <Typography variant='body1'>{item.desc}</Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
+            { icon: <FlashOnIcon fontSize='large' color='primary' />, title: 'Free & No Signup', desc: 'Instant conversion – no account or watermark.' },
+            { icon: <SwapHorizIcon fontSize='large' color='primary' />, title: 'Multiple Formats', desc: 'MP4, MOV, MKV, AVI, and more.' },
+            { icon: <HighQualityIcon fontSize='large' color='primary' />, title: 'Custom Conversion', desc: 'Resolution, codec, bitrate & FPS control.' },
+            { icon: <PublicIcon fontSize='large' color='primary' />, title: 'Cross-Browser', desc: 'Works on Chrome, Firefox, Safari, Edge – even on mobile.' }].map((item, i) => (
+              <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+                <Card sx={{ height: '100%' }}>
+                  <CardContent sx={{ p: 2 }}>
+                    {item.icon}
+                    <Typography variant='h5' component='h3'>{item.title}</Typography>
+                    <Typography variant='body1'>{item.desc}</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
           </Grid>
         </Container>
       </section>
@@ -139,21 +138,21 @@ export default function VideoConvertLanding() { // corrected component name to m
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
             <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center" flexGrow={1}>
-              {[{ icon: <CloudUploadIcon />, title: 'Upload Video File', desc: 'Drag & drop or click to select.' },
-                { icon: <SwapHorizIcon />, title: 'Choose Output Format', desc: 'MP4, MOV, MKV, AVI, etc.' },
-                { icon: <TuneIcon />, title: 'Customize Settings', desc: 'Resolution, codec, bitrate, FPS.' },
-                { icon: <FlashOnIcon />, title: 'Convert Video', desc: 'Processing happens in your browser.' },
-                { icon: <DownloadIcon />, title: 'Download File', desc: 'Export converted video instantly.' }].map((step, i) => (
-                  <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                      <Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
-                      <Box>
-                        <Typography variant='h5' component='h3'>{step.title}</Typography>
-                        <Typography variant='body1'>{step.desc}</Typography>
-                      </Box>
+              {[{ icon: <CloudUploadIcon />, title: 'Upload', desc: 'Drag & drop or select.' },
+              { icon: <SwapHorizIcon />, title: 'Choose Format', desc: 'MP4, MOV, MKV, AVI, WebM.' },
+              { icon: <TuneIcon />, title: 'Set Options', desc: 'Resolution, codec, bitrate, FPS.' },
+              { icon: <FlashOnIcon />, title: 'Convert Locally', desc: 'In‑browser FFmpeg WASM.' },
+              { icon: <DownloadIcon />, title: 'Download', desc: 'Clean output, no watermark.' }].map((step, i) => (
+                <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+                    <Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
+                    <Box>
+                      <Typography variant='h5' component='h3'>{step.title}</Typography>
+                      <Typography variant='body1'>{step.desc}</Typography>
                     </Box>
-                  </Grid>
-                ))}
+                  </Box>
+                </Grid>
+              ))}
             </Grid>
           </Grid>
         </Container>
@@ -166,23 +165,23 @@ export default function VideoConvertLanding() { // corrected component name to m
               <Typography variant='h2' mb={4}>Key Features</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            {[{ icon: <UploadFileIcon fontSize='large' color='primary' />, title: 'Drag & Drop Upload', desc: 'Easily add your videos.' },
-              { icon: <VideoFileIcon fontSize='large' color='primary' />, title: 'Supports Major Formats', desc: 'MP4, MOV, MKV, AVI, and more.' },
-              { icon: <TuneIcon fontSize='large' color='primary' />, title: 'Custom Resolution', desc: 'Convert to 1080p, 720p, 480p, or custom size.' },
-              { icon: <HighQualityIcon fontSize='large' color='primary' />, title: 'Codec Control', desc: 'Change video (H.264, H.265) and audio codecs.' },
-              { icon: <SpeedIcon fontSize='large' color='primary' />, title: 'Bitrate & FPS Options', desc: 'Fine-tune video quality and smoothness.' },
-              { icon: <DownloadIcon fontSize='large' color='primary' />, title: 'Instant Download', desc: 'Export converted videos without delay.' },
-              { icon: <FlashOnIcon fontSize='large' color='primary' />, title: 'Completely Free', desc: 'No signups, no watermarks, no credit card required.' }].map((feat, i) => (
-                <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-                  <Card sx={{ height: '100%' }}>
-                    <CardContent sx={{ p: 2 }}>
-                      {feat.icon}
-                      <Typography variant='h5' component='h3'>{feat.title}</Typography>
-                      <Typography variant='body1'>{feat.desc}</Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
+            {[{ icon: <UploadFileIcon fontSize='large' color='primary' />, title: 'Drag & Drop', desc: 'Quick video import.' },
+            { icon: <VideoFileIcon fontSize='large' color='primary' />, title: 'Format Support', desc: 'MP4, MOV, MKV, AVI, WebM.' },
+            { icon: <TuneIcon fontSize='large' color='primary' />, title: 'Resolution Control', desc: '1080p, 720p, 480p or custom.' },
+            { icon: <HighQualityIcon fontSize='large' color='primary' />, title: 'Codec Options', desc: 'H.264 / H.265 & audio codecs.' },
+            { icon: <SpeedIcon fontSize='large' color='primary' />, title: 'Bitrate & FPS', desc: 'Quality & smoothness tuning.' },
+            { icon: <DownloadIcon fontSize='large' color='primary' />, title: 'Instant Export', desc: 'No queue or watermark.' },
+            { icon: <FlashOnIcon fontSize='large' color='primary' />, title: 'Free & Private', desc: 'No signup or uploads.' }].map((feat, i) => (
+              <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+                <Card sx={{ height: '100%' }}>
+                  <CardContent sx={{ p: 2 }}>
+                    {feat.icon}
+                    <Typography variant='h5' component='h3'>{feat.title}</Typography>
+                    <Typography variant='body1'>{feat.desc}</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
           </Grid>
         </Container>
       </section>

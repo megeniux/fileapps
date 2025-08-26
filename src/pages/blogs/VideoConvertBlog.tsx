@@ -6,6 +6,8 @@ import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
+import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 const FAQ_SCHEMA = {
   "@context": "https://schema.org",
@@ -23,47 +25,90 @@ export default function VideoConvertBlog() {
   return (
     <Container maxWidth='lg' sx={{ py: 6 }}>
       <Helmet>
-        <title>How to Convert Videos Online Free (No Signup, No Watermarks)</title>
-        <meta name='description' content='This guide explains how to convert videos to MP4, MOV, MKV, AVI, and more without installing software, without uploading to servers, and while keeping your files private.' />
-        <meta name='keywords' content='convert video online free, convert video to mp4, free online video converter, no signup video converter, change video resolution online, convert mov to mp4 free, convert mkv to mp4 online, video codec converter online, convert video without losing quality' />
-        <meta property='og:title' content='How to Convert Videos Online Free (No Signup, No Watermarks)' />
-        <meta property='og:description' content='Convert videos privately in your browser – MP4, MOV, MKV, AVI, and more. No uploads, no signup, no watermark.' />
+        <title>Convert Video Online Free – Private No‑Signup Video Converter (No Watermark)</title>
+        <meta name='description' content='Free online video converter: convert MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free.' />
+        <meta property='og:title' content='Free Online Video Converter – Fast, Private & No Watermark' />
+        <meta property='og:description' content='Convert video formats (MP4, MOV, MKV, AVI, WebM) in your browser. Customize resolution, codec, bitrate & FPS. No signup or uploads.' />
         <meta property='og:type' content='article' />
-  <meta property='og:image' content='/images/landing/video-convert-hero.jpg' />
-  <meta property='og:url' content='/tools/video/how-to-convert-video-online' />
+        <meta property='og:image' content='/images/landing/video-convert-hero.jpg' />
+        <meta property='og:url' content='/tools/video/how-to-convert-video-online' />
         <meta property='og:site_name' content='FileApps' />
-  <link rel='canonical' href='/tools/video/how-to-convert-video-online' />
+        <link rel='canonical' href='/tools/video/how-to-convert-video-online' />
         <script type='application/ld+json'>{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
       <Paper sx={{ p: 4 }}>
         <Box mb={4}>
-          <img src='/images/landing/video-convert-hero.jpg' alt='Video Converter' title='Video Converter' loading='lazy' width='400px' height='auto' style={{ maxWidth: '100%', display: 'table', margin: '0 auto 32px' }} />
-          <Typography variant='h3' component='h1' gutterBottom>How to Convert Videos Online Free (No Signup, No Watermarks)</Typography>
-          <Typography variant='body1'>This guide explains how to convert videos to MP4, MOV, MKV, AVI, and more without installing software, without uploading to servers, and while keeping your files private.</Typography>
+          <img src='/images/landing/video-convert-hero.jpg' alt='Video Converter' title='Video Converter' loading='lazy' width='400px' height='auto' style={{ maxWidth:'100%',display:'table',margin:'0 auto 24px' }} />
+          <Typography variant='h3' component='h1' gutterBottom>Convert Videos Online — Free, Private & No Watermark</Typography>
+          <Typography variant='body1'>Convert MP4, MOV, MKV, AVI, WebM and more directly in your browser. Adjust resolution, codec, bitrate & FPS — no uploads, signup or watermark.</Typography>
         </Box>
 
         <Divider sx={{ mb: 3 }} />
 
         <Box>
-          <Typography variant='h4' component='h2' gutterBottom>Why Convert Videos?</Typography>
-          <Typography variant='body1' mb={2}>Ensure compatibility across devices and platforms.<br />Reduce file size for faster sharing and uploads.<br />Adjust quality for social media (YouTube, Instagram, TikTok).<br />Convert for professional editing or archiving.</Typography>
+          <Typography variant='h4' component='h2' gutterBottom>Why Convert Video?</Typography>
+          <Box component='ul' sx={{ pl:3, mb:2 }}>
+            <li><Typography variant='body1'>Cross‑platform playback compatibility.</Typography></li>
+            <li><Typography variant='body1'>Smaller size for faster sharing.</Typography></li>
+            <li><Typography variant='body1'>Match platform specs (YouTube / Reels / Shorts).</Typography></li>
+            <li><Typography variant='body1'>Archival or editing codec changes.</Typography></li>
+          </Box>
 
-          <Typography variant='h4' component='h2' my={2}>Step-by-Step: Convert Video in Browser</Typography>
-          <Typography variant='body1'>1. <strong>Upload your video</strong> (drag &amp; drop supported).<br />2. <strong>Select output format</strong> (MP4, MOV, MKV, AVI).<br />3. <strong>Customize settings</strong> (resolution, codec, bitrate, FPS).<br />4. <strong>Click Convert &amp; Download</strong> – your converted file will be ready instantly.</Typography>
+          <Typography variant='h4' component='h2' gutterBottom>How It Works (5 Steps)</Typography>
+          <Box component='ol' sx={{ pl:3, mb:2 }}>
+            <li><Typography variant='body1' component='span'><strong>Upload</strong> source video (drag & drop).</Typography></li>
+            <li><Typography variant='body1' component='span'><strong>Choose format</strong> (MP4, MOV, MKV, AVI, WebM).</Typography></li>
+            <li><Typography variant='body1' component='span'><strong>Set options</strong> (resolution, codec, bitrate, FPS).</Typography></li>
+            <li><Typography variant='body1' component='span'><strong>Convert locally</strong> via WebAssembly FFmpeg.</Typography></li>
+            <li><Typography variant='body1' component='span'><strong>Download</strong> watermark‑free output.</Typography></li>
+          </Box>
 
-          <Typography variant='h4' component='h2' mt={3} gutterBottom>Tips for Best Results</Typography>
-          <Typography variant='body1' mb={2}>Use H.264 or H.265 for high-quality MP4 output.<br />Lower resolution (720p or 480p) for smaller file sizes.<br />Increase FPS (60fps) for smooth gaming or action videos.</Typography>
+          <Typography variant='h4' component='h2' gutterBottom mt={3}>Key Features</Typography>
+          <Box component='ul' sx={{ pl:3, mb:2 }}>
+            <li><Typography variant='body1'>Local (private) FFmpeg WASM conversion.</Typography></li>
+            <li><Typography variant='body1'>Multiple containers & codecs.</Typography></li>
+            <li><Typography variant='body1'>Resolution & FPS control.</Typography></li>
+            <li><Typography variant='body1'>Video + audio bitrate tuning.</Typography></li>
+            <li><Typography variant='body1'>No signup, watermark or queue.</Typography></li>
+          </Box>
 
-          <Typography variant='h4' component='h2' gutterBottom>Best Practices for Social Media Videos</Typography>
-          <Typography variant='body1' mb={2}><strong>YouTube:</strong> 1080p, 60fps, MP4 format.<br /><strong>Instagram &amp; TikTok:</strong> 720p, vertical aspect ratio.<br /><strong>Facebook:</strong> 720p for faster loading.</Typography>
+          <Typography variant='h4' component='h2' gutterBottom>Use Cases</Typography>
+          <Box component='ul' sx={{ pl:3, mb:2 }}>
+            <li><Typography variant='body1'>Prepare uploads (YouTube / social).</Typography></li>
+            <li><Typography variant='body1'>Device playback compatibility.</Typography></li>
+            <li><Typography variant='body1'>Create lightweight review copies.</Typography></li>
+            <li><Typography variant='body1'>Archive in a standard format.</Typography></li>
+          </Box>
 
+          <Typography variant='h4' component='h2' gutterBottom>Tips</Typography>
+            <Box component='ul' sx={{ pl:3, mb:2 }}>
+              <li><Typography variant='body1'>Use H.264 for widest support; H.265 for smaller size (if supported).</Typography></li>
+              <li><Typography variant='body1'>Downscale 4K → 1080p or 720p for large savings.</Typography></li>
+              <li><Typography variant='body1'>Keep FPS original unless platform needs 60fps.</Typography></li>
+              <li><Typography variant='body1'>Target constant quality (CRF) over fixed bitrate when possible.</Typography></li>
+            </Box>
+
+          <Typography variant='h4' component='h2' gutterBottom>Social Platform Targets</Typography>
+          <Box component='ul' sx={{ pl:3, mb:2 }}>
+            <li><Typography variant='body1'><strong>YouTube:</strong> 1080p (or 4K), 24–60fps MP4 (H.264).</Typography></li>
+            <li><Typography variant='body1'><strong>Instagram / TikTok:</strong> 720p vertical (9:16), 30fps.</Typography></li>
+            <li><Typography variant='body1'><strong>Facebook:</strong> 720p MP4 for faster loads.</Typography></li>
+          </Box>
+
+          <Typography variant='h4' component='h2' gutterBottom>FAQs</Typography>
+          {FAQ_SCHEMA.mainEntity.map((faq:any,idx:number)=>(
+            <Accordion key={idx} disableGutters square>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>{faq.name}</Typography></AccordionSummary>
+              <AccordionDetails><Typography variant='body1'>{faq.acceptedAnswer.text}</Typography></AccordionDetails>
+            </Accordion>
+          ))}
+          <Divider sx={{ my:3 }} />
           <Typography variant='h4' component='h2' gutterBottom>Conclusion</Typography>
-          <Typography variant='body1' mb={2}>Video conversion doesn’t require signups, uploads, or expensive software. With our free browser-based video converter, you can instantly convert videos to MP4, MOV, MKV, AVI, and more — while keeping your files private.</Typography>
-
+          <Typography variant='body1' mb={2}>Convert videos privately — set format, resolution, codec, bitrate & FPS locally, then export a clean, watermark‑free file.</Typography>
           <Box mt={4} textAlign='center'>
             <Button color='primary' size='large' href='/tools/video/convert' variant='contained'>Upload</Button>
-            <Button color='primary' size='large' href='/tools/video/convert-video-online' variant='outlined' sx={{ ml: 2 }}>Features</Button>
+            <Button color='primary' size='large' href='/tools/video/convert-video-online' variant='outlined' sx={{ ml:2 }}>Features</Button>
           </Box>
         </Box>
       </Paper>

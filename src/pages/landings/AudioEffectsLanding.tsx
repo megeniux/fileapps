@@ -32,10 +32,10 @@ export default function AudioEffectsLanding() {
 	return (
 		<Root elevation={0}>
 			<Helmet>
-				<title>Free Online Audio Effects Editor – Pitch, Speed, Normalize, Fade</title>
-				<meta name="description" content="Edit audio online free: pitch shift, speed change, fade in/out, normalize, volume boost/reduce. No signup, no uploads, privacy-first." />
-				<meta property="og:title" content="Edit Audio Online Free – Pitch, Speed, Normalize & Fade" />
-				<meta property="og:description" content="Apply pitch, tempo, fades & normalization locally. Free, private & no watermark." />
+				<title>Edit Audio Online Free – Pitch Shift, Tempo, Normalize & Fade (Private)</title>
+				<meta name="description" content="Free online audio effects: pitch shift, tempo/speed change, normalize loudness, fade in/out, volume gain. Local WebAssembly processing – no uploads, signup or watermark." />
+				<meta property="og:title" content="Online Audio Effects – Pitch, Speed, Normalize & Fade (Free & Private)" />
+				<meta property="og:description" content="Apply pitch, speed, normalize, fades & gain to audio locally (MP3, WAV, FLAC, OGG, M4A). No uploads, signup or watermark." />
 				<meta property="og:image" content="/images/landing/audio-effect-hero.jpg" />
 				<meta property="og:type" content="website" />
 				<meta property="og:url" content="/tools/audio/audio-effects-online" />
@@ -43,15 +43,12 @@ export default function AudioEffectsLanding() {
 				<link rel="canonical" href="/tools/audio/audio-effects-online" />
 				<script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
 			</Helmet>
-
 			<section className='hero-section'>
 				<Container maxWidth="lg">
 					<Grid container spacing={3} alignItems="center">
 						<Grid size={{ xs: 12, md: 6 }} className='hero-text'>
-							<Typography variant="h2" component="h1">Edit Audio Online Free — Apply Effects Instantly</Typography>
-							<Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>
-								Change pitch, adjust speed, normalize volume, and apply fade in/out — all locally in your browser. No uploads, no signup, no watermark.
-							</Typography>
+							<Typography variant="h2" component="h1">Online Audio Effects – Pitch, Speed, Normalize & Fade</Typography>
+							<Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Pitch shift, tempo change, normalize loudness, fade in/out & gain — processed locally. Free, private & watermark‑free.</Typography>
 							<Box display="flex" gap={1}>
 								<Button color='info' size='large' href="/tools/audio/effects" variant="contained">Upload</Button>
 								<Button size='large' href="/tools/audio/how-to-audio-effects-online" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
@@ -63,7 +60,6 @@ export default function AudioEffectsLanding() {
 					</Grid>
 				</Container>
 			</section>
-
 			<section className='why-us'>
 				<Container maxWidth="lg">
 					<Grid container spacing={3} justifyContent='center' flexGrow={1}>
@@ -74,35 +70,34 @@ export default function AudioEffectsLanding() {
 						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<PrivacyTipIcon fontSize='large' color='info' />
-								<Typography variant='h5' component='h3' gutterBottom>Privacy First</Typography>
-								<Typography variant='body1'>All processing stays in your browser — no uploads.</Typography>
+								<Typography variant='h5' component='h3' gutterBottom>Local & Private</Typography>
+								<Typography variant='body1'>WebAssembly processing only.</Typography>
 							</CardContent></Card>
 						</Grid>
 						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<GraphicEqIcon fontSize='large' color='info' />
-								<Typography variant='h5' component='h3' gutterBottom>Free & Easy</Typography>
-								<Typography variant='body1'>No signup, no fees, no watermark.</Typography>
+								<Typography variant='h5' component='h3' gutterBottom>Free & Clean</Typography>
+								<Typography variant='body1'>No signup or watermark.</Typography>
 							</CardContent></Card>
 						</Grid>
 						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<FlashOnIcon fontSize='large' color='info' />
 								<Typography variant='h5' component='h3' gutterBottom>Fast WASM</Typography>
-								<Typography variant='body1'>FFmpeg WebAssembly for instant effects.</Typography>
+								<Typography variant='body1'>Instant effect rendering.</Typography>
 							</CardContent></Card>
 						</Grid>
 						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<MusicNoteIcon fontSize='large' color='info' />
-								<Typography variant='h5' component='h3' gutterBottom>Multiple Formats</Typography>
-								<Typography variant='body1'>MP3, WAV, FLAC, AAC, OGG, M4A.</Typography>
+								<Typography variant='h5' component='h3' gutterBottom>Format Support</Typography>
+								<Typography variant='body1'>MP3, WAV, FLAC, AAC, OGG.</Typography>
 							</CardContent></Card>
 						</Grid>
 					</Grid>
 				</Container>
 			</section>
-
 			<section className='how-it-works'>
 				<Container maxWidth="lg">
 					<Grid container spacing={3}>
@@ -151,7 +146,6 @@ export default function AudioEffectsLanding() {
 					</Grid>
 				</Container>
 			</section>
-
 			<section className='key-features'>
 				<Container maxWidth="lg">
 					<Grid container spacing={3}>
@@ -169,42 +163,41 @@ export default function AudioEffectsLanding() {
 						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<SpeedIcon fontSize='large' color='info' />
-								<Typography variant='h5' component='h3' gutterBottom>Speed / Tempo</Typography>
-								<Typography variant='body1'>0.5× to 2× practice & edits.</Typography>
+								<Typography variant='h5' component='h3' gutterBottom>Tempo / Speed</Typography>
+								<Typography variant='body1'>0.5×–2× range.</Typography>
 							</CardContent></Card>
 						</Grid>
 						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<VolumeUpIcon fontSize='large' color='info' />
-								<Typography variant='h5' component='h3' gutterBottom>Fade In / Out</Typography>
-								<Typography variant='body1'>Smooth intros & endings.</Typography>
+								<Typography variant='h5' component='h3' gutterBottom>Fades</Typography>
+								<Typography variant='body1'>In / out smoothing.</Typography>
 							</CardContent></Card>
 						</Grid>
 						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<HighQualityIcon fontSize='large' color='info' />
-								<Typography variant='h5' component='h3' gutterBottom>Normalize</Typography>
-								<Typography variant='body1'>Consistent loudness.</Typography>
+								<Typography variant='h5' component='h3' gutterBottom>Normalize Loudness</Typography>
+								<Typography variant='body1'>Balanced levels.</Typography>
 							</CardContent></Card>
 						</Grid>
 						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<VolumeUpIcon fontSize='large' color='info' />
-								<Typography variant='h5' component='h3' gutterBottom>Volume Gain</Typography>
-								<Typography variant='body1'>Boost or reduce level.</Typography>
+								<Typography variant='h5' component='h3' gutterBottom>Gain Control</Typography>
+								<Typography variant='body1'>Boost / reduce.</Typography>
 							</CardContent></Card>
 						</Grid>
 						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<FlashOnIcon fontSize='large' color='info' />
 								<Typography variant='h5' component='h3' gutterBottom>Instant Export</Typography>
-								<Typography variant='body1'>Fast, private processing.</Typography>
+								<Typography variant='body1'>Fast & watermark‑free.</Typography>
 							</CardContent></Card>
 						</Grid>
 					</Grid>
 				</Container>
 			</section>
-
 			<section className='use-cases'>
 				<Container maxWidth="lg">
 					<Typography variant='h2'>Effect Guidance & Use Cases</Typography>
@@ -248,7 +241,6 @@ export default function AudioEffectsLanding() {
 					</Grid>
 				</Container>
 			</section>
-
 			<section className='faq-section'>
 				<Container maxWidth="lg">
 					<Grid container spacing={3} justifyContent='center' flexGrow={1}>
@@ -271,7 +263,6 @@ export default function AudioEffectsLanding() {
 					</Grid>
 				</Container>
 			</section>
-
 			<section className='cta-section'>
 				<Container maxWidth="lg">
 					<Grid container spacing={3} justifyContent='center' flexGrow={1}>
@@ -336,4 +327,4 @@ const Root = styled(Paper)(({ theme }) => ({
 		paddingBlock: theme.spacing(8),
 		'& .MuiTypography-h2': { textAlign: 'center', marginBottom: theme.spacing(2) }
 	},
-}))
+}));
