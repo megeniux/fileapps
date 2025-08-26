@@ -117,7 +117,7 @@ export default function VideoConvertLanding() { // corrected component name to m
               { icon: <SwapHorizIcon fontSize='large' color='primary' />, title: 'Multiple Formats', desc: 'MP4, MOV, MKV, AVI, and more.' },
               { icon: <HighQualityIcon fontSize='large' color='primary' />, title: 'Custom Conversion', desc: 'Change resolution, codec, bitrate, and FPS.' },
               { icon: <PublicIcon fontSize='large' color='primary' />, title: 'Cross-Browser', desc: 'Works on Chrome, Firefox, Safari, Edge – even on mobile.' }].map((item, i) => (
-                <Grid key={i} size={{ xs: 12, sm: 6, lg: 3 }}>
+                <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                   <Card sx={{ height: '100%' }}>
                     <CardContent sx={{ p: 2 }}>
                       {item.icon}
@@ -144,7 +144,7 @@ export default function VideoConvertLanding() { // corrected component name to m
                 { icon: <TuneIcon />, title: 'Customize Settings', desc: 'Resolution, codec, bitrate, FPS.' },
                 { icon: <FlashOnIcon />, title: 'Convert Video', desc: 'Processing happens in your browser.' },
                 { icon: <DownloadIcon />, title: 'Download File', desc: 'Export converted video instantly.' }].map((step, i) => (
-                  <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+                  <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
                       <Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
                       <Box>
@@ -173,7 +173,7 @@ export default function VideoConvertLanding() { // corrected component name to m
               { icon: <SpeedIcon fontSize='large' color='primary' />, title: 'Bitrate & FPS Options', desc: 'Fine-tune video quality and smoothness.' },
               { icon: <DownloadIcon fontSize='large' color='primary' />, title: 'Instant Download', desc: 'Export converted videos without delay.' },
               { icon: <FlashOnIcon fontSize='large' color='primary' />, title: 'Completely Free', desc: 'No signups, no watermarks, no credit card required.' }].map((feat, i) => (
-                <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+                <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                   <Card sx={{ height: '100%' }}>
                     <CardContent sx={{ p: 2 }}>
                       {feat.icon}

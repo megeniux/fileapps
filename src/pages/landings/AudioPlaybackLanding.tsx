@@ -78,42 +78,42 @@ export default function AudioPlaybackLanding() {
               <Typography variant='h2'>Why Use This Speed Editor?</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <SpeedIcon fontSize='large' color='success' />
                 <Typography variant='h5' component='h3' gutterBottom>Flexible Tempo</Typography>
                 <Typography variant='body1'>Slow down or speed up precisely.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <ReplayIcon fontSize='large' color='success' />
                 <Typography variant='h5' component='h3' gutterBottom>Reverse Audio</Typography>
                 <Typography variant='body1'>Create FX & transitions instantly.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <PrivacyTipIcon fontSize='large' color='success' />
                 <Typography variant='h5' component='h3' gutterBottom>Private & Local</Typography>
                 <Typography variant='body1'>Processing stays in your browser.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <AudiotrackIcon fontSize='large' color='success' />
                 <Typography variant='h5' component='h3' gutterBottom>Format Support</Typography>
                 <Typography variant='body1'>MP3, WAV, FLAC, AAC, OGG, M4A.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <PlayArrowIcon fontSize='large' color='success' />
                 <Typography variant='h5' component='h3' gutterBottom>Instant Preview</Typography>
                 <Typography variant='body1'>Hear changes right away.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <HighQualityIcon fontSize='large' color='success' />
                 <Typography variant='h5' component='h3' gutterBottom>Clean Output</Typography>
@@ -132,7 +132,7 @@ export default function AudioPlaybackLanding() {
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
             <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent='center' flexGrow={1}>
-              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Box sx={{ textAlign: 'center' }}>
                   <Box sx={{ bgcolor: 'success.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <CloudUploadIcon />
@@ -141,7 +141,7 @@ export default function AudioPlaybackLanding() {
                   <Typography variant='body1'>Drag & drop a file.</Typography>
                 </Box>
               </Grid>
-              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Box sx={{ textAlign: 'center' }}>
                   <Box sx={{ bgcolor: 'success.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <SpeedIcon />
@@ -150,7 +150,7 @@ export default function AudioPlaybackLanding() {
                   <Typography variant='body1'>Pick slower, faster or reverse.</Typography>
                 </Box>
               </Grid>
-              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Box sx={{ textAlign: 'center' }}>
                   <Box sx={{ bgcolor: 'success.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <PlayArrowIcon />
@@ -159,7 +159,7 @@ export default function AudioPlaybackLanding() {
                   <Typography variant='body1'>Hear instant result.</Typography>
                 </Box>
               </Grid>
-              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Box sx={{ textAlign: 'center' }}>
                   <Box sx={{ bgcolor: 'success.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <DownloadIcon />
@@ -180,42 +180,42 @@ export default function AudioPlaybackLanding() {
               <Typography variant='h2' mb={4}>Key Features</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <SpeedIcon fontSize='large' color='success' />
                 <Typography variant='h5' component='h3' gutterBottom>Tempo Control</Typography>
                 <Typography variant='body1'>Fine speed adjustments.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <ReplayIcon fontSize='large' color='success' />
                 <Typography variant='h5' component='h3' gutterBottom>Reverse Mode</Typography>
                 <Typography variant='body1'>Creative playback FX.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <AudiotrackIcon fontSize='large' color='success' />
                 <Typography variant='h5' component='h3' gutterBottom>Format Versatility</Typography>
                 <Typography variant='body1'>MP3, WAV, FLAC & more.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <PlayArrowIcon fontSize='large' color='success' />
                 <Typography variant='h5' component='h3' gutterBottom>Instant Preview</Typography>
                 <Typography variant='body1'>Real-time feedback.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <PrivacyTipIcon fontSize='large' color='success' />
                 <Typography variant='h5' component='h3' gutterBottom>Local Processing</Typography>
                 <Typography variant='body1'>No uploads required.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <HighQualityIcon fontSize='large' color='success' />
                 <Typography variant='h5' component='h3' gutterBottom>Quality Output</Typography>

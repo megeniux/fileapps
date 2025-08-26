@@ -155,7 +155,7 @@ export default function VideoCompressionLanding() {
             </Grid>
             <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center" flexGrow={1}>
               {steps.map((s, i) => (
-                <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+                <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
                     <Box sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{s.icon}</Box>
                     <Box>
@@ -178,7 +178,7 @@ export default function VideoCompressionLanding() {
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
             {features.map((f, i) => (
-              <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}> {f.icon} <Typography variant='h5' component='h3'>{f.title}</Typography> <Typography variant='body1'>{f.desc}</Typography> </CardContent>
                 </Card>

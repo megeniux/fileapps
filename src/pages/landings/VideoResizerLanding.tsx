@@ -139,7 +139,7 @@ export default function VideoResizerLanding() {
                             <Typography variant='h2'>Why Use Our Online Video Resizer?</Typography>
                             <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
                         </Grid>
-                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+                        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                             <Card sx={{ height: '100%' }}>
                                 <CardContent sx={{ p: 2 }}>
                                     <PrivacyTipIcon fontSize='large' color="warning" />
@@ -148,7 +148,7 @@ export default function VideoResizerLanding() {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+                        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                             <Card sx={{ height: '100%' }}>
                                 <CardContent sx={{ p: 2 }}>
                                     <FlashOnIcon fontSize='large' color="warning" />
@@ -157,7 +157,7 @@ export default function VideoResizerLanding() {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+                        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                             <Card sx={{ height: '100%' }}>
                                 <CardContent sx={{ p: 2 }}>
                                     <TuneIcon fontSize='large' color="warning" />
@@ -166,7 +166,7 @@ export default function VideoResizerLanding() {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+                        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                             <Card sx={{ height: '100%' }}>
                                 <CardContent sx={{ p: 2 }}>
                                     <ShareIcon fontSize='large' color="warning" />
@@ -192,7 +192,7 @@ export default function VideoResizerLanding() {
                             { icon: <TuneIcon />, title: 'Select Mode', desc: 'Fit, Fill, Stretch, or Crop.' },
                             { icon: <MovieIcon />, title: 'Resize Video', desc: 'Processing happens locally with FFmpeg WASM.' },
                             { icon: <DownloadIcon />, title: 'Download', desc: 'Export resized MP4 instantly.' }].map((step, i) => (
-                                <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+                                <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
                                         <Box sx={{ bgcolor: 'warning.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
                                         <Box>
@@ -220,7 +220,7 @@ export default function VideoResizerLanding() {
                         { icon: <SpeedIcon fontSize='large' color='warning' />, title: 'FPS Control', desc: 'Adjust frame rate for smoother playback.' },
                         { icon: <VideoFileIcon fontSize='large' color='warning' />, title: 'Cross-Browser', desc: 'Works on Chrome, Safari, Firefox, Edge.' },
                         { icon: <LanguageIcon fontSize='large' color='warning' />, title: 'Instant Download', desc: 'Export resized MP4 in one click.' }].map((feat, i) => (
-                            <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+                            <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                                 <Card sx={{ height: '100%' }}>
                                     <CardContent sx={{ p: 2 }}>
                                         {feat.icon}

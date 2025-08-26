@@ -72,28 +72,28 @@ export default function AudioMergerLanding() {
               <Typography variant='h2'>Why Use Our Online Audio Merger?</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <PrivacyTipIcon fontSize='large' color='warning' />
                 <Typography variant='h5' component='h3' gutterBottom>Local Privacy</Typography>
                 <Typography variant='body1'>All merging runs in your browser.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <PlaylistAddIcon fontSize='large' color='warning' />
                 <Typography variant='h5' component='h3' gutterBottom>Drag & Reorder</Typography>
                 <Typography variant='body1'>Full control over sequence.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <HighQualityIcon fontSize='large' color='warning' />
                 <Typography variant='h5' component='h3' gutterBottom>Format Support</Typography>
                 <Typography variant='body1'>MP3, WAV, FLAC, AAC, OGG.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <FlashOnIcon fontSize='large' color='warning' />
                 <Typography variant='h5' component='h3' gutterBottom>Fast & Free</Typography>
@@ -113,7 +113,7 @@ export default function AudioMergerLanding() {
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
             <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent='center' flexGrow={1}>
-              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Box sx={{ textAlign: 'center' }}>
                   <Box sx={{ bgcolor: 'warning.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <CloudUploadIcon />
@@ -122,7 +122,7 @@ export default function AudioMergerLanding() {
                   <Typography variant='body1'>Drag & drop or select.</Typography>
                 </Box>
               </Grid>
-              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Box sx={{ textAlign: 'center' }}>
                   <Box sx={{ bgcolor: 'warning.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <ReorderIcon />
@@ -131,7 +131,7 @@ export default function AudioMergerLanding() {
                   <Typography variant='body1'>Arrange track order.</Typography>
                 </Box>
               </Grid>
-              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Box sx={{ textAlign: 'center' }}>
                   <Box sx={{ bgcolor: 'warning.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <AudiotrackIcon />
@@ -140,7 +140,7 @@ export default function AudioMergerLanding() {
                   <Typography variant='body1'>Check sequence flow.</Typography>
                 </Box>
               </Grid>
-              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Box sx={{ textAlign: 'center' }}>
                   <Box sx={{ bgcolor: 'warning.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <MergeTypeIcon />
@@ -162,42 +162,42 @@ export default function AudioMergerLanding() {
               <Typography variant='h2' mb={4}>Key Features</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <CloudUploadIcon fontSize='large' color='warning' />
                 <Typography variant='h5' component='h3' gutterBottom>Batch Import</Typography>
                 <Typography variant='body1'>Add multiple clips together.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <MergeTypeIcon fontSize='large' color='warning' />
                 <Typography variant='h5' component='h3' gutterBottom>Format Normalization</Typography>
                 <Typography variant='body1'>Mixed codecs re‑encoded.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <DownloadIcon fontSize='large' color='warning' />
                 <Typography variant='h5' component='h3' gutterBottom>Instant Export</Typography>
                 <Typography variant='body1'>Quick local processing.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <HighQualityIcon fontSize='large' color='warning' />
                 <Typography variant='h5' component='h3' gutterBottom>Clean Output</Typography>
                 <Typography variant='body1'>No watermark branding.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <PlaylistAddIcon fontSize='large' color='warning' />
                 <Typography variant='h5' component='h3' gutterBottom>Order Control</Typography>
                 <Typography variant='body1'>Drag to arrange tracks.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <PrivacyTipIcon fontSize='large' color='warning' />
                 <Typography variant='h5' component='h3' gutterBottom>Private</Typography>

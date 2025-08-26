@@ -71,28 +71,28 @@ export default function AudioEffectsLanding() {
 							<Typography variant='h2'>Why Use Our Audio Effects Tool?</Typography>
 							<Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
 						</Grid>
-						<Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<PrivacyTipIcon fontSize='large' color='info' />
 								<Typography variant='h5' component='h3' gutterBottom>Privacy First</Typography>
 								<Typography variant='body1'>All processing stays in your browser — no uploads.</Typography>
 							</CardContent></Card>
 						</Grid>
-						<Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<GraphicEqIcon fontSize='large' color='info' />
 								<Typography variant='h5' component='h3' gutterBottom>Free & Easy</Typography>
 								<Typography variant='body1'>No signup, no fees, no watermark.</Typography>
 							</CardContent></Card>
 						</Grid>
-						<Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<FlashOnIcon fontSize='large' color='info' />
 								<Typography variant='h5' component='h3' gutterBottom>Fast WASM</Typography>
 								<Typography variant='body1'>FFmpeg WebAssembly for instant effects.</Typography>
 							</CardContent></Card>
 						</Grid>
-						<Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<MusicNoteIcon fontSize='large' color='info' />
 								<Typography variant='h5' component='h3' gutterBottom>Multiple Formats</Typography>
@@ -111,7 +111,7 @@ export default function AudioEffectsLanding() {
 							<Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
 						</Grid>
 						<Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center" flexGrow={1}>
-							<Grid size={{ xs: 12, sm: 6, md: 3 }}>
+							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 								<Box sx={{ textAlign: 'center' }}>
 									<Box sx={{ bgcolor: 'info.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 										<CloudUploadIcon />
@@ -120,7 +120,7 @@ export default function AudioEffectsLanding() {
 									<Typography variant='body1'>Drag & drop audio file.</Typography>
 								</Box>
 							</Grid>
-							<Grid size={{ xs: 12, sm: 6, md: 3 }}>
+							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 								<Box sx={{ textAlign: 'center' }}>
 									<Box sx={{ bgcolor: 'info.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 										<TuneIcon />
@@ -129,7 +129,7 @@ export default function AudioEffectsLanding() {
 									<Typography variant='body1'>Pitch, speed, fades, normalize.</Typography>
 								</Box>
 							</Grid>
-							<Grid size={{ xs: 12, sm: 6, md: 3 }}>
+							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 								<Box sx={{ textAlign: 'center' }}>
 									<Box sx={{ bgcolor: 'info.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 										<GraphicEqIcon />
@@ -138,7 +138,7 @@ export default function AudioEffectsLanding() {
 									<Typography variant='body1'>Instant local playback.</Typography>
 								</Box>
 							</Grid>
-							<Grid size={{ xs: 12, sm: 6, md: 3 }}>
+							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 								<Box sx={{ textAlign: 'center' }}>
 									<Box sx={{ bgcolor: 'info.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 										<DownloadIcon />
@@ -159,42 +159,42 @@ export default function AudioEffectsLanding() {
 							<Typography variant='h2' mb={4}>Key Features</Typography>
 							<Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
 						</Grid>
-						<Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<LibraryMusicIcon fontSize='large' color='info' />
 								<Typography variant='h5' component='h3' gutterBottom>Pitch Shift</Typography>
 								<Typography variant='body1'>Transpose ± semitones.</Typography>
 							</CardContent></Card>
 						</Grid>
-						<Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<SpeedIcon fontSize='large' color='info' />
 								<Typography variant='h5' component='h3' gutterBottom>Speed / Tempo</Typography>
 								<Typography variant='body1'>0.5× to 2× practice & edits.</Typography>
 							</CardContent></Card>
 						</Grid>
-						<Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<VolumeUpIcon fontSize='large' color='info' />
 								<Typography variant='h5' component='h3' gutterBottom>Fade In / Out</Typography>
 								<Typography variant='body1'>Smooth intros & endings.</Typography>
 							</CardContent></Card>
 						</Grid>
-						<Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<HighQualityIcon fontSize='large' color='info' />
 								<Typography variant='h5' component='h3' gutterBottom>Normalize</Typography>
 								<Typography variant='body1'>Consistent loudness.</Typography>
 							</CardContent></Card>
 						</Grid>
-						<Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<VolumeUpIcon fontSize='large' color='info' />
 								<Typography variant='h5' component='h3' gutterBottom>Volume Gain</Typography>
 								<Typography variant='body1'>Boost or reduce level.</Typography>
 							</CardContent></Card>
 						</Grid>
-						<Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 							<Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
 								<FlashOnIcon fontSize='large' color='info' />
 								<Typography variant='h5' component='h3' gutterBottom>Instant Export</Typography>

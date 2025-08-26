@@ -114,7 +114,7 @@ export default function VideoPlaybackLanding() {
             { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'No Watermark', desc: 'Edit and download your video with no branding.' },
             { icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: '100% Browser-Based', desc: 'No need to download any software.' },
             { icon: <DownloadIcon fontSize='large' color='secondary' />, title: 'Instant Processing', desc: 'Apply playback speed changes and download the file quickly.' }].map((item, i) => (
-              <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
                     {item.icon}
@@ -141,7 +141,7 @@ export default function VideoPlaybackLanding() {
               { icon: <SpeedIcon />, title: 'Adjust Playback Speed', desc: 'Use the slider to change the playback speed from -20x (reverse) to +20x.' },
               { icon: <PrivacyTipIcon />, title: 'No Installation Needed', desc: 'Change video speed directly in your browser—no software required.' },
               { icon: <DownloadIcon />, title: 'Download the Edited Video', desc: 'Once you\'re happy, click "Download" to save your adjusted video.' }].map((step, i) => (
-                <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+                <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
                     <Box sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
                     <Box>
@@ -169,7 +169,7 @@ export default function VideoPlaybackLanding() {
             { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'Free & No Watermark', desc: 'No sign-ups, charges, or watermarks.' },
             { icon: <DownloadIcon fontSize='large' color='secondary' />, title: 'Instant Processing', desc: 'Edit and download videos instantly.' },
             { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Easy to Use', desc: 'Simple interface for quick video speed adjustments.' }].map((feat, i) => (
-              <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
                     {feat.icon}

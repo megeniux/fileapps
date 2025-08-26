@@ -82,7 +82,7 @@ const videoTools: {
       color: 'primary'
     },
     {
-      title: 'Video Playback Speed Editor',
+      title: 'Video Playback Editor',
       description: 'Change video playback speed from -20x (reverse) to +20x online. No watermark, no signup, 100% browser-based.',
       icon: <SpeedIcon fontSize="small" color="secondary" />,
       link: '/tools/video/video-playback-speed-editor',
@@ -126,7 +126,7 @@ const audioTools: {
       color: 'info'
     },
     {
-      title: 'Audio Playback Speed Editor',
+      title: 'Audio Playback Editor',
       description: 'Change audio speed (with pitch correction) or reverse tracks. Export processed audio quickly.',
       icon: <SpeedIcon fontSize="small" color="success" />,
       link: '/tools/audio/audio-playback-speed-editor',
@@ -179,7 +179,7 @@ function Home() {
       <Divider sx={{ mt: 1, mb: 2 }} />
       <Grid container spacing={2} sx={{ mb: 4 }}>
         {videoTools.map((tool) => (
-          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={tool.title}>
+          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={tool.title}>
             <Card sx={{ display: 'flex', height: '100%', alignItems: 'flex-start' }}>
               <CardActionArea onClick={() => navigate(tool.link)} sx={{ height: '100%' }}>
                 <CardContent>
@@ -199,7 +199,7 @@ function Home() {
       <Divider sx={{ mt: 1, mb: 2 }} />
       <Grid container spacing={2} sx={{ mb: 4 }}>
         {audioTools.map((tool) => (
-          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={tool.title}>
+          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={tool.title}>
             <Card sx={{ display: 'flex', height: '100%', alignItems: 'flex-start' }}>
               <CardActionArea onClick={() => navigate(tool.link)} sx={{ height: '100%' }}>
                 <CardContent>
@@ -219,7 +219,7 @@ function Home() {
       <Divider sx={{ mt: 1, mb: 2 }} />
       <Grid container spacing={2}>
         {imageTools.map((tool) => (
-          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={tool.title}>
+          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={tool.title}>
             <Card sx={{ display: 'flex', height: '100%', alignItems: 'flex-start' }}>
               <CardActionArea onClick={() => navigate(tool.link)} sx={{ height: '100%' }}>
                 <CardContent>

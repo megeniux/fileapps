@@ -115,7 +115,7 @@ export default function VideoTrimLanding() {
             { icon: <DownloadIcon fontSize='large' color='info' />, title: 'Fast & Instant', desc: 'Trim your video and download it in seconds.' },
             { icon: <PrivacyTipIcon fontSize='large' color='info' />, title: 'No Software Needed', desc: 'Browser-based—no downloads or installations.' },
             { icon: <HighQualityIcon fontSize='large' color='info' />, title: '100% Private', desc: 'Your files remain private—everything happens locally.' }].map((item, i) => (
-              <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
                     {item.icon}
@@ -141,7 +141,7 @@ export default function VideoTrimLanding() {
               { icon: <ContentCutIcon />, title: 'Set the Trim Points', desc: 'Use the slider to select the start and end points for your trim.' },
               { icon: <PrivacyTipIcon />, title: 'No Installation Needed', desc: 'Trim videos directly in your browser—no software required.' },
               { icon: <DownloadIcon />, title: 'Download the Edited Video', desc: 'Click "Download" once you\'re satisfied with your video trim.' }].map((step, i) => (
-                <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+                <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
                     <Box sx={{ bgcolor: 'info.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
                     <Box>
@@ -169,7 +169,7 @@ export default function VideoTrimLanding() {
             { icon: <MovieIcon fontSize='large' color='info' />, title: 'Multiple Format Support', desc: 'Works with MP4, MOV, AVI, MKV, and more.' },
             { icon: <DownloadIcon fontSize='large' color='info' />, title: 'Fast & Simple', desc: 'Upload, trim, and download in a few clicks.' },
             { icon: <CloudUploadIcon fontSize='large' color='info' />, title: 'Free & No Signup', desc: 'No need to create an account or sign up.' }].map((feat, i) => (
-              <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
                     {feat.icon}

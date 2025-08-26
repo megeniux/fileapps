@@ -113,7 +113,7 @@ export default function ExtractAudioLanding() {
             { icon: <PrivacyTipIcon fontSize='large' color='error' />, title: 'Browser-Based & Secure', desc: 'No downloads—everything runs right in your browser.' },
             { icon: <ContentCutIcon fontSize='large' color='error' />, title: 'Precise Range Extraction', desc: 'Trim audio by specifying start and end times before extraction.' },
             { icon: <MusicNoteIcon fontSize='large' color='error' />, title: 'No Software Needed', desc: 'Works on desktop and mobile – accessible from any modern browser.' }].map((item, i) => (
-              <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
                     {item.icon}
@@ -138,7 +138,7 @@ export default function ExtractAudioLanding() {
               { icon: <ContentCutIcon />, title: 'Set Range (Optional)', desc: 'Adjust start & end markers.' },
               { icon: <HighQualityIcon />, title: 'Extract Locally', desc: 'Convert to MP3 / WAV / AAC.' },
               { icon: <DownloadIcon />, title: 'Download Audio', desc: 'Instant, watermark‑free export.' }].map((step, i) => (
-                <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+                <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
                     <Box sx={{ bgcolor: 'error.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
                     <Box>
@@ -165,7 +165,7 @@ export default function ExtractAudioLanding() {
             { icon: <HighQualityIcon fontSize='large' color='error' />, title: '100% Free & No Watermark', desc: 'A clean, hassle-free experience.' },
             { icon: <DownloadIcon fontSize='large' color='error' />, title: 'Quick Processing', desc: 'Extract and download your audio in seconds.' },
             { icon: <MusicNoteIcon fontSize='large' color='error' />, title: 'Secure and Private', desc: 'Files are processed in-browser or removed from servers shortly after processing.' }].map((feat, i) => (
-              <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
                     {feat.icon}

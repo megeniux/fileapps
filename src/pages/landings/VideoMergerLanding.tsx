@@ -121,7 +121,7 @@ export default function VideoMergerLanding() {
             { icon: <FlashOnIcon fontSize='large' color='success' />, title: 'Free & No Signup', desc: 'No watermark, no credit card, unlimited merges.' },
             { icon: <MergeTypeIcon fontSize='large' color='success' />, title: 'Drag & Reorder', desc: 'Add clips and arrange order easily.' },
             { icon: <HighQualityIcon fontSize='large' color='success' />, title: 'Format Support', desc: 'MP4, MOV, AVI, MKV, WebM & more.' }].map((item, i) => (
-              <Grid key={i} size={{ xs: 12, sm: 6, lg: 3 }}>
+              <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
                     {item.icon}
@@ -148,7 +148,7 @@ export default function VideoMergerLanding() {
               { icon: <MovieIcon />, title: 'Preview Merge', desc: 'Check sequence before combining.' },
               { icon: <MergeTypeIcon />, title: 'Click Merge', desc: 'FFmpeg WASM stitches locally.' },
               { icon: <DownloadIcon />, title: 'Download Video', desc: 'Export merged MP4 instantly.' }].map((step, i) => (
-                <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+                <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
                     <Box sx={{ bgcolor: 'success.main', color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
                     <Box>
@@ -176,7 +176,7 @@ export default function VideoMergerLanding() {
             { icon: <SpeedIcon fontSize='large' color='success' />, title: 'Fast Processing', desc: 'Local merging, no queue.' },
             { icon: <MergeTypeIcon fontSize='large' color='success' />, title: 'Format Agnostic', desc: 'Different codecs accepted.' },
             { icon: <HighQualityIcon fontSize='large' color='success' />, title: 'No Watermarks', desc: 'Clean output every time.' }].map((feat, i) => (
-              <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
                     {feat.icon}

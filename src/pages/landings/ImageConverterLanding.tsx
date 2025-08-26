@@ -118,28 +118,28 @@ export default function ImageConverterLanding() {
                             <Typography variant='h2'>Why Use Our Image Converter?</Typography>
                             <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
                         </Grid>
-                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+                        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                             <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                                 <PrivacyTipIcon fontSize='large' color='primary' />
                                 <Typography variant='h5' component='h3'>Private</Typography>
                                 <Typography variant='body1'>Local processing — no uploads.</Typography>
                             </CardContent></Card>
                         </Grid>
-                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+                        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                             <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                                 <CompareIcon fontSize='large' color='primary' />
                                 <Typography variant='h5' component='h3'>Free & Fast</Typography>
                                 <Typography variant='body1'>No signup. No watermark.</Typography>
                             </CardContent></Card>
                         </Grid>
-                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+                        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                             <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                                 <ImageIcon fontSize='large' color='primary' />
                                 <Typography variant='h5' component='h3'>Format Support</Typography>
                                 <Typography variant='body1'>JPG, PNG, WebP, GIF.</Typography>
                             </CardContent></Card>
                         </Grid>
-                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+                        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                             <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                                 <PhotoSizeSelectLargeIcon fontSize='large' color='primary' />
                                 <Typography variant='h5' component='h3'>Resize & Crop</Typography>
@@ -158,7 +158,7 @@ export default function ImageConverterLanding() {
                             <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
                         </Grid>
                         <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent='center' flexGrow={1}>
-                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                                 <Box sx={{ textAlign: 'center' }}>
                                     <Box sx={{
                                         bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
@@ -170,7 +170,7 @@ export default function ImageConverterLanding() {
                                     <Typography variant='body1'>Drag & drop image.</Typography>
                                 </Box>
                             </Grid>
-                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                                 <Box sx={{ textAlign: 'center' }}>
                                     <Box sx={{
                                         bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
@@ -182,7 +182,7 @@ export default function ImageConverterLanding() {
                                     <Typography variant='body1'>Adjust size & area.</Typography>
                                 </Box>
                             </Grid>
-                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                                 <Box sx={{ textAlign: 'center' }}>
                                     <Box sx={{
                                         bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
@@ -194,7 +194,7 @@ export default function ImageConverterLanding() {
                                     <Typography variant='body1'>Filters & quality.</Typography>
                                 </Box>
                             </Grid>
-                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                                 <Box sx={{ textAlign: 'center' }}>
                                     <Box sx={{
                                         bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
@@ -224,7 +224,7 @@ export default function ImageConverterLanding() {
                         { icon: <ImageSearchIcon fontSize='large' color='primary' />, title: 'File Format Converter', desc: 'Convert images to JPG, PNG, WebP, or GIF.' },
                         { icon: <ColorLensIcon fontSize='large' color='primary' />, title: 'Filter Controls', desc: 'Adjust brightness, contrast, saturation, and blur.' },
                         { icon: <DownloadDoneIcon fontSize='large' color='primary' />, title: 'Instant Download', desc: 'Export without delay and no watermark.' }].map((feat, i) => (
-                            <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+                            <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                                 <Card sx={{ height: '100%' }}>
                                     <CardContent sx={{ p: 2 }}>
                                         {feat.icon}

@@ -125,7 +125,7 @@ export default function ThumbnailGeneratorLanding() {
             { icon: <DeviceHubIcon fontSize='large' color='secondary' />, title: 'Customizable Thumbnail Sizes', desc: 'Perfect for YouTube, social media, presentations, and more.' },
             { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Fast & Easy to Use', desc: 'Extract multiple thumbnails with a single click.' },
             { icon: <DeviceHubIcon fontSize='large' color='secondary' />, title: 'Cross-Platform Compatibility', desc: 'Works on desktop and mobile browsers alike.' }].map((item, i) => (
-              <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
                     {item.icon}
@@ -152,7 +152,7 @@ export default function ThumbnailGeneratorLanding() {
               { icon: <TuneIcon />, title: 'Customize Size', desc: 'Select from preset dimensions or enter a custom size.' },
               { icon: <FlashOnIcon />, title: 'Generate Thumbnail', desc: 'Extract your image instantly in your browser.' },
               { icon: <DownloadIcon />, title: 'Download Image', desc: 'Save your high-quality thumbnail with no watermark.' }].map((step, i) => (
-                <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+                <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
                     <Box sx={{ bgcolor: (theme) => theme.palette.secondary.main, color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
                     <Box>
@@ -180,7 +180,7 @@ export default function ThumbnailGeneratorLanding() {
             { icon: <DeviceHubIcon fontSize='large' color='secondary' />, title: 'Custom Size Output', desc: 'Resize thumbnails for YouTube, Instagram, Facebook, and more.' },
             { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'High-Resolution Export', desc: 'No compression or watermark.' },
             { icon: <FlashOnIcon fontSize='large' color='secondary' />, title: 'Free Forever', desc: 'No signup, no credit card, no limits.' }].map((feat, i) => (
-              <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+              <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
                     {feat.icon}

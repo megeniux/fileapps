@@ -122,7 +122,7 @@ export default function BurnCaptionLanding() {
                         { icon: <FlashOnIcon fontSize='large' color='primary' />, title: 'Free & No Signup', desc: 'No credit card required. Burn captions instantly with no watermark.' },
                         { icon: <SubtitlesIcon fontSize='large' color='primary' />, title: 'Custom Styling', desc: 'Change font size, color, and outline before burning.' },
                         { icon: <ColorLensIcon fontSize='large' color='primary' />, title: 'Supports All Videos', desc: 'MP4, MOV, MKV, AVI, and more.' }].map((item, i) => (
-                            <Grid key={i} size={{ xs: 12, sm: 6, lg: 3 }}>
+                            <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                                 <Card sx={{ height: '100%' }}>
                                     <CardContent sx={{ p: 2 }}>
                                         {item.icon}
@@ -144,7 +144,7 @@ export default function BurnCaptionLanding() {
                             <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
                         </Grid>
                         <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent='center' flexGrow={1}>
-                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                                 <Box sx={{ textAlign: 'center' }}>
                                     <Box sx={{
                                         bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
@@ -156,7 +156,7 @@ export default function BurnCaptionLanding() {
                                     <Typography variant='body1'>Add your video file.</Typography>
                                 </Box>
                             </Grid>
-                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                                 <Box sx={{ textAlign: 'center' }}>
                                     <Box sx={{
                                         bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
@@ -168,7 +168,7 @@ export default function BurnCaptionLanding() {
                                     <Typography variant='body1'>Load SRT or VTT file.</Typography>
                                 </Box>
                             </Grid>
-                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                                 <Box sx={{ textAlign: 'center' }}>
                                     <Box sx={{
                                         bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
@@ -180,7 +180,7 @@ export default function BurnCaptionLanding() {
                                     <Typography variant='body1'>Font size, color, outline.</Typography>
                                 </Box>
                             </Grid>
-                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                                 <Box sx={{ textAlign: 'center' }}>
                                     <Box sx={{
                                         bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
@@ -192,7 +192,7 @@ export default function BurnCaptionLanding() {
                                     <Typography variant='body1'>Check timing & styling.</Typography>
                                 </Box>
                             </Grid>
-                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                                 <Box sx={{ textAlign: 'center' }}>
                                     <Box sx={{
                                         bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56,
@@ -226,7 +226,7 @@ export default function BurnCaptionLanding() {
                         { icon: <SpeedIcon fontSize='large' color='primary' />, title: 'Instant Download', desc: 'Local WASM processing.' },
                         { icon: <PrivacyTipIcon fontSize='large' color='primary' />, title: 'Private & Free', desc: 'No upload. No watermark.' },
                         ].map((feat, i) => (
-                            <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
+                            <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                                 <Card sx={{ height: '100%' }}>
                                     <CardContent sx={{ p: 2 }}>
                                         {feat.icon}

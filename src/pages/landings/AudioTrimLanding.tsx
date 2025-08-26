@@ -101,42 +101,42 @@ export default function AudioTrimLanding() {
               <Typography variant='h2'>Why Use Our Online Audio Trimmer?</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <ContentCutIcon fontSize='large' color='secondary' />
                 <Typography variant='h5' component='h3'>100% Free</Typography>
                 <Typography variant='body1'>No signup, fees or watermark.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <PrivacyTipIcon fontSize='large' color='secondary' />
                 <Typography variant='h5' component='h3'>Private</Typography>
                 <Typography variant='body1'>All processing stays local.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <AudiotrackIcon fontSize='large' color='secondary' />
                 <Typography variant='h5' component='h3'>Format Support</Typography>
                 <Typography variant='body1'>MP3, WAV, FLAC, AAC, OGG.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <HighQualityIcon fontSize='large' color='secondary' />
                 <Typography variant='h5' component='h3'>Accurate</Typography>
                 <Typography variant='body1'>Precise region selection.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <SpeedIcon fontSize='large' color='secondary' />
                 <Typography variant='h5' component='h3'>Fast Preview</Typography>
                 <Typography variant='body1'>Instant in‑browser play.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <CloudUploadIcon fontSize='large' color='secondary' />
                 <Typography variant='h5' component='h3'>Cross‑Platform</Typography>
@@ -155,7 +155,7 @@ export default function AudioTrimLanding() {
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
             <Grid container spacing={{ xs: 8, sm: 6 }} justifyContent='center' flexGrow={1}>
-              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Box sx={{ textAlign: 'center' }}>
                   <Box sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
                     display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -165,7 +165,7 @@ export default function AudioTrimLanding() {
                   <Typography variant='body1'>Drag & drop audio.</Typography>
                 </Box>
               </Grid>
-              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Box sx={{ textAlign: 'center' }}>
                   <Box sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
                     display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -175,7 +175,7 @@ export default function AudioTrimLanding() {
                   <Typography variant='body1'>Adjust start & end.</Typography>
                 </Box>
               </Grid>
-              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Box sx={{ textAlign: 'center' }}>
                   <Box sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
                     display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -185,7 +185,7 @@ export default function AudioTrimLanding() {
                   <Typography variant='body1'>Confirm selection.</Typography>
                 </Box>
               </Grid>
-              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Box sx={{ textAlign: 'center' }}>
                   <Box sx={{ bgcolor: 'secondary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2,
                     display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -207,42 +207,42 @@ export default function AudioTrimLanding() {
               <Typography variant='h2' mb={4}>Key Features</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <ContentCutIcon fontSize='large' color='secondary' />
                 <Typography variant='h5' component='h3'>Precise Trimming</Typography>
                 <Typography variant='body1'>Accurate start/end control.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <AudiotrackIcon fontSize='large' color='secondary' />
                 <Typography variant='h5' component='h3'>Format Support</Typography>
                 <Typography variant='body1'>MP3, WAV, FLAC, AAC, OGG.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <PrivacyTipIcon fontSize='large' color='secondary' />
                 <Typography variant='h5' component='h3'>Local Only</Typography>
                 <Typography variant='body1'>No uploads required.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <HighQualityIcon fontSize='large' color='secondary' />
                 <Typography variant='h5' component='h3'>Clean Output</Typography>
                 <Typography variant='body1'>No watermark branding.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <SpeedIcon fontSize='large' color='secondary' />
                 <Typography variant='h5' component='h3'>Instant Preview</Typography>
                 <Typography variant='body1'>Check result quickly.</Typography>
               </CardContent></Card>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Card sx={{ height: '100%' }}><CardContent sx={{ p: 2 }}>
                 <CloudUploadIcon fontSize='large' color='secondary' />
                 <Typography variant='h5' component='h3'>Cross‑Device</Typography>
