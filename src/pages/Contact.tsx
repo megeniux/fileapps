@@ -13,11 +13,11 @@ function Contact() {
   return (
     <>
       <Helmet>
-        <title>Contact FileApps - Get Support for Video, Audio & Image Tools</title>
-        <meta name="description" content="Contact FileApps for questions, feedback, or support. Reach out to our team for help with free video, audio, and image editing tools. Developer support available." />
-        <meta name="keywords" content="contact fileapps, video tools support, audio editor help, image converter support, video editing assistance, customer support" />
-        <meta property="og:title" content="Contact FileApps - Get Support for Video, Audio & Image Tools" />
-        <meta property="og:description" content="Contact FileApps for questions, feedback, or support. Reach out to our team for help with free video, audio, and image editing tools. Developer support available." />
+        <title>Contact {APP_INFO.name} - Get Support for Video, Audio & Image Tools</title>
+        <meta name="description" content={`Contact ${APP_INFO.name} for questions, feedback, or support. Reach out to our team for help with free video, audio, and image editing tools. Developer support available.`} />
+        <meta name="keywords" content={`contact ${APP_INFO.name.toLowerCase()}, video tools support, audio editor help, image converter support, video editing assistance, customer support`} />
+        <meta property="og:title" content={`Contact ${APP_INFO.name} - Get Support for Video, Audio & Image Tools`} />
+        <meta property="og:description" content={`Contact ${APP_INFO.name} for questions, feedback, or support. Reach out to our team for help with free video, audio, and image editing tools. Developer support available.`} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://videotools.netlify.app/contact" />
         <link rel="canonical" href="https://videotools.netlify.app/contact" />

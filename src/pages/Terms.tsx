@@ -12,11 +12,11 @@ function TOS() {
   return (
     <>
       <Helmet>
-        <title>Terms and Conditions - FileApps Service Agreement</title>
-        <meta name="description" content="FileApps terms and conditions: Browser-based platform providing free file editing tools. All processing is local, service provided as-is. User responsibilities and service terms." />
-        <meta name="keywords" content="terms and conditions, service terms, user agreement, fileapps terms, video editor terms, file editing agreement" />
-        <meta property="og:title" content="Terms and Conditions - FileApps Service Agreement" />
-        <meta property="og:description" content="FileApps terms and conditions: Browser-based platform providing free file editing tools. All processing is local, service provided as-is. User responsibilities and service terms." />
+        <title>Terms and Conditions - {APP_INFO.name} Service Agreement</title>
+        <meta name="description" content={`${APP_INFO.name} terms and conditions: Browser-based platform providing free file editing tools. All processing is local, service provided as-is. User responsibilities and service terms.`} />
+        <meta name="keywords" content={`terms and conditions, service terms, user agreement, ${APP_INFO.name.toLowerCase()} terms, video editor terms, file editing agreement`} />
+        <meta property="og:title" content={`Terms and Conditions - ${APP_INFO.name} Service Agreement`} />
+        <meta property="og:description" content={`${APP_INFO.name} terms and conditions: Browser-based platform providing free file editing tools. All processing is local, service provided as-is. User responsibilities and service terms.`} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://videotools.netlify.app/terms" />
         <link rel="canonical" href="https://videotools.netlify.app/terms" />

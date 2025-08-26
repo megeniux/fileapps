@@ -16,11 +16,11 @@ function NotFound() {
   return (
     <>
       <Helmet>
-        <title>404 - Page Not Found | FileApps</title>
-        <meta name="description" content="Page not found on FileApps. The page you're looking for doesn't exist or was moved. Return home to access our free video, audio, and image editing tools." />
-        <meta name="keywords" content="404 error, page not found, fileapps, video editor, audio editor, image converter" />
-        <meta property="og:title" content="404 - Page Not Found | FileApps" />
-        <meta property="og:description" content="Page not found on FileApps. The page you're looking for doesn't exist or was moved. Return home to access our free video, audio, and image editing tools." />
+        <title>404 - Page Not Found | {APP_INFO.name}</title>
+        <meta name="description" content={`Page not found on ${APP_INFO.name}. The page you're looking for doesn't exist or was moved. Return home to access our free video, audio, and image editing tools.`} />
+        <meta name="keywords" content={`404 error, page not found, ${APP_INFO.name.toLowerCase()}, video editor, audio editor, image converter`} />
+        <meta property="og:title" content={`404 - Page Not Found | ${APP_INFO.name}`} />
+        <meta property="og:description" content={`Page not found on ${APP_INFO.name}. The page you're looking for doesn't exist or was moved. Return home to access our free video, audio, and image editing tools.`} />
         <meta property="og:type" content="website" />
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>

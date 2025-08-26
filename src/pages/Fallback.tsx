@@ -13,9 +13,9 @@ function Fallback() {
   return (
     <BasicLayout>
       <Helmet>
-        <title>Loading FileApps - Free Video, Audio & Image Editor</title>
-        <meta name="description" content="Loading FileApps - Professional browser-based media editing tools. Free video compression, audio editing, and image conversion tools loading." />
-        <meta name="keywords" content="loading fileapps, video editor loading, audio editor, image converter, media tools" />
+        <title>Loading {APP_INFO.name} - Free Video, Audio & Image Editor</title>
+        <meta name="description" content={`Loading ${APP_INFO.name} - Professional browser-based media editing tools. Free video compression, audio editing, and image conversion tools loading.`} />
+        <meta name="keywords" content={`loading ${APP_INFO.name.toLowerCase()}, video editor loading, audio editor, image converter, media tools`} />
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <Box sx={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', p: 2 }}>
