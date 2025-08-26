@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 // MUI imports
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -255,7 +256,18 @@ function AudioMerge() {
     ), [files, isProcessing]);
 
     return (
-        <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+        <>
+            <Helmet>
+                <title>Audio Merger - Join Multiple Audio Files Online Free</title>
+                <meta name="description" content="Free online audio merger to join multiple audio tracks into one file instantly. Combine MP3, WAV, AAC files in your browser with no uploads or signups required." />
+                <meta name="keywords" content="audio merger, join audio files, combine audio, merge mp3, audio concatenation, audio joiner, free audio tools, merge music" />
+                <meta property="og:title" content="Audio Merger - Join Multiple Audio Files Online Free" />
+                <meta property="og:description" content="Free online audio merger to join multiple audio tracks into one file instantly. Combine MP3, WAV, AAC files in your browser with no uploads or signups required." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://videotools.netlify.app/tools/audio-merge" />
+                <link rel="canonical" href="https://videotools.netlify.app/tools/audio-merge" />
+            </Helmet>
+            <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
             <Card sx={{ p: 1.5 }}>
                 <CardContent sx={{ p: 0 }}>
                     <Box display="flex" alignItems="center">
@@ -361,6 +373,7 @@ function AudioMerge() {
                 </Card>
                 {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
             </Container>
+            </>
     );
 }
 

@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from "../constants";
 import BasicLayout from '../components/BasicLayout';
 
@@ -11,6 +12,12 @@ import Paper from '@mui/material/Paper';
 function Fallback() {
   return (
     <BasicLayout>
+      <Helmet>
+        <title>Loading FileApps - Free Video, Audio & Image Editor</title>
+        <meta name="description" content="Loading FileApps - Professional browser-based media editing tools. Free video compression, audio editing, and image conversion tools loading." />
+        <meta name="keywords" content="loading fileapps, video editor loading, audio editor, image converter, media tools" />
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       <Box sx={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', p: 2 }}>
         <Paper elevation={3} sx={{ px: 4, py: 5, maxWidth: 360, width: '100%', textAlign: 'center' }}>
           <Box display="flex" justifyContent="center" mb={2}>

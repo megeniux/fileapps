@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { formatBytes } from '../../helpers';
+import { Helmet } from 'react-helmet-async';
 
 // MUI
 import Button from '@mui/material/Button';
@@ -380,7 +381,20 @@ function VideoConvert() {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+    <>
+      <Helmet>
+        <title>Video Converter Online Free – Convert MP4, MOV, MKV, AVI</title>
+        <meta name="description" content="Free online video converter: convert MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free." />
+        <meta name="keywords" content="convert video online free, convert video to mp4, free online video converter, video format converter, change video resolution online, convert mov to mp4 free, convert mkv to mp4 online, video codec converter online" />
+        <meta property="og:title" content="Free Online Video Converter – Fast, Private & No Watermark" />
+        <meta property="og:description" content="Convert video formats (MP4, MOV, MKV, AVI, WebM) in your browser. Customize resolution, codec, bitrate & FPS." />
+        <meta property="og:image" content="/images/landing/video-convert-hero.jpg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="/tools/video/convert" />
+        <meta property="og:site_name" content="FileApps" />
+        <link rel="canonical" href="/tools/video/convert" />
+      </Helmet>
+      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
       <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
@@ -706,6 +720,7 @@ function VideoConvert() {
         </Typography>
       </Popover>
     </Container>
+    </>
   );
 }
 

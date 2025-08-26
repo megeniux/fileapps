@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { FFmpeg } from '@ffmpeg/ffmpeg'
 import { fetchFile } from '@ffmpeg/util'
 
@@ -169,7 +170,18 @@ function ExtractAudio() {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+    <>
+      <Helmet>
+        <title>Extract Audio from Video - Free MP3 Audio Extractor Tool</title>
+        <meta name="description" content="Free online tool to extract audio from video files. Convert video to MP3, WAV, AAC, or FLAC audio formats. High-quality audio extraction with no uploads or watermarks." />
+        <meta name="keywords" content="extract audio, video to mp3, audio extractor, video to audio converter, mp3 extractor, free audio extraction, video audio ripper" />
+        <meta property="og:title" content="Extract Audio from Video - Free MP3 Audio Extractor Tool" />
+        <meta property="og:description" content="Free online tool to extract audio from video files. Convert video to MP3, WAV, AAC, or FLAC audio formats. High-quality audio extraction with no uploads or watermarks." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://videotools.netlify.app/tools/extract-audio" />
+        <link rel="canonical" href="https://videotools.netlify.app/tools/extract-audio" />
+      </Helmet>
+      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
@@ -325,6 +337,7 @@ function ExtractAudio() {
         )}
       </Card>
     </Container>
+    </>
   )
 }
 

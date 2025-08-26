@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from "../constants";
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +14,17 @@ function NotFound() {
   const navigate = useNavigate();
 
   return (
-    <Box sx={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', p: 2 }}>
+    <>
+      <Helmet>
+        <title>404 - Page Not Found | FileApps</title>
+        <meta name="description" content="Page not found on FileApps. The page you're looking for doesn't exist or was moved. Return home to access our free video, audio, and image editing tools." />
+        <meta name="keywords" content="404 error, page not found, fileapps, video editor, audio editor, image converter" />
+        <meta property="og:title" content="404 - Page Not Found | FileApps" />
+        <meta property="og:description" content="Page not found on FileApps. The page you're looking for doesn't exist or was moved. Return home to access our free video, audio, and image editing tools." />
+        <meta property="og:type" content="website" />
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+      <Box sx={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', p: 2 }}>
       <Paper elevation={3} sx={{ px: 4, py: 6, maxWidth: 460, width: '100%', textAlign: 'center' }}>
         <Box display="flex" justifyContent="center" mb={2}>
           <img
@@ -37,6 +48,7 @@ function NotFound() {
         </Stack>
       </Paper>
     </Box>
+    </>
   );
 }
 

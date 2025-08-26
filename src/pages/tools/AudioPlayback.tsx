@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { formatBytes } from '../../helpers';
@@ -217,7 +218,18 @@ function AudioPlayback() {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+    <>
+      <Helmet>
+        <title>Audio Playback Speed Editor - Change Audio Speed Online Free</title>
+        <meta name="description" content="Free online audio playback speed editor to change audio speed with pitch correction or reverse tracks completely. Export processed audio with no watermarks, 100% browser-based." />
+        <meta name="keywords" content="audio speed editor, change audio speed, audio pitch correction, reverse audio, audio playback speed, free audio tools, audio tempo" />
+        <meta property="og:title" content="Audio Playback Speed Editor - Change Audio Speed Online Free" />
+        <meta property="og:description" content="Free online audio playback speed editor to change audio speed with pitch correction or reverse tracks completely. Export processed audio with no watermarks, 100% browser-based." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://videotools.netlify.app/tools/audio-playback" />
+        <link rel="canonical" href="https://videotools.netlify.app/tools/audio-playback" />
+      </Helmet>
+      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       <Card sx={{ p: 1.5 }} elevation={3}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
@@ -350,6 +362,7 @@ function AudioPlayback() {
       </Card>
       {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
     </Container>
+    </>
   );
 }
 

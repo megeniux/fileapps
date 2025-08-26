@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { formatBytes, estimateSizeMB } from '../../helpers';
+import { Helmet } from 'react-helmet-async';
 
 // MUI
 import Button from '@mui/material/Button';
@@ -231,7 +232,20 @@ function VideoCompression() {
   ];
 
   return (
-    <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+    <>
+      <Helmet>
+        <title>Video Compressor Online Free – Reduce File Size Without Quality Loss</title>
+        <meta name="description" content="Reduce video file size without quality loss using local browser processing. Adjust CRF, bitrate & resolution — private, fast & watermark‑free." />
+        <meta name="keywords" content="compress video online free, reduce video file size, video compressor online, compress mp4 online, shrink video file size, video compression tool, compress video without losing quality" />
+        <meta property="og:title" content="Free Online Video Compressor – Fast, Private & No Watermark" />
+        <meta property="og:description" content="Compress videos locally in your browser. Reduce file size while maintaining quality." />
+        <meta property="og:image" content="/images/landing/video-compression-hero.jpg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="/tools/video/compress" />
+        <meta property="og:site_name" content="FileApps" />
+        <link rel="canonical" href="/tools/video/compress" />
+      </Helmet>
+      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
       <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
@@ -438,6 +452,7 @@ function VideoCompression() {
         </Typography>
       </Popover>
     </Container>
+    </>
   );
 }
 

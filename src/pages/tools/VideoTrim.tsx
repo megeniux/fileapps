@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { FFmpeg } from '@ffmpeg/ffmpeg'
 import { fetchFile } from '@ffmpeg/util'
+import { Helmet } from 'react-helmet-async'
 
 // MUI imports
 import Container from '@mui/material/Container'
@@ -174,7 +175,20 @@ function VideoTrim() {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+    <>
+      <Helmet>
+        <title>Video Trimmer Online Free – Cut and Trim Videos Precisely</title>
+        <meta name="description" content="Trim and cut videos with frame-accurate precision. Remove unwanted parts locally — no watermark, private & fast." />
+        <meta name="keywords" content="trim video online free, cut video online, video trimmer tool, clip video online, remove parts from video, video editor online, trim mp4 online" />
+        <meta property="og:title" content="Free Online Video Trimmer – Fast, Private & No Watermark" />
+        <meta property="og:description" content="Trim and cut videos with precision in your browser. No uploads required." />
+        <meta property="og:image" content="/images/landing/video-trim-hero.jpg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="/tools/video/trim" />
+        <meta property="og:site_name" content="FileApps" />
+        <link rel="canonical" href="/tools/video/trim" />
+      </Helmet>
+      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
@@ -327,6 +341,7 @@ function VideoTrim() {
       </Card>
       {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
     </Container>
+    </>
   )
 }
 

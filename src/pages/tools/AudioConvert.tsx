@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { formatBytes } from '../../helpers';
+import { Helmet } from 'react-helmet-async';
 
 // MUI
 import { useTheme } from '@mui/material/styles';
@@ -221,7 +222,20 @@ function AudioConvert() {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+    <>
+      <Helmet>
+        <title>Audio Converter Online Free – Convert MP3, WAV, AAC, FLAC</title>
+        <meta name="description" content="Convert MP3, WAV, AAC, FLAC, OGG, M4A locally in your browser. Choose bitrate (128k–320k) or lossless — private, fast & watermark‑free." />
+        <meta name="keywords" content="convert audio online free, convert mp3 to wav, convert wav to mp3, free online audio converter, convert flac to mp3, convert m4a to mp3, audio format converter, convert audio files online" />
+        <meta property="og:title" content="Free Online Audio Converter – Fast, Private & No Watermark" />
+        <meta property="og:description" content="Convert audio (MP3, WAV, AAC, FLAC, OGG, M4A) in your browser. Choose bitrate or lossless." />
+        <meta property="og:image" content="/images/landing/audio-convert-hero.jpg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="/tools/audio/convert" />
+        <meta property="og:site_name" content="FileApps" />
+        <link rel="canonical" href="/tools/audio/convert" />
+      </Helmet>
+      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
@@ -385,6 +399,7 @@ function AudioConvert() {
       </Card>
       {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
     </Container>
+    </>
   );
 }
 

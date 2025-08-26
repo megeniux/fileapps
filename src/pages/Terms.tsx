@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from "../constants";
 
 // MUI Imports
@@ -9,8 +10,19 @@ import CardContent from '@mui/material/CardContent';
 
 function TOS() {
   return (
-    <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Typography variant="h1" gutterBottom>
+    <>
+      <Helmet>
+        <title>Terms and Conditions - FileApps Service Agreement</title>
+        <meta name="description" content="FileApps terms and conditions: Browser-based platform providing free file editing tools. All processing is local, service provided as-is. User responsibilities and service terms." />
+        <meta name="keywords" content="terms and conditions, service terms, user agreement, fileapps terms, video editor terms, file editing agreement" />
+        <meta property="og:title" content="Terms and Conditions - FileApps Service Agreement" />
+        <meta property="og:description" content="FileApps terms and conditions: Browser-based platform providing free file editing tools. All processing is local, service provided as-is. User responsibilities and service terms." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://videotools.netlify.app/terms" />
+        <link rel="canonical" href="https://videotools.netlify.app/terms" />
+      </Helmet>
+      <Container maxWidth="md" sx={{ my: 'auto' }}>
+      <Typography variant="h2" component="h1" gutterBottom>
         Terms and Conditions
       </Typography>
       <Divider sx={{ mb: 4 }} />
@@ -31,6 +43,7 @@ function TOS() {
         </CardContent>
       </Card>
     </Container>
+    </>
   )
 }
 

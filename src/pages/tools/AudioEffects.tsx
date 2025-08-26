@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { formatBytes } from '../../helpers';
@@ -292,7 +293,18 @@ function AudioEffects() {
     };
 
     return (
-        <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+        <>
+            <Helmet>
+                <title>Audio Effects - Apply Fades, Normalization, Pitch & Speed Effects Free</title>
+                <meta name="description" content="Free online audio effects tool to apply fades, normalization, pitch adjustment, speed changes, and volume control to audio files. Professional audio effects in your browser." />
+                <meta name="keywords" content="audio effects, audio fade, normalize audio, pitch adjustment, audio speed, volume control, audio processing, free audio editor" />
+                <meta property="og:title" content="Audio Effects - Apply Fades, Normalization, Pitch & Speed Effects Free" />
+                <meta property="og:description" content="Free online audio effects tool to apply fades, normalization, pitch adjustment, speed changes, and volume control to audio files. Professional audio effects in your browser." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://videotools.netlify.app/tools/audio-effects" />
+                <link rel="canonical" href="https://videotools.netlify.app/tools/audio-effects" />
+            </Helmet>
+            <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
             <Card sx={{ p: 1.5 }}>
                 <CardContent sx={{ p: 0 }}>
                     <Box display="flex" alignItems="center">
@@ -511,6 +523,7 @@ function AudioEffects() {
             </Card>
             {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
         </Container>
+        </>
     );
 }
 

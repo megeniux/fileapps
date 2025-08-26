@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 
 // MUI imports
 import Typography from '@mui/material/Typography'
@@ -280,7 +281,20 @@ function VideoResize() {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+    <>
+      <Helmet>
+        <title>Video Resizer Online Free – Change Resolution & Aspect Ratio</title>
+        <meta name="description" content="Resize videos to custom dimensions or aspect ratios (16:9, 4:3, 1:1) for social media. Change resolution privately in your browser." />
+        <meta name="keywords" content="resize video online free, change video resolution, video aspect ratio changer, resize mp4 online, video resizer tool, scale video online, resize video for social media" />
+        <meta property="og:title" content="Free Online Video Resizer – Fast, Private & No Watermark" />
+        <meta property="og:description" content="Resize videos to custom resolutions and aspect ratios in your browser." />
+        <meta property="og:image" content="/images/landing/video-resizer-hero.jpg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="/tools/video/resize" />
+        <meta property="og:site_name" content="FileApps" />
+        <link rel="canonical" href="/tools/video/resize" />
+      </Helmet>
+      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       <Card sx={{ p: 1.5 }} elevation={3}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
@@ -490,6 +504,7 @@ function VideoResize() {
       </Card>
       {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
     </Container>
+    </>
   )
 }
 

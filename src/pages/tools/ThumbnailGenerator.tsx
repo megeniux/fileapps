@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { FFmpeg } from '@ffmpeg/ffmpeg'
 import { fetchFile } from '@ffmpeg/util'
 import JSZip from 'jszip'
@@ -331,7 +332,18 @@ function ThumbnailGenerator() {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+    <>
+      <Helmet>
+        <title>Video Thumbnail Generator - Extract Preview Images from Videos Free</title>
+        <meta name="description" content="Free online video thumbnail generator. Extract high-quality preview images from videos instantly. Generate thumbnails in multiple sizes with no watermarks or signups required." />
+        <meta name="keywords" content="video thumbnail generator, extract video thumbnails, video preview images, thumbnail maker, video screenshots, free thumbnail generator" />
+        <meta property="og:title" content="Video Thumbnail Generator - Extract Preview Images from Videos Free" />
+        <meta property="og:description" content="Free online video thumbnail generator. Extract high-quality preview images from videos instantly. Generate thumbnails in multiple sizes with no watermarks or signups required." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://videotools.netlify.app/tools/thumbnail-generator" />
+        <link rel="canonical" href="https://videotools.netlify.app/tools/thumbnail-generator" />
+      </Helmet>
+      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
       <Card sx={{ p: 1.5 }} elevation={3}>
         <CardContent sx={{ p: 0 }}>
@@ -620,6 +632,7 @@ function ThumbnailGenerator() {
         )}
       </Card>
     </Container>
+    </>
   )
 }
 

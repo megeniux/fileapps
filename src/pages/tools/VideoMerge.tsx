@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
@@ -250,7 +251,18 @@ function VideoMerge() {
   ), [files, isProcessing])
 
   return (
-    <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+    <>
+      <Helmet>
+        <title>Video Merger Tool - Combine Multiple Videos Online for Free</title>
+        <meta name="description" content="Free online video merger tool to combine multiple video clips into one file. Merge videos in browser with no uploads, preserving quality. No watermarks, completely private." />
+        <meta name="keywords" content="video merger, combine videos, merge video clips, video joiner, video concatenation, video editor, free video tools, online video merger" />
+        <meta property="og:title" content="Video Merger Tool - Combine Multiple Videos Online for Free" />
+        <meta property="og:description" content="Free online video merger tool to combine multiple video clips into one file. Merge videos in browser with no uploads, preserving quality. No watermarks, completely private." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://videotools.netlify.app/tools/video-merge" />
+        <link rel="canonical" href="https://videotools.netlify.app/tools/video-merge" />
+      </Helmet>
+      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
@@ -355,6 +367,7 @@ function VideoMerge() {
       </Card>
       {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
     </Container>
+    </>
   )
 }
 

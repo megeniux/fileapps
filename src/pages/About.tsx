@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from "../constants";
 
 // MUI Imports
@@ -9,8 +10,19 @@ import CardContent from '@mui/material/CardContent';
 
 function AboutUs() {
   return (
-    <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Typography variant="h1" gutterBottom>
+    <>
+      <Helmet>
+        <title>About FileApps - Free Online Video, Audio & Image Editor</title>
+        <meta name="description" content="Learn about FileApps, a comprehensive platform providing free video compression and editing tools. Professional media editing without cost or technical barriers." />
+        <meta name="keywords" content="about fileapps, video editing platform, free video tools, video compression, media editing, online video editor" />
+        <meta property="og:title" content="About FileApps - Free Online Video, Audio & Image Editor" />
+        <meta property="og:description" content="Learn about FileApps, a comprehensive platform providing free video compression and editing tools. Professional media editing without cost or technical barriers." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://videotools.netlify.app/about" />
+        <link rel="canonical" href="https://videotools.netlify.app/about" />
+      </Helmet>
+      <Container maxWidth="md" sx={{ my: 'auto' }}>
+      <Typography variant="h2" component="h1" gutterBottom>
         About
       </Typography>
       <Divider sx={{ mb: 4 }} />
@@ -25,6 +37,7 @@ function AboutUs() {
         </CardContent>
       </Card>
     </Container>
+    </>
   )
 }
 

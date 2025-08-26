@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { formatBytes } from '../../helpers';
@@ -252,7 +253,18 @@ function VideoPlayback() {
     };
 
     return (
-        <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+        <>
+            <Helmet>
+                <title>Video Playback Speed Editor - Change Video Speed Online Free</title>
+                <meta name="description" content="Free online video playback speed editor. Change video speed from slow motion to time-lapse effects. Supports reverse playback and pitch correction. No watermarks, browser-based." />
+                <meta name="keywords" content="video speed editor, playback speed, slow motion, time lapse, video speed changer, reverse video, pitch correction, free video tools" />
+                <meta property="og:title" content="Video Playback Speed Editor - Change Video Speed Online Free" />
+                <meta property="og:description" content="Free online video playback speed editor. Change video speed from slow motion to time-lapse effects. Supports reverse playback and pitch correction. No watermarks, browser-based." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://videotools.netlify.app/tools/video-playback" />
+                <link rel="canonical" href="https://videotools.netlify.app/tools/video-playback" />
+            </Helmet>
+            <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
             <Card sx={{ p: 1.5 }} elevation={3}>
                 <CardContent sx={{ p: 0 }}>
                     <Box display="flex" alignItems="center">
@@ -391,6 +403,7 @@ function VideoPlayback() {
             </Card>
             {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
         </Container>
+        </>
     );
 }
 

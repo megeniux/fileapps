@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { formatBytes } from '../../helpers';
@@ -224,7 +225,18 @@ function AudioTrim() {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+    <>
+      <Helmet>
+        <title>Audio Trimmer - Cut and Trim Audio Files Online Free</title>
+        <meta name="description" content="Free online audio trimmer to cut and trim audio files with precision timing. Perfect for podcasts, music, and voiceovers. Local processing with no watermarks or uploads." />
+        <meta name="keywords" content="audio trimmer, cut audio, trim audio, audio cutter, audio editor, clip audio, free audio tools, podcast editor" />
+        <meta property="og:title" content="Audio Trimmer - Cut and Trim Audio Files Online Free" />
+        <meta property="og:description" content="Free online audio trimmer to cut and trim audio files with precision timing. Perfect for podcasts, music, and voiceovers. Local processing with no watermarks or uploads." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://videotools.netlify.app/tools/audio-trim" />
+        <link rel="canonical" href="https://videotools.netlify.app/tools/audio-trim" />
+      </Helmet>
+      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
       <Card sx={{ p: 1.5 }} elevation={3}>
         <CardContent sx={{ p: 0 }}>
@@ -358,6 +370,7 @@ function AudioTrim() {
         )}
       </Card>
     </Container>
+    </>
   );
 }
 

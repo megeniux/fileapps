@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { FFmpeg } from '@ffmpeg/ffmpeg'
 import { fetchFile } from '@ffmpeg/util'
 
@@ -254,7 +255,18 @@ function BurnCaption() {
     }
 
     return (
-        <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+        <>
+            <Helmet>
+                <title>Burn Captions into Video - Add Permanent Subtitles Online Free</title>
+                <meta name="description" content="Free online tool to burn captions and subtitles permanently into video files. Supports SRT and VTT formats. Customize font, size, color, and position. No uploads required." />
+                <meta name="keywords" content="burn captions, burn subtitles, add subtitles to video, hardcode subtitles, embed captions, subtitle editor, free video tools, SRT VTT" />
+                <meta property="og:title" content="Burn Captions into Video - Add Permanent Subtitles Online Free" />
+                <meta property="og:description" content="Free online tool to burn captions and subtitles permanently into video files. Supports SRT and VTT formats. Customize font, size, color, and position. No uploads required." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://videotools.netlify.app/tools/burn-caption" />
+                <link rel="canonical" href="https://videotools.netlify.app/tools/burn-caption" />
+            </Helmet>
+            <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
             {/* Move error message above Card */}
             {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
             <Card sx={{ p: 1.5 }} elevation={3}>
@@ -454,6 +466,7 @@ function BurnCaption() {
                 )}
             </Card>
         </Container>
+        </>
     )
 }
 

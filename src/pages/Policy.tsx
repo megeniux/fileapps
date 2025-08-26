@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from "../constants";
 
 // MUI Imports
@@ -9,8 +10,19 @@ import CardContent from '@mui/material/CardContent';
 
 function PrivacyPolicy() {
   return (
-    <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Typography variant="h1" gutterBottom>
+    <>
+      <Helmet>
+        <title>Privacy Policy - FileApps Data Protection & Security</title>
+        <meta name="description" content="FileApps privacy policy: We don't collect, store, or share personal information. All processing is local in your browser. Your data remains private and secure." />
+        <meta name="keywords" content="privacy policy, data protection, fileapps privacy, browser-based processing, secure video editing, private video tools" />
+        <meta property="og:title" content="Privacy Policy - FileApps Data Protection & Security" />
+        <meta property="og:description" content="FileApps privacy policy: We don't collect, store, or share personal information. All processing is local in your browser. Your data remains private and secure." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://videotools.netlify.app/policy" />
+        <link rel="canonical" href="https://videotools.netlify.app/policy" />
+      </Helmet>
+      <Container maxWidth="md" sx={{ my: 'auto' }}>
+      <Typography variant="h2" component="h1" gutterBottom>
         Privacy Policy
       </Typography>
       <Divider sx={{ mb: 4 }} />
@@ -31,6 +43,7 @@ function PrivacyPolicy() {
         </CardContent>
       </Card>
     </Container>
+    </>
   )
 }
 

@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from "../constants";
 
 // MUI Imports
@@ -10,8 +11,19 @@ import Link from '@mui/material/Link';
 
 function Contact() {
   return (
-    <Container maxWidth="md" sx={{ my: 'auto' }}>
-      <Typography variant="h1" gutterBottom>
+    <>
+      <Helmet>
+        <title>Contact FileApps - Get Support for Video, Audio & Image Tools</title>
+        <meta name="description" content="Contact FileApps for questions, feedback, or support. Reach out to our team for help with free video, audio, and image editing tools. Developer support available." />
+        <meta name="keywords" content="contact fileapps, video tools support, audio editor help, image converter support, video editing assistance, customer support" />
+        <meta property="og:title" content="Contact FileApps - Get Support for Video, Audio & Image Tools" />
+        <meta property="og:description" content="Contact FileApps for questions, feedback, or support. Reach out to our team for help with free video, audio, and image editing tools. Developer support available." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://videotools.netlify.app/contact" />
+        <link rel="canonical" href="https://videotools.netlify.app/contact" />
+      </Helmet>
+      <Container maxWidth="md" sx={{ my: 'auto' }}>
+      <Typography variant="h2" component="h1" gutterBottom>
         Contact
       </Typography>
       <Divider sx={{ mb: 4 }} />
@@ -29,6 +41,7 @@ function Contact() {
         </CardContent>
       </Card>
     </Container>
+    </>
   )
 }
 

@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { formatBytes } from '../../helpers';
+import { Helmet } from 'react-helmet-async';
 
 // MUI imports
 import { useTheme } from '@mui/material/styles';
@@ -684,7 +685,18 @@ function ImageConvert() {
   const blurMin = 0, blurMax = 10;
 
   return (
-    <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+    <>
+      <Helmet>
+        <title>Image Converter & Editor - Convert JPG PNG WebP GIF Online Free</title>
+        <meta name="description" content="Free online image converter and editor. Convert between JPG, PNG, WebP, GIF formats. Resize, crop, rotate, and apply filters to images. Local processing with no watermarks." />
+        <meta name="keywords" content="image converter, photo editor, JPG to PNG, PNG to JPG, WebP converter, image resize, crop image, rotate image, free image tools" />
+        <meta property="og:title" content="Image Converter & Editor - Convert JPG PNG WebP GIF Online Free" />
+        <meta property="og:description" content="Free online image converter and editor. Convert between JPG, PNG, WebP, GIF formats. Resize, crop, rotate, and apply filters to images. Local processing with no watermarks." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://videotools.netlify.app/tools/image-convert" />
+        <link rel="canonical" href="https://videotools.netlify.app/tools/image-convert" />
+      </Helmet>
+      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       <Card sx={{ p: 1.5 }} elevation={3}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
@@ -1072,6 +1084,7 @@ function ImageConvert() {
       </Card>
       {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
     </Container>
+    </>
   );
 }
 
