@@ -5,8 +5,8 @@ import Header from './Header';
 
 // MUI imports
 import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 
 type BasicLayoutProps = {
   children: React.ReactNode;

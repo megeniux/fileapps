@@ -1,67 +1,79 @@
+import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // Layouts
 import BasicLayout from './components/BasicLayout';
 
-// Pages
-import Home from './pages/Home';
-import Contact from './pages/Contact';
-import AboutUs from './pages/About';
-import TOS from './pages/Terms';
-import PrivacyPolicy from './pages/Policy';
-import NotFound from './pages/404';
-
-// Video Tools
-import ExtractAudioLanding from './pages/landings/ExtractAudioLanding';
-import ExtractAudioBlog from './pages/blogs/ExtractAudioBlog';
-import VideoPlaybackLanding from './pages/landings/VideoPlaybackLanding';
-import VideoPlaybackBlog from './pages/blogs/VideoPlaybackBlog';
-import VideoConvert from './pages/tools/VideoConvert';
-import VideoConvertLanding from './pages/landings/VideoConvertLanding';
-import VideoConvertBlog from './pages/blogs/VideoConvertBlog';
-import VideoCompression from './pages/tools/VideoCompression';
-import VideoCompressionLanding from './pages/landings/VideoCompressionLanding';
-import VideoCompressionBlog from './pages/blogs/VideoCompressionBlog';
-import VideoResize from './pages/tools/VideoResize';
-import VideoResizerLanding from './pages/landings/VideoResizerLanding';
-import VideoResizerBlog from './pages/blogs/VideoResizerBlog';
-import VideoTrim from './pages/tools/VideoTrim';
-import VideoTrimLanding from './pages/landings/VideoTrimLanding';
-import VideoTrimBlog from './pages/blogs/VideoTrimBlog';
-import VideoMerge from './pages/tools/VideoMerge';
-import VideoMergerLanding from './pages/landings/VideoMergerLanding';
-import VideoMergerBlog from './pages/blogs/VideoMergerBlog';
-import ExtractAudio from './pages/tools/ExtractAudio';
-import ThumbnailGenerator from './pages/tools/ThumbnailGenerator';
-import VideoPlayback from './pages/tools/VideoPlayback';
-import BurnCaption from './pages/tools/BurnCaption';
-import BurnCaptionLanding from './pages/landings/BurnCaptionLanding';
-import BurnCaptionsBlog from './pages/blogs/BurnCaptionsBlog';
+// Main Pages
+const AboutUs = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Home = lazy(() => import('./pages/Home'));
+const NotFound = lazy(() => import('./pages/404'));
+const PrivacyPolicy = lazy(() => import('./pages/Policy'));
+const TOS = lazy(() => import('./pages/Terms'));
 
 // Audio Tools
-import AudioConvert from './pages/tools/AudioConvert';
-import AudioConvertLanding from './pages/landings/AudioConvertLanding';
-import AudioConvertBlog from './pages/blogs/AudioConvertBlog';
-import AudioTrim from './pages/tools/AudioTrim';
-import AudioTrimLanding from './pages/landings/AudioTrimLanding';
-import AudioTrimBlog from './pages/blogs/AudioTrimBlog';
-import AudioMerge from './pages/tools/AudioMerge';
-import AudioMergerLanding from './pages/landings/AudioMergerLanding';
-import AudioMergerBlog from './pages/blogs/AudioMergerBlog';
-import AudioEffects from './pages/tools/AudioEffects';
-import AudioEffectsLanding from './pages/landings/AudioEffectsLanding';
-import ThumbnailGeneratorLanding from './pages/landings/ThumbnailGeneratorLanding';
-import ThumbnailGeneratorBlog from './pages/blogs/ThumbnailGeneratorBlog';
-import AudioEffectsBlog from './pages/blogs/AudioEffectsBlog';
-import AudioPlayback from './pages/tools/AudioPlayback';
-import AudioPlaybackLanding from './pages/landings/AudioPlaybackLanding';
-import AudioPlaybackBlog from './pages/blogs/AudioPlaybackBlog';
+const AudioConvert = lazy(() => import('./pages/tools/AudioConvert'));
+const AudioEffects = lazy(() => import('./pages/tools/AudioEffects'));
+const AudioMerge = lazy(() => import('./pages/tools/AudioMerge'));
+const AudioPlayback = lazy(() => import('./pages/tools/AudioPlayback'));
+const AudioTrim = lazy(() => import('./pages/tools/AudioTrim'));
 
-// Image
-import ImageEditor from './pages/tools/ImageConvert';
-import ImageConverterLanding from './pages/landings/ImageConverterLanding';
-import ImageConverterBlog from './pages/blogs/ImageConverterBlog';
+// Audio Blogs
+const AudioConvertBlog = lazy(() => import('./pages/blogs/AudioConvertBlog'));
+const AudioEffectsBlog = lazy(() => import('./pages/blogs/AudioEffectsBlog'));
+const AudioMergerBlog = lazy(() => import('./pages/blogs/AudioMergerBlog'));
+const AudioPlaybackBlog = lazy(() => import('./pages/blogs/AudioPlaybackBlog'));
+const AudioTrimBlog = lazy(() => import('./pages/blogs/AudioTrimBlog'));
 
+// Audio Landings
+const AudioConvertLanding = lazy(() => import('./pages/landings/AudioConvertLanding'));
+const AudioEffectsLanding = lazy(() => import('./pages/landings/AudioEffectsLanding'));
+const AudioMergerLanding = lazy(() => import('./pages/landings/AudioMergerLanding'));
+const AudioPlaybackLanding = lazy(() => import('./pages/landings/AudioPlaybackLanding'));
+const AudioTrimLanding = lazy(() => import('./pages/landings/AudioTrimLanding'));
+
+// Image Tools
+const ImageEditor = lazy(() => import('./pages/tools/ImageConvert'));
+const ThumbnailGenerator = lazy(() => import('./pages/tools/ThumbnailGenerator'));
+
+// Image Blogs
+const ImageConverterBlog = lazy(() => import('./pages/blogs/ImageConverterBlog'));
+const ThumbnailGeneratorBlog = lazy(() => import('./pages/blogs/ThumbnailGeneratorBlog'));
+
+// Image Landings
+const ImageConverterLanding = lazy(() => import('./pages/landings/ImageConverterLanding'));
+const ThumbnailGeneratorLanding = lazy(() => import('./pages/landings/ThumbnailGeneratorLanding'));
+
+// Video Tools
+const BurnCaption = lazy(() => import('./pages/tools/BurnCaption'));
+const ExtractAudio = lazy(() => import('./pages/tools/ExtractAudio'));
+const VideoCompression = lazy(() => import('./pages/tools/VideoCompression'));
+const VideoConvert = lazy(() => import('./pages/tools/VideoConvert'));
+const VideoMerge = lazy(() => import('./pages/tools/VideoMerge'));
+const VideoPlayback = lazy(() => import('./pages/tools/VideoPlayback'));
+const VideoResize = lazy(() => import('./pages/tools/VideoResize'));
+const VideoTrim = lazy(() => import('./pages/tools/VideoTrim'));
+
+// Video Blogs
+const BurnCaptionsBlog = lazy(() => import('./pages/blogs/BurnCaptionsBlog'));
+const ExtractAudioBlog = lazy(() => import('./pages/blogs/ExtractAudioBlog'));
+const VideoCompressionBlog = lazy(() => import('./pages/blogs/VideoCompressionBlog'));
+const VideoConvertBlog = lazy(() => import('./pages/blogs/VideoConvertBlog'));
+const VideoMergerBlog = lazy(() => import('./pages/blogs/VideoMergerBlog'));
+const VideoPlaybackBlog = lazy(() => import('./pages/blogs/VideoPlaybackBlog'));
+const VideoResizerBlog = lazy(() => import('./pages/blogs/VideoResizerBlog'));
+const VideoTrimBlog = lazy(() => import('./pages/blogs/VideoTrimBlog'));
+
+// Video Landings
+const BurnCaptionLanding = lazy(() => import('./pages/landings/BurnCaptionLanding'));
+const ExtractAudioLanding = lazy(() => import('./pages/landings/ExtractAudioLanding'));
+const VideoCompressionLanding = lazy(() => import('./pages/landings/VideoCompressionLanding'));
+const VideoConvertLanding = lazy(() => import('./pages/landings/VideoConvertLanding'));
+const VideoMergerLanding = lazy(() => import('./pages/landings/VideoMergerLanding'));
+const VideoPlaybackLanding = lazy(() => import('./pages/landings/VideoPlaybackLanding'));
+const VideoResizerLanding = lazy(() => import('./pages/landings/VideoResizerLanding'));
+const VideoTrimLanding = lazy(() => import('./pages/landings/VideoTrimLanding'));
 
 function AppRoutes() {
   return (

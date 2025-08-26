@@ -18,8 +18,8 @@ function TOS() {
         <meta property="og:title" content={`Terms and Conditions - ${APP_INFO.name} Service Agreement`} />
         <meta property="og:description" content={`${APP_INFO.name} terms and conditions: Browser-based platform providing free file editing tools. All processing is local, service provided as-is. User responsibilities and service terms.`} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://videotools.netlify.app/terms" />
-        <link rel="canonical" href="https://videotools.netlify.app/terms" />
+        <meta property="og:url" content="https://fileapps.click/terms" />
+        <link rel="canonical" href="https://fileapps.click/terms" />
       </Helmet>
       <Container maxWidth="md" sx={{ my: 'auto' }}>
       <Typography variant="h2" component="h1" gutterBottom>

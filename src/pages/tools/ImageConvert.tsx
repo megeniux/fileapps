@@ -693,8 +693,8 @@ function ImageConvert() {
         <meta property="og:title" content="Image Converter & Editor - Convert JPG PNG WebP GIF Online Free" />
         <meta property="og:description" content="Free online image converter and editor. Convert between JPG, PNG, WebP, GIF formats. Resize, crop, rotate, and apply filters to images. Local processing with no watermarks." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://videotools.netlify.app/tools/image-convert" />
-        <link rel="canonical" href="https://videotools.netlify.app/tools/image-convert" />
+        <meta property="og:url" content="https://fileapps.click/tools/image-convert" />
+        <link rel="canonical" href="https://fileapps.click/tools/image-convert" />
       </Helmet>
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       <Card sx={{ p: 1.5 }} elevation={3}>

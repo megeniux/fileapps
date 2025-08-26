@@ -259,8 +259,8 @@ function VideoMerge() {
         <meta property="og:title" content="Video Merger Tool - Combine Multiple Videos Online for Free" />
         <meta property="og:description" content="Free online video merger tool to combine multiple video clips into one file. Merge videos in browser with no uploads, preserving quality. No watermarks, completely private." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://videotools.netlify.app/tools/video-merge" />
-        <link rel="canonical" href="https://videotools.netlify.app/tools/video-merge" />
+        <meta property="og:url" content="https://fileapps.click/tools/video-merge" />
+        <link rel="canonical" href="https://fileapps.click/tools/video-merge" />
       </Helmet>
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       <Card sx={{ p: 1.5 }}>

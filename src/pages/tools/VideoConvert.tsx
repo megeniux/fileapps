@@ -1,32 +1,32 @@
 import React, { useState, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { formatBytes } from '../../helpers';
-import { Helmet } from 'react-helmet-async';
 
 // MUI
+import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import LinearProgress from '@mui/material/LinearProgress';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
-import Box from '@mui/material/Box';
-import Alert from '@mui/material/Alert';
-import Popover from '@mui/material/Popover';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
+import LinearProgress from '@mui/material/LinearProgress';
 import MenuItem from '@mui/material/MenuItem';
+import Popover from '@mui/material/Popover';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
 // Icons
-import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 
 const ffmpeg = new FFmpeg();
 let isFFmpegLoaded = false;

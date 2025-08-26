@@ -18,8 +18,8 @@ function AboutUs() {
         <meta property="og:title" content={`About ${APP_INFO.name} - Free Online Video, Audio & Image Editor`} />
         <meta property="og:description" content={`Learn about ${APP_INFO.name}, a comprehensive platform providing free video compression and editing tools. Professional media editing without cost or technical barriers.`} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://videotools.netlify.app/about" />
-        <link rel="canonical" href="https://videotools.netlify.app/about" />
+        <meta property="og:url" content="https://fileapps.click/about" />
+        <link rel="canonical" href="https://fileapps.click/about" />
       </Helmet>
       <Container maxWidth="md" sx={{ my: 'auto' }}>
       <Typography variant="h2" component="h1" gutterBottom>

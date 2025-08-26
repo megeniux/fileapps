@@ -2,11 +2,11 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { APP_INFO } from "../constants";
 
-// Mui imports
+// MUI imports
 import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,

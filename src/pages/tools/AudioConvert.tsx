@@ -231,9 +231,9 @@ function AudioConvert() {
         <meta property="og:description" content="Convert audio (MP3, WAV, AAC, FLAC, OGG, M4A) in your browser. Choose bitrate or lossless." />
         <meta property="og:image" content="/images/landing/audio-convert-hero.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="/tools/audio/convert" />
+        <meta property="og:url" content="https://fileapps.click/tools/audio/convert" />
         <meta property="og:site_name" content="FileApps" />
-        <link rel="canonical" href="/tools/audio/convert" />
+        <link rel="canonical" href="https://fileapps.click/tools/audio/convert" />
       </Helmet>
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       <Card sx={{ p: 1.5 }}>

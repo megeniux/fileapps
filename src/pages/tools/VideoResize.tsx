@@ -290,9 +290,9 @@ function VideoResize() {
         <meta property="og:description" content="Resize videos to custom resolutions and aspect ratios in your browser." />
         <meta property="og:image" content="/images/landing/video-resizer-hero.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="/tools/video/resize" />
+        <meta property="og:url" content="https://fileapps.click/tools/video/resize" />
         <meta property="og:site_name" content="FileApps" />
-        <link rel="canonical" href="/tools/video/resize" />
+        <link rel="canonical" href="https://fileapps.click/tools/video/resize" />
       </Helmet>
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       <Card sx={{ p: 1.5 }} elevation={3}>

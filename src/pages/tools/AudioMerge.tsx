@@ -264,8 +264,8 @@ function AudioMerge() {
                 <meta property="og:title" content="Audio Merger - Join Multiple Audio Files Online Free" />
                 <meta property="og:description" content="Free online audio merger to join multiple audio tracks into one file instantly. Combine MP3, WAV, AAC files in your browser with no uploads or signups required." />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://videotools.netlify.app/tools/audio-merge" />
-                <link rel="canonical" href="https://videotools.netlify.app/tools/audio-merge" />
+                <meta property="og:url" content="https://fileapps.click/tools/audio-merge" />
+                <link rel="canonical" href="https://fileapps.click/tools/audio-merge" />
             </Helmet>
             <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
             <Card sx={{ p: 1.5 }}>

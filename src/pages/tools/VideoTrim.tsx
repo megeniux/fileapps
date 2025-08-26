@@ -184,9 +184,9 @@ function VideoTrim() {
         <meta property="og:description" content="Trim and cut videos with precision in your browser. No uploads required." />
         <meta property="og:image" content="/images/landing/video-trim-hero.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="/tools/video/trim" />
+        <meta property="og:url" content="https://fileapps.click/tools/video/trim" />
         <meta property="og:site_name" content="FileApps" />
-        <link rel="canonical" href="/tools/video/trim" />
+        <link rel="canonical" href="https://fileapps.click/tools/video/trim" />
       </Helmet>
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       <Card sx={{ p: 1.5 }}>

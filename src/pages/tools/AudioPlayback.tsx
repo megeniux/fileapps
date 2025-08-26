@@ -226,8 +226,8 @@ function AudioPlayback() {
         <meta property="og:title" content="Audio Playback Speed Editor - Change Audio Speed Online Free" />
         <meta property="og:description" content="Free online audio playback speed editor to change audio speed with pitch correction or reverse tracks completely. Export processed audio with no watermarks, 100% browser-based." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://videotools.netlify.app/tools/audio-playback" />
-        <link rel="canonical" href="https://videotools.netlify.app/tools/audio-playback" />
+        <meta property="og:url" content="https://fileapps.click/tools/audio-playback" />
+        <link rel="canonical" href="https://fileapps.click/tools/audio-playback" />
       </Helmet>
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       <Card sx={{ p: 1.5 }} elevation={3}>

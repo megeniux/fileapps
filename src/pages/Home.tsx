@@ -170,8 +170,8 @@ function Home() {
         <meta property="og:title" content={`${APP_INFO.name} - Free Online Video, Audio & Image Editor Tools`} />
         <meta property="og:description" content="Professional browser-based media tools for free. Compress, convert, resize, trim, merge videos; extract audio, burn captions; edit audio files; convert images. No signup, no watermarks, private processing." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://videotools.netlify.app/" />
-        <link rel="canonical" href="https://videotools.netlify.app/" />
+        <meta property="og:url" content="https://fileapps.click/" />
+        <link rel="canonical" href="https://fileapps.click/" />
       </Helmet>
       <Container maxWidth="lg" sx={{ marginBlock: 'auto', py: 5 }}>
       <Box mb={4}>

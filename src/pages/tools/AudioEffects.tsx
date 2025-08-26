@@ -301,8 +301,8 @@ function AudioEffects() {
                 <meta property="og:title" content="Audio Effects - Apply Fades, Normalization, Pitch & Speed Effects Free" />
                 <meta property="og:description" content="Free online audio effects tool to apply fades, normalization, pitch adjustment, speed changes, and volume control to audio files. Professional audio effects in your browser." />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://videotools.netlify.app/tools/audio-effects" />
-                <link rel="canonical" href="https://videotools.netlify.app/tools/audio-effects" />
+                <meta property="og:url" content="https://fileapps.click/tools/audio-effects" />
+                <link rel="canonical" href="https://fileapps.click/tools/audio-effects" />
             </Helmet>
             <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
             <Card sx={{ p: 1.5 }}>

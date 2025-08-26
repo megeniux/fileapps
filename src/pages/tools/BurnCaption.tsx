@@ -263,8 +263,8 @@ function BurnCaption() {
                 <meta property="og:title" content="Burn Captions into Video - Add Permanent Subtitles Online Free" />
                 <meta property="og:description" content="Free online tool to burn captions and subtitles permanently into video files. Supports SRT and VTT formats. Customize font, size, color, and position. No uploads required." />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://videotools.netlify.app/tools/burn-caption" />
-                <link rel="canonical" href="https://videotools.netlify.app/tools/burn-caption" />
+                <meta property="og:url" content="https://fileapps.click/tools/burn-caption" />
+                <link rel="canonical" href="https://fileapps.click/tools/burn-caption" />
             </Helmet>
             <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
             {/* Move error message above Card */}

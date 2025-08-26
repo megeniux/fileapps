@@ -340,8 +340,8 @@ function ThumbnailGenerator() {
         <meta property="og:title" content="Video Thumbnail Generator - Extract Preview Images from Videos Free" />
         <meta property="og:description" content="Free online video thumbnail generator. Extract high-quality preview images from videos instantly. Generate thumbnails in multiple sizes with no watermarks or signups required." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://videotools.netlify.app/tools/thumbnail-generator" />
-        <link rel="canonical" href="https://videotools.netlify.app/tools/thumbnail-generator" />
+        <meta property="og:url" content="https://fileapps.click/tools/thumbnail-generator" />
+        <link rel="canonical" href="https://fileapps.click/tools/thumbnail-generator" />
       </Helmet>
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}

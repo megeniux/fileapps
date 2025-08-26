@@ -241,9 +241,9 @@ function VideoCompression() {
         <meta property="og:description" content="Compress videos locally in your browser. Reduce file size while maintaining quality." />
         <meta property="og:image" content="/images/landing/video-compression-hero.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="/tools/video/compress" />
+        <meta property="og:url" content="https://fileapps.click/tools/video/compress" />
         <meta property="og:site_name" content="FileApps" />
-        <link rel="canonical" href="/tools/video/compress" />
+        <link rel="canonical" href="https://fileapps.click/tools/video/compress" />
       </Helmet>
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}

@@ -233,8 +233,8 @@ function AudioTrim() {
         <meta property="og:title" content="Audio Trimmer - Cut and Trim Audio Files Online Free" />
         <meta property="og:description" content="Free online audio trimmer to cut and trim audio files with precision timing. Perfect for podcasts, music, and voiceovers. Local processing with no watermarks or uploads." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://videotools.netlify.app/tools/audio-trim" />
-        <link rel="canonical" href="https://videotools.netlify.app/tools/audio-trim" />
+        <meta property="og:url" content="https://fileapps.click/tools/audio-trim" />
+        <link rel="canonical" href="https://fileapps.click/tools/audio-trim" />
       </Helmet>
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}

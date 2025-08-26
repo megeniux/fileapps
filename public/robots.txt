@@ -1,2 +1,8 @@
 User-agent: *
-Disallow: /tools
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_/
+
+# Sitemap
+Sitemap: https://fileapps.click/sitemap.xml

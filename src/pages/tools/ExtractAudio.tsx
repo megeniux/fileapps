@@ -178,8 +178,8 @@ function ExtractAudio() {
         <meta property="og:title" content="Extract Audio from Video - Free MP3 Audio Extractor Tool" />
         <meta property="og:description" content="Free online tool to extract audio from video files. Convert video to MP3, WAV, AAC, or FLAC audio formats. High-quality audio extraction with no uploads or watermarks." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://videotools.netlify.app/tools/extract-audio" />
-        <link rel="canonical" href="https://videotools.netlify.app/tools/extract-audio" />
+        <meta property="og:url" content="https://fileapps.click/tools/extract-audio" />
+        <link rel="canonical" href="https://fileapps.click/tools/extract-audio" />
       </Helmet>
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       <Card sx={{ p: 1.5 }}>

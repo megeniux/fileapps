@@ -19,8 +19,8 @@ function Contact() {
         <meta property="og:title" content={`Contact ${APP_INFO.name} - Get Support for Video, Audio & Image Tools`} />
         <meta property="og:description" content={`Contact ${APP_INFO.name} for questions, feedback, or support. Reach out to our team for help with free video, audio, and image editing tools. Developer support available.`} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://videotools.netlify.app/contact" />
-        <link rel="canonical" href="https://videotools.netlify.app/contact" />
+        <meta property="og:url" content="https://fileapps.click/contact" />
+        <link rel="canonical" href="https://fileapps.click/contact" />
       </Helmet>
       <Container maxWidth="md" sx={{ my: 'auto' }}>
       <Typography variant="h2" component="h1" gutterBottom>

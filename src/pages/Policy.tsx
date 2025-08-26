@@ -18,8 +18,8 @@ function PrivacyPolicy() {
         <meta property="og:title" content={`Privacy Policy - ${APP_INFO.name} Data Protection & Security`} />
         <meta property="og:description" content={`${APP_INFO.name} privacy policy: We don't collect, store, or share personal information. All processing is local in your browser. Your data remains private and secure.`} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://videotools.netlify.app/policy" />
-        <link rel="canonical" href="https://videotools.netlify.app/policy" />
+        <meta property="og:url" content="https://fileapps.click/policy" />
+        <link rel="canonical" href="https://fileapps.click/policy" />
       </Helmet>
       <Container maxWidth="md" sx={{ my: 'auto' }}>
       <Typography variant="h2" component="h1" gutterBottom>

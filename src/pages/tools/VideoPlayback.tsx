@@ -261,8 +261,8 @@ function VideoPlayback() {
                 <meta property="og:title" content="Video Playback Speed Editor - Change Video Speed Online Free" />
                 <meta property="og:description" content="Free online video playback speed editor. Change video speed from slow motion to time-lapse effects. Supports reverse playback and pitch correction. No watermarks, browser-based." />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://videotools.netlify.app/tools/video-playback" />
-                <link rel="canonical" href="https://videotools.netlify.app/tools/video-playback" />
+                <meta property="og:url" content="https://fileapps.click/tools/video-playback" />
+                <link rel="canonical" href="https://fileapps.click/tools/video-playback" />
             </Helmet>
             <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
             <Card sx={{ p: 1.5 }} elevation={3}>
