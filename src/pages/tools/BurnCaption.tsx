@@ -262,12 +262,12 @@ function BurnCaption() {
                     <Box display="flex" alignItems="center">
                         <SubtitlesIcon color="primary" fontSize="small" sx={{ mr: 0.5 }} />
                         <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
-                            Burn Captions
+                            Burn Captions into Video
                         </Typography>
                     </Box>
                     <Divider sx={{ my: 0.5 }} />
                     <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-                        Upload a video and subtitle file, customize style, and burn captions into your video.
+                        Embed SRT/VTT subtitles permanently into video files. Customize font, size, color & position — private browser-based processing.
                     </Typography>
                     {/* Upload area */}
                     <Box

@@ -27,7 +27,7 @@ export default function VideoCompressionBlog() {
   return (
     <Container maxWidth='lg' sx={{ py: 6 }}>
       <Helmet>
-        <title>Compress Video Online Free – Private No‑Signup Video Compressor (No Watermark)</title>
+        <title>How to Compress Video Online Free – Step-by-Step Guide</title>
         <meta name='description' content='Free online video compressor: reduce MP4 / MOV / MKV size with CRF, bitrate & resolution control. Private in‑browser processing, no signup, no watermark.' />
         <meta property='og:title' content='Free Video Compressor Online – Reduce Size Without Quality Loss' />
         <meta property='og:description' content='Compress videos locally: CRF, bitrate, resolution, presets & size estimate. Fast, private, watermark‑free.' />

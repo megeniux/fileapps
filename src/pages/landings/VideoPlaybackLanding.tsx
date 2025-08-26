@@ -70,7 +70,7 @@ export default function VideoPlaybackLanding() {
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Change Video Speed Online Free – Reverse / Fast Playback (No Signup)</title>
+        <title>Change Video Speed Online Free – Reverse / Fast Playback</title>
         <meta name="description" content="Adjust or reverse video playback speed from -20x to +20x in your browser. MP4, MOV, MKV, AVI supported. Private, fast & watermark‑free." />
         <meta property="og:title" content="Free Online Video Speed Changer – -20x to +20x" />
         <meta property="og:description" content="Change or reverse video speed locally ( -20x to +20x ). No uploads, signup or watermark." />
@@ -89,7 +89,7 @@ export default function VideoPlaybackLanding() {
               <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Set playback from -20x (reverse) to +20x locally. MP4, MOV, MKV, AVI supported — free, private & watermark‑free.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
                 <Button color='secondary' size='large' href="/tools/video/playback" variant="contained">Upload Video</Button>
-                <Button size='large' href="/tools/video/how-to-video-playback-speed-editor" variant="text" sx={{ color: 'text.secondary' }}>How to Change Video Speed</Button>
+                <Button size='large' href="/tools/video/how-to-video-playback-speed-editor" variant="text" sx={{ color: 'text.secondary' }}>How-to Guide</Button>
               </Box>
             </Grid>
             <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -205,7 +205,7 @@ export default function VideoPlaybackLanding() {
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Fast, private & free video speed editing — right in your browser.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
               <Button color='inherit' variant='contained' size='large' href='/tools/video/playback'>Upload Video</Button>
-              <Button size='large' href='/tools/video/how-to-video-playback-speed-editor' sx={{ color: 'common.white' }}>How to Change Video Speed</Button>
+              <Button size='large' href='/tools/video/how-to-video-playback-speed-editor' sx={{ color: 'common.white' }}>How-to Guide</Button>
             </Grid>
           </Grid>
         </Container>

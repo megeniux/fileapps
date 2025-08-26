@@ -291,7 +291,7 @@ function VideoResize() {
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-            Resize videos to custom resolutions and aspect ratios. Choose fit/fill/stretch modes, change FPS, and preview before exporting — processed locally in your browser.
+            Resize videos to custom dimensions or aspect ratios (16:9, 4:3, 1:1) for social media. Change resolution privately in your browser.
           </Typography>
           <Box
             onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}

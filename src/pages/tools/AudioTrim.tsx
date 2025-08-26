@@ -236,7 +236,7 @@ function AudioTrim() {
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-            Trim and cut audio files online with precision.
+            Trim and cut audio files with precision timing for podcasts, music, or voiceovers. Local processing — private & watermark-free.
           </Typography>
           {/* Upload & Preview area, styled like ImageConvert */}
           <Box

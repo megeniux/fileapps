@@ -301,7 +301,7 @@ function AudioEffects() {
                     </Box>
                     <Divider sx={{ my: 0.5 }} />
                     <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-                        Apply effects: fade in/out, normalize, speed, pitch, and volume.
+                        Apply fades, normalization, pitch adjustment, speed changes & volume control to audio files. Professional effects in your browser.
                     </Typography>
                     {/* Upload & Preview area */}
                     <Box

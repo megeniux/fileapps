@@ -14,7 +14,7 @@ export default function BurnCaptionsBlog(){
   return (
     <Container maxWidth='lg' sx={{ py:6 }}>
       <Helmet>
-        <title>How to Burn Subtitles into Video Online – Hardcode Captions (Free & Private)</title>
+        <title>How to Burn Subtitles into Video Online – Hardcode Captions Guide</title>
         <meta name='description' content='Learn how to hardcode subtitles: upload video, add SRT/VTT, style font, color, outline & background then burn locally with no watermark.' />
         <meta property='og:title' content='Burn Subtitles into Video Online – Free & Private (No Watermark)' />
         <meta property='og:description' content='Hardcode SRT / VTT captions into MP4 locally. Style & export watermark‑free.' />

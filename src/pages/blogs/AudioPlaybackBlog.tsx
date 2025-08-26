@@ -18,7 +18,7 @@ export default function AudioPlaybackBlog() {
   return (
     <Container maxWidth='lg' sx={{ py:6 }}>
       <Helmet>
-        <title>Change Audio Playback Speed Online – Slow Down, Speed Up or Reverse (Free)</title>
+        <title>How to Change Audio Playback Speed Online – Slow Down, Speed Up Guide</title>
         <meta name='description' content='Free online audio speed changer: slow down, speed up or reverse MP3, WAV, FLAC, AAC, OGG, M4A locally. Private, fast & watermark‑free.' />
         <meta property='og:title' content='Free Online Audio Playback Speed Editor – Slow, Fast, Reverse' />
         <meta property='og:description' content='Adjust or reverse audio speed in your browser. MP3, WAV, FLAC, AAC supported. No uploads or signup.' />

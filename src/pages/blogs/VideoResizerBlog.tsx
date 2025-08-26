@@ -28,7 +28,7 @@ export default function VideoResizerBlog() {
     return (
         <Container maxWidth="lg" sx={{ py: 6 }}>
             <Helmet>
-                <title>Free Online Video Resizer – Change Resolution & Aspect Ratio (No Signup)</title>
+                <title>How to Resize Video Online Free – Change Resolution & Aspect Ratio Guide</title>
                 <meta name="description" content="Resize videos locally: change resolution, aspect ratio (16:9, 9:16, 1:1, 4:3, 21:9), modes (Fit, Fill, Stretch) & FPS. Private, fast & watermark‑free." />
                 <meta name="keywords" content="resize video online free, online video resizer no signup, resize mp4 video online, change video resolution online, video aspect ratio changer, resize MOV AVI MKV online, private video resizer browser, no credit card video tool" />
                 <meta property="og:title" content="Resize Videos Online Free – Fast Aspect Ratio & Resolution Editor" />

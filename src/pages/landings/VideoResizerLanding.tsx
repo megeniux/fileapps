@@ -99,7 +99,7 @@ export default function VideoResizerLanding() {
     return (
         <Root elevation={0}>
             <Helmet>
-                <title>Free Online Video Resizer – Change Resolution & Aspect Ratio (No Signup)</title>
+                <title>Free Online Video Resizer – Change Resolution & Aspect Ratio</title>
                 <meta name="description" content="Resize videos locally: change resolution, aspect ratio (16:9, 9:16, 1:1, 4:3, 21:9), modes (Fit, Fill, Stretch) & FPS. Private, fast & watermark‑free." />
                 <meta property="og:title" content="Resize Videos Online Free – Fast Aspect Ratio & Resolution Editor" />
                 <meta property="og:description" content="Resize & reformat video dimensions locally in your browser. No uploads, no signup, no watermark." />
@@ -119,7 +119,7 @@ export default function VideoResizerLanding() {
                             <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Change resolution, aspect ratio (16:9, 9:16, 1:1, 4:3, 21:9), mode & FPS locally. No uploads, signup or watermark.</Typography>
                             <Box display="flex" gap={1}>
                                 <Button color='warning' size='large' href="/tools/video/resize" variant="contained">Upload</Button>
-                                <Button size='large' href="/tools/video/how-to-resize-video-online" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
+                                <Button size='large' href="/tools/video/how-to-resize-video-online" variant="text" sx={{ color: 'text.secondary' }}>How-to Guide</Button>
                             </Box>
                         </Grid>
                         <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -256,7 +256,7 @@ export default function VideoResizerLanding() {
                         <Grid size={12}><Typography variant='h6' component="p" color='common.white'>Fast, private and free video resizing — right in your browser.</Typography></Grid>
                         <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
                             <Button color='inherit' variant="contained" size='large' href="/tools/video/resize">Upload</Button>
-                            <Button size='large' href="/tools/video/how-to-resize-video-online" sx={{ color: 'common.white' }}>Learn More</Button>
+                            <Button size='large' href="/tools/video/how-to-resize-video-online" sx={{ color: 'common.white' }}>How-to Guide</Button>
                         </Grid>
                     </Grid>
                 </Container>

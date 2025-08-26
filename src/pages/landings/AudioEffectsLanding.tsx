@@ -32,7 +32,7 @@ export default function AudioEffectsLanding() {
 	return (
 		<Root elevation={0}>
 			<Helmet>
-				<title>Edit Audio Online Free – Pitch Shift, Tempo, Normalize & Fade (Private)</title>
+				<title>Edit Audio Online Free – Pitch Shift, Tempo, Normalize & Fade Private</title>
 				<meta name="description" content="Free online audio effects: pitch shift, tempo/speed change, normalize loudness, fade in/out, volume gain. Local WebAssembly processing – no uploads, signup or watermark." />
 				<meta property="og:title" content="Online Audio Effects – Pitch, Speed, Normalize & Fade (Free & Private)" />
 				<meta property="og:description" content="Apply pitch, speed, normalize, fades & gain to audio locally (MP3, WAV, FLAC, OGG, M4A). No uploads, signup or watermark." />
@@ -51,7 +51,7 @@ export default function AudioEffectsLanding() {
 							<Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Pitch shift, tempo change, normalize loudness, fade in/out & gain — processed locally. Free, private & watermark‑free.</Typography>
 							<Box display="flex" gap={1}>
 								<Button color='info' size='large' href="/tools/audio/effects" variant="contained">Upload</Button>
-								<Button size='large' href="/tools/audio/how-to-audio-effects-online" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
+								<Button size='large' href="/tools/audio/how-to-audio-effects-online" variant="text" sx={{ color: 'text.secondary' }}>How-to Guide</Button>
 							</Box>
 						</Grid>
 						<Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -270,7 +270,7 @@ export default function AudioEffectsLanding() {
 						<Grid size={12}><Typography variant='h6' component='p' color='common.white'>Apply pitch, speed, fades, normalization & more — all locally.</Typography></Grid>
 						<Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
 							<Button color='inherit' variant='contained' size='large' href='/tools/audio/effects'>Upload</Button>
-							<Button size='large' href='/tools/audio/how-to-audio-effects-online' sx={{ color: 'common.white' }}>Learn More</Button>
+							<Button size='large' href='/tools/audio/how-to-audio-effects-online' sx={{ color: 'common.white' }}>How-to Guide</Button>
 						</Grid>
 					</Grid>
 				</Container>

@@ -236,12 +236,12 @@ function VideoCompression() {
       <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
-            <CompressIcon color="primary" fontSize='small' sx={{ mr: 0.5 }} />
+            <CompressIcon color="secondary" fontSize='small' sx={{ mr: 0.5 }} />
             <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Video Compressor</Typography>
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-            Reduce video file size while maintaining quality. Simple, fast and easy compression for all your videos.
+            Reduce video file size without quality loss using local browser processing. Adjust CRF, bitrate & resolution — no uploads, no signup required.
           </Typography>
           {/* Upload area - refactored to match AudioConvert/VideoTrim */}
           <Box

@@ -82,7 +82,7 @@ export default function ThumbnailGeneratorLanding() {
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Create Stunning Video Thumbnails Online – Fast, Free & No Signup</title>
+        <title>Create Stunning Video Thumbnails Online – Fast & Free</title>
         <meta name="description" content="Extract high-quality thumbnails from your videos instantly in your browser. No watermark, no downloads, and no credit card required." />
         <meta property="og:title" content="Create Stunning Video Thumbnails Online – Fast, Free & No Signup" />
         <meta property="og:description" content="Extract high-quality thumbnails from your videos instantly in your browser. No watermark, no downloads, and no credit card required." />
@@ -102,7 +102,7 @@ export default function ThumbnailGeneratorLanding() {
               <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Extract high-quality thumbnails from your videos instantly in your browser. No watermark, no downloads, and no credit card required.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
                 <Button color='secondary' size='large' href="/tools/image/thumbnail" variant="contained">Upload Video</Button>
-                <Button size='large' href="/tools/image/how-to-generate-thumbnail" variant="text" sx={{ color: 'text.secondary' }}>Learn How</Button>
+                <Button size='large' href="/tools/image/how-to-generate-thumbnail" variant="text" sx={{ color: 'text.secondary' }}>How-to Guide</Button>
               </Box>
             </Grid>
             <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -224,7 +224,7 @@ export default function ThumbnailGeneratorLanding() {
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Fast, private & free thumbnail generation — right in your browser.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
               <Button color='inherit' variant='contained' size='large' href='/tools/image/thumbnail'>Upload Video</Button>
-              <Button size='large' href='/tools/image/how-to-generate-thumbnail' sx={{ color: 'common.white' }}>Learn How</Button>
+              <Button size='large' href='/tools/image/how-to-generate-thumbnail' sx={{ color: 'common.white' }}>How-to Guide</Button>
             </Grid>
           </Grid>
         </Container>

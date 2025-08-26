@@ -74,7 +74,7 @@ export default function VideoConvertLanding() { // corrected component name to m
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Convert Video Online Free – Private No‑Signup Video Converter</title>
+        <title>Convert Video Online Free – Private Video Converter</title>
         <meta name="description" content="Free online video converter: convert MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free." />
         <meta name="keywords" content="convert video online free, convert video to mp4, free online video converter, no signup video converter, change video resolution online, convert mov to mp4 free, convert mkv to mp4 online, video codec converter online, convert video without losing quality" />
         <meta property="og:title" content="Free Online Video Converter – Fast, Private & No Watermark" />
@@ -94,7 +94,7 @@ export default function VideoConvertLanding() { // corrected component name to m
               <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Convert MP4, MOV, MKV, AVI, WebM & more. Adjust resolution, codec, bitrate & FPS locally — no signup, uploads or watermark.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
                 <Button color='primary' size='large' href="/tools/video/convert" variant="contained">Upload</Button>
-                <Button size='large' href="/tools/video/how-to-convert-video-online" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
+                <Button size='large' href="/tools/video/how-to-convert-video-online" variant="text" sx={{ color: 'text.secondary' }}>How-to Guide</Button>
               </Box>
             </Grid>
             <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -216,7 +216,7 @@ export default function VideoConvertLanding() { // corrected component name to m
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Upload your file and convert it instantly — private & free.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
               <Button color='inherit' variant='contained' size='large' href='/tools/video/convert'>Upload</Button>
-              <Button size='large' href='/tools/video/how-to-convert-video-online' sx={{ color: 'common.white' }}>Learn More</Button>
+              <Button size='large' href='/tools/video/how-to-convert-video-online' sx={{ color: 'common.white' }}>How-to Guide</Button>
             </Grid>
           </Grid>
         </Container>

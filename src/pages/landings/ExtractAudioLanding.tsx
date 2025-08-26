@@ -28,7 +28,7 @@ export default function ExtractAudioLanding() {
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Extract Audio from Video – Free Online Audio Extractor (No Signup)</title>
+        <title>Extract Audio from Video – Free Online Audio Extractor</title>
         <meta name="description" content="Extract audio (MP3, WAV, AAC) from MP4, MOV, MKV, WebM in your browser. Select a time range & download — fast, private & watermark‑free." />
         <meta property="og:title" content="Extract Audio from Video – Free Online Tool" />
         <meta property="og:description" content="Pull MP3, WAV or AAC from MP4, MOV, MKV, WebM locally. Select range & export – no uploads or watermark." />
@@ -47,7 +47,7 @@ export default function ExtractAudioLanding() {
               <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Pull MP3, WAV or AAC from MP4, MOV, MKV, WebM. Select a time range & export locally — no signup or watermark.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
                 <Button color='error' size='large' href="/tools/video/extract-audio" variant="contained">Upload Video</Button>
-                <Button size='large' href="/tools/video/how-to-extract-audio-from-video" variant="text" sx={{ color: 'text.secondary' }}>How to Extract Audio</Button>
+                <Button size='large' href="/tools/video/how-to-extract-audio-from-video" variant="text" sx={{ color: 'text.secondary' }}>How-to Guide</Button>
               </Box>
             </Grid>
             <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -163,7 +163,7 @@ export default function ExtractAudioLanding() {
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Fast, private & free audio extraction — right in your browser.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
               <Button color='inherit' variant='contained' size='large' href='/tools/video/extract-audio'>Upload Video</Button>
-              <Button size='large' href='/tools/video/how-to-extract-audio-from-video' sx={{ color: 'common.white' }}>How to Extract Audio</Button>
+              <Button size='large' href='/tools/video/how-to-extract-audio-from-video' sx={{ color: 'common.white' }}>How-to Guide</Button>
             </Grid>
           </Grid>
         </Container>

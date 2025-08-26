@@ -695,7 +695,7 @@ function ImageConvert() {
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-            Convert, resize, crop, rotate and optimize images for web and social: adjust quality, apply filters and crop interactively — export in popular formats, all processed in your browser.
+            Convert, resize, crop, rotate, and apply filters to JPG, PNG, WebP, GIF images. Local processing in your browser — fast, secure, no watermark.
           </Typography>
           {/* Drag area (shown only before file is selected) */}
           {!file && (

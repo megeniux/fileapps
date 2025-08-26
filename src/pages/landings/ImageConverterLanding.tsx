@@ -32,7 +32,7 @@ export default function ImageConverterLanding() {
     return (
         <Root elevation={0}>
             <Helmet>
-                <title>Free Online Image Converter – Resize, Crop, Rotate & Convert (Private)</title>
+                <title>Free Online Image Converter – Resize, Crop, Rotate & Convert Private</title>
                 <meta name="description" content="Convert & edit images (JPG, PNG, WebP, GIF) locally in your browser: resize, crop, rotate, adjust filters & quality. Free, private & watermark‑free." />
                 <meta property="og:title" content="Free Online Image Converter – Convert, Resize & Edit Privately" />
                 <meta property="og:description" content="Resize, crop, rotate & convert images (JPG, PNG, WebP, GIF) with local processing. No uploads, no signup, no watermark." />
@@ -52,7 +52,7 @@ export default function ImageConverterLanding() {
                             <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Drag & drop an image, then resize, crop, rotate, and apply filters like grayscale, blur, and brightness. Export in JPG, PNG, WebP, or GIF formats – no signup or watermark.</Typography>
                             <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
                                 <Button color='primary' size='large' href="/tools/image/convert" variant="contained">Upload Image</Button>
-                                <Button size='large' href="/tools/image/how-to-convert-image-online" variant="text" sx={{ color: 'text.secondary' }}>View Full Guide</Button>
+                                <Button size='large' href="/tools/image/how-to-convert-image-online" variant="text" sx={{ color: 'text.secondary' }}>How-to Guide</Button>
                             </Box>
                         </Grid>
                         <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -257,7 +257,7 @@ export default function ImageConverterLanding() {
                         <Grid size={{ xs: 12 }}><Typography variant='h6' component='p' color='common.white'>Drag & drop an image, edit it instantly — private & free.</Typography></Grid>
                         <Grid size={{ xs: 12 }} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
                             <Button color='inherit' variant='contained' size='large' href='/tools/image/convert'>Upload Image</Button>
-                            <Button size='large' href='/tools/image/how-to-convert-image-online' sx={{ color: 'common.white' }}>Learn More</Button>
+                            <Button size='large' href='/tools/image/how-to-convert-image-online' sx={{ color: 'common.white' }}>How-to Guide</Button>
                         </Grid>
                     </Grid>
                 </Container>

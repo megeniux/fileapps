@@ -25,6 +25,7 @@ import RemoveIcon from '@mui/icons-material/Remove'
 
 // Icons
 import ImageIcon from '@mui/icons-material/Image'
+import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual'
 import CollectionsIcon from '@mui/icons-material/Collections'
 import FilterFramesIcon from '@mui/icons-material/FilterFrames'
 import CloseIcon from '@mui/icons-material/Close'
@@ -335,14 +336,14 @@ function ThumbnailGenerator() {
       <Card sx={{ p: 1.5 }} elevation={3}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
-            <ImageIcon color="warning" fontSize="small" sx={{ mr: 0.5 }} />
+            <PhotoSizeSelectActualIcon color="secondary" fontSize="small" sx={{ mr: 0.5 }} />
                 <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
-              Thumbnail Generator
+              Video Thumbnail Generator
             </Typography>
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-            Generate thumbnails from your videos with custom options.
+            Extract high-quality thumbnails from videos instantly. Generate preview images in multiple sizes — no watermark, no signup required.
           </Typography>
           <Box
             onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}

@@ -27,7 +27,7 @@ export default function ImageConverterBlog() {
   return (
     <Container maxWidth='lg' sx={{ py: 6 }}>
       <Helmet>
-        <title>Convert & Edit Images Online Free – Resize, Crop, Rotate (Private)</title>
+        <title>How to Convert & Edit Images Online Free – Resize, Crop, Rotate Guide</title>
         <meta name='description' content='Resize, crop, rotate & convert JPG, PNG, WebP, GIF locally in your browser. Apply filters & quality settings. Free, private, no watermark.' />
         <meta property='og:title' content='Free Online Image Converter – Private Resize, Crop & Convert' />
         <meta property='og:description' content='Convert & edit images (JPG, PNG, WebP, GIF) without uploads. Resize, crop, rotate, filter & export — free & watermark‑free.' />

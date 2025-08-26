@@ -26,7 +26,7 @@ export default function VideoPlaybackBlog() {
   return (
     <Container maxWidth="lg" sx={{ py: 6 }}>
       <Helmet>
-        <title>Change Video Speed Online Free – Adjust / Reverse Playback (Private, No Signup)</title>
+        <title>How to Change Video Speed Online Free – Complete Guide</title>
         <meta name="description" content="Free online video speed editor: change playback speed from -20x (reverse) to +20x locally in your browser. MP4, MOV, MKV, AVI supported. Private & watermark‑free." />
         <meta property="og:title" content="Free Online Video Speed Changer – -20x to +20x (Reverse / Fast)" />
         <meta property="og:description" content="Adjust or reverse video speed (-20x to +20x) privately in your browser. No uploads, signup or watermark." />

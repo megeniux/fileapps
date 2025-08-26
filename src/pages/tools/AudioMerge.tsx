@@ -264,7 +264,7 @@ function AudioMerge() {
                     </Box>
                     <Divider sx={{ my: 0.5 }} />
                     <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-                        Upload multiple audio files, arrange their order, and merge them into one file.
+                        Join multiple audio tracks into one file instantly. Combine MP3, WAV, AAC files in your browser — no uploads or signup required.
                     </Typography>
                     {/* Drag-and-drop Upload/Preview UI */}
                     <Box

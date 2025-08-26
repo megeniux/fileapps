@@ -32,7 +32,7 @@ export default function BurnCaptionLanding(){
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Burn Subtitles into Video Online – Hardcode Captions (Free & Private)</title>
+        <title>Burn Subtitles into Video Online – Hardcode Captions Free & Private</title>
         <meta name="description" content="Free online subtitle burner: hardcode SRT / VTT captions into MP4, MOV, MKV. Style font, size, color, outline & background. Private local processing – no signup or watermark." />
         <meta property="og:title" content="Online Subtitle Burner – Hardcode Captions Free (No Watermark)" />
         <meta property="og:description" content="Burn subtitles (SRT/VTT) into video locally. Style & encode MP4 without uploads or signup." />
@@ -54,7 +54,7 @@ export default function BurnCaptionLanding(){
               </Typography>
               <Box display="flex" gap={1} justifyContent={{ xs:'center', md:'flex-start' }}>
                 <Button color='secondary' size='large' variant='contained' href='/tools/video/burn-captions'>Upload Video</Button>
-                <Button size='large' variant='text' sx={{ color:'text.secondary' }} href='/tools/video/how-to-burn-subtitles-into-video'>Learn More</Button>
+                <Button size='large' variant='text' sx={{ color:'text.secondary' }} href='/tools/video/how-to-burn-subtitles-into-video'>How-to Guide</Button>
               </Box>
             </Grid>
             <Grid container size={{ xs:12, md:6 }} className='hero-image' justifyContent={{ xs:'center', md:'flex-end' }}>
@@ -187,7 +187,7 @@ export default function BurnCaptionLanding(){
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Hardcode captions privately — fast, free & watermark‑free.</Typography></Grid>
             <Grid size={12} sx={{ display:'flex', justifyContent:'center', gap:1 }}>
               <Button color='inherit' variant='contained' size='large' href='/tools/video/burn-captions'>Upload Video</Button>
-              <Button size='large' href='/tools/video/how-to-burn-subtitles-into-video' sx={{ color:'common.white' }}>Learn More</Button>
+              <Button size='large' href='/tools/video/how-to-burn-subtitles-into-video' sx={{ color:'common.white' }}>How-to Guide</Button>
             </Grid>
           </Grid>
         </Container>

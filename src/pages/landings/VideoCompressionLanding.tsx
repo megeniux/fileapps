@@ -98,7 +98,7 @@ export default function VideoCompressionLanding() {
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Compress Video Online Free – Private No‑Signup Video Compressor</title>
+        <title>Compress Video Online Free – Private Video Compressor</title>
         <meta name='description' content='Free online video compressor: reduce MP4 / MOV / MKV size with CRF, bitrate & resolution control. 100% in‑browser, private, no signup, no watermark.' />
         <meta property='og:title' content='Free Video Compressor Online – Reduce Size Without Quality Loss' />
         <meta property='og:description' content='Compress videos locally with CRF, bitrate, resolution & preset control. Fast, private & watermark‑free.' />
@@ -117,7 +117,7 @@ export default function VideoCompressionLanding() {
               <Typography variant='h6' component='p' color='text.secondary' mt={3} mb={4}>Shrink file size using CRF, bitrate & resolution controls — processed locally. No signup, no uploads, no watermark.</Typography>
               <Box display='flex' gap={1} flexWrap='wrap'>
                 <Button color='secondary' size='large' variant='contained' href='/tools/video/compress'>Upload</Button>
-                <Button size='large' variant='outlined' color='secondary' href='/tools/video/how-to-compress-video-online'>Learn More</Button>
+                <Button size='large' variant='outlined' color='secondary' href='/tools/video/how-to-compress-video-online'>How-to Guide</Button>
               </Box>
             </Grid>
             <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -217,7 +217,7 @@ export default function VideoCompressionLanding() {
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Upload, set CRF & download a smaller file — private & free.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1, flexWrap: 'wrap' }}>
               <Button color='inherit' variant='contained' size='large' href='/tools/video/compress'>Upload</Button>
-              <Button size='large' href='/tools/video/how-to-compress-video-online' sx={{ color: 'common.white' }}>Learn More</Button>
+              <Button size='large' href='/tools/video/how-to-compress-video-online' sx={{ color: 'common.white' }}>How-to Guide</Button>
             </Grid>
           </Grid>
         </Container>

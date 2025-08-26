@@ -26,7 +26,7 @@ export default function ExtractAudioBlog() {
   return (
     <Container maxWidth="lg" sx={{ py: 6 }}>
       <Helmet>
-        <title>Extract Audio from Video – Free Online Audio Extractor (No Signup)</title>
+        <title>How to Extract Audio from Video Free – Complete Guide</title>
         <meta name="description" content="Extract audio (MP3, WAV, AAC) from MP4, MOV, MKV, WebM in your browser. Select a time range & download – fast, private & watermark‑free." />
         <meta property="og:title" content="Extract Audio from Video – Free Online Tool" />
         <meta property="og:description" content="Pull MP3, WAV or AAC from MP4, MOV, MKV, WebM locally. Select range & export – no uploads or watermark." />

@@ -14,7 +14,7 @@ export default function AudioTrimBlog(){
   return (
     <Container maxWidth='lg' sx={{ py:6 }}>
       <Helmet>
-        <title>Trim Audio Online Free – Cut MP3, WAV, M4A (Private, No Signup)</title>
+        <title>How to Trim Audio Online Free – Cut MP3, WAV, M4A Complete Guide</title>
         <meta name='description' content='Free online audio trimmer: cut MP3, WAV, M4A, FLAC, OGG locally. Set start/end, preview & export — private, fast & watermark‑free.' />
         <meta property='og:title' content='Free Online Audio Trimmer – Fast, Private & No Watermark' />
         <meta property='og:description' content='Trim or cut audio segments (MP3, WAV, M4A, FLAC) in your browser. No uploads, signup or watermark.' />

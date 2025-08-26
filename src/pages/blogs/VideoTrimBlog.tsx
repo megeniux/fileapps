@@ -26,7 +26,7 @@ export default function VideoTrimBlog() {
   return (
     <Container maxWidth='lg' sx={{ py: 6 }}>
       <Helmet>
-        <title>Trim Video Online Free – Private No‑Signup Video Trimmer (No Watermark)</title>
+        <title>How to Trim Video Online Free – Complete Guide</title>
         <meta name='description' content='Free online video trimmer: cut MP4, MOV, MKV, WebM clips locally. Set start/end, preview & export – private, fast & watermark‑free.' />
         <meta property='og:title' content='Free Online Video Trimmer – Fast, Private & No Watermark' />
         <meta property='og:description' content='Trim video segments (MP4, MOV, MKV, WebM) in your browser. No uploads, signup or watermark.' />

@@ -174,12 +174,12 @@ function ExtractAudio() {
         <CardContent sx={{ p: 0 }}>
           {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" alignItems="center">
-            <MusicNoteIcon color="warning" fontSize="small" sx={{ mr: 0.5 }} />
-            <Typography variant="body1" component="h1" fontWeight={600} mb={0.5}>Extract Audio</Typography>
+            <MusicNoteIcon color="error" fontSize="small" sx={{ mr: 0.5 }} />
+            <Typography variant="body1" component="h1" fontWeight={600} mb={0.5}>Extract Audio from Video</Typography>
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-            Select a video, extract the audio track, and download the result.
+            Extract high-quality audio from videos and save as MP3, WAV, AAC, or FLAC. Local processing — no uploads, no watermark, no signup.
           </Typography>
           {/* Unified Upload/Preview UI - VideoResize style */}
           <Box

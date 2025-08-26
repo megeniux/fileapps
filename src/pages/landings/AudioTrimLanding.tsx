@@ -29,7 +29,7 @@ export default function AudioTrimLanding() {
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Trim Audio Online Free – Cut MP3, WAV, M4A (Private, No Signup)</title>
+        <title>Trim Audio Online Free – Cut MP3, WAV, M4A Private</title>
         <meta name="description" content="Free online audio trimmer: cut MP3, WAV, M4A, FLAC, OGG locally. Set start/end, preview & export — private, fast & watermark‑free." />
         <meta property="og:title" content="Free Online Audio Trimmer – Fast, Private & No Watermark" />
         <meta property="og:description" content="Trim or cut audio segments (MP3, WAV, M4A, FLAC) in your browser. No uploads, signup or watermark." />
@@ -49,7 +49,7 @@ export default function AudioTrimLanding() {
               <Typography variant='h6' component='p' color='text.secondary' mt={3} mb={4}>Cut unwanted sections from MP3, WAV, M4A, FLAC or OGG locally — no signup, uploads or watermark.</Typography>
               <Box display='flex' gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
                 <Button variant='contained' color='primary' size='large' href='/tools/audio/trim'>Upload</Button>
-                <Button variant='text' size='large' sx={{ color: 'text.secondary' }} href='/tools/audio/how-to-trim-audio-online'>Learn More</Button>
+                <Button variant='text' size='large' sx={{ color: 'text.secondary' }} href='/tools/audio/how-to-trim-audio-online'>How-to Guide</Button>
               </Box>
             </Grid>
             <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -169,7 +169,7 @@ export default function AudioTrimLanding() {
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Fast, private & free audio trimming — all in your browser.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
               <Button color='inherit' variant='contained' size='large' href='/tools/audio/trim'>Upload</Button>
-              <Button size='large' href='/tools/audio/how-to-trim-audio-online' sx={{ color: 'common.white' }}>Learn More</Button>
+              <Button size='large' href='/tools/audio/how-to-trim-audio-online' sx={{ color: 'common.white' }}>How-to Guide</Button>
             </Grid>
           </Grid>
         </Container>

@@ -17,7 +17,7 @@ export default function AudioConvertBlog() {
   return (
     <Container maxWidth='lg' sx={{ py:6 }}>
       <Helmet>
-        <title>Convert Audio Online Free – MP3, WAV, AAC, FLAC (Private No Signup)</title>
+        <title>How to Convert Audio Online Free – MP3, WAV, AAC Guide</title>
         <meta name='description' content='Free online audio converter: convert MP3, WAV, AAC, FLAC, OGG, M4A locally. Set bitrate, quality or lossless — private, fast, watermark‑free.' />
         <meta property='og:title' content='Free Online Audio Converter – Fast, Private & No Watermark' />
         <meta property='og:description' content='Convert audio formats (MP3, WAV, AAC, FLAC, OGG, M4A) in your browser. Choose bitrate or lossless. No uploads or signup.' />

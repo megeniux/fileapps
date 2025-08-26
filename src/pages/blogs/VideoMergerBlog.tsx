@@ -26,7 +26,7 @@ export default function VideoMergerBlog() {
   return (
     <Container maxWidth="lg" sx={{ py: 6 }}>
       <Helmet>
-        <title>Merge Videos Online Free – Private No‑Signup Video Merger (No Watermark)</title>
+        <title>How to Merge Videos Online Free – Complete Guide</title>
         <meta name="description" content="Free online video merger: combine MP4, MOV, MKV, AVI, WebM clips locally. Drag, reorder, preview & export — private, fast & watermark‑free." />
         <meta property="og:title" content="Free Online Video Merger – Fast, Private & No Watermark" />
         <meta property="og:description" content="Merge multiple video clips (MP4, MOV, MKV, AVI, WebM) in your browser. Reorder, preview & export clean output — no uploads or signup." />

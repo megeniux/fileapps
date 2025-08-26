@@ -22,7 +22,7 @@ export default function ThumbnailGeneratorBlog() {
   return (
     <Container maxWidth="lg" sx={{ py: 6 }}>
       <Helmet>
-        <title>How to Generate Video Thumbnails Online for Free (No Signup)</title>
+        <title>How to Generate Video Thumbnails Online for Free – Complete Guide</title>
         <meta name="description" content="Extract high-quality thumbnails from your videos instantly in your browser. No watermark, no downloads, and no credit card required. Step-by-step guide." />
         <meta property="og:title" content="How to Generate Video Thumbnails Online for Free (No Signup)" />
         <meta property="og:description" content="Extract high-quality thumbnails from your videos instantly in your browser. No watermark, no downloads, and no credit card required." />

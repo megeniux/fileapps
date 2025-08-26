@@ -259,7 +259,7 @@ function VideoMerge() {
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-            Upload multiple videos, arrange their order, and merge them into one file.
+            Merge multiple video clips into one file while preserving quality. Combine videos locally in your browser — private & watermark-free.
           </Typography>
           {/* Drag-and-drop Upload/Preview UI */}
           <Box

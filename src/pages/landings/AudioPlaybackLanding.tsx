@@ -29,7 +29,7 @@ export default function AudioPlaybackLanding() {
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Change Audio Playback Speed Online – Slow, Fast or Reverse (Free & Private)</title>
+        <title>Change Audio Playback Speed Online – Slow, Fast or Reverse Free & Private</title>
         <meta name="description" content="Free audio speed changer: slow down, speed up or reverse MP3, WAV, FLAC, AAC, OGG, M4A locally. No uploads, signup or watermark." />
         <meta property="og:title" content="Audio Speed Changer – Slow Down, Speed Up or Reverse (Free)" />
         <meta property="og:description" content="Adjust or reverse audio speed privately in your browser. Multi‑format, fast & watermark‑free." />
@@ -49,7 +49,7 @@ export default function AudioPlaybackLanding() {
               <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Slow down, speed up or reverse MP3, WAV, FLAC, AAC, OGG, M4A locally — free, private & watermark‑free.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
                 <Button color='success' size='large' href="/tools/audio/playback" variant="contained">Upload Audio</Button>
-                <Button size='large' href="/tools/audio/how-to-audio-playback-speed-editor" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
+                <Button size='large' href="/tools/audio/how-to-audio-playback-speed-editor" variant="text" sx={{ color: 'text.secondary' }}>How-to Guide</Button>
               </Box>
             </Grid>
             <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -295,7 +295,7 @@ export default function AudioPlaybackLanding() {
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Fast, private & watermark‑free playback control.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
               <Button color='inherit' variant='contained' size='large' href='/tools/audio/playback'>Upload Audio</Button>
-              <Button size='large' href='/tools/audio/how-to-audio-playback-speed-editor' sx={{ color: 'common.white' }}>Learn More</Button>
+              <Button size='large' href='/tools/audio/how-to-audio-playback-speed-editor' sx={{ color: 'common.white' }}>How-to Guide</Button>
             </Grid>
           </Grid>
         </Container>

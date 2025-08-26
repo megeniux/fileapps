@@ -230,7 +230,7 @@ function AudioConvert() {
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-            Convert audio files to different formats with custom quality settings.
+            Convert MP3, WAV, AAC, FLAC, OGG, M4A locally in your browser. Choose bitrate (128k–320k) or lossless — no uploads, no signup, no watermark.
           </Typography>
           {/* Upload area */}
           <Box

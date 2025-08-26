@@ -182,7 +182,7 @@ function VideoTrim() {
             <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Video Trimmer</Typography>
           </Box>
           <Divider sx={{ my: 0.5 }} />
-          <Typography variant="body2" component="h2" color="text.secondary" mb={2}>Select a video, choose the duration to trim, and download the result.</Typography>
+          <Typography variant="body2" component="h2" color="text.secondary" mb={2}>Trim and cut videos with frame-accurate precision. Remove unwanted parts locally — no watermark, no signup, 100% browser-based.</Typography>
           <Box
             onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}
             onDragLeave={e => { e.preventDefault(); setIsDragActive(false); }}

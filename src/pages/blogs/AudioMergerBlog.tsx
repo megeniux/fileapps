@@ -18,7 +18,7 @@ export default function AudioMergerBlog() {
   return (
     <Container maxWidth='lg' sx={{ py:6 }}>
       <Helmet>
-        <title>Merge Audio Files Online Free – MP3, WAV, FLAC Combiner (No Signup)</title>
+        <title>How to Merge Audio Files Online Free – MP3, WAV, FLAC Guide</title>
         <meta name='description' content='Free online audio merger: combine MP3, WAV, FLAC, OGG, M4A tracks in your browser. Reorder, optional crossfade & export — private, fast, watermark‑free.' />
         <meta property='og:title' content='Free Online Audio Merger – Private MP3 / WAV / FLAC Combiner' />
         <meta property='og:description' content='Merge multiple audio files (MP3, WAV, FLAC, OGG, M4A) locally. Reorder, join, export clean output — no uploads or signup.' />

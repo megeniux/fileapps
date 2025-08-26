@@ -385,11 +385,11 @@ function VideoConvert() {
       <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
-            <SwapHorizIcon color="secondary" fontSize="small" sx={{ mr: 0.5 }} />
+            <SwapHorizIcon color="primary" fontSize="small" sx={{ mr: 0.5 }} />
             <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Video Converter</Typography>
           </Box>
           <Divider sx={{ my: 0.5 }} />
-          <Typography variant="body2" component="h2" color="text.secondary" mb={2}>Convert videos to different formats, codecs, resolutions and more. Advanced options for quality, speed, and compatibility.</Typography>
+          <Typography variant="body2" component="h2" color="text.secondary" mb={2}>Convert MP4, MOV, MKV, AVI, WebM & more locally in your browser. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free.</Typography>
           {/* Upload area - refactored to match AudioConvert/VideoTrim/VideoCompression/VideoResize */}
           <Box
             onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}

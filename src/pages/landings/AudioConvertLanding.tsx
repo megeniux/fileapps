@@ -34,7 +34,7 @@ export default function AudioConvertLanding() {
 	return (
 		<Root elevation={0}>
 			<Helmet>
-				<title>Convert Audio Online Free – MP3, WAV, AAC, FLAC (Private No Signup)</title>
+				<title>Convert Audio Online Free – MP3, WAV, AAC, FLAC Private</title>
 				<meta name="description" content="Free online audio converter: convert MP3, WAV, AAC, FLAC, OGG, M4A locally. Set bitrate or lossless — private, fast & watermark‑free." />
 				<meta name="keywords" content="convert audio to mp3, convert audio to mp3 online free, free online audio converter, wav to mp3 converter, flac to mp3 converter online, ogg to mp3, m4a to mp3 online, browser audio converter, no signup mp3 converter" />
 				<meta property="og:title" content="Free Online Audio Converter – Fast, Private & No Watermark" />
@@ -54,7 +54,7 @@ export default function AudioConvertLanding() {
 							<Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Convert MP3, WAV, AAC, FLAC, OGG, M4A locally. Select bitrate (128k–320k) or lossless — no uploads, signup or watermark.</Typography>
 							<Box display="flex" justifyContent={{ xs: 'center', md: 'flex-start' }} gap={1}>
 								<Button color='primary' size='large' href="/tools/audio/convert" variant="contained">Upload</Button>
-								<Button size='large' href="/tools/audio/how-to-convert-audio-online" variant="text">Learn More</Button>
+								<Button size='large' href="/tools/audio/how-to-convert-audio-online" variant="text">How-to Guide</Button>
 							</Box>
 						</Grid>
 						<Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -303,7 +303,7 @@ export default function AudioConvertLanding() {
 						</Grid>
 						<Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
 							<Button color='inherit' variant="contained" size='large' href="/tools/audio/convert">Upload</Button>
-							<Button size='large' href="/tools/audio/how-to-convert-audio-online" sx={{ color: 'common.white' }}>Learn More</Button>
+							<Button size='large' href="/tools/audio/how-to-convert-audio-online" sx={{ color: 'common.white' }}>How-to Guide</Button>
 						</Grid>
 					</Grid>
 				</Container>

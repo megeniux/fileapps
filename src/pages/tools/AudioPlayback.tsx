@@ -223,12 +223,12 @@ function AudioPlayback() {
           <Box display="flex" alignItems="center">
             <SpeedIcon color="success" fontSize="small" sx={{ mr: 0.5 }} />
             <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
-              Audio Playback Speed
+              Audio Playback Speed Editor
             </Typography>
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-            Change audio playback speed from -20x (reverse) to +20x.
+            Change audio speed with pitch correction or reverse tracks completely. Export processed audio with no watermark — 100% browser-based.
           </Typography>
           {/* Upload & Preview area */}
           <Box

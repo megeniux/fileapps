@@ -256,14 +256,14 @@ function VideoPlayback() {
             <Card sx={{ p: 1.5 }} elevation={3}>
                 <CardContent sx={{ p: 0 }}>
                     <Box display="flex" alignItems="center">
-                        <SpeedIcon color="primary" fontSize="small" sx={{ mr: 0.5 }} />
+                        <SpeedIcon color="secondary" fontSize="small" sx={{ mr: 0.5 }} />
                         <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
-                            Video Playback Speed
+                            Video Playback Speed Editor
                         </Typography>
                     </Box>
                     <Divider sx={{ my: 0.5 }} />
                     <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-                        Change video playback speed from -20x (reverse) to +20x.
+                        Change video speed from -20x (reverse) to +20x with pitch correction. Slow motion & time-lapse effects — no watermark, browser-based.
                     </Typography>
                     {/* Upload & Preview area */}
                     <Box

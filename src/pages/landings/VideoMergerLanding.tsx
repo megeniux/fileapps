@@ -79,7 +79,7 @@ export default function VideoMergerLanding() {
   return (
     <Root elevation={0}>
       <Helmet>
-        <title>Merge Videos Online Free – Private No‑Signup Video Merger</title>
+        <title>Merge Videos Online Free – Private Video Merger</title>
         <meta name="description" content="Free online video merger: combine MP4, MOV, MKV, AVI, WebM clips locally. Drag, reorder, preview & export — private, fast & watermark‑free." />
         <meta property="og:title" content="Free Online Video Merger – Fast, Private & No Watermark" />
         <meta property="og:description" content="Merge multiple video clips (MP4, MOV, MKV, AVI, WebM) in your browser. Reorder, preview & export clean output — no uploads or signup." />
@@ -98,7 +98,7 @@ export default function VideoMergerLanding() {
               <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Combine MP4, MOV, MKV, AVI, WebM clips. Drag, reorder, preview & export locally — no signup, uploads or watermark.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
                 <Button color='success' size='large' href="/tools/video/merge" variant="contained">Upload</Button>
-                <Button size='large' href="/tools/video/how-to-merge-videos-online" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
+                <Button size='large' href="/tools/video/how-to-merge-videos-online" variant="text" sx={{ color: 'text.secondary' }}>How-to Guide</Button>
               </Box>
             </Grid>
             <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
@@ -213,7 +213,7 @@ export default function VideoMergerLanding() {
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Fast, private & free video merging — right in your browser.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
               <Button color='inherit' variant='contained' size='large' href='/tools/video/merge'>Upload</Button>
-              <Button size='large' href='/tools/video/how-to-merge-videos-online' sx={{ color: 'common.white' }}>Learn More</Button>
+              <Button size='large' href='/tools/video/how-to-merge-videos-online' sx={{ color: 'common.white' }}>How-to Guide</Button>
             </Grid>
           </Grid>
         </Container>

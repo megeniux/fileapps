@@ -17,7 +17,7 @@ export default function AudioEffectsBlog(){
   return (
     <Container maxWidth='lg' sx={{ py:6 }}>
       <Helmet>
-        <title>Edit Audio Online Free – Pitch Shift, Speed, Normalize, Fade (No Signup)</title>
+        <title>How to Edit Audio Online Free – Pitch Shift, Speed, Normalize Guide</title>
         <meta name='description' content='Free online audio effects: pitch shift, tempo/speed change, normalize loudness, fade in/out, volume gain. All processing is local & private — no uploads or watermark.' />
         <meta property='og:title' content='Online Audio Effects – Pitch, Speed, Normalize & Fade (Free & Private)' />
         <meta property='og:description' content='Apply pitch, speed, normalize, fades & gain to audio locally (MP3, WAV, FLAC, OGG, M4A). No uploads, signup or watermark.' />
