@@ -56,7 +56,7 @@ export default function AudioMergerLanding() {
                 Combine MP3, WAV, FLAC, OGG, M4A tracks. Drag, reorder, merge & export locally — no signup or uploads.
               </Typography>
               <Box display='flex' gap={1} justifyContent={{ xs:'center', md:'flex-start' }}>
-                <Button variant='contained' color='primary' size='large' href='/tools/audio/merge'>Upload</Button>
+                <Button variant='contained' color='warning' size='large' href='/tools/audio/merge'>Upload</Button>
                 <Button variant='text' size='large' href='/tools/audio/how-to-merge-audio-online' sx={{ color:'text.secondary' }}>Learn More</Button>
               </Box>
             </Grid>
@@ -75,10 +75,10 @@ export default function AudioMergerLanding() {
               <Typography variant='h2'>Why Use Our Audio Merger?</Typography>
               <Divider sx={{ width:100, borderColor:'common.white', mx:'auto', my:2 }} />
             </Grid>
-            {[{ icon:<PrivacyTipIcon fontSize='large' color='primary'/>, title:'Local & Private', desc:'Processing stays in your browser.' },
-              { icon:<PlaylistAddIcon fontSize='large' color='primary'/>, title:'Drag & Reorder', desc:'Arrange track order easily.' },
-              { icon:<LibraryMusicIcon fontSize='large' color='primary'/>, title:'Format Support', desc:'MP3, WAV, FLAC, OGG, M4A.' },
-              { icon:<HighQualityIcon fontSize='large' color='primary'/>, title:'Clean Output', desc:'No watermark or signup.' }].map((c,i)=>(
+            {[{ icon:<PrivacyTipIcon fontSize='large' color='warning'/>, title:'Local & Private', desc:'Processing stays in your browser.' },
+              { icon:<PlaylistAddIcon fontSize='large' color='warning'/>, title:'Drag & Reorder', desc:'Arrange track order easily.' },
+              { icon:<LibraryMusicIcon fontSize='large' color='warning'/>, title:'Format Support', desc:'MP3, WAV, FLAC, OGG, M4A.' },
+              { icon:<HighQualityIcon fontSize='large' color='warning'/>, title:'Clean Output', desc:'No watermark or signup.' }].map((c,i)=>(
               <Grid key={i} size={{ xs:12, sm:6, md:4, lg:3 }}>
                 <Card sx={{ height:'100%' }}><CardContent sx={{ p:2 }}>
                   {c.icon}
@@ -97,16 +97,16 @@ export default function AudioMergerLanding() {
           <Grid container spacing={3}>
             <Grid size={12}>
               <Typography variant='h2'>How It Works</Typography>
-              <Divider sx={{ width:100, borderColor:'text.primary', mx:'auto', my:2 }} />
+              <Divider sx={{ width:100, borderColor:'text.warning', mx:'auto', my:2 }} />
             </Grid>
-            <Grid container spacing={{ xs:8, sm:6 }} justifyContent='center'>
+            <Grid container spacing={{ xs:8, sm:6 }} justifyContent='center' flexGrow={1}>
               {[{ icon:<CloudUploadIcon/>, title:'Upload', desc:'Add multiple audio files.' },
                 { icon:<ReorderIcon/>, title:'Reorder', desc:'Drag to set sequence.' },
                 { icon:<MergeIcon/>, title:'Merge Locally', desc:'FFmpeg WASM join.' },
                 { icon:<DownloadIcon/>, title:'Download', desc:'Single merged file.' }].map((s,i)=>(
                 <Grid key={i} size={{ xs:12, sm:6, md:4, lg:3 }}>
                   <Box sx={{ display:'flex', flexDirection:'column', alignItems:'center', gap:2 }}>
-                    <Box sx={{ bgcolor:'primary.main', color:'white', width:56, height:56, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center' }}>{s.icon}</Box>
+                    <Box sx={{ bgcolor:'warning.main', color:'white', width:56, height:56, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center' }}>{s.icon}</Box>
                     <Box>
                       <Typography variant='h5' component='h3'>{s.title}</Typography>
                       <Typography variant='body1'>{s.desc}</Typography>
@@ -127,12 +127,12 @@ export default function AudioMergerLanding() {
               <Typography variant='h2' mb={4}>Key Features</Typography>
               <Divider sx={{ width:100, borderColor:'common.white', mx:'auto', my:2 }} />
             </Grid>
-            {[{ icon:<QueueMusicIcon fontSize='large' color='primary'/>, title:'Multi‑File Upload', desc:'Add many tracks at once.' },
-              { icon:<PlaylistAddIcon fontSize='large' color='primary'/>, title:'Reorder Control', desc:'Drag & arrange order.' },
-              { icon:<GraphicEqIcon fontSize='large' color='primary'/>, title:'Optional Crossfade', desc:'Smooth transitions (if enabled).' },
-              { icon:<AudiotrackIcon fontSize='large' color='primary'/>, title:'Format Flexible', desc:'Mixed input accepted.' },
-              { icon:<SpeedIcon fontSize='large' color='primary'/>, title:'Fast Local Merge', desc:'No queue or upload.' },
-              { icon:<HighQualityIcon fontSize='large' color='primary'/>, title:'Watermark‑Free', desc:'Clean final file.' }].map((f,i)=>(
+            {[{ icon:<QueueMusicIcon fontSize='large' color='warning'/>, title:'Multi‑File Upload', desc:'Add many tracks at once.' },
+              { icon:<PlaylistAddIcon fontSize='large' color='warning'/>, title:'Reorder Control', desc:'Drag & arrange order.' },
+              { icon:<GraphicEqIcon fontSize='large' color='warning'/>, title:'Optional Crossfade', desc:'Smooth transitions (if enabled).' },
+              { icon:<AudiotrackIcon fontSize='large' color='warning'/>, title:'Format Flexible', desc:'Mixed input accepted.' },
+              { icon:<SpeedIcon fontSize='large' color='warning'/>, title:'Fast Local Merge', desc:'No queue or upload.' },
+              { icon:<HighQualityIcon fontSize='large' color='warning'/>, title:'Watermark‑Free', desc:'Clean final file.' }].map((f,i)=>(
               <Grid key={i} size={{ xs:12, sm:6, md:4, lg:3 }}>
                 <Card sx={{ height:'100%' }}><CardContent sx={{ p:2 }}>
                   {f.icon}
@@ -151,7 +151,7 @@ export default function AudioMergerLanding() {
           <Grid container spacing={3} justifyContent='center'>
             <Grid size={12}>
               <Typography variant='h2' align='center' mb={4}>FAQs</Typography>
-              <Divider sx={{ width:100, borderColor:'text.primary', mx:'auto', my:2 }} />
+              <Divider sx={{ width:100, borderColor:'text.warning', mx:'auto', my:2 }} />
             </Grid>
             <Grid size={{ xs:12 }}>
               {FAQ_SCHEMA.mainEntity.map((faq:any,idx:number)=>(
@@ -214,7 +214,7 @@ const Root = styled(Paper)(({ theme }) => ({
   },
   '& .why-us, & .key-features, & .cta-section':{
     paddingBlock:theme.spacing(8),
-    background:`radial-gradient(circle at 50% 0%, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+    background:`radial-gradient(circle at 50% 0%, ${theme.palette.warning.main} 0%, ${theme.palette.warning.dark} 100%)`,
     textAlign:'center',
     '& .MuiTypography-h2':{ color:theme.palette.common.white }
   },

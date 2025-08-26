@@ -148,7 +148,7 @@ export default function AudioEffectsLanding() {
 			</section>
 			<section className='key-features'>
 				<Container maxWidth="lg">
-					<Grid container spacing={3}>
+					<Grid container spacing={3} justifyContent='center'>
 						<Grid size={12}>
 							<Typography variant='h2' mb={4}>Key Features</Typography>
 							<Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />

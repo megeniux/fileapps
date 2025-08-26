@@ -66,51 +66,49 @@ export default function AudioConvertLanding() {
 			<section className='why-us'>
 				<Container maxWidth="lg">
 					<Grid container spacing={3} justifyContent='center' flexGrow={1}>
-						<Grid container size={12}>
-							<Grid size={12}>
-								<Typography variant='h2'>Why Use Our Online Audio Converter?</Typography>
-								<Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
-							</Grid>
+						<Grid size={12}>
+							<Typography variant='h2'>Why Use Our Online Audio Converter?</Typography>
+							<Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
+						</Grid>
 
-							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-								<Card sx={{ height: '100%' }}>
-									<CardContent sx={{ p: 2 }}>
-										<PrivacyTipIcon fontSize='large' color="primary" />
-										<Typography variant='h5' component="h3" gutterBottom>Local & Private</Typography>
-										<Typography variant='body1'>In‑browser FFmpeg — files never leave.</Typography>
-									</CardContent>
-								</Card>
-							</Grid>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+							<Card sx={{ height: '100%' }}>
+								<CardContent sx={{ p: 2 }}>
+									<PrivacyTipIcon fontSize='large' color="primary" />
+									<Typography variant='h5' component="h3" gutterBottom>Local & Private</Typography>
+									<Typography variant='body1'>In‑browser FFmpeg — files never leave.</Typography>
+								</CardContent>
+							</Card>
+						</Grid>
 
-							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-								<Card sx={{ height: '100%' }}>
-									<CardContent sx={{ p: 2 }}>
-										<FlashOnIcon fontSize='large' color="primary" />
-										<Typography variant='h5' component="h3" gutterBottom>Free & Fast</Typography>
-										<Typography variant='body1'>No signup, no watermark, instant conversions with WASM.</Typography>
-									</CardContent>
-								</Card>
-							</Grid>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+							<Card sx={{ height: '100%' }}>
+								<CardContent sx={{ p: 2 }}>
+									<FlashOnIcon fontSize='large' color="primary" />
+									<Typography variant='h5' component="h3" gutterBottom>Free & Fast</Typography>
+									<Typography variant='body1'>No signup, no watermark, instant conversions with WASM.</Typography>
+								</CardContent>
+							</Card>
+						</Grid>
 
-							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-								<Card sx={{ height: '100%' }}>
-									<CardContent sx={{ p: 2 }}>
-										<LibraryMusicIcon fontSize='large' color="primary" />
-										<Typography variant='h5' component="h3" gutterBottom>Multiple Formats</Typography>
-										<Typography variant='body1'>MP3, WAV, AAC, FLAC, OGG, M4A supported.</Typography>
-									</CardContent>
-								</Card>
-							</Grid>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+							<Card sx={{ height: '100%' }}>
+								<CardContent sx={{ p: 2 }}>
+									<LibraryMusicIcon fontSize='large' color="primary" />
+									<Typography variant='h5' component="h3" gutterBottom>Multiple Formats</Typography>
+									<Typography variant='body1'>MP3, WAV, AAC, FLAC, OGG, M4A supported.</Typography>
+								</CardContent>
+							</Card>
+						</Grid>
 
-							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-								<Card sx={{ height: '100%' }}>
-									<CardContent sx={{ p: 2 }}>
-										<ShareIcon fontSize='large' color="primary" />
-										<Typography variant='h5' component="h3" gutterBottom>Cross Platform</Typography>
-										<Typography variant='body1'>Works on Chrome, Firefox, Safari & Edge.</Typography>
-									</CardContent>
-								</Card>
-							</Grid>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+							<Card sx={{ height: '100%' }}>
+								<CardContent sx={{ p: 2 }}>
+									<ShareIcon fontSize='large' color="primary" />
+									<Typography variant='h5' component="h3" gutterBottom>Cross Platform</Typography>
+									<Typography variant='body1'>Works on Chrome, Firefox, Safari & Edge.</Typography>
+								</CardContent>
+							</Card>
 						</Grid>
 					</Grid>
 				</Container>
@@ -123,7 +121,7 @@ export default function AudioConvertLanding() {
 							<Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
 						</Grid>
 						<Grid container spacing={{ xs: 8, sm: 6 }} justifyContent="center" flexGrow={1}>
-							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+							<Grid size={{ xs: 12, sm: 6, md: 4 }}>
 								<Box sx={{ textAlign: 'center' }}>
 									<Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 										<CloudUploadIcon />
@@ -132,7 +130,7 @@ export default function AudioConvertLanding() {
 									<Typography variant='body1'>Drag & drop MP3, WAV, FLAC, OGG, M4A, AAC.</Typography>
 								</Box>
 							</Grid>
-							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+							<Grid size={{ xs: 12, sm: 6, md: 4 }}>
 								<Box sx={{ textAlign: 'center' }}>
 									<Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 										<TuneIcon />
@@ -141,7 +139,7 @@ export default function AudioConvertLanding() {
 									<Typography variant='body1'>Set target (MP3, WAV, AAC, FLAC, OGG) + bitrate / lossless.</Typography>
 								</Box>
 							</Grid>
-							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+							<Grid size={{ xs: 12, sm: 6, md: 4 }}>
 								<Box sx={{ textAlign: 'center' }}>
 									<Box sx={{ bgcolor: 'primary.main', color: 'white', borderRadius: '50%', width: 56, height: 56, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 										<DownloadIcon />
@@ -157,65 +155,63 @@ export default function AudioConvertLanding() {
 			<section className='key-features'>
 				<Container maxWidth="lg">
 					<Grid container spacing={3} justifyContent="center">
-						<Grid container size={12} justifyContent="center">
-							<Grid size={12}>
-								<Typography variant='h2' mb={4}>Key Features</Typography>
-								<Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
-							</Grid>
-							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-								<Card sx={{ height: '100%' }}>
-									<CardContent sx={{ p: 2 }}>
-										<UploadFileIcon fontSize='large' color="primary" />
-										<Typography variant='h5' component="h3" gutterBottom>Drag & Drop</Typography>
-										<Typography variant='body1'>Quickly import audio files.</Typography>
-									</CardContent>
-								</Card>
-							</Grid>
-							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-								<Card sx={{ height: '100%' }}>
-									<CardContent sx={{ p: 2 }}>
-										<LibraryMusicIcon fontSize='large' color="primary" />
-										<Typography variant='h5' component="h3" gutterBottom>Major Formats</Typography>
-										<Typography variant='body1'>MP3, WAV, AAC, FLAC, OGG, M4A support.</Typography>
-									</CardContent>
-								</Card>
-							</Grid>
-							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-								<Card sx={{ height: '100%' }}>
-									<CardContent sx={{ p: 2 }}>
-										<HighQualityIcon fontSize='large' color="primary" />
-										<Typography variant='h5' component="h3" gutterBottom>Custom Bitrate</Typography>
-										<Typography variant='body1'>128k to 320k or lossless output.</Typography>
-									</CardContent>
-								</Card>
-							</Grid>
-							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-								<Card sx={{ height: '100%' }}>
-									<CardContent sx={{ p: 2 }}>
-										<SpeedIcon fontSize='large' color="primary" />
-										<Typography variant='h5' component="h3" gutterBottom>Fast WASM Engine</Typography>
-										<Typography variant='body1'>Efficient FFmpeg WebAssembly processing.</Typography>
-									</CardContent>
-								</Card>
-							</Grid>
-							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-								<Card sx={{ height: '100%' }}>
-									<CardContent sx={{ p: 2 }}>
-										<AudioFileIcon fontSize='large' color="primary" />
-										<Typography variant='h5' component="h3" gutterBottom>Lossless Options</Typography>
-										<Typography variant='body1'>Convert to WAV or FLAC without quality loss.</Typography>
-									</CardContent>
-								</Card>
-							</Grid>
-							<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-								<Card sx={{ height: '100%' }}>
-									<CardContent sx={{ p: 2 }}>
-										<PublicIcon fontSize='large' color="primary" />
-										<Typography variant='h5' component="h3" gutterBottom>Cross-Browser</Typography>
-										<Typography variant='body1'>Works on modern desktop & mobile browsers.</Typography>
-									</CardContent>
-								</Card>
-							</Grid>
+						<Grid size={12}>
+							<Typography variant='h2' mb={4}>Key Features</Typography>
+							<Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
+						</Grid>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+							<Card sx={{ height: '100%' }}>
+								<CardContent sx={{ p: 2 }}>
+									<UploadFileIcon fontSize='large' color="primary" />
+									<Typography variant='h5' component="h3" gutterBottom>Drag & Drop</Typography>
+									<Typography variant='body1'>Quickly import audio files.</Typography>
+								</CardContent>
+							</Card>
+						</Grid>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+							<Card sx={{ height: '100%' }}>
+								<CardContent sx={{ p: 2 }}>
+									<LibraryMusicIcon fontSize='large' color="primary" />
+									<Typography variant='h5' component="h3" gutterBottom>Major Formats</Typography>
+									<Typography variant='body1'>MP3, WAV, AAC, FLAC, OGG, M4A support.</Typography>
+								</CardContent>
+							</Card>
+						</Grid>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+							<Card sx={{ height: '100%' }}>
+								<CardContent sx={{ p: 2 }}>
+									<HighQualityIcon fontSize='large' color="primary" />
+									<Typography variant='h5' component="h3" gutterBottom>Custom Bitrate</Typography>
+									<Typography variant='body1'>128k to 320k or lossless output.</Typography>
+								</CardContent>
+							</Card>
+						</Grid>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+							<Card sx={{ height: '100%' }}>
+								<CardContent sx={{ p: 2 }}>
+									<SpeedIcon fontSize='large' color="primary" />
+									<Typography variant='h5' component="h3" gutterBottom>Fast WASM Engine</Typography>
+									<Typography variant='body1'>Efficient FFmpeg WebAssembly processing.</Typography>
+								</CardContent>
+							</Card>
+						</Grid>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+							<Card sx={{ height: '100%' }}>
+								<CardContent sx={{ p: 2 }}>
+									<AudioFileIcon fontSize='large' color="primary" />
+									<Typography variant='h5' component="h3" gutterBottom>Lossless Options</Typography>
+									<Typography variant='body1'>Convert to WAV or FLAC without quality loss.</Typography>
+								</CardContent>
+							</Card>
+						</Grid>
+						<Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+							<Card sx={{ height: '100%' }}>
+								<CardContent sx={{ p: 2 }}>
+									<PublicIcon fontSize='large' color="primary" />
+									<Typography variant='h5' component="h3" gutterBottom>Cross-Browser</Typography>
+									<Typography variant='body1'>Works on modern desktop & mobile browsers.</Typography>
+								</CardContent>
+							</Card>
 						</Grid>
 					</Grid>
 				</Container>
@@ -316,7 +312,7 @@ export default function AudioConvertLanding() {
 	)
 }
 
-// Constants moved to bottom
+// Constants
 const FAQ_SCHEMA = {
 	"@context": "https://schema.org",
 	"@type": "FAQPage",

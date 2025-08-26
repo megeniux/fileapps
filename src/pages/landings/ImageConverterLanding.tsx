@@ -28,55 +28,6 @@ import ImageSearchIcon from '@mui/icons-material/ImageSearch'
 import ColorLensIcon from '@mui/icons-material/ColorLens'
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone'
 
-// FAQ schema moved to bottom (updated list)
-const FAQ_SCHEMA = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        { "@type": "Question", "name": "Is processing private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. All image conversion & editing execute locally in your browser — nothing is uploaded." } },
-        { "@type": "Question", "name": "Which formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "You can load and export JPG, PNG, WebP and GIF." } },
-        { "@type": "Question", "name": "Can I maintain aspect ratio while resizing?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Use the aspect ratio lock toggle to keep proportions consistent." } },
-        { "@type": "Question", "name": "Are crop & rotate tools included?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can crop interactively and rotate or flip the image before exporting." } },
-        { "@type": "Question", "name": "Is it free and watermark‑free?", "acceptedAnswer": { "@type": "Answer", "text": "Completely free — no watermark, signup or usage limits." } }
-    ]
-}
-
-const Root = styled(Paper)(({ theme }) => ({
-    '& img': { maxWidth: '100%' },
-    '& .hero-section': {
-        display: 'flex',
-        alignItems: 'center',
-        minHeight: 500,
-        '& .hero-image img': { marginBottom: theme.spacing(2) },
-        [theme.breakpoints.down('md')]: {
-            '& .hero-text': { textAlign: 'center', paddingBottom: theme.spacing(6) },
-            '& .hero-image img': { display: 'table', marginInline: 'auto' }
-        }
-    },
-    '& .how-it-works': {
-        paddingBlock: theme.spacing(8),
-        textAlign: 'center',
-        '& .MuiTypography-h2': { color: theme.palette.text.primary }
-    },
-    '& .faq-section': {
-        paddingBlock: theme.spacing(8),
-        background: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
-        '& .MuiTypography-h2': { color: theme.palette.text.primary },
-        '& .MuiAccordionSummary-root': { padding: theme.spacing(0, 2, 0, 2) },
-        '& .MuiAccordionDetails-root': { padding: theme.spacing(0, 2, 2, 2) }
-    },
-    '& .why-us, & .key-features, & .cta-section': {
-        paddingBlock: theme.spacing(8),
-        background: `radial-gradient(circle at 50% 0%, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
-        textAlign: 'center',
-        '& .MuiTypography-h2': { color: theme.palette.common.white }
-    },
-    '& .use-cases': {
-        paddingBlock: theme.spacing(8),
-        '& .MuiTypography-h2': { textAlign: 'center', marginBottom: theme.spacing(2) }
-    },
-}))
-
 export default function ImageConverterLanding() {
     return (
         <Root elevation={0}>
@@ -314,3 +265,52 @@ export default function ImageConverterLanding() {
         </Root>
     )
 }
+
+// FAQ schema
+const FAQ_SCHEMA = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        { "@type": "Question", "name": "Is processing private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. All image conversion & editing execute locally in your browser — nothing is uploaded." } },
+        { "@type": "Question", "name": "Which formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "You can load and export JPG, PNG, WebP and GIF." } },
+        { "@type": "Question", "name": "Can I maintain aspect ratio while resizing?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Use the aspect ratio lock toggle to keep proportions consistent." } },
+        { "@type": "Question", "name": "Are crop & rotate tools included?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can crop interactively and rotate or flip the image before exporting." } },
+        { "@type": "Question", "name": "Is it free and watermark‑free?", "acceptedAnswer": { "@type": "Answer", "text": "Completely free — no watermark, signup or usage limits." } }
+    ]
+}
+
+const Root = styled(Paper)(({ theme }) => ({
+    '& img': { maxWidth: '100%' },
+    '& .hero-section': {
+        display: 'flex',
+        alignItems: 'center',
+        minHeight: 500,
+        '& .hero-image img': { marginBottom: theme.spacing(2) },
+        [theme.breakpoints.down('md')]: {
+            '& .hero-text': { textAlign: 'center', paddingBottom: theme.spacing(6) },
+            '& .hero-image img': { display: 'table', marginInline: 'auto' }
+        }
+    },
+    '& .how-it-works': {
+        paddingBlock: theme.spacing(8),
+        textAlign: 'center',
+        '& .MuiTypography-h2': { color: theme.palette.text.primary }
+    },
+    '& .faq-section': {
+        paddingBlock: theme.spacing(8),
+        background: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
+        '& .MuiTypography-h2': { color: theme.palette.text.primary },
+        '& .MuiAccordionSummary-root': { padding: theme.spacing(0, 2, 0, 2) },
+        '& .MuiAccordionDetails-root': { padding: theme.spacing(0, 2, 2, 2) }
+    },
+    '& .why-us, & .key-features, & .cta-section': {
+        paddingBlock: theme.spacing(8),
+        background: `radial-gradient(circle at 50% 0%, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+        textAlign: 'center',
+        '& .MuiTypography-h2': { color: theme.palette.common.white }
+    },
+    '& .use-cases': {
+        paddingBlock: theme.spacing(8),
+        '& .MuiTypography-h2': { textAlign: 'center', marginBottom: theme.spacing(2) }
+    },
+}))

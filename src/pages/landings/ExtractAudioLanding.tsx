@@ -24,50 +24,6 @@ import HighQualityIcon from '@mui/icons-material/HighQuality'
 import DownloadIcon from '@mui/icons-material/Download'
 import ContentCutIcon from '@mui/icons-material/ContentCut'
 
-const FAQ_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "Can I extract audio from only part of the video?", "acceptedAnswer": { "@type": "Answer", "text": "Yes—you can select a time range using the slider before extraction." } },
-    { "@type": "Question", "name": "Which audio formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "You can extract audio as MP3, WAV, or AAC." } },
-    { "@type": "Question", "name": "Do I need to sign up or install anything?", "acceptedAnswer": { "@type": "Answer", "text": "No, the tool is completely free and browser-based." } },
-    { "@type": "Question", "name": "Is the process safe?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, extraction happens in-browser or on secure servers, and videos are deleted after processing." } },
-    { "@type": "Question", "name": "Can I preview the audio before extracting it?", "acceptedAnswer": { "@type": "Answer", "text": "The built-in preview player plays the original video only. To listen to the extracted audio, download the file and play it on your device." } }
-  ]
-}
-
-const Root = styled(Paper)(({ theme }) => ({
-  '& img': { maxWidth: '100%' },
-  '& .hero-section': {
-display: 'flex',
-alignItems: 'center',
-minHeight: 500,
-    '& .hero-image': { '& > img': { marginBottom: theme.spacing(2) } },
-    [theme.breakpoints.down('md')]: {
-      '& .hero-text': { textAlign: 'center', paddingBottom: theme.spacing(6) },
-      '& .hero-image > img': { display: 'table', marginInline: 'auto' }
-    }
-  },
-  '& .how-it-works': {
-    paddingBlock: theme.spacing(8),
-    textAlign: 'center',
-    '& .MuiTypography-h2': { color: theme.palette.text.primary }
-  },
-  '& .faq-section': {
-    paddingBlock: theme.spacing(8),
-    background: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
-    '& .MuiTypography-h2': { color: theme.palette.text.primary },
-    '& .MuiAccordionSummary-root': { padding: theme.spacing(0, 2, 0, 2) },
-    '& .MuiAccordionDetails-root': { padding: theme.spacing(0, 2, 2, 2) }
-  },
-  '& .why-us, & .key-features, & .cta-section': {
-    paddingBlock: theme.spacing(8),
-    background: `radial-gradient(circle at 50% 0%, ${theme.palette.error.main} 0%, ${theme.palette.error.dark} 100%)`,
-    textAlign: 'center',
-    '& .MuiTypography-h2': { color: theme.palette.common.white }
-  },
-}))
-
 export default function ExtractAudioLanding() {
   return (
     <Root elevation={0}>
@@ -215,3 +171,47 @@ export default function ExtractAudioLanding() {
     </Root>
   )
 }
+
+const FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Can I extract audio from only part of the video?", "acceptedAnswer": { "@type": "Answer", "text": "Yes—you can select a time range using the slider before extraction." } },
+    { "@type": "Question", "name": "Which audio formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "You can extract audio as MP3, WAV, or AAC." } },
+    { "@type": "Question", "name": "Do I need to sign up or install anything?", "acceptedAnswer": { "@type": "Answer", "text": "No, the tool is completely free and browser-based." } },
+    { "@type": "Question", "name": "Is the process safe?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, extraction happens in-browser or on secure servers, and videos are deleted after processing." } },
+    { "@type": "Question", "name": "Can I preview the audio before extracting it?", "acceptedAnswer": { "@type": "Answer", "text": "The built-in preview player plays the original video only. To listen to the extracted audio, download the file and play it on your device." } }
+  ]
+}
+
+const Root = styled(Paper)(({ theme }) => ({
+  '& img': { maxWidth: '100%' },
+  '& .hero-section': {
+display: 'flex',
+alignItems: 'center',
+minHeight: 500,
+    '& .hero-image': { '& > img': { marginBottom: theme.spacing(2) } },
+    [theme.breakpoints.down('md')]: {
+      '& .hero-text': { textAlign: 'center', paddingBottom: theme.spacing(6) },
+      '& .hero-image > img': { display: 'table', marginInline: 'auto' }
+    }
+  },
+  '& .how-it-works': {
+    paddingBlock: theme.spacing(8),
+    textAlign: 'center',
+    '& .MuiTypography-h2': { color: theme.palette.text.primary }
+  },
+  '& .faq-section': {
+    paddingBlock: theme.spacing(8),
+    background: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
+    '& .MuiTypography-h2': { color: theme.palette.text.primary },
+    '& .MuiAccordionSummary-root': { padding: theme.spacing(0, 2, 0, 2) },
+    '& .MuiAccordionDetails-root': { padding: theme.spacing(0, 2, 2, 2) }
+  },
+  '& .why-us, & .key-features, & .cta-section': {
+    paddingBlock: theme.spacing(8),
+    background: `radial-gradient(circle at 50% 0%, ${theme.palette.error.main} 0%, ${theme.palette.error.dark} 100%)`,
+    textAlign: 'center',
+    '& .MuiTypography-h2': { color: theme.palette.common.white }
+  },
+}))

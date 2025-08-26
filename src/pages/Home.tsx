@@ -34,56 +34,56 @@ const videoTools: {
 }[] = [
     {
       title: 'Video Converter',
-      description: 'Convert videos between MP4, WebM, MKV, MOV and more. Preserve quality and choose codecs, resolution and bitrate.',
+      description: 'Convert MP4, MOV, MKV, AVI, WebM & more locally in your browser. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free.',
       icon: <SwapHorizIcon fontSize="small" color="primary" />,
       link: '/tools/video/convert-video-online',
       color: 'primary'
     },
     {
-      title: 'Compress Video',
-      description: 'Reduce video file size while maintaining quality. Fast and easy compression for all your videos.',
+      title: 'Video Compressor',
+      description: 'Reduce video file size without quality loss using local browser processing. Adjust CRF, bitrate & resolution — no uploads, no signup required.',
       icon: <CompressIcon fontSize="small" color="secondary" />,
       link: '/tools/video/compress-video-online',
       color: 'secondary'
     },
     {
       title: 'Video Resizer',
-      description: 'Resize videos to custom dimensions or common aspect ratios for web and social platforms.',
+      description: 'Resize videos to custom dimensions or aspect ratios (16:9, 4:3, 1:1) for social media. Change resolution privately in your browser.',
       icon: <AspectRatioIcon fontSize="small" color='warning' />,
       link: '/tools/video/resize-video-online',
       color: 'warning'
     },
     {
       title: 'Video Trimmer',
-      description: 'Quickly trim and cut unwanted parts from videos with frame-accurate trimming.',
+      description: 'Trim and cut videos with frame-accurate precision. Remove unwanted parts locally — no watermark, no signup, 100% browser-based.',
       icon: <ContentCutIcon fontSize="small" color="info" />,
       link: '/tools/video/trim-video-online',
       color: 'info'
     },
     {
       title: 'Video Merger',
-      description: 'Combine multiple clips into a single video file while preserving order and quality.',
+      description: 'Merge multiple video clips into one file while preserving quality. Combine videos locally in your browser — private & watermark-free.',
       icon: <MergeTypeIcon fontSize="small" color="success" />,
       link: '/tools/video/merge-videos-online',
       color: 'success'
     },
     {
-      title: 'Extract Audio',
-      description: 'Extract high-quality audio from video files and save as MP3, WAV or AAC for reuse.',
+      title: 'Extract Audio from Video',
+      description: 'Extract high-quality audio from videos and save as MP3, WAV, AAC, or FLAC. Local processing — no uploads, no watermark, no signup.',
       icon: <MusicNoteIcon fontSize="small" color="error" />,
       link: '/tools/video/extract-audio-from-video',
       color: 'error'
     },
     {
-      title: 'Burn Captions',
-      description: 'Embed subtitles into video files (SRT/VTT). Customize font, size and color before burning in.',
+      title: 'Burn Captions into Video',
+      description: 'Embed SRT/VTT subtitles permanently into video files. Customize font, size, color & position — private browser-based processing.',
       icon: <SubtitlesIcon fontSize="small" color="primary" />,
       link: '/tools/video/burn-captions-into-video-online',
       color: 'primary'
     },
     {
-      title: 'Video Playback Editor',
-      description: 'Change video playback speed from -20x (reverse) to +20x online. No watermark, no signup, 100% browser-based.',
+      title: 'Video Playback Speed Editor',
+      description: 'Change video speed from -20x (reverse) to +20x with pitch correction. Slow motion & time-lapse effects — no watermark, browser-based.',
       icon: <SpeedIcon fontSize="small" color="secondary" />,
       link: '/tools/video/video-playback-speed-editor',
       color: 'secondary'
@@ -99,35 +99,35 @@ const audioTools: {
 }[] = [
     {
       title: 'Audio Converter',
-      description: 'Convert audio between MP3, WAV, AAC, FLAC and more. Keep bitrate and quality control options.',
+      description: 'Convert MP3, WAV, AAC, FLAC, OGG, M4A locally in your browser. Choose bitrate (128k–320k) or lossless — no uploads, no signup, no watermark.',
       icon: <SwapHorizIcon fontSize="small" color="primary" />,
       link: '/tools/audio/convert-audio-online',
       color: 'primary'
     },
     {
       title: 'Audio Trimmer',
-      description: 'Trim and cut audio files to extract clips for podcasts, music or voiceovers.',
+      description: 'Trim and cut audio files with precision timing for podcasts, music, or voiceovers. Local processing — private & watermark-free.',
       icon: <ContentCutIcon fontSize="small" color="secondary" />,
       link: '/tools/audio/trim-audio-online',
       color: 'secondary'
     },
     {
       title: 'Audio Merger',
-      description: 'Join multiple audio tracks into one file quickly and reliably in your browser.',
+      description: 'Join multiple audio tracks into one file instantly. Combine MP3, WAV, AAC files in your browser — no uploads or signup required.',
       icon: <MergeTypeIcon fontSize="small" color="warning" />,
       link: '/tools/audio/merge-audio-online',
       color: 'warning'
     },
     {
       title: 'Audio Effects',
-      description: 'Apply fades, normalization, pitch, speed and volume adjustments to audio files.',
+      description: 'Apply fades, normalization, pitch adjustment, speed changes & volume control to audio files. Professional effects in your browser.',
       icon: <GraphicEqIcon fontSize="small" color="info" />,
       link: '/tools/audio/audio-effects-online',
       color: 'info'
     },
     {
-      title: 'Audio Playback Editor',
-      description: 'Change audio speed (with pitch correction) or reverse tracks. Export processed audio quickly.',
+      title: 'Audio Playback Speed Editor',
+      description: 'Change audio speed with pitch correction or reverse tracks completely. Export processed audio with no watermark — 100% browser-based.',
       icon: <SpeedIcon fontSize="small" color="success" />,
       link: '/tools/audio/audio-playback-speed-editor',
       color: 'success'
@@ -143,14 +143,14 @@ const imageTools: {
 }[] = [
     {
       title: 'Image Converter & Editor',
-      description: 'Convert, resize, crop, rotate, and apply filters to images online for free. Supports JPG, PNG, WebP, GIF formats. Fast, secure, and works entirely in your browser.',
+      description: 'Convert, resize, crop, rotate, and apply filters to JPG, PNG, WebP, GIF images. Local processing in your browser — fast, secure, no watermark.',
       icon: <ImageIcon fontSize="small" color="primary" />,
       link: '/tools/image/convert-image-online',
       color: 'primary'
     },
     {
-      title: 'Thumbnail Generator',
-      description: 'Extract high-quality thumbnails from your videos instantly in your browser. No watermark, no downloads, and no credit card required.',
+      title: 'Video Thumbnail Generator',
+      description: 'Extract high-quality thumbnails from videos instantly. Generate preview images in multiple sizes — no watermark, no signup required.',
       icon: <PhotoSizeSelectActualIcon fontSize="small" color="secondary" />,
       link: '/tools/image/extract-thumbnail-from-video',
       color: 'secondary'
@@ -172,7 +172,7 @@ function Home() {
           align='center'
           marginInline="auto"
         >
-          Explore our browser-based suite for video, audio and images: compress, convert, resize, trim, merge and adjust playback speed for videos; extract high-quality audio and generate thumbnails; burn captions into videos; convert, trim, merge and apply effects to audio; and convert, resize and optimize images — all fast, secure and privacy-first with no installs required.
+          Professional browser-based media tools: compress, convert, resize, trim, merge videos with custom resolution & codecs; extract audio, burn captions, adjust playback speed; convert, trim, merge audio with bitrate control; edit & convert images — all free, private, no signup, no watermark, with local processing.
         </Typography>
       </Box>
       <Typography variant='h6' component="h3">Video Tools</Typography>
