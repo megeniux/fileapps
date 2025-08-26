@@ -104,7 +104,7 @@ export default function BurnCaptionLanding() {
                                 <Button size='large' href="/tools/video/how-to-burn-captions-into-video-online" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
                             </Box>
                         </Grid>
-                        <Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
+                        <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
                             <img src='/images/landing/burn-caption-hero.jpg' alt='Laptop with video player and subtitle styling UI' title='Caption Burner' loading='lazy' width="auto" height="auto" style={{ filter: 'hue-rotate(65deg)' }} />
                         </Grid>
                     </Grid>
@@ -290,34 +290,12 @@ export default function BurnCaptionLanding() {
                             <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
                         </Grid>
                         <Grid size={{ xs: 12 }}>
-                            <Accordion square disableGutters elevation={3}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Is it private?</Typography></AccordionSummary>
-                                <AccordionDetails><Typography variant='body1'>Yes — all burning runs locally (WebAssembly FFmpeg).</Typography></AccordionDetails>
-                            </Accordion>
-                            <Accordion square disableGutters elevation={3}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Which subtitle formats?</Typography></AccordionSummary>
-                                <AccordionDetails><Typography variant='body1'>SRT & VTT (WebVTT).</Typography></AccordionDetails>
-                            </Accordion>
-                            <Accordion square disableGutters elevation={3}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Which video formats?</Typography></AccordionSummary>
-                                <AccordionDetails><Typography variant='body1'>MP4, MOV, MKV, WebM (others if the browser decodes them).</Typography></AccordionDetails>
-                            </Accordion>
-                            <Accordion square disableGutters elevation={3}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Can I position captions?</Typography></AccordionSummary>
-                                <AccordionDetails><Typography variant='body1'>Yes — toggle top or bottom before burning.</Typography></AccordionDetails>
-                            </Accordion>
-                            <Accordion square disableGutters elevation={3}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Can I preview first?</Typography></AccordionSummary>
-                                <AccordionDetails><Typography variant='body1'>Yes — preview timing & styling before final burn.</Typography></AccordionDetails>
-                            </Accordion>
-                            <Accordion square disableGutters elevation={3}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Removable after burning?</Typography></AccordionSummary>
-                                <AccordionDetails><Typography variant='body1'>No — hardsubs are permanent (by design).</Typography></AccordionDetails>
-                            </Accordion>
-                            <Accordion square disableGutters elevation={3}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Any watermark or signup?</Typography></AccordionSummary>
-                                <AccordionDetails><Typography variant='body1'>None — fully free & watermark‑free.</Typography></AccordionDetails>
-                            </Accordion>
+                            {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
+                                <Accordion key={idx} square disableGutters elevation={3}>
+                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>{faq.name}</Typography></AccordionSummary>
+                                    <AccordionDetails><Typography variant='body1'>{faq.acceptedAnswer.text}</Typography></AccordionDetails>
+                                </Accordion>
+                            ))}
                         </Grid>
                     </Grid>
                 </Container>

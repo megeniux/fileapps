@@ -84,11 +84,6 @@ function AppRoutes() {
       <Route path="tools/video/resize-video-online" element={<BasicLayout><VideoResizerLanding /></BasicLayout>} />
       <Route path="tools/video/how-to-resize-video-online" element={<BasicLayout><VideoResizerBlog /></BasicLayout>} />
 
-      {/* Thumbnail Generator */}
-      <Route path="tools/video/thumbnail" element={<BasicLayout><ThumbnailGenerator /></BasicLayout>} />
-      <Route path="tools/video/extract-thumbnail-from-video" element={<BasicLayout><ThumbnailGeneratorLanding /></BasicLayout>} />
-      <Route path="tools/video/how-to-generate-thumbnail" element={<BasicLayout><ThumbnailGeneratorBlog /></BasicLayout>} />
-
       {/* Trim */}
       <Route path="tools/video/trim" element={<BasicLayout><VideoTrim /></BasicLayout>} />
       <Route path="tools/video/trim-video-online" element={<BasicLayout><VideoTrimLanding /></BasicLayout>} />
@@ -141,9 +136,15 @@ function AppRoutes() {
       <Route path="tools/audio/how-to-audio-playback-speed-editor" element={<BasicLayout><AudioPlaybackBlog /></BasicLayout>} />
 
       {/* Image Tools */}
+      {/* Converter */}
       <Route path="tools/image/convert" element={<BasicLayout><ImageEditor /></BasicLayout>} />
       <Route path="tools/image/convert-image-online" element={<BasicLayout><ImageConverterLanding /></BasicLayout>} />
       <Route path="tools/image/how-to-convert-image-online" element={<BasicLayout><ImageConverterBlog /></BasicLayout>} />
+
+      {/* Thumbnail Generator */}
+      <Route path="tools/image/thumbnail" element={<BasicLayout><ThumbnailGenerator /></BasicLayout>} />
+      <Route path="tools/image/extract-thumbnail-from-video" element={<BasicLayout><ThumbnailGeneratorLanding /></BasicLayout>} />
+      <Route path="tools/image/how-to-generate-thumbnail" element={<BasicLayout><ThumbnailGeneratorBlog /></BasicLayout>} />
 
       {/* Other pages */}
       <Route path="about" element={<BasicLayout><AboutUs /></BasicLayout>} />
@@ -151,6 +152,7 @@ function AppRoutes() {
       <Route path="terms" element={<BasicLayout><TOS /></BasicLayout>} />
       <Route path="privacy" element={<BasicLayout><PrivacyPolicy /></BasicLayout>} />
       <Route path="*" element={<BasicLayout><NotFound /></BasicLayout>} />
+
     </Routes>
   );
 }

@@ -104,7 +104,7 @@ export default function ImageConverterLanding() {
                                 <Button size='large' href="/tools/image/how-to-convert-image-online" variant="text" sx={{ color: 'text.secondary' }}>View Full Guide</Button>
                             </Box>
                         </Grid>
-                        <Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
+                        <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
                             <img src='/images/landing/image-converter-hero.jpg' alt='Screenshot of online image converter tool with preview and editing sliders' title='Image Converter' loading='lazy' width="auto" height="auto" />
                         </Grid>
                     </Grid>
@@ -288,26 +288,12 @@ export default function ImageConverterLanding() {
                             <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
                         </Grid>
                         <Grid size={{ xs: 12 }}>
-                            <Accordion square disableGutters elevation={3}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Is processing private?</Typography></AccordionSummary>
-                                <AccordionDetails><Typography variant='body1'>Yes — runs locally; no uploads.</Typography></AccordionDetails>
-                            </Accordion>
-                            <Accordion square disableGutters elevation={3}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Which formats?</Typography></AccordionSummary>
-                                <AccordionDetails><Typography variant='body1'>JPG, PNG, WebP, GIF input & output.</Typography></AccordionDetails>
-                            </Accordion>
-                            <Accordion square disableGutters elevation={3}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Maintain aspect ratio?</Typography></AccordionSummary>
-                                <AccordionDetails><Typography variant='body1'>Yes — toggle lock to preserve proportions.</Typography></AccordionDetails>
-                            </Accordion>
-                            <Accordion square disableGutters elevation={3}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Crop & rotate supported?</Typography></AccordionSummary>
-                                <AccordionDetails><Typography variant='body1'>Yes — interactive crop, rotate & flip tools.</Typography></AccordionDetails>
-                            </Accordion>
-                            <Accordion square disableGutters elevation={3}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Free & watermark‑free?</Typography></AccordionSummary>
-                                <AccordionDetails><Typography variant='body1'>Completely free — no signup or watermark.</Typography></AccordionDetails>
-                            </Accordion>
+                            {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
+                                <Accordion key={idx} square disableGutters elevation={3}>
+                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>{faq.name}</Typography></AccordionSummary>
+                                    <AccordionDetails><Typography variant='body1'>{faq.acceptedAnswer.text}</Typography></AccordionDetails>
+                                </Accordion>
+                            ))}
                         </Grid>
                     </Grid>
                 </Container>

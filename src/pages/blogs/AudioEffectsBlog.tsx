@@ -98,46 +98,16 @@ export default function AudioEffectsBlog() {
           <Divider sx={{ my: 3 }} />
 
           <Typography variant="h4" component="h2" gutterBottom>FAQs</Typography>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="h6" component="h3">Is it really free and private?</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography variant="body1">Yes. Runs fully in your browser via WebAssembly — no uploads or accounts.</Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="h6" component="h3">Can I change pitch and speed together?</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography variant="body1">Yes — adjust semitone pitch and tempo multiplier in the same session.</Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="h6" component="h3">Which formats are supported?</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography variant="body1">MP3, WAV, FLAC, AAC, OGG, M4A (browser‑decodable formats).</Typography>
-            </AccordionDetails>
-          </Accordion>
-            <Accordion disableGutters square>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography variant="h6" component="h3">What’s a safe range for pitch & speed?</Typography>
+          {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
+            <Accordion key={idx} disableGutters square>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}> 
+                <Typography variant="h6" component="h3">{faq.name}</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography variant="body1">Pitch ±7 semitones for natural tone; speed 0.5×–2× covers most needs.</Typography>
+                <Typography variant="body1">{faq.acceptedAnswer.text}</Typography>
               </AccordionDetails>
             </Accordion>
-            <Accordion disableGutters square>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography variant="h6" component="h3">How do I avoid clipping or distortion?</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography variant="body1">Normalize first, then add gain and keep ~1 dB headroom.</Typography>
-              </AccordionDetails>
-            </Accordion>
+          ))}
 
           <Divider sx={{ my: 3 }} />
           <Typography variant="h4" component="h2" gutterBottom>Conclusion</Typography>

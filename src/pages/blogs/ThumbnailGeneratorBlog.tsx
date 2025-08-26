@@ -28,9 +28,9 @@ export default function ThumbnailGeneratorBlog() {
         <meta property="og:description" content="Extract high-quality thumbnails from your videos instantly in your browser. No watermark, no downloads, and no credit card required." />
         <meta property="og:type" content="article" />
         <meta property="og:image" content="/images/landing/thumbnail-generator-hero.jpg" />
-        <meta property="og:url" content="/tools/video/how-to-generate-thumbnail" />
+        <meta property="og:url" content="/tools/image/how-to-generate-thumbnail" />
         <meta property="og:site_name" content="FileApps" />
-        <link rel="canonical" href="/tools/video/how-to-generate-thumbnail" />
+        <link rel="canonical" href="/tools/image/how-to-generate-thumbnail" />
         <script type='application/ld+json'>{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
@@ -62,8 +62,8 @@ export default function ThumbnailGeneratorBlog() {
           <Typography variant="body1" mb={2}>With our free online thumbnail generator, creating engaging video thumbnails is fast, easy, and private. No signups, no watermarks, and no complicated software. Start generating your thumbnails today and boost your video views!</Typography>
 
           <Box mt={4} textAlign="center">
-            <Button color='inherit' size='large' href="/tools/video/thumbnail" variant="contained">Upload Video</Button>
-            <Button color='inherit' size='large' href="/tools/video/extract-thumbnail-from-video" variant="outlined" sx={{ ml: 2 }}>Features</Button>
+            <Button color='warning' size='large' href="/tools/image/thumbnail" variant="contained">Upload Video</Button>
+            <Button color='warning' size='large' href="/tools/image/extract-thumbnail-from-video" variant="outlined" sx={{ ml: 2 }}>Features</Button>
           </Box>
         </Box>
       </Paper>

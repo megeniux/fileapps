@@ -5,6 +5,10 @@ import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
+import Accordion from '@mui/material/Accordion'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 const FAQ_SCHEMA = {
   "@context": "https://schema.org",
@@ -85,7 +89,25 @@ export default function ExtractAudioBlog() {
             <li><Typography variant='body1'>Trim the exact range to reduce size.</Typography></li>
             <li><Typography variant='body1'>Keep the original video as a source.</Typography></li>
           </Box>
-          <Typography variant="body1" mb={2}>Try it now — upload a video, set a range, and export clean audio instantly.</Typography>
+
+          <Divider sx={{ my: 3 }} />
+
+          <Typography variant="h4" component="h2" gutterBottom>FAQs</Typography>
+          {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
+            <Accordion key={idx} disableGutters square>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography variant="h6" component="h3">{faq.name}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography variant="body1">{faq.acceptedAnswer.text}</Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))}
+
+          <Divider sx={{ my: 3 }} />
+
+          <Typography variant="h4" component="h2" gutterBottom>Conclusion</Typography>
+          <Typography variant="body1" mb={2}>Extracting audio from video doesn’t need bulky software or uploads. Load a file, optionally set a time range, and export MP3, WAV or AAC locally — fast, private and watermark‑free. Try it now.</Typography>
 
           <Box mt={4} textAlign="center">
             <Button color='error' size='large' href="/tools/video/extract-audio" variant="contained">Upload Video</Button>

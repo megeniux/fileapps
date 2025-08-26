@@ -82,26 +82,16 @@ export default function AudioTrimBlog() {
           <Divider sx={{ my: 3 }} />
 
           <Typography variant="h4" component="h2" gutterBottom>FAQs</Typography>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant="h6" component="h3">Can I cut MP3 files?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant="body1">Yes — MP3 plus WAV, FLAC, AAC, OGG, M4A and other browser‑supported formats.</Typography></AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant="h6" component="h3">Do I need to upload?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant="body1">No. Trimming runs entirely in your browser for privacy.</Typography></AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant="h6" component="h3">Is it free & watermark‑free?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant="body1">Yes — fully free with no watermark or signup.</Typography></AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant="h6" component="h3">Will quality drop?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant="body1">Lossless inputs can remain lossless; lossy formats may re‑encode.</Typography></AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant="h6" component="h3">Any size limits?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant="body1">Only constrained by available device memory.</Typography></AccordionDetails>
-          </Accordion>
+          {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
+            <Accordion key={idx} disableGutters square>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}> 
+                <Typography variant="h6" component="h3">{faq.name}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography variant="body1">{faq.acceptedAnswer.text}</Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))}
 
           <Divider sx={{ my: 3 }} />
           <Typography variant="h4" component="h2" gutterBottom>Conclusion</Typography>

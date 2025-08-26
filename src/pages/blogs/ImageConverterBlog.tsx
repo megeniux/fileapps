@@ -94,26 +94,12 @@ export default function ImageConverterBlog() {
 
           <Divider sx={{ my: 3 }} />
           <Typography variant='h4' component='h2' gutterBottom>FAQs</Typography>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Is processing private?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant='body1'>Yes — all actions run locally; nothing uploads.</Typography></AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Which formats can I convert?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant='body1'>JPG, PNG, WebP, GIF — convert between any of them.</Typography></AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Can I keep aspect ratio?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant='body1'>Yes — enable the aspect lock toggle when resizing.</Typography></AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Are crop & rotate supported?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant='body1'>Interactive crop, rotate and flip are included.</Typography></AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Is it free & watermark‑free?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant='body1'>Completely free — no watermark, no signup.</Typography></AccordionDetails>
-          </Accordion>
+          {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
+            <Accordion key={idx} disableGutters square>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>{faq.name}</Typography></AccordionSummary>
+              <AccordionDetails><Typography variant='body1'>{faq.acceptedAnswer.text}</Typography></AccordionDetails>
+            </Accordion>
+          ))}
 
           <Divider sx={{ my: 3 }} />
           <Typography variant='h4' component='h2' gutterBottom>Conclusion</Typography>

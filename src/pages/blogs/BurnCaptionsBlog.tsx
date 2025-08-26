@@ -80,34 +80,16 @@ export default function BurnCaptionsBlog() {
             </Box>
           <Divider sx={{ my: 3 }} />
           <Typography variant='h4' component='h2' gutterBottom>FAQs</Typography>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Is processing private?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant='body1'>Yes — caption burning happens locally (no uploads).</Typography></AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Can I preview before burning?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant='body1'>Yes — review timing & styling, then finalize.</Typography></AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>What subtitle formats?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant='body1'>SRT and VTT (WebVTT).</Typography></AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Which video formats?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant='body1'>MP4, MOV, MKV, WebM (others if browser supports).</Typography></AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Can I change caption position?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant='body1'>Yes — choose top or bottom before burning.</Typography></AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Are captions removable later?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant='body1'>No — hardsubbed captions are permanent.</Typography></AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Any watermark or signup?</Typography></AccordionSummary>
-            <AccordionDetails><Typography variant='body1'>No — free, watermark‑free & no account.</Typography></AccordionDetails>
-          </Accordion>
+          {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
+            <Accordion key={idx} disableGutters square>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}> 
+                <Typography variant='h6' component='h3'>{faq.name}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography variant='body1'>{faq.acceptedAnswer.text}</Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))}
           <Divider sx={{ my: 3 }} />
           <Typography variant='h4' component='h2' gutterBottom>Conclusion</Typography>
           <Typography variant='body1' mb={2}>Upload, add SRT/VTT, style & position, preview, then burn and download — fast, private & watermark‑free.</Typography>

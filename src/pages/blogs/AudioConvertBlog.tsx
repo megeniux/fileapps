@@ -95,62 +95,16 @@ export default function AudioConvertBlog() {
 
                     <Divider sx={{ my: 3 }} />
                     <Typography variant="h4" component="h2" gutterBottom>FAQs</Typography>
-                    <Accordion disableGutters square>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography variant="h6" component="h3">Is AudioConvert really free and safe?</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Typography variant="body1">Absolutely — it’s completely free, with no hidden fees or limitations. All conversions happen in your browser for your privacy.</Typography>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion disableGutters square>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography variant="h6" component="h3">Can I convert WAV to MP3 online for free?</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Typography variant="body1">Yes—AudioConvert supports converting WAV to MP3, as well as to formats like FLAC, OGG, AAC, M4A.</Typography>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion disableGutters square>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography variant="h6" component="h3">Does it support bulk audio conversion?</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Typography variant="body1">Yes, you can convert multiple files at once using the batch upload feature.</Typography>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion disableGutters square>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography variant="h6" component="h3">What about audio quality control?</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Typography variant="body1">You can select quality up to 320 kbps, choose lossless conversion, and adjust sample rate or add fade in/out effects.</Typography>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion disableGutters square>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography variant="h6" component="h3">Do I need to register or upload files to your server?</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Typography variant="body1">Nope—no account needed and no file ever leaves your browser. It's a privacy-first, client-side audio converter.</Typography>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion disableGutters square>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography variant="h6" component="h3">Will files have watermarks or branding?</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Typography variant="body1">No, converted audio files come clean—no watermarks, no audio branding, no extra modifications.</Typography>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion disableGutters square>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography variant="h6" component="h3">What formats are supported?</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Typography variant="body1">Supports MP3, WAV, AAC, FLAC, OGG, M4A, WMA, AIFF, etc.</Typography>
-                        </AccordionDetails>
-                    </Accordion>
+                    {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
+                        <Accordion key={idx} disableGutters square>
+                            <AccordionSummary expandIcon={<ExpandMoreIcon />}> 
+                                <Typography variant="h6" component="h3">{faq.name}</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Typography variant="body1">{faq.acceptedAnswer.text}</Typography>
+                            </AccordionDetails>
+                        </Accordion>
+                    ))}
 
                     <Divider sx={{ my: 3 }} />
                     <Typography variant="h4" component="h2" gutterBottom>Conclusion</Typography>

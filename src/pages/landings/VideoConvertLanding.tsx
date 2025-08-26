@@ -98,7 +98,7 @@ export default function VideoConvertLanding() { // corrected component name to m
                 <Button size='large' href="/tools/video/how-to-convert-video-online" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
               </Box>
             </Grid>
-            <Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
+            <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
               <img src='/images/landing/video-convert-hero.jpg' alt='Laptop with video conversion interface' title='Video Converter' loading='lazy' width="auto" height="auto" />
             </Grid>
           </Grid>
@@ -194,9 +194,9 @@ export default function VideoConvertLanding() { // corrected component name to m
               <Typography variant='h2' mb={4} align='center'>FAQs</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
-            {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
-              <Grid key={idx} size={{ xs: 12 }}>
-                <Accordion square disableGutters elevation={3} sx={{ '& .MuiAccordionSummary-root': { px: 1, py: 0.5 }, '& .MuiAccordionDetails-root': { px: 1, py: 1 } }}>
+            <Grid size={{ xs: 12 }}>
+              {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
+                <Accordion key={idx} square disableGutters elevation={3}>
                   <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`faq-vc-${idx}-content`} id={`faq-vc-${idx}-header`}>
                     <Typography variant='h6' component='h3'>{faq.name}</Typography>
                   </AccordionSummary>
@@ -204,8 +204,8 @@ export default function VideoConvertLanding() { // corrected component name to m
                     <Typography variant='body1'>{faq.acceptedAnswer.text}</Typography>
                   </AccordionDetails>
                 </Accordion>
-              </Grid>
-            ))}
+              ))}
+            </Grid>
           </Grid>
         </Container>
       </section>

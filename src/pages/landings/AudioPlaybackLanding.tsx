@@ -57,7 +57,7 @@ export default function AudioPlaybackLanding() {
                 <Button size='large' href="/tools/audio/how-to-audio-playback-speed-editor" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
               </Box>
             </Grid>
-            <Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
+            <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
               <img
                 src='/images/landing/audio-speed-editor-hero.jpg'
                 alt='Audio speed adjustment interface'
@@ -278,46 +278,16 @@ export default function AudioPlaybackLanding() {
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
             <Grid size={{ xs: 12 }}>
-              <Accordion square disableGutters elevation={3}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography variant='h6' component='h3'>Can I reverse audio?</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography variant='body1'>Yes — reverse mode flips playback locally without uploads.</Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion square disableGutters elevation={3}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography variant='h6' component='h3'>Are my files uploaded?</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography variant='body1'>No. Processing is browser‑based for privacy.</Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion square disableGutters elevation={3}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography variant='h6' component='h3'>Which formats are supported?</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography variant='body1'>Any browser‑decodable audio: MP3, WAV, FLAC, AAC, OGG, M4A.</Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion square disableGutters elevation={3}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography variant='h6' component='h3'>Does changing speed affect pitch?</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography variant='body1'>Pitch preservation aims to maintain tone for common adjustments.</Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion square disableGutters elevation={3}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography variant='h6' component='h3'>Is it free & watermark‑free?</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography variant='body1'>Yes — no signup, no watermark, no hidden limits.</Typography>
-                </AccordionDetails>
-              </Accordion>
+              {FAQ_SCHEMA.mainEntity.map((faq, idx) => (
+                <Accordion key={idx} square disableGutters elevation={3}>
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`faq-playback-${idx}-content`} id={`faq-playback-${idx}-header`}>
+                    <Typography variant='h6' component='h3'>{faq.name}</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography variant='body1'>{faq.acceptedAnswer.text}</Typography>
+                  </AccordionDetails>
+                </Accordion>
+              ))}
             </Grid>
           </Grid>
         </Container>

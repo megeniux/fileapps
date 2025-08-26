@@ -57,7 +57,7 @@ export default function AudioMergerLanding() {
                 <Button size='large' href="/tools/audio/how-to-merge-audio-online" variant="text" sx={{ color: 'text.secondary' }}>Read Guide</Button>
               </Box>
             </Grid>
-            <Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
+            <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
               <img src='/images/landing/audio-merger-landing.png' alt='Audio Merger UI' title='Audio Merger' loading='lazy' width="auto" height="auto" />
             </Grid>
           </Grid>
@@ -260,46 +260,16 @@ export default function AudioMergerLanding() {
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
             <Grid size={{ xs: 12 }}>
-              <Accordion square disableGutters elevation={3}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography variant='h6' component='h3'>How do I merge audio?</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography variant='body1'>Add tracks, arrange order, then merge & download.</Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion square disableGutters elevation={3}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography variant='h6' component='h3'>Are files uploaded?</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography variant='body1'>No — all processing is local in your browser.</Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion square disableGutters elevation={3}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography variant='h6' component='h3'>Do formats need to match?</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography variant='body1'>Not strictly — mixed formats are re‑encoded as needed.</Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion square disableGutters elevation={3}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography variant='h6' component='h3'>Is there a size limit?</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography variant='body1'>Only practical device memory limits apply.</Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion square disableGutters elevation={3}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography variant='h6' component='h3'>Watermark or signup?</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography variant='body1'>None — fully free & watermark‑free.</Typography>
-                </AccordionDetails>
-              </Accordion>
+              {FAQ_SCHEMA.mainEntity.map((faq, idx) => (
+                <Accordion key={idx} square disableGutters elevation={3}>
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`faq-merger-${idx}-content`} id={`faq-merger-${idx}-header`}>
+                    <Typography variant='h6' component='h3'>{faq.name}</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography variant='body1'>{faq.acceptedAnswer.text}</Typography>
+                  </AccordionDetails>
+                </Accordion>
+              ))}
             </Grid>
           </Grid>
         </Container>

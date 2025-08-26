@@ -68,13 +68,6 @@ const videoTools: {
       color: 'success'
     },
     {
-      title: 'Video Playback Speed Editor',
-      description: 'Change video playback speed from -20x (reverse) to +20x online. No watermark, no signup, 100% browser-based.',
-      icon: <SpeedIcon fontSize="small" color="secondary" />,
-      link: '/tools/video/video-playback-speed-editor',
-      color: 'secondary'
-    },
-    {
       title: 'Extract Audio',
       description: 'Extract high-quality audio from video files and save as MP3, WAV or AAC for reuse.',
       icon: <MusicNoteIcon fontSize="small" color="error" />,
@@ -89,18 +82,11 @@ const videoTools: {
       color: 'primary'
     },
     {
-      title: 'Video Playback Speed',
-      description: 'Speed up, slow down or reverse video playback and export the processed file at the chosen speed.',
+      title: 'Video Playback Speed Editor',
+      description: 'Change video playback speed from -20x (reverse) to +20x online. No watermark, no signup, 100% browser-based.',
       icon: <SpeedIcon fontSize="small" color="secondary" />,
-      link: '/tools/video/playback',
+      link: '/tools/video/video-playback-speed-editor',
       color: 'secondary'
-    },
-    {
-      title: 'Thumbnail Generator',
-      description: 'Extract high-quality thumbnails from your videos instantly in your browser. No watermark, no downloads, and no credit card required.',
-      icon: <PhotoSizeSelectActualIcon fontSize="small" color="warning" />,
-      link: '/tools/video/extract-thumbnail-from-video',
-      color: 'warning'
     },
   ];
 
@@ -140,7 +126,7 @@ const audioTools: {
       color: 'info'
     },
     {
-      title: 'Audio Playback Speed',
+      title: 'Audio Playback Speed Editor',
       description: 'Change audio speed (with pitch correction) or reverse tracks. Export processed audio quickly.',
       icon: <SpeedIcon fontSize="small" color="success" />,
       link: '/tools/audio/audio-playback-speed-editor',
@@ -158,8 +144,15 @@ const imageTools: {
     {
       title: 'Image Converter & Editor',
       description: 'Convert, resize, crop, rotate, and apply filters to images online for free. Supports JPG, PNG, WebP, GIF formats. Fast, secure, and works entirely in your browser.',
-      icon: <ImageIcon fontSize="small" color="secondary" />,
+      icon: <ImageIcon fontSize="small" color="primary" />,
       link: '/tools/image/convert-image-online',
+      color: 'primary'
+    },
+    {
+      title: 'Thumbnail Generator',
+      description: 'Extract high-quality thumbnails from your videos instantly in your browser. No watermark, no downloads, and no credit card required.',
+      icon: <PhotoSizeSelectActualIcon fontSize="small" color="secondary" />,
+      link: '/tools/image/extract-thumbnail-from-video',
       color: 'secondary'
     },
   ];
@@ -211,7 +204,7 @@ function Home() {
               <CardActionArea onClick={() => navigate(tool.link)} sx={{ height: '100%' }}>
                 <CardContent>
                   <Box display="flex" alignItems="center" mb={1}>
-                    <Box width={30} height={30} p={0.5} borderRadius={4} sx={{ background: theme.palette.action.selected }}>{tool.icon}</Box>
+                    <Box display="flex" alignItems="center" justifyContent="center" width={30} height={30} p={0.5} borderRadius={4} sx={{ background: theme.palette.action.selected }}>{tool.icon}</Box>
                     <Typography variant="subtitle1" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
                   </Box>
                   <Typography variant="body2" color="text.secondary">{tool.description}</Typography>
@@ -231,7 +224,7 @@ function Home() {
               <CardActionArea onClick={() => navigate(tool.link)} sx={{ height: '100%' }}>
                 <CardContent>
                   <Box display="flex" alignItems="center" mb={1}>
-                    <Box width={30} height={30} p={0.5} borderRadius={4} sx={{ background: theme.palette.action.selected }}>{tool.icon}</Box>
+                    <Box display="flex" alignItems="center" justifyContent="center" width={30} height={30} p={0.5} borderRadius={4} sx={{ background: theme.palette.action.selected }}>{tool.icon}</Box>
                     <Typography variant="subtitle1" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
                   </Box>
                   <Typography variant="body2" color="text.secondary">{tool.description}</Typography>

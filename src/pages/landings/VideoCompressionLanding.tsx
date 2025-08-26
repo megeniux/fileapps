@@ -121,7 +121,7 @@ export default function VideoCompressionLanding() {
                 <Button size='large' variant='outlined' color='secondary' href='/tools/video/how-to-compress-video-online'>Learn More</Button>
               </Box>
             </Grid>
-            <Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
+            <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
               <img src='/images/landing/video-compression-hero.jpg' alt='Laptop with video compression interface' title='Online Video Compressor' loading='lazy' />
             </Grid>
           </Grid>
@@ -195,9 +195,9 @@ export default function VideoCompressionLanding() {
               <Typography variant='h2' align='center'>FAQs</Typography>
               <Divider sx={{ width: 100, borderColor: 'text.primary', mx: 'auto', my: 2 }} />
             </Grid>
-            {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
-              <Grid key={idx} size={{ xs: 12 }}>
-                <Accordion square disableGutters elevation={3}>
+            <Grid size={{ xs: 12 }}>
+              {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
+                <Accordion key={idx} square disableGutters elevation={3}>
                   <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`vcfaq-${idx}-content`} id={`vcfaq-${idx}-header`}>
                     <Typography variant='h6' component='h3'>{faq.name}</Typography>
                   </AccordionSummary>
@@ -205,8 +205,8 @@ export default function VideoCompressionLanding() {
                     <Typography variant='body1'>{faq.acceptedAnswer.text}</Typography>
                   </AccordionDetails>
                 </Accordion>
-              </Grid>
-            ))}
+              ))}
+            </Grid>
           </Grid>
         </Container>
       </section>

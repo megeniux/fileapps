@@ -6,9 +6,9 @@ ogTitle: "Free Online Video Thumbnail Generator – Capture & Export Frames"
 ogDescription: "Generate HD video thumbnails free online. Capture frames from MP4, MOV, WebM. Export PNG/JPEG locally. No signup, watermark-free, privacy-first."
 ogType: "website"
 ogImage: "/images/landing/thumbnail-generator-hero.jpg"
-ogUrl: "/tools/video/extract-thumbnail-from-video"
+ogUrl: "/tools/image/extract-thumbnail-from-video"
 ogSiteName: "FileApps"
-canonical: "/tools/video/extract-thumbnail-from-video"
+canonical: "/tools/image/extract-thumbnail-from-video"
 slug: thumbnail-generator
 type: landing+blog
 ---

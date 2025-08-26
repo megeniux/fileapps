@@ -95,7 +95,7 @@ export default function VideoTrimLanding() {
                 <Button size='large' href="/tools/video/how-to-trim-video-online" variant="text" sx={{ color: 'text.secondary' }}>Learn How to Trim</Button>
               </Box>
             </Grid>
-            <Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
+            <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
               <img src='/images/landing/video-trimmer-hero.jpg' alt='Interface for trimming and cutting videos online' title='Video Trimmer' loading='lazy' width="auto" height="auto" />
             </Grid>
           </Grid>
@@ -190,9 +190,9 @@ export default function VideoTrimLanding() {
               <Typography variant='h2' mb={4} align='center'>FAQs</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
-            {FAQ_SCHEMA.mainEntity.map((faq, idx) => (
-              <Grid key={idx} size={{ xs: 12 }}>
-                <Accordion square disableGutters elevation={3} sx={{ '& .MuiAccordionSummary-root': { px: 1, py: 0.5 }, '& .MuiAccordionDetails-root': { px: 1, py: 1 } }}>
+            <Grid size={{ xs: 12 }}>
+              {FAQ_SCHEMA.mainEntity.map((faq, idx) => (
+                <Accordion key={idx} square disableGutters elevation={3}>
                   <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`faq-vt-${idx}-content`} id={`faq-vt-${idx}-header`}>
                     <Typography variant="subtitle1">{faq.name}</Typography>
                   </AccordionSummary>
@@ -200,8 +200,8 @@ export default function VideoTrimLanding() {
                     <Typography variant="body2">{faq.acceptedAnswer.text}</Typography>
                   </AccordionDetails>
                 </Accordion>
-              </Grid>
-            ))}
+              ))}
+            </Grid>
           </Grid>
         </Container>
       </section>

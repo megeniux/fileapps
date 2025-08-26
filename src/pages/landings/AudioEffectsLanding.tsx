@@ -57,7 +57,7 @@ export default function AudioEffectsLanding() {
 								<Button size='large' href="/tools/audio/how-to-audio-effects-online" variant="text" sx={{ color: 'text.secondary' }}>Learn More</Button>
 							</Box>
 						</Grid>
-						<Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
+						<Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
 							<img src='/images/landing/audio-effect-hero.jpg' alt='Audio Effects Editor' title='Audio Effects Editor' loading='lazy' width="auto" height="auto" style={{ filter: 'hue-rotate(-70deg)' }} />
 						</Grid>
 					</Grid>
@@ -257,46 +257,16 @@ export default function AudioEffectsLanding() {
 							<Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
 						</Grid>
 						<Grid size={{ xs: 12 }}>
-							<Accordion square disableGutters elevation={3}>
-								<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-									<Typography variant='h6' component='h3'>Is it really free and private?</Typography>
-								</AccordionSummary>
-								<AccordionDetails>
-									<Typography variant='body1'>Yes. Runs entirely in your browser — no uploads, accounts, or watermarks.</Typography>
-								</AccordionDetails>
-							</Accordion>
-							<Accordion square disableGutters elevation={3}>
-								<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-									<Typography variant='h6' component='h3'>Can I change pitch and speed together?</Typography>
-								</AccordionSummary>
-								<AccordionDetails>
-									<Typography variant='body1'>Yes — adjust semitone pitch and tempo multiplier in the same session.</Typography>
-								</AccordionDetails>
-							</Accordion>
-							<Accordion square disableGutters elevation={3}>
-								<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-									<Typography variant='h6' component='h3'>Which formats are supported?</Typography>
-								</AccordionSummary>
-								<AccordionDetails>
-									<Typography variant='body1'>MP3, WAV, FLAC, AAC, OGG, M4A (browser-decodable formats).</Typography>
-								</AccordionDetails>
-							</Accordion>
-							<Accordion square disableGutters elevation={3}>
-								<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-									<Typography variant='h6' component='h3'>What’s a safe range?</Typography>
-								</AccordionSummary>
-								<AccordionDetails>
-									<Typography variant='body1'>Pitch ±7 semitones for natural results; speed 0.5×–2× covers most needs.</Typography>
-								</AccordionDetails>
-							</Accordion>
-							<Accordion square disableGutters elevation={3}>
-								<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-									<Typography variant='h6' component='h3'>How do I avoid clipping?</Typography>
-								</AccordionSummary>
-								<AccordionDetails>
-									<Typography variant='body1'>Normalize first, then apply gain; leave about 1 dB headroom.</Typography>
-								</AccordionDetails>
-							</Accordion>
+							{FAQ_SCHEMA.mainEntity.map((faq, idx) => (
+								<Accordion key={idx} square disableGutters elevation={3}>
+									<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`faq-effects-${idx}-content`} id={`faq-effects-${idx}-header`}>
+										<Typography variant='h6' component='h3'>{faq.name}</Typography>
+									</AccordionSummary>
+									<AccordionDetails>
+										<Typography variant='body1'>{faq.acceptedAnswer.text}</Typography>
+									</AccordionDetails>
+								</Accordion>
+							))}
 						</Grid>
 					</Grid>
 				</Container>

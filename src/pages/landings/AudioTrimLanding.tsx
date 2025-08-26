@@ -87,7 +87,7 @@ export default function AudioTrimLanding() {
                 <Button size='large' href="/tools/audio/how-to-trim-audio-online" variant="text" sx={{ color: 'text.secondary' }}>Learn How to Use</Button>
               </Box>
             </Grid>
-            <Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
+            <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
               <img src='/images/landing/audio-trimmer-hero.jpg' alt='Interface for cutting and trimming audio online' title='Audio Trimmer' loading='lazy' width="auto" height="auto" />
             </Grid>
           </Grid>
@@ -303,26 +303,16 @@ export default function AudioTrimLanding() {
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
             <Grid size={{ xs: 12 }}>
-              <Accordion square disableGutters elevation={3}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Can I trim MP3 files?</Typography></AccordionSummary>
-                <AccordionDetails><Typography variant='body1'>Yes — MP3 plus WAV, FLAC, AAC, OGG & more.</Typography></AccordionDetails>
-              </Accordion>
-              <Accordion square disableGutters elevation={3}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Are files uploaded?</Typography></AccordionSummary>
-                <AccordionDetails><Typography variant='body1'>No — everything stays in your browser.</Typography></AccordionDetails>
-              </Accordion>
-              <Accordion square disableGutters elevation={3}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Is it free & watermark‑free?</Typography></AccordionSummary>
-                <AccordionDetails><Typography variant='body1'>Completely free — no watermark or signup.</Typography></AccordionDetails>
-              </Accordion>
-              <Accordion square disableGutters elevation={3}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Will quality degrade?</Typography></AccordionSummary>
-                <AccordionDetails><Typography variant='body1'>Lossless sources can stay lossless; lossy may re‑encode.</Typography></AccordionDetails>
-              </Accordion>
-              <Accordion square disableGutters elevation={3}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant='h6' component='h3'>Do I need an account?</Typography></AccordionSummary>
-                <AccordionDetails><Typography variant='body1'>No account required.</Typography></AccordionDetails>
-              </Accordion>
+              {FAQ_SCHEMA.mainEntity.map((faq, idx) => (
+                <Accordion key={idx} square disableGutters elevation={3}>
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`faq-trim-${idx}-content`} id={`faq-trim-${idx}-header`}>
+                    <Typography variant='h6' component='h3'>{faq.name}</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography variant='body1'>{faq.acceptedAnswer.text}</Typography>
+                  </AccordionDetails>
+                </Accordion>
+              ))}
             </Grid>
           </Grid>
         </Container>
@@ -341,18 +331,21 @@ export default function AudioTrimLanding() {
         </Container>
       </section>
 
-      {/* FAQ Schema moved to bottom */}
-      <script type="application/ld+json">{JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          { "@type": "Question", "name": "Can I trim MP3 files?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — MP3 plus WAV, FLAC, AAC, OGG and other browser‑decodable formats." } },
-          { "@type": "Question", "name": "Are files uploaded?", "acceptedAnswer": { "@type": "Answer", "text": "No. All trimming runs locally in your browser for privacy." } },
-          { "@type": "Question", "name": "Is it free and watermark‑free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The trimmer is fully free with no watermark or signup." } },
-          { "@type": "Question", "name": "Will quality degrade?", "acceptedAnswer": { "@type": "Answer", "text": "Lossless inputs can stay lossless; lossy formats may re‑encode when exporting." } },
-          { "@type": "Question", "name": "Do I need an account?", "acceptedAnswer": { "@type": "Answer", "text": "No account required — completely browser‑based." } }
-        ]
-      })}</script>
+  {/* FAQ Schema moved to bottom */}
+  <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
     </Root>
   )
+}
+
+// FAQ schema constant for mapping and structured data
+const FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Can I trim MP3 files?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — MP3 plus WAV, FLAC, AAC, OGG and other browser‑decodable formats." } },
+    { "@type": "Question", "name": "Are files uploaded?", "acceptedAnswer": { "@type": "Answer", "text": "No. All trimming runs locally in your browser for privacy." } },
+    { "@type": "Question", "name": "Is it free and watermark‑free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The trimmer is fully free with no watermark or signup." } },
+    { "@type": "Question", "name": "Will quality degrade?", "acceptedAnswer": { "@type": "Answer", "text": "Lossless inputs can stay lossless; lossy formats may re‑encode when exporting." } },
+    { "@type": "Question", "name": "Do I need an account?", "acceptedAnswer": { "@type": "Answer", "text": "No account required — completely browser‑based." } }
+  ]
 }

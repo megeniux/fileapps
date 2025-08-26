@@ -85,46 +85,16 @@ export default function AudioMergerBlog() {
           <Divider sx={{ my: 3 }} />
 
           <Typography variant="h4" component="h2" gutterBottom>FAQs</Typography>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="h6" component="h3">How do I merge audio?</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography variant="body1">Add tracks, reorder them, then click merge to export a single file.</Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="h6" component="h3">Are files uploaded?</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography variant="body1">No. All processing happens locally in your browser.</Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="h6" component="h3">Do formats need to match?</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography variant="body1">Not exactly — differing formats are re‑encoded during merge.</Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="h6" component="h3">Is there a size limit?</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography variant="body1">Only practical memory limits on your device/browser.</Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="h6" component="h3">Watermark or signup?</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography variant="body1">None — the tool is free and watermark‑free.</Typography>
-            </AccordionDetails>
-          </Accordion>
+          {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
+            <Accordion key={idx} disableGutters square>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography variant="h6" component="h3">{faq.name}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography variant="body1">{faq.acceptedAnswer.text}</Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))}
 
           <Divider sx={{ my: 3 }} />
           <Typography variant="h4" component="h2" gutterBottom>Conclusion</Typography>

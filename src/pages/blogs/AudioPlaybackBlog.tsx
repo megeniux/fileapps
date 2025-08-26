@@ -100,46 +100,16 @@ export default function AudioPlaybackBlog() {
           <Divider sx={{ my: 3 }} />
 
           <Typography variant="h4" component="h2" gutterBottom>FAQs</Typography>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="h6" component="h3">Can I reverse audio?</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography variant="body1">Yes — enable reverse (or negative direction where available) to flip playback.</Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion disableGutters square>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="h6" component="h3">Do I need to upload files?</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography variant="body1">No. Everything runs inside your browser; files never leave your device.</Typography>
-            </AccordionDetails>
-          </Accordion>
-            <Accordion disableGutters square>
+          {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
+            <Accordion key={idx} disableGutters square>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography variant="h6" component="h3">Which formats are supported?</Typography>
+                <Typography variant="h6" component="h3">{faq.name}</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography variant="body1">Any format your browser decodes: MP3, WAV, FLAC, AAC, OGG, M4A (others where supported).</Typography>
+                <Typography variant="body1">{faq.acceptedAnswer.text}</Typography>
               </AccordionDetails>
             </Accordion>
-            <Accordion disableGutters square>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography variant="h6" component="h3">Will pitch change when I edit speed?</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography variant="body1">Pitch preservation aims to retain original tone for moderate adjustments (extreme values may vary).</Typography>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion disableGutters square>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography variant="h6" component="h3">Is it really free and watermark‑free?</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography variant="body1">Yes — no watermark, no signup, no hidden limits.</Typography>
-              </AccordionDetails>
-            </Accordion>
+          ))}
 
           <Divider sx={{ my: 3 }} />
           <Typography variant="h4" component="h2" gutterBottom>Conclusion</Typography>

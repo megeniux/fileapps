@@ -68,7 +68,7 @@ const Root = styled(Paper)(({ theme }) => ({
   },
   '& .why-us, & .key-features, & .cta-section': {
     paddingBlock: theme.spacing(8),
-    background: `radial-gradient(circle at 50% 0%, ${theme.palette.warning.main} 0%, ${theme.palette.warning.dark} 100%)`,
+    background: `radial-gradient(circle at 50% 0%, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary.dark} 100%)`,
     textAlign: 'center',
     '& .MuiTypography-h2': { color: theme.palette.common.white }
   },
@@ -88,9 +88,9 @@ export default function ThumbnailGeneratorLanding() {
         <meta property="og:description" content="Extract high-quality thumbnails from your videos instantly in your browser. No watermark, no downloads, and no credit card required." />
         <meta property="og:image" content="/images/landing/thumbnail-generator-hero.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="/tools/video/extract-thumbnail-from-video" />
+        <meta property="og:url" content="/tools/image/extract-thumbnail-from-video" />
         <meta property="og:site_name" content="FileApps" />
-        <link rel="canonical" href="/tools/video/extract-thumbnail-from-video" />
+        <link rel="canonical" href="/tools/image/extract-thumbnail-from-video" />
         <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
@@ -101,11 +101,11 @@ export default function ThumbnailGeneratorLanding() {
               <Typography variant="h2" component="h1">Create Stunning Video Thumbnails Online – Fast, Free & No Signup</Typography>
               <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Extract high-quality thumbnails from your videos instantly in your browser. No watermark, no downloads, and no credit card required.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
-                <Button color='warning' size='large' href="/tools/video/thumbnail" variant="contained">Upload Video</Button>
-                <Button size='large' href="/tools/video/how-to-generate-thumbnail" variant="text" sx={{ color: 'text.secondary' }}>Learn How</Button>
+                <Button color='secondary' size='large' href="/tools/image/thumbnail" variant="contained">Upload Video</Button>
+                <Button size='large' href="/tools/image/how-to-generate-thumbnail" variant="text" sx={{ color: 'text.secondary' }}>Learn How</Button>
               </Box>
             </Grid>
-            <Grid size={{ xs: 12, md: 6 }} order={{ xs: -1, md: 1 }} className='hero-image'>
+            <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
               <img src='/images/landing/thumbnail-generator-hero.jpg' alt='Laptop showing video thumbnail generator interface' title='Thumbnail Generator' loading='lazy' width="auto" height="auto" />
             </Grid>
           </Grid>
@@ -119,12 +119,12 @@ export default function ThumbnailGeneratorLanding() {
               <Typography variant='h2'>Why Use Our Free Online Thumbnail Generator?</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            {[{ icon: <SpeedIcon fontSize='large' color='warning' />, title: '100% Browser-Based & Private', desc: 'All processing happens locally. No uploads or data leaks.' },
-            { icon: <PrivacyTipIcon fontSize='large' color='warning' />, title: 'No Signup or Watermark', desc: 'Use the tool instantly without restrictions or branding.' },
-            { icon: <HighQualityIcon fontSize='large' color='warning' />, title: 'Supports All Major Formats', desc: 'MP4, MOV, AVI, MKV, and more.' },
-            { icon: <DeviceHubIcon fontSize='large' color='warning' />, title: 'Customizable Thumbnail Sizes', desc: 'Perfect for YouTube, social media, presentations, and more.' },
-            { icon: <SpeedIcon fontSize='large' color='warning' />, title: 'Fast & Easy to Use', desc: 'Extract multiple thumbnails with a single click.' },
-            { icon: <DeviceHubIcon fontSize='large' color='warning' />, title: 'Cross-Platform Compatibility', desc: 'Works on desktop and mobile browsers alike.' }].map((item, i) => (
+            {[{ icon: <SpeedIcon fontSize='large' color='secondary' />, title: '100% Browser-Based & Private', desc: 'All processing happens locally. No uploads or data leaks.' },
+            { icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: 'No Signup or Watermark', desc: 'Use the tool instantly without restrictions or branding.' },
+            { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'Supports All Major Formats', desc: 'MP4, MOV, AVI, MKV, and more.' },
+            { icon: <DeviceHubIcon fontSize='large' color='secondary' />, title: 'Customizable Thumbnail Sizes', desc: 'Perfect for YouTube, social media, presentations, and more.' },
+            { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Fast & Easy to Use', desc: 'Extract multiple thumbnails with a single click.' },
+            { icon: <DeviceHubIcon fontSize='large' color='secondary' />, title: 'Cross-Platform Compatibility', desc: 'Works on desktop and mobile browsers alike.' }].map((item, i) => (
               <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
@@ -154,7 +154,7 @@ export default function ThumbnailGeneratorLanding() {
               { icon: <DownloadIcon />, title: 'Download Image', desc: 'Save your high-quality thumbnail with no watermark.' }].map((step, i) => (
                 <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                    <Box sx={{ bgcolor: (theme) => theme.palette.grey[700], color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
+                    <Box sx={{ bgcolor: (theme) => theme.palette.secondary.main, color: 'white', borderRadius: '50%', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{step.icon}</Box>
                     <Box>
                       <Typography variant='h5' component='h3'>{step.title}</Typography>
                       <Typography variant='body1'>{step.desc}</Typography>
@@ -174,12 +174,12 @@ export default function ThumbnailGeneratorLanding() {
               <Typography variant='h2' mb={4}>Key Features</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            {[{ icon: <UploadFileIcon fontSize='large' color='warning' />, title: 'Drag & Drop Upload', desc: 'Simple and intuitive video selection.' },
-            { icon: <AspectRatioIcon fontSize='large' color='warning' />, title: 'Multi-Format Support', desc: 'Works with MP4, MOV, AVI, MKV, etc.' },
-            { icon: <PhotoLibraryIcon fontSize='large' color='warning' />, title: 'Frame-by-Frame Selection', desc: 'Choose the perfect moment for your thumbnail.' },
-            { icon: <DeviceHubIcon fontSize='large' color='warning' />, title: 'Custom Size Output', desc: 'Resize thumbnails for YouTube, Instagram, Facebook, and more.' },
-            { icon: <HighQualityIcon fontSize='large' color='warning' />, title: 'High-Resolution Export', desc: 'No compression or watermark.' },
-            { icon: <FlashOnIcon fontSize='large' color='warning' />, title: 'Free Forever', desc: 'No signup, no credit card, no limits.' }].map((feat, i) => (
+            {[{ icon: <UploadFileIcon fontSize='large' color='secondary' />, title: 'Drag & Drop Upload', desc: 'Simple and intuitive video selection.' },
+            { icon: <AspectRatioIcon fontSize='large' color='secondary' />, title: 'Multi-Format Support', desc: 'Works with MP4, MOV, AVI, MKV, etc.' },
+            { icon: <PhotoLibraryIcon fontSize='large' color='secondary' />, title: 'Frame-by-Frame Selection', desc: 'Choose the perfect moment for your thumbnail.' },
+            { icon: <DeviceHubIcon fontSize='large' color='secondary' />, title: 'Custom Size Output', desc: 'Resize thumbnails for YouTube, Instagram, Facebook, and more.' },
+            { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'High-Resolution Export', desc: 'No compression or watermark.' },
+            { icon: <FlashOnIcon fontSize='large' color='secondary' />, title: 'Free Forever', desc: 'No signup, no credit card, no limits.' }].map((feat, i) => (
               <Grid key={i} size={{ xs: 12, sm: 6, lg: 4 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
@@ -201,9 +201,9 @@ export default function ThumbnailGeneratorLanding() {
               <Typography variant='h2' mb={4} align='center'>FAQs</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
             </Grid>
-            {FAQ_SCHEMA.mainEntity.map((faq, idx) => (
-              <Grid key={idx} size={{ xs: 12 }}>
-                <Accordion square disableGutters elevation={3} sx={{ '& .MuiAccordionSummary-root': { px: 1, py: 0.5 }, '& .MuiAccordionDetails-root': { px: 1, py: 1 } }}>
+            <Grid size={{ xs: 12 }}>
+              {FAQ_SCHEMA.mainEntity.map((faq, idx) => (
+                <Accordion key={idx} square disableGutters elevation={3}>
                   <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`faq-thumb-${idx}-content`} id={`faq-thumb-${idx}-header`}>
                     <Typography variant="subtitle1">{faq.name}</Typography>
                   </AccordionSummary>
@@ -211,8 +211,8 @@ export default function ThumbnailGeneratorLanding() {
                     <Typography variant="body2">{faq.acceptedAnswer.text}</Typography>
                   </AccordionDetails>
                 </Accordion>
-              </Grid>
-            ))}
+              ))}
+            </Grid>
           </Grid>
         </Container>
       </section>
@@ -223,8 +223,8 @@ export default function ThumbnailGeneratorLanding() {
             <Grid size={12}><Typography variant='h2' align='center'>Ready to generate your thumbnail?</Typography></Grid>
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Fast, private & free thumbnail generation — right in your browser.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-              <Button color='inherit' variant='contained' size='large' href='/tools/video/thumbnail'>Upload Video</Button>
-              <Button size='large' href='/tools/video/how-to-generate-thumbnail' sx={{ color: 'common.white' }}>Learn How</Button>
+              <Button color='inherit' variant='contained' size='large' href='/tools/image/thumbnail'>Upload Video</Button>
+              <Button size='large' href='/tools/image/how-to-generate-thumbnail' sx={{ color: 'common.white' }}>Learn How</Button>
             </Grid>
           </Grid>
         </Container>
