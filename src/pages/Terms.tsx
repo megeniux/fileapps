@@ -35,7 +35,10 @@ function TOS() {
             The service is provided "as is" and "as available." We do not guarantee the accuracy, reliability, or suitability of the tools for any particular purpose. You use {APP_INFO.name} at your own risk, and we are not responsible for any loss, damage, or consequences resulting from the use of our platform.
           </Typography>
           <Typography variant="body1" mb={2}>
-            {APP_INFO.name} displays advertisements to support the service. These ads are managed by third-party providers and may use cookies or similar technologies. We do not control the content or data collection practices of these third parties.
+            {APP_INFO.name} displays advertisements provided by Google AdSense and other third-party advertising networks to support our free service. These advertisements are clearly marked and may be personalized based on your interests. By using our service, you consent to the display of these advertisements and the data collection practices described in our Privacy Policy.
+          </Typography>
+          <Typography variant="body1" mb={2}>
+            We do not control the content of third-party advertisements and are not responsible for the products, services, or claims made in such advertisements. Any transactions or interactions with advertisers are solely between you and the advertiser.
           </Typography>
           <Typography variant="body1">
             By using {APP_INFO.name}, you acknowledge that you are solely responsible for your actions and any content processed through our tools. We disclaim all liability for any direct, indirect, incidental, or consequential damages arising from your use of the service.
