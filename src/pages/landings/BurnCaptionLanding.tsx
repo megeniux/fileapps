@@ -53,12 +53,12 @@ export default function BurnCaptionLanding(){
                 Hardcode SRT / VTT captions into MP4, MOV, MKV locally. Style font, size, color & background — no uploads, signup or watermark.
               </Typography>
               <Box display="flex" gap={1} justifyContent={{ xs:'center', md:'flex-start' }}>
-                <Button color='secondary' size='large' variant='contained' href='/tools/video/burn-captions'>Upload Video</Button>
-                <Button size='large' variant='text' sx={{ color:'text.secondary' }} href='/tools/video/how-to-burn-subtitles-into-video'>How-to Guide</Button>
+                <Button color='primary' size='large' variant='contained' href='/tools/video/burn-captions'>Upload Video</Button>
+                <Button size='large' variant='text' sx={{ color:'text.secondary' }} href='/tools/video/how-to-burn-captions-into-video-online'>How-to Guide</Button>
               </Box>
             </Grid>
             <Grid container size={{ xs:12, md:6 }} className='hero-image' justifyContent={{ xs:'center', md:'flex-end' }}>
-              <img src='/images/landing/burn-captions-hero.jpg' alt='Subtitle burner interface overlaying styled captions on video' title='Subtitle Burner' loading='lazy' />
+              <img src='/images/landing/burn-captions-hero.jpg' alt='Subtitle burner interface overlaying styled captions on video' title='Subtitle Burner' loading='lazy' style={{filter: 'hue-rotate(60deg)'}} />
             </Grid>
           </Grid>
         </Container>
@@ -72,19 +72,19 @@ export default function BurnCaptionLanding(){
               <Divider sx={{ width:100, borderColor:'common.white', mx:'auto', my:2 }} />
             </Grid>
             {[{
-              icon:<SecurityIcon fontSize='large' color='secondary' />,
+              icon:<SecurityIcon fontSize='large' color='primary' />,
               title:'Local & Private',
               desc:'Encoding stays on device.'
             },{
-              icon:<SubtitlesIcon fontSize='large' color='secondary' />,
+              icon:<SubtitlesIcon fontSize='large' color='primary' />,
               title:'SRT / VTT Support',
               desc:'Load or paste captions.'
             },{
-              icon:<PaletteIcon fontSize='large' color='secondary' />,
+              icon:<PaletteIcon fontSize='large' color='primary' />,
               title:'Styling Controls',
               desc:'Color, outline, box, size.'
             },{
-              icon:<HighQualityIcon fontSize='large' color='secondary' />,
+              icon:<HighQualityIcon fontSize='large' color='primary' />,
               title:'No Watermark',
               desc:'Clean final MP4.'
             }].map((c,i)=>(
@@ -107,7 +107,7 @@ export default function BurnCaptionLanding(){
               <Typography variant='h2'>How It Works</Typography>
               <Divider sx={{ width:100, borderColor:'text.primary', mx:'auto', my:2 }} />
             </Grid>
-            <Grid container spacing={{ xs:8, sm:6 }} justifyContent='center'>
+            <Grid container spacing={{ xs:8, sm:6 }} justifyContent='center' flexGrow={1}>
               {[{ icon:<CloudUploadIcon />, title:'Upload', desc:'Drag & drop video.' },
                 { icon:<SubtitlesIcon />, title:'Add Subtitles', desc:'Load SRT / VTT or paste.' },
                 { icon:<StyleIcon />, title:'Style', desc:'Font, size, color, box.' },
@@ -116,7 +116,7 @@ export default function BurnCaptionLanding(){
               ].map((s,i)=>(
                 <Grid key={i} size={{ xs:12, sm:6, md:4, lg:3 }}>
                   <Box sx={{ display:'flex', flexDirection:'column', alignItems:'center', gap:2 }}>
-                    <Box sx={{ bgcolor:'secondary.main', color:'white', width:56, height:56, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center' }}>{s.icon}</Box>
+                    <Box sx={{ bgcolor:'primary.main', color:'white', width:56, height:56, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center' }}>{s.icon}</Box>
                     <Box>
                       <Typography variant='h5' component='h3'>{s.title}</Typography>
                       <Typography variant='body1'>{s.desc}</Typography>
@@ -136,12 +136,12 @@ export default function BurnCaptionLanding(){
               <Typography variant='h2' mb={4}>Key Features</Typography>
               <Divider sx={{ width:100, borderColor:'common.white', mx:'auto', my:2 }} />
             </Grid>
-            {[{ icon:<SubtitlesIcon fontSize='large' color='secondary' />, title:'SRT / VTT Input', desc:'Standard caption formats.' },
-              { icon:<FontDownloadIcon fontSize='large' color='secondary' />, title:'Font & Size', desc:'Readable styling.' },
-              { icon:<PaletteIcon fontSize='large' color='secondary' />, title:'Color & Box', desc:'Outline / background.' },
-              { icon:<TuneIcon fontSize='large' color='secondary' />, title:'Positioning', desc:'Top / bottom alignment.' },
-              { icon:<SpeedIcon fontSize='large' color='secondary' />, title:'Local FFmpeg', desc:'Private WASM encoder.' },
-              { icon:<DownloadIcon fontSize='large' color='secondary' />, title:'Watermark‑Free', desc:'Clean MP4 export.' }
+            {[{ icon:<SubtitlesIcon fontSize='large' color='primary' />, title:'SRT / VTT Input', desc:'Standard caption formats.' },
+              { icon:<FontDownloadIcon fontSize='large' color='primary' />, title:'Font & Size', desc:'Readable styling.' },
+              { icon:<PaletteIcon fontSize='large' color='primary' />, title:'Color & Box', desc:'Outline / background.' },
+              { icon:<TuneIcon fontSize='large' color='primary' />, title:'Positioning', desc:'Top / bottom alignment.' },
+              { icon:<SpeedIcon fontSize='large' color='primary' />, title:'Local FFmpeg', desc:'Private WASM encoder.' },
+              { icon:<DownloadIcon fontSize='large' color='primary' />, title:'Watermark‑Free', desc:'Clean MP4 export.' }
             ].map((f,i)=>(
               <Grid key={i} size={{ xs:12, sm:6, md:4, lg:3 }}>
                 <Card sx={{ height:'100%' }}>
@@ -187,7 +187,7 @@ export default function BurnCaptionLanding(){
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Hardcode captions privately — fast, free & watermark‑free.</Typography></Grid>
             <Grid size={12} sx={{ display:'flex', justifyContent:'center', gap:1 }}>
               <Button color='inherit' variant='contained' size='large' href='/tools/video/burn-captions'>Upload Video</Button>
-              <Button size='large' href='/tools/video/how-to-burn-subtitles-into-video' sx={{ color:'common.white' }}>How-to Guide</Button>
+              <Button size='large' href='/tools/video/how-to-burn-captions-into-video-online' sx={{ color:'common.white' }}>How-to Guide</Button>
             </Grid>
           </Grid>
         </Container>
@@ -223,7 +223,7 @@ const Root = styled(Paper)(({ theme }) => ({
   },
   '& .why-us, & .key-features, & .cta-section':{
     paddingBlock:theme.spacing(8),
-    background:`radial-gradient(circle at 50% 0%, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary.dark} 100%)`,
+    background:`radial-gradient(circle at 50% 0%, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
     textAlign:'center',
     '& .MuiTypography-h2':{ color:theme.palette.common.white }
   },

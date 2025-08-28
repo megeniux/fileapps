@@ -38,9 +38,9 @@ const FAQ_SCHEMA = {
 const Root = styled(Paper)(({ theme }) => ({
   '& img': { maxWidth: '100%' },
   '& .hero-section': {
-display: 'flex',
-alignItems: 'center',
-minHeight: 500,
+    display: 'flex',
+    alignItems: 'center',
+    minHeight: 500,
     '& .hero-image': { '& > img': { marginBottom: theme.spacing(2) } },
     [theme.breakpoints.down('md')]: {
       '& .hero-text': { textAlign: 'center', paddingBottom: theme.spacing(6) },
@@ -93,7 +93,7 @@ export default function VideoPlaybackLanding() {
               </Box>
             </Grid>
             <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
-              <img src='/images/landing/video-playback-speed-hero.jpg' alt='Video speed changer interface' title='Video Playback Speed Editor' loading='lazy' width="auto" height="auto" />
+              <img src='/images/landing/video-playback-speed-hero.jpg' alt='Video speed changer interface' title='Video Playback Speed Editor' loading='lazy' width="auto" height="auto" style={{ filter: 'hue-rotate(30deg)' }} />
             </Grid>
           </Grid>
         </Container>

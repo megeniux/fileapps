@@ -62,8 +62,8 @@ export default function ThumbnailGeneratorBlog() {
           <Typography variant="body1" mb={2}>With our free online thumbnail generator, creating engaging video thumbnails is fast, easy, and private. No signups, no watermarks, and no complicated software. Start generating your thumbnails today and boost your video views!</Typography>
 
           <Box mt={4} textAlign="center">
-            <Button color='warning' size='large' href="/tools/image/thumbnail" variant="contained">Upload Video</Button>
-            <Button color='warning' size='large' href="/tools/image/extract-thumbnail-from-video" variant="outlined" sx={{ ml: 2 }}>Features</Button>
+            <Button color='secondary' size='large' href="/tools/image/thumbnail" variant="contained">Upload Video</Button>
+            <Button color='secondary' size='large' href="/tools/image/extract-thumbnail-from-video" variant="outlined" sx={{ ml: 2 }}>Features</Button>
           </Box>
         </Box>
       </Paper>

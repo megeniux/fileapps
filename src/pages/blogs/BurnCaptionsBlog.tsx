@@ -20,15 +20,15 @@ export default function BurnCaptionsBlog(){
         <meta property='og:description' content='Hardcode SRT / VTT captions into MP4 locally. Style & export watermark‑free.' />
         <meta property='og:type' content='article' />
         <meta property='og:image' content='/images/landing/burn-captions-hero.jpg' />
-        <meta property='og:url' content='/tools/video/how-to-burn-subtitles-into-video' />
+        <meta property='og:url' content='/tools/video/how-to-burn-captions-into-video-online' />
         <meta property='og:site_name' content='FileApps' />
-        <link rel='canonical' href='/tools/video/how-to-burn-subtitles-into-video' />
+        <link rel='canonical' href='/tools/video/how-to-burn-captions-into-video-online' />
         <script type='application/ld+json'>{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
       <Paper sx={{ p:{ xs:3, md:5 } }}>
         <Box mb={4}>
-          <img src='/images/landing/burn-captions-hero.jpg' alt='Subtitle Burner' title='Subtitle Burner' loading='lazy' width='480' height='auto' style={{ display:'table', margin:'0 auto 16px', maxWidth:'100%' }} />
+          <img src='/images/landing/burn-captions-hero.jpg' alt='Subtitle Burner' title='Subtitle Burner' loading='lazy' width='480' height='auto' style={{ display:'table', margin:'0 auto 16px', maxWidth:'100%', filter: 'hue-rotate(60deg)'}}/>
           <Typography variant='h3' component='h1' gutterBottom>Burn Subtitles into Video — Free, Private & Watermark‑Free</Typography>
           <Typography variant='body1'>Hardcode captions (SRT / VTT) into MP4, MOV or MKV entirely in your browser. Style font, size, color, outline and background box, then export a clean video — no uploads, signup or watermark.</Typography>
         </Box>
@@ -103,8 +103,8 @@ export default function BurnCaptionsBlog(){
         <Typography variant='body1' mb={2}>Burn captions privately: upload, add SRT/VTT, style, preview then export a clean MP4 — no signup, no watermark, full control.</Typography>
 
         <Box mt={4} textAlign='center'>
-          <Button variant='contained' color='secondary' size='large' href='/tools/video/burn-captions'>Upload Video</Button>
-          <Button variant='outlined' color='secondary' size='large' sx={{ ml:2 }} href='/tools/video/burn-subtitles-into-video'>Features</Button>
+          <Button variant='contained' color='primary' size='large' href='/tools/video/burn-captions'>Upload Video</Button>
+          <Button variant='outlined' color='primary' size='large' sx={{ ml:2 }} href='/tools/video/burn-subtitles-into-video'>Features</Button>
         </Box>
       </Paper>
     </Container>

@@ -116,7 +116,7 @@ const audioTools: {
       title: 'Audio Merger',
       description: 'Join multiple audio tracks into one file instantly. Combine MP3, WAV, AAC files in your browser — no uploads or signup required.',
       icon: <MergeTypeIcon fontSize="small" color="warning" />,
-      link: '/tools/audio/merge-audio-online',
+      link: '/tools/audio/merge-audio-files-online',
       color: 'warning'
     },
     {

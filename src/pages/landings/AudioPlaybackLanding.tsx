@@ -33,7 +33,7 @@ export default function AudioPlaybackLanding() {
         <meta name="description" content="Free audio speed changer: slow down, speed up or reverse MP3, WAV, FLAC, AAC, OGG, M4A locally. No uploads, signup or watermark." />
         <meta property="og:title" content="Audio Speed Changer – Slow Down, Speed Up or Reverse (Free)" />
         <meta property="og:description" content="Adjust or reverse audio speed privately in your browser. Multi‑format, fast & watermark‑free." />
-        <meta property="og:image" content="/images/landing/audio-speed-editor-hero.jpg" />
+        <meta property="og:image" content="/images/landing/audio-speed-editor-hero.png" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="/tools/audio/audio-playback-speed-editor" />
         <meta property="og:site_name" content="FileApps" />
@@ -54,7 +54,7 @@ export default function AudioPlaybackLanding() {
             </Grid>
             <Grid container size={{ xs: 12, md: 6 }} justifyContent={{ xs: 'center', md: 'flex-end' }} order={{ xs: -1, md: 1 }} className='hero-image'>
               <img
-                src='/images/landing/audio-speed-editor-hero.jpg'
+                src='/images/landing/audio-speed-editor-hero.png'
                 alt='Audio speed adjustment interface'
                 title='Audio Playback Speed Editor'
                 loading='lazy'

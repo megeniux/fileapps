@@ -23,7 +23,7 @@ export default function AudioPlaybackBlog() {
         <meta property='og:title' content='Free Online Audio Playback Speed Editor – Slow, Fast, Reverse' />
         <meta property='og:description' content='Adjust or reverse audio speed in your browser. MP3, WAV, FLAC, AAC supported. No uploads or signup.' />
         <meta property='og:type' content='article' />
-        <meta property='og:image' content='/images/landing/audio-speed-editor-hero.jpg' />
+        <meta property='og:image' content='/images/landing/audio-speed-editor-hero.png' />
         <meta property='og:url' content='/tools/audio/how-to-audio-playback-speed-editor' />
         <meta property='og:site_name' content='FileApps' />
         <link rel='canonical' href='/tools/audio/how-to-audio-playback-speed-editor' />
@@ -32,7 +32,7 @@ export default function AudioPlaybackBlog() {
 
       <Paper sx={{ p:{ xs:3, md:5 } }}>
         <Box mb={4}>
-          <img src='/images/landing/audio-speed-editor-hero.jpg' alt='Audio Speed Editor' title='Audio Speed Editor' loading='lazy' width='480' height='auto' style={{ maxWidth:'100%',display:'table',margin:'0 auto 16px' }} />
+          <img src='/images/landing/audio-speed-editor-hero.png' alt='Audio Speed Editor' title='Audio Speed Editor' loading='lazy' width='480' height='auto' style={{ maxWidth:'100%',display:'table',margin:'0 auto 16px' }} />
           <Typography variant='h3' component='h1' gutterBottom>Change Audio Playback Speed Online — Free, Private & Watermark‑Free</Typography>
           <Typography variant='body1'>Slow down, speed up or reverse audio (MP3, WAV, FLAC, AAC, OGG, M4A) directly in your browser. No uploads, signup or watermark — fast local processing.</Typography>
         </Box>

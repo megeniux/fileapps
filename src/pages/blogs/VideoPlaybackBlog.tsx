@@ -39,7 +39,7 @@ export default function VideoPlaybackBlog() {
       </Helmet>
       <Paper sx={{ p: 4 }}>
         <Box mb={4}>
-          <img src='/images/landing/video-playback-speed-hero.jpg' alt='Video Playback Speed Editor' title='Video Playback Speed Editor' loading='lazy' width="400px" height="auto" style={{ maxWidth: '100%', display: 'table', margin: '0 auto 16px' }} />
+          <img src='/images/landing/video-playback-speed-hero.jpg' alt='Video Playback Speed Editor' title='Video Playback Speed Editor' loading='lazy' width="400px" height="auto" style={{ maxWidth: '100%', display: 'table', margin: '0 auto 16px', filter: 'hue-rotate(30deg)' }} />
           <Typography variant="h3" component="h1" gutterBottom>Change Video Speed Online — Free, Private & Watermark‑Free</Typography>
           <Typography variant="body1">Adjust or reverse playback speed from <strong>-20x (reverse)</strong> to <strong>+20x</strong> directly in your browser. No uploads, signup or watermark — fast local FFmpeg WebAssembly processing.</Typography>
         </Box>

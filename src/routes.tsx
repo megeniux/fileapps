@@ -134,8 +134,8 @@ function AppRoutes() {
 
       {/* Merge */}
       <Route path="tools/audio/merge" element={<BasicLayout><AudioMerge /></BasicLayout>} />
-      <Route path="tools/audio/merge-audio-online" element={<BasicLayout><AudioMergerLanding /></BasicLayout>} />
-      <Route path="tools/audio/how-to-merge-audio-online" element={<BasicLayout><AudioMergerBlog /></BasicLayout>} />
+      <Route path="tools/audio/merge-audio-files-online" element={<BasicLayout><AudioMergerLanding /></BasicLayout>} />
+      <Route path="tools/audio/how-to-merge-audio-files-online" element={<BasicLayout><AudioMergerBlog /></BasicLayout>} />
 
       {/* Effects */}
       <Route path="tools/audio/effects" element={<BasicLayout><AudioEffects /></BasicLayout>} />

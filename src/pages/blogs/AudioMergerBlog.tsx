@@ -24,9 +24,9 @@ export default function AudioMergerBlog() {
         <meta property='og:description' content='Merge multiple audio files (MP3, WAV, FLAC, OGG, M4A) locally. Reorder, join, export clean output — no uploads or signup.' />
         <meta property='og:type' content='article' />
         <meta property='og:image' content='/images/landing/audio-merger-hero.jpg' />
-        <meta property='og:url' content='/tools/audio/how-to-merge-audio-online' />
+        <meta property='og:url' content='/tools/audio/how-to-merge-audio-files-online' />
         <meta property='og:site_name' content='FileApps' />
-        <link rel='canonical' href='/tools/audio/how-to-merge-audio-online' />
+        <link rel='canonical' href='/tools/audio/how-to-merge-audio-files-online' />
         <script type='application/ld+json'>{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
@@ -107,8 +107,8 @@ export default function AudioMergerBlog() {
         <Typography variant='body1' mb={2}>Merge multiple audio clips privately — upload, reorder, configure format (and crossfade if desired) then export a clean, watermark‑free file.</Typography>
 
         <Box mt={4} textAlign='center'>
-          <Button size='large' variant='contained' color='primary' href='/tools/audio/merge'>Upload</Button>
-          <Button size='large' variant='outlined' color='primary' href='/tools/audio/merge-audio-files-online' sx={{ ml:2 }}>Features</Button>
+          <Button size='large' variant='contained' color='warning' href='/tools/audio/merge'>Upload</Button>
+          <Button size='large' variant='outlined' color='warning' href='/tools/audio/merge-audio-files-online' sx={{ ml:2 }}>Features</Button>
         </Box>
       </Paper>
     </Container>

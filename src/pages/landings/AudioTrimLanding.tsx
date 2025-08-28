@@ -48,7 +48,7 @@ export default function AudioTrimLanding() {
               <Typography variant='h2' component='h1'>Trim Audio Online – Free, Private & No Watermark</Typography>
               <Typography variant='h6' component='p' color='text.secondary' mt={3} mb={4}>Cut unwanted sections from MP3, WAV, M4A, FLAC or OGG locally — no signup, uploads or watermark.</Typography>
               <Box display='flex' gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
-                <Button variant='contained' color='primary' size='large' href='/tools/audio/trim'>Upload</Button>
+                <Button variant='contained' color='secondary' size='large' href='/tools/audio/trim'>Upload</Button>
                 <Button variant='text' size='large' sx={{ color: 'text.secondary' }} href='/tools/audio/how-to-trim-audio-online'>How-to Guide</Button>
               </Box>
             </Grid>
@@ -66,10 +66,10 @@ export default function AudioTrimLanding() {
               <Typography variant='h2'>Why Use Our Audio Trimmer?</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            {[{ icon: <PrivacyTipIcon fontSize='large' color='primary' />, title: 'Local & Private', desc: 'Processing stays on device.' },
-            { icon: <ContentCutIcon fontSize='large' color='primary' />, title: 'Precise Cutting', desc: 'Accurate range markers.' },
-            { icon: <MusicNoteIcon fontSize='large' color='primary' />, title: 'Format Support', desc: 'MP3, WAV, M4A, FLAC, OGG.' },
-            { icon: <HighQualityIcon fontSize='large' color='primary' />, title: 'Quality Retained', desc: 'Lossless export option.' }].map((c, i) => (
+            {[{ icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: 'Local & Private', desc: 'Processing stays on device.' },
+            { icon: <ContentCutIcon fontSize='large' color='secondary' />, title: 'Precise Cutting', desc: 'Accurate range markers.' },
+            { icon: <MusicNoteIcon fontSize='large' color='secondary' />, title: 'Format Support', desc: 'MP3, WAV, M4A, FLAC, OGG.' },
+            { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'Quality Retained', desc: 'Lossless export option.' }].map((c, i) => (
               <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
@@ -98,7 +98,7 @@ export default function AudioTrimLanding() {
               { icon: <DownloadIcon />, title: 'Export', desc: 'Clean output.' }].map((s, i) => (
                 <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                    <Box sx={{ bgcolor: 'primary.main', color: 'white', width: 56, height: 56, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{s.icon}</Box>
+                    <Box sx={{ bgcolor: 'secondary.main', color: 'white', width: 56, height: 56, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{s.icon}</Box>
                     <Box>
                       <Typography variant='h5' component='h3'>{s.title}</Typography>
                       <Typography variant='body1'>{s.desc}</Typography>
@@ -118,13 +118,13 @@ export default function AudioTrimLanding() {
               <Typography variant='h2' mb={4}>Key Features</Typography>
               <Divider sx={{ width: 100, borderColor: 'common.white', mx: 'auto', my: 2 }} />
             </Grid>
-            {[{ icon: <ContentCutIcon fontSize='large' color='primary' />, title: 'Precise Trim', desc: 'Frame‑adjacent accuracy.' },
-            { icon: <WaveformIcon fontSize='large' color='primary' />, title: 'Waveform View', desc: 'Visual selection.' },
-            { icon: <MusicNoteIcon fontSize='large' color='primary' />, title: 'Format Support', desc: 'MP3/WAV/M4A/FLAC/OGG.' },
-            { icon: <PrivacyTipIcon fontSize='large' color='primary' />, title: 'Private', desc: 'Local WASM engine.' },
-            { icon: <HighQualityIcon fontSize='large' color='primary' />, title: 'Lossless Option', desc: 'Export WAV/FLAC.' },
-            { icon: <DownloadIcon fontSize='large' color='primary' />, title: 'Watermark‑Free', desc: 'Clean download.' },
-            { icon: <SpeedIcon fontSize='large' color='primary' />, title: 'Fast Processing', desc: 'Instant preview.' }].map((f, i) => (
+            {[{ icon: <ContentCutIcon fontSize='large' color='secondary' />, title: 'Precise Trim', desc: 'Frame‑adjacent accuracy.' },
+            { icon: <WaveformIcon fontSize='large' color='secondary' />, title: 'Waveform View', desc: 'Visual selection.' },
+            { icon: <MusicNoteIcon fontSize='large' color='secondary' />, title: 'Format Support', desc: 'MP3/WAV/M4A/FLAC/OGG.' },
+            { icon: <PrivacyTipIcon fontSize='large' color='secondary' />, title: 'Private', desc: 'Local WASM engine.' },
+            { icon: <HighQualityIcon fontSize='large' color='secondary' />, title: 'Lossless Option', desc: 'Export WAV/FLAC.' },
+            { icon: <DownloadIcon fontSize='large' color='secondary' />, title: 'Watermark‑Free', desc: 'Clean download.' },
+            { icon: <SpeedIcon fontSize='large' color='secondary' />, title: 'Fast Processing', desc: 'Instant preview.' }].map((f, i) => (
               <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: 2 }}>
@@ -204,7 +204,7 @@ const Root = styled(Paper)(({ theme }) => ({
   },
   '& .why-us, & .key-features, & .cta-section': {
     paddingBlock: theme.spacing(8),
-    background: `radial-gradient(circle at 50% 0%, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+    background: `radial-gradient(circle at 50% 0%, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary.dark} 100%)`,
     textAlign: 'center',
     '& .MuiTypography-h2': { color: theme.palette.common.white }
   },

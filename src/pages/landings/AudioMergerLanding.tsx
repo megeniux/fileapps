@@ -57,7 +57,7 @@ export default function AudioMergerLanding() {
               </Typography>
               <Box display='flex' gap={1} justifyContent={{ xs:'center', md:'flex-start' }}>
                 <Button variant='contained' color='warning' size='large' href='/tools/audio/merge'>Upload</Button>
-                <Button variant='text' size='large' href='/tools/audio/how-to-merge-audio-online' sx={{ color:'text.secondary' }}>How-to Guide</Button>
+                <Button variant='text' size='large' href='/tools/audio/how-to-merge-audio-files-online' sx={{ color:'text.secondary' }}>How-to Guide</Button>
               </Box>
             </Grid>
             <Grid container size={{ xs:12, md:6 }} justifyContent={{ xs:'center', md:'flex-end' }} order={{ xs:-1, md:1 }} className='hero-image'>
@@ -177,7 +177,7 @@ export default function AudioMergerLanding() {
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Fast, private & free audio merging — right in your browser.</Typography></Grid>
             <Grid size={12} sx={{ display:'flex', justifyContent:'center', gap:1 }}>
               <Button color='inherit' variant='contained' size='large' href='/tools/audio/merge'>Upload</Button>
-              <Button size='large' href='/tools/audio/how-to-merge-audio-online' sx={{ color:'common.white' }}>How-to Guide</Button>
+              <Button size='large' href='/tools/audio/how-to-merge-audio-files-online' sx={{ color:'common.white' }}>How-to Guide</Button>
             </Grid>
           </Grid>
         </Container>

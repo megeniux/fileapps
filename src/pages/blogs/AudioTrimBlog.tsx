@@ -94,8 +94,8 @@ export default function AudioTrimBlog(){
         <Typography variant='body1' mb={2}>Trim audio clips privately — upload, mark start & end, preview and export a clean result with no signup or watermark.</Typography>
 
         <Box mt={4} textAlign='center'>
-          <Button size='large' variant='contained' color='primary' href='/tools/audio/trim'>Upload</Button>
-          <Button size='large' variant='outlined' color='primary' href='/tools/audio/trim-audio-online' sx={{ ml:2 }}>Features</Button>
+          <Button size='large' variant='contained' color='secondary' href='/tools/audio/trim'>Upload</Button>
+          <Button size='large' variant='outlined' color='secondary' href='/tools/audio/trim-audio-online' sx={{ ml:2 }}>Features</Button>
         </Box>
       </Paper>
     </Container>
