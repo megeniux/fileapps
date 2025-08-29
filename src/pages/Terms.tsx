@@ -21,7 +21,7 @@ function TOS() {
         <meta property="og:url" content="https://fileapps.click/terms" />
         <link rel="canonical" href="https://fileapps.click/terms" />
       </Helmet>
-      <Container maxWidth="md" sx={{ my: 'auto' }}>
+      <Container maxWidth="md" sx={{ py: 2, my: 'auto' }}>
       <Typography variant="h2" component="h1" gutterBottom>
         Terms and Conditions
       </Typography>
