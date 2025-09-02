@@ -543,13 +543,11 @@ function VideoConvert() {
                 status={status}
                 consoleLogs={consoleLogs}
               />
-
+              <Alert severity="info" sx={{ alignItems: 'center', mt: 2, py: 0 }}>
+                <Typography variant='body2' component="p"> <strong>Feels Slow?</strong> - Be on this same tab! processing depends on your system performance. <Link color="info" sx={{ cursor: 'pointer' }} onClick={handlePerformanceDialogOpen}>Learn more</Link></Typography>
+              </Alert>
             </>
           )}
-
-          <Alert severity="info" sx={{ alignItems: 'center', mt: 2, py: 0 }}>
-            <Typography variant='body2' component="p"> <strong>Feels Slow?</strong> - Be on this same tab! processing depends on your system performance. <Link color="info" sx={{ cursor: 'pointer' }} onClick={handlePerformanceDialogOpen}>Learn more</Link></Typography>
-          </Alert>
         </Card>
 
         <InfoPopovers
