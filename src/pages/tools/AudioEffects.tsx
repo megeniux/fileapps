@@ -521,7 +521,7 @@ function AudioEffects() {
                     </Box>
                 )}
             </Card>
-            {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
+            {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
         </Container>
         </>
     );

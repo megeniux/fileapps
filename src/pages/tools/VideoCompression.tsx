@@ -246,7 +246,7 @@ function VideoCompression() {
         <link rel="canonical" href="https://fileapps.click/tools/video/compress" />
       </Helmet>
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
-      {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
+      {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
       <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">

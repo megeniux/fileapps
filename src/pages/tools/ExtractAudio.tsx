@@ -184,7 +184,7 @@ function ExtractAudio() {
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
-          {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
+          {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" alignItems="center">
             <MusicNoteIcon color="error" fontSize="small" sx={{ mr: 0.5 }} />
             <Typography variant="body1" component="h1" fontWeight={600} mb={0.5}>Extract Audio from Video</Typography>
