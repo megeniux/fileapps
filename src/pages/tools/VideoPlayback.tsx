@@ -18,6 +18,9 @@ import Alert from '@mui/material/Alert';
 import Slider from '@mui/material/Slider';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Link from '@mui/material/Link';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
@@ -25,6 +28,9 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import SpeedIcon from '@mui/icons-material/Speed';
 import CloseIcon from '@mui/icons-material/Close';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
+// Components
+import PerformanceInfoDialog from '../../components/PerformanceInfoDialog';
 
 const ffmpeg = new FFmpeg();
 let isFFmpegLoaded = false;
@@ -36,6 +42,7 @@ function VideoPlayback() {
     const [file, setFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [speed, setSpeed] = useState<number>(1);
+    const [isReversed, setIsReversed] = useState<boolean>(false);
     const [isProcessing, setIsProcessing] = useState(false);
     const [progress, setProgress] = useState(0);
     const [status, setStatus] = useState<string | null>(null);
@@ -44,6 +51,7 @@ function VideoPlayback() {
     const [downloadSize, setDownloadSize] = useState<number | null>(null);
     const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
     const [isDragActive, setIsDragActive] = useState(false);
+    const [isPerformanceDialogOpen, setIsPerformanceDialogOpen] = useState(false);
 
     const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -57,6 +65,7 @@ function VideoPlayback() {
             setFile(selectedFile);
             setPreviewUrl(URL.createObjectURL(selectedFile));
             setSpeed(1);
+            setIsReversed(false);
             setProgress(0);
             setStatus(null);
             setErrorMsg(null);
@@ -86,6 +95,7 @@ function VideoPlayback() {
             setFile(selectedFile);
             setPreviewUrl(URL.createObjectURL(selectedFile));
             setSpeed(1);
+            setIsReversed(false);
             setProgress(0);
             setStatus(null);
             setErrorMsg(null);
@@ -99,6 +109,7 @@ function VideoPlayback() {
         setFile(null);
         setPreviewUrl(null);
         setSpeed(1);
+        setIsReversed(false);
         setProgress(0);
         setStatus(null);
         setErrorMsg(null);
@@ -120,10 +131,6 @@ function VideoPlayback() {
             setErrorMsg('Please select a video file.');
             return;
         }
-        if (speed === 0) {
-            setErrorMsg('Speed cannot be zero.');
-            return;
-        }
         setIsProcessing(true);
         setProgress(0);
         setStatus('Preparing');
@@ -138,7 +145,7 @@ function VideoPlayback() {
             }
             ffmpegRef.current = ffmpeg;
             const inputFileName = file.name;
-            const outputFileName = `speed_${speed}x_${inputFileName}`;
+            const outputFileName = `${isReversed ? 'reversed_' : ''}speed_${speed}x_${inputFileName}`;
             await ffmpeg.writeFile(inputFileName, await fetchFile(file));
 
             let durationParsed = false;
@@ -179,17 +186,38 @@ function VideoPlayback() {
             let args = ['-i', inputFileName];
             let videoFilter = '';
             let audioFilter = '';
-            if (speed < 0) {
-                // Reverse video and audio
-                videoFilter = 'reverse';
-                audioFilter = 'areverse';
+            const effectiveSpeed = speed; // Always positive now
+            
+            if (isReversed) {
+                if (effectiveSpeed !== 1) {
+                    // Reverse and change speed
+                    videoFilter = `setpts=${(1 / effectiveSpeed).toFixed(5)}*PTS,reverse`;
+                    // Audio speed: chain atempo filters for >2 or <0.5, then reverse
+                    let s = effectiveSpeed;
+                    let filters = [];
+                    while (s > 2.0) {
+                        filters.push('atempo=2.0');
+                        s /= 2.0;
+                    }
+                    while (s < 0.5) {
+                        filters.push('atempo=0.5');
+                        s /= 0.5;
+                    }
+                    filters.push(`atempo=${s}`);
+                    filters.push('areverse');
+                    audioFilter = filters.join(',');
+                } else {
+                    // Just reverse, no speed change
+                    videoFilter = 'reverse';
+                    audioFilter = 'areverse';
+                }
                 args.push('-vf', videoFilter);
                 args.push('-af', audioFilter);
-            } else if (speed !== 1) {
-                // Video speed: setpts=PTS/Speed
-                videoFilter = `setpts=${(1 / speed).toFixed(5)}*PTS`;
+            } else if (effectiveSpeed !== 1) {
+                // Just change speed, no reverse
+                videoFilter = `setpts=${(1 / effectiveSpeed).toFixed(5)}*PTS`;
                 // Audio speed: chain atempo filters for >2 or <0.5
-                let s = speed;
+                let s = effectiveSpeed;
                 let filters = [];
                 while (s > 2.0) {
                     filters.push('atempo=2.0');
@@ -238,7 +266,7 @@ function VideoPlayback() {
         if (downloadUrl && file) {
             const a = document.createElement('a');
             a.href = downloadUrl;
-            a.download = `speed_${speed}x_${file.name}`;
+            a.download = `${isReversed ? 'reversed_' : ''}speed_${speed}x_${file.name}`;
             a.click();
             setTimeout(() => URL.revokeObjectURL(downloadUrl), 5000);
         }
@@ -250,6 +278,14 @@ function VideoPlayback() {
         setStatus('Stopped');
         setProgress(0);
         setErrorMsg(null);
+    };
+
+    const handlePerformanceDialogOpen = () => {
+        setIsPerformanceDialogOpen(true);
+    };
+
+    const handlePerformanceDialogClose = () => {
+        setIsPerformanceDialogOpen(false);
     };
 
     return (
@@ -344,35 +380,44 @@ function VideoPlayback() {
                             </IconButton>
                         </Box>
                     )}
-                    {/* Speed slider */}
+                    {/* Speed controls */}
                     {file && (
                         <Box sx={{ mb: 3, width: '100%' }}>
                             <Typography variant="subtitle2" gutterBottom>
-                                Playback Speed: {speed}x
+                                Playback Speed: {speed}x {isReversed ? '(Reversed)' : ''}
                             </Typography>
-                            <Box display="flex" alignItems="center">
-                                <IconButton onClick={() => setSpeed(prev => Math.max(-20, Number((prev - 0.1).toFixed(1))))} disabled={isProcessing}><RemoveIcon /></IconButton>
+                            <Box display="flex" alignItems="center" mb={2}>
+                                <IconButton onClick={() => setSpeed(prev => Math.max(0.1, Number((prev - 0.1).toFixed(1))))} disabled={isProcessing}><RemoveIcon /></IconButton>
                                 <Slider
                                     value={speed}
-                                    min={-20}
-                                    max={20}
+                                    min={-5}
+                                    max={5}
                                     step={0.1}
                                     onChange={handleSpeedChange}
                                     valueLabelDisplay="auto"
                                     disabled={isProcessing}
-                                    
                                     sx={{ mx: 1, flex: 1 }}
                                 />
                                 <IconButton onClick={() => setSpeed(prev => Math.min(20, Number((prev + 0.1).toFixed(1))))} disabled={isProcessing}><AddIcon /></IconButton>
                             </Box>
-                            <Typography variant="caption" color="text.secondary">
-                                Negative values reverse video and audio. 1x is normal speed.
-                            </Typography>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={isReversed}
+                                        onChange={(e) => setIsReversed(e.target.checked)}
+                                        disabled={isProcessing}
+                                        size="small"
+                                    />
+                                }
+                                label={<Typography variant="subtitle2">Reverse video</Typography>}
+                                title="Use the checkbox to reverse video and audio. Speed adjustment applies to both normal and reversed video. 1x is normal speed."
+                                sx={{ mb: 2 }}
+                            />
                         </Box>
                     )}
                 </CardContent>
                 <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-                    <Button variant="contained" onClick={handleProcess} disabled={isProcessing || !file || speed === 0}>
+                    <Button variant="contained" onClick={handleProcess} disabled={isProcessing || !file}>
                         {isProcessing ? 'Processing' : 'Process'}
                     </Button>
                     {!isProcessing && (
@@ -400,7 +445,19 @@ function VideoPlayback() {
                         </Typography>
                     </Box>
                 )}
+
+                {isProcessing && (
+                    <Alert severity="info" sx={{ alignItems: 'center', mt: 2, py: 0 }}>
+                        <Typography variant='body2' component="p"> <strong>Feels Slow?</strong> - Be on this same tab! processing depends on your system performance. <Link color="info" sx={{ cursor: 'pointer' }} onClick={handlePerformanceDialogOpen}>Learn more</Link></Typography>
+                    </Alert>
+                )}
             </Card>
+
+            <PerformanceInfoDialog
+                open={isPerformanceDialogOpen}
+                onClose={handlePerformanceDialogClose}
+            />
+
             {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
         </Container>
         </>

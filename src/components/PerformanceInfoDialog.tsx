@@ -1,27 +1,27 @@
 import React from 'react';
-import {
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogActions,
-    Typography,
-    Button,
-    Box,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
-    Divider,
-    Alert,
-    AlertTitle
-} from '@mui/material';
-import {
-    Speed as SpeedIcon,
-    Security as SecurityIcon,
-    Memory as MemoryIcon,
-    Tab as TabIcon,
-    Close as CloseIcon,
-} from '@mui/icons-material';
+
+// MUI imports
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+
+// Icons
+import SpeedIcon from '@mui/icons-material/Speed';
+import SecurityIcon from '@mui/icons-material/Security';
+import MemoryIcon from '@mui/icons-material/Memory';
+import TabIcon from '@mui/icons-material/Tab';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface PerformanceInfoDialogProps {
     open: boolean;

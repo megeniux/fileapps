@@ -83,7 +83,7 @@ const videoTools: {
       color: 'primary'
     },
     {
-      title: 'Video Playback Speed Editor',
+      title: 'Video Speed Editor',
       description: 'Change video speed from -20x (reverse) to +20x with pitch correction. Slow motion & time-lapse effects — no watermark, browser-based.',
       icon: <SpeedIcon fontSize="small" color="secondary" />,
       link: '/tools/video/video-playback-speed-editor',
@@ -127,7 +127,7 @@ const audioTools: {
       color: 'info'
     },
     {
-      title: 'Audio Playback Speed Editor',
+      title: 'Audio Speed Editor',
       description: 'Change audio speed with pitch correction or reverse tracks completely. Export processed audio with no watermark — 100% browser-based.',
       icon: <SpeedIcon fontSize="small" color="success" />,
       link: '/tools/audio/audio-playback-speed-editor',
@@ -150,7 +150,7 @@ const imageTools: {
       color: 'primary'
     },
     {
-      title: 'Video Thumbnail Generator',
+      title: 'Thumbnail Generator',
       description: 'Extract high-quality thumbnails from videos instantly. Generate preview images in multiple sizes — no watermark, no signup required.',
       icon: <PhotoSizeSelectActualIcon fontSize="small" color="secondary" />,
       link: '/tools/image/extract-thumbnail-from-video',
