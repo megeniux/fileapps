@@ -6,13 +6,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Typography from '@mui/material/Typography';
-import Alert from '@mui/material/Alert';
 
 // Types
 import type { SelectChangeEvent } from '@mui/material/Select';
 
 // Local constants
-import { thumbnailSizeOptions, validateThumbnailSize, MAX_SAFE_WIDTH, MAX_SAFE_HEIGHT } from './constants';
+import { thumbnailSizeOptions, MAX_SAFE_WIDTH, MAX_SAFE_HEIGHT } from './constants';
 
 interface SizeSelectorProps {
   width: number
@@ -31,11 +30,8 @@ export default function SizeSelector({
   onWidthChange,
   onHeightChange,
   onSizePresetChange,
-  mode
 }: SizeSelectorProps) {
   const isCustomSize = sizePreset === 'custom'
-  const isValidSize = validateThumbnailSize(width, height)
-  const showSizeWarning = !isValidSize && (width > 0 || height > 0)
 
   return (
     <Box>
@@ -88,35 +84,6 @@ export default function SizeSelector({
             Selected size: {width} × {height} pixels
           </Typography>
         </Box>
-      )}
-
-      {/* Size warning alert */}
-      {showSizeWarning && (
-        <Alert severity="warning" sx={{ mb: 2 }}>
-          <Typography variant="body2">
-            <strong>Size Warning:</strong> Large dimensions may cause memory errors. 
-            Recommended maximum: {MAX_SAFE_WIDTH}×{MAX_SAFE_HEIGHT}px
-          </Typography>
-        </Alert>
-      )}
-
-      {/* Mode-specific information */}
-      {mode === 1 && (
-        <Alert severity="info" sx={{ mb: 2 }}>
-          <Typography variant="body2">
-            <strong>Scrub Mode:</strong> Individual frames will be resized to 240×135px for performance, 
-            then combined into a strip.
-          </Typography>
-        </Alert>
-      )}
-
-      {mode === 2 && (
-        <Alert severity="info" sx={{ mb: 2 }}>
-          <Typography variant="body2">
-            <strong>Frames Mode:</strong> Each frame will be resized to 480×270px for better performance 
-            when extracting multiple frames.
-          </Typography>
-        </Alert>
       )}
     </Box>
   );

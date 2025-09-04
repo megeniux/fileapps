@@ -15,6 +15,7 @@ export const useThumbnailState = () => {
   const [progress, setProgress] = useState(0)
   const [status, setStatus] = useState<string | null>(null)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
+  const [warningMsg, setWarningMsg] = useState<string | null>(null) // Separate warning state
   const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null)
   const [mode, setMode] = useState(0) // 0: Single, 1: Scrub, 2: Frames
   const [startTime, setStartTime] = useState(0)
@@ -38,6 +39,7 @@ export const useThumbnailState = () => {
     setProgress(0)
     setStatus(null)
     setErrorMsg(null)
+    setWarningMsg(null)
     setThumbnailUrl(null)
     setThumbnails([])
     setConsoleLogs([])
@@ -77,6 +79,13 @@ export const useThumbnailState = () => {
     if (selectedPreset && selectedPreset.width && selectedPreset.height) {
       setWidth(selectedPreset.width)
       setHeight(selectedPreset.height)
+      
+      // Warn about large sizes that may cause memory issues
+      if (selectedPreset.width >= 1920 || selectedPreset.height >= 1080) {
+        setWarningMsg('Large thumbnail sizes may cause memory issues with some videos. Consider using a smaller size if you encounter problems.')
+      } else {
+        setWarningMsg(null)
+      }
     }
   }, [])
 
@@ -109,6 +118,7 @@ export const useThumbnailState = () => {
     progress,
     status,
     errorMsg,
+    warningMsg,
     thumbnailUrl,
     mode,
     startTime,
@@ -130,6 +140,7 @@ export const useThumbnailState = () => {
     setProgress,
     setStatus,
     setErrorMsg,
+    setWarningMsg,
     setThumbnailUrl,
     setMode,
     setStartTime,

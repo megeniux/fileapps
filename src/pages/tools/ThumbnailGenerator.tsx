@@ -48,6 +48,7 @@ function ThumbnailGenerator() {
     progress,
     status,
     errorMsg,
+    warningMsg,
     thumbnailUrl,
     mode,
     startTime,
@@ -133,7 +134,7 @@ function ThumbnailGenerator() {
 
   const handleExtractThumbnail = async () => {
     if (!file) return
-    
+
     setIsProcessing(true)
     setProgress(0)
     updateStatus('Preparing')
@@ -144,10 +145,10 @@ function ThumbnailGenerator() {
 
     try {
       const ffmpeg = await ffmpegManager.ensureReady()
-      
+
       // Add a small delay to ensure FFmpeg is fully ready
       await new Promise(resolve => setTimeout(resolve, 200))
-      
+
       const options = {
         mode,
         time,
@@ -166,24 +167,24 @@ function ThumbnailGenerator() {
       }
 
       const urls = await ThumbnailProcessor.processThumbnails(file, ffmpeg, options, callbacks)
-      
+
       if (mode === 0 || mode === 1) {
         setThumbnailUrl(urls[0])
       } else {
         setThumbnails(urls)
       }
-      
+
       setProgress(100)
       updateStatus('Completed')
     } catch (err: any) {
       updateStatus('Failed')
-      
+
       // Only log errors that aren't from termination
       const errorMessage = err instanceof Error ? err.message : String(err);
       if (!errorMessage.includes('terminate')) {
         setConsoleLogs(logs => [...logs, errorMessage])
       }
-      
+
       if (err.message && (err.message.includes('memory') || err.message.includes('out of bounds'))) {
         setErrorMsg('Memory error: Video is too large or complex. Please try with a shorter video or smaller resolution.')
         await ffmpegManager.reset()
@@ -229,10 +230,10 @@ function ThumbnailGenerator() {
         <meta property="og:url" content="https://fileapps.click/tools/thumbnail-generator" />
         <link rel="canonical" href="https://fileapps.click/tools/thumbnail-generator" />
       </Helmet>
-      
+
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
         {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
-        
+
         <Card sx={{ p: 1.5 }} elevation={3}>
           <CardContent sx={{ p: 0 }}>
             <Box display="flex" alignItems="center">
@@ -245,7 +246,7 @@ function ThumbnailGenerator() {
             <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
               Extract high-quality thumbnails from videos instantly. Generate preview images in multiple sizes — no watermark, no signup required.
             </Typography>
-            
+
             <FileUploadArea
               file={file}
               previewUrl={previewUrl}
@@ -297,8 +298,8 @@ function ThumbnailGenerator() {
               thumbnails={thumbnails}
             />
           </CardContent>
-          
-          <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
+
+          <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, my: 2, gap: 1 }}>
             <Button variant="contained" onClick={handleExtractThumbnail} disabled={!file || isProcessing}>
               {isProcessing ? 'Extracting' : 'Extract'}
             </Button>
@@ -318,7 +319,13 @@ function ThumbnailGenerator() {
               </Button>
             )}
           </CardActions>
-          
+
+          {warningMsg && (
+            <Alert severity="warning" sx={{ fontSize: '0.875rem' }}>
+              {warningMsg}
+            </Alert>
+          )}
+
           <ProgressDisplay
             isProcessing={isProcessing}
             progress={progress}

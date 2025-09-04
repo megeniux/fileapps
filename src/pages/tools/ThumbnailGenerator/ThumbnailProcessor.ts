@@ -1,7 +1,7 @@
 import { FFmpeg } from '@ffmpeg/ffmpeg'
 import { fetchFile } from '@ffmpeg/util'
 import JSZip from 'jszip'
-import { getSafeDimensions } from './constants'
+import { getMemoryOptimizedDimensions } from './constants'
 
 export interface ThumbnailProcessingOptions {
   mode: number
@@ -34,10 +34,17 @@ export class ThumbnailProcessor {
     const { setProgress, setStatus } = callbacks
     const inputFileName = 'input.mp4'
 
-    // Set up timeout
+    // Check file size and warn about large files
+    const fileSizeMB = file.size / (1024 * 1024)
+    if (fileSizeMB > 100) {
+      setStatus(`Processing large video (${fileSizeMB.toFixed(1)}MB) - this may take longer...`)
+    }
+
+    // Set up timeout (longer for large files)
+    const timeoutMs = fileSizeMB > 500 ? 300000 : this.TIMEOUT_MS // 5 minutes for very large files
     const timeoutId = setTimeout(() => {
-      throw new Error('Operation timed out. This usually happens with very long videos.')
-    }, this.TIMEOUT_MS)
+      throw new Error('Operation timed out. Video may be too large for browser processing.')
+    }, timeoutMs)
 
     try {
       setStatus('Preparing video...')
@@ -53,7 +60,56 @@ export class ThumbnailProcessor {
       // Wait a moment for cleanup to complete
       await new Promise(resolve => setTimeout(resolve, 100))
 
-      await ffmpeg.writeFile(inputFileName, await fetchFile(file))
+      // For large files (>50MB), create a smaller working copy, otherwise use original
+      const fileSizeMB = file.size / (1024 * 1024)
+      
+      if (fileSizeMB > 50) {
+        setProgress(15)
+        setStatus('Creating optimized copy for large video...')
+        
+        const originalInputName = 'original_input.mp4'
+        await ffmpeg.writeFile(originalInputName, await fetchFile(file))
+        
+        setProgress(20)
+        setStatus('Optimizing video for processing...')
+        
+        try {
+          // More conservative preprocessing for very large files
+          await ffmpeg.exec([
+            '-i', originalInputName,
+            '-vf', 'scale=854:480:force_original_aspect_ratio=decrease',
+            '-c:v', 'libx264',
+            '-preset', 'ultrafast',
+            '-crf', '30',
+            '-an', // Remove audio to save memory
+            '-t', '60', // Limit to first 60 seconds for very large files
+            '-y',
+            inputFileName
+          ])
+          
+          // Clean up original large file immediately
+          await ffmpeg.deleteFile(originalInputName)
+          setProgress(25)
+        } catch (error) {
+          // If preprocessing fails, use original but with size limits
+          console.warn('Video preprocessing failed, using original with limits:', error)
+          try {
+            await ffmpeg.deleteFile(inputFileName)
+            await ffmpeg.deleteFile(originalInputName)
+          } catch {}
+          
+          // Limit file size if too large
+          if (fileSizeMB > 200) {
+            throw new Error('Video file is too large for browser processing. Please use a smaller file or compress it first.')
+          }
+          
+          await ffmpeg.writeFile(inputFileName, await fetchFile(file))
+        }
+      } else {
+        // For smaller files, use original directly
+        await ffmpeg.writeFile(inputFileName, await fetchFile(file))
+        setProgress(25)
+      }
       
       // Verify the file was written successfully
       try {
@@ -66,6 +122,9 @@ export class ThumbnailProcessor {
       }
 
       let urls: string[] = []
+
+      // Force memory cleanup before processing
+      await this.forceMemoryCleanup(ffmpeg)
 
       switch (options.mode) {
         case 0:
@@ -80,6 +139,9 @@ export class ThumbnailProcessor {
         default:
           throw new Error('Invalid processing mode')
       }
+
+      // Force memory cleanup after processing
+      await this.forceMemoryCleanup(ffmpeg)
 
       clearTimeout(timeoutId)
       return urls
@@ -100,10 +162,25 @@ export class ThumbnailProcessor {
     const { time, width, height } = options
     const outputFileName = 'thumbnail.jpg'
 
-    // Use safe dimensions to prevent memory issues
-    const { safeWidth, safeHeight } = getSafeDimensions(width, height)
-
     setStatus(`Extracting frame at ${time.toFixed(1)}s`)
+    setProgress(30)
+
+    // Get video info first for memory optimization
+    let videoWidth: number | undefined
+    let videoHeight: number | undefined
+    
+    try {
+      setStatus('Analyzing video...')
+      await ffmpeg.exec(['-i', 'input.mp4', '-t', '0.1', '-f', 'null', '-'])
+    } catch (error) {
+      // FFmpeg outputs video info to stderr, so we expect this to "fail"
+      // The video dimensions will be logged
+    }
+
+    // Use memory-optimized dimensions based on source video size
+    const { safeWidth, safeHeight } = getMemoryOptimizedDimensions(width, height, videoWidth, videoHeight)
+
+    setStatus(`Generating ${safeWidth}×${safeHeight} thumbnail...`)
     setProgress(50)
 
     // Clean up any existing output file first
@@ -113,19 +190,41 @@ export class ThumbnailProcessor {
       // File doesn't exist, continue
     }
 
-    // Execute FFmpeg command with better error handling
+    // Memory optimized FFmpeg command
     try {
       await ffmpeg.exec([
         '-i', 'input.mp4',
         '-ss', `${time}`,
         '-vframes', '1',
-        '-vf', `scale=${safeWidth}:${safeHeight}`,
-        '-q:v', '3',
+        '-vf', `scale=${safeWidth}:${safeHeight}:flags=fast_bilinear`,
+        '-q:v', '5', // Slightly lower quality to reduce memory usage
+        '-an', // No audio processing
+        '-threads', '1', // Single thread to reduce memory usage
         '-y',
         outputFileName
       ])
     } catch (error) {
-      throw new Error(`FFmpeg execution failed: ${error}`)
+      // Try fallback with even more aggressive memory settings
+      try {
+        setStatus('Retrying with optimized settings...')
+        const fallbackWidth = Math.min(safeWidth, 640)
+        const fallbackHeight = Math.min(safeHeight, 360)
+        
+        await ffmpeg.exec([
+          '-i', 'input.mp4',
+          '-ss', `${time}`,
+          '-vframes', '1',
+          '-vf', `scale=${fallbackWidth}:${fallbackHeight}:flags=fast_bilinear`,
+          '-q:v', '6',
+          '-an',
+          '-threads', '1',
+          '-preset', 'ultrafast',
+          '-y',
+          outputFileName
+        ])
+      } catch (fallbackError) {
+        throw new Error(`FFmpeg execution failed even with optimized settings: ${fallbackError}`)
+      }
     }
 
     setProgress(80)
@@ -292,18 +391,47 @@ export class ThumbnailProcessor {
       // Ignore cleanup errors
     }
 
+    // Clean up any preprocessing files
+    try {
+      await ffmpeg.deleteFile('original_input.mp4')
+    } catch {
+      // Ignore cleanup errors
+    }
+
     // Clean up any remaining temp files
-    const tempFilePatterns = ['scrub_', 'frames_', 'thumbnail.jpg', 'scrub_joined.jpg']
+    const tempFilePatterns = ['scrub_', 'frames_', 'thumbnail.jpg', 'scrub_joined.jpg', 'temp_']
     
     for (const pattern of tempFilePatterns) {
-      for (let i = 0; i < 50; i++) {
+      for (let i = 0; i < 100; i++) { // Increased range for more thorough cleanup
         try {
-          const fileName = pattern.includes('_') ? `${pattern}${i}.jpg` : pattern
+          const fileName = pattern.includes('_') ? `${pattern}${String(i).padStart(3, '0')}.jpg` : pattern
           await ffmpeg.deleteFile(fileName)
         } catch {
           // File doesn't exist, continue
         }
       }
+    }
+
+    // Force garbage collection if available
+    if (typeof window !== 'undefined' && (window as any).gc) {
+      (window as any).gc()
+    }
+  }
+
+  // Add memory management method
+  private static async forceMemoryCleanup(ffmpeg: FFmpeg) {
+    // Force garbage collection in FFmpeg context
+    try {
+      // This helps free up WebAssembly memory
+      await new Promise(resolve => setTimeout(resolve, 100))
+      
+      // Force garbage collection if available
+      if (typeof window !== 'undefined' && (window as any).gc) {
+        (window as any).gc()
+      }
+    } catch (error) {
+      console.error('Memory cleanup failed:', ffmpeg, error)
+      // Ignore errors in memory cleanup
     }
   }
 

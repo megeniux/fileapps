@@ -29,9 +29,17 @@ export const useFFmpeg = () => {
   }, [])
 
   const terminate = useCallback(() => {
-    if (ffmpegRef.current) {
-      ffmpegRef.current.terminate()
+    try {
+      if (ffmpegRef.current && isLoadedRef.current) {
+        ffmpegRef.current.terminate()
+      }
+    } catch (error) {
+      // Ignore termination errors
+      console.warn('Error during FFmpeg termination:', error)
+    } finally {
+      // Always reset the state
       isLoadedRef.current = false
+      ffmpegRef.current = new FFmpeg()
     }
   }, [])
 
