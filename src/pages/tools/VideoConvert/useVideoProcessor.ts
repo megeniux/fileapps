@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import { fetchFile } from '@ffmpeg/util';
 import { parseDuration, parseCurrentTime, validateResolution, ensureEvenDimensions, getFFmpeg, resetFFmpeg } from './utils';
 import { videoCodecs, audioCodecs } from './types';
@@ -45,13 +45,20 @@ export function useVideoProcessor({
   setDownloadUrl,
   setDownloadSize,
 }: UseVideoProcessorProps) {
+  const statusRef = useRef<string | null>(null);
+
+  // Update ref whenever status changes
+  const updateStatus = useCallback((newStatus: string | null) => {
+    statusRef.current = newStatus;
+    setStatus(newStatus);
+  }, [setStatus]);
   
   const processVideo = useCallback(async () => {
     if (!file) return;
 
     setIsProcessing(true);
     setProgress(0);
-    setStatus('Preparing');
+    updateStatus('Preparing');
     setErrorMsg(null);
     setDownloadUrl(null);
     setDownloadSize(null);
@@ -64,7 +71,7 @@ export function useVideoProcessor({
       const inputFileName = 'input.' + file.name.split('.').pop();
       const outputFileName = `output.${outputFormat}`;
 
-      setStatus('Uploading');
+      updateStatus('Uploading');
       setProgress(5);
       await ffmpeg.writeFile(inputFileName, await fetchFile(file));
 
@@ -136,10 +143,10 @@ export function useVideoProcessor({
 
       args.push(outputFileName);
 
-      setStatus('Converting');
+      updateStatus('Converting');
       await ffmpeg.exec(args);
 
-      setStatus('Finalizing');
+      updateStatus('Finalizing');
       setProgress(99.9);
 
       const data = await ffmpeg.readFile(outputFileName);
@@ -157,22 +164,30 @@ export function useVideoProcessor({
       await ffmpeg.deleteFile(outputFileName);
 
       setProgress(100);
-      setStatus('Completed');
+              updateStatus('Completed');
       ffmpeg.off('log', logHandler);
     } catch (err: unknown) {
-      setStatus('Failed');
+      updateStatus('Failed');
       const errorMessage = err instanceof Error ? err.message : String(err);
-      setConsoleLogs((logs) => [...logs, errorMessage]);
-      setErrorMsg(errorMessage);
+      
+      // Only log errors that aren't from termination
+      if (!errorMessage.includes('terminate') && !errorMessage.includes('aborted')) {
+        setConsoleLogs((logs) => [...logs, errorMessage]);
+        setErrorMsg(errorMessage);
+      }
 
       if (errorMessage.includes('terminated') || errorMessage.includes('aborted')) {
         resetFFmpeg();
       }
     } finally {
       setIsProcessing(false);
+      // Only reset progress/status after completion, not after stopping
       setTimeout(() => {
-        setProgress(0);
-        setStatus(null);
+        const currentStatus = statusRef.current;
+        if (currentStatus === 'Completed' || currentStatus === 'Failed') {
+          setProgress(0);
+          updateStatus(null);
+        }
       }, 2000);
     }
   }, [
@@ -184,7 +199,7 @@ export function useVideoProcessor({
     const ffmpeg = getFFmpeg();
     ffmpeg.terminate();
     resetFFmpeg();
-    setStatus('Stopped');
+    updateStatus('Stopped');
     setIsProcessing(false);
     setErrorMsg(null);
   }, [setStatus, setIsProcessing, setErrorMsg]);

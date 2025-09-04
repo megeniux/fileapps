@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 
 // Custom hooks
@@ -35,6 +35,7 @@ import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual
 function ThumbnailGenerator() {
   // Custom hooks
   const ffmpegManager = useFFmpeg()
+  const statusRef = useRef<string | null>(null)
   const {
     file,
     previewUrl,
@@ -71,6 +72,7 @@ function ThumbnailGenerator() {
     setThumbnails,
     setConsoleLogs,
     setIsDragActive,
+    resetState,
     handleFileSelect,
     handleLoadedMetadata,
     handleSizePresetChange,
@@ -81,6 +83,12 @@ function ThumbnailGenerator() {
   // Drag and drop handlers
   const dragHandlers = handleDragEvents(setIsDragActive, setErrorMsg, handleFileSelect)
 
+  // Update status with ref tracking
+  const updateStatus = (newStatus: string | null) => {
+    statusRef.current = newStatus;
+    setStatus(newStatus);
+  };
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files?.[0]) {
       handleFileSelect(event.target.files[0])
@@ -88,7 +96,7 @@ function ThumbnailGenerator() {
   }
 
   const handleReset = () => {
-    window.location.reload();
+    resetState();
   };
 
   // Slider for start/end time
@@ -128,7 +136,7 @@ function ThumbnailGenerator() {
     
     setIsProcessing(true)
     setProgress(0)
-    setStatus('Preparing')
+    updateStatus('Preparing')
     setErrorMsg(null)
     setThumbnailUrl(null)
     setThumbnails([])
@@ -166,10 +174,15 @@ function ThumbnailGenerator() {
       }
       
       setProgress(100)
-      setStatus('Completed')
+      updateStatus('Completed')
     } catch (err: any) {
-      setStatus('Failed')
-      setConsoleLogs(logs => [...logs, String(err)])
+      updateStatus('Failed')
+      
+      // Only log errors that aren't from termination
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      if (!errorMessage.includes('terminate')) {
+        setConsoleLogs(logs => [...logs, errorMessage])
+      }
       
       if (err.message && (err.message.includes('memory') || err.message.includes('out of bounds'))) {
         setErrorMsg('Memory error: Video is too large or complex. Please try with a shorter video or smaller resolution.')
@@ -177,21 +190,25 @@ function ThumbnailGenerator() {
       } else if (err.message && (err.message.includes('Input file validation failed') || err.message.includes('Failed to write input file'))) {
         setErrorMsg('Failed to process video file. Please try again or try with a different video file.')
         await ffmpegManager.reset()
-      } else if (err.message !== 'called FFmpeg.terminate()') {
-        setErrorMsg(err instanceof Error ? err.message : String(err))
+      } else if (!errorMessage.includes('terminate')) {
+        setErrorMsg(errorMessage)
       }
     } finally {
       setIsProcessing(false)
+      // Only reset progress/status after completion, not after stopping
       setTimeout(() => {
-        setProgress(0)
-        setStatus(null)
+        const currentStatus = statusRef.current;
+        if (currentStatus === 'Completed' || currentStatus === 'Failed') {
+          setProgress(0)
+          updateStatus(null)
+        }
       }, 2000)
     }
   }
 
   const handleStop = () => {
     ffmpegManager.terminate()
-    setStatus('Stopped')
+    updateStatus('Stopped')
     setIsProcessing(false)
     setErrorMsg(null)
   }

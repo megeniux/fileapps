@@ -221,7 +221,39 @@ export function useImageConverter() {
   }, [previewUrl]);
 
   const handleReset = useCallback(() => {
-    window.location.reload();
+    // Reset all state to defaults
+    setFile(null);
+    setPreviewUrl(null);
+    setWidth(defaultState.width);
+    setHeight(defaultState.height);
+    setMaintainAspectRatio(defaultState.maintainAspectRatio);
+    setQuality(defaultState.quality);
+    setFormat(defaultState.format);
+    setErrorMsg(null);
+    setIsProcessing(false);
+    setProgress(0);
+    setStatus(null);
+    setDownloadUrl(null);
+    setDownloadSize(null);
+    setOriginalDimensions(null);
+    setIsDragActive(false);
+    setCrop(defaultState.crop);
+    setRotate(defaultState.rotate);
+    setGrayscale(defaultState.grayscale);
+    setBlur(defaultState.blur);
+    setOutputName(defaultState.outputName);
+    setFlipH(defaultState.flipH);
+    setFlipV(defaultState.flipV);
+    setBrightness(defaultState.brightness);
+    setContrast(defaultState.contrast);
+    setSaturation(defaultState.saturation);
+    
+    // Reset refs
+    widthRef.current = defaultState.width;
+    heightRef.current = defaultState.height;
+    originalFileRef.current = null;
+    originalPreviewUrlRef.current = null;
+    baseOriginalDimensionsRef.current = null;
   }, []);
 
   const handleImageLoad = useCallback(() => {
