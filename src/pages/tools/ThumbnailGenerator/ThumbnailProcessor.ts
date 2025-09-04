@@ -43,7 +43,27 @@ export class ThumbnailProcessor {
       setStatus('Preparing video...')
       setProgress(10)
 
+      // Ensure any existing input file is cleaned up first
+      try {
+        await ffmpeg.deleteFile(inputFileName)
+      } catch {
+        // File doesn't exist, continue
+      }
+
+      // Wait a moment for cleanup to complete
+      await new Promise(resolve => setTimeout(resolve, 100))
+
       await ffmpeg.writeFile(inputFileName, await fetchFile(file))
+      
+      // Verify the file was written successfully
+      try {
+        const fileData = await ffmpeg.readFile(inputFileName)
+        if (!fileData || (fileData as Uint8Array).length === 0) {
+          throw new Error('Failed to write input file to FFmpeg')
+        }
+      } catch (error) {
+        throw new Error('Input file validation failed')
+      }
 
       let urls: string[] = []
 
@@ -84,23 +104,55 @@ export class ThumbnailProcessor {
     const { safeWidth, safeHeight } = getSafeDimensions(width, height)
 
     setStatus(`Extracting frame at ${time.toFixed(1)}s`)
+    setProgress(50)
 
-    await ffmpeg.exec([
-      '-i', 'input.mp4',
-      '-ss', `${time}`,
-      '-vframes', '1',
-      '-vf', `scale=${safeWidth}:${safeHeight}`,
-      '-q:v', '3',
-      '-y',
-      outputFileName
-    ])
+    // Clean up any existing output file first
+    try {
+      await ffmpeg.deleteFile(outputFileName)
+    } catch {
+      // File doesn't exist, continue
+    }
+
+    // Execute FFmpeg command with better error handling
+    try {
+      await ffmpeg.exec([
+        '-i', 'input.mp4',
+        '-ss', `${time}`,
+        '-vframes', '1',
+        '-vf', `scale=${safeWidth}:${safeHeight}`,
+        '-q:v', '3',
+        '-y',
+        outputFileName
+      ])
+    } catch (error) {
+      throw new Error(`FFmpeg execution failed: ${error}`)
+    }
+
+    setProgress(80)
+    
+    // Verify output file exists and has content
+    let data: any
+    try {
+      data = await ffmpeg.readFile(outputFileName)
+      
+      if (!data || (new Uint8Array(data)).length === 0) {
+        throw new Error('Generated thumbnail file is empty')
+      }
+    } catch (error) {
+      throw new Error(`Failed to read generated thumbnail: ${error}`)
+    }
 
     setProgress(90)
-    const data = await ffmpeg.readFile(outputFileName)
-    const blob = new Blob([new Uint8Array(data as any)], { type: 'image/jpeg' })
+    const blob = new Blob([new Uint8Array(data)], { type: 'image/jpeg' })
     const url = URL.createObjectURL(blob)
 
-    await ffmpeg.deleteFile(outputFileName)
+    // Clean up output file
+    try {
+      await ffmpeg.deleteFile(outputFileName)
+    } catch {
+      // Ignore cleanup errors
+    }
+    
     return [url]
   }
 

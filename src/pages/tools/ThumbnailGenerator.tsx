@@ -151,6 +151,9 @@ function ThumbnailGenerator() {
     try {
       const ffmpeg = await ffmpegManager.ensureReady()
       
+      // Add a small delay to ensure FFmpeg is fully ready
+      await new Promise(resolve => setTimeout(resolve, 200))
+      
       const options = {
         mode,
         time,
@@ -184,6 +187,9 @@ function ThumbnailGenerator() {
       
       if (err.message && (err.message.includes('memory') || err.message.includes('out of bounds'))) {
         setErrorMsg('Memory error: Video is too large or complex. Please try with a shorter video or smaller resolution.')
+        await ffmpegManager.reset()
+      } else if (err.message && (err.message.includes('Input file validation failed') || err.message.includes('Failed to write input file'))) {
+        setErrorMsg('Failed to process video file. Please try again or try with a different video file.')
         await ffmpegManager.reset()
       } else if (err.message !== 'called FFmpeg.terminate()') {
         setErrorMsg(err instanceof Error ? err.message : String(err))
