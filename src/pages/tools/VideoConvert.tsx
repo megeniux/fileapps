@@ -12,7 +12,7 @@ import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
-// Icons
+// MUI Icons
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 
 // Global Components

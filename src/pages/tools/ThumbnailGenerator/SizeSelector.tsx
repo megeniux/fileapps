@@ -1,5 +1,3 @@
-import React from 'react';
-
 // MUI Components
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -26,7 +24,7 @@ interface SizeSelectorProps {
   mode: number
 }
 
-export const SizeSelector: React.FC<SizeSelectorProps> = ({
+export default function SizeSelector({
   width,
   height,
   sizePreset,
@@ -34,7 +32,7 @@ export const SizeSelector: React.FC<SizeSelectorProps> = ({
   onHeightChange,
   onSizePresetChange,
   mode
-}) => {
+}: SizeSelectorProps) {
   const isCustomSize = sizePreset === 'custom'
   const isValidSize = validateThumbnailSize(width, height)
   const showSizeWarning = !isValidSize && (width > 0 || height > 0)
@@ -122,4 +120,4 @@ export const SizeSelector: React.FC<SizeSelectorProps> = ({
       )}
     </Box>
   );
-};
+}

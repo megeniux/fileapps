@@ -1,5 +1,3 @@
-import React from 'react';
-
 // MUI Components
 import Box from '@mui/material/Box';
 
@@ -9,11 +7,11 @@ interface ThumbnailDisplayProps {
   thumbnails: string[]
 }
 
-export const ThumbnailDisplay: React.FC<ThumbnailDisplayProps> = ({
+export default function ThumbnailDisplay({
   mode,
   thumbnailUrl,
   thumbnails
-}) => {
+}: ThumbnailDisplayProps) {
   return (
     <>
       {/* Single thumbnail or scrub display */}
@@ -52,4 +50,4 @@ export const ThumbnailDisplay: React.FC<ThumbnailDisplayProps> = ({
       )}
     </>
   );
-};
+}

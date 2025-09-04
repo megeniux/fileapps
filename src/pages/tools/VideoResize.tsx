@@ -18,7 +18,7 @@ import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import LinearProgress from '@mui/material/LinearProgress';
 
-// Icons
+// MUI Icons
 import CloseIcon from '@mui/icons-material/Close'
 import ReplayIcon from '@mui/icons-material/Replay'
 import AspectRatioIcon from '@mui/icons-material/AspectRatio';

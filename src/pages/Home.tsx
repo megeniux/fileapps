@@ -14,7 +14,7 @@ import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import Box from '@mui/material/Box';
 
-// Icons
+// MUI Icons
 import CompressIcon from '@mui/icons-material/Compress';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import AspectRatioIcon from '@mui/icons-material/AspectRatio';

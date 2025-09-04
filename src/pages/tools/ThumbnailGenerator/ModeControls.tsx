@@ -1,5 +1,3 @@
-import React from 'react';
-
 // MUI Components
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -15,7 +13,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import type { SelectChangeEvent } from '@mui/material/Select';
 
 // Local Components
-import { SizeSelector } from './SizeSelector';
+import SizeSelector from './SizeSelector';
 
 interface ModeControlsProps {
   mode: number
@@ -41,7 +39,7 @@ interface ModeControlsProps {
   setEndTime: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const ModeControls: React.FC<ModeControlsProps> = ({
+export default function ModeControls({
   mode,
   time,
   startTime,
@@ -63,7 +61,7 @@ export const ModeControls: React.FC<ModeControlsProps> = ({
   setTime,
   setStartTime,
   setEndTime
-}) => {
+}: ModeControlsProps) {
   return (
     <>
       {/* Start/End time slider for scrub and frames modes */}
@@ -196,4 +194,4 @@ export const ModeControls: React.FC<ModeControlsProps> = ({
       )}
     </>
   );
-};
+}

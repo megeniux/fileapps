@@ -20,7 +20,7 @@ import Grid from '@mui/material/Grid'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 
-// Icons
+// MUI Icons
 import SubtitlesIcon from '@mui/icons-material/Subtitles'
 import CloseIcon from '@mui/icons-material/Close'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'

@@ -11,7 +11,7 @@ import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-// Icons
+// MUI Icons
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 // Types

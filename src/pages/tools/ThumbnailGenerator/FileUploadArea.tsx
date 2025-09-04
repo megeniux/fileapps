@@ -1,5 +1,3 @@
-import React from 'react';
-
 // MUI Components
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -25,7 +23,7 @@ interface FileUploadAreaProps {
   videoRef: React.RefObject<HTMLVideoElement>
 }
 
-export const FileUploadArea: React.FC<FileUploadAreaProps> = ({
+export default function FileUploadArea({
   file,
   previewUrl,
   isDragActive,
@@ -36,7 +34,7 @@ export const FileUploadArea: React.FC<FileUploadAreaProps> = ({
   onDrop,
   onLoadedMetadata,
   videoRef
-}) => {
+}: FileUploadAreaProps) {
   const theme = useTheme();
 
   return (
@@ -119,4 +117,4 @@ export const FileUploadArea: React.FC<FileUploadAreaProps> = ({
       )}
     </>
   );
-};
+}

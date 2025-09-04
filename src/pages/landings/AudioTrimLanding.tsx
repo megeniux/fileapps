@@ -15,7 +15,7 @@ import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
-// Icons
+// MUI Icons
 import ContentCutIcon from '@mui/icons-material/ContentCut'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import MusicNoteIcon from '@mui/icons-material/MusicNote'

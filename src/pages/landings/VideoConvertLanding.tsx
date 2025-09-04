@@ -14,7 +14,7 @@ import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-// Icons for new content
+// MUI Icons for new content
 import PrivacyTipIcon from '@mui/icons-material/PrivacyTip'
 import FlashOnIcon from '@mui/icons-material/FlashOn'
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz'

@@ -1,5 +1,3 @@
-import React from 'react';
-
 // MUI Components
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -18,12 +16,12 @@ interface ProgressDisplayProps {
  * Shows processing progress with progress bar and status
  */
 
-export const ProgressDisplay: React.FC<ProgressDisplayProps> = ({
+export default function ProgressDisplay({
   isProcessing,
   progress,
   status,
   consoleLogs
-}) => {
+}: ProgressDisplayProps) {
   if (!isProcessing) return null
 
   return (

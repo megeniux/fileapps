@@ -14,7 +14,7 @@ import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-// Icons
+// MUI Icons
 import PrivacyTipIcon from '@mui/icons-material/PrivacyTip'
 import CompareIcon from '@mui/icons-material/Compare'
 import PhotoSizeSelectLargeIcon from '@mui/icons-material/PhotoSizeSelectLarge'

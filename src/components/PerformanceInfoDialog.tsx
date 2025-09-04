@@ -16,7 +16,7 @@ import Divider from '@mui/material/Divider';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 
-// Icons
+// MUI Icons
 import SpeedIcon from '@mui/icons-material/Speed';
 import SecurityIcon from '@mui/icons-material/Security';
 import MemoryIcon from '@mui/icons-material/Memory';
@@ -41,13 +41,13 @@ const PerformanceInfoDialog: React.FC<PerformanceInfoDialogProps> = ({ open, onC
         >
             <DialogTitle sx={{ pb: 1 }}>
                 <Typography variant="h6" component="span">
-                    Why is processing slow? What you should know
+                    Why is processing slow? Things you should know
                 </Typography>
             </DialogTitle>
 
             <DialogContent dividers>
                 <Typography variant="body1" paragraph>
-                    Our video converter runs entirely in your browser using advanced web technologies.
+                    Our tools runs entirely in your browser using advanced web technologies.
                     Here's everything you need to know about performance and privacy:
                 </Typography>
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 // MUI Components
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -15,7 +13,7 @@ interface ModeTabsProps {
   show: boolean
 }
 
-export const ModeTabs: React.FC<ModeTabsProps> = ({ mode, onChange, show }) => {
+export default function ModeTabs({ mode, onChange, show }: ModeTabsProps) {
   if (!show) return null;
 
   return (
@@ -30,4 +28,4 @@ export const ModeTabs: React.FC<ModeTabsProps> = ({ mode, onChange, show }) => {
       <Tab icon={<FilterFramesIcon fontSize="small" />} label="Frames" />
     </Tabs>
   );
-};
+}

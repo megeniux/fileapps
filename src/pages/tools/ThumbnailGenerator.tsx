@@ -6,11 +6,11 @@ import { useFFmpeg } from './ThumbnailGenerator/utils'
 import { useThumbnailState } from './ThumbnailGenerator/useThumbnailState'
 
 // Components
-import { FileUploadArea } from './ThumbnailGenerator/FileUploadArea'
-import { ModeTabs } from './ThumbnailGenerator/ModeTabs'
-import { ModeControls } from './ThumbnailGenerator/ModeControls'
-import { ThumbnailDisplay } from './ThumbnailGenerator/ThumbnailDisplay'
-import { ProgressDisplay } from './ThumbnailGenerator/ProgressDisplay'
+import FileUploadArea from './ThumbnailGenerator/FileUploadArea'
+import ModeTabs from './ThumbnailGenerator/ModeTabs'
+import ModeControls from './ThumbnailGenerator/ModeControls'
+import ThumbnailDisplay from './ThumbnailGenerator/ThumbnailDisplay'
+import ProgressDisplay from './ThumbnailGenerator/ProgressDisplay'
 
 // Processing logic
 import { ThumbnailProcessor } from './ThumbnailGenerator/ThumbnailProcessor'
@@ -28,13 +28,9 @@ import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import Alert from '@mui/material/Alert'
 import Divider from '@mui/material/Divider'
-import Link from '@mui/material/Link'
 
-// Icons
+// MUI Icons
 import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual'
-
-// Components
-import PerformanceInfoDialog from '../../components/PerformanceInfoDialog'
 
 function ThumbnailGenerator() {
   // Custom hooks
@@ -125,16 +121,6 @@ function ThumbnailGenerator() {
   const handleFrameIntervalChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const val = parseInt(event.target.value)
     if (!isNaN(val) && val > 0) setFrameInterval(val)
-  }
-
-  const [isPerformanceDialogOpen, setIsPerformanceDialogOpen] = React.useState(false)
-
-  const handlePerformanceDialogOpen = () => {
-    setIsPerformanceDialogOpen(true)
-  }
-
-  const handlePerformanceDialogClose = () => {
-    setIsPerformanceDialogOpen(false)
   }
 
   const handleExtractThumbnail = async () => {
@@ -322,22 +308,7 @@ function ThumbnailGenerator() {
             status={status}
             consoleLogs={consoleLogs}
           />
-
-          <Alert icon={false} severity="warning" sx={{ alignItems: 'center', mt: 2, py: 0 }}>
-            <Typography variant='subtitle1' fontWeight={600} component="h4">Recommendations:</Typography>
-            <ol style={{ paddingLeft: 15 }}>
-              <li><Typography variant='body2' component="p"> <strong>Use predefined sizes:</strong> Choose from YouTube, Instagram, Facebook, and other optimized thumbnail sizes to prevent memory errors.</Typography></li>
-              <li><Typography variant='body2' component="p"> <strong>Avoid custom large sizes:</strong> Custom dimensions above 1920×1080px may cause memory issues. Use preset sizes for best results.</Typography></li>
-              <li><Typography variant='body2' component="p"> <strong>Extract fewer thumbnails:</strong> If you need fewer thumbnails, consider adjusting the extraction settings.</Typography></li>
-            </ol>
-            <Typography variant='body2' component="p">Progress depends on the system hardware mostly <Link color="info" sx={{ cursor: 'pointer' }} onClick={handlePerformanceDialogOpen}>Learn more</Link></Typography>
-          </Alert>
         </Card>
-
-        <PerformanceInfoDialog
-          open={isPerformanceDialogOpen}
-          onClose={handlePerformanceDialogClose}
-        />
       </Container>
     </>
   )
