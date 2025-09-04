@@ -89,7 +89,7 @@ export default function VideoTrimLanding() {
               <Typography variant="h2" component="h1">Trim Video Online – Free, Private & No Watermark</Typography>
               <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Cut unwanted sections from MP4, MOV, MKV, WebM locally — no signup, uploads or watermark.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
-                <Button color='info' size='large' href="/tools/video/trim" variant="contained">Upload Video</Button>
+                <Button color='info' size='large' href="/tools/video/trim" variant="contained">Upload</Button>
                 <Button size='large' href="/tools/video/how-to-trim-video-online" variant="text" sx={{ color: 'text.secondary' }}>How-to Guide</Button>
               </Box>
             </Grid>
@@ -205,7 +205,7 @@ export default function VideoTrimLanding() {
             <Grid size={12}><Typography variant='h2' align='center'>Ready to trim your video?</Typography></Grid>
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Fast, private & free video trimming — right in your browser.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-              <Button color='inherit' variant='contained' size='large' href='/tools/video/trim'>Upload Video</Button>
+              <Button color='inherit' variant='contained' size='large' href='/tools/video/trim'>Upload</Button>
               <Button size='large' href='/tools/video/how-to-trim-video-online' sx={{ color: 'common.white' }}>How-to Guide</Button>
             </Grid>
           </Grid>

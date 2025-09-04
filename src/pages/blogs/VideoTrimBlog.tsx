@@ -107,7 +107,7 @@ export default function VideoTrimBlog() {
         <Typography variant='body1' mb={2}>Trim video clips quickly and privately — upload locally, mark start & end, preview, then export a clean, watermark‑free result.</Typography>
 
         <Box mt={4} textAlign='center'>
-          <Button size='large' variant='contained' color='info' href='/tools/video/trim'>Upload Video</Button>
+          <Button size='large' variant='contained' color='info' href='/tools/video/trim'>Upload</Button>
           <Button size='large' variant='outlined' color='info' href='/tools/video/trim-video-online' sx={{ ml:2 }}>Features</Button>
         </Box>
       </Paper>

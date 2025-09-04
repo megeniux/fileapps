@@ -46,7 +46,7 @@ export default function ExtractAudioLanding() {
               <Typography variant="h2" component="h1">Extract Audio from Video – Free & Private</Typography>
               <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Pull MP3, WAV or AAC from MP4, MOV, MKV, WebM. Select a time range & export locally — no signup or watermark.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
-                <Button color='error' size='large' href="/tools/video/extract-audio" variant="contained">Upload Video</Button>
+                <Button color='error' size='large' href="/tools/video/extract-audio" variant="contained">Upload</Button>
                 <Button size='large' href="/tools/video/how-to-extract-audio-from-video" variant="text" sx={{ color: 'text.secondary' }}>How-to Guide</Button>
               </Box>
             </Grid>
@@ -162,7 +162,7 @@ export default function ExtractAudioLanding() {
             <Grid size={12}><Typography variant='h2' align='center'>Ready to extract audio from your video?</Typography></Grid>
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Fast, private & free audio extraction — right in your browser.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-              <Button color='inherit' variant='contained' size='large' href='/tools/video/extract-audio'>Upload Video</Button>
+              <Button color='inherit' variant='contained' size='large' href='/tools/video/extract-audio'>Upload</Button>
               <Button size='large' href='/tools/video/how-to-extract-audio-from-video' sx={{ color: 'common.white' }}>How-to Guide</Button>
             </Grid>
           </Grid>

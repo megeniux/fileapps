@@ -88,7 +88,7 @@ export default function VideoPlaybackLanding() {
               <Typography variant="h2" component="h1">Change Video Speed Online – Reverse to 20× Faster</Typography>
               <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Set playback from -20x (reverse) to +20x locally. MP4, MOV, MKV, AVI supported — free, private & watermark‑free.</Typography>
               <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
-                <Button color='secondary' size='large' href="/tools/video/playback" variant="contained">Upload Video</Button>
+                <Button color='secondary' size='large' href="/tools/video/playback" variant="contained">Upload</Button>
                 <Button size='large' href="/tools/video/how-to-video-playback-speed-editor" variant="text" sx={{ color: 'text.secondary' }}>How-to Guide</Button>
               </Box>
             </Grid>
@@ -204,7 +204,7 @@ export default function VideoPlaybackLanding() {
             <Grid size={12}><Typography variant='h2' align='center'>Ready to change your video speed?</Typography></Grid>
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Fast, private & free video speed editing — right in your browser.</Typography></Grid>
             <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-              <Button color='inherit' variant='contained' size='large' href='/tools/video/playback'>Upload Video</Button>
+              <Button color='inherit' variant='contained' size='large' href='/tools/video/playback'>Upload</Button>
               <Button size='large' href='/tools/video/how-to-video-playback-speed-editor' sx={{ color: 'common.white' }}>How-to Guide</Button>
             </Grid>
           </Grid>

@@ -53,7 +53,7 @@ export default function BurnCaptionLanding(){
                 Hardcode SRT / VTT captions into MP4, MOV, MKV locally. Style font, size, color & background — no uploads, signup or watermark.
               </Typography>
               <Box display="flex" gap={1} justifyContent={{ xs:'center', md:'flex-start' }}>
-                <Button color='primary' size='large' variant='contained' href='/tools/video/burn-captions'>Upload Video</Button>
+                <Button color='primary' size='large' variant='contained' href='/tools/video/burn-captions'>Upload</Button>
                 <Button size='large' variant='text' sx={{ color:'text.secondary' }} href='/tools/video/how-to-burn-captions-into-video-online'>How-to Guide</Button>
               </Box>
             </Grid>
@@ -186,7 +186,7 @@ export default function BurnCaptionLanding(){
             <Grid size={12}><Typography variant='h2' align='center'>Ready to burn subtitles?</Typography></Grid>
             <Grid size={12}><Typography variant='h6' component='p' color='common.white'>Hardcode captions privately — fast, free & watermark‑free.</Typography></Grid>
             <Grid size={12} sx={{ display:'flex', justifyContent:'center', gap:1 }}>
-              <Button color='inherit' variant='contained' size='large' href='/tools/video/burn-captions'>Upload Video</Button>
+              <Button color='inherit' variant='contained' size='large' href='/tools/video/burn-captions'>Upload</Button>
               <Button size='large' href='/tools/video/how-to-burn-captions-into-video-online' sx={{ color:'common.white' }}>How-to Guide</Button>
             </Grid>
           </Grid>

@@ -103,7 +103,7 @@ export default function BurnCaptionsBlog(){
         <Typography variant='body1' mb={2}>Burn captions privately: upload, add SRT/VTT, style, preview then export a clean MP4 — no signup, no watermark, full control.</Typography>
 
         <Box mt={4} textAlign='center'>
-          <Button variant='contained' color='primary' size='large' href='/tools/video/burn-captions'>Upload Video</Button>
+          <Button variant='contained' color='primary' size='large' href='/tools/video/burn-captions'>Upload</Button>
           <Button variant='outlined' color='primary' size='large' sx={{ ml:2 }} href='/tools/video/burn-subtitles-into-video'>Features</Button>
         </Box>
       </Paper>

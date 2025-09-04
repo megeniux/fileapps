@@ -100,7 +100,7 @@ export default function VideoPlaybackBlog() {
           <Typography variant="h4" component="h2" gutterBottom>Conclusion</Typography>
           <Typography variant="body1" mb={2}>Change or reverse video speed locally — upload, set speed, preview and export a clean MP4 with no watermark or signup.</Typography>
           <Box mt={4} textAlign="center">
-            <Button color='secondary' size='large' href="/tools/video/playback" variant="contained">Upload Video</Button>
+            <Button color='secondary' size='large' href="/tools/video/playback" variant="contained">Upload</Button>
             <Button color='secondary' size='large' href="/tools/video/video-playback-speed-editor" variant="outlined" sx={{ ml: 2 }}>Features</Button>
           </Box>
         </Box>

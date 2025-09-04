@@ -110,7 +110,7 @@ export default function ExtractAudioBlog() {
           <Typography variant="body1" mb={2}>Extracting audio from video doesn’t need bulky software or uploads. Load a file, optionally set a time range, and export MP3, WAV or AAC locally — fast, private and watermark‑free. Try it now.</Typography>
 
           <Box mt={4} textAlign="center">
-            <Button color='error' size='large' href="/tools/video/extract-audio" variant="contained">Upload Video</Button>
+            <Button color='error' size='large' href="/tools/video/extract-audio" variant="contained">Upload</Button>
             <Button color='error' size='large' href="/tools/video/extract-audio-from-video" variant="outlined" sx={{ ml: 2 }}>Features</Button>
           </Box>
         </Box>
