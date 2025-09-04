@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback } from 'react'
-import { validateVideoFile, createPreviewUrl, cleanupPreviewUrl } from '../utils/fileHandling'
-import { thumbnailSizeOptions, getSafeDimensions } from '../pages/tools/ThumbnailGenerator/constants'
+import { validateVideoFile, createPreviewUrl, cleanupPreviewUrl } from './fileHandling'
+import { thumbnailSizeOptions, getSafeDimensions } from './constants'
 import type { SelectChangeEvent } from '@mui/material/Select'
 
 export const useThumbnailState = () => {

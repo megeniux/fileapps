@@ -2,8 +2,8 @@ import React from 'react'
 import { Helmet } from 'react-helmet-async'
 
 // Custom hooks
-import { useFFmpeg } from '../../hooks/useFFmpeg'
-import { useThumbnailState } from '../../hooks/useThumbnailState'
+import { useFFmpeg } from './ThumbnailGenerator/utils'
+import { useThumbnailState } from './ThumbnailGenerator/useThumbnailState'
 
 // Components
 import { FileUploadArea } from './ThumbnailGenerator/FileUploadArea'
@@ -16,7 +16,7 @@ import { ProgressDisplay } from './ThumbnailGenerator/ProgressDisplay'
 import { ThumbnailProcessor } from './ThumbnailGenerator/ThumbnailProcessor'
 
 // Utilities
-import { handleDragEvents } from '../../utils/fileHandling'
+import { handleDragEvents } from './ThumbnailGenerator/fileHandling'
 
 // MUI Imports
 import Container from '@mui/material/Container'

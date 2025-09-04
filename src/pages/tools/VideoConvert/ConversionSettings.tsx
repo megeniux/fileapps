@@ -69,7 +69,7 @@ export default function ConversionSettings({
   return (
     <Grid container spacing={2} mt={2}>
       <Grid size={{ xs: 12, md: 6 }}>
-        <Typography variant="subtitle2" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Typography variant="subtitle2">
           Output Format:
         </Typography>
         <Select
@@ -171,7 +171,7 @@ export default function ConversionSettings({
       </Grid>
       
       <Grid size={{ xs: 12, md: 6 }}>
-        <Typography variant="subtitle2" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Typography variant="subtitle2">
           <Box display="flex" alignItems="center">
             Quality:
             <IconButton
@@ -182,9 +182,6 @@ export default function ConversionSettings({
               <InfoOutlinedIcon fontSize="small" />
             </IconButton>
           </Box>
-          <small>
-            {crf === CRF_KEEP ? 'Keep as original' : `${crf} CRF`}
-          </small>
         </Typography>
         <Select
           fullWidth
@@ -201,7 +198,7 @@ export default function ConversionSettings({
       </Grid>
       
       <Grid size={{ xs: 12, md: 6 }}>
-        <Typography variant="subtitle2" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Typography variant="subtitle2">
           <Box display="flex" alignItems="center">
             Preset:
             <IconButton
@@ -212,9 +209,6 @@ export default function ConversionSettings({
               <InfoOutlinedIcon fontSize="small" />
             </IconButton>
           </Box>
-          <small>
-            {preset === PRESET_KEEP ? 'Keep as original' : preset}
-          </small>
         </Typography>
         <Select
           fullWidth
