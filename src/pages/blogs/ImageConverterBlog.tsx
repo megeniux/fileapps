@@ -106,7 +106,7 @@ export default function ImageConverterBlog() {
           <Typography variant='body1' mb={2}>Convert & edit images quickly without installs or uploads. Resize, crop, adjust and export a clean file — private, fast and free.</Typography>
 
           <Box mt={4} textAlign='center'>
-            <Button color='primary' size='large' href='/tools/image/convert' variant='contained'>Upload Image</Button>
+            <Button color='primary' size='large' href='/tools/image/convert' variant='contained'>Upload</Button>
             <Button color='primary' size='large' href='/tools/image/convert-image-online' variant='outlined' sx={{ ml: 2 }}>Features</Button>
           </Box>
         </Box>

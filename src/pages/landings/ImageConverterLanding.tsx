@@ -51,7 +51,7 @@ export default function ImageConverterLanding() {
                             <Typography variant="h2" component="h1">Convert & Edit Images Online – Resize, Crop, Rotate, and More</Typography>
                             <Typography variant="h6" component="p" color="text.secondary" mt={3} mb={4}>Drag & drop an image, then resize, crop, rotate, and apply filters like grayscale, blur, and brightness. Export in JPG, PNG, WebP, or GIF formats – no signup or watermark.</Typography>
                             <Box display="flex" gap={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
-                                <Button color='primary' size='large' href="/tools/image/convert" variant="contained">Upload Image</Button>
+                                <Button color='primary' size='large' href="/tools/image/convert" variant="contained">Upload</Button>
                                 <Button size='large' href="/tools/image/how-to-convert-image-online" variant="text" sx={{ color: 'text.secondary' }}>How-to Guide</Button>
                             </Box>
                         </Grid>
@@ -256,7 +256,7 @@ export default function ImageConverterLanding() {
                         <Grid size={{ xs: 12 }}><Typography variant='h2' align='center'>Ready to convert an image?</Typography></Grid>
                         <Grid size={{ xs: 12 }}><Typography variant='h6' component='p' color='common.white'>Drag & drop an image, edit it instantly — private & free.</Typography></Grid>
                         <Grid size={{ xs: 12 }} sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-                            <Button color='inherit' variant='contained' size='large' href='/tools/image/convert'>Upload Image</Button>
+                            <Button color='inherit' variant='contained' size='large' href='/tools/image/convert'>Upload</Button>
                             <Button size='large' href='/tools/image/how-to-convert-image-online' sx={{ color: 'common.white' }}>How-to Guide</Button>
                         </Grid>
                     </Grid>
