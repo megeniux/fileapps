@@ -45,7 +45,7 @@ export default function FileUploadArea({
       alignItems="center"
       flexDirection="column"
       width="100%"
-      height={300}
+      height={220}
       borderRadius={1}
       bgcolor={isDragActive ? 'primary.lighter' : 'action.hover'}
       border={isDragActive ? `2px dashed ${theme.palette.primary.main}` : `2px dashed ${theme.palette.divider}`}
