@@ -281,7 +281,7 @@ function AudioConvert() {
             alignItems="center"
             flexDirection="column"
             width="100%"
-            height={220}
+            height={300}
             borderRadius={1}
             bgcolor={isDragActive ? 'primary.lighter' : 'action.hover'}
             border={isDragActive ? `2px dashed ${theme.palette.primary.main}` : `2px dashed ${theme.palette.divider}`}

@@ -1,50 +1,55 @@
-// MUI Components
+/**
+ * File Upload Area component for Video Trimmer
+ * Following established patterns from VideoResize and VideoConvert
+ */
+
+import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-
-// MUI Theme
-import { useTheme } from '@mui/material/styles';
-
-// MUI Icons
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CloseIcon from '@mui/icons-material/Close';
+import { UI_CONFIG } from './constants';
+import type { FileUploadAreaProps } from './types';
 
-interface FileUploadAreaProps {
-  file: File | null
-  previewUrl: string | null
-  isDragActive: boolean
-  onFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-  onReset: () => void
-  onDragOver: (e: React.DragEvent) => void
-  onDragLeave: (e: React.DragEvent) => void
-  onDrop: (e: React.DragEvent) => void
-  onLoadedMetadata: () => void
-  videoRef: React.RefObject<HTMLVideoElement>
-  fileInputRef: React.RefObject<HTMLInputElement>
-}
-
-export default function FileUploadArea({
+/**
+ * File upload area with drag & drop support
+ */
+export const FileUploadArea: React.FC<FileUploadAreaProps> = ({
   file,
   previewUrl,
   isDragActive,
-  onFileChange,
-  onReset,
-  onDragOver,
-  onDragLeave,
-  onDrop,
+  onFileSelect,
+  onFileRemove,
   onLoadedMetadata,
-  videoRef,
-  fileInputRef
-}: FileUploadAreaProps) {
-  const theme = useTheme();
-
+  onDragEnter,
+  onDragLeave,
+  onDragOver,
+  onDrop
+}) => {
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+  
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files?.[0]) {
+      onFileSelect(event.target.files[0]);
+    }
+  };
+  
+  const handleRemoveFile = () => {
+    // Clear the file input to allow re-uploading the same file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+    onFileRemove();
+  };
+  
   return (
     <>
-      {/* File upload area with drag and drop */}
+      {/* Upload Area */}
       <Box
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
+        onDragEnter={onDragEnter}
         onDrop={onDrop}
         position="relative"
         display="flex"
@@ -52,17 +57,17 @@ export default function FileUploadArea({
         alignItems="center"
         flexDirection="column"
         width="100%"
-        height={300}
+        height={UI_CONFIG.VIDEO_PREVIEW_HEIGHT}
         borderRadius={1}
         bgcolor={isDragActive ? 'primary.lighter' : 'action.hover'}
-        border={isDragActive ? `2px dashed ${theme.palette.primary.main}` : `2px dashed ${theme.palette.divider}`}
+        border={isDragActive ? theme => `2px dashed ${theme.palette.primary.main}` : theme => `2px dashed ${theme.palette.divider}`}
         sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
       >
         {!file ? (
           <Box textAlign="center">
             <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
             <Typography variant="subtitle2" gutterBottom>
-              Drag & drop a video file here<br />or<br />Click to select
+              Drag & drop a video file here<br/>or<br/>Click to select
             </Typography>
             <Typography color="text.secondary" variant="caption">
               Supported: MP4, MOV, AVI, MKV, and more
@@ -71,22 +76,21 @@ export default function FileUploadArea({
         ) : (
           <Box textAlign="center" width="100%">
             <video
-              ref={videoRef}
               src={previewUrl || undefined}
               controls
-              style={{
-                aspectRatio: '16 / 9',
-                maxWidth: '100%',
-                maxHeight: 220,
-                background: '#000',
-                objectFit: 'contain',
-                position: 'relative',
-                zIndex: 10
+              style={{ 
+                maxWidth: '100%', 
+                maxHeight: UI_CONFIG.VIDEO_PREVIEW_HEIGHT, 
+                background: '#000', 
+                position: 'relative', 
+                zIndex: 10 
               }}
               onLoadedMetadata={onLoadedMetadata}
             />
           </Box>
         )}
+        
+        {/* Hidden file input */}
         <input
           ref={fileInputRef}
           accept="video/*"
@@ -100,24 +104,23 @@ export default function FileUploadArea({
             cursor: 'pointer',
             zIndex: 2
           }}
-          id="video-file-input"
           type="file"
-          onChange={onFileChange}
+          onChange={handleFileChange}
           tabIndex={-1}
         />
       </Box>
       
-      {/* Filename and remove button */}
+      {/* File name and remove button */}
       {file && (
         <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
           <Typography variant="body2" noWrap>
             {file.name}
           </Typography>
-          <IconButton onClick={onReset} color="error" sx={{ ml: 1 }}>
+          <IconButton color="error" onClick={handleRemoveFile} sx={{ ml: 1 }}>
             <CloseIcon fontSize="small" />
           </IconButton>
         </Box>
       )}
     </>
   );
-}
+};

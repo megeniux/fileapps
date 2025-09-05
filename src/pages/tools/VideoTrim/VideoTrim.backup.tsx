@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
-import { Helmet } from 'react-helmet-async'
 import { FFmpeg } from '@ffmpeg/ffmpeg'
 import { fetchFile } from '@ffmpeg/util'
+import { Helmet } from 'react-helmet-async'
 
 // MUI imports
 import Container from '@mui/material/Container'
@@ -13,14 +13,14 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 import Alert from '@mui/material/Alert';
-import Divider from '@mui/material/Divider';
 import Slider from '@mui/material/Slider';
+import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 // MUI Icons
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import ContentCutIcon from '@mui/icons-material/ContentCut';
 import CloseIcon from '@mui/icons-material/Close';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
@@ -31,10 +31,12 @@ let isFFmpegLoaded = false
 const ffmpegRef = { current: ffmpeg };
 
 
-function ExtractAudio() {
+function VideoTrim() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+  const [duration, setDuration] = useState<number>(0)
+  const [range, setRange] = useState<[number, number]>([0, 0])
   const [isProcessing, setIsProcessing] = useState(false)
   const [progress, setProgress] = useState(0)
   const [status, setStatus] = useState<string | null>(null)
@@ -42,11 +44,47 @@ function ExtractAudio() {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null)
   const [downloadSize, setDownloadSize] = useState<number | null>(null)
   const [consoleLogs, setConsoleLogs] = useState<string[]>([])
-  const [duration, setDuration] = useState<number>(0)
-  const [range, setRange] = useState<[number, number]>([0, 0])
   const [isDragActive, setIsDragActive] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null)
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files?.[0]) {
+      setFile(event.target.files[0])
+      setPreviewUrl(URL.createObjectURL(event.target.files[0]))
+      setDuration(0)
+      setRange([0, 0])
+      setProgress(0)
+      setStatus(null)
+      setErrorMsg(null)
+      setDownloadUrl(null)
+      setDownloadSize(null)
+      setConsoleLogs([])
+    }
+  }
+
+  const handleRemoveFile = () => {
+    // Clear the file input to allow re-uploading the same file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+    
+    setFile(null);
+    setPreviewUrl(null);
+    setDuration(0);
+    setRange([0, 0]);
+    setProgress(0);
+    setStatus(null);
+    setErrorMsg(null);
+    setDownloadUrl(null);
+    setDownloadSize(null);
+    setConsoleLogs([]);
+  };
+
+  // Remove handleReset logic and replace with reload
+  const handleReset = () => {
+    window.location.reload();
+  };
 
   const handleLoadedMetadata = () => {
     if (videoRef.current) {
@@ -60,40 +98,7 @@ function ExtractAudio() {
     if (Array.isArray(newValue)) setRange([Math.floor(newValue[0]), Math.ceil(newValue[1])])
   }
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files?.[0]) {
-      setFile(event.target.files[0])
-      setPreviewUrl(URL.createObjectURL(event.target.files[0]))
-      setProgress(0)
-      setStatus(null)
-      setErrorMsg(null)
-      setDownloadUrl(null)
-      setDownloadSize(null)
-      setConsoleLogs([])
-      setDuration(0)
-      setRange([0, 0])
-    }
-  }
-
-  const handleRemoveFile = () => {
-    // Clear the file input to allow re-uploading the same file
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
-    
-    setFile(null);
-    setPreviewUrl(null);
-    setProgress(0);
-    setStatus(null);
-    setErrorMsg(null);
-    setDownloadUrl(null);
-    setDownloadSize(null);
-    setConsoleLogs([]);
-    setDuration(0);
-    setRange([0, 0]);
-  };
-
-  const handleExtract = async () => {
+  const handleTrim = async () => {
     if (!file) return
     if (!isFFmpegLoaded) {
       await ffmpeg.load()
@@ -107,32 +112,32 @@ function ExtractAudio() {
     setDownloadSize(null)
     setConsoleLogs([])
 
+    // Assign ffmpeg to ref for stop functionality
     ffmpegRef.current = ffmpeg;
 
     const inputFileName = file.name
-    const outputFileName = `audio_${inputFileName.replace(/\.[^/.]+$/, "")}.mp3`
+    const outputFileName = `trimmed_${inputFileName}`
     try {
       await ffmpeg.writeFile(inputFileName, await fetchFile(file))
       const logHandler = ({ message }: { message: string }) => {
         setConsoleLogs(logs => [...logs, message])
-        if (message.includes('size=')) {
+        if (message.includes('frame=')) {
           setProgress(prev => Math.min(prev + 5, 99))
         }
       }
       ffmpeg.on('log', logHandler)
-      setStatus('Extracting')
+      setStatus('Trimming')
       await ffmpeg.exec([
         '-i', inputFileName,
         '-ss', `${range[0]}`,
         '-to', `${range[1]}`,
-        '-vn',
-        '-acodec', 'mp3',
+        '-c', 'copy',
         outputFileName
       ])
       setStatus('Finalizing')
       setProgress(99.9)
   const data = await ffmpeg.readFile(outputFileName)
-  const blob = new Blob([new Uint8Array(data as any)], { type: 'audio/mp3' })
+  const blob = new Blob([new Uint8Array(data as any)], { type: 'video/mp4' })
   const url = URL.createObjectURL(blob)
   setDownloadUrl(url)
       setDownloadSize(data.length)
@@ -169,7 +174,7 @@ function ExtractAudio() {
     if (downloadUrl && file) {
       const a = document.createElement('a')
       a.href = downloadUrl
-      a.download = `audio_${file.name.replace(/\.[^/.]+$/, "")}.mp3`
+      a.download = `trimmed_${file.name}`
       a.click()
       setTimeout(() => URL.revokeObjectURL(downloadUrl), 5000)
     }
@@ -178,28 +183,26 @@ function ExtractAudio() {
   return (
     <>
       <Helmet>
-        <title>Extract Audio from Video - Free MP3 Audio Extractor Tool</title>
-        <meta name="description" content="Free online tool to extract audio from video files. Convert video to MP3, WAV, AAC, or FLAC audio formats. High-quality audio extraction with no uploads or watermarks." />
-        <meta name="keywords" content="extract audio, video to mp3, audio extractor, video to audio converter, mp3 extractor, free audio extraction, video audio ripper" />
-        <meta property="og:title" content="Extract Audio from Video - Free MP3 Audio Extractor Tool" />
-        <meta property="og:description" content="Free online tool to extract audio from video files. Convert video to MP3, WAV, AAC, or FLAC audio formats. High-quality audio extraction with no uploads or watermarks." />
+        <title>Video Trimmer Online Free – Cut and Trim Videos Precisely</title>
+        <meta name="description" content="Trim and cut videos with frame-accurate precision. Remove unwanted parts locally — no watermark, private & fast." />
+        <meta name="keywords" content="trim video online free, cut video online, video trimmer tool, clip video online, remove parts from video, video editor online, trim mp4 online" />
+        <meta property="og:title" content="Free Online Video Trimmer – Fast, Private & No Watermark" />
+        <meta property="og:description" content="Trim and cut videos with precision in your browser. No uploads required." />
+        <meta property="og:image" content="/images/landing/video-trim-hero.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://fileapps.click/tools/extract-audio" />
-        <link rel="canonical" href="https://fileapps.click/tools/extract-audio" />
+        <meta property="og:url" content="https://fileapps.click/tools/video/trim" />
+        <meta property="og:site_name" content="FileApps" />
+        <link rel="canonical" href="https://fileapps.click/tools/video/trim" />
       </Helmet>
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
       <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
-          {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
           <Box display="flex" alignItems="center">
-            <MusicNoteIcon color="error" fontSize="small" sx={{ mr: 0.5 }} />
-            <Typography variant="body1" component="h1" fontWeight={600} mb={0.5}>Extract Audio from Video</Typography>
+            <ContentCutIcon color="info" fontSize="small" sx={{ mr: 0.5 }} />
+            <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Video Trimmer</Typography>
           </Box>
           <Divider sx={{ my: 0.5 }} />
-          <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-            Extract high-quality audio from videos and save as MP3, WAV, AAC, or FLAC. Local processing — no uploads, no watermark, no signup.
-          </Typography>
-          {/* Unified Upload/Preview UI - VideoResize style */}
+          <Typography variant="body2" component="h2" color="text.secondary" mb={2}>Trim and cut videos with frame-accurate precision. Remove unwanted parts locally — no watermark, no signup, 100% browser-based.</Typography>
           <Box
             onDragOver={e => { e.preventDefault(); setIsDragActive(true); }}
             onDragLeave={e => { e.preventDefault(); setIsDragActive(false); }}
@@ -214,14 +217,14 @@ function ExtractAudio() {
                 }
                 setFile(selectedFile);
                 setPreviewUrl(URL.createObjectURL(selectedFile));
+                setDuration(0);
+                setRange([0, 0]);
                 setProgress(0);
                 setStatus(null);
                 setErrorMsg(null);
                 setDownloadUrl(null);
                 setDownloadSize(null);
                 setConsoleLogs([]);
-                setDuration(0);
-                setRange([0, 0]);
               }
             }}
             position="relative"
@@ -252,15 +255,7 @@ function ExtractAudio() {
                   ref={videoRef}
                   src={previewUrl || undefined}
                   controls
-                  style={{
-                    aspectRatio: '16 / 9',
-                    maxWidth: '100%',
-                    maxHeight: 220,
-                    background: '#000',
-                    objectFit: 'contain', 
-                    position: 'relative', 
-                    zIndex: 10 
-                  }}
+                  style={{ maxWidth: '100%', maxHeight: 220, background: '#000', position: 'relative', zIndex: 10 }}
                   onLoadedMetadata={handleLoadedMetadata}
                 />
               </Box>
@@ -278,7 +273,7 @@ function ExtractAudio() {
                 cursor: 'pointer',
                 zIndex: 2
               }}
-              id="audio-file-input"
+              id="video-file-input"
               type="file"
               onChange={handleFileChange}
               tabIndex={-1}
@@ -290,17 +285,19 @@ function ExtractAudio() {
               <Typography variant="body2" noWrap>
                 {file.name}
               </Typography>
-              <IconButton size="small" color="error" onClick={handleRemoveFile}><CloseIcon fontSize="small" /></IconButton>
+              <IconButton color='error' onClick={handleRemoveFile} sx={{ ml: 1 }}>
+                <CloseIcon fontSize='small'/>
+              </IconButton>
             </Box>
           )}
-          {/* Duration slider */}
+          {/* Range slider and controls */}
           {file && duration > 0 && !isProcessing && (
             <Box mb={2}>
               <Typography variant="subtitle2" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 Select Duration: <small>{`${range[0]}s - ${range[1]}s`}</small>
               </Typography>
               <Box display="flex" alignItems="center">
-                <IconButton size="small" onClick={() => setRange([Math.max(0, range[0] - 1), range[1]])} disabled={isProcessing}><RemoveIcon /></IconButton>
+                <IconButton onClick={() => setRange([Math.max(0, Math.floor(range[0] - 1)), range[1]])} disabled={isProcessing}><RemoveIcon /></IconButton>
                 <Slider
                   min={0}
                   max={Math.floor(duration)}
@@ -309,26 +306,32 @@ function ExtractAudio() {
                   onChange={handleRangeChange}
                   valueLabelDisplay="auto"
                   disableSwap
-                  size="small"
+                  
                   sx={{ mx: 1, flex: 1 }}
                 />
-                <IconButton size="small" onClick={() => setRange([range[0], Math.min(Math.floor(duration), range[1] + 1)])} disabled={isProcessing}><AddIcon /></IconButton>
+                <IconButton onClick={() => setRange([range[0], Math.min(Math.floor(duration), Math.ceil(range[1] + 1))])} disabled={isProcessing}><AddIcon /></IconButton>
               </Box>
             </Box>
           )}
         </CardContent>
         <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" onClick={handleExtract} disabled={!file || isProcessing || range[1] <= range[0]} size="small">
-            {isProcessing ? 'Extracting' : 'Extract Audio'}
+          <Button variant="contained" onClick={handleTrim} disabled={!file || isProcessing || range[1] <= range[0]}>
+            {isProcessing ? 'Trimming' : 'Trim'}
           </Button>
+          {/* Reset button only visible when not processing */}
+          {!isProcessing && (
+            <Button variant="outlined" onClick={handleReset}>
+              Reset
+            </Button>
+          )}
           {/* Add Stop button */}
           {isProcessing && (
-            <Button variant="contained" color="error" onClick={handleStop} size="small">
+            <Button variant="contained" color="error" onClick={handleStop}>
               Stop
             </Button>
           )}
           {downloadUrl && downloadSize !== null && (
-            <Button variant="contained" color="success" onClick={handleDownload} size="small">
+            <Button variant="contained" color="success" onClick={handleDownload}>
               Download ({(downloadSize / (1024 * 1024)).toFixed(2)} MB)
             </Button>
           )}
@@ -343,9 +346,10 @@ function ExtractAudio() {
           </Box>
         )}
       </Card>
+      {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
     </Container>
     </>
   )
 }
 
-export default ExtractAudio
+export default VideoTrim
