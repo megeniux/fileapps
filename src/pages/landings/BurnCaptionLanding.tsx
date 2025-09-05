@@ -38,9 +38,9 @@ export default function BurnCaptionLanding(){
         <meta property="og:description" content="Burn subtitles (SRT/VTT) into video locally. Style & encode MP4 without uploads or signup." />
         <meta property="og:image" content="/images/landing/burn-captions-hero.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="/tools/video/burn-subtitles-into-video" />
+        <meta property="og:url" content="/tools/video/burn-captions-into-video-online" />
         <meta property="og:site_name" content="FileApps" />
-        <link rel="canonical" href="/tools/video/burn-subtitles-into-video" />
+        <link rel="canonical" href="/tools/video/burn-captions-into-video-online" />
         <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 

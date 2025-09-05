@@ -89,6 +89,9 @@ function ImageConvert() {
     handleSaturationChange,
     handleConvert,
     handleStop,
+
+    // Refs
+    fileInputRef,
   } = useImageConverter();
 
   const handleDownload = () => {
@@ -149,6 +152,7 @@ function ImageConvert() {
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
+              fileInputRef={fileInputRef}
             />
 
             {file && (

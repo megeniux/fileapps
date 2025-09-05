@@ -32,6 +32,7 @@ const ffmpegRef = { current: ffmpeg };
 
 
 function VideoTrim() {
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [duration, setDuration] = useState<number>(0)
@@ -63,6 +64,11 @@ function VideoTrim() {
   }
 
   const handleRemoveFile = () => {
+    // Clear the file input to allow re-uploading the same file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+    
     setFile(null);
     setPreviewUrl(null);
     setDuration(0);
@@ -255,6 +261,7 @@ function VideoTrim() {
               </Box>
             )}
             <input
+              ref={fileInputRef}
               accept="video/*"
               style={{
                 position: 'absolute',

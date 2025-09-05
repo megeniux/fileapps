@@ -4,6 +4,7 @@ import { thumbnailSizeOptions, getSafeDimensions } from './constants'
 import type { SelectChangeEvent } from '@mui/material/Select'
 
 export const useThumbnailState = () => {
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const [file, setFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [duration, setDuration] = useState<number>(0)
@@ -29,6 +30,11 @@ export const useThumbnailState = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   const resetState = useCallback(() => {
+    // Clear the file input to allow re-uploading the same file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+    
     cleanupPreviewUrl(previewUrl)
     setFile(null)
     setPreviewUrl(null)
@@ -129,6 +135,7 @@ export const useThumbnailState = () => {
     consoleLogs,
     isDragActive,
     videoRef,
+    fileInputRef,
     
     // Setters
     setFile,

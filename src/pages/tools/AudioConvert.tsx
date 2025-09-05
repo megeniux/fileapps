@@ -47,6 +47,7 @@ const outputFormats = [
 
 function AudioConvert() {
   const theme = useTheme();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [outputFormat, setOutputFormat] = useState('mp3');
@@ -83,6 +84,11 @@ function AudioConvert() {
   };
 
   const handleRemoveFile = () => {
+    // Clear the file input to allow re-uploading the same file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+    
     setFile(null);
     setPreviewUrl(null);
     setDownloadUrl(null);
@@ -297,6 +303,7 @@ function AudioConvert() {
               </Box>
             )}
             <input
+              ref={fileInputRef}
               accept="audio/*"
               style={{
                 position: 'absolute',

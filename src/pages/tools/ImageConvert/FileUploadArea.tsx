@@ -15,6 +15,7 @@ interface FileUploadAreaProps {
   onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
   onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
   onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
+  fileInputRef: React.RefObject<HTMLInputElement>;
 }
 
 export default function FileUploadArea({
@@ -23,7 +24,8 @@ export default function FileUploadArea({
   onFileChange,
   onDragOver,
   onDragLeave,
-  onDrop
+  onDrop,
+  fileInputRef
 }: FileUploadAreaProps) {
   const theme = useTheme();
 
@@ -60,6 +62,7 @@ export default function FileUploadArea({
       </Box>
       {/* Overlay file input */}
       <input
+        ref={fileInputRef}
         accept="image/*"
         style={{
           position: 'absolute',

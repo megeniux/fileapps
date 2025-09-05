@@ -34,6 +34,7 @@ const ffmpegRef = { current: ffmpeg };
 
 function AudioEffects() {
     const theme = useTheme();
+    const fileInputRef = useRef<HTMLInputElement>(null);
     const [file, setFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [duration, setDuration] = useState<number>(0);
@@ -117,6 +118,11 @@ function AudioEffects() {
     };
 
     const handleRemoveFile = () => {
+        // Clear the file input to allow re-uploading the same file
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+        }
+        
         setFile(null);
         setPreviewUrl(null);
         setDuration(0);
@@ -348,6 +354,7 @@ function AudioEffects() {
                             </Box>
                         )}
                         <input
+                            ref={fileInputRef}
                             accept="audio/*"
                             style={{
                                 position: 'absolute',

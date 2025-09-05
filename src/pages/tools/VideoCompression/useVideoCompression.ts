@@ -8,6 +8,7 @@ const ffmpeg = new FFmpeg();
 let isFFmpegLoaded = false;
 
 export function useVideoCompression() {
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(defaultState.file);
   const [crf, setCrf] = useState<number>(defaultState.crf);
   const [preset, setPreset] = useState<string>(defaultState.preset);
@@ -80,6 +81,11 @@ export function useVideoCompression() {
   }, []);
 
   const handleRemoveFile = useCallback(() => {
+    // Clear the file input to allow re-uploading the same file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+    
     setFile(null);
     setPreviewUrl(null);
     setDownloadUrl(null);
@@ -248,6 +254,7 @@ export function useVideoCompression() {
     previewUrl,
     isDragActive,
     totalDuration: totalDurationRef.current,
+    fileInputRef,
 
     // Event handlers
     handleFileChange,

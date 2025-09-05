@@ -31,6 +31,8 @@ const ffmpegRef = { current: ffmpeg }
 
 
 function BurnCaption() {
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const subtitleInputRef = useRef<HTMLInputElement>(null);
     const [file, setFile] = useState<File | null>(null)
     const [subtitleFile, setSubtitleFile] = useState<File | null>(null)
     const [previewUrl, setPreviewUrl] = useState<string | null>(null)
@@ -72,6 +74,11 @@ function BurnCaption() {
     }
 
     const handleRemoveFile = () => {
+        // Clear the file input to allow re-uploading the same file
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+        }
+        
         setFile(null)
         setPreviewUrl(null)
         setProgress(0)
@@ -83,6 +90,11 @@ function BurnCaption() {
     }
 
     const handleRemoveSubtitle = () => {
+        // Clear the subtitle file input to allow re-uploading the same file
+        if (subtitleInputRef.current) {
+            subtitleInputRef.current.value = '';
+        }
+        
         setSubtitleFile(null)
         setSubtitleName(null)
     }
@@ -319,6 +331,7 @@ function BurnCaption() {
                             </Box>
                         )}
                         <input
+                            ref={fileInputRef}
                             accept="video/*"
                             style={{
                                 position: 'absolute',
@@ -349,6 +362,7 @@ function BurnCaption() {
                     )}
                     <Box display={isProcessing ? "none" : "flex"} alignItems="center" justifyContent="center" my={2}>
                         <input
+                            ref={subtitleInputRef}
                             accept=".srt,.vtt"
                             style={{ display: 'none' }}
                             id="burn-caption-subtitle-input"

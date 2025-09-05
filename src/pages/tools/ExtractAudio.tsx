@@ -32,6 +32,7 @@ const ffmpegRef = { current: ffmpeg };
 
 
 function ExtractAudio() {
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [isProcessing, setIsProcessing] = useState(false)
@@ -75,6 +76,11 @@ function ExtractAudio() {
   }
 
   const handleRemoveFile = () => {
+    // Clear the file input to allow re-uploading the same file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+    
     setFile(null);
     setPreviewUrl(null);
     setProgress(0);
@@ -260,6 +266,7 @@ function ExtractAudio() {
               </Box>
             )}
             <input
+              ref={fileInputRef}
               accept="video/*"
               style={{
                 position: 'absolute',

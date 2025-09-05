@@ -21,6 +21,7 @@ interface FileUploadAreaProps {
   onDrop: (e: React.DragEvent) => void
   onLoadedMetadata: () => void
   videoRef: React.RefObject<HTMLVideoElement>
+  fileInputRef: React.RefObject<HTMLInputElement>
 }
 
 export default function FileUploadArea({
@@ -33,7 +34,8 @@ export default function FileUploadArea({
   onDragLeave,
   onDrop,
   onLoadedMetadata,
-  videoRef
+  videoRef,
+  fileInputRef
 }: FileUploadAreaProps) {
   const theme = useTheme();
 
@@ -86,6 +88,7 @@ export default function FileUploadArea({
           </Box>
         )}
         <input
+          ref={fileInputRef}
           accept="video/*"
           style={{
             position: 'absolute',

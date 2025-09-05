@@ -104,7 +104,7 @@ export default function BurnCaptionsBlog(){
 
         <Box mt={4} textAlign='center'>
           <Button variant='contained' color='primary' size='large' href='/tools/video/burn-captions'>Upload</Button>
-          <Button variant='outlined' color='primary' size='large' sx={{ ml:2 }} href='/tools/video/burn-subtitles-into-video'>Features</Button>
+          <Button variant='outlined' color='primary' size='large' sx={{ ml:2 }} href='/tools/video/burn-captions-into-video-online'>Features</Button>
         </Box>
       </Paper>
     </Container>

@@ -117,7 +117,7 @@ function AppRoutes() {
       <Route path="tools/video/how-to-video-playback-speed-editor" element={<BasicLayout><VideoPlaybackBlog /></BasicLayout>} />
 
       {/* Burn Caption */}
-      <Route path="tools/video/burn-caption" element={<BasicLayout><BurnCaption /></BasicLayout>} />
+      <Route path="tools/video/burn-captions" element={<BasicLayout><BurnCaption /></BasicLayout>} />
       <Route path="tools/video/burn-captions-into-video-online" element={<BasicLayout><BurnCaptionLanding /></BasicLayout>} />
       <Route path="tools/video/how-to-burn-captions-into-video-online" element={<BasicLayout><BurnCaptionsBlog /></BasicLayout>} />
 

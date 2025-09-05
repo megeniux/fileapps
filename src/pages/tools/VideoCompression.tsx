@@ -36,6 +36,7 @@ function VideoCompression() {
     previewUrl,
     isDragActive,
     totalDuration,
+    fileInputRef,
     handleFileChange,
     handleLoadedMetadata,
     handleDragOver,
@@ -89,6 +90,7 @@ function VideoCompression() {
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
             onLoadedMetadata={handleLoadedMetadata}
+            fileInputRef={fileInputRef}
           />
           
           {/* Controls */}

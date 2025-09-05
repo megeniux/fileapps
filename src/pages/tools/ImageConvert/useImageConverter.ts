@@ -16,6 +16,9 @@ import { applyDimensionsToPreview, applyCropToImage } from './utils';
 const ffmpegRef = { current: null as any };
 
 export function useImageConverter() {
+  // File input ref for clearing value
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  
   // Core state
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -194,6 +197,11 @@ export function useImageConverter() {
   }, [previewUrl]);
 
   const handleRemoveFile = useCallback(() => {
+    // Clear the file input to allow re-uploading the same file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+    
     // Revoke any working preview URL (and original)
     if (previewUrl) {
       try { URL.revokeObjectURL(previewUrl); } catch { }
@@ -667,6 +675,7 @@ export function useImageConverter() {
     baseOriginalDimensionsRef,
     applyTimerRef,
     applyCounterRef,
-    ffmpegRef
+    ffmpegRef,
+    fileInputRef
   };
 }

@@ -59,6 +59,7 @@ const ffmpegRef = { current: ffmpeg };
 
 
 function VideoResize() {
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [width, setWidth] = useState<string>(defaultState.width)
@@ -90,6 +91,11 @@ function VideoResize() {
 
   // Remove file
   const handleRemoveFile = () => {
+    // Clear the file input to allow re-uploading the same file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+    
     setFile(null)
     setPreviewUrl(null)
     setWidth('')
@@ -370,6 +376,7 @@ function VideoResize() {
               </Box>
             )}
             <input
+              ref={fileInputRef}
               accept="video/*"
               style={{
                 position: 'absolute',

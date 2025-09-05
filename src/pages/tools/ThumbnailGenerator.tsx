@@ -59,6 +59,7 @@ function ThumbnailGenerator() {
     consoleLogs,
     isDragActive,
     videoRef,
+    fileInputRef,
     setTime,
     setIsProcessing,
     setProgress,
@@ -258,6 +259,7 @@ function ThumbnailGenerator() {
               onDrop={dragHandlers.onDrop}
               onLoadedMetadata={handleLoadedMetadata}
               videoRef={videoRef}
+              fileInputRef={fileInputRef}
             />
 
             <ModeTabs
