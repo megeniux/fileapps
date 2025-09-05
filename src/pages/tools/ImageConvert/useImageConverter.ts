@@ -229,6 +229,11 @@ export function useImageConverter() {
   }, [previewUrl]);
 
   const handleReset = useCallback(() => {
+    // Clear the file input to allow re-uploading the same file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+    
     // Reset all state to defaults
     setFile(null);
     setPreviewUrl(null);

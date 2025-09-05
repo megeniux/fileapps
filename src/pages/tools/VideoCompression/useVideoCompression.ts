@@ -44,8 +44,10 @@ export function useVideoCompression() {
     }
   }, []);
 
-  const handleLoadedMetadata = useCallback(() => {
-    totalDurationRef.current = 0; // Will be set from FFmpeg logs
+  const handleLoadedMetadata = useCallback((duration?: number) => {
+    if (duration && duration > 0) {
+      totalDurationRef.current = duration;
+    }
     setCrf(28);
   }, []);
 
@@ -197,6 +199,11 @@ export function useVideoCompression() {
   }, []);
 
   const handleReset = useCallback(() => {
+    // Clear the file input to allow re-uploading the same file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+    
     // Reset all state to defaults
     setFile(defaultState.file);
     setCrf(defaultState.crf);
