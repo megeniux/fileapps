@@ -1,0 +1,124 @@
+import React from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import CloseIcon from '@mui/icons-material/Close';
+import type { AudioFile } from './types';
+
+interface FileUploadAreaProps {
+  audioFile: AudioFile | null;
+  isDragActive: boolean;
+  onDragOver: (event: React.DragEvent) => void;
+  onDragLeave: (event: React.DragEvent) => void;
+  onDrop: (event: React.DragEvent) => void;
+  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onRemoveFile: () => void;
+  onVideoMetadataLoad: (duration: number) => void;
+  inputRef: React.RefObject<HTMLInputElement>;
+  videoRef: React.RefObject<HTMLVideoElement>;
+}
+
+const FileUploadArea: React.FC<FileUploadAreaProps> = ({
+  audioFile,
+  isDragActive,
+  onDragOver,
+  onDragLeave,
+  onDrop,
+  onInputChange,
+  onRemoveFile,
+  onVideoMetadataLoad,
+  inputRef,
+  videoRef
+}) => {
+  const handleLoadedMetadata = () => {
+    if (videoRef.current) {
+      onVideoMetadataLoad(videoRef.current.duration);
+    }
+  };
+
+  return (
+    <>
+      {/* Main Upload/Preview Area */}
+      <Box
+        onDragOver={onDragOver}
+        onDragLeave={onDragLeave}
+        onDrop={onDrop}
+        position="relative"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="column"
+        width="100%"
+        height={300}
+        borderRadius={1}
+        bgcolor={isDragActive ? 'primary.lighter' : 'action.hover'}
+        border={isDragActive ? theme => `2px dashed ${theme.palette.primary.main}` : theme => `2px dashed ${theme.palette.divider}`}
+        sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
+      >
+        {!audioFile ? (
+          <Box textAlign="center">
+            <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
+            <Typography variant="subtitle2" gutterBottom>
+              Drag & drop a video file here<br/>or<br/>Click to select
+            </Typography>
+            <Typography color="text.secondary" variant="caption">
+              Supported: MP4, MOV, AVI, MKV, and more
+            </Typography>
+          </Box>
+        ) : (
+          <Box textAlign="center" width="100%">
+            <video
+              ref={videoRef}
+              src={audioFile.previewUrl}
+              controls
+              style={{
+                aspectRatio: '16 / 9',
+                maxWidth: '100%',
+                maxHeight: 220,
+                background: '#000',
+                objectFit: 'contain', 
+                position: 'relative', 
+                zIndex: 10 
+              }}
+              onLoadedMetadata={handleLoadedMetadata}
+            />
+          </Box>
+        )}
+        
+        <input
+          ref={inputRef}
+          accept="video/*"
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            left: 0,
+            top: 0,
+            opacity: 0,
+            cursor: 'pointer',
+            zIndex: 2
+          }}
+          id="audio-file-input"
+          type="file"
+          onChange={onInputChange}
+          tabIndex={-1}
+        />
+      </Box>
+
+      {/* Filename and remove button */}
+      {audioFile && (
+        <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
+          <Typography variant="body2" noWrap>
+            {audioFile.file.name}
+          </Typography>
+          <IconButton size="small" color="error" onClick={onRemoveFile}>
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </Box>
+      )}
+    </>
+  );
+};
+
+export default FileUploadArea;
