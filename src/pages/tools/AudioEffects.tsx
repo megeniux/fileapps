@@ -61,6 +61,9 @@ export default function AudioEffects() {
         handleDownload,
         handleReset,
         setDuration
+    ,
+    eqGains,
+    setEqGains
     } = useAudioEffects();
 
     const audioRef = React.useRef<HTMLAudioElement | null>(null);
@@ -155,6 +158,8 @@ export default function AudioEffects() {
                                 onNormalizeChange={setNormalize}
                                 isProcessing={isProcessing}
                                 duration={duration}
+                                eqGains={eqGains}
+                                setEqGains={setEqGains}
                             />
                         )}
                     </CardContent>

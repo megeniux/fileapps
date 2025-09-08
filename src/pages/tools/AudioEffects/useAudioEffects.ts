@@ -27,6 +27,9 @@ export function useAudioEffects() {
   const [fadeOut, setFadeOut] = useState<number>(0);
   const [normalize, setNormalize] = useState<boolean>(false);
   const [volume, setVolume] = useState<number>(1);
+  // Equalizer: 5-band (Hz)
+  const EQ_FREQUENCIES = [60, 250, 1000, 4000, 10000] as const;
+  const [eqGains, setEqGains] = useState<number[]>(EQ_FREQUENCIES.map(() => 0));
 
   const loadFFmpeg = useCallback(async () => {
     if (ffmpegRef.current && ffmpegLoadedRef.current) return ffmpegRef.current;
@@ -93,6 +96,15 @@ export function useAudioEffects() {
 
   const buildFilter = useCallback(() => {
     const filters: string[] = [];
+    // equalizer bands
+    // use FFmpeg 'equalizer' filter: equalizer=f=<freq>:width_type=o:width=<width>:g=<gain>
+    // width set to 1 (one octave) for gentle bands
+    eqGains.forEach((gain, idx) => {
+      if (Math.abs(gain) > 0.001) {
+        const freq = EQ_FREQUENCIES[idx];
+        filters.push(`equalizer=f=${freq}:width_type=o:width=1:g=${gain.toFixed(2)}`);
+      }
+    });
     // speed
     if (speed !== 1) {
       let s = speed;
@@ -112,6 +124,7 @@ export function useAudioEffects() {
     if (volume !== 1) filters.push(`volume=${volume}`);
     return filters.length ? filters.join(',') : '';
   }, [speed, pitch, fadeIn, fadeOut, normalize, volume, duration]);
+
 
   const handleProcess = useCallback(async () => {
     if (!file) { setErrorMsg('Please select an audio file.'); return; }
@@ -233,6 +246,8 @@ export function useAudioEffects() {
     setNormalize,
     volume,
     setVolume,
+  eqGains,
+  setEqGains,
     handleFileChange,
     handleRemoveFile,
     handleDragOver,
