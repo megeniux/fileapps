@@ -144,7 +144,7 @@ function BurnCaption() {
           
           {/* Action Buttons */}
           <CardActions sx={{ 
-            display: !!(state.videoFile && state.subtitleFile) ? 'flex' : 'none', 
+            display: state.videoFile && state.subtitleFile ? 'flex' : 'none', 
             flexWrap: 'wrap', 
             justifyContent: 'center', 
             pb: 0, 

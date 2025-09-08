@@ -116,7 +116,7 @@ function ExtractAudio() {
           
           {/* Action Buttons */}
           <CardActions sx={{ 
-            display: !!state.audioFile ? 'flex' : 'none', 
+            display: state.audioFile ? 'flex' : 'none', 
             flexWrap: 'wrap', 
             justifyContent: 'center', 
             pb: 0, 

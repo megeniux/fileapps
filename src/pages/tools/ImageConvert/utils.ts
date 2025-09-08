@@ -149,7 +149,7 @@ export const processImageWithFFmpeg = async (
   const args = ['-i', inputFileName];
 
   // Compose filters in correct order
-  let filters: string[] = [];
+  const filters: string[] = [];
   // Flip filters FIRST
   if (settings.flipH) filters.push('hflip');
   if (settings.flipV) filters.push('vflip');

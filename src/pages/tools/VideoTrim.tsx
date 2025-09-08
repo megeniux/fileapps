@@ -153,7 +153,7 @@ const VideoTrim: React.FC = () => {
           {/* Action Buttons */}
           <CardActions 
             sx={{ 
-              display: !!file ? 'flex' : 'none', 
+              display: file ? 'flex' : 'none', 
               flexWrap: 'wrap', 
               justifyContent: 'center', 
               pb: 0, 

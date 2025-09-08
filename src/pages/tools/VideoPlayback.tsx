@@ -124,7 +124,7 @@ function VideoPlayback() {
           
           {/* Action Buttons */}
           <CardActions sx={{ 
-            display: !!state.videoFile ? 'flex' : 'none', 
+            display: state.videoFile ? 'flex' : 'none', 
             flexWrap: 'wrap', 
             justifyContent: 'center', 
             pb: 0, 

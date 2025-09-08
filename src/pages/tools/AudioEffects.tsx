@@ -1,7 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile } from '@ffmpeg/util';
 import { formatBytes } from '../../helpers';
 
 // MUI imports
@@ -13,525 +11,175 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import LinearProgress from '@mui/material/LinearProgress';
-import Alert from '@mui/material/Alert';
-import Slider from '@mui/material/Slider';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Grid from '@mui/material/Grid';
+// Grid intentionally not used in this file
 
 // MUI Icons
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import CloseIcon from '@mui/icons-material/Close';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
 
-const ffmpeg = new FFmpeg();
-let isFFmpegLoaded = false;
-const ffmpegRef = { current: ffmpeg };
+import { useAudioEffects } from './AudioEffects/useAudioEffects';
+import EffectControls from './AudioEffects/EffectControls';
+import ProgressDisplay from './AudioEffects/ProgressDisplay';
 
-
-function AudioEffects() {
+export default function AudioEffects() {
     const theme = useTheme();
-    const fileInputRef = useRef<HTMLInputElement>(null);
-    const [file, setFile] = useState<File | null>(null);
-    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-    const [duration, setDuration] = useState<number>(0);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [progress, setProgress] = useState(0);
-    const [status, setStatus] = useState<string | null>(null);
-    const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
-    const [downloadSize, setDownloadSize] = useState<number | null>(null);
-    const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
-    const [isDragActive, setIsDragActive] = useState(false);
+    const {
+        file,
+        previewUrl,
+        duration,
+        isProcessing,
+        progress,
+        status,
+        errorMsg,
+        downloadUrl,
+        downloadSize,
+        consoleLogs,
+        isDragActive,
+        fileInputRef,
+        speed,
+        setSpeed,
+        pitch,
+        setPitch,
+        volume,
+        setVolume,
+        fadeIn,
+        setFadeIn,
+        fadeOut,
+        setFadeOut,
+        normalize,
+        setNormalize,
+        handleFileChange,
+        handleRemoveFile,
+        handleDragOver,
+        handleDragLeave,
+        handleDrop,
+        handleProcess,
+        handleStop,
+        handleDownload,
+        handleReset,
+        setDuration
+    } = useAudioEffects();
 
-    // Effect controls
-    const [speed, setSpeed] = useState<number>(1);
-    const [pitch, setPitch] = useState<number>(0); // semitones
-    const [fadeIn, setFadeIn] = useState<number>(0);
-    const [fadeOut, setFadeOut] = useState<number>(0);
-    const [normalize, setNormalize] = useState<boolean>(false);
-    const [volume, setVolume] = useState<number>(1);
-
-    const audioRef = useRef<HTMLAudioElement>(null);
-
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files?.[0]) {
-            const selectedFile = event.target.files[0];
-            if (!selectedFile.type.startsWith('audio/')) {
-                setErrorMsg('Please select an audio file.');
-                return;
-            }
-            setFile(selectedFile);
-            setPreviewUrl(URL.createObjectURL(selectedFile));
-            setDuration(0);
-            setProgress(0);
-            setStatus(null);
-            setErrorMsg(null);
-            setDownloadUrl(null);
-            setDownloadSize(null);
-            setConsoleLogs([]);
-            setSpeed(1);
-            setPitch(0);
-            setFadeIn(0);
-            setFadeOut(0);
-            setNormalize(false);
-            setVolume(1);
-        }
-    };
-
-    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        setIsDragActive(true);
-    };
-    const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        setIsDragActive(false);
-    };
-    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        setIsDragActive(false);
-        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-            const selectedFile = e.dataTransfer.files[0];
-            if (!selectedFile.type.startsWith('audio/')) {
-                setErrorMsg('Please select an audio file.');
-                return;
-            }
-            setFile(selectedFile);
-            setPreviewUrl(URL.createObjectURL(selectedFile));
-            setDuration(0);
-            setProgress(0);
-            setStatus(null);
-            setErrorMsg(null);
-            setDownloadUrl(null);
-            setDownloadSize(null);
-            setConsoleLogs([]);
-            setSpeed(1);
-            setPitch(0);
-            setFadeIn(0);
-            setFadeOut(0);
-            setNormalize(false);
-            setVolume(1);
-        }
-    };
-
-    const handleRemoveFile = () => {
-        // Clear the file input to allow re-uploading the same file
-        if (fileInputRef.current) {
-            fileInputRef.current.value = '';
-        }
-        
-        setFile(null);
-        setPreviewUrl(null);
-        setDuration(0);
-        setProgress(0);
-        setStatus(null);
-        setErrorMsg(null);
-        setDownloadUrl(null);
-        setDownloadSize(null);
-        setConsoleLogs([]);
-        setSpeed(1);
-        setPitch(0);
-        setFadeIn(0);
-        setFadeOut(0);
-        setNormalize(false);
-        setVolume(1);
-    };
-
-    const handleReset = () => {
-        window.location.reload();
-    };
-
-    const handleLoadedMetadata = () => {
-        if (audioRef.current) {
-            setDuration(audioRef.current.duration);
-        }
-    };
-
-    // Effect controls handlers
-    const handleSpeedChange = (_: Event, value: number | number[]) => {
-        if (typeof value === 'number') setSpeed(value);
-    };
-    const handlePitchChange = (_: Event, value: number | number[]) => {
-        if (typeof value === 'number') setPitch(value);
-    };
-    const handleFadeInChange = (_: Event, value: number | number[]) => {
-        if (typeof value === 'number') setFadeIn(value);
-    };
-    const handleFadeOutChange = (_: Event, value: number | number[]) => {
-        if (typeof value === 'number') setFadeOut(value);
-    };
-    const handleNormalizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setNormalize(e.target.checked);
-    };
-    const handleVolumeChange = (_: Event, value: number | number[]) => {
-        if (typeof value === 'number') setVolume(value);
-    };
-
-    // Build FFmpeg filter string
-    const buildFilter = () => {
-        let filters: string[] = [];
-        // Speed
-        if (speed !== 1) {
-            let s = speed;
-            // FFmpeg atempo supports 0.5-2.0, chain if needed
-            while (s > 2.0) {
-                filters.push('atempo=2.0');
-                s /= 2.0;
-            }
-            while (s < 0.5) {
-                filters.push('atempo=0.5');
-                s /= 0.5;
-            }
-            filters.push(`atempo=${s.toFixed(3)}`);
-        }
-        // Pitch (rubberband, asetrate, or asetrate+aresample)
-        if (pitch !== 0) {
-            // Use asetrate for pitch shift (approximate, changes speed too)
-            // To keep duration, combine with atempo
-            // semitones to ratio: 2^(n/12)
-            const ratio = Math.pow(2, pitch / 12);
-            filters.push(`asetrate=44100*${ratio.toFixed(5)}`);
-            filters.push('aresample=44100');
-            filters.push(`atempo=${(1 / ratio).toFixed(5)}`);
-        }
-        // Fade in
-        if (fadeIn > 0) {
-            filters.push(`afade=t=in:st=0:d=${fadeIn}`);
-        }
-        // Fade out
-        if (fadeOut > 0 && duration > 0) {
-            filters.push(`afade=t=out:st=${Math.max(0, duration - fadeOut)}:d=${fadeOut}`);
-        }
-        // Normalize
-        if (normalize) {
-            filters.push('dynaudnorm');
-        }
-        // Volume
-        if (volume !== 1) {
-            filters.push(`volume=${volume}`);
-        }
-        return filters.length ? filters.join(',') : '';
-    };
-
-    const handleProcess = async () => {
-        if (!file) {
-            setErrorMsg('Please select an audio file.');
-            return;
-        }
-        setIsProcessing(true);
-        setProgress(0);
-        setStatus('Preparing');
-        setErrorMsg(null);
-        setDownloadUrl(null);
-        setDownloadSize(null);
-        setConsoleLogs([]);
-        try {
-            if (!isFFmpegLoaded) {
-                await ffmpeg.load();
-                isFFmpegLoaded = true;
-            }
-            ffmpegRef.current = ffmpeg;
-            const inputFileName = file.name;
-            const outputFileName = `effect_${inputFileName}`;
-            await ffmpeg.writeFile(inputFileName, await fetchFile(file));
-            const logHandler = ({ message }: { message: string }) => {
-                setConsoleLogs(logs => [...logs, message]);
-                if (message.includes('size=')) {
-                    setProgress(prev => Math.min(prev + 5, 99));
-                }
-            };
-            ffmpeg.on('log', logHandler);
-            setStatus('Processing');
-            let args = ['-i', inputFileName];
-            const filterStr = buildFilter();
-            if (filterStr) {
-                args.push('-af', filterStr);
-            }
-            args.push(outputFileName);
-            await ffmpeg.exec(args);
-            setStatus('Finalizing');
-            setProgress(99.9);
-            const data = await ffmpeg.readFile(outputFileName);
-            const mimeType = file.type || 'audio/mpeg';
-            const blob = new Blob([new Uint8Array(data as any)], { type: mimeType });
-            const url = URL.createObjectURL(blob);
-            setDownloadUrl(url);
-            setDownloadSize(data.length);
-            await ffmpeg.deleteFile(inputFileName);
-            await ffmpeg.deleteFile(outputFileName);
-            setProgress(100);
-            setStatus('Completed');
-            ffmpeg.off('log', logHandler);
-        } catch (err: any) {
-            setStatus('Failed');
-            setConsoleLogs(logs => [...logs, String(err)]);
-            if (err.message !== 'called FFmpeg.terminate()') {
-                setErrorMsg(err instanceof Error ? err.message : String(err));
-            }
-        } finally {
-            setIsProcessing(false);
-            setTimeout(() => {
-                setProgress(0);
-                setStatus(null);
-            }, 2000);
-        }
-    };
-
-    const handleDownload = () => {
-        if (downloadUrl && file) {
-            const a = document.createElement('a');
-            a.href = downloadUrl;
-            a.download = `effect_${file.name}`;
-            a.click();
-            setTimeout(() => URL.revokeObjectURL(downloadUrl), 5000);
-        }
-    };
-
-    const handleStop = () => {
-        ffmpegRef.current?.terminate?.();
-        setIsProcessing(false);
-        setStatus('Stopped');
-        setProgress(0);
-        setErrorMsg(null);
-    };
+    const audioRef = React.useRef<HTMLAudioElement | null>(null);
 
     return (
         <>
             <Helmet>
                 <title>Audio Effects - Apply Fades, Normalization, Pitch & Speed Effects Free</title>
                 <meta name="description" content="Free online audio effects tool to apply fades, normalization, pitch adjustment, speed changes, and volume control to audio files. Professional audio effects in your browser." />
-                <meta name="keywords" content="audio effects, audio fade, normalize audio, pitch adjustment, audio speed, volume control, audio processing, free audio editor" />
-                <meta property="og:title" content="Audio Effects - Apply Fades, Normalization, Pitch & Speed Effects Free" />
-                <meta property="og:description" content="Free online audio effects tool to apply fades, normalization, pitch adjustment, speed changes, and volume control to audio files. Professional audio effects in your browser." />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://fileapps.click/tools/audio-effects" />
                 <link rel="canonical" href="https://fileapps.click/tools/audio-effects" />
             </Helmet>
+
             <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
-            <Card sx={{ p: 1.5 }}>
-                <CardContent sx={{ p: 0 }}>
-                    <Box display="flex" alignItems="center">
-                        <GraphicEqIcon color="info" fontSize="small" sx={{ mr: 0.5 }} />
-                        <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>Audio Effects</Typography>
-                    </Box>
-                    <Divider sx={{ my: 0.5 }} />
-                    <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-                        Apply fades, normalization, pitch adjustment, speed changes & volume control to audio files. Professional effects in your browser.
-                    </Typography>
-                    {/* Upload & Preview area */}
-                    <Box
-                        onDragOver={handleDragOver}
-                        onDragLeave={handleDragLeave}
-                        onDrop={handleDrop}
-                        position="relative"
-                        display="flex"
-                        justifyContent="center"
-                        alignItems="center"
-                        flexDirection="column"
-                        width="100%"
-                        height={220}
-                        borderRadius={1}
-                        bgcolor={isDragActive ? 'primary.lighter' : 'action.hover'}
-                        border={isDragActive ? `2px dashed ${theme.palette.info.main}` : `2px dashed ${theme.palette.divider}`}
-                        sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
-                    >
-                        {!file ? (
-                            <Box textAlign="center">
-                                <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
-                                <Typography variant="subtitle2" gutterBottom>
-                                    Drag & drop an audio file here<br />or<br />Click to select
+                <Card sx={{ p: 1.5 }}>
+                    <CardContent sx={{ p: 0 }}>
+                        <Box display="flex" alignItems="center">
+                            <GraphicEqIcon color="info" fontSize="small" sx={{ mr: 0.5 }} />
+                            <Typography variant="body1" component="h1" fontWeight={600} mb={0.5}>Audio Effects</Typography>
+                        </Box>
+                        <Divider sx={{ my: 0.5 }} />
+                        <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
+                            Apply fades, normalization, pitch adjustment, speed changes & volume control to audio files. Professional effects in your browser.
+                        </Typography>
+
+                        <Box
+                            onDragOver={handleDragOver}
+                            onDragLeave={handleDragLeave}
+                            onDrop={handleDrop}
+                            position="relative"
+                            display="flex"
+                            justifyContent="center"
+                            alignItems="center"
+                            flexDirection="column"
+                            width="100%"
+                            height={220}
+                            borderRadius={1}
+                            bgcolor={isDragActive ? 'primary.lighter' : 'action.hover'}
+                            border={isDragActive ? `2px dashed ${theme.palette.info.main}` : `2px dashed ${theme.palette.divider}`}
+                            sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
+                        >
+                            {!file ? (
+                                <Box textAlign="center">
+                                    <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
+                                    <Typography variant="subtitle2" gutterBottom>
+                                        Drag & drop an audio file here<br />or<br />Click to select
+                                    </Typography>
+                                    <Typography color="text.secondary" variant="caption">
+                                        Supported: MP3, WAV, AAC, FLAC, OGG, and more
+                                    </Typography>
+                                </Box>
+                            ) : (
+                                <Box textAlign="center" width="100%">
+                                    <audio ref={audioRef} src={previewUrl || undefined} controls style={{ width: '100%', maxWidth: 500, position: 'relative', zIndex: 1000 }} onLoadedMetadata={(e) => setDuration((e.target as HTMLAudioElement).duration)} />
+                                </Box>
+                            )}
+
+                            <input
+                                ref={fileInputRef as any}
+                                accept="audio/*"
+                                style={{ position: 'absolute', width: '100%', height: '100%', left: 0, top: 0, opacity: 0, cursor: 'pointer', zIndex: 2 }}
+                                id="audio-effects-file-input"
+                                type="file"
+                                onChange={(e) => handleFileChange(e.target.files?.[0] ?? null)}
+                                tabIndex={-1}
+                            />
+                        </Box>
+
+                        {file && (
+                            <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
+                                <Typography variant="body2" noWrap>
+                                    {file.name} ({formatBytes(file.size)})
                                 </Typography>
-                                <Typography color="text.secondary" variant="caption">
-                                    Supported: MP3, WAV, AAC, FLAC, OGG, and more
-                                </Typography>
-                            </Box>
-                        ) : (
-                            <Box textAlign="center" width="100%">
-                                <audio ref={audioRef} src={previewUrl || undefined} controls style={{ width: '100%', maxWidth: 500, position: 'relative', zIndex: 1000 }} onLoadedMetadata={handleLoadedMetadata} />
+                                <IconButton onClick={handleRemoveFile} color="error" sx={{ ml: 1 }}>
+                                    <CloseIcon fontSize="small" />
+                                </IconButton>
                             </Box>
                         )}
-                        <input
-                            ref={fileInputRef}
-                            accept="audio/*"
-                            style={{
-                                position: 'absolute',
-                                width: '100%',
-                                height: '100%',
-                                left: 0,
-                                top: 0,
-                                opacity: 0,
-                                cursor: 'pointer',
-                                zIndex: 2
-                            }}
-                            id="audio-effects-file-input"
-                            type="file"
-                            onChange={handleFileChange}
-                            tabIndex={-1}
-                        />
-                    </Box>
-                    {/* Filename and remove button */}
-                    {file && (
-                        <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
-                            <Typography variant="body2" noWrap>
-                                {file.name} ({formatBytes(file.size)})
-                            </Typography>
-                            <IconButton onClick={handleRemoveFile} color="error" sx={{ ml: 1 }}>
-                                <CloseIcon fontSize="small" />
-                            </IconButton>
-                        </Box>
-                    )}
-                    {/* Effect controls */}
-                    {file && (
-                        <Grid container spacing={2} sx={{ mb: 3 }}>
-                            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
-                                <Typography variant="subtitle2" gutterBottom>
-                                    Speed
-                                    <small> ({speed}x)</small>
-                                </Typography>
-                                <Box display="flex" alignItems="center">
-                                    <IconButton onClick={() => setSpeed(prev => Math.max(-3, Number((prev - 0.01).toFixed(2))))} disabled={isProcessing}><RemoveIcon /></IconButton>
-                                    <Slider
-                                        value={speed}
-                                        min={-3}
-                                        max={3}
-                                        step={0.01}
-                                        onChange={handleSpeedChange}
-                                        valueLabelDisplay="auto"
-                                        disabled={isProcessing}
-                                        
-                                        sx={{ mx: 1, flex: 1 }}
-                                    />
-                                    <IconButton onClick={() => setSpeed(prev => Math.min(3, Number((prev + 0.01).toFixed(2))))} disabled={isProcessing}><AddIcon /></IconButton>
-                                </Box>
-                            </Grid>
-                            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
-                                <Typography variant="subtitle2" gutterBottom>
-                                    Pitch
-                                    <small> ({pitch} semitones)</small>
-                                </Typography>
-                                <Box display="flex" alignItems="center">
-                                    <IconButton onClick={() => setPitch(prev => Math.max(-12, prev - 1))} disabled={isProcessing}><RemoveIcon /></IconButton>
-                                    <Slider
-                                        value={pitch}
-                                        min={-12}
-                                        max={12}
-                                        step={1}
-                                        onChange={handlePitchChange}
-                                        valueLabelDisplay="auto"
-                                        disabled={isProcessing}
-                                        
-                                        sx={{ mx: 1, flex: 1 }}
-                                    />
-                                    <IconButton onClick={() => setPitch(prev => Math.min(12, prev + 1))} disabled={isProcessing}><AddIcon /></IconButton>
-                                </Box>
-                            </Grid>
-                            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
-                                <Typography variant="subtitle2" gutterBottom>Volume</Typography>
-                                <Box display="flex" alignItems="center">
-                                    <IconButton onClick={() => setVolume(prev => Math.max(0, Number((prev - 0.01).toFixed(2))))} disabled={isProcessing}><RemoveIcon /></IconButton>
-                                    <Slider
-                                        value={volume}
-                                        min={0}
-                                        max={3}
-                                        step={0.01}
-                                        onChange={handleVolumeChange}
-                                        valueLabelDisplay="auto"
-                                        disabled={isProcessing}
-                                        
-                                        sx={{ mx: 1, flex: 1 }}
-                                    />
-                                    <IconButton onClick={() => setVolume(prev => Math.min(3, Number((prev + 0.01).toFixed(2))))} disabled={isProcessing}><AddIcon /></IconButton>
-                                </Box>
-                            </Grid>
-                            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
-                                <Typography variant="subtitle2" gutterBottom>
-                                    Fade In
-                                    <small> ({fadeIn} seconds)</small>
-                                </Typography>
-                                <Box display="flex" alignItems="center">
-                                    <IconButton onClick={() => setFadeIn(prev => Math.max(0, Number((prev - 0.5).toFixed(1))))} disabled={isProcessing}><RemoveIcon /></IconButton>
-                                    <Slider
-                                        value={fadeIn}
-                                        min={0}
-                                        max={Math.floor(duration)}
-                                        step={0.1}
-                                        onChange={handleFadeInChange}
-                                        valueLabelDisplay="auto"
-                                        disabled={isProcessing}
-                                        
-                                        sx={{ mx: 1, flex: 1 }}
-                                    />
-                                    <IconButton onClick={() => setFadeIn(prev => Math.min(Math.floor(duration), Number((prev + 0.5).toFixed(1))))} disabled={isProcessing}><AddIcon /></IconButton>
-                                </Box>
-                            </Grid>
-                            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
-                                <Typography variant="subtitle2" gutterBottom >
-                                    Fade Out
-                                    <small> ({fadeOut} seconds)</small>
-                                </Typography>
-                                <Box display="flex" alignItems="center">
-                                    <IconButton onClick={() => setFadeOut(prev => Math.max(0, Number((prev - 0.5).toFixed(1))))} disabled={isProcessing}><RemoveIcon /></IconButton>
-                                    <Slider
-                                        value={fadeOut}
-                                        min={0}
-                                        max={Math.floor(duration)}
-                                        step={0.1}
-                                        onChange={handleFadeOutChange}
-                                        valueLabelDisplay="auto"
-                                        disabled={isProcessing}
-                                        
-                                        sx={{ mx: 1, flex: 1 }}
-                                    />
-                                    <IconButton onClick={() => setFadeOut(prev => Math.min(Math.floor(duration), Number((prev + 0.5).toFixed(1))))} disabled={isProcessing}><AddIcon /></IconButton>
-                                </Box>
-                            </Grid>
-                            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
-                                <Typography variant="subtitle2" gutterBottom>Normalize</Typography>
-                                <Box display="flex" alignItems="center" gap={1}>
-                                    <input type="checkbox" checked={normalize} onChange={handleNormalizeChange} disabled={isProcessing} />
-                                    <Typography variant="caption" color="text.secondary">Auto volume normalization</Typography>
-                                </Box>
-                            </Grid>
-                        </Grid>
-                    )}
-                </CardContent>
-                <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-                    <Button variant="contained" onClick={handleProcess} disabled={isProcessing || !file}>
-                        {isProcessing ? 'Processing' : 'Apply Effects'}
-                    </Button>
-                    {!isProcessing && (
-                        <Button variant="outlined" onClick={handleReset}>
-                            Reset
-                        </Button>
-                    )}
-                    {isProcessing && (
-                        <Button color="error" variant='contained' onClick={handleStop} disabled={!isProcessing}>
-                            Stop
-                        </Button>
-                    )}
-                    {downloadUrl && downloadSize !== null && (
-                        <Button color="success" variant='contained' onClick={handleDownload}>
-                            Download ({formatBytes(downloadSize)})
-                        </Button>
-                    )}
-                </CardActions>
-                {isProcessing && (
-                    <Box textAlign="center" bgcolor="action.hover" p={2} mt={2} borderRadius={0.25} overflow="hidden">
-                        <LinearProgress color='success' variant="determinate" value={progress} />
-                        <Typography variant="body2" my={1}>{`${status} ${progress.toFixed(1)}%`}</Typography>
-                        <Typography variant="caption" color="text.secondary" noWrap>
-                            {consoleLogs.length > 0 ? consoleLogs[consoleLogs.length - 1] : ""}
-                        </Typography>
-                    </Box>
-                )}
-            </Card>
-            {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
-        </Container>
-        </>
-    );
-}
 
-export default AudioEffects;
+                        {file && (
+                            <EffectControls
+                                speed={speed}
+                                onSpeedChange={setSpeed}
+                                pitch={pitch}
+                                onPitchChange={setPitch}
+                                volume={volume}
+                                onVolumeChange={setVolume}
+                                fadeIn={fadeIn}
+                                onFadeInChange={setFadeIn}
+                                fadeOut={fadeOut}
+                                onFadeOutChange={setFadeOut}
+                                normalize={normalize}
+                                onNormalizeChange={setNormalize}
+                                isProcessing={isProcessing}
+                                duration={duration}
+                            />
+                        )}
+                    </CardContent>
+
+                    <CardActions sx={{ display: file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
+                        <Button variant="contained" onClick={handleProcess} disabled={isProcessing || !file}>
+                            {isProcessing ? 'Processing' : 'Apply Effects'}
+                        </Button>
+                        {!isProcessing && (
+                            <Button variant="outlined" onClick={handleReset}>Reset</Button>
+                        )}
+                        {isProcessing && (
+                            <Button color="error" variant='contained' onClick={handleStop} disabled={!isProcessing}>Stop</Button>
+                        )}
+                        {downloadUrl && downloadSize !== null && (
+                            <Button color="success" variant='contained' onClick={handleDownload}>Download ({formatBytes(downloadSize)})</Button>
+                        )}
+                    </CardActions>
+
+                    <ProgressDisplay isProcessing={isProcessing} progress={progress} status={status} consoleLogs={consoleLogs} />
+
+                </Card>
+
+                {errorMsg && <Box sx={{ my: 2 }}><Typography color="error">{errorMsg}</Typography></Box>}
+            </Container>
+                </>
+            );
+        }

@@ -83,12 +83,12 @@ export function useImageConverter() {
     const rect = (e.target as HTMLDivElement).getBoundingClientRect();
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
     const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
-    let x2 = Math.max(0, Math.round((clientX - rect.left) * (originalDimensions.width / displaySize.width)));
-    let y2 = Math.max(0, Math.round((clientY - rect.top) * (originalDimensions.height / displaySize.height)));
-    let x = Math.min(cropStart.x, x2);
-    let y = Math.min(cropStart.y, y2);
-    let w = Math.abs(x2 - cropStart.x);
-    let h = Math.abs(y2 - cropStart.y);
+    const x2 = Math.max(0, Math.round((clientX - rect.left) * (originalDimensions.width / displaySize.width)));
+    const y2 = Math.max(0, Math.round((clientY - rect.top) * (originalDimensions.height / displaySize.height)));
+    const x = Math.min(cropStart.x, x2);
+    const y = Math.min(cropStart.y, y2);
+    const w = Math.abs(x2 - cropStart.x);
+    const h = Math.abs(y2 - cropStart.y);
     setDrawingCrop({ x, y, w, h });
   }, [isSelectingCrop, cropStart, originalDimensions, displaySize]);
 
@@ -487,7 +487,7 @@ export function useImageConverter() {
       const args = ['-i', inputFileName];
 
       // Compose filters in correct order
-      let filters: string[] = [];
+      const filters: string[] = [];
       // Flip filters FIRST
       if (flipH) filters.push('hflip');
       if (flipV) filters.push('vflip');

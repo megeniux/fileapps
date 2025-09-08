@@ -99,7 +99,7 @@ export function useVideoProcessor({
       ffmpeg.on('log', logHandler);
 
       // Build ffmpeg args
-      let args = ['-i', inputFileName];
+      const args = ['-i', inputFileName];
 
       // Video options
       if (outputFormat !== 'gif' && videoCodec) {

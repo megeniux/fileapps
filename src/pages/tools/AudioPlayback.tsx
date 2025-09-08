@@ -163,13 +163,13 @@ function AudioPlayback() {
       setStatus('Processing');
       // FFmpeg atempo filter supports 0.5-2.0, so for other speeds, chain filters
       // Handle reverse audio and speed change
-      let args = ['-i', inputFileName];
+      const args = ['-i', inputFileName];
       const effectiveSpeed = speed; // Always positive now
 
       if (isReversed) {
         if (effectiveSpeed !== 1) {
           // Reverse and change speed
-          let filters = [];
+          const filters = [];
           let s = effectiveSpeed;
           while (s > 2.0) {
             filters.push('atempo=2.0');
@@ -188,7 +188,7 @@ function AudioPlayback() {
       } else if (effectiveSpeed !== 1) {
         // Just change speed, no reverse
         let s = effectiveSpeed;
-        let filters = [];
+        const filters = [];
         while (s > 2.0) {
           filters.push('atempo=2.0');
           s /= 2.0;
@@ -381,7 +381,7 @@ function AudioPlayback() {
               </Box>
             )}
           </CardContent>
-          <CardActions sx={{ display: !!file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
+          <CardActions sx={{ display: file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
             <Button variant="contained" onClick={handleProcess} disabled={isProcessing || !file} size="small">
               {isProcessing ? 'Processing' : 'Process'}
             </Button>
