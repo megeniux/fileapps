@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { formatBytes } from '../../helpers';
+import { formatBytes } from '../../../helpers';
 import { Helmet } from 'react-helmet-async';
 
 // MUI Components
@@ -16,10 +16,10 @@ import Alert from '@mui/material/Alert';
 // MUI Icons
 import CompressIcon from '@mui/icons-material/Compress';
 
-import { useVideoCompression } from './VideoCompression/useVideoCompression';
-import FileUploadArea from './VideoCompression/FileUploadArea';
-import CompressionSettings from './VideoCompression/CompressionSettings';
-import ProgressDisplay from './VideoCompression/ProgressDisplay';
+import { useVideoCompression } from './useVideoCompression';
+import FileUploadArea from './FileUploadArea';
+import CompressionSettings from './CompressionSettings';
+import ProgressDisplay from './ProgressDisplay';
 
 function VideoCompression() {
   const {

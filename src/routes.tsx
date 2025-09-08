@@ -13,11 +13,11 @@ const PrivacyPolicy = lazy(() => import('./pages/Policy'));
 const TOS = lazy(() => import('./pages/Terms'));
 
 // Audio Tools
-const AudioConvert = lazy(() => import('./pages/tools/AudioConvert'));
-const AudioEffects = lazy(() => import('./pages/tools/AudioEffects'));
-const AudioMerge = lazy(() => import('./pages/tools/AudioMerge'));
-const AudioPlayback = lazy(() => import('./pages/tools/AudioPlayback'));
-const AudioTrim = lazy(() => import('./pages/tools/AudioTrim'));
+const AudioConvert = lazy(() => import('./pages/tools/AudioConvert/AudioConvert'));
+const AudioEffects = lazy(() => import('./pages/tools/AudioEffects/AudioEffects'));
+const AudioMerge = lazy(() => import('./pages/tools/AudioMerge/AudioMerge'));
+const AudioPlayback = lazy(() => import('./pages/tools/AudioPlayback/AudioPlayback'));
+const AudioTrim = lazy(() => import('./pages/tools/AudioTrim/AudioTrim'));
 
 // Audio Blogs
 const AudioConvertBlog = lazy(() => import('./pages/blogs/AudioConvertBlog'));
@@ -34,8 +34,8 @@ const AudioPlaybackLanding = lazy(() => import('./pages/landings/AudioPlaybackLa
 const AudioTrimLanding = lazy(() => import('./pages/landings/AudioTrimLanding'));
 
 // Image Tools
-const ImageEditor = lazy(() => import('./pages/tools/ImageConvert'));
-const ThumbnailGenerator = lazy(() => import('./pages/tools/ThumbnailGenerator'));
+const ImageEditor = lazy(() => import('./pages/tools/ImageConvert/ImageConvert'));
+const ThumbnailGenerator = lazy(() => import('./pages/tools/ThumbnailGenerator/ThumbnailGenerator'));
 
 // Image Blogs
 const ImageConverterBlog = lazy(() => import('./pages/blogs/ImageConverterBlog'));
@@ -46,14 +46,14 @@ const ImageConverterLanding = lazy(() => import('./pages/landings/ImageConverter
 const ThumbnailGeneratorLanding = lazy(() => import('./pages/landings/ThumbnailGeneratorLanding'));
 
 // Video Tools
-const BurnCaption = lazy(() => import('./pages/tools/BurnCaption'));
-const ExtractAudio = lazy(() => import('./pages/tools/ExtractAudio'));
-const VideoCompression = lazy(() => import('./pages/tools/VideoCompression'));
-const VideoConvert = lazy(() => import('./pages/tools/VideoConvert'));
-const VideoMerge = lazy(() => import('./pages/tools/VideoMerge'));
-const VideoPlayback = lazy(() => import('./pages/tools/VideoPlayback'));
-const VideoResize = lazy(() => import('./pages/tools/VideoResize'));
-const VideoTrim = lazy(() => import('./pages/tools/VideoTrim'));
+const BurnCaption = lazy(() => import('./pages/tools/BurnCaption/BurnCaption'));
+const ExtractAudio = lazy(() => import('./pages/tools/ExtractAudio/ExtractAudio'));
+const VideoCompression = lazy(() => import('./pages/tools/VideoCompression/VideoCompression'));
+const VideoConvert = lazy(() => import('./pages/tools/VideoConvert/VideoConvert'));
+const VideoMerge = lazy(() => import('./pages/tools/VideoMerge/VideoMerge'));
+const VideoPlayback = lazy(() => import('./pages/tools/VideoPlayback/VideoPlayback'));
+const VideoResize = lazy(() => import('./pages/tools/VideoResize/VideoResize'));
+const VideoTrim = lazy(() => import('./pages/tools/VideoTrim/VideoTrim'));
 
 // Video Blogs
 const BurnCaptionsBlog = lazy(() => import('./pages/blogs/BurnCaptionsBlog'));

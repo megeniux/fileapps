@@ -2,21 +2,21 @@ import React, { useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 
 // Custom hooks
-import { useFFmpeg } from './ThumbnailGenerator/utils'
-import { useThumbnailState } from './ThumbnailGenerator/useThumbnailState'
+import { useFFmpeg } from './utils'
+import { useThumbnailState } from './useThumbnailState'
 
 // Components
-import FileUploadArea from './ThumbnailGenerator/FileUploadArea'
-import ModeTabs from './ThumbnailGenerator/ModeTabs'
-import ModeControls from './ThumbnailGenerator/ModeControls'
-import ThumbnailDisplay from './ThumbnailGenerator/ThumbnailDisplay'
-import ProgressDisplay from './ThumbnailGenerator/ProgressDisplay'
+import FileUploadArea from './FileUploadArea'
+import ModeTabs from './ModeTabs'
+import ModeControls from './ModeControls'
+import ThumbnailDisplay from './ThumbnailDisplay'
+import ProgressDisplay from './ProgressDisplay'
 
 // Processing logic
-import { ThumbnailProcessor } from './ThumbnailGenerator/ThumbnailProcessor'
+import { ThumbnailProcessor } from './ThumbnailProcessor'
 
 // Utilities
-import { handleDragEvents } from './ThumbnailGenerator/fileHandling'
+import { handleDragEvents } from './fileHandling'
 
 // MUI Imports
 import Container from '@mui/material/Container'

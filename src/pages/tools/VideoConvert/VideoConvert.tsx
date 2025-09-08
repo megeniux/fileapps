@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { formatBytes } from '../../helpers';
+import { formatBytes } from '../../../helpers';
 
 // MUI
 import Alert from '@mui/material/Alert';
@@ -16,14 +16,14 @@ import Typography from '@mui/material/Typography';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 
 // Global Components
-import PerformanceInfoDialog from '../../components/PerformanceInfoDialog';
+import PerformanceInfoDialog from '../../../components/PerformanceInfoDialog';
 
 // Components and utilities from VideoConvert folder
-import FileUploadArea from './VideoConvert/FileUploadArea';
-import ConversionSettings from './VideoConvert/ConversionSettings';
-import ProgressDisplay from './VideoConvert/ProgressDisplay';
-import InfoPopovers from './VideoConvert/InfoPopovers';
-import { useVideoConverter } from './VideoConvert/useVideoConverter';
+import FileUploadArea from './FileUploadArea';
+import ConversionSettings from './ConversionSettings';
+import ProgressDisplay from './ProgressDisplay';
+import InfoPopovers from './InfoPopovers';
+import { useVideoConverter } from './useVideoConverter';
 
 function VideoConvert() {
   const {

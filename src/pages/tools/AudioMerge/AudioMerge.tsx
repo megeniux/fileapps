@@ -12,8 +12,8 @@ import Alert from '@mui/material/Alert';
 
 import MergeTypeIcon from '@mui/icons-material/MergeType';
 
-import { FileUploadArea, AudioList, ProgressDisplay, useAudioMerger, MIN_AUDIO_COUNT } from './AudioMerge/index';
-import { formatBytes } from '../../helpers';
+import { FileUploadArea, AudioList, ProgressDisplay, useAudioMerger, MIN_AUDIO_COUNT } from './index';
+import { formatBytes } from '../../../helpers';
 
 const AudioMerge: React.FC = () => {
   const {

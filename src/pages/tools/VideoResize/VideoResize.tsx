@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { formatBytes } from '../../helpers';
+import { formatBytes } from '../../../helpers';
 
 // MUI
 import Alert from '@mui/material/Alert';
@@ -16,10 +16,10 @@ import Typography from '@mui/material/Typography';
 import AspectRatioIcon from '@mui/icons-material/AspectRatio';
 
 // Components and utilities from VideoResize folder
-import FileUploadArea from './VideoResize/FileUploadArea';
-import ResizeSettings from './VideoResize/ResizeSettings';
-import ProgressDisplay from './VideoResize/ProgressDisplay';
-import { useVideoResizer } from './VideoResize/useVideoResizer';
+import FileUploadArea from './FileUploadArea';
+import ResizeSettings from './ResizeSettings';
+import ProgressDisplay from './ProgressDisplay';
+import { useVideoResizer } from './useVideoResizer';
 
 function VideoResize() {
   const {

@@ -16,12 +16,12 @@ import Divider from '@mui/material/Divider';
 import SubtitlesIcon from '@mui/icons-material/Subtitles';
 
 // Local imports
-import { useCaptionBurner } from './BurnCaption/useCaptionBurner';
-import FileUploadArea from './BurnCaption/FileUploadArea';
-import SubtitleUpload from './BurnCaption/SubtitleUpload';
-import StyleControls from './BurnCaption/StyleControls';
-import ProgressDisplay from './BurnCaption/ProgressDisplay';
-import { formatFileSize } from './BurnCaption/utils';
+import { useCaptionBurner } from './useCaptionBurner';
+import FileUploadArea from './FileUploadArea';
+import SubtitleUpload from './SubtitleUpload';
+import StyleControls from './StyleControls';
+import ProgressDisplay from './ProgressDisplay';
+import { formatFileSize } from './utils';
 
 function BurnCaption() {
   const fileInputRef = useRef<HTMLInputElement>(null);

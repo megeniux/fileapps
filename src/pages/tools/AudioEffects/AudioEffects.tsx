@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { formatBytes } from '../../helpers';
+import { formatBytes } from '../../../helpers';
 
 // MUI imports
 import { useTheme } from '@mui/material/styles';
@@ -20,9 +20,9 @@ import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import CloseIcon from '@mui/icons-material/Close';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
-import { useAudioEffects } from './AudioEffects/useAudioEffects';
-import EffectControls from './AudioEffects/EffectControls';
-import ProgressDisplay from './AudioEffects/ProgressDisplay';
+import { useAudioEffects } from './useAudioEffects';
+import EffectControls from './EffectControls';
+import ProgressDisplay from './ProgressDisplay';
 
 export default function AudioEffects() {
     const theme = useTheme();

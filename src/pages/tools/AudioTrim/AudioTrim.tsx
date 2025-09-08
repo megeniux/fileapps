@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { formatBytes } from '../../helpers';
+import { formatBytes } from '../../../helpers';
 
 // MUI imports
 import Container from '@mui/material/Container';
@@ -19,10 +19,10 @@ import ContentCutIcon from '@mui/icons-material/ContentCut';
 import CloseIcon from '@mui/icons-material/Close';
 
 // Local hook & components
-import { useAudioTrimmer } from './AudioTrim/useAudioTrimmer';
-import FileUploadArea from './AudioTrim/FileUploadArea';
-import ProgressDisplay from './AudioTrim/ProgressDisplay';
-import TrimSettings from './AudioTrim/TrimSettings';
+import { useAudioTrimmer } from './useAudioTrimmer';
+import FileUploadArea from './FileUploadArea';
+import ProgressDisplay from './ProgressDisplay';
+import TrimSettings from './TrimSettings';
 
 function AudioTrim() {
   const {

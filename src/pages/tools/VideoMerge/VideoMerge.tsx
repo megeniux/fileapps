@@ -1,15 +1,15 @@
 /**
- * Video Trimmer Component - Modular Refactored Version
+ * Video Merger Component - Modular Refactored Version
  * 
- * A comprehensive video trimming tool with frame-accurate precision.
+ * A comprehensive video merging tool for combining multiple videos.
  * Features:
- * - Drag & drop file upload
- * - Range selection with visual slider
+ * - Drag & drop multiple file upload
+ * - Video reordering and management
  * - Real-time progress tracking
  * - Local processing (no server uploads)
  * - Multiple video format support
  * 
- * Following established patterns from VideoResize and VideoConvert
+ * Following established patterns from VideoResize and VideoTrim
  */
 
 import React from 'react';
@@ -27,28 +27,26 @@ import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 
 // MUI Icons
-import ContentCutIcon from '@mui/icons-material/ContentCut';
+import MergeTypeIcon from '@mui/icons-material/MergeType';
 
 // Local imports
 import { 
-  useVideoTrimmer,
+  useVideoMerger,
   FileUploadArea,
-  TrimSettings,
-  ProgressDisplay,
-  formatFileSize
-} from './VideoTrim/index';
+  VideoList,
+  ProgressDisplay
+} from './index';
+import { formatFileSize } from './utils';
+import { MIN_VIDEO_COUNT } from './constants';
 
 /**
- * Main Video Trimmer Component
+ * Main Video Merger Component
  */
-const VideoTrim: React.FC = () => {
+const VideoMerge: React.FC = () => {
   const {
     // State
-    file,
-    previewUrl,
+    files,
     isDragActive,
-    duration,
-    range,
     isProcessing,
     progress,
     status,
@@ -58,42 +56,39 @@ const VideoTrim: React.FC = () => {
     errorMsg,
     
     // Refs
-    videoRef,
+    fileInputRef,
     
     // Actions
-    handleFileSelect,
+    handleFilesAdd,
     handleFileRemove,
-    handleReset,
+    handleMoveUp,
+    handleMoveDown,
     handleDragEnter,
     handleDragLeave,
     handleDragOver,
     handleDrop,
-    handleLoadedMetadata,
-    handleRangeChange,
-    handleTrim,
+    handleMerge,
     handleStop,
     handleDownload,
-    decreaseStartTime,
-    increaseEndTime
-  } = useVideoTrimmer();
+    handleAddClick,
+    createReplaceHandler
+  } = useVideoMerger();
   
-  // Check if trim is possible
-  const canTrim = file && !isProcessing && range[1] > range[0];
+  // Check if merge is possible
+  const canMerge = files.length >= MIN_VIDEO_COUNT && !isProcessing;
   
   return (
     <>
       {/* SEO Meta Tags */}
       <Helmet>
-        <title>Video Trimmer Online Free – Cut and Trim Videos Precisely</title>
-        <meta name="description" content="Trim and cut videos with frame-accurate precision. Remove unwanted parts locally — no watermark, private & fast." />
-        <meta name="keywords" content="trim video online free, cut video online, video trimmer tool, clip video online, remove parts from video, video editor online, trim mp4 online" />
-        <meta property="og:title" content="Free Online Video Trimmer – Fast, Private & No Watermark" />
-        <meta property="og:description" content="Trim and cut videos with precision in your browser. No uploads required." />
-        <meta property="og:image" content="/images/landing/video-trim-hero.jpg" />
+        <title>Video Merger Tool - Combine Multiple Videos Online for Free</title>
+        <meta name="description" content="Free online video merger tool to combine multiple video clips into one file. Merge videos in browser with no uploads, preserving quality. No watermarks, completely private." />
+        <meta name="keywords" content="video merger, combine videos, merge video clips, video joiner, video concatenation, video editor, free video tools, online video merger" />
+        <meta property="og:title" content="Video Merger Tool - Combine Multiple Videos Online for Free" />
+        <meta property="og:description" content="Free online video merger tool to combine multiple video clips into one file. Merge videos in browser with no uploads, preserving quality. No watermarks, completely private." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://fileapps.click/tools/video/trim" />
-        <meta property="og:site_name" content="FileApps" />
-        <link rel="canonical" href="https://fileapps.click/tools/video/trim" />
+        <meta property="og:url" content="https://fileapps.click/tools/video-merge" />
+        <link rel="canonical" href="https://fileapps.click/tools/video-merge" />
       </Helmet>
       
       {/* Main Content */}
@@ -102,9 +97,9 @@ const VideoTrim: React.FC = () => {
           <CardContent sx={{ p: 0 }}>
             {/* Header */}
             <Box display="flex" alignItems="center">
-              <ContentCutIcon color="info" fontSize="small" sx={{ mr: 0.5 }} />
-              <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
-                Video Trimmer
+              <MergeTypeIcon color="success" fontSize="small" sx={{ mr: 0.5 }} />
+              <Typography variant="body1" component="h1" fontWeight={600} mb={0.5}>
+                Video Merger
               </Typography>
             </Box>
             
@@ -112,48 +107,51 @@ const VideoTrim: React.FC = () => {
             
             {/* Description */}
             <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-              Trim and cut videos with frame-accurate precision. Remove unwanted parts locally — no watermark, no signup, 100% browser-based.
+              Merge multiple video clips into one file while preserving quality. Combine videos locally in your browser — private & watermark-free.
             </Typography>
             
             {/* File Upload Area */}
             <FileUploadArea
-              file={file}
-              previewUrl={previewUrl}
+              files={files}
               isDragActive={isDragActive}
-              onFileSelect={handleFileSelect}
-              onFileRemove={handleFileRemove}
-              onLoadedMetadata={handleLoadedMetadata}
+              isProcessing={isProcessing}
+              onFilesAdd={handleFilesAdd}
+              onAddClick={handleAddClick}
               onDragEnter={handleDragEnter}
               onDragLeave={handleDragLeave}
               onDragOver={handleDragOver}
               onDrop={handleDrop}
             />
             
-            {/* Hidden video ref for metadata */}
-            {previewUrl && (
-              <video
-                ref={videoRef}
-                src={previewUrl}
-                style={{ display: 'none' }}
-                onLoadedMetadata={handleLoadedMetadata}
-              />
-            )}
+            {/* Hidden file input for reference */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="video/*"
+              multiple
+              style={{ display: 'none' }}
+              onChange={(e) => {
+                if (e.target.files) {
+                  handleFilesAdd(Array.from(e.target.files));
+                }
+              }}
+            />
             
-            {/* Trim Settings */}
-            <TrimSettings
-              duration={duration}
-              range={range}
+            {/* Video List */}
+            <VideoList
+              files={files}
               isProcessing={isProcessing}
-              onRangeChange={handleRangeChange}
-              onDecreaseStartTime={decreaseStartTime}
-              onIncreaseEndTime={increaseEndTime}
+              onRemove={handleFileRemove}
+              onMoveUp={handleMoveUp}
+              onMoveDown={handleMoveDown}
+              onReplace={(index) => createReplaceHandler(index)()}
             />
           </CardContent>
           
           {/* Action Buttons */}
           <CardActions 
             sx={{ 
-              display: file ? 'flex' : 'none', 
+              display: files.length ? 'flex' : 'none', 
               flexWrap: 'wrap', 
               justifyContent: 'center', 
               pb: 0, 
@@ -161,22 +159,15 @@ const VideoTrim: React.FC = () => {
               gap: 1 
             }}
           >
-            {/* Trim Button */}
+            {/* Merge Button */}
             <Button 
               variant="contained" 
-              onClick={handleTrim} 
-              disabled={!canTrim}
-              startIcon={<ContentCutIcon />}
+              onClick={handleMerge} 
+              disabled={!canMerge}
+              startIcon={<MergeTypeIcon />}
             >
-              {isProcessing ? 'Trimming...' : 'Trim Video'}
+              {isProcessing ? 'Merging...' : 'Merge'}
             </Button>
-            
-            {/* Reset Button - only when not processing */}
-            {!isProcessing && (
-              <Button variant="outlined" onClick={handleReset}>
-                Reset
-              </Button>
-            )}
             
             {/* Stop Button - only when processing */}
             {isProcessing && (
@@ -217,4 +208,4 @@ const VideoTrim: React.FC = () => {
   );
 };
 
-export default VideoTrim;
+export default VideoMerge;

@@ -15,12 +15,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 
 // Local
-import { formatBytes } from '../../helpers';
-import { useAudioConverter } from './AudioConvert/useAudioConverter';
-import FileUploadArea from './AudioConvert/FileUploadArea';
-import FormatSelector from './AudioConvert/FormatSelector';
-import QualitySelector from './AudioConvert/QualitySelector';
-import ProgressDisplay from './AudioConvert/ProgressDisplay';
+import { formatBytes } from '../../../helpers';
+import { useAudioConverter } from './useAudioConverter';
+import FileUploadArea from './FileUploadArea';
+import FormatSelector from './FormatSelector';
+import QualitySelector from './QualitySelector';
+import ProgressDisplay from './ProgressDisplay';
 import Button from '@mui/material/Button';
 
 function AudioConvert() {

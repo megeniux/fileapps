@@ -15,12 +15,12 @@ import Alert from '@mui/material/Alert';
 // Icons
 import SpeedIcon from '@mui/icons-material/Speed';
 
-import { useAudioPlayback } from './AudioPlayback/useAudioPlayback';
-import FileUploadArea from './AudioPlayback/FileUploadArea';
-import SpeedControls from './AudioPlayback/SpeedControls';
-import ProgressDisplay from './AudioPlayback/ProgressDisplay';
-import PerformanceInfoDialog from '../../components/PerformanceInfoDialog';
-import { formatBytes } from '../../helpers';
+import { useAudioPlayback } from './useAudioPlayback';
+import FileUploadArea from './FileUploadArea';
+import SpeedControls from './SpeedControls';
+import ProgressDisplay from './ProgressDisplay';
+import PerformanceInfoDialog from '../../../components/PerformanceInfoDialog';
+import { formatBytes } from '../../../helpers';
 
 function AudioPlayback() {
   const {

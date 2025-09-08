@@ -16,11 +16,11 @@ import Divider from '@mui/material/Divider';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
 // Local imports
-import { useAudioExtractor } from './ExtractAudio/useAudioExtractor';
-import FileUploadArea from './ExtractAudio/FileUploadArea';
-import DurationSelector from './ExtractAudio/DurationSelector';
-import ProgressDisplay from './ExtractAudio/ProgressDisplay';
-import { formatFileSize } from './ExtractAudio/utils';
+import { useAudioExtractor } from './useAudioExtractor';
+import FileUploadArea from './FileUploadArea';
+import DurationSelector from './DurationSelector';
+import ProgressDisplay from './ProgressDisplay';
+import { formatFileSize } from './utils';
 
 function ExtractAudio() {
   const fileInputRef = useRef<HTMLInputElement>(null);

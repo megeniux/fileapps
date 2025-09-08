@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { formatBytes } from '../../helpers';
+import { formatBytes } from '../../../helpers';
 
 // MUI
 import Alert from '@mui/material/Alert';
@@ -18,12 +18,12 @@ import AspectRatioIcon from '@mui/icons-material/AspectRatio';
 import CloseIcon from '@mui/icons-material/Close';
 
 // Components
-import FileUploadArea from './ImageConvert/FileUploadArea';
-import SettingsPanel from './ImageConvert/SettingsPanel';
-import ProgressDisplay from './ImageConvert/ProgressDisplay';
+import FileUploadArea from './FileUploadArea';
+import SettingsPanel from './SettingsPanel';
+import ProgressDisplay from './ProgressDisplay';
 
 // Hook
-import { useImageConverter } from './ImageConvert/useImageConverter';
+import { useImageConverter } from './useImageConverter';
 
 function ImageConvert() {
   const {

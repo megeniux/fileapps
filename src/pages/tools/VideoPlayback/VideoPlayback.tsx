@@ -16,11 +16,11 @@ import Divider from '@mui/material/Divider';
 import SpeedIcon from '@mui/icons-material/Speed';
 
 // Local imports
-import { useVideoPlayback } from './VideoPlayback/useVideoPlayback';
-import FileUploadArea from './VideoPlayback/FileUploadArea';
-import SpeedControls from './VideoPlayback/SpeedControls';
-import ProgressDisplay from './VideoPlayback/ProgressDisplay';
-import { formatFileSize } from './VideoPlayback/utils';
+import { useVideoPlayback } from './useVideoPlayback';
+import FileUploadArea from './FileUploadArea';
+import SpeedControls from './SpeedControls';
+import ProgressDisplay from './ProgressDisplay';
+import { formatFileSize } from './utils';
 
 
 function VideoPlayback() {
