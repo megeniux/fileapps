@@ -78,7 +78,6 @@ function AudioTrim() {
         <link rel="canonical" href="https://fileapps.click/tools/audio-trim" />
       </Helmet>
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
-        {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
         <Card sx={{ p: 1.5 }} elevation={3}>
           <CardContent sx={{ p: 0 }}>
             <Box display="flex" alignItems="center">
@@ -153,6 +152,7 @@ function AudioTrim() {
           </CardActions>
           <ProgressDisplay isProcessing={isProcessing} progress={progress} status={status} consoleLogs={consoleLogs} />
         </Card>
+        {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
       </Container>
     </>
   );

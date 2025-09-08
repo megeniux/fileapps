@@ -101,7 +101,6 @@ function VideoConvert() {
       </Helmet>
 
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
-        {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
 
         <Card sx={{ p: 1.5 }}>
           <CardContent sx={{ p: 0 }}>
@@ -186,9 +185,11 @@ function VideoConvert() {
               consoleLogs={consoleLogs}
             />
           )}
-        </Card>
+  </Card>
 
-        <InfoPopovers
+  {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
+
+  <InfoPopovers
           crfAnchor={crfAnchor}
           presetAnchor={presetAnchor}
           onCrfInfoClose={handleCrfInfoClose}

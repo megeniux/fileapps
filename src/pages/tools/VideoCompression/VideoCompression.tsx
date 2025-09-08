@@ -67,9 +67,8 @@ function VideoCompression() {
         <meta property="og:site_name" content="FileApps" />
         <link rel="canonical" href="https://fileapps.click/tools/video/compress" />
       </Helmet>
-      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
-      {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
-      <Card sx={{ p: 1.5 }}>
+  <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+  <Card sx={{ p: 1.5 }}>
         <CardContent sx={{ p: 0 }}>
           <Box display="flex" alignItems="center">
             <CompressIcon color="secondary" fontSize='small' sx={{ mr: 0.5 }} />
@@ -134,8 +133,9 @@ function VideoCompression() {
           status={status}
           consoleLogs={consoleLogs}
         />
-      </Card>
-    </Container>
+    </Card>
+    {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
+  </Container>
     </>
   );
 }

@@ -51,7 +51,7 @@ const AudioMerge: React.FC = () => {
       </Helmet>
 
       <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
-        <Card sx={{ p: 1.5 }}>
+  <Card sx={{ p: 1.5 }}>
           <CardContent sx={{ p: 0 }}>
             <Box display="flex" alignItems="center">
               <MergeTypeIcon color="warning" fontSize="small" sx={{ mr: 0.5 }} />
