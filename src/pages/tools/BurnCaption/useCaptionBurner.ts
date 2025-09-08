@@ -156,7 +156,14 @@ export const useCaptionBurner = () => {
       }, UI_CONFIG.STATUS_RESET_DELAY);
 
     } catch (error: any) {
-      stateManager.failProcessing(error.message || 'Caption burning failed');
+      // If FFmpeg was terminated (user stopped the operation), treat it as a normal stop
+      const msg = error?.message || '';
+      if (msg === 'Operation was stopped' || msg === 'called FFmpeg.terminate()') {
+        stateManager.stopProcessing();
+        return;
+      }
+
+      stateManager.failProcessing(msg || 'Caption burning failed');
     }
   }, [stateManager, processor]);
 

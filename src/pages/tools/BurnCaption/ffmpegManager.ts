@@ -21,8 +21,22 @@ class FFmpegManager {
 
   public async ensureLoaded(): Promise<void> {
     if (!this.isLoaded) {
-      await this.ffmpeg.load();
-      this.isLoaded = true;
+      try {
+        await this.ffmpeg.load();
+        this.isLoaded = true;
+      } catch (error) {
+        // If loading failed (possibly due to a terminated/invalid instance),
+        // recreate ffmpeg and retry once.
+        console.warn('FFmpeg.load() failed, recreating instance and retrying:', error);
+        try {
+          this.ffmpeg = new FFmpeg();
+          await this.ffmpeg.load();
+          this.isLoaded = true;
+        } catch (retryError) {
+          console.warn('Retry FFmpeg.load() failed:', retryError);
+          throw retryError;
+        }
+      }
     }
   }
 
@@ -48,12 +62,30 @@ class FFmpegManager {
 
   public async terminate(): Promise<void> {
     try {
-      if (this.currentOperation) {
+      // Attempt to terminate any running operation. FFmpeg.terminate() may throw
+      // when there is no running operation or when already terminated; handle
+      // that gracefully.
+      try {
         await this.ffmpeg.terminate();
-        this.currentOperation = null;
+      } catch (err) {
+        // Log but don't rethrow - termination is best-effort
+        console.warn('FFmpeg.terminate() call resulted in error (ignored):', err);
       }
+      this.currentOperation = null;
     } catch (error) {
       console.warn('Error terminating FFmpeg:', error);
+    } finally {
+      // Ensure the manager moves back to an uninitialized state so a subsequent
+      // call to ensureLoaded() will load a fresh FFmpeg instance. This fixes
+      // the issue where a terminated FFmpeg instance could not be reused.
+      try {
+        this.ffmpeg = new FFmpeg();
+      } catch (recreateError) {
+        console.warn('Failed to recreate FFmpeg instance after terminate():', recreateError);
+      }
+      this.isLoaded = false;
+      this.fontLoaded = false;
+      this.currentOperation = null;
     }
   }
 

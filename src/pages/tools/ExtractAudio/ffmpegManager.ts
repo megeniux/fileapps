@@ -19,8 +19,20 @@ class FFmpegManager {
 
   public async ensureLoaded(): Promise<void> {
     if (!this.isLoaded) {
-      await this.ffmpeg.load();
-      this.isLoaded = true;
+      try {
+        await this.ffmpeg.load();
+        this.isLoaded = true;
+      } catch (error) {
+        console.warn('FFmpeg.load() failed, recreating instance and retrying:', error);
+        try {
+          this.ffmpeg = new FFmpeg();
+          await this.ffmpeg.load();
+          this.isLoaded = true;
+        } catch (retryError) {
+          console.warn('Retry FFmpeg.load() failed:', retryError);
+          throw retryError;
+        }
+      }
     }
   }
 
@@ -30,12 +42,22 @@ class FFmpegManager {
 
   public async terminate(): Promise<void> {
     try {
-      if (this.currentOperation) {
+      try {
         await this.ffmpeg.terminate();
-        this.currentOperation = null;
+      } catch (err) {
+        console.warn('FFmpeg.terminate() call resulted in error (ignored):', err);
       }
+      this.currentOperation = null;
     } catch (error) {
       console.warn('Error terminating FFmpeg:', error);
+    } finally {
+      try {
+        this.ffmpeg = new FFmpeg();
+      } catch (recreateError) {
+        console.warn('Failed to recreate FFmpeg instance after terminate():', recreateError);
+      }
+      this.isLoaded = false;
+      this.currentOperation = null;
     }
   }
 

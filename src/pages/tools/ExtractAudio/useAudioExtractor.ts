@@ -132,7 +132,13 @@ export const useAudioExtractor = () => {
       }, UI_CONFIG.STATUS_RESET_DELAY);
 
     } catch (error: any) {
-      stateManager.failProcessing(error.message || 'Audio extraction failed');
+      const msg = error?.message || '';
+      if (msg === 'Operation was stopped' || msg === 'called FFmpeg.terminate()') {
+        stateManager.stopProcessing();
+        return;
+      }
+
+      stateManager.failProcessing(msg || 'Audio extraction failed');
     }
   }, [stateManager, processor]);
 
