@@ -35,16 +35,7 @@ export const ProgressDisplay: React.FC<ProgressDisplayProps> = ({
       overflow="hidden"
     >
       {/* Progress bar */}
-      <LinearProgress 
-        color="success" 
-        variant="determinate" 
-        value={progress} 
-        sx={{ 
-          height: 8,
-          borderRadius: 4,
-          mb: 1
-        }}
-      />
+      <LinearProgress color="success" variant="determinate" value={progress} />
       
       {/* Status and progress percentage */}
       <Typography variant="body2" my={1} fontWeight="medium">
