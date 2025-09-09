@@ -17,7 +17,6 @@ const Root = styled(Box)(({ theme }) => ({
   '& > .main-container': {
     display: 'flex',
     flexDirection: 'column',
-    backgroundImage: 'linear-gradient(90deg, rgb(23 173 196 / 15%), rgb(200 4 171 / 15%), rgb(250 158 48 / 15%))',
     height: '100dvh',
     paddingTop: theme.spacing(3),
     overflowY: 'auto',

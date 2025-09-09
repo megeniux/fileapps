@@ -44,7 +44,7 @@ const FileUploadArea: React.FC<FileUploadAreaProps> = ({
       >
         {!videoFile ? (
           <Box textAlign="center">
-            <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
+            <CloudUploadIcon sx={{ fontSize: '2.5rem', mb: 1 }} />
             <Typography variant="subtitle2" gutterBottom>
               Drag & drop a video file here<br />or<br />Click to select
             </Typography>

@@ -60,7 +60,7 @@ export const FileUploadArea: React.FC<FileUploadAreaProps> = ({
     >
       {files.length === 0 ? (
         <Box textAlign="center">
-          <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
+          <CloudUploadIcon sx={{ fontSize: '2.5rem', mb: 1 }} />
           <Typography variant="subtitle2" gutterBottom>
             Drag & drop video files here<br />or<br />Click to add
           </Typography>

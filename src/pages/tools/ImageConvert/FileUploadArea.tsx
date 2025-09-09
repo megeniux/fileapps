@@ -52,7 +52,7 @@ export default function FileUploadArea({
       sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
     >
       <Box textAlign="center">
-        <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
+        <CloudUploadIcon sx={{ fontSize: '2.5rem', mb: 1 }} />
         <Typography variant="subtitle2" gutterBottom>
           Drag & drop an image here<br />or<br />Click to select
         </Typography>

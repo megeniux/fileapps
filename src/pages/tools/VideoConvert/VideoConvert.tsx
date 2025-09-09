@@ -3,17 +3,20 @@ import { formatBytes } from '../../../helpers';
 
 // MUI
 import Alert from '@mui/material/Alert';
-import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
 
 // MUI Icons
-import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 // Global Components
 import PerformanceInfoDialog from '../../../components/PerformanceInfoDialog';
@@ -50,11 +53,11 @@ function VideoConvert() {
     crfAnchor,
     presetAnchor,
     isDragActive,
-    
+
     // Refs
     videoRef,
     fileInputRef,
-    
+
     // Event handlers
     handleFileChange,
     handleRemoveFile,
@@ -79,7 +82,7 @@ function VideoConvert() {
     handleCrfChange,
     handlePresetChange,
     handleAudioBitrateChange,
-    
+
     // Processing
     processVideo,
     stopProcessing,
@@ -88,33 +91,30 @@ function VideoConvert() {
   return (
     <>
       <Helmet>
-        <title>Video Converter Online Free – Convert MP4, MOV, MKV, AVI</title>
-        <meta name="description" content="Free online video converter: convert MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free." />
-        <meta name="keywords" content="convert video online free, convert video to mp4, free online video converter, video format converter, change video resolution online, convert mov to mp4 free, convert mkv to mp4 online, video codec converter online" />
-        <meta property="og:title" content="Free Online Video Converter – Fast, Private & No Watermark" />
-        <meta property="og:description" content="Convert video formats (MP4, MOV, MKV, AVI, WebM) in your browser. Customize resolution, codec, bitrate & FPS." />
+        <title>Convert Videos Online For Free | No Signup, No Limit</title>
+        <meta name="description" content="Convert Videos Online For Free convert to MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free." />
+        <meta property="og:title" content="Convert Videos Online For Free | No Signup, No Limit" />
+        <meta property="og:description" content="Convert Videos Online For Free convert to MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free." />
         <meta property="og:image" content="/images/landing/video-convert-hero.jpg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="/tools/video/convert" />
         <meta property="og:site_name" content="FileApps" />
         <link rel="canonical" href="/tools/video/convert" />
+        <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
-      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
-
-        <Card sx={{ p: 1.5 }}>
+      <Container maxWidth="lg" sx={{ py: 10 }}>
+        <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
+          <Grid size={{ xs: 12, md: 7 }} textAlign={{ xs: 'center', md: 'left' }}>
+            <Typography variant="h2" component="h1" fontWeight="600"> Convert Videos Online For Free </Typography>
+            <Typography variant="h5" component="h2" color="text.secondary" my={2}> Convert Videos Online For Free convert to MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free. </Typography>
+          </Grid>
+          <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
+            <img src="/images/landing/video-convert-hero.jpg" alt="Video Convert Icon" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+          </Grid>
+        </Grid>
+        <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
-            <Box display="flex" alignItems="center">
-              <SwapHorizIcon color="primary" fontSize="small" sx={{ mr: 0.5 }} />
-              <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
-                Video Converter
-              </Typography>
-            </Box>
-            <Divider sx={{ my: 0.5 }} />
-            <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-              Convert your videos to different formats with custom settings. All processing happens locally in your browser.
-            </Typography>
-
             <FileUploadArea
               file={file}
               previewUrl={previewUrl}
@@ -128,7 +128,6 @@ function VideoConvert() {
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
             />
-
             {file && (
               <ConversionSettings
                 outputFormat={outputFormat}
@@ -156,7 +155,6 @@ function VideoConvert() {
               />
             )}
           </CardContent>
-
           <CardActions sx={{ display: file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
             <Button variant="contained" onClick={processVideo} disabled={isProcessing || !file}>
               {isProcessing ? 'Converting' : 'Convert'}
@@ -178,18 +176,28 @@ function VideoConvert() {
             )}
           </CardActions>
 
-          {isProcessing && (
-            <ProgressDisplay
-              progress={progress}
-              status={status}
-              consoleLogs={consoleLogs}
-            />
-          )}
-  </Card>
-
-  {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
-
-  <InfoPopovers
+          {isProcessing && (<ProgressDisplay progress={progress} status={status} consoleLogs={consoleLogs} />)}
+          {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
+        </Card>
+        <Grid container spacing={3} mt={5} justifyContent='center' flexGrow={1}>
+          <Grid size={12}>
+            <Typography variant='h2' mb={4} align='center'>FAQs</Typography>
+            <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
+          </Grid>
+          <Grid size={{ xs: 12 }}>
+            {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
+              <Accordion key={idx} square disableGutters elevation={3}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`faq-vc-${idx}-content`} id={`faq-vc-${idx}-header`}>
+                  <Typography variant='h6' component='h3'>{faq.name}</Typography>
+                </AccordionSummary>
+                <AccordionDetails sx={{ p: 2 }}>
+                  <Typography variant='body1'>{faq.acceptedAnswer.text}</Typography>
+                </AccordionDetails>
+              </Accordion>
+            ))}
+          </Grid>
+        </Grid>
+        <InfoPopovers
           crfAnchor={crfAnchor}
           presetAnchor={presetAnchor}
           onCrfInfoClose={handleCrfInfoClose}
@@ -203,6 +211,18 @@ function VideoConvert() {
       </Container>
     </>
   );
+}
+
+const FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "How does this online video converter work?", "acceptedAnswer": { "@type": "Answer", "text": "It uses FFmpeg WASM inside your browser – no uploads, no server processing." } },
+    { "@type": "Question", "name": "Which video formats can I convert?", "acceptedAnswer": { "@type": "Answer", "text": "MP4, MOV, MKV, AVI, WebM, FLV, and more." } },
+    { "@type": "Question", "name": "Can I change video resolution and FPS?", "acceptedAnswer": { "@type": "Answer", "text": "Yes – set custom resolution and FPS during conversion." } },
+    { "@type": "Question", "name": "Is this tool free and private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes – completely free, no signup, no watermark, and 100% browser-based for privacy." } },
+    { "@type": "Question", "name": "Does it work on mobile devices?", "acceptedAnswer": { "@type": "Answer", "text": "Yes – works on Android and iOS with modern browsers." } }
+  ]
 }
 
 export default VideoConvert;

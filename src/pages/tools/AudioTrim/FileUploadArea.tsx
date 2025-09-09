@@ -38,7 +38,7 @@ export default function FileUploadArea({ file, previewUrl, isDragActive, onDragO
     >
       {!file ? (
         <Box textAlign="center">
-          <CloudUploadIcon sx={{ fontSize: '1.5rem', mb: 1 }} />
+          <CloudUploadIcon sx={{ fontSize: '2.5rem', mb: 1 }} />
           <Typography variant="subtitle2" gutterBottom>
             Drag & drop an audio file here<br />or<br />Click to select
           </Typography>
