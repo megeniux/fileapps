@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
+import Grid from '@mui/material/Grid';
 
 // MUI Icons
 import CloseIcon from '@mui/icons-material/Close';
@@ -70,7 +71,7 @@ function AudioTrim() {
           content="Trim and cut audio files with precision timing for podcasts, music, or voiceovers. Local processing — private & watermark-free."
         />
         <meta property="og:title" content={`Cut and Trim Audio Files Online For Free | ${APP_INFO.name}`} />
-        <meta property="og:image" content="/images/landing/audio-trim-hero.jpg" />
+  <meta property="og:image" content="/images/branding/logo-small.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fileapps.click/tools/audio-trim" />
         <meta property="og:site_name" content={APP_INFO.name} />
@@ -79,6 +80,16 @@ function AudioTrim() {
       <Container maxWidth="lg" sx={{ py: 10 }}>
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
+            <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
+              <Grid size={{ xs: 12, md: 7 }} textAlign={{ xs: 'center', md: 'left' }}>
+                <Typography variant="h2" component="h1" fontWeight="600"> Cut and Trim Audio Files Online </Typography>
+                <Typography variant="h5" component="h2" color="text.secondary" my={2}> Trim and cut audio files with precision timing for podcasts, music, or voiceovers. Local processing — private & watermark-free. </Typography>
+              </Grid>
+              <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
+                <img src="/images/landing/audio-trim-hero.jpg" alt="Audio Trim" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+              </Grid>
+            </Grid>
+
             {/* Upload & Preview area (preserve exact UX) */}
             <FileUploadArea
               file={file}

@@ -9,6 +9,8 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 
 // Components and hooks from AudioMerge folder
@@ -54,7 +56,7 @@ const AudioMerge: React.FC = () => {
           content="Join multiple audio tracks into one file instantly. Combine MP3, WAV, AAC files with ease."
         />
         <meta property="og:title" content={`Merge Audio Files Online For Free | ${APP_INFO.name}`} />
-        <meta property="og:image" content="/images/landing/audio-merge-hero.jpg" />
+    <meta property="og:image" content="/images/branding/logo-small.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`https://fileapps.click/tools/audio/merge`} />
         <meta property="og:site_name" content={APP_INFO.name} />
@@ -64,6 +66,16 @@ const AudioMerge: React.FC = () => {
       <Container maxWidth="lg" sx={{ py: 10 }}>
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
+            <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
+              <Grid size={{ xs: 12, md: 7 }} textAlign={{ xs: 'center', md: 'left' }}>
+                <Typography variant="h2" component="h1" fontWeight="600"> Merge Audio Files Online </Typography>
+                <Typography variant="h5" component="h2" color="text.secondary" my={2}> Join multiple audio tracks into one file instantly. Combine MP3, WAV, AAC files with ease. </Typography>
+              </Grid>
+              <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
+                <img src="/images/landing/audio-merger-hero.jpg" alt="Audio Merge" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+              </Grid>
+            </Grid>
+
             <FileUploadArea
               files={files}
               isDragActive={isDragActive}

@@ -64,75 +64,84 @@ function AudioConvert() {
           content="Convert to MP3, WAV, AAC, FLAC, OGG, M4A locally. Set bitrate or lossless — private, fast & watermark‑free."
         />
         <meta property="og:title" content={`Convert Audio Online For Free | ${APP_INFO.name}`} />
-        <meta property="og:image" content="/images/landing/audio-convert-hero.jpg" />
+  <meta property="og:image" content="/images/branding/logo-small.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fileapps.click/tools/audio/convert" />
         <meta property="og:site_name" content={APP_INFO.name} />
         <link rel="canonical" href="https://fileapps.click/tools/audio/convert" />
       </Helmet>
       <Container maxWidth="lg" sx={{ py: 10 }}>
-      <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
-        <CardContent sx={{ p: 0 }}>
-          {/* Upload area (preserves UI/UX) */}
-          <FileUploadArea
-            file={file}
-            previewUrl={previewUrl}
-            audioRef={audioRef}
-            inputRef={fileInputRef}
-            isDragActive={isDragActive}
-            onDragOver={onDragOver}
-            onDragLeave={onDragLeave}
-            onDrop={onDrop}
-            onInputChange={handleFileChange}
-          />
-          {/* Filename and remove button */}
-          {file && (
-            <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
-              <Typography variant="body2" noWrap>
-                {file.name} ({formatBytes(file.size)})
-              </Typography>
-              <IconButton onClick={removeFile} color="error" sx={{ ml: 1 }}>
-                <CloseIcon fontSize="small" />
-              </IconButton>
-            </Box>
-          )}
-          {/* Controls */}
-          {file && (
-            <Grid container spacing={2} sx={{ mb: 3 }}>
-              <Grid size={{ xs: 12, sm: 6 }}>
-                <FormatSelector value={outputFormat} onChange={handleFormatChange} disabled={isProcessing} />
+        <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
+          <CardContent sx={{ p: 0 }}>
+            <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
+              <Grid size={{ xs: 12, md: 7 }} textAlign={{ xs: 'center', md: 'left' }}>
+                <Typography variant="h2" component="h1" fontWeight="600"> Convert Audio Online </Typography>
+                <Typography variant="h5" component="h2" color="text.secondary" my={2}> Convert to MP3, WAV, AAC, FLAC, OGG, M4A locally. Set bitrate or lossless — private, fast & watermark‑free. </Typography>
               </Grid>
-              <Grid size={{ xs: 12, sm: 6 }}>
-                <QualitySelector outputFormat={outputFormat} value={outputQuality} onChange={handleQualityChange} disabled={isProcessing} />
+              <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
+                <img src="/images/landing/audio-convert-hero.jpg" alt="Audio Convert" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
               </Grid>
             </Grid>
-          )}
-        </CardContent>
-        <CardActions sx={{ display: file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
-          <Button variant="contained" onClick={processVideo} disabled={isProcessing || !file}>
-            {isProcessing ? 'Converting' : 'Convert'}
-          </Button>
-          {!isProcessing && (
-            <Button variant="outlined" onClick={handleReset}>
-              Reset
+            {/* Upload area (preserves UI/UX) */}
+            <FileUploadArea
+              file={file}
+              previewUrl={previewUrl}
+              audioRef={audioRef}
+              inputRef={fileInputRef}
+              isDragActive={isDragActive}
+              onDragOver={onDragOver}
+              onDragLeave={onDragLeave}
+              onDrop={onDrop}
+              onInputChange={handleFileChange}
+            />
+            {/* Filename and remove button */}
+            {file && (
+              <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
+                <Typography variant="body2" noWrap>
+                  {file.name} ({formatBytes(file.size)})
+                </Typography>
+                <IconButton onClick={removeFile} color="error" sx={{ ml: 1 }}>
+                  <CloseIcon fontSize="small" />
+                </IconButton>
+              </Box>
+            )}
+            {/* Controls */}
+            {file && (
+              <Grid container spacing={2} sx={{ mb: 3 }}>
+                <Grid size={{ xs: 12, sm: 6 }}>
+                  <FormatSelector value={outputFormat} onChange={handleFormatChange} disabled={isProcessing} />
+                </Grid>
+                <Grid size={{ xs: 12, sm: 6 }}>
+                  <QualitySelector outputFormat={outputFormat} value={outputQuality} onChange={handleQualityChange} disabled={isProcessing} />
+                </Grid>
+              </Grid>
+            )}
+          </CardContent>
+          <CardActions sx={{ display: file ? 'flex' : 'none', flexWrap: 'wrap', justifyContent: 'center', pb: 0, mt: 2, gap: 1 }}>
+            <Button variant="contained" onClick={processVideo} disabled={isProcessing || !file}>
+              {isProcessing ? 'Converting' : 'Convert'}
             </Button>
-          )}
-          {isProcessing && (
-            <Button color="error" variant='contained' onClick={stopProcessing} disabled={!isProcessing}>
-              Stop
-            </Button>
-          )}
-          {downloadUrl && downloadSize !== null && (
-            <Button color="success" variant='contained' onClick={handleDownload}>
-              Download ({formatBytes(downloadSize)})
-            </Button>
-          )}
-        </CardActions>
+            {!isProcessing && (
+              <Button variant="outlined" onClick={handleReset}>
+                Reset
+              </Button>
+            )}
+            {isProcessing && (
+              <Button color="error" variant='contained' onClick={stopProcessing} disabled={!isProcessing}>
+                Stop
+              </Button>
+            )}
+            {downloadUrl && downloadSize !== null && (
+              <Button color="success" variant='contained' onClick={handleDownload}>
+                Download ({formatBytes(downloadSize)})
+              </Button>
+            )}
+          </CardActions>
 
-        <ProgressDisplay isProcessing={isProcessing} progress={progress} status={status} consoleLogs={consoleLogs} />
-      </Card>
-      {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
-    </Container>
+          <ProgressDisplay isProcessing={isProcessing} progress={progress} status={status} consoleLogs={consoleLogs} />
+        </Card>
+        {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
+      </Container>
     </>
   );
 }

@@ -10,6 +10,8 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 // Local Imports
 import { useAudioPlayback } from './useAudioPlayback';
@@ -66,7 +68,7 @@ function AudioPlayback() {
           content="Adjust audio speed online. Speed up or slow down audio playback with pitch correction. Free, fast & secure."
         />
         <meta property="og:title" content={`Change Audio Speed Online For Free | ${APP_INFO.name}`} />
-        <meta property="og:image" content="/images/landing/audio-playback-hero.jpg" />
+  <meta property="og:image" content="/images/branding/logo-small.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`https://fileapps.click/tools/audio/playback`} />
         <meta property='site_name' content={APP_INFO.name} />
@@ -76,6 +78,16 @@ function AudioPlayback() {
       <Container maxWidth="lg" sx={{ py: 10 }}>
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
+            <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
+              <Grid size={{ xs: 12, md: 7 }} textAlign={{ xs: 'center', md: 'left' }}>
+                <Typography variant="h2" component="h1" fontWeight="600"> Change Audio Speed and Playback </Typography>
+                <Typography variant="h5" component="h2" color="text.secondary" my={2}> Adjust audio speed online. Speed up or slow down audio playback with pitch correction. Free, fast & secure. </Typography>
+              </Grid>
+              <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
+                <img src="/images/landing/audio-speed-editor-hero.png" alt="Audio Playback" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+              </Grid>
+            </Grid>
+
             <FileUploadArea
               file={file}
               previewUrl={previewUrl}

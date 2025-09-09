@@ -12,6 +12,7 @@ import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 
 // Local imports
 import { useVideoPlayback } from './useVideoPlayback';
@@ -61,7 +62,7 @@ function VideoPlayback() {
           content="Free online video playback speed editor. Change video speed from slow motion to time-lapse effects. Supports reverse playback and pitch correction."
         />
         <meta property="og:title" content={`Change Video Speed Online For Free | ${APP_INFO.name}`} />
-        <meta property="og:image" content="/images/landing/video-playback-hero.jpg" />
+  <meta property="og:image" content="/images/branding/logo-small.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fileapps.click/tools/video-playback" />
         <meta property="og:site_name" content={APP_INFO.name} />
@@ -82,6 +83,16 @@ function VideoPlayback() {
 
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
+            <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
+              <Grid size={{ xs: 12, md: 7 }} textAlign={{ xs: 'center', md: 'left' }}>
+                <Typography variant="h2" component="h1" fontWeight="600"> Change Video Speed and Playback </Typography>
+                <Typography variant="h5" component="h2" color="text.secondary" my={2}> Free online video playback speed editor. Change video speed from slow motion to time-lapse effects. Supports reverse playback and pitch correction. </Typography>
+              </Grid>
+              <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
+                <img src="/images/landing/video-playback-hero.jpg" alt="Video Playback" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+              </Grid>
+            </Grid>
+
             {/* File Upload Area */}
             <FileUploadArea
               videoFile={state.videoFile}

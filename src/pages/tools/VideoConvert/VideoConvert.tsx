@@ -84,7 +84,7 @@ function VideoConvert() {
         <title>Convert Video Online For Free | {APP_INFO.name}</title>
         <meta name="description" property="og:description" content="Convert Video to MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free." />
         <meta property="og:title" content={`Convert Video Online For Free | ${APP_INFO.name}`} />
-        <meta property="og:image" content="/images/landing/video-convert-hero.jpg" />
+  <meta property="og:image" content="/images/branding/logo-small.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="/tools/video/convert" />
         <meta property="og:site_name" content={APP_INFO.name} />

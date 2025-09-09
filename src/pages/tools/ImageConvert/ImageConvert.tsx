@@ -12,6 +12,7 @@ import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 
 // Icons
 import CloseIcon from '@mui/icons-material/Close';
@@ -125,8 +126,8 @@ function ImageConvert() {
           content="Free online image converter and editor. Convert between JPG, PNG, WebP, GIF formats. Resize, crop, rotate, and apply filters to images. Local processing with no watermarks."
         />
         <meta property="og:title" content={`Image Converter & Editor Online For Free | ${APP_INFO.name}`} />
-        <meta property="og:image" content="/images/landing/image-convert-hero.jpg" />
-        <meta property="og:type" content="website" />
+        <meta property="og:image" content="/images/landing/image-converter-hero.jpg" />
+      <meta property="og:image" content="/images/branding/logo-small.svg" />
         <meta property="og:url" content="https://fileapps.click/tools/convert" />
         <meta property="og:site_name" content={APP_INFO.name} />
         <link rel="canonical" href="https://fileapps.click/tools/convert" />
@@ -136,6 +137,16 @@ function ImageConvert() {
 
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
+            <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
+              <Grid size={{ xs: 12, md: 7 }} textAlign={{ xs: 'center', md: 'left' }}>
+                <Typography variant="h2" component="h1" fontWeight="600"> Image Converter & Editor Online </Typography>
+                <Typography variant="h5" component="h2" color="text.secondary" my={2}> Free online image converter and editor. Convert between JPG, PNG, WebP, GIF formats. Resize, crop, rotate, and apply filters to images. Local processing with no watermarks. </Typography>
+              </Grid>
+              <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
+                <img src="/images/landing/image-converter-hero.jpg" alt="Image Convert" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+              </Grid>
+            </Grid>
+
              <FileUploadArea
               file={file}
               isDragActive={isDragActive}

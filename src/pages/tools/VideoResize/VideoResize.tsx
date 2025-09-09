@@ -9,6 +9,8 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 // Local imports
 import FileUploadArea from './FileUploadArea';
@@ -72,7 +74,7 @@ function VideoResize() {
           content="Resize videos to custom dimensions or aspect ratios (16:9, 4:3, 1:1) for social media. Change resolution privately in your browser."
         />
         <meta property="og:title" content={`Resize Video Online For Free | ${APP_INFO.name}`} />
-        <meta property="og:image" content="/images/landing/video-resizer-hero.jpg" />
+  <meta property="og:image" content="/images/branding/logo-small.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fileapps.click/tools/video/resize" />
         <meta property="og:site_name" content={APP_INFO.name} />
@@ -83,6 +85,16 @@ function VideoResize() {
 
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
+            <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
+              <Grid size={{ xs: 12, md: 7 }} textAlign={{ xs: 'center', md: 'left' }}>
+                <Typography variant="h2" component="h1" fontWeight="600"> Resize Video Online </Typography>
+                <Typography variant="h5" component="h2" color="text.secondary" my={2}> Resize videos to custom dimensions or aspect ratios (16:9, 4:3, 1:1) for social media. Change resolution privately in your browser. </Typography>
+              </Grid>
+              <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
+                <img src="/images/landing/video-resizer-hero.jpg" alt="Video Resize" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+              </Grid>
+            </Grid>
+
             <FileUploadArea
               file={file}
               previewUrl={previewUrl}
