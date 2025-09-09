@@ -21,22 +21,22 @@ function AboutUs() {
         <meta property="og:url" content="https://fileapps.click/about" />
         <link rel="canonical" href="https://fileapps.click/about" />
       </Helmet>
-      <Container maxWidth="md" sx={{ py: 2, my: 'auto' }}>
-      <Typography variant="h2" component="h1" gutterBottom>
-        About
-      </Typography>
-      <Divider sx={{ mb: 4 }} />
-      <Card sx={{ p: 2 }}>
-        <CardContent>
-          <Typography variant="body1" mb={2}>
-            Welcome to {APP_INFO.name}, a comprehensive platform dedicated to providing free and user-friendly tools for video compression and editing. Our mission is to empower users to efficiently manage and enhance their video content without any cost or technical barriers.
-          </Typography>
-          <Typography variant="body1">
-            {APP_INFO.name} offers a suite of features designed to simplify the process of optimizing videos for various purposes, including sharing, storage, and professional editing. We are committed to maintaining high standards of quality, privacy, and accessibility for all our users.
-          </Typography>
-        </CardContent>
-      </Card>
-    </Container>
+      <Container maxWidth="md" sx={{ py: 10, my: 'auto' }}>
+        <Typography variant="h2" component="h1" gutterBottom>
+          About Us
+        </Typography>
+        <Divider sx={{ mb: 4 }} />
+        <Card sx={{ p: 2 }}>
+          <CardContent>
+            <Typography variant="body1" mb={2}>
+              Welcome to {APP_INFO.name}, a comprehensive platform dedicated to providing free and user-friendly tools for video compression and editing. Our mission is to empower users to efficiently manage and enhance their video content without any cost or technical barriers.
+            </Typography>
+            <Typography variant="body1">
+              {APP_INFO.name} offers a suite of features designed to simplify the process of optimizing videos for various purposes, including sharing, storage, and professional editing. We are committed to maintaining high standards of quality, privacy, and accessibility for all our users.
+            </Typography>
+          </CardContent>
+        </Card>
+      </Container>
     </>
   )
 }

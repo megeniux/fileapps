@@ -242,8 +242,8 @@ function ThumbnailGenerator() {
                 <Typography variant="h2" component="h1" fontWeight="600"> Extract Frames, Generate Scrubs from Videos Online </Typography>
                 <Typography variant="h5" component="h2" color="text.secondary" my={2}> Extract high-quality thumbnails and contact sheets from videos. Generate image scrubs for easy navigation. Local processing — private & watermark-free. </Typography>
               </Grid>
-              <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
-                <img src="/images/landing/thumbnail-generator-hero.jpg" alt="Thumbnail Generator" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+              <Grid container size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }} justifyContent={{ xs: 'center', md: 'flex-end' }}>
+                <img src="/images/landing/thumbnail-generator-hero.jpg" alt="Thumbnail Generator" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%', maxHeight: 300 }} />
               </Grid>
             </Grid>
 

@@ -70,8 +70,8 @@ function ExtractAudio() {
                 <Typography variant="h2" component="h1" fontWeight="600"> Extract Audio from Video Online </Typography>
                 <Typography variant="h5" component="h2" color="text.secondary" my={2}> Extract audio from video files. Convert video to MP3, WAV, AAC, or FLAC audio formats. High-quality audio extraction. </Typography>
               </Grid>
-              <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
-                <img src="/images/landing/audio-extract-hero.jpg" alt="Extract Audio" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+              <Grid container size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }} justifyContent={{ xs: 'center', md: 'flex-end' }}>
+                <img src="/images/landing/audio-extract-hero.jpg" alt="Extract Audio" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%', maxHeight: 300 }} />
               </Grid>
             </Grid>
 

@@ -22,7 +22,7 @@ function PrivacyPolicy() {
         <meta property="og:url" content="https://fileapps.click/policy" />
         <link rel="canonical" href="https://fileapps.click/policy" />
       </Helmet>
-      <Container maxWidth="md" sx={{ py: 2, my: 'auto' }}>
+      <Container maxWidth="md" sx={{ py: 10, my: 'auto' }}>
         <Typography variant="h2" component="h1" gutterBottom>
           Privacy Policy
         </Typography>

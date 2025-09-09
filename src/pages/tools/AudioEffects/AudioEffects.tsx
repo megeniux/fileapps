@@ -93,8 +93,8 @@ export default function AudioEffects() {
                                 <Typography variant="h2" component="h1" fontWeight="600">Apply Audio Effects Online </Typography>
                                 <Typography variant="h5" component="h2" color="text.secondary" my={2}> Apply effect to audio adjust speed, pitch, volume, apply fade‑in/out, normalize and equalizer. </Typography>
                             </Grid>
-                            <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
-                                <img src="/images/landing/audio-effect-hero.jpg" alt="Audio Effects" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+                            <Grid container size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }} justifyContent={{ xs: 'center', md: 'flex-end' }}>
+                                <img src="/images/landing/audio-effect-hero.jpg" alt="Audio Effects" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%', maxHeight: 300 }} />
                             </Grid>
                         </Grid>
 

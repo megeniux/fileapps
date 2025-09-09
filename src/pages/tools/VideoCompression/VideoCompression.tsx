@@ -76,8 +76,8 @@ function VideoCompression() {
                 <Typography variant="h2" component="h1" fontWeight="600"> Compress Videos Online </Typography>
                 <Typography variant="h5" component="h2" color="text.secondary" my={2}> Reduce video file size without quality loss using local browser processing. Adjust CRF, bitrate & resolution — private, fast & watermark‑free. </Typography>
               </Grid>
-              <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
-                <img src="/images/landing/video-compression-hero.jpg" alt="Video Compression" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+              <Grid container size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }} justifyContent={{ xs: 'center', md: 'flex-end' }}>
+                <img src="/images/landing/video-compression-hero.jpg" alt="Video Compression" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%', maxHeight: 300 }} />
               </Grid>
             </Grid>
 

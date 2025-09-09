@@ -90,8 +90,8 @@ function VideoResize() {
                 <Typography variant="h2" component="h1" fontWeight="600"> Resize Video Online </Typography>
                 <Typography variant="h5" component="h2" color="text.secondary" my={2}> Resize videos to custom dimensions or aspect ratios (16:9, 4:3, 1:1) for social media. Change resolution privately in your browser. </Typography>
               </Grid>
-              <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
-                <img src="/images/landing/video-resizer-hero.jpg" alt="Video Resize" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+              <Grid container size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }} justifyContent={{ xs: 'center', md: 'flex-end' }}>
+                <img src="/images/landing/video-resizer-hero.jpg" alt="Video Resize" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%', maxHeight: 300 }} />
               </Grid>
             </Grid>
 

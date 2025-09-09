@@ -96,8 +96,8 @@ function BurnCaption() {
                 <Typography variant="h2" component="h1" fontWeight="600"> Burn Captions Online </Typography>
                 <Typography variant="h5" component="h2" color="text.secondary" my={2}> Add subtitles to videos. Burn captions directly into the video. Supports SRT and VTT formats. Customize font, size, color, and position. No uploads required. </Typography>
               </Grid>
-              <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
-                <img src="/images/landing/burn-captions-hero.jpg" alt="Burn Captions" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+              <Grid container size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }} justifyContent={{ xs: 'center', md: 'flex-end' }}>
+                <img src="/images/landing/burn-captions-hero.jpg" alt="Burn Captions" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%', maxHeight: 300 }} />
               </Grid>
             </Grid>
 

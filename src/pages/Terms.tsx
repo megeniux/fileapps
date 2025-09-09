@@ -21,9 +21,9 @@ function TOS() {
         <meta property="og:url" content="https://fileapps.click/terms" />
         <link rel="canonical" href="https://fileapps.click/terms" />
       </Helmet>
-      <Container maxWidth="md" sx={{ py: 2, my: 'auto' }}>
+      <Container maxWidth="md" sx={{ py: 10, my: 'auto' }}>
       <Typography variant="h2" component="h1" gutterBottom>
-        Terms and Conditions
+        Terms and Condition
       </Typography>
       <Divider sx={{ mb: 4 }} />
       <Card sx={{ p: 2 }}>

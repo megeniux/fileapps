@@ -22,9 +22,9 @@ function Contact() {
         <meta property="og:url" content="https://fileapps.click/contact" />
         <link rel="canonical" href="https://fileapps.click/contact" />
       </Helmet>
-      <Container maxWidth="md" sx={{ py: 2, my: 'auto' }}>
+      <Container maxWidth="md" sx={{ py: 10, my: 'auto' }}>
       <Typography variant="h2" component="h1" gutterBottom>
-        Contact
+        Contact Us
       </Typography>
       <Divider sx={{ mb: 4 }} />
       <Card sx={{ p: 2 }}>

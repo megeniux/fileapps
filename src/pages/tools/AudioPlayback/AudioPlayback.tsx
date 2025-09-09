@@ -83,8 +83,8 @@ function AudioPlayback() {
                 <Typography variant="h2" component="h1" fontWeight="600"> Change Audio Speed and Playback </Typography>
                 <Typography variant="h5" component="h2" color="text.secondary" my={2}> Adjust audio speed online. Speed up or slow down audio playback with pitch correction. Free, fast & secure. </Typography>
               </Grid>
-              <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
-                <img src="/images/landing/audio-speed-editor-hero.png" alt="Audio Playback" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+              <Grid container size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }} justifyContent={{ xs: 'center', md: 'flex-end' }}>
+                <img src="/images/landing/audio-speed-editor-hero.jpg" alt="Audio Playback" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%', maxHeight: 300 }} />
               </Grid>
             </Grid>
 

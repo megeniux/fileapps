@@ -142,8 +142,8 @@ function ImageConvert() {
                 <Typography variant="h2" component="h1" fontWeight="600"> Image Converter & Editor Online </Typography>
                 <Typography variant="h5" component="h2" color="text.secondary" my={2}> Free online image converter and editor. Convert between JPG, PNG, WebP, GIF formats. Resize, crop, rotate, and apply filters to images. Local processing with no watermarks. </Typography>
               </Grid>
-              <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
-                <img src="/images/landing/image-converter-hero.jpg" alt="Image Convert" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+              <Grid container size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }} justifyContent={{ xs: 'center', md: 'flex-end' }}>
+                <img src="/images/landing/image-converter-hero.jpg" alt="Image Convert" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%', maxHeight: 300 }} />
               </Grid>
             </Grid>
 

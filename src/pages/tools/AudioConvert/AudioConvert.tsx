@@ -78,8 +78,8 @@ function AudioConvert() {
                 <Typography variant="h2" component="h1" fontWeight="600"> Convert Audio Online </Typography>
                 <Typography variant="h5" component="h2" color="text.secondary" my={2}> Convert to MP3, WAV, AAC, FLAC, OGG, M4A locally. Set bitrate or lossless — private, fast & watermark‑free. </Typography>
               </Grid>
-              <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
-                <img src="/images/landing/audio-convert-hero.jpg" alt="Audio Convert" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+              <Grid container size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }} justifyContent={{ xs: 'center', md: 'flex-end' }}>
+                <img src="/images/landing/audio-convert-hero.jpg" alt="Audio Convert" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%', maxHeight: 300 }} />
               </Grid>
             </Grid>
             {/* Upload area (preserves UI/UX) */}
