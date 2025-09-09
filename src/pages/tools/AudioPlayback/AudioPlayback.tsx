@@ -35,14 +35,14 @@ function AudioPlayback() {
     isDragActive,
     fileInputRef,
     audioRef,
-  onInputChange,
-  onDragOver,
-  onDragLeave,
-  onDrop,
-  removeFile,
-  processSpeedAdjustment,
-  stopSpeedAdjustment,
-  downloadResult,
+    onInputChange,
+    onDragOver,
+    onDragLeave,
+    onDrop,
+    removeFile,
+    processSpeedAdjustment,
+    stopSpeedAdjustment,
+    downloadResult,
     canProcess,
     resetAll,
   } = useAudioPlayback();
@@ -74,10 +74,6 @@ function AudioPlayback() {
       </Helmet>
 
       <Container maxWidth="lg" sx={{ py: 10 }}>
-        {errorMsg && (
-          <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>
-        )}
-
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
             <FileUploadArea
@@ -125,6 +121,9 @@ function AudioPlayback() {
             consoleLogs={consoleLogs}
           />
         </Card>
+        {errorMsg && (
+          <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>
+        )}
       </Container>
     </>
   );

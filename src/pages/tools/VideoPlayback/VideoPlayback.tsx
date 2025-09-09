@@ -167,12 +167,6 @@ function VideoPlayback() {
                   {state.consoleLogs.length > 0 ? state.consoleLogs[state.consoleLogs.length - 1] : ""}
                 </Typography>
               </Box>
-
-              <Alert severity="info" sx={{ alignItems: 'center', mt: 2, py: 0 }}>
-                <Typography variant='body2' component="p">
-                  <strong>Feels Slow?</strong> - Be on this same tab! processing depends on your system performance.
-                </Typography>
-              </Alert>
             </>
           )}
         </Card>

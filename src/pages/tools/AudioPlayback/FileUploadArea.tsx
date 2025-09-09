@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { useTheme } from '@mui/material/styles';
 import { formatBytes } from '../../../helpers';
 
 type Props = {
@@ -20,6 +21,7 @@ type Props = {
 };
 
 export default function FileUploadArea(props: Props) {
+  const theme = useTheme();
   const { file, previewUrl, isDragActive, onDragOver, onDragLeave, onDrop, onInputChange, onRemoveFile, inputRef, audioRef } = props;
 
   return (
@@ -36,6 +38,7 @@ export default function FileUploadArea(props: Props) {
       height={220}
       borderRadius={1}
       bgcolor={isDragActive ? 'primary.lighter' : 'action.hover'}
+      border={isDragActive ? `2px dashed ${theme.palette.primary.main}` : `2px dashed ${theme.palette.divider}`}
       sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
     >
       {!file ? (
