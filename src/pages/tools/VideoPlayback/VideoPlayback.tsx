@@ -9,12 +9,15 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
+import Typography from '@mui/material/Typography';
 
 // Local imports
 import { useVideoPlayback } from './useVideoPlayback';
 import FileUploadArea from './FileUploadArea';
 import SpeedControls from './SpeedControls';
-import ProgressDisplay from './ProgressDisplay';
+// ProgressDisplay removed from this component
 import { formatFileSize } from './utils';
 
 
@@ -35,8 +38,6 @@ function VideoPlayback() {
     processSpeedAdjustment,
     stopSpeedAdjustment,
     downloadVideo,
-    openPerformanceDialog,
-    closePerformanceDialog,
     canProcess,
     resetAll,
     clearError
@@ -154,14 +155,26 @@ function VideoPlayback() {
             )}
           </CardActions>
 
-          {/* Progress Display */}
-          <ProgressDisplay
-            processing={state.processing}
-            consoleLogs={state.consoleLogs}
-            isPerformanceDialogOpen={state.isPerformanceDialogOpen}
-            onPerformanceDialogOpen={openPerformanceDialog}
-            onPerformanceDialogClose={closePerformanceDialog}
-          />
+          {/* Progress Display (inline) */}
+          {state.processing.isProcessing && (
+            <>
+              <Box textAlign="center" bgcolor="action.hover" p={2} mt={2} borderRadius={0.25} overflow="hidden">
+                <LinearProgress color='success' variant="determinate" value={state.processing.progress} />
+                <Typography variant="body2" my={1}>
+                  {`${state.processing.status} ${state.processing.progress.toFixed(1)}%`}
+                </Typography>
+                <Typography variant="caption" color="text.secondary" noWrap>
+                  {state.consoleLogs.length > 0 ? state.consoleLogs[state.consoleLogs.length - 1] : ""}
+                </Typography>
+              </Box>
+
+              <Alert severity="info" sx={{ alignItems: 'center', mt: 2, py: 0 }}>
+                <Typography variant='body2' component="p">
+                  <strong>Feels Slow?</strong> - Be on this same tab! processing depends on your system performance.
+                </Typography>
+              </Alert>
+            </>
+          )}
         </Card>
       </Container>
     </>

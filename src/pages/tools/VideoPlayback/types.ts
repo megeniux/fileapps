@@ -44,7 +44,6 @@ export interface VideoPlaybackState {
   download: DownloadState;
   isDragActive: boolean;
   consoleLogs: string[];
-  isPerformanceDialogOpen: boolean;
 }
 
 /**
@@ -88,7 +87,4 @@ export interface SpeedControlsProps {
 export interface ProgressDisplayProps {
   processing: ProcessingState;
   consoleLogs: string[];
-  isPerformanceDialogOpen: boolean;
-  onPerformanceDialogOpen: () => void;
-  onPerformanceDialogClose: () => void;
 }

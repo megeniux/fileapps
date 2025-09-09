@@ -16,7 +16,6 @@ import { useAudioPlayback } from './useAudioPlayback';
 import FileUploadArea from './FileUploadArea';
 import SpeedControls from './SpeedControls';
 import ProgressDisplay from './ProgressDisplay';
-import PerformanceInfoDialog from '../../../components/PerformanceInfoDialog';
 
 function AudioPlayback() {
   const {
@@ -36,17 +35,14 @@ function AudioPlayback() {
     isDragActive,
     fileInputRef,
     audioRef,
-    isPerformanceDialogOpen,
-    onInputChange,
-    onDragOver,
-    onDragLeave,
-    onDrop,
-    removeFile,
-    processSpeedAdjustment,
-    stopSpeedAdjustment,
-    downloadResult,
-    openPerformanceDialog,
-    closePerformanceDialog,
+  onInputChange,
+  onDragOver,
+  onDragLeave,
+  onDrop,
+  removeFile,
+  processSpeedAdjustment,
+  stopSpeedAdjustment,
+  downloadResult,
     canProcess,
     resetAll,
   } = useAudioPlayback();
@@ -127,13 +123,8 @@ function AudioPlayback() {
           <ProgressDisplay
             processing={{ isProcessing, progress, status, errorMsg }}
             consoleLogs={consoleLogs}
-            isPerformanceDialogOpen={isPerformanceDialogOpen}
-            onPerformanceDialogOpen={openPerformanceDialog}
-            onPerformanceDialogClose={closePerformanceDialog}
           />
         </Card>
-
-        <PerformanceInfoDialog open={isPerformanceDialogOpen} onClose={closePerformanceDialog} />
       </Container>
     </>
   );

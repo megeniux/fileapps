@@ -1,7 +1,6 @@
 // Export all components
 export { default as FileUploadArea } from './FileUploadArea';
 export { default as SpeedControls } from './SpeedControls';
-export { default as ProgressDisplay } from './ProgressDisplay';
 
 // Export hooks
 export { useVideoPlayback } from './useVideoPlayback';

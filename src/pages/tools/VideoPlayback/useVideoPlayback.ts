@@ -25,7 +25,6 @@ export const useVideoPlayback = () => {
     setProcessing,
     setDownload,
     setConsoleLogs,
-    setIsPerformanceDialogOpen
   } = usePlaybackState();
 
   const { processVideo, stopProcessing } = useSpeedProcessor();
@@ -168,14 +167,7 @@ export const useVideoPlayback = () => {
     }
   }, [state.download.url, state.videoFile, state.speedOptions]);
 
-  // Performance dialog
-  const openPerformanceDialog = useCallback(() => {
-    setIsPerformanceDialogOpen(true);
-  }, [setIsPerformanceDialogOpen]);
-
-  const closePerformanceDialog = useCallback(() => {
-    setIsPerformanceDialogOpen(false);
-  }, [setIsPerformanceDialogOpen]);
+  // Performance dialog (handled in component via ProgressDisplay)
 
   // Utility functions
   const canProcess = useCallback(() => {
@@ -216,8 +208,6 @@ export const useVideoPlayback = () => {
     downloadVideo,
     
     // Performance dialog
-    openPerformanceDialog,
-    closePerformanceDialog,
     
     // Utilities
     canProcess,

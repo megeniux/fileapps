@@ -33,7 +33,6 @@ export const usePlaybackState = () => {
 
   // Console logs and dialog state
   const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
-  const [isPerformanceDialogOpen, setIsPerformanceDialogOpen] = useState(false);
 
   // Combined state object
   const state: VideoPlaybackState = {
@@ -44,7 +43,7 @@ export const usePlaybackState = () => {
     download,
     isDragActive,
     consoleLogs,
-    isPerformanceDialogOpen
+    
   };
 
   // State setters
@@ -56,7 +55,7 @@ export const usePlaybackState = () => {
     setProcessing,
     setDownload,
     setConsoleLogs,
-    setIsPerformanceDialogOpen
+  // performance dialog setter removed
   };
 
   return {

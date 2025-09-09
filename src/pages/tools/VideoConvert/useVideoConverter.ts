@@ -34,7 +34,7 @@ export function useVideoConverter() {
   const [crfAnchor, setCrfAnchor] = useState<null | HTMLElement>(null);
   const [presetAnchor, setPresetAnchor] = useState<null | HTMLElement>(null);
   const [isDragActive, setIsDragActive] = useState(false);
-  const [isPerformanceDialogOpen, setIsPerformanceDialogOpen] = useState(false);
+  
 
   // Refs
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -133,13 +133,7 @@ export function useVideoConverter() {
     setPresetAnchor(null);
   }, []);
 
-  const handlePerformanceDialogOpen = useCallback(() => {
-    setIsPerformanceDialogOpen(true);
-  }, []);
-
-  const handlePerformanceDialogClose = useCallback(() => {
-    setIsPerformanceDialogOpen(false);
-  }, []);
+  // performance dialog handlers removed
 
   const handleReset = useCallback(() => {
     // Clean up any existing URLs to prevent memory leaks
@@ -178,7 +172,7 @@ export function useVideoConverter() {
     setCrfAnchor(null);
     setPresetAnchor(null);
     setIsDragActive(false);
-    setIsPerformanceDialogOpen(false);
+  // performance dialog reset removed
     durationRef.current = 0;
   }, [previewUrl, downloadUrl]);
 
@@ -232,9 +226,7 @@ export function useVideoConverter() {
     downloadSize,
     crfAnchor,
     presetAnchor,
-    isDragActive,
-    isPerformanceDialogOpen,
-    
+  isDragActive,
     // Refs
     videoRef,
     fileInputRef,
@@ -261,8 +253,7 @@ export function useVideoConverter() {
     handleCrfInfoClose,
     handlePresetInfoClick,
     handlePresetInfoClose,
-    handlePerformanceDialogOpen,
-    handlePerformanceDialogClose,
+  // performance dialog handlers removed
     handleWidthChange,
     handleHeightChange,
     handleRatioChange,
@@ -275,8 +266,8 @@ export function useVideoConverter() {
     handlePresetChange,
     handleAudioBitrateChange,
     
-    // Processing
-    processVideo,
-    stopProcessing,
+  // Processing
+  processVideo,
+  stopProcessing,
   };
 }

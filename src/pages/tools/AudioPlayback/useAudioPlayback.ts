@@ -18,7 +18,6 @@ export function useAudioPlayback() {
   const [downloadSize, setDownloadSize] = useState<number | null>(null);
   const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
   const [isDragActive, setIsDragActive] = useState(false);
-  const [isPerformanceDialogOpen, setIsPerformanceDialogOpen] = useState(false);
 
   // FFmpeg refs
   const ffmpegRef = useRef<FFmpeg | null>(null);
@@ -214,8 +213,6 @@ export function useAudioPlayback() {
     }
   };
 
-  const openPerformanceDialog = () => setIsPerformanceDialogOpen(true);
-  const closePerformanceDialog = () => setIsPerformanceDialogOpen(false);
 
   const resetAll = (inputRef?: React.RefObject<HTMLInputElement>) => {
     if (inputRef?.current) inputRef.current.value = '';
@@ -239,7 +236,6 @@ export function useAudioPlayback() {
     isDragActive,
     fileInputRef,
     audioRef,
-    isPerformanceDialogOpen,
     onInputChange,
     onDragOver,
     onDragLeave,
@@ -248,8 +244,7 @@ export function useAudioPlayback() {
     processSpeedAdjustment,
     stopSpeedAdjustment,
     downloadResult,
-    openPerformanceDialog,
-    closePerformanceDialog,
+  
     canProcess,
     resetAll,
     clearAll,

@@ -11,9 +11,6 @@ type Props = {
     errorMsg: string | null;
   };
   consoleLogs: string[];
-  isPerformanceDialogOpen: boolean;
-  onPerformanceDialogOpen: () => void;
-  onPerformanceDialogClose: () => void;
 };
 
 export default function ProgressDisplay(props: Props) {
