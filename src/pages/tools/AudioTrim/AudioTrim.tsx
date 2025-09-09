@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { APP_INFO } from '../../../constants';
 import { formatBytes } from '../../../helpers';
 
 // MUI imports
@@ -11,11 +12,9 @@ import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 
 // MUI Icons
-import ContentCutIcon from '@mui/icons-material/ContentCut';
 import CloseIcon from '@mui/icons-material/Close';
 
 // Local hook & components
@@ -61,35 +60,25 @@ function AudioTrim() {
     }
   };
 
-
-
-
-
   return (
     <>
       <Helmet>
-        <title>Audio Trimmer - Cut and Trim Audio Files Online Free</title>
-        <meta name="description" content="Free online audio trimmer to cut and trim audio files with precision timing. Perfect for podcasts, music, and voiceovers. Local processing with no watermarks or uploads." />
-        <meta name="keywords" content="audio trimmer, cut audio, trim audio, audio cutter, audio editor, clip audio, free audio tools, podcast editor" />
-        <meta property="og:title" content="Audio Trimmer - Cut and Trim Audio Files Online Free" />
-        <meta property="og:description" content="Free online audio trimmer to cut and trim audio files with precision timing. Perfect for podcasts, music, and voiceovers. Local processing with no watermarks or uploads." />
+        <title>Cut and Trim Audio Files Online For Free | {APP_INFO.name}</title>
+        <meta
+          name="description"
+          property="og:description"
+          content="Trim and cut audio files with precision timing for podcasts, music, or voiceovers. Local processing — private & watermark-free."
+        />
+        <meta property="og:title" content={`Cut and Trim Audio Files Online For Free | ${APP_INFO.name}`} />
+        <meta property="og:image" content="/images/landing/audio-trim-hero.jpg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fileapps.click/tools/audio-trim" />
+        <meta property="og:site_name" content={APP_INFO.name} />
         <link rel="canonical" href="https://fileapps.click/tools/audio-trim" />
       </Helmet>
       <Container maxWidth="lg" sx={{ py: 10 }}>
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
-            <Box display="flex" alignItems="center">
-              <ContentCutIcon color="secondary" fontSize="small" sx={{ mr: 0.5 }} />
-              <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
-                Audio Trimmer
-              </Typography>
-            </Box>
-            <Divider sx={{ my: 0.5 }} />
-            <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-              Trim and cut audio files with precision timing for podcasts, music, or voiceovers. Local processing — private & watermark-free.
-            </Typography>
             {/* Upload & Preview area (preserve exact UX) */}
             <FileUploadArea
               file={file}

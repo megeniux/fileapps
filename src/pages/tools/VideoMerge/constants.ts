@@ -56,7 +56,7 @@ export const FFMPEG_CONFIG = {
  */
 export const UI_CONFIG = {
   // Upload area height when empty
-  UPLOAD_AREA_HEIGHT_EMPTY: 300,
+  UPLOAD_AREA_HEIGHT_EMPTY: 220,
   
   // Upload area height when files present
   UPLOAD_AREA_HEIGHT_WITH_FILES: 80,

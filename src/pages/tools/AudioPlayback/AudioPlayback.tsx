@@ -1,26 +1,22 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { APP_INFO } from '../../../constants';
+import { formatBytes } from '../../../helpers';
 
-// MUI
+// MUI Imports
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import Alert from '@mui/material/Alert';
 
-// Icons
-import SpeedIcon from '@mui/icons-material/Speed';
-
+// Local Imports
 import { useAudioPlayback } from './useAudioPlayback';
 import FileUploadArea from './FileUploadArea';
 import SpeedControls from './SpeedControls';
 import ProgressDisplay from './ProgressDisplay';
 import PerformanceInfoDialog from '../../../components/PerformanceInfoDialog';
-import { formatBytes } from '../../../helpers';
 
 function AudioPlayback() {
   const {
@@ -67,9 +63,18 @@ function AudioPlayback() {
   return (
     <>
       <Helmet>
-        <title>Audio Playback Speed Editor - Change Audio Speed Online Free</title>
-        <meta name="description" content="Free online audio playback speed editor to change audio speed with pitch correction or reverse tracks completely. Export processed audio with no watermarks, 100% browser-based." />
-        <link rel="canonical" href="https://fileapps.click/tools/audio-playback" />
+        <title>Change Audio Speed Online For Free | {APP_INFO.name}</title>
+        <meta
+          name="description"
+          property="og:description"
+          content="Adjust audio speed online. Speed up or slow down audio playback with pitch correction. Free, fast & secure."
+        />
+        <meta property="og:title" content={`Change Audio Speed Online For Free | ${APP_INFO.name}`} />
+        <meta property="og:image" content="/images/landing/audio-playback-hero.jpg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://fileapps.click/tools/audio/playback`} />
+        <meta property='site_name' content={APP_INFO.name} />
+        <link rel="canonical" href={`https://fileapps.click/tools/audio/playback`} />
       </Helmet>
 
       <Container maxWidth="lg" sx={{ py: 10 }}>
@@ -79,18 +84,6 @@ function AudioPlayback() {
 
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
-            <Box display="flex" alignItems="center">
-              <SpeedIcon color="success" fontSize="small" sx={{ mr: 0.5 }} />
-              <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
-                Audio Playback Speed Editor
-              </Typography>
-            </Box>
-            <Divider sx={{ my: 0.5 }} />
-
-            <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-              Change audio speed with pitch correction or reverse tracks completely. Export processed audio with no watermark — 100% browser-based.
-            </Typography>
-
             <FileUploadArea
               file={file}
               previewUrl={previewUrl}

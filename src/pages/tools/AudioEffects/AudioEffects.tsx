@@ -1,8 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { APP_INFO } from '../../../constants';
 import { formatBytes } from '../../../helpers';
 
-// MUI imports
+// MUI Imports
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -10,21 +11,19 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-// Grid intentionally not used in this file
 
 // MUI Icons
-import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import CloseIcon from '@mui/icons-material/Close';
 
+// Local Imports   
 import { useAudioEffects } from './useAudioEffects';
 import EffectControls from './EffectControls';
 import ProgressDisplay from './ProgressDisplay';
 import FileUploadArea from './FileUploadArea';
 
 export default function AudioEffects() {
-    
+
     const {
         file,
         previewUrl,
@@ -60,9 +59,9 @@ export default function AudioEffects() {
         handleDownload,
         handleReset,
         setDuration
-    ,
-    eqGains,
-    setEqGains
+        ,
+        eqGains,
+        setEqGains
     } = useAudioEffects();
 
     const audioRef = React.useRef<HTMLAudioElement | null>(null);
@@ -70,23 +69,23 @@ export default function AudioEffects() {
     return (
         <>
             <Helmet>
-                <title>Audio Effects - Apply Fades, Normalization, Pitch & Speed Effects Free</title>
-                <meta name="description" content="Free online audio effects tool to apply fades, normalization, pitch adjustment, speed changes, and volume control to audio files. Professional audio effects in your browser." />
+                <title>Audio Effects Online For Free | {APP_INFO.name}</title>
+                <meta
+                    name="description"
+                    property="og:description"
+                    content="Apply effect to audio adjust speed, pitch, volume, apply fade‑in/out, normalize and equalizer."
+                />
+                <meta property="og:title" content={`Audio Effects Online For Free | ${APP_INFO.name}`} />
+                <meta property="og:image" content="/images/landing/audio-effect-hero.jpg" />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://fileapps.click/tools/audio-effects" />
+                <meta property="og:site_name" content={APP_INFO.name} />
                 <link rel="canonical" href="https://fileapps.click/tools/audio-effects" />
             </Helmet>
 
             <Container maxWidth="lg" sx={{ py: 10 }}>
                 <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
                     <CardContent sx={{ p: 0 }}>
-                        <Box display="flex" alignItems="center">
-                            <GraphicEqIcon color="info" fontSize="small" sx={{ mr: 0.5 }} />
-                            <Typography variant="body1" component="h1" fontWeight={600} mb={0.5}>Audio Effects</Typography>
-                        </Box>
-                        <Divider sx={{ my: 0.5 }} />
-                        <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-                            Apply fades, normalization, pitch adjustment, speed changes & volume control to audio files. Professional effects in your browser.
-                        </Typography>
-
                         <FileUploadArea
                             file={file}
                             previewUrl={previewUrl}
@@ -154,6 +153,6 @@ export default function AudioEffects() {
 
                 {errorMsg && <Box sx={{ my: 2 }}><Typography color="error">{errorMsg}</Typography></Box>}
             </Container>
-                </>
-            );
-        }
+        </>
+    );
+}

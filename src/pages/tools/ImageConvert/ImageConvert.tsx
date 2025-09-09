@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { APP_INFO } from '../../../constants';
 import { formatBytes } from '../../../helpers';
 
 // MUI
@@ -9,12 +10,10 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
 // Icons
-import AspectRatioIcon from '@mui/icons-material/AspectRatio';
 import CloseIcon from '@mui/icons-material/Close';
 
 // Components
@@ -119,32 +118,25 @@ function ImageConvert() {
   return (
     <>
       <Helmet>
-        <title>Image Converter & Editor - Convert JPG PNG WebP GIF Online Free</title>
-        <meta name="description" content="Free online image converter and editor. Convert between JPG, PNG, WebP, GIF formats. Resize, crop, rotate, and apply filters to images. Local processing with no watermarks." />
-        <meta name="keywords" content="image converter, photo editor, JPG to PNG, PNG to JPG, WebP converter, image resize, crop image, rotate image, free image tools" />
-        <meta property="og:title" content="Image Converter & Editor - Convert JPG PNG WebP GIF Online Free" />
-        <meta property="og:description" content="Free online image converter and editor. Convert between JPG, PNG, WebP, GIF formats. Resize, crop, rotate, and apply filters to images. Local processing with no watermarks." />
+        <title>Image Converter & Editor Online For Free | {APP_INFO.name}</title>
+        <meta
+          name="description"
+          property="og:description"
+          content="Free online image converter and editor. Convert between JPG, PNG, WebP, GIF formats. Resize, crop, rotate, and apply filters to images. Local processing with no watermarks."
+        />
+        <meta property="og:title" content={`Image Converter & Editor Online For Free | ${APP_INFO.name}`} />
+        <meta property="og:image" content="/images/landing/image-convert-hero.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://fileapps.click/tools/image-convert" />
-        <link rel="canonical" href="https://fileapps.click/tools/image-convert" />
+        <meta property="og:url" content="https://fileapps.click/tools/convert" />
+        <meta property="og:site_name" content={APP_INFO.name} />
+        <link rel="canonical" href="https://fileapps.click/tools/convert" />
       </Helmet>
 
       <Container maxWidth="lg" sx={{ py: 10 }}>
 
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
-            <Box display="flex" alignItems="center">
-              <AspectRatioIcon color="primary" fontSize="small" sx={{ mr: 0.5 }} />
-              <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
-                Image Converter & Editor
-              </Typography>
-            </Box>
-            <Divider sx={{ my: 0.5 }} />
-            <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-              Convert, resize, crop, rotate, and apply filters to JPG, PNG, WebP, GIF images. Local processing in your browser — fast, secure, no watermark.
-            </Typography>
-
-            <FileUploadArea
+             <FileUploadArea
               file={file}
               isDragActive={isDragActive}
               onFileChange={handleFileChange}

@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from '../../../constants';
 import { formatBytes } from '../../../helpers';
 
-// MUI
+// MUI Imports
 import Alert from '@mui/material/Alert';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -12,15 +12,12 @@ import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-// Global Components
-import PerformanceInfoDialog from '../../../components/PerformanceInfoDialog';
-
-// Components and utilities from VideoConvert folder
+// Local Imports
+import { useVideoConverter } from './useVideoConverter';
 import FileUploadArea from './FileUploadArea';
 import ConversionSettings from './ConversionSettings';
 import ProgressDisplay from './ProgressDisplay';
 import InfoPopovers from './InfoPopovers';
-import { useVideoConverter } from './useVideoConverter';
 
 function VideoConvert() {
   const {
@@ -64,7 +61,6 @@ function VideoConvert() {
     handleCrfInfoClose,
     handlePresetInfoClick,
     handlePresetInfoClose,
-    handlePerformanceDialogClose,
     handleWidthChange,
     handleHeightChange,
     handleRatioChange,
@@ -85,14 +81,13 @@ function VideoConvert() {
   return (
     <>
       <Helmet>
-        <title>Convert Videos Online For Free | {APP_INFO.name}</title>
-        <meta name="description" content="Convert Videos Online For Free convert to MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free." />
-        <meta property="og:title" content="Convert Videos Online For Free | " />
-        <meta property="og:description" content="Convert Videos Online For Free convert to MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free." />
+        <title>Convert Video Online For Free | {APP_INFO.name}</title>
+        <meta name="description" property="og:description" content="Convert Video to MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free." />
+        <meta property="og:title" content={`Convert Video Online For Free | ${APP_INFO.name}`} />
         <meta property="og:image" content="/images/landing/video-convert-hero.jpg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="/tools/video/convert" />
-        <meta property="og:site_name" content="FileApps" />
+        <meta property="og:site_name" content={APP_INFO.name} />
         <link rel="canonical" href="/tools/video/convert" />
       </Helmet>
 
@@ -101,11 +96,11 @@ function VideoConvert() {
           <CardContent sx={{ p: 0 }}>
             <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
               <Grid size={{ xs: 12, md: 7 }} textAlign={{ xs: 'center', md: 'left' }}>
-                <Typography variant="h2" component="h1" fontWeight="600"> Convert Videos Online For Free </Typography>
-                <Typography variant="h5" component="h2" color="text.secondary" my={2}> Easily convert your audio and videos to MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free. </Typography>
+                <Typography variant="h2" component="h1" fontWeight="600"> Convert Video Online For Free </Typography>
+                <Typography variant="h5" component="h2" color="text.secondary" my={2}> Easily convert your audio and video file to MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free. </Typography>
               </Grid>
               <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
-                <img src="/images/landing/video-convert-hero.jpg" alt="Video Convert Icon" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+                <img src="/images/landing/video-convert-hero.jpg" alt="Video Convert" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
               </Grid>
             </Grid>
             <FileUploadArea
@@ -178,26 +173,9 @@ function VideoConvert() {
           onCrfInfoClose={handleCrfInfoClose}
           onPresetInfoClose={handlePresetInfoClose}
         />
-
-        <PerformanceInfoDialog
-          open={false}
-          onClose={handlePerformanceDialogClose}
-        />
       </Container>
     </>
   );
-}
-
-const FAQ_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "How does this online video converter work?", "acceptedAnswer": { "@type": "Answer", "text": "It uses FFmpeg WASM inside your browser – no uploads, no server processing." } },
-    { "@type": "Question", "name": "Which video formats can I convert?", "acceptedAnswer": { "@type": "Answer", "text": "MP4, MOV, MKV, AVI, WebM, FLV, and more." } },
-    { "@type": "Question", "name": "Can I change video resolution and FPS?", "acceptedAnswer": { "@type": "Answer", "text": "Yes – set custom resolution and FPS during conversion." } },
-    { "@type": "Question", "name": "Is this tool free and private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes – completely free, no signup, no watermark, and 100% browser-based for privacy." } },
-    { "@type": "Question", "name": "Does it work on mobile devices?", "acceptedAnswer": { "@type": "Answer", "text": "Yes – works on Android and iOS with modern browsers." } }
-  ]
 }
 
 export default VideoConvert;

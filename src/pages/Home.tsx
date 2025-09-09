@@ -1,6 +1,6 @@
 import ImageIcon from '@mui/icons-material/Image';
 import { Helmet } from 'react-helmet-async';
-import { useNavigate } from 'react-router-dom'
+// react-router Link used below
 import { APP_INFO } from "../constants";
 
 // MUI imports
@@ -9,9 +9,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import CardActionArea from '@mui/material/CardActionArea';
-import CardContent from '@mui/material/CardContent';
+import Link from '@mui/material/Link';
+import { Link as RouterLink } from 'react-router-dom'
 import Box from '@mui/material/Box';
 
 // MUI Icons
@@ -146,20 +145,19 @@ const imageTools: {
       title: 'Image Converter & Editor',
       description: 'Convert, resize, crop, rotate, and apply filters to JPG, PNG, WebP, GIF images. Local processing in your browser — fast, secure, no watermark.',
       icon: <ImageIcon fontSize="small" color="primary" />,
-      link: '/tools/image/convert-image-online',
+      link: '/tools/image/convert',
       color: 'primary'
     },
     {
       title: 'Thumbnail Generator',
       description: 'Extract high-quality thumbnails from videos instantly. Generate preview images in multiple sizes — no watermark, no signup required.',
       icon: <PhotoSizeSelectActualIcon fontSize="small" color="secondary" />,
-      link: '/tools/image/extract-thumbnail-from-video',
+      link: '/tools/image/thumbnail',
       color: 'secondary'
     },
   ];
 
 function Home() {
-  const navigate = useNavigate();
   const theme = useTheme();
   return (
     <>
@@ -192,17 +190,25 @@ function Home() {
       <Grid container spacing={2} sx={{ mb: 4 }}>
         {videoTools.map((tool) => (
           <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={tool.title}>
-            <Card sx={{ display: 'flex', height: '100%', alignItems: 'flex-start' }}>
-              <CardActionArea onClick={() => navigate(tool.link)} sx={{ height: '100%' }}>
-                <CardContent>
-                  <Box display="flex" alignItems="center" mb={1}>
-                    <Box display="flex" alignItems="center" justifyContent="center" width={30} height={30} p={0.5} borderRadius={4} sx={{ background: theme.palette.action.selected }}>{tool.icon}</Box>
-                    <Typography variant="subtitle1" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
-                  </Box>
-                  <Typography variant="body2" color="text.secondary">{tool.description}</Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+            <Link
+              component={RouterLink}
+              to={tool.link}
+              underline="none"
+              sx={{
+                display: 'flex',
+                height: '100%',
+                alignItems: 'center',
+                p: 2,
+                borderRadius: 2,
+                background: theme.palette.action.selected,
+              }}
+              aria-label={tool.title}
+            >
+              <Box display="flex" alignItems="center">
+                <Box display="flex" alignItems="center" justifyContent="center" width={30} height={30} p={0.5} borderRadius={4}>{tool.icon}</Box>
+                <Typography variant="subtitle1" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
+              </Box>
+            </Link>
           </Grid>
         ))}
       </Grid>
@@ -212,17 +218,25 @@ function Home() {
       <Grid container spacing={2} sx={{ mb: 4 }}>
         {audioTools.map((tool) => (
           <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={tool.title}>
-            <Card sx={{ display: 'flex', height: '100%', alignItems: 'flex-start' }}>
-              <CardActionArea onClick={() => navigate(tool.link)} sx={{ height: '100%' }}>
-                <CardContent>
-                  <Box display="flex" alignItems="center" mb={1}>
-                    <Box display="flex" alignItems="center" justifyContent="center" width={30} height={30} p={0.5} borderRadius={4} sx={{ background: theme.palette.action.selected }}>{tool.icon}</Box>
-                    <Typography variant="subtitle1" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
-                  </Box>
-                  <Typography variant="body2" color="text.secondary">{tool.description}</Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+            <Link
+              component={RouterLink}
+              to={tool.link}
+              underline="none"
+              sx={{
+                display: 'flex',
+                height: '100%',
+                alignItems: 'center',
+                p: 2,
+                borderRadius: 2,
+                background: theme.palette.action.selected,
+              }}
+              aria-label={tool.title}
+            >
+              <Box display="flex" alignItems="center">
+                <Box display="flex" alignItems="center" justifyContent="center" width={30} height={30} p={0.5} borderRadius={4}>{tool.icon}</Box>
+                <Typography variant="subtitle1" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
+              </Box>
+            </Link>
           </Grid>
         ))}
       </Grid>
@@ -232,17 +246,25 @@ function Home() {
       <Grid container spacing={2}>
         {imageTools.map((tool) => (
           <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={tool.title}>
-            <Card sx={{ display: 'flex', height: '100%', alignItems: 'flex-start' }}>
-              <CardActionArea onClick={() => navigate(tool.link)} sx={{ height: '100%' }}>
-                <CardContent>
-                  <Box display="flex" alignItems="center" mb={1}>
-                    <Box display="flex" alignItems="center" justifyContent="center" width={30} height={30} p={0.5} borderRadius={4} sx={{ background: theme.palette.action.selected }}>{tool.icon}</Box>
-                    <Typography variant="subtitle1" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
-                  </Box>
-                  <Typography variant="body2" color="text.secondary">{tool.description}</Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+            <Link
+              component={RouterLink}
+              to={tool.link}
+              underline="none"
+              sx={{
+                display: 'flex',
+                height: '100%',
+                alignItems: 'center',
+                p: 2,
+                borderRadius: 2,
+                background: theme.palette.action.selected,
+              }}
+              aria-label={tool.title}
+            >
+              <Box display="flex" alignItems="center">
+                <Box display="flex" alignItems="center" justifyContent="center" width={30} height={30} p={0.5} borderRadius={4}>{tool.icon}</Box>
+                <Typography variant="subtitle1" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
+              </Box>
+            </Link>
           </Grid>
         ))}
       </Grid>

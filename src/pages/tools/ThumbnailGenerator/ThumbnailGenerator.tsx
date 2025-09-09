@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
+import { APP_INFO } from '../../../constants'
 
 // Custom hooks
 import { useFFmpeg } from './utils'
@@ -20,17 +21,12 @@ import { handleDragEvents } from './fileHandling'
 
 // MUI Imports
 import Container from '@mui/material/Container'
-import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 import Button from '@mui/material/Button'
-import Box from '@mui/material/Box'
 import Alert from '@mui/material/Alert'
-import Divider from '@mui/material/Divider'
 
-// MUI Icons
-import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual'
 
 function ThumbnailGenerator() {
   // Custom hooks
@@ -222,31 +218,23 @@ function ThumbnailGenerator() {
   return (
     <>
       <Helmet>
-        <title>Video Thumbnail Generator - Extract Preview Images from Videos Free</title>
-        <meta name="description" content="Free online video thumbnail generator. Extract high-quality preview images from videos instantly. Generate thumbnails in multiple sizes with no watermarks or signups required." />
-        <meta name="keywords" content="video thumbnail generator, extract video thumbnails, video preview images, thumbnail maker, video screenshots, free thumbnail generator" />
-        <meta property="og:title" content="Video Thumbnail Generator - Extract Preview Images from Videos Free" />
-        <meta property="og:description" content="Free online video thumbnail generator. Extract high-quality preview images from videos instantly. Generate thumbnails in multiple sizes with no watermarks or signups required." />
+        <title>Extract Frames, Generate Scrubs from Videos Online For Free | {APP_INFO.name}</title>
+        <meta
+          name="description"
+          property="og:description"
+          content="Extract high-quality thumbnails and contact sheets from videos. Generate image scrubs for easy navigation. Local processing — private & watermark-free."
+        />
+        <meta property="og:title" content={`Extract Frames, Generate Scrubs from Videos Online For Free | ${APP_INFO.name}`} />
+        <meta property="og:image" content="/images/landing/thumbnail-generator-hero.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://fileapps.click/tools/thumbnail-generator" />
-        <link rel="canonical" href="https://fileapps.click/tools/thumbnail-generator" />
+        <meta property="og:url" content="https://fileapps.click/tools/thumbnail" />
+        <meta property="og:site_name" content={APP_INFO.name} />
+        <link rel="canonical" href="https://fileapps.click/tools/thumbnail" />
       </Helmet>
 
       <Container maxWidth="lg" sx={{ py: 10 }}>
-
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
-            <Box display="flex" alignItems="center">
-              <PhotoSizeSelectActualIcon color="secondary" fontSize="small" sx={{ mr: 0.5 }} />
-              <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
-                Video Thumbnail Generator
-              </Typography>
-            </Box>
-            <Divider sx={{ my: 0.5 }} />
-            <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-              Extract high-quality thumbnails from videos instantly. Generate preview images in multiple sizes — no watermark, no signup required.
-            </Typography>
-
             <FileUploadArea
               file={file}
               previewUrl={previewUrl}

@@ -1,21 +1,16 @@
 import { Helmet } from 'react-helmet-async';
+import { APP_INFO } from '../../../constants';
 import { formatBytes } from '../../../helpers';
 
 // MUI
 import Alert from '@mui/material/Alert';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
-import Typography from '@mui/material/Typography';
 
-// MUI Icons
-import AspectRatioIcon from '@mui/icons-material/AspectRatio';
-
-// Components and utilities from VideoResize folder
+// Local imports
 import FileUploadArea from './FileUploadArea';
 import ResizeSettings from './ResizeSettings';
 import ProgressDisplay from './ProgressDisplay';
@@ -26,7 +21,7 @@ function VideoResize() {
     // Refs
     videoRef,
     fileInputRef,
-    
+
     // State
     file,
     previewUrl,
@@ -44,7 +39,7 @@ function VideoResize() {
     downloadUrl,
     downloadSize,
     isDragActive,
-    
+
     // Event handlers
     handleFileChange,
     handleRemoveFile,
@@ -56,12 +51,12 @@ function VideoResize() {
     handleFpsChange,
     handleReset,
     handleDownload,
-    
+
     // Drag handlers
     onDragOver,
     onDragLeave,
     onDrop,
-    
+
     // Processing
     processVideo,
     stopProcessing,
@@ -70,15 +65,17 @@ function VideoResize() {
   return (
     <>
       <Helmet>
-        <title>Video Resizer Online Free – Change Resolution & Aspect Ratio</title>
-        <meta name="description" content="Resize videos to custom dimensions or aspect ratios (16:9, 4:3, 1:1) for social media. Change resolution privately in your browser." />
-        <meta name="keywords" content="resize video online free, change video resolution, video aspect ratio changer, resize mp4 online, video resizer tool, scale video online, resize video for social media" />
-        <meta property="og:title" content="Free Online Video Resizer – Fast, Private & No Watermark" />
-        <meta property="og:description" content="Resize videos to custom resolutions and aspect ratios in your browser." />
+        <title>Resize Video Online For Free | {APP_INFO.name}</title>
+        <meta
+          name="description"
+          property="og:description"
+          content="Resize videos to custom dimensions or aspect ratios (16:9, 4:3, 1:1) for social media. Change resolution privately in your browser."
+        />
+        <meta property="og:title" content={`Resize Video Online For Free | ${APP_INFO.name}`} />
         <meta property="og:image" content="/images/landing/video-resizer-hero.jpg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fileapps.click/tools/video/resize" />
-        <meta property="og:site_name" content="FileApps" />
+        <meta property="og:site_name" content={APP_INFO.name} />
         <link rel="canonical" href="https://fileapps.click/tools/video/resize" />
       </Helmet>
 
@@ -86,17 +83,6 @@ function VideoResize() {
 
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
-            <Box display="flex" alignItems="center">
-              <AspectRatioIcon color="warning" fontSize="small" sx={{ mr: 0.5 }} />
-              <Typography variant="body1" component="h1" fontWeight="600" mb={0.5}>
-                Video Resizer
-              </Typography>
-            </Box>
-            <Divider sx={{ my: 0.5 }} />
-            <Typography variant="body2" component="h2" color="text.secondary" mb={2}>
-              Resize videos to custom dimensions or aspect ratios (16:9, 4:3, 1:1) for social media. Change resolution privately in your browser.
-            </Typography>
-
             <FileUploadArea
               file={file}
               previewUrl={previewUrl}
