@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { APP_INFO } from '../../../constants';
 import { formatBytes } from '../../../helpers';
 
 // MUI
@@ -10,13 +11,6 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-
-// MUI Icons
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 // Global Components
 import PerformanceInfoDialog from '../../../components/PerformanceInfoDialog';
@@ -91,30 +85,29 @@ function VideoConvert() {
   return (
     <>
       <Helmet>
-        <title>Convert Videos Online For Free | No Signup, No Limit</title>
+        <title>Convert Videos Online For Free | {APP_INFO.name}</title>
         <meta name="description" content="Convert Videos Online For Free convert to MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free." />
-        <meta property="og:title" content="Convert Videos Online For Free | No Signup, No Limit" />
+        <meta property="og:title" content="Convert Videos Online For Free | " />
         <meta property="og:description" content="Convert Videos Online For Free convert to MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free." />
         <meta property="og:image" content="/images/landing/video-convert-hero.jpg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="/tools/video/convert" />
         <meta property="og:site_name" content="FileApps" />
         <link rel="canonical" href="/tools/video/convert" />
-        <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
       </Helmet>
 
       <Container maxWidth="lg" sx={{ py: 10 }}>
-        <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
-          <Grid size={{ xs: 12, md: 7 }} textAlign={{ xs: 'center', md: 'left' }}>
-            <Typography variant="h2" component="h1" fontWeight="600"> Convert Videos Online For Free </Typography>
-            <Typography variant="h5" component="h2" color="text.secondary" my={2}> Convert Videos Online For Free convert to MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free. </Typography>
-          </Grid>
-          <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
-            <img src="/images/landing/video-convert-hero.jpg" alt="Video Convert Icon" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
-          </Grid>
-        </Grid>
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
+            <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
+              <Grid size={{ xs: 12, md: 7 }} textAlign={{ xs: 'center', md: 'left' }}>
+                <Typography variant="h2" component="h1" fontWeight="600"> Convert Videos Online For Free </Typography>
+                <Typography variant="h5" component="h2" color="text.secondary" my={2}> Easily convert your audio and videos to MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free. </Typography>
+              </Grid>
+              <Grid size={{ xs: 12, md: 5 }} order={{ xs: -1, md: 0 }}>
+                <img src="/images/landing/video-convert-hero.jpg" alt="Video Convert Icon" loading="lazy" width="auto" height="auto" style={{ maxWidth: '100%' }} />
+              </Grid>
+            </Grid>
             <FileUploadArea
               file={file}
               previewUrl={previewUrl}
@@ -179,24 +172,6 @@ function VideoConvert() {
           {isProcessing && (<ProgressDisplay progress={progress} status={status} consoleLogs={consoleLogs} />)}
           {errorMsg && <Alert severity="error" sx={{ mt: 2 }}>{errorMsg}</Alert>}
         </Card>
-        <Grid container spacing={3} mt={5} justifyContent='center' flexGrow={1}>
-          <Grid size={12}>
-            <Typography variant='h2' mb={4} align='center'>FAQs</Typography>
-            <Divider sx={{ width: 100, borderColor: 'common.black', mx: 'auto', my: 2 }} />
-          </Grid>
-          <Grid size={{ xs: 12 }}>
-            {FAQ_SCHEMA.mainEntity.map((faq: any, idx: number) => (
-              <Accordion key={idx} square disableGutters elevation={3}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`faq-vc-${idx}-content`} id={`faq-vc-${idx}-header`}>
-                  <Typography variant='h6' component='h3'>{faq.name}</Typography>
-                </AccordionSummary>
-                <AccordionDetails sx={{ p: 2 }}>
-                  <Typography variant='body1'>{faq.acceptedAnswer.text}</Typography>
-                </AccordionDetails>
-              </Accordion>
-            ))}
-          </Grid>
-        </Grid>
         <InfoPopovers
           crfAnchor={crfAnchor}
           presetAnchor={presetAnchor}

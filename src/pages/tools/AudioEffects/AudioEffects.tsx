@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { formatBytes } from '../../../helpers';
 
 // MUI imports
-import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -18,14 +17,14 @@ import IconButton from '@mui/material/IconButton';
 // MUI Icons
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import CloseIcon from '@mui/icons-material/Close';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 import { useAudioEffects } from './useAudioEffects';
 import EffectControls from './EffectControls';
 import ProgressDisplay from './ProgressDisplay';
+import FileUploadArea from './FileUploadArea';
 
 export default function AudioEffects() {
-    const theme = useTheme();
+    
     const {
         file,
         previewUrl,
@@ -76,8 +75,8 @@ export default function AudioEffects() {
                 <link rel="canonical" href="https://fileapps.click/tools/audio-effects" />
             </Helmet>
 
-            <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
-                <Card sx={{ p: 1.5 }}>
+            <Container maxWidth="lg" sx={{ py: 10 }}>
+                <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
                     <CardContent sx={{ p: 0 }}>
                         <Box display="flex" alignItems="center">
                             <GraphicEqIcon color="info" fontSize="small" sx={{ mr: 0.5 }} />
@@ -88,48 +87,18 @@ export default function AudioEffects() {
                             Apply fades, normalization, pitch adjustment, speed changes & volume control to audio files. Professional effects in your browser.
                         </Typography>
 
-                        <Box
+                        <FileUploadArea
+                            file={file}
+                            previewUrl={previewUrl}
+                            isDragActive={isDragActive}
+                            fileInputRef={fileInputRef}
+                            audioRef={audioRef}
+                            onInputChange={handleFileChange}
                             onDragOver={handleDragOver}
                             onDragLeave={handleDragLeave}
                             onDrop={handleDrop}
-                            position="relative"
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            flexDirection="column"
-                            width="100%"
-                            height={220}
-                            borderRadius={1}
-                            bgcolor={isDragActive ? 'primary.lighter' : 'action.hover'}
-                            border={isDragActive ? `2px dashed ${theme.palette.info.main}` : `2px dashed ${theme.palette.divider}`}
-                            sx={{ cursor: 'pointer', transition: 'background 0.2s, border 0.2s' }}
-                        >
-                            {!file ? (
-                                <Box textAlign="center">
-                                    <CloudUploadIcon sx={{ fontSize: '2.5rem', mb: 1 }} />
-                                    <Typography variant="subtitle2" gutterBottom>
-                                        Drag & drop an audio file here<br />or<br />Click to select
-                                    </Typography>
-                                    <Typography color="text.secondary" variant="caption">
-                                        Supported: MP3, WAV, AAC, FLAC, OGG, and more
-                                    </Typography>
-                                </Box>
-                            ) : (
-                                <Box textAlign="center" width="100%">
-                                    <audio ref={audioRef} src={previewUrl || undefined} controls style={{ width: '100%', maxWidth: 500, position: 'relative', zIndex: 1000 }} onLoadedMetadata={(e) => setDuration((e.target as HTMLAudioElement).duration)} />
-                                </Box>
-                            )}
-
-                            <input
-                                ref={fileInputRef as any}
-                                accept="audio/*"
-                                style={{ position: 'absolute', width: '100%', height: '100%', left: 0, top: 0, opacity: 0, cursor: 'pointer', zIndex: 2 }}
-                                id="audio-effects-file-input"
-                                type="file"
-                                onChange={(e) => handleFileChange(e.target.files?.[0] ?? null)}
-                                tabIndex={-1}
-                            />
-                        </Box>
+                            onLoadedMetadata={(e) => setDuration((e.target as HTMLAudioElement).duration)}
+                        />
 
                         {file && (
                             <Box display="flex" alignItems="center" justifyContent="center" mb={2}>

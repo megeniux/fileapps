@@ -37,56 +37,56 @@ const videoTools: {
       title: 'Video Converter',
       description: 'Convert MP4, MOV, MKV, AVI, WebM & more locally in your browser. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free.',
       icon: <SwapHorizIcon fontSize="small" color="primary" />,
-      link: '/tools/video/convert-video-online',
+  link: '/tools/video/convert',
       color: 'primary'
     },
     {
       title: 'Video Compressor',
       description: 'Reduce video file size without quality loss using local browser processing. Adjust CRF, bitrate & resolution — no uploads, no signup required.',
       icon: <CompressIcon fontSize="small" color="secondary" />,
-      link: '/tools/video/compress-video-online',
+  link: '/tools/video/compress',
       color: 'secondary'
     },
     {
       title: 'Video Resizer',
       description: 'Resize videos to custom dimensions or aspect ratios (16:9, 4:3, 1:1) for social media. Change resolution privately in your browser.',
       icon: <AspectRatioIcon fontSize="small" color='warning' />,
-      link: '/tools/video/resize-video-online',
+  link: '/tools/video/resize',
       color: 'warning'
     },
     {
       title: 'Video Trimmer',
       description: 'Trim and cut videos with frame-accurate precision. Remove unwanted parts locally — no watermark, no signup, 100% browser-based.',
       icon: <ContentCutIcon fontSize="small" color="info" />,
-      link: '/tools/video/trim-video-online',
+  link: '/tools/video/trim',
       color: 'info'
     },
     {
       title: 'Video Merger',
       description: 'Merge multiple video clips into one file while preserving quality. Combine videos locally in your browser — private & watermark-free.',
       icon: <MergeTypeIcon fontSize="small" color="success" />,
-      link: '/tools/video/merge-videos-online',
+  link: '/tools/video/merge',
       color: 'success'
     },
     {
       title: 'Extract Audio from Video',
       description: 'Extract high-quality audio from videos and save as MP3, WAV, AAC, or FLAC. Local processing — no uploads, no watermark, no signup.',
       icon: <MusicNoteIcon fontSize="small" color="error" />,
-      link: '/tools/video/extract-audio-from-video',
+  link: '/tools/video/extract-audio',
       color: 'error'
     },
     {
       title: 'Burn Captions into Video',
       description: 'Embed SRT/VTT subtitles permanently into video files. Customize font, size, color & position — private browser-based processing.',
       icon: <SubtitlesIcon fontSize="small" color="primary" />,
-      link: '/tools/video/burn-captions-into-video-online',
+  link: '/tools/video/burn-captions',
       color: 'primary'
     },
     {
       title: 'Video Speed Editor',
       description: 'Change video speed from -20x (reverse) to +20x with pitch correction. Slow motion & time-lapse effects — no watermark, browser-based.',
       icon: <SpeedIcon fontSize="small" color="secondary" />,
-      link: '/tools/video/video-playback-speed-editor',
+  link: '/tools/video/playback',
       color: 'secondary'
     },
   ];
@@ -102,35 +102,35 @@ const audioTools: {
       title: 'Audio Converter',
       description: 'Convert MP3, WAV, AAC, FLAC, OGG, M4A locally in your browser. Choose bitrate (128k–320k) or lossless — no uploads, no signup, no watermark.',
       icon: <SwapHorizIcon fontSize="small" color="primary" />,
-      link: '/tools/audio/convert-audio-online',
+  link: '/tools/audio/convert',
       color: 'primary'
     },
     {
       title: 'Audio Trimmer',
       description: 'Trim and cut audio files with precision timing for podcasts, music, or voiceovers. Local processing — private & watermark-free.',
       icon: <ContentCutIcon fontSize="small" color="secondary" />,
-      link: '/tools/audio/trim-audio-online',
+  link: '/tools/audio/trim',
       color: 'secondary'
     },
     {
       title: 'Audio Merger',
       description: 'Join multiple audio tracks into one file instantly. Combine MP3, WAV, AAC files in your browser — no uploads or signup required.',
       icon: <MergeTypeIcon fontSize="small" color="warning" />,
-      link: '/tools/audio/merge-audio-files-online',
+  link: '/tools/audio/merge',
       color: 'warning'
     },
     {
       title: 'Audio Effects',
       description: 'Apply fades, normalization, pitch adjustment, speed changes & volume control to audio files. Professional effects in your browser.',
       icon: <GraphicEqIcon fontSize="small" color="info" />,
-      link: '/tools/audio/audio-effects-online',
+  link: '/tools/audio/effects',
       color: 'info'
     },
     {
       title: 'Audio Speed Editor',
       description: 'Change audio speed with pitch correction or reverse tracks completely. Export processed audio with no watermark — 100% browser-based.',
       icon: <SpeedIcon fontSize="small" color="success" />,
-      link: '/tools/audio/audio-playback-speed-editor',
+  link: '/tools/audio/playback',
       color: 'success'
     }
   ];

@@ -61,8 +61,8 @@ function ExtractAudio() {
         <link rel="canonical" href="https://fileapps.click/tools/extract-audio" />
       </Helmet>
       
-      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
-        <Card sx={{ p: 1.5 }}>
+      <Container maxWidth="lg" sx={{ py: 10 }}>
+        <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
             {/* Error Alert */}
             {state.processing.errorMsg && (

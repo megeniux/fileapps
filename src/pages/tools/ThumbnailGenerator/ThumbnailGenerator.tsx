@@ -232,9 +232,9 @@ function ThumbnailGenerator() {
         <link rel="canonical" href="https://fileapps.click/tools/thumbnail-generator" />
       </Helmet>
 
-      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+      <Container maxWidth="lg" sx={{ py: 10 }}>
 
-        <Card sx={{ p: 1.5 }} elevation={3}>
+        <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
             <Box display="flex" alignItems="center">
               <PhotoSizeSelectActualIcon color="secondary" fontSize="small" sx={{ mr: 0.5 }} />

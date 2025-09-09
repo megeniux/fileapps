@@ -50,8 +50,8 @@ const AudioMerge: React.FC = () => {
         <title>Audio Merger - Join Multiple Audio Files Online Free</title>
       </Helmet>
 
-      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
-  <Card sx={{ p: 1.5 }}>
+      <Container maxWidth="lg" sx={{ py: 10 }}>
+  <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
             <Box display="flex" alignItems="center">
               <MergeTypeIcon color="warning" fontSize="small" sx={{ mr: 0.5 }} />

@@ -92,8 +92,8 @@ const VideoMerge: React.FC = () => {
       </Helmet>
       
       {/* Main Content */}
-      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
-        <Card sx={{ p: 1.5 }}>
+      <Container maxWidth="lg" sx={{ py: 10 }}>
+        <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
             {/* Header */}
             <Box display="flex" alignItems="center">

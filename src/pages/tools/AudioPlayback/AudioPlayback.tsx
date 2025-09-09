@@ -72,12 +72,12 @@ function AudioPlayback() {
         <link rel="canonical" href="https://fileapps.click/tools/audio-playback" />
       </Helmet>
 
-      <Container maxWidth="lg" sx={{ py: 2, my: 'auto' }}>
+      <Container maxWidth="lg" sx={{ py: 10 }}>
         {errorMsg && (
           <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>
         )}
 
-        <Card sx={{ p: 1.5 }} elevation={3}>
+        <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
             <Box display="flex" alignItems="center">
               <SpeedIcon color="success" fontSize="small" sx={{ mr: 0.5 }} />
