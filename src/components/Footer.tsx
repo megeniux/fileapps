@@ -9,15 +9,16 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 
-const StyledFooter = styled('footer')(({ theme }) => ({
+const StyledFooter = styled('footer')(() => ({
     position: 'fixed',
     bottom: 0,
     width: '100%',
+    '& > .MuiToolbar-root':{
+        minHeight: '40px',
+    }
 }));
 
 function Footer() {
-  const year = new Date().getFullYear();
-
   return (
     <StyledFooter>
       <Toolbar component={Paper} elevation={3} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

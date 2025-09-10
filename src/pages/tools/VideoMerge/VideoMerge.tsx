@@ -35,10 +35,10 @@ const VideoMerge: React.FC = () => {
     downloadUrl,
     downloadSize,
     errorMsg,
-    
+
     // Refs
     fileInputRef,
-    
+
     // Actions
     handleFilesAdd,
     handleFileRemove,
@@ -54,10 +54,10 @@ const VideoMerge: React.FC = () => {
     handleAddClick,
     createReplaceHandler
   } = useVideoMerger();
-  
+
   // Check if merge is possible
   const canMerge = files.length >= MIN_VIDEO_COUNT && !isProcessing;
-  
+
   return (
     <>
       {/* SEO Meta Tags */}
@@ -69,13 +69,13 @@ const VideoMerge: React.FC = () => {
           content="Join multiple video clips into one file while preserving quality. Combine videos locally in your browser — private & watermark-free."
         />
         <meta property="og:title" content={`Merge Videos Online For Free | ${APP_INFO.name}`} />
-  <meta property="og:image" content="/images/branding/logo-small.svg" />
+        <meta property="og:image" content="/images/branding/logo-small.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fileapps.click/tools/video-merge" />
         <meta property="og:site_name" content={APP_INFO.name} />
         <link rel="canonical" href="https://fileapps.click/tools/video-merge" />
       </Helmet>
-      
+
       {/* Main Content */}
       <Container maxWidth="lg" sx={{ py: 10 }}>
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
@@ -102,7 +102,7 @@ const VideoMerge: React.FC = () => {
               onDragOver={handleDragOver}
               onDrop={handleDrop}
             />
-            
+
             {/* Hidden file input for reference */}
             <input
               ref={fileInputRef}
@@ -116,7 +116,7 @@ const VideoMerge: React.FC = () => {
                 }
               }}
             />
-            
+
             {/* Video List */}
             <VideoList
               files={files}
@@ -127,47 +127,47 @@ const VideoMerge: React.FC = () => {
               onReplace={(index) => createReplaceHandler(index)()}
             />
           </CardContent>
-          
+
           {/* Action Buttons */}
-          <CardActions 
-            sx={{ 
-              display: files.length ? 'flex' : 'none', 
-              flexWrap: 'wrap', 
-              justifyContent: 'center', 
-              pb: 0, 
-              mt: 2, 
-              gap: 1 
+          <CardActions
+            sx={{
+              display: files.length ? 'flex' : 'none',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              pb: 0,
+              mt: 2,
+              gap: 1
             }}
           >
             {/* Merge Button */}
-            <Button 
-              variant="contained" 
-              onClick={handleMerge} 
+            <Button
+              variant="contained"
+              onClick={handleMerge}
               disabled={!canMerge}
               startIcon={<MergeTypeIcon />}
             >
               {isProcessing ? 'Merging...' : 'Merge'}
             </Button>
-            
+
             {/* Stop Button - only when processing */}
             {isProcessing && (
               <Button variant="contained" color="error" onClick={handleStop}>
                 Stop
               </Button>
             )}
-            
+
             {/* Download Button */}
             {downloadUrl && downloadSize !== null && (
-              <Button 
-                variant="contained" 
-                color="success" 
+              <Button
+                variant="contained"
+                color="success"
                 onClick={handleDownload}
               >
                 Download ({formatFileSize(downloadSize)})
               </Button>
             )}
           </CardActions>
-          
+
           {/* Progress Display */}
           <ProgressDisplay
             isProcessing={isProcessing}
@@ -176,7 +176,7 @@ const VideoMerge: React.FC = () => {
             consoleLogs={consoleLogs}
           />
         </Card>
-        
+
         {/* Error Display */}
         {errorMsg && (
           <Alert severity="error" sx={{ my: 2 }}>
