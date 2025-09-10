@@ -1,37 +1,36 @@
-import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // Layouts
 import BasicLayout from './components/BasicLayout';
 
 // Main Pages
-const AboutUs = lazy(() => import('./pages/About'));
-const Contact = lazy(() => import('./pages/Contact'));
-const Home = lazy(() => import('./pages/Home'));
-const NotFound = lazy(() => import('./pages/404'));
-const PrivacyPolicy = lazy(() => import('./pages/Policy'));
-const TOS = lazy(() => import('./pages/Terms'));
+import Home from './pages/Home';
+import AboutUs from './pages/About';
+import Contact from './pages/Contact';
+import NotFound from './pages/404';
+import PrivacyPolicy from './pages/Policy';
+import TOS from './pages/Terms';
 
 // Audio Tools
-const AudioConvert = lazy(() => import('./pages/tools/AudioConvert/AudioConvert'));
-const AudioEffects = lazy(() => import('./pages/tools/AudioEffects/AudioEffects'));
-const AudioMerge = lazy(() => import('./pages/tools/AudioMerge/AudioMerge'));
-const AudioPlayback = lazy(() => import('./pages/tools/AudioPlayback/AudioPlayback'));
-const AudioTrim = lazy(() => import('./pages/tools/AudioTrim/AudioTrim'));
+import AudioConvert from './pages/tools/AudioConvert/AudioConvert';
+import AudioEffects from './pages/tools/AudioEffects/AudioEffects';
+import AudioMerge from './pages/tools/AudioMerge/AudioMerge';
+import AudioPlayback from './pages/tools/AudioPlayback/AudioPlayback';
+import AudioTrim from './pages/tools/AudioTrim/AudioTrim';
 
 // Image Tools
-const ImageEditor = lazy(() => import('./pages/tools/ImageConvert/ImageConvert'));
-const ThumbnailGenerator = lazy(() => import('./pages/tools/ThumbnailGenerator/ThumbnailGenerator'));
+import ImageEditor from './pages/tools/ImageConvert/ImageConvert';
+import ThumbnailGenerator from './pages/tools/ThumbnailGenerator/ThumbnailGenerator';
 
 // Video Tools
-const BurnCaption = lazy(() => import('./pages/tools/BurnCaption/BurnCaption'));
-const ExtractAudio = lazy(() => import('./pages/tools/ExtractAudio/ExtractAudio'));
-const VideoCompression = lazy(() => import('./pages/tools/VideoCompression/VideoCompression'));
-const VideoConvert = lazy(() => import('./pages/tools/VideoConvert/VideoConvert'));
-const VideoMerge = lazy(() => import('./pages/tools/VideoMerge/VideoMerge'));
-const VideoPlayback = lazy(() => import('./pages/tools/VideoPlayback/VideoPlayback'));
-const VideoResize = lazy(() => import('./pages/tools/VideoResize/VideoResize'));
-const VideoTrim = lazy(() => import('./pages/tools/VideoTrim/VideoTrim'));
+import BurnCaption from './pages/tools/BurnCaption/BurnCaption';
+import ExtractAudio from './pages/tools/ExtractAudio/ExtractAudio';
+import VideoCompression from './pages/tools/VideoCompression/VideoCompression';
+import VideoConvert from './pages/tools/VideoConvert/VideoConvert';
+import VideoMerge from './pages/tools/VideoMerge/VideoMerge';
+import VideoPlayback from './pages/tools/VideoPlayback/VideoPlayback';
+import VideoResize from './pages/tools/VideoResize/VideoResize';
+import VideoTrim from './pages/tools/VideoTrim/VideoTrim';
 
 function AppRoutes() {
   return (

@@ -171,7 +171,7 @@ function Home() {
         <meta property="og:url" content="https://fileapps.click/" />
         <link rel="canonical" href="https://fileapps.click/" />
       </Helmet>
-      <Container maxWidth="lg" sx={{ marginBlock: 'auto', py: 5 }}>
+      <Container maxWidth="lg" sx={{ marginBlock: 'auto', py: 10 }}>
       <Box mb={4}>
         <Typography variant="h2" component="h1" gutterBottom align='center' fontWeight="bold"> Welcome to <span className='gradient-text-primary'>{APP_INFO.name}</span> </Typography>
         <Typography
@@ -206,7 +206,7 @@ function Home() {
             >
               <Box display="flex" alignItems="center">
                 <Box display="flex" alignItems="center" justifyContent="center" width={30} height={30} p={0.5} borderRadius={4}>{tool.icon}</Box>
-                <Typography variant="subtitle1" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
+                <Typography variant="subtitle1" component="p" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
               </Box>
             </Link>
           </Grid>
@@ -234,7 +234,7 @@ function Home() {
             >
               <Box display="flex" alignItems="center">
                 <Box display="flex" alignItems="center" justifyContent="center" width={30} height={30} p={0.5} borderRadius={4}>{tool.icon}</Box>
-                <Typography variant="subtitle1" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
+                <Typography variant="subtitle1" component="p" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
               </Box>
             </Link>
           </Grid>
@@ -262,7 +262,7 @@ function Home() {
             >
               <Box display="flex" alignItems="center">
                 <Box display="flex" alignItems="center" justifyContent="center" width={30} height={30} p={0.5} borderRadius={4}>{tool.icon}</Box>
-                <Typography variant="subtitle1" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
+                <Typography variant="subtitle1" component="p" color={tool.color} fontWeight="bold" ml={1}>{tool.title}</Typography>
               </Box>
             </Link>
           </Grid>

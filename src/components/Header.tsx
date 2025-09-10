@@ -90,7 +90,7 @@ function Header() {
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Box display="flex" alignItems="center" sx={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
           <img src="/images/branding/logo-small.svg" alt={APP_INFO.name} width={28} height={28} style={{ marginRight: 8 }} />
-          <Typography variant="h6" sx={{ fontWeight: 700 }}>{APP_INFO.name}</Typography>
+          <Typography variant="h6" component="p" sx={{ fontWeight: 700 }}>{APP_INFO.name}</Typography>
         </Box>
 
         {/* Desktop nav */}
