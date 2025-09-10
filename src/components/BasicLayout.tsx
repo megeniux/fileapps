@@ -2,6 +2,7 @@ import React from 'react';
 
 // Components
 import Header from './Header';
+import Footer from './Footer';
 
 // MUI imports
 import { styled } from '@mui/material/styles';
@@ -30,6 +31,7 @@ function BasicLayout({ children }: BasicLayoutProps) {
       <Paper square elevation={0} className='main-container'>
         {children}
       </Paper>
+      <Footer />
     </Root>
   );
 }
