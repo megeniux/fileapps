@@ -64,7 +64,7 @@ const IMAGE_TOOLS = [
 function Header() {
   const navigate = useNavigate();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
   const location = useLocation();
 
   const isActivePath = (path: string) => location.pathname === path;

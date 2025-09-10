@@ -45,8 +45,8 @@ function Home() {
         <meta property="og:site_name" content={APP_INFO.name} />
         <link rel="canonical" href="https://fileapps.click/" />
       </Helmet>
-      <section className='hero' style={{ background: alpha(theme.palette.grey[900], 0.02) }}>
-        <Container maxWidth="lg" sx={{ py: 10, mt: 5 }}>
+      <section className='hero' style={{ background: `linear-gradient(180deg, ${alpha(theme.palette.grey[900], 0.25)} 0%, transparent 100%)` }}>
+        <Container maxWidth="lg" sx={{ pt: 5, mt: 5 }}>
           <Grid container gap={4}>
             <Grid size={12}>
               <Typography variant="h1" component="h1" gutterBottom align='center' fontWeight={700}>Welcome to <span className='gradient-text-primary'>{APP_INFO.name}</span></Typography>
@@ -86,7 +86,7 @@ function Home() {
           </Grid>
         </Container>
       </section>
-      <section className='tools video' style={{ background: alpha(theme.palette.info.main, 0.05) }}>
+      <section className='tools video' style={{ background: `linear-gradient(90deg, ${alpha(theme.palette.info.main, 0.25)} 0%, transparent 75%)` }}>
         <Container maxWidth="lg" sx={{ py: 10 }}>
           <Grid container spacing={4}>
             <Grid size={{ xs: 12 }}>
@@ -108,7 +108,7 @@ function Home() {
           </Grid>
         </Container>
       </section>
-      <section className='tools audio' style={{ background: alpha(theme.palette.primary.main, 0.05) }}>
+      <section className='tools audio' style={{ background: `linear-gradient(270deg, ${alpha(theme.palette.primary.main, 0.25)} 0%, transparent 75%)` }}>
         <Container maxWidth="lg" sx={{ py: 10 }}>
           <Grid container spacing={4}>
             <Grid size={{ xs: 12 }}>
@@ -130,7 +130,7 @@ function Home() {
           </Grid>
         </Container>
       </section>
-      <section className='tools image' style={{ background: alpha(theme.palette.warning.main, 0.05) }}>
+      <section className='tools image' style={{ background: `linear-gradient(90deg, ${alpha(theme.palette.warning.main, 0.25)} 0%, transparent 75%)` }}>
         <Container maxWidth="lg" sx={{ py: 10 }}>
           <Grid container spacing={4}>
             <Grid size={{ xs: 12 }}>
@@ -163,7 +163,7 @@ function Home() {
           ))}
         </Container>
       </section>
-      <section className='privacy' style={{ background: alpha(theme.palette.grey[900], 0.02) }}>
+      <section className='privacy' style={{ background: `linear-gradient(0deg, ${alpha(theme.palette.grey[900], 0.25)} 0%, transparent 100%)` }}>
         <Container maxWidth="lg" sx={{ py: 10, textAlign: 'center' }}>
           <Typography variant="h3" component="h2" gutterBottom>Privacy is our priority</Typography>
           <Typography variant="body1" color="text.secondary" mb={4}>
