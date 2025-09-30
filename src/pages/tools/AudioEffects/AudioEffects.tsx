@@ -1,27 +1,25 @@
-import React from 'react';
+import { useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from '../../../constants';
 import { formatBytes } from '../../../helpers';
+import { styled } from '@mui/material/styles';
 
-// MUI Imports
+// MUI imports
+import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
 import Grid from '@mui/material/Grid';
 
-// MUI Icons
-import CloseIcon from '@mui/icons-material/Close';
-
-// Local Imports   
+// Component imports
 import { useAudioEffects } from './useAudioEffects';
 import EffectControls from './EffectControls';
 import ProgressDisplay from './ProgressDisplay';
 import FileUploadArea from './FileUploadArea';
+import FileInfoDisplay from '../../../components/shared/FileInfoDisplay';
 
 export default function AudioEffects() {
 
@@ -65,7 +63,7 @@ export default function AudioEffects() {
         setEqGains
     } = useAudioEffects();
 
-    const audioRef = React.useRef<HTMLAudioElement | null>(null);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
 
     return (
         <>
@@ -78,14 +76,17 @@ export default function AudioEffects() {
                 />
                 <meta property="og:title" content={`Audio Effects Online For Free | ${APP_INFO.name}`} />
                 <meta property="og:image" content="/images/branding/logo-small.svg" />
-                
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://fileapps.click/tools/audio-effects" />
                 <meta property="og:site_name" content={APP_INFO.name} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={`Audio Effects Online For Free | ${APP_INFO.name}`} />
+                <meta name="twitter:description" content="Apply effect to audio adjust speed, pitch, volume, apply fade‑in/out, normalize and equalizer." />
+                <meta name="twitter:image" content="/images/branding/logo-small.svg" />
                 <link rel="canonical" href="https://fileapps.click/tools/audio-effects" />
             </Helmet>
 
-            <Container maxWidth="lg" sx={{ py: 10 }}>
+            <Root maxWidth="lg">
                 <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
                     <CardContent sx={{ p: 0 }}>
                         <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
@@ -111,16 +112,8 @@ export default function AudioEffects() {
                             onLoadedMetadata={(e) => setDuration((e.target as HTMLAudioElement).duration)}
                         />
 
-                        {file && (
-                            <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
-                                <Typography variant="body2" noWrap>
-                                    {file.name} ({formatBytes(file.size)})
-                                </Typography>
-                                <IconButton onClick={handleRemoveFile} color="error" sx={{ ml: 1 }}>
-                                    <CloseIcon fontSize="small" />
-                                </IconButton>
-                            </Box>
-                        )}
+                        {/* File information and remove button */}
+                        {file && <FileInfoDisplay file={file} onRemove={handleRemoveFile} isProcessing={isProcessing} />}
 
                         {file && (
                             <EffectControls
@@ -164,7 +157,13 @@ export default function AudioEffects() {
                 </Card>
 
                 {errorMsg && <Box sx={{ my: 2 }}><Typography color="error">{errorMsg}</Typography></Box>}
-            </Container>
+            </Root>
         </>
     );
 }
+
+// Styled components
+const Root = styled(Container)(({ theme }) => ({
+    paddingTop: theme.spacing(10),
+    paddingBottom: theme.spacing(10),
+}));

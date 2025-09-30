@@ -10,8 +10,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
+// removed unused List and ListItem imports (we now use Grid for layout)
 import ListItemText from '@mui/material/ListItemText';
 
 // MUI Icons
@@ -21,6 +20,7 @@ import AspectRatioIcon from '@mui/icons-material/AspectRatio';
 import ContentCutIcon from '@mui/icons-material/ContentCut';
 import MergeTypeIcon from '@mui/icons-material/MergeType';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import VideocamIcon from '@mui/icons-material/Videocam';
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import SpeedIcon from '@mui/icons-material/Speed';
 import SubtitlesIcon from '@mui/icons-material/Subtitles';
@@ -64,7 +64,7 @@ function Home() {
       </section>
       <section className='features'>
         <Container maxWidth="lg" sx={{ py: 10 }}>
-          <Grid container spacing={4}>
+          <Grid container spacing={4} justifyContent="center">
             <Grid size={{ xs: 12 }} mb={4}>
               <Typography variant="h3" component="h2" gutterBottom align='center'>Why choose {APP_INFO.name}?</Typography>
               <Typography variant="body1" component="p" color="text.secondary" align="center">
@@ -83,6 +83,18 @@ function Home() {
               <Typography variant="h5" component="h3" gutterBottom fontWeight={600} align='center'>Broad format support</Typography>
               <Typography variant="body1" color="text.secondary" align='center'>Supports common video, audio and image formats depending on the browser's capabilities.</Typography>
             </Grid>
+            <Grid size={{ xs: 12, md: 6, lg: 4 }}>
+              <Typography variant="h5" component="h3" gutterBottom fontWeight={600} align='center'>Customizable settings</Typography>
+              <Typography variant="body1" color="text.secondary" align='center'>Adjust encoding options like bitrate, resolution and codec to balance quality and file size.</Typography>
+            </Grid>
+            <Grid size={{ xs: 12, md: 6, lg: 4 }}>
+              <Typography variant="h5" component="h3" gutterBottom fontWeight={600} align='center'>Completely free to use</Typography>
+              <Typography variant="body1" color="text.secondary" align='center'>Access essential features at no cost. We display ads to support the service, but there are no hidden fees.</Typography>
+            </Grid>
+            <Grid size={{ xs: 12, md: 6, lg: 4 }}>
+              <Typography variant="h5" component="h3" gutterBottom fontWeight={600} align='center'>Cross-platform compatibility</Typography>
+              <Typography variant="body1" color="text.secondary" align='center'>Works on desktop and mobile browsers. Performance may vary based on device capabilities.</Typography>
+            </Grid>
           </Grid>
         </Container>
       </section>
@@ -90,20 +102,23 @@ function Home() {
         <Container maxWidth="lg" sx={{ py: 10 }}>
           <Grid container spacing={4}>
             <Grid size={{ xs: 12 }}>
-              <Typography variant="h3" component="h2" mb={3} align='center'>Video Tools</Typography>
-              <Typography variant="body1" color="text.secondary" align='center'>
+              <Typography variant="h3" component="h2" mb={3}><VideocamIcon fontSize="large" sx={{ mr: 1 }} />Video Tools</Typography>
+              <Typography variant="body1" color="text.secondary">
                 Our video toolset enables you to convert between popular container and codec formats, compress large video files while preserving visual quality, change resolution and frame rates for different platforms, trim and merge clips, and burn captions directly into your footage. All processing runs locally in the browser using modern Web APIs and WebAssembly-powered libraries so your files are not uploaded or stored on a server unless you explicitly choose to share them.
               </Typography>
-              <List sx={{ display: 'flex', flexWrap: 'wrap', mt: 4 }}>
+              <Grid container spacing={2} sx={{ mt: 4 }}>
                 {videoTools.map((tool) => (
-                  <ListItem key={tool.title} disableGutters sx={{ flex: '1 0 25%', display: 'inline-flex', justifyContent: 'center' }}>
-                    <Link color="inherit" component={RouterLink} to={tool.link} underline="none" sx={{ display: 'flex', alignItems: 'center' }} aria-label={tool.title}>
+                  <Grid
+                    key={tool.title}
+                    size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
+                  >
+                    <Link color="inherit" component={RouterLink} to={tool.link} underline="none" sx={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center' }} aria-label={tool.title}>
                       {tool.icon}
                       <ListItemText primary={tool.title} sx={{ ml: 1 }} />
                     </Link>
-                  </ListItem>
+                  </Grid>
                 ))}
-              </List>
+              </Grid>
             </Grid>
           </Grid>
         </Container>
@@ -112,20 +127,23 @@ function Home() {
         <Container maxWidth="lg" sx={{ py: 10 }}>
           <Grid container spacing={4}>
             <Grid size={{ xs: 12 }}>
-              <Typography variant="h3" component="h2" mb={3} align='center'>Audio Tools</Typography>
-              <Typography variant="body1" color="text.secondary" align='center'>
+              <Typography variant="h3" component="h2" mb={3}><MusicNoteIcon fontSize="large" sx={{ mr: 1 }} />Audio Tools</Typography>
+              <Typography variant="body1" color="text.secondary">
                 The audio tools let you convert between MP3, WAV, AAC, FLAC and other formats, trim and merge tracks, adjust bitrate and apply simple effects such as fades and normalization. Exports can be tailored for streaming or high-quality archival use. Processing is performed entirely client-side to keep your audio private and fast, with controls for bitrate and encoding to help you balance size and fidelity.
               </Typography>
-              <List sx={{ display: 'flex', flexWrap: 'wrap', mt: 4 }}>
+              <Grid container spacing={2} sx={{ mt: 4 }}>
                 {audioTools.map((tool) => (
-                  <ListItem key={tool.title} disableGutters sx={{ flex: '1 0 20%', display: 'inline-flex', justifyContent: 'center' }}>
-                    <Link color="inherit" component={RouterLink} to={tool.link} underline="none" sx={{ display: 'flex', alignItems: 'center' }} aria-label={tool.title}>
+                  <Grid
+                    key={tool.title}
+                    size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
+                  >
+                    <Link color="inherit" component={RouterLink} to={tool.link} underline="none" sx={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center' }} aria-label={tool.title}>
                       {tool.icon}
                       <ListItemText primary={tool.title} sx={{ ml: 1 }} />
                     </Link>
-                  </ListItem>
+                  </Grid>
                 ))}
-              </List>
+              </Grid>
             </Grid>
           </Grid>
         </Container>
@@ -134,26 +152,29 @@ function Home() {
         <Container maxWidth="lg" sx={{ py: 10 }}>
           <Grid container spacing={4}>
             <Grid size={{ xs: 12 }}>
-              <Typography variant="h3" component="h2" mb={3} align='center'>Image Tools</Typography>
-              <Typography variant="body1" color="text.secondary" align='center'>
+              <Typography variant="h3" component="h2" mb={3}><ImageIcon fontSize="large" sx={{ mr: 1 }} />Image Tools</Typography>
+              <Typography variant="body1" color="text.secondary">
                 Image tools support conversion between common image formats, resizing to custom dimensions, cropping, rotating and applying basic quality adjustments and filters. You can generate thumbnails from video frames, compress images for web delivery, and convert between JPG, PNG, WebP and GIF formats directly in your browser — all without uploading your images to a remote server.
               </Typography>
-              <List sx={{ display: 'flex', flexWrap: 'wrap', mt: 4 }}>
+              <Grid container spacing={2} sx={{ mt: 4 }}>
                 {imageTools.map((tool) => (
-                  <ListItem key={tool.title} disableGutters sx={{ flex: '1 0 20%', display: 'inline-flex', justifyContent: 'center' }}>
-                    <Link color="inherit" component={RouterLink} to={tool.link} underline="none" sx={{ display: 'flex', alignItems: 'center' }} aria-label={tool.title}>
+                  <Grid
+                    key={tool.title}
+                    size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
+                  >
+                    <Link color="inherit" component={RouterLink} to={tool.link} underline="none" sx={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center' }} aria-label={tool.title}>
                       {tool.icon}
                       <ListItemText primary={tool.title} sx={{ ml: 1 }} />
                     </Link>
-                  </ListItem>
+                  </Grid>
                 ))}
-              </List>
+              </Grid>
             </Grid>
           </Grid>
         </Container>
       </section>
       <section className='faq'>
-        <Container maxWidth="lg" sx={{ py: 10 }}>
+        <Container maxWidth="lg" sx={{ pt: 10 }}>
           <Typography variant="h3" component="h2" mb={3} align='center'>Frequently Asked Questions</Typography>
           {faqItems.map((item) => (
             <div key={item.question} style={{ marginBottom: '1.5rem' }}>

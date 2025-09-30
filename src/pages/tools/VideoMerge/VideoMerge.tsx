@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from '../../../constants';
 
 // MUI imports
+import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -15,10 +16,15 @@ import Typography from '@mui/material/Typography';
 // MUI Icons
 import MergeTypeIcon from '@mui/icons-material/MergeType';
 
-// Local imports
+// Component imports
 import { useVideoMerger, FileUploadArea, VideoList, ProgressDisplay } from './index';
 import { formatFileSize } from './utils';
 import { MIN_VIDEO_COUNT } from './constants';
+
+const Root = styled(Container)(({ theme }) => ({
+  paddingTop: theme.spacing(10),
+  paddingBottom: theme.spacing(10)
+}));
 
 /**
  * Main Video Merger Component
@@ -73,11 +79,15 @@ const VideoMerge: React.FC = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fileapps.click/tools/video-merge" />
         <meta property="og:site_name" content={APP_INFO.name} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`Merge Videos Online For Free | ${APP_INFO.name}`} />
+        <meta name="twitter:description" content="Join multiple video clips into one file while preserving quality. Combine videos locally in your browser — private & watermark-free." />
+        <meta name="twitter:image" content="/images/branding/logo-small.svg" />
         <link rel="canonical" href="https://fileapps.click/tools/video-merge" />
       </Helmet>
 
       {/* Main Content */}
-      <Container maxWidth="lg" sx={{ py: 10 }}>
+      <Root maxWidth="lg">
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
             <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
@@ -183,7 +193,7 @@ const VideoMerge: React.FC = () => {
             {errorMsg}
           </Alert>
         )}
-      </Container>
+      </Root>
     </>
   );
 };

@@ -61,6 +61,7 @@ export interface FileUploadAreaProps {
   videoFile: VideoFile | null;
   previewUrl: string | null;
   isDragActive: boolean;
+  isProcessing: boolean;
   onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
   onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
   onDrop: (e: React.DragEvent<HTMLDivElement>) => void;

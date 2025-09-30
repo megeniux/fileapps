@@ -1,9 +1,10 @@
 import { useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from '../../../constants';
+import { styled } from '@mui/material/styles';
 
 // MUI imports
-import Container from '@mui/material/Container';
+import { Container } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
@@ -12,13 +13,18 @@ import Alert from '@mui/material/Alert';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-// Local imports
+// Component imports
 import { useCaptionBurner } from './useCaptionBurner';
 import FileUploadArea from './FileUploadArea';
 import SubtitleUpload from './SubtitleUpload';
 import StyleControls from './StyleControls';
 import ProgressDisplay from './ProgressDisplay';
 import { formatFileSize } from './utils';
+
+const Root = styled(Container)(({ theme }) => ({
+  paddingTop: theme.spacing(10),
+  paddingBottom: theme.spacing(10)
+}));
 
 function BurnCaption() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -70,14 +76,18 @@ function BurnCaption() {
           content="Add subtitles to videos. Burn captions directly into the video. Supports SRT and VTT formats. Customize font, size, color, and position. No uploads required."
         />
         <meta property="og:title" content={`Burn Captions Online For Free | ${APP_INFO.name}`} />
-    <meta property="og:image" content="/images/branding/logo-small.svg" />
+        <meta property="og:image" content="/images/branding/logo-small.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fileapps.click/tools/burn-caption" />
         <meta property="og:site_name" content={APP_INFO.name} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`Burn Captions Online For Free | ${APP_INFO.name}`} />
+        <meta name="twitter:description" content="Add subtitles to videos. Burn captions directly into the video. Supports SRT and VTT formats. Customize font, size, color, and position. No uploads required." />
+        <meta name="twitter:image" content="/images/branding/logo-small.svg" />
         <link rel="canonical" href="https://fileapps.click/tools/burn-caption" />
       </Helmet>
 
-      <Container maxWidth="lg" sx={{ py: 10 }}>
+      <Root maxWidth="lg">
         {/* Error Alert */}
         {state.processing.errorMsg && (
           <Alert
@@ -105,6 +115,7 @@ function BurnCaption() {
             <FileUploadArea
               videoFile={state.videoFile}
               isDragActive={state.isDragActive}
+              isProcessing={state.processing.isProcessing}
               onDragOver={onDragOver}
               onDragLeave={onDragLeave}
               onDrop={onDrop}
@@ -196,7 +207,7 @@ function BurnCaption() {
             consoleLogs={state.consoleLogs}
           />
         </Card>
-      </Container>
+      </Root>
     </>
   );
 }

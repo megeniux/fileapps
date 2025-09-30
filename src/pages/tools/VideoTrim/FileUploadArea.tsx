@@ -19,6 +19,7 @@ export const FileUploadArea: React.FC<FileUploadAreaProps> = ({
   file,
   previewUrl,
   isDragActive,
+  isProcessing,
   onFileSelect,
   onFileRemove,
   onLoadedMetadata,
@@ -116,7 +117,7 @@ export const FileUploadArea: React.FC<FileUploadAreaProps> = ({
           <Typography variant="body2" noWrap>
             {file.name}
           </Typography>
-          <IconButton color="error" onClick={handleRemoveFile} sx={{ ml: 1 }}>
+          <IconButton color="error" onClick={handleRemoveFile} sx={{ ml: 1 }} disabled={isProcessing}>
             <CloseIcon fontSize="small" />
           </IconButton>
         </Box>

@@ -15,9 +15,10 @@ import { formatBytes } from '../../../helpers';
 interface FileDisplayProps {
   file: File;
   onRemoveFile: () => void;
+  isProcessing: boolean;
 }
 
-export default function FileDisplay({ file, onRemoveFile }: FileDisplayProps) {
+export default function FileDisplay({ file, onRemoveFile, isProcessing }: FileDisplayProps) {
   const theme = useTheme();
   
   return (
@@ -46,6 +47,7 @@ export default function FileDisplay({ file, onRemoveFile }: FileDisplayProps) {
         color="error" 
         size="small"
         sx={{ ml: 1 }}
+        disabled={isProcessing}
       >
         <CloseIcon />
       </IconButton>

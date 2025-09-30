@@ -9,6 +9,7 @@ import type { AudioFile } from './types';
 interface FileUploadAreaProps {
   audioFile: AudioFile | null;
   isDragActive: boolean;
+  isProcessing: boolean;
   onDragOver: (event: React.DragEvent) => void;
   onDragLeave: (event: React.DragEvent) => void;
   onDrop: (event: React.DragEvent) => void;
@@ -22,6 +23,7 @@ interface FileUploadAreaProps {
 const FileUploadArea: React.FC<FileUploadAreaProps> = ({
   audioFile,
   isDragActive,
+  isProcessing,
   onDragOver,
   onDragLeave,
   onDrop,
@@ -112,7 +114,7 @@ const FileUploadArea: React.FC<FileUploadAreaProps> = ({
           <Typography variant="body2" noWrap>
             {audioFile.file.name}
           </Typography>
-          <IconButton size="small" color="error" onClick={onRemoveFile}>
+          <IconButton size="small" color="error" onClick={onRemoveFile} disabled={isProcessing}>
             <CloseIcon fontSize="small" />
           </IconButton>
         </Box>

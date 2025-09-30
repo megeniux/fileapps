@@ -14,6 +14,7 @@ interface FileUploadAreaProps {
   file: File | null;
   previewUrl: string | null;
   isDragActive: boolean;
+  isProcessing: boolean;
   onFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onRemoveFile: () => void;
   onDragOver: (e: React.DragEvent) => void;
@@ -28,6 +29,7 @@ export default function FileUploadArea({
   file,
   previewUrl,
   isDragActive,
+  isProcessing,
   onFileChange,
   onRemoveFile,
   onDragOver,
@@ -109,7 +111,7 @@ export default function FileUploadArea({
           <Typography variant="body2" noWrap>
             {file.name} ({formatBytes(file.size)})
           </Typography>
-          <IconButton color='error' onClick={onRemoveFile} sx={{ ml: 1 }}>
+          <IconButton color='error' onClick={onRemoveFile} sx={{ ml: 1 }} disabled={isProcessing}>
             <CloseIcon fontSize='small' />
           </IconButton>
         </Box>

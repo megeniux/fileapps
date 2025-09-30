@@ -45,6 +45,7 @@ export interface FileUploadAreaProps {
   videoRef: React.RefObject<HTMLVideoElement>;
   fileInputRef: React.RefObject<HTMLInputElement>;
   isDragActive: boolean;
+  isProcessing: boolean;
   width: string;
   height: string;
   resizeMode: string;

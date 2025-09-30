@@ -16,6 +16,7 @@ export default function FileUploadArea({
   videoRef,
   fileInputRef,
   isDragActive,
+  isProcessing,
   width,
   height,
   resizeMode,
@@ -100,7 +101,7 @@ export default function FileUploadArea({
           <Typography variant="body2" noWrap>
             {file.name}
           </Typography>
-          <IconButton color="error" onClick={onRemoveFile}>
+          <IconButton color="error" onClick={onRemoveFile} disabled={isProcessing}>
             <CloseIcon fontSize="small" />
           </IconButton>
         </Box>

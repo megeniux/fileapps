@@ -176,9 +176,14 @@ export function useAudioMerger() {
     if (ffmpegRef.current) {
       ffmpegRef.current.terminate();
       if (logHandlerRef.current) ffmpegRef.current.off('log', logHandlerRef.current);
+      ffmpegRef.current = null; // Clear the FFmpeg instance
+      ffmpegLoadedRef.current = false; // Mark FFmpeg as not loaded
     }
-    setStatus('Stopped');
     setIsProcessing(false);
+    setStatus('Stopped');
+    setTimeout(() => {
+      setStatus(null);
+    }, 2000);
     setErrorMsg(null);
   }, []);
 
@@ -198,8 +203,21 @@ export function useAudioMerger() {
     setDownloadUrl(prev => { if (prev) { URL.revokeObjectURL(prev); } return null; });
     setDownloadSize(null);
     setProgress(0);
-    setStatus(null);
+    setStatus('Ready');
+    setTimeout(() => {
+      setStatus(null);
+    }, 2000);
     setIsProcessing(false);
+    
+    // Terminate any running ffmpeg and reset state
+    if (ffmpegRef.current) {
+      try { 
+        ffmpegRef.current.terminate(); 
+        if (logHandlerRef.current) ffmpegRef.current.off('log', logHandlerRef.current);
+      } catch {}
+      ffmpegRef.current = null;
+      ffmpegLoadedRef.current = false;
+    }
   }, []);
 
   useEffect(() => {

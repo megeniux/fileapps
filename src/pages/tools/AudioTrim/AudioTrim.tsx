@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from '../../../constants';
 import { formatBytes } from '../../../helpers';
+import { styled } from '@mui/material/styles';
 
 // MUI imports
 import Container from '@mui/material/Container';
@@ -10,19 +11,15 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
 import Grid from '@mui/material/Grid';
 
-// MUI Icons
-import CloseIcon from '@mui/icons-material/Close';
-
-// Local hook & components
+// Component imports
 import { useAudioTrimmer } from './useAudioTrimmer';
 import FileUploadArea from './FileUploadArea';
 import ProgressDisplay from './ProgressDisplay';
 import TrimSettings from './TrimSettings';
+import FileInfoDisplay from '../../../components/shared/FileInfoDisplay';
 
 function AudioTrim() {
   const {
@@ -71,13 +68,17 @@ function AudioTrim() {
           content="Trim and cut audio files with precision timing for podcasts, music, or voiceovers. Local processing — private & watermark-free."
         />
         <meta property="og:title" content={`Cut and Trim Audio Files Online For Free | ${APP_INFO.name}`} />
-  <meta property="og:image" content="/images/branding/logo-small.svg" />
+        <meta property="og:image" content="/images/branding/logo-small.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fileapps.click/tools/audio-trim" />
         <meta property="og:site_name" content={APP_INFO.name} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`Cut and Trim Audio Files Online For Free | ${APP_INFO.name}`} />
+        <meta name="twitter:description" content="Trim and cut audio files with precision timing for podcasts, music, or voiceovers. Local processing — private & watermark-free." />
+        <meta name="twitter:image" content="/images/branding/logo-small.svg" />
         <link rel="canonical" href="https://fileapps.click/tools/audio-trim" />
       </Helmet>
-      <Container maxWidth="lg" sx={{ py: 10 }}>
+      <Root maxWidth="lg">
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
             <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
@@ -103,17 +104,8 @@ function AudioTrim() {
               audioRef={audioRef}
               onLoadedMetadata={handleLoadedMetadata}
             />
-            {/* Filename and remove button */}
-            {file && (
-              <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
-                <Typography variant="body2" noWrap>
-                  {file.name} ({formatBytes(file.size)})
-                </Typography>
-                <IconButton onClick={removeFile} size="small" color="error" sx={{ ml: 1 }}>
-                  <CloseIcon fontSize="small" />
-                </IconButton>
-              </Box>
-            )}
+            {/* File information and remove button */}
+            {file && <FileInfoDisplay file={file} onRemove={removeFile} isProcessing={isProcessing} />}
             {/* Controls */}
             {file && (
               <TrimSettings
@@ -153,9 +145,15 @@ function AudioTrim() {
           <ProgressDisplay isProcessing={isProcessing} progress={progress} status={status} consoleLogs={consoleLogs} />
         </Card>
         {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
-      </Container>
+      </Root>
     </>
   );
 }
+
+// Styled components
+const Root = styled(Container)(({ theme }) => ({
+  paddingTop: theme.spacing(10),
+  paddingBottom: theme.spacing(10),
+}));
 
 export default AudioTrim;

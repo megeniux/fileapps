@@ -11,6 +11,7 @@ type Props = {
   file: File | null;
   previewUrl: string | null;
   isDragActive: boolean;
+  isProcessing: boolean;
   onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
   onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
   onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
@@ -22,7 +23,7 @@ type Props = {
 
 export default function FileUploadArea(props: Props) {
   const theme = useTheme();
-  const { file, previewUrl, isDragActive, onDragOver, onDragLeave, onDrop, onInputChange, onRemoveFile, inputRef, audioRef } = props;
+  const { file, previewUrl, isDragActive, isProcessing, onDragOver, onDragLeave, onDrop, onInputChange, onRemoveFile, inputRef, audioRef } = props;
 
   return (
     <Box
@@ -72,7 +73,7 @@ export default function FileUploadArea(props: Props) {
           <Typography variant="body2" noWrap>
             {file.name} ({formatBytes(file.size)})
           </Typography>
-          <IconButton onClick={onRemoveFile} size="small" color="error" sx={{ ml: 1 }}>
+          <IconButton onClick={onRemoveFile} size="small" color="error" sx={{ ml: 1 }} disabled={isProcessing}>
             <CloseIcon fontSize="small" />
           </IconButton>
         </Box>

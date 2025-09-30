@@ -1,26 +1,25 @@
 import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from '../../../constants';
 import { formatBytes } from '../../../helpers';
+import { styled } from '@mui/material/styles';
 
-// MUI Imports
+// MUI imports
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Alert from '@mui/material/Alert';
 import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 
-// Local Imports
+// Component imports
 import { useAudioConverter } from './useAudioConverter';
 import FileUploadArea from './FileUploadArea';
 import FormatSelector from './FormatSelector';
 import QualitySelector from './QualitySelector';
 import ProgressDisplay from './ProgressDisplay';
+import FileInfoDisplay from '../../../components/shared/FileInfoDisplay';
 
 function AudioConvert() {
   const {
@@ -64,13 +63,17 @@ function AudioConvert() {
           content="Convert to MP3, WAV, AAC, FLAC, OGG, M4A locally. Set bitrate or lossless — private, fast & watermark‑free."
         />
         <meta property="og:title" content={`Convert Audio Online For Free | ${APP_INFO.name}`} />
-  <meta property="og:image" content="/images/branding/logo-small.svg" />
+        <meta property="og:image" content="/images/branding/logo-small.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fileapps.click/tools/audio/convert" />
         <meta property="og:site_name" content={APP_INFO.name} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`Convert Audio Online For Free | ${APP_INFO.name}`} />
+        <meta name="twitter:description" content="Convert to MP3, WAV, AAC, FLAC, OGG, M4A locally. Set bitrate or lossless — private, fast & watermark‑free." />
+        <meta name="twitter:image" content="/images/branding/logo-small.svg" />
         <link rel="canonical" href="https://fileapps.click/tools/audio/convert" />
       </Helmet>
-      <Container maxWidth="lg" sx={{ py: 10 }}>
+      <Root maxWidth="lg">
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
             <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
@@ -94,17 +97,8 @@ function AudioConvert() {
               onDrop={onDrop}
               onInputChange={handleFileChange}
             />
-            {/* Filename and remove button */}
-            {file && (
-              <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
-                <Typography variant="body2" noWrap>
-                  {file.name} ({formatBytes(file.size)})
-                </Typography>
-                <IconButton onClick={removeFile} color="error" sx={{ ml: 1 }}>
-                  <CloseIcon fontSize="small" />
-                </IconButton>
-              </Box>
-            )}
+            {/* File information and remove button */}
+            {file && <FileInfoDisplay file={file} onRemove={removeFile} isProcessing={isProcessing} />}
             {/* Controls */}
             {file && (
               <Grid container spacing={2} sx={{ mb: 3 }}>
@@ -141,9 +135,15 @@ function AudioConvert() {
           <ProgressDisplay isProcessing={isProcessing} progress={progress} status={status} consoleLogs={consoleLogs} />
         </Card>
         {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
-      </Container>
+      </Root>
     </>
   );
 }
+
+// Styled components
+const Root = styled(Container)(({ theme }) => ({
+  paddingTop: theme.spacing(10),
+  paddingBottom: theme.spacing(10),
+}));
 
 export default AudioConvert;

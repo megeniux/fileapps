@@ -2,8 +2,9 @@ import { useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from '../../../constants';
 import { formatBytes } from '../../../helpers';
+import { styled } from '@mui/material/styles';
 
-// MUI Components
+// MUI imports
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -13,7 +14,7 @@ import Alert from '@mui/material/Alert';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-// Local Imports
+// Component imports
 import { useVideoCompression } from './useVideoCompression';
 import FileUploadArea from './FileUploadArea';
 import CompressionSettings from './CompressionSettings';
@@ -60,15 +61,18 @@ function VideoCompression() {
           content="Reduce video file size without quality loss using local browser processing. Adjust CRF, bitrate & resolution — private, fast & watermark‑free."
         />
         <meta property="og:title" content={`Compress Videos Online For Free | ${APP_INFO.name}`} />
-        <meta property="og:description" content="Compress videos locally in your browser. Reduce file size while maintaining quality." />
-  <meta property="og:image" content="/images/branding/logo-small.svg" />
-        
+        <meta property="og:description" content="Reduce video file size without quality loss using local browser processing. Adjust CRF, bitrate & resolution — private, fast & watermark‑free." />
+        <meta property="og:image" content="/images/branding/logo-small.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fileapps.click/tools/video/compress" />
         <meta property="og:site_name" content={APP_INFO.name} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`Compress Videos Online For Free | ${APP_INFO.name}`} />
+        <meta name="twitter:description" content="Reduce video file size without quality loss using local browser processing. Adjust CRF, bitrate & resolution — private, fast & watermark‑free." />
+        <meta name="twitter:image" content="/images/branding/logo-small.svg" />
         <link rel="canonical" href="https://fileapps.click/tools/video/compress" />
       </Helmet>
-      <Container maxWidth="lg" sx={{ py: 10 }}>
+      <Root maxWidth="lg">
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
             <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
@@ -85,6 +89,7 @@ function VideoCompression() {
               file={file}
               previewUrl={previewUrl}
               isDragActive={isDragActive}
+              isProcessing={isProcessing}
               onFileChange={handleFileChange}
               onRemoveFile={handleRemoveFile}
               onDragOver={handleDragOver}
@@ -137,9 +142,15 @@ function VideoCompression() {
           />
         </Card>
         {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
-      </Container>
+      </Root>
     </>
   );
 }
+
+// Styled components
+const Root = styled(Container)(({ theme }) => ({
+  paddingTop: theme.spacing(10),
+  paddingBottom: theme.spacing(10),
+}));
 
 export default VideoCompression;

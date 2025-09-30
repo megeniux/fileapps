@@ -1,8 +1,9 @@
-import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from '../../../constants';
+import { formatBytes } from '../../../helpers';
+import { styled } from '@mui/material/styles';
 
-// MUI
+// MUI imports
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -12,10 +13,8 @@ import Alert from '@mui/material/Alert';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-
-// Components and hooks from AudioMerge folder
+// Component imports
 import { FileUploadArea, AudioList, ProgressDisplay, useAudioMerger, MIN_AUDIO_COUNT } from './index';
-import { formatBytes } from '../../../helpers';
 
 const AudioMerge: React.FC = () => {
   const {
@@ -56,14 +55,18 @@ const AudioMerge: React.FC = () => {
           content="Join multiple audio tracks into one file instantly. Combine MP3, WAV, AAC files with ease."
         />
         <meta property="og:title" content={`Merge Audio Files Online For Free | ${APP_INFO.name}`} />
-    <meta property="og:image" content="/images/branding/logo-small.svg" />
+        <meta property="og:image" content="/images/branding/logo-small.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`https://fileapps.click/tools/audio/merge`} />
         <meta property="og:site_name" content={APP_INFO.name} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`Merge Audio Files Online For Free | ${APP_INFO.name}`} />
+        <meta name="twitter:description" content="Join multiple audio tracks into one file instantly. Combine MP3, WAV, AAC files with ease." />
+        <meta name="twitter:image" content="/images/branding/logo-small.svg" />
         <link rel="canonical" href={`https://fileapps.click/tools/audio/merge`} />
       </Helmet>
 
-      <Container maxWidth="lg" sx={{ py: 10 }}>
+      <Root maxWidth="lg">
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
             <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
@@ -125,10 +128,16 @@ const AudioMerge: React.FC = () => {
             {errorMsg}
           </Alert>
         )}
-      </Container>
+      </Root>
     </>
   );
 };
+
+// Styled components
+const Root = styled(Container)(({ theme }) => ({
+  paddingTop: theme.spacing(10),
+  paddingBottom: theme.spacing(10),
+}));
 
 export default AudioMerge;
 

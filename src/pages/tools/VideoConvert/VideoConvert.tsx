@@ -1,8 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from '../../../constants';
 import { formatBytes } from '../../../helpers';
+import { styled } from '@mui/material/styles';
 
-// MUI Imports
+// MUI imports
 import Alert from '@mui/material/Alert';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -12,7 +13,7 @@ import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-// Local Imports
+// Component imports
 import { useVideoConverter } from './useVideoConverter';
 import FileUploadArea from './FileUploadArea';
 import ConversionSettings from './ConversionSettings';
@@ -88,10 +89,14 @@ function VideoConvert() {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="/tools/video/convert" />
         <meta property="og:site_name" content={APP_INFO.name} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`Convert Video Online For Free | ${APP_INFO.name}`} />
+        <meta name="twitter:description" content="Convert Video to MP4, MOV, MKV, AVI, WebM & more locally. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free." />
+        <meta name="twitter:image" content="/images/branding/logo-small.svg" />
         <link rel="canonical" href="/tools/video/convert" />
       </Helmet>
 
-      <Container maxWidth="lg" sx={{ py: 10 }}>
+      <Root maxWidth="lg">
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
             <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
@@ -109,6 +114,7 @@ function VideoConvert() {
               videoRef={videoRef}
               fileInputRef={fileInputRef}
               isDragActive={isDragActive}
+              isProcessing={isProcessing}
               onFileChange={handleFileChange}
               onRemoveFile={handleRemoveFile}
               onLoadedMetadata={handleLoadedMetadata}
@@ -173,9 +179,15 @@ function VideoConvert() {
           onCrfInfoClose={handleCrfInfoClose}
           onPresetInfoClose={handlePresetInfoClose}
         />
-      </Container>
+      </Root>
     </>
   );
 }
+
+// Styled components
+const Root = styled(Container)(({ theme }) => ({
+  paddingTop: theme.spacing(10),
+  paddingBottom: theme.spacing(10),
+}));
 
 export default VideoConvert;

@@ -1,8 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from '../../../constants';
 import { formatBytes } from '../../../helpers';
+import { styled } from '@mui/material/styles';
 
-// MUI
+// MUI imports
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -12,7 +13,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-// Local imports
+// Component imports
 import FileUploadArea from './FileUploadArea';
 import ResizeSettings from './ResizeSettings';
 import ProgressDisplay from './ProgressDisplay';
@@ -74,14 +75,18 @@ function VideoResize() {
           content="Resize videos to custom dimensions or aspect ratios (16:9, 4:3, 1:1) for social media. Change resolution privately in your browser."
         />
         <meta property="og:title" content={`Resize Video Online For Free | ${APP_INFO.name}`} />
-  <meta property="og:image" content="/images/branding/logo-small.svg" />
+        <meta property="og:image" content="/images/branding/logo-small.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fileapps.click/tools/video/resize" />
         <meta property="og:site_name" content={APP_INFO.name} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`Resize Video Online For Free | ${APP_INFO.name}`} />
+        <meta name="twitter:description" content="Resize videos to custom dimensions or aspect ratios (16:9, 4:3, 1:1) for social media. Change resolution privately in your browser." />
+        <meta name="twitter:image" content="/images/branding/logo-small.svg" />
         <link rel="canonical" href="https://fileapps.click/tools/video/resize" />
       </Helmet>
 
-      <Container maxWidth="lg" sx={{ py: 10 }}>
+      <Root maxWidth="lg">
 
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
@@ -101,6 +106,7 @@ function VideoResize() {
               videoRef={videoRef}
               fileInputRef={fileInputRef}
               isDragActive={isDragActive}
+              isProcessing={isProcessing}
               width={width}
               height={height}
               resizeMode={resizeMode}
@@ -164,9 +170,15 @@ function VideoResize() {
           )}
         </Card>
         {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
-      </Container>
+      </Root>
     </>
   );
 }
+
+// Styled components
+const Root = styled(Container)(({ theme }) => ({
+  paddingTop: theme.spacing(10),
+  paddingBottom: theme.spacing(10),
+}));
 
 export default VideoResize;

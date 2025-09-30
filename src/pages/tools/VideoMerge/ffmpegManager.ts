@@ -52,7 +52,7 @@ export const resetFFmpeg = async (): Promise<void> => {
     }
   }
   
-  // Create new instance
+  // Create new instance and reset state
   ffmpegInstance = new FFmpeg();
   isFFmpegLoaded = false;
 };

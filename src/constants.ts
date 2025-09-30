@@ -1,4 +1,4 @@
 export const APP_INFO = {
-    name: "FileApps",
+    name: location.origin.includes("localhost") ? "ioMoVo Tools" : "FileApps",
     version: "0.0.1"
 };

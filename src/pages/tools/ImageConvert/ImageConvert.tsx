@@ -1,8 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 import { APP_INFO } from '../../../constants';
 import { formatBytes } from '../../../helpers';
+import { styled } from '@mui/material/styles';
 
-// MUI
+// MUI imports
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -10,19 +11,14 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
-// Icons
-import CloseIcon from '@mui/icons-material/Close';
-
-// Components
+// Component imports
 import FileUploadArea from './FileUploadArea';
 import SettingsPanel from './SettingsPanel';
 import ProgressDisplay from './ProgressDisplay';
-
-// Hook
+import FileInfoDisplay from '../../../components/shared/FileInfoDisplay';
 import { useImageConverter } from './useImageConverter';
 
 function ImageConvert() {
@@ -127,13 +123,17 @@ function ImageConvert() {
         />
         <meta property="og:title" content={`Image Converter & Editor Online For Free | ${APP_INFO.name}`} />
         <meta property="og:image" content="/images/landing/image-converter-hero.jpg" />
-      <meta property="og:image" content="/images/branding/logo-small.svg" />
+        <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fileapps.click/tools/convert" />
         <meta property="og:site_name" content={APP_INFO.name} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`Image Converter & Editor Online For Free | ${APP_INFO.name}`} />
+        <meta name="twitter:description" content="Free online image converter and editor. Convert between JPG, PNG, WebP, GIF formats. Resize, crop, rotate, and apply filters to images. Local processing with no watermarks." />
+        <meta name="twitter:image" content="/images/landing/image-converter-hero.jpg" />
         <link rel="canonical" href="https://fileapps.click/tools/convert" />
       </Helmet>
 
-      <Container maxWidth="lg" sx={{ py: 10 }}>
+      <Root maxWidth="lg">
 
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
@@ -289,21 +289,14 @@ function ImageConvert() {
               </Box>
             )}
 
-            {/* Filename and remove button */}
+            {/* File information and remove button */}
             {file && (
-              <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
-                <Typography variant="body2" noWrap>
-                  {file.name} ({formatBytes(file.size)})
-                </Typography>
-                {originalDimensions &&
-                  <Typography variant="body2" sx={{ ml: 0.5 }}>
-                    ({originalDimensions.width}x{originalDimensions.height})
-                  </Typography>
-                }
-                <IconButton onClick={handleRemoveFile} color="error" sx={{ ml: 1 }}>
-                  <CloseIcon fontSize="small" />
-                </IconButton>
-              </Box>
+              <FileInfoDisplay 
+                file={file} 
+                onRemove={handleRemoveFile}
+                additionalInfo={originalDimensions ? `(${originalDimensions.width}x${originalDimensions.height})` : undefined}
+                isProcessing={isProcessing}
+              />
             )}
 
             {file && (
@@ -373,9 +366,15 @@ function ImageConvert() {
         </Card>
 
         {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
-      </Container>
+      </Root>
     </>
   );
 }
+
+// Styled components
+const Root = styled(Container)(({ theme }) => ({
+  paddingTop: theme.spacing(10),
+  paddingBottom: theme.spacing(10),
+}));
 
 export default ImageConvert;

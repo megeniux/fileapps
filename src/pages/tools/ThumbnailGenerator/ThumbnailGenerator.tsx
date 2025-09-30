@@ -2,24 +2,8 @@ import React, { useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { APP_INFO } from '../../../constants'
 
-// Custom hooks
-import { useFFmpeg } from './utils'
-import { useThumbnailState } from './useThumbnailState'
-
-// Components
-import FileUploadArea from './FileUploadArea'
-import ModeTabs from './ModeTabs'
-import ModeControls from './ModeControls'
-import ThumbnailDisplay from './ThumbnailDisplay'
-import ProgressDisplay from './ProgressDisplay'
-
-// Processing logic
-import { ThumbnailProcessor } from './ThumbnailProcessor'
-
-// Utilities
-import { handleDragEvents } from './fileHandling'
-
-// MUI Imports
+// MUI imports
+import { styled } from '@mui/material/styles'
 import Container from '@mui/material/Container'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
@@ -29,6 +13,21 @@ import Alert from '@mui/material/Alert'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
+// Component imports
+import { useFFmpeg } from './utils'
+import { useThumbnailState } from './useThumbnailState'
+import FileUploadArea from './FileUploadArea'
+import ModeTabs from './ModeTabs'
+import ModeControls from './ModeControls'
+import ThumbnailDisplay from './ThumbnailDisplay'
+import ProgressDisplay from './ProgressDisplay'
+import { ThumbnailProcessor } from './ThumbnailProcessor'
+import { handleDragEvents } from './fileHandling'
+
+const Root = styled(Container)(({ theme }) => ({
+  paddingTop: theme.spacing(10),
+  paddingBottom: theme.spacing(10)
+}))
 
 function ThumbnailGenerator() {
   // Custom hooks
@@ -227,14 +226,18 @@ function ThumbnailGenerator() {
           content="Extract high-quality thumbnails and contact sheets from videos. Generate image scrubs for easy navigation. Local processing — private & watermark-free."
         />
         <meta property="og:title" content={`Extract Frames, Generate Scrubs from Videos Online For Free | ${APP_INFO.name}`} />
-  <meta property="og:image" content="/images/branding/logo-small.svg" />
+        <meta property="og:image" content="/images/branding/logo-small.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fileapps.click/tools/thumbnail" />
         <meta property="og:site_name" content={APP_INFO.name} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`Extract Frames, Generate Scrubs from Videos Online For Free | ${APP_INFO.name}`} />
+        <meta name="twitter:description" content="Extract high-quality thumbnails and contact sheets from videos. Generate image scrubs for easy navigation. Local processing — private & watermark-free." />
+        <meta name="twitter:image" content="/images/branding/logo-small.svg" />
         <link rel="canonical" href="https://fileapps.click/tools/thumbnail" />
       </Helmet>
 
-      <Container maxWidth="lg" sx={{ py: 10 }}>
+      <Root maxWidth="lg">
         <Card elevation={0} sx={{ backgroundColor: 'transparent' }}>
           <CardContent sx={{ p: 0 }}>
             <Grid container spacing={5} mb={5} justifyContent="center" alignItems="center">
@@ -251,6 +254,7 @@ function ThumbnailGenerator() {
               file={file}
               previewUrl={previewUrl}
               isDragActive={isDragActive}
+              isProcessing={isProcessing}
               onFileChange={handleFileChange}
               onReset={handleReset}
               onDragOver={dragHandlers.onDragOver}
@@ -336,7 +340,7 @@ function ThumbnailGenerator() {
         </Card>
 
         {errorMsg && <Alert severity="error" sx={{ my: 2 }}>{errorMsg}</Alert>}
-      </Container>
+      </Root>
     </>
   )
 }

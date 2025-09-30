@@ -267,6 +267,12 @@ export function useImageConverter() {
     originalFileRef.current = null;
     originalPreviewUrlRef.current = null;
     baseOriginalDimensionsRef.current = null;
+    
+    // Terminate any running ffmpeg and reset state
+    if (ffmpegRef.current) {
+      try { ffmpegRef.current.terminate(); } catch { }
+      ffmpegRef.current = null;
+    }
   }, []);
 
   const handleImageLoad = useCallback(() => {
@@ -588,9 +594,15 @@ export function useImageConverter() {
   }, [file, width, height, format, outputName, originalFileRef, crop, flipH, flipV, rotate, grayscale, blur, brightness, contrast, saturation, quality, setErrorMsg, setIsProcessing, setProgress, setStatus, setDownloadUrl, setDownloadSize]);
 
   const handleStop = useCallback(() => {
-    ffmpegRef.current?.terminate?.();
+    if (ffmpegRef.current) {
+      ffmpegRef.current.terminate();
+      ffmpegRef.current = null; // Clear the FFmpeg instance
+    }
     setIsProcessing(false);
     setStatus('Stopped');
+    setTimeout(() => {
+      setStatus(null);
+    }, 2000);
     setProgress(0);
     setErrorMsg(null); // Clear error on stop
   }, [setIsProcessing, setStatus, setProgress, setErrorMsg]);

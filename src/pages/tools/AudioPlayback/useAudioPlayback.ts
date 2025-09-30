@@ -48,6 +48,13 @@ export function useAudioPlayback() {
       URL.revokeObjectURL(downloadUrl);
       setDownloadUrl(null);
     }
+    
+    // Terminate any running ffmpeg and reset state
+    if (ffmpegRef.current) {
+      try { ffmpegRef.current.terminate(); } catch (e) { /* ignore */ }
+      ffmpegRef.current = null;
+      isFFmpegLoaded.current = false;
+    }
     setSpeed(1);
     setIsReversed(false);
     setProgress(0);
@@ -191,14 +198,21 @@ export function useAudioPlayback() {
       if (err?.message !== 'called FFmpeg.terminate()') setErrorMsg(err instanceof Error ? err.message : String(err));
     } finally {
       setIsProcessing(false);
-      setTimeout(() => { setProgress(0); setStatus(null); }, 2000);
+      // Do not reset status/progress here; let reset/stop handle it
     }
   };
 
   const stopSpeedAdjustment = () => {
-    try { ffmpegRef.current?.terminate?.(); } catch (e) { /* ignore */ }
+    if (ffmpegRef.current) {
+      try { ffmpegRef.current.terminate(); } catch (e) { /* ignore */ }
+      ffmpegRef.current = null; // Clear the FFmpeg instance
+      isFFmpegLoaded.current = false; // Mark FFmpeg as not loaded
+    }
     setIsProcessing(false);
     setStatus('Stopped');
+    setTimeout(() => {
+      setStatus(null);
+    }, 2000);
     setProgress(0);
     setErrorMsg(null);
   };

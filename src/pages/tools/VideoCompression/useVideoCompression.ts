@@ -191,10 +191,15 @@ export function useVideoCompression() {
   }, [file, crf, preset]);
 
   const handleStop = useCallback(() => {
-    ffmpeg.terminate();
+    if (ffmpeg) {
+      ffmpeg.terminate();
+    }
     isFFmpegLoaded = false; // Reset flag so FFmpeg can be loaded again
-    setStatus('Stopped');
     setIsProcessing(false);
+    setStatus('Stopped');
+    setTimeout(() => {
+      setStatus(null);
+    }, 2000);
     setErrorMsg(null); // Clear error on stop
   }, []);
 
@@ -226,6 +231,12 @@ export function useVideoCompression() {
     if (previewUrl) {
       URL.revokeObjectURL(previewUrl);
     }
+    
+    // Terminate any running ffmpeg and reset state
+    if (ffmpeg) {
+      ffmpeg.terminate();
+    }
+    isFFmpegLoaded = false;
   }, [downloadUrl, previewUrl]);
 
   const handleDownload = useCallback(() => {

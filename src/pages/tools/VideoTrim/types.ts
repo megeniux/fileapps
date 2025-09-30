@@ -99,6 +99,7 @@ export interface FileUploadAreaProps {
   file: File | null;
   previewUrl: string | null;
   isDragActive: boolean;
+  isProcessing: boolean;
   onFileSelect: (file: File) => void;
   onFileRemove: () => void;
   onLoadedMetadata: () => void;

@@ -9,6 +9,7 @@ import type { VideoFile } from './types';
 interface FileUploadAreaProps {
   videoFile: VideoFile | null;
   isDragActive: boolean;
+  isProcessing: boolean;
   onDragOver: (event: React.DragEvent) => void;
   onDragLeave: (event: React.DragEvent) => void;
   onDrop: (event: React.DragEvent) => void;
@@ -21,6 +22,7 @@ interface FileUploadAreaProps {
 const FileUploadArea: React.FC<FileUploadAreaProps> = ({
   videoFile,
   isDragActive,
+  isProcessing,
   onDragOver,
   onDragLeave,
   onDrop,
@@ -101,7 +103,7 @@ const FileUploadArea: React.FC<FileUploadAreaProps> = ({
           <Typography variant="body2" noWrap>
             {videoFile.file.name}
           </Typography>
-          <IconButton size="small" color="error" onClick={onRemoveFile} sx={{ ml: 1 }}>
+          <IconButton size="small" color="error" onClick={onRemoveFile} sx={{ ml: 1 }} disabled={isProcessing}>
             <CloseIcon fontSize="small" />
           </IconButton>
         </Box>

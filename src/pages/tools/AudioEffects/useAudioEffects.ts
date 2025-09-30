@@ -176,8 +176,15 @@ export function useAudioEffects() {
         ffmpegRef.current.terminate();
         if (logHandlerRef.current) ffmpegRef.current.off('log', logHandlerRef.current);
       } catch {}
+      ffmpegRef.current = null; // Clear the FFmpeg instance
+      ffmpegLoadedRef.current = false; // Mark FFmpeg as not loaded
     }
-    setStatus('Stopped'); setIsProcessing(false); setErrorMsg(null);
+    setIsProcessing(false);
+    setStatus('Stopped');
+    setTimeout(() => {
+      setStatus(null);
+    }, 2000);
+    setErrorMsg(null);
   }, []);
 
   const handleDownload = useCallback(() => {
@@ -190,21 +197,39 @@ export function useAudioEffects() {
   }, [downloadUrl, file]);
 
   const handleReset = useCallback(() => {
-    // cleanup
-    if (ffmpegRef.current) {
-      try { ffmpegRef.current.terminate(); } catch {}
-    }
+    // Clear inputs and urls
+    if (fileInputRef.current) fileInputRef.current.value = '';
     setFile(null);
     setPreviewUrl(prev => { if (prev) URL.revokeObjectURL(prev); return null; });
-    setDuration(0);
-    setProgress(0);
-    setStatus(null);
-    setErrorMsg(null);
     setDownloadUrl(prev => { if (prev) URL.revokeObjectURL(prev); return null; });
     setDownloadSize(null);
+    setDuration(0);
+    setProgress(0);
+    setStatus('Ready');
+    setTimeout(() => {
+      setStatus(null);
+    }, 2000);
+    setErrorMsg(null);
     setConsoleLogs([]);
-    setSpeed(1); setPitch(0); setFadeIn(0); setFadeOut(0); setNormalize(false); setVolume(1);
-    if (fileInputRef.current) fileInputRef.current.value = '';
+    
+    // Reset effect controls
+    setSpeed(1);
+    setPitch(0);
+    setFadeIn(0);
+    setFadeOut(0);
+    setNormalize(false);
+    setVolume(1);
+    setEqGains(EQ_FREQUENCIES.map(() => 0));
+    
+    // Terminate any running ffmpeg and reset state
+    if (ffmpegRef.current) {
+      try { 
+        ffmpegRef.current.terminate(); 
+        if (logHandlerRef.current) ffmpegRef.current.off('log', logHandlerRef.current);
+      } catch {}
+      ffmpegRef.current = null;
+      ffmpegLoadedRef.current = false;
+    }
   }, []);
 
   useEffect(() => {

@@ -13,6 +13,7 @@ const FileUploadArea: React.FC<FileUploadAreaProps> = ({
   videoFile,
   previewUrl,
   isDragActive,
+  isProcessing,
   onDragOver,
   onDragLeave,
   onDrop,
@@ -94,7 +95,7 @@ const FileUploadArea: React.FC<FileUploadAreaProps> = ({
           <Typography variant="body2" noWrap>
             {videoFile.name} ({formatBytes(videoFile.size)})
           </Typography>
-          <IconButton onClick={onRemoveFile} color="error" sx={{ ml: 1 }}>
+          <IconButton onClick={onRemoveFile} color="error" sx={{ ml: 1 }} disabled={isProcessing}>
             <CloseIcon fontSize="small" />
           </IconButton>
         </Box>

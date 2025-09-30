@@ -87,8 +87,13 @@ export function useAudioConverter() {
     }
 
     if (!isFFmpegLoaded) {
-      await ffmpegRef.current.load();
-      setIsFFmpegLoaded(true);
+      try {
+        await ffmpegRef.current.load();
+        setIsFFmpegLoaded(true);
+      } catch (error) {
+        setErrorMsg('Failed to load FFmpeg. Please try again.');
+        console.error('FFmpeg load error:', error);
+      }
     }
   };
 
@@ -167,20 +172,23 @@ export function useAudioConverter() {
       }
     } finally {
       setIsProcessing(false);
-      setTimeout(() => {
-        setProgress(0);
-        setStatus(null);
-      }, 2000);
+      // Do not reset status/progress here; let reset/stop handle it
     }
   };
 
   const stop = () => {
-    ffmpegRef.current?.terminate?.();
+    if (ffmpegRef.current) {
+      ffmpegRef.current.terminate?.();
+      ffmpegRef.current = null; // Clear the FFmpeg instance
+      setIsFFmpegLoaded(false); // Mark FFmpeg as not loaded
+    }
     setIsProcessing(false);
     setStatus('Stopped');
     setProgress(0);
-    // do not set errorMsg on stop
-    setErrorMsg(null);
+    setTimeout(() => {
+      setStatus(null);
+    }, 2000);
+    setErrorMsg(null); // Do not set errorMsg on stop
   };
 
   const download = () => {
@@ -206,12 +214,19 @@ export function useAudioConverter() {
     setDownloadUrl(null);
     setDownloadSize(null);
     setProgress(0);
-    setStatus(null);
+    setStatus('Ready');
+    setTimeout(() => {
+      setStatus(null);
+    }, 2000);
     setConsoleLogs([]);
     setErrorMsg(null);
 
-    // terminate any running ffmpeg
-    ffmpegRef.current?.terminate?.();
+    // Terminate any running ffmpeg and reset state
+    if (ffmpegRef.current) {
+      ffmpegRef.current.terminate?.();
+      ffmpegRef.current = null;
+      setIsFFmpegLoaded(false);
+    }
   };
 
   const onDrop = (e: React.DragEvent) => {

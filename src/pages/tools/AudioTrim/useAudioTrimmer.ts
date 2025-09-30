@@ -156,15 +156,22 @@ export function useAudioTrimmer() {
       }
     } finally {
       setIsProcessing(false);
-      setTimeout(() => { setProgress(0); setStatus(null); }, 2000);
+      // Do not reset status/progress here; let reset/stop handle it
     }
   };
 
   const handleStop = () => {
-    ffmpegRef.current?.terminate?.();
+    if (ffmpegRef.current) {
+      ffmpegRef.current.terminate?.();
+      ffmpegRef.current = null; // Clear the FFmpeg instance
+      setIsFFmpegLoaded(false); // Mark FFmpeg as not loaded
+    }
     setIsProcessing(false);
     setStatus('Stopped');
     setProgress(0);
+    setTimeout(() => {
+      setStatus(null);
+    }, 2000);
     setErrorMsg(null);
   };
 
@@ -179,20 +186,29 @@ export function useAudioTrimmer() {
   };
 
   const handleReset = () => {
+    // Clear inputs and urls
     if (fileInputRef.current) fileInputRef.current.value = '';
     if (previewUrl) URL.revokeObjectURL(previewUrl);
     if (downloadUrl) URL.revokeObjectURL(downloadUrl);
 
     setFile(null);
     setPreviewUrl(null);
-    setProgress(0);
-    setStatus(null);
-    setConsoleLogs([]);
-    setErrorMsg(null);
     setDownloadUrl(null);
     setDownloadSize(null);
+    setProgress(0);
+    setStatus('Ready');
+    setTimeout(() => {
+      setStatus(null);
+    }, 2000);
+    setConsoleLogs([]);
+    setErrorMsg(null);
 
-    ffmpegRef.current?.terminate?.();
+    // Terminate any running ffmpeg and reset state
+    if (ffmpegRef.current) {
+      ffmpegRef.current.terminate?.();
+      ffmpegRef.current = null;
+      setIsFFmpegLoaded(false);
+    }
   };
 
   return {

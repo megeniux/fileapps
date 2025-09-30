@@ -62,6 +62,7 @@ const SubtitleUpload: React.FC<SubtitleUploadProps> = ({
               color="error" 
               onClick={onRemoveFile} 
               sx={{ ml: 1 }}
+              disabled={isProcessing}
             >
               <CloseIcon fontSize="small" />
             </IconButton>
