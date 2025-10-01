@@ -55,9 +55,18 @@ const Root = styled('div')(({ theme }) => ({
     alignItems: 'center',
     minHeight: '100dvh',
     paddingBlock: theme.spacing(10),
+    [theme.breakpoints.down('md')]: {
+      minHeight: '50dvh',
+      paddingBlock: theme.spacing(5),
+    }
   },
   '& .hero': {
     background: `url('/images/backgrounds/bg0.jpg') no-repeat center/cover fixed`,
+    '& .left':{
+      [theme.breakpoints.down('sm')]: {
+        textAlign: 'center',
+      }
+    }
   },
   '& .benefits': {
     background: `url('/images/backgrounds/bg0.jpg') no-repeat center/cover fixed`,
@@ -87,6 +96,9 @@ const Root = styled('div')(({ theme }) => ({
   },
   '& .cta': {
     paddingBlock: theme.spacing(10),
+    [theme.breakpoints.down('sm')]: {
+      paddingBottom: theme.spacing(15),
+    }
   }
 }));
 
@@ -286,14 +298,14 @@ function Home() {
     {
       title: 'Image Converter & Editor',
       description: 'Convert, resize, crop, rotate, and apply filters to JPG, PNG, WebP, GIF images. Local processing in your browser — fast, secure, no watermark.',
-      icon: <ImageIcon fontSize="large" color="warning" />,
+      icon: <ImageIcon color="warning" />,
       link: '/tools/image/convert',
       color: theme.palette.warning.main
     },
     {
       title: 'Thumbnail Generator',
       description: 'Extract high-quality thumbnails from videos instantly. Generate preview images in multiple sizes — no watermark, no signup required.',
-      icon: <PhotoSizeSelectActualIcon fontSize="large" color="warning" />,
+      icon: <PhotoSizeSelectActualIcon color="warning" />,
       link: '/tools/image/thumbnail',
       color: theme.palette.warning.main
     }
@@ -316,9 +328,9 @@ function Home() {
       {/* Hero Section */}
       <section className='hero'>
         <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
-          <Grid container spacing={6} alignItems="center">
-            <Grid size={{ xs: 12, lg: 7 }}>
-              <Stack direction="row" spacing={2} sx={{ mb: 4 }}>
+          <Grid container spacing={6} alignItems="center" flexDirection={{ xs: 'column-reverse', md: 'row' }}>
+            <Grid size={{ xs: 12, md: 6, lg: 7 }} className="left">
+              <Stack direction="row" justifyContent={{ xs: 'center', md: 'flex-start' }} spacing={2} sx={{ mb: 4 }}>
                 <Chip
                   label="100% Private"
                   color="success"
@@ -346,7 +358,7 @@ function Home() {
                 variant="h1"
                 component="h1"
                 sx={{
-                  fontSize: { xs: '2rem', md: '2.5rem', lg: '3.5rem' },
+                  fontSize: { xs: '2.5rem', sm: '3rem', md: '3.5rem', lg: '4rem' },
                   fontWeight: 800,
                   lineHeight: 1.1,
                   mb: 3
@@ -378,7 +390,7 @@ function Home() {
                 All processing happens locally — your files stay private and secure.
               </Typography>
 
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 6 }}>
+              <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} sx={{ mb: 6 }}>
                 <Button
                   component={RouterLink}
                   to="/tools/video/convert"
@@ -425,7 +437,7 @@ function Home() {
               </Paper>
             </Grid>
 
-            <Grid size={{ xs: 12, lg: 5 }}>
+            <Grid size={{ xs: 12, md: 6, lg: 5 }} className="right">
               <HeroSlider>
                 {/* Placeholder image for proper sizing */}
                 <img
@@ -435,6 +447,7 @@ function Home() {
                   style={{
                     width: '100%',
                     height: 'auto',
+                    maxWidth: 400,
                   }}
                 />
                 {/* Actual slider images */}
@@ -447,6 +460,7 @@ function Home() {
                     style={{
                       width: '100%',
                       height: 'auto',
+                      maxWidth: 400,
                     }}
                   />
                 ))}
@@ -589,7 +603,7 @@ function Home() {
       {/* Audio Tools Section */}
       <section className='tools audio'>
         <Container maxWidth="lg">
-          <Grid container spacing={6}>
+          <Grid container spacing={6} flexDirection={{ xs: 'column-reverse', lg: 'row' }}>
             <Grid size={{ xs: 12, lg: 7 }}>
               <Grid container spacing={3}>
                 {audioTools.map((tool) => (
