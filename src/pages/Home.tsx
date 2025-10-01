@@ -1,358 +1,938 @@
-import ImageIcon from '@mui/icons-material/Image';
+import { Link as RouterLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { useState, useEffect } from 'react';
 import { APP_INFO } from "../constants";
-import { Link as RouterLink } from 'react-router-dom'
 
 // MUI imports
-import { alpha, useTheme } from '@mui/material/styles';
+import { styled, alpha, useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
-import Button from '@mui/material/Button';
-// removed unused List and ListItem imports (we now use Grid for layout)
+import Paper from '@mui/material/Paper';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Grid from '@mui/material/Grid';
 
-// MUI Icons
+// Icons
+import VideocamIcon from '@mui/icons-material/Videocam';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import ImageIcon from '@mui/icons-material/Image';
+import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual';
 import CompressIcon from '@mui/icons-material/Compress';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import AspectRatioIcon from '@mui/icons-material/AspectRatio';
 import ContentCutIcon from '@mui/icons-material/ContentCut';
 import MergeTypeIcon from '@mui/icons-material/MergeType';
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
-import VideocamIcon from '@mui/icons-material/Videocam';
-import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import SpeedIcon from '@mui/icons-material/Speed';
 import SubtitlesIcon from '@mui/icons-material/Subtitles';
-import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual';
+import GraphicEqIcon from '@mui/icons-material/GraphicEq';
+import SecurityIcon from '@mui/icons-material/Security';
+import CloudOffIcon from '@mui/icons-material/CloudOff';
+import MoneyOffIcon from '@mui/icons-material/MoneyOff';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import InfoIcon from '@mui/icons-material/Info';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import DevicesIcon from '@mui/icons-material/Devices';
+import FreeBreakfastIcon from '@mui/icons-material/FreeBreakfast';
+import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+
+const Root = styled('div')(({ theme }) => ({
+  '& .hero': {
+    background: `url('/images/backgrounds/bg1.jpg') no-repeat center/cover fixed`,
+  },
+  '& .tools': {
+    background: `url('/images/backgrounds/bg2.jpg') no-repeat center/cover fixed`,
+    '&.video': {
+      '& h2': {
+        color: theme.palette.primary.main,
+      },
+    },
+    '&.audio': {
+      '& h2': {
+        color: theme.palette.secondary.main,
+      },
+    },
+    '&.image': {
+      '& h2': {
+        color: theme.palette.warning.main,
+      },
+    },
+  },
+}));
+
+// Slider component for hero images
+const HeroSlider = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  width: '100%',
+  height: 'auto',
+  overflow: 'hidden',
+  borderRadius: 16,
+  '& .slider-image': {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    transition: 'opacity 1s ease-in-out',
+    opacity: 0,
+    '&.active': {
+      opacity: 1,
+    },
+  },
+  '& .slider-placeholder': {
+    width: '100%',
+    height: 'auto',
+    opacity: 0,
+  },
+}));
+
+const sliderImages = [
+  '/images/slider/slider1.png',
+  '/images/slider/slider2.png',
+  '/images/slider/slider3.png',
+  '/images/slider/slider4.png',
+];
+
+const sliderAltTexts = [
+  'Professional video editing interface',
+  'Audio processing workspace',
+  'Image editing tools',
+  'Multimedia conversion dashboard',
+];
 
 function Home() {
   const theme = useTheme();
-  return (
-    <>
-      <Helmet>
-        <title>{APP_INFO.name} — Free Online Video, Audio & Image Tools with No Signup Required</title>
-        <meta
-          name="description"
-          property='og:description'
-          content={`${APP_INFO.name} offers private, browser-based tools to convert, compress, trim and edit video, audio and images locally on your device. No signup, no uploads, no watermarks.`}
-        />
-        <meta name="robots" content="index,follow" />
-        <meta property="og:title" content={`${APP_INFO.name} — Free Online Video, Audio & Image Tools with No Signup Required`} />
-        <meta property="og:image" content="/images/branding/logo-small.svg" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://fileapps.click/" />
-        <meta property="og:site_name" content={APP_INFO.name} />
-        <link rel="canonical" href="https://fileapps.click/" />
-      </Helmet>
-      <section className='hero' style={{ background: `linear-gradient(180deg, ${alpha(theme.palette.grey[900], 0.25)} 0%, transparent 100%)` }}>
-        <Container maxWidth="lg" sx={{ pt: 5, mt: 5 }}>
-          <Grid container gap={4}>
-            <Grid size={12}>
-              <Typography variant="h1" component="h1" gutterBottom align='center' fontWeight={700}>Welcome to <span className='gradient-text-primary'>{APP_INFO.name}</span></Typography>
-              <Typography variant="body1" component="p" color="text.secondary" align="center">
-                {APP_INFO.name} provides a suite of fast, privacy-first media tools that run entirely in your browser. Convert and edit videos, audio and images locally—no uploads, no account, no watermark. Choose a tool below to get started instantly.
-              </Typography>
-            </Grid>
-            <Grid container size={12} justifyContent="center" gap={2}>
-              <Button component={RouterLink} to="/tools/video/convert" size='medium' variant="outlined" color="info">Start with Video</Button>
-              <Button component={RouterLink} to="/tools/audio/convert" size='medium' variant="outlined" color="secondary">Start with Audio</Button>
-              <Button component={RouterLink} to="/tools/image/convert" size='medium' variant="outlined" color="warning">Start with Images</Button>
-            </Grid>
-          </Grid>
-        </Container>
-      </section>
-      <section className='features'>
-        <Container maxWidth="lg" sx={{ py: 10 }}>
-          <Grid container spacing={4} justifyContent="center">
-            <Grid size={{ xs: 12 }} mb={4}>
-              <Typography variant="h3" component="h2" gutterBottom align='center'>Why choose {APP_INFO.name}?</Typography>
-              <Typography variant="body1" component="p" color="text.secondary" align="center">
-                {APP_INFO.name} is designed to be fast, easy to use, and respectful of your privacy. Here are some of the key features that set us apart:
-              </Typography>
-            </Grid>
-            <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-              <Typography variant="h5" component="h3" gutterBottom fontWeight={600} align='center'>Privacy-first processing</Typography>
-              <Typography variant="body1" color="text.secondary" align='center'>All processing happens locally in your browser. Files are not uploaded unless you explicitly choose to upload them.</Typography>
-            </Grid>
-            <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-              <Typography variant="h5" component="h3" gutterBottom fontWeight={600} align='center'>No signup or watermark</Typography>
-              <Typography variant="body1" color="text.secondary" align='center'>Use the core tools without creating an account. Exported files are free of watermarks for standard usage.</Typography>
-            </Grid>
-            <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-              <Typography variant="h5" component="h3" gutterBottom fontWeight={600} align='center'>Broad format support</Typography>
-              <Typography variant="body1" color="text.secondary" align='center'>Supports common video, audio and image formats depending on the browser's capabilities.</Typography>
-            </Grid>
-            <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-              <Typography variant="h5" component="h3" gutterBottom fontWeight={600} align='center'>Customizable settings</Typography>
-              <Typography variant="body1" color="text.secondary" align='center'>Adjust encoding options like bitrate, resolution and codec to balance quality and file size.</Typography>
-            </Grid>
-            <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-              <Typography variant="h5" component="h3" gutterBottom fontWeight={600} align='center'>Completely free to use</Typography>
-              <Typography variant="body1" color="text.secondary" align='center'>Access essential features at no cost. We display ads to support the service, but there are no hidden fees.</Typography>
-            </Grid>
-            <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-              <Typography variant="h5" component="h3" gutterBottom fontWeight={600} align='center'>Cross-platform compatibility</Typography>
-              <Typography variant="body1" color="text.secondary" align='center'>Works on desktop and mobile browsers. Performance may vary based on device capabilities.</Typography>
-            </Grid>
-          </Grid>
-        </Container>
-      </section>
-      <section className='tools video' style={{ background: `linear-gradient(90deg, ${alpha(theme.palette.info.main, 0.25)} 0%, transparent 75%)` }}>
-        <Container maxWidth="lg" sx={{ py: 10 }}>
-          <Grid container spacing={4}>
-            <Grid size={{ xs: 12 }}>
-              <Typography variant="h3" component="h2" mb={3}><VideocamIcon fontSize="large" sx={{ mr: 1 }} />Video Tools</Typography>
-              <Typography variant="body1" color="text.secondary">
-                Our video toolset enables you to convert between popular container and codec formats, compress large video files while preserving visual quality, change resolution and frame rates for different platforms, trim and merge clips, and burn captions directly into your footage. All processing runs locally in the browser using modern Web APIs and WebAssembly-powered libraries so your files are not uploaded or stored on a server unless you explicitly choose to share them.
-              </Typography>
-              <Grid container spacing={2} sx={{ mt: 4 }}>
-                {videoTools.map((tool) => (
-                  <Grid
-                    key={tool.title}
-                    size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
-                  >
-                    <Link color="inherit" component={RouterLink} to={tool.link} underline="none" sx={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center' }} aria-label={tool.title}>
-                      {tool.icon}
-                      <ListItemText primary={tool.title} sx={{ ml: 1 }} />
-                    </Link>
-                  </Grid>
-                ))}
-              </Grid>
-            </Grid>
-          </Grid>
-        </Container>
-      </section>
-      <section className='tools audio' style={{ background: `linear-gradient(270deg, ${alpha(theme.palette.primary.main, 0.25)} 0%, transparent 75%)` }}>
-        <Container maxWidth="lg" sx={{ py: 10 }}>
-          <Grid container spacing={4}>
-            <Grid size={{ xs: 12 }}>
-              <Typography variant="h3" component="h2" mb={3}><MusicNoteIcon fontSize="large" sx={{ mr: 1 }} />Audio Tools</Typography>
-              <Typography variant="body1" color="text.secondary">
-                The audio tools let you convert between MP3, WAV, AAC, FLAC and other formats, trim and merge tracks, adjust bitrate and apply simple effects such as fades and normalization. Exports can be tailored for streaming or high-quality archival use. Processing is performed entirely client-side to keep your audio private and fast, with controls for bitrate and encoding to help you balance size and fidelity.
-              </Typography>
-              <Grid container spacing={2} sx={{ mt: 4 }}>
-                {audioTools.map((tool) => (
-                  <Grid
-                    key={tool.title}
-                    size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
-                  >
-                    <Link color="inherit" component={RouterLink} to={tool.link} underline="none" sx={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center' }} aria-label={tool.title}>
-                      {tool.icon}
-                      <ListItemText primary={tool.title} sx={{ ml: 1 }} />
-                    </Link>
-                  </Grid>
-                ))}
-              </Grid>
-            </Grid>
-          </Grid>
-        </Container>
-      </section>
-      <section className='tools image' style={{ background: `linear-gradient(90deg, ${alpha(theme.palette.warning.main, 0.25)} 0%, transparent 75%)` }}>
-        <Container maxWidth="lg" sx={{ py: 10 }}>
-          <Grid container spacing={4}>
-            <Grid size={{ xs: 12 }}>
-              <Typography variant="h3" component="h2" mb={3}><ImageIcon fontSize="large" sx={{ mr: 1 }} />Image Tools</Typography>
-              <Typography variant="body1" color="text.secondary">
-                Image tools support conversion between common image formats, resizing to custom dimensions, cropping, rotating and applying basic quality adjustments and filters. You can generate thumbnails from video frames, compress images for web delivery, and convert between JPG, PNG, WebP and GIF formats directly in your browser — all without uploading your images to a remote server.
-              </Typography>
-              <Grid container spacing={2} sx={{ mt: 4 }}>
-                {imageTools.map((tool) => (
-                  <Grid
-                    key={tool.title}
-                    size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
-                  >
-                    <Link color="inherit" component={RouterLink} to={tool.link} underline="none" sx={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center' }} aria-label={tool.title}>
-                      {tool.icon}
-                      <ListItemText primary={tool.title} sx={{ ml: 1 }} />
-                    </Link>
-                  </Grid>
-                ))}
-              </Grid>
-            </Grid>
-          </Grid>
-        </Container>
-      </section>
-      <section className='faq'>
-        <Container maxWidth="lg" sx={{ pt: 10 }}>
-          <Typography variant="h3" component="h2" mb={3} align='center'>Frequently Asked Questions</Typography>
-          {faqItems.map((item) => (
-            <div key={item.question} style={{ marginBottom: '1.5rem' }}>
-              <Typography variant="h6" component="h3" gutterBottom fontWeight={600}>{item.question}</Typography>
-              <Typography variant="body1" color="text.secondary">{item.answer}</Typography>
-            </div>
-          ))}
-        </Container>
-      </section>
-      <section className='privacy' style={{ background: `linear-gradient(0deg, ${alpha(theme.palette.grey[900], 0.25)} 0%, transparent 100%)` }}>
-        <Container maxWidth="lg" sx={{ py: 10, textAlign: 'center' }}>
-          <Typography variant="h3" component="h2" gutterBottom>Privacy is our priority</Typography>
-          <Typography variant="body1" color="text.secondary" mb={4}>
-            We respect your privacy and are committed to protecting your personal data. All processing is done locally in your browser using WebAssembly and modern Web APIs. Your files are not uploaded to any server unless you explicitly choose to share them. We do not store or log any of your data.
-          </Typography>
-        </Container>
-      </section>
-    </>
-  )
-}
 
-const faqItems: { question: string; answer: string | JSX.Element }[] = [
-  {
-    question: `Is ${APP_INFO.name} really free to use?`,
-    answer: `${APP_INFO.name} offers a suite of core tools that are completely free to use without any signup or watermark. We display ads to support the service, but you can access all essential features at no cost.`
-  },
-  {
-    question: `How does ${APP_INFO.name} protect my privacy?`,
-    answer: `All processing is done locally in your browser using WebAssembly and modern Web APIs. Your files are not uploaded to any server unless you explicitly choose to share them. We do not store or log any of your data.`
-  },
-  {
-    question: 'What video formats are supported?',
-    answer: `We support a wide range of video formats including MP4, MOV, MKV, AVI, WebM and more. The exact formats available depend on your browser's capabilities.`
-  },
-  {
-    question: `Can I use ${APP_INFO.name} on my mobile device?`,
-    answer: `Yes! ${APP_INFO.name} is designed to work on both desktop and mobile browsers. However, performance may vary depending on your device's hardware and browser support for WebAssembly.`
-  },
-  {
-    question: 'Are there any file size limits?',
-    answer: `While there are no strict file size limits, performance may degrade with very large files due to browser memory constraints. For best results, we recommend using files under a few gigabytes.`
-  },
-  {
-    question: 'What should I do if I encounter a bug or issue?',
-    answer: <>If you experience any problems, please visit our <Link to="/about" underline="hover" component={RouterLink}>About Us</Link> page to find contact information and report the issue. We appreciate your feedback!</>
-  }
-];
+  // Slider state
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-const videoTools: {
-  title: string;
-  description: string;
-  icon: JSX.Element;
-  link: string;
-  color: "primary" | "secondary" | "warning" | "info" | "success" | "error" | "inherit";
-}[] = [
-    {
-      title: 'Video Converter',
-      description: 'Convert MP4, MOV, MKV, AVI, WebM & more locally in your browser. Change resolution, codec, bitrate & FPS — private, fast & watermark‑free.',
-      icon: <SwapHorizIcon fontSize="small" color="primary" />,
-      link: '/tools/video/convert',
-      color: 'primary'
-    },
-    {
-      title: 'Video Compressor',
-      description: 'Reduce video file size without quality loss using local browser processing. Adjust CRF, bitrate & resolution — no uploads, no signup required.',
-      icon: <CompressIcon fontSize="small" color="secondary" />,
-      link: '/tools/video/compress',
-      color: 'secondary'
-    },
-    {
-      title: 'Video Resizer',
-      description: 'Resize videos to custom dimensions or aspect ratios (16:9, 4:3, 1:1) for social media. Change resolution privately in your browser.',
-      icon: <AspectRatioIcon fontSize="small" color='warning' />,
-      link: '/tools/video/resize',
-      color: 'warning'
-    },
-    {
-      title: 'Video Trimmer',
-      description: 'Trim and cut videos with frame-accurate precision. Remove unwanted parts locally — no watermark, no signup, 100% browser-based.',
-      icon: <ContentCutIcon fontSize="small" color="info" />,
-      link: '/tools/video/trim',
-      color: 'info'
-    },
-    {
-      title: 'Video Merger',
-      description: 'Merge multiple video clips into one file while preserving quality. Combine videos locally in your browser — private & watermark-free.',
-      icon: <MergeTypeIcon fontSize="small" color="success" />,
-      link: '/tools/video/merge',
-      color: 'success'
-    },
-    {
-      title: 'Extract Audio from Video',
-      description: 'Extract high-quality audio from videos and save as MP3, WAV, AAC, or FLAC. Local processing — no uploads, no watermark, no signup.',
-      icon: <MusicNoteIcon fontSize="small" color="error" />,
-      link: '/tools/video/extract-audio',
-      color: 'error'
-    },
-    {
-      title: 'Burn Captions into Video',
-      description: 'Embed SRT/VTT subtitles permanently into video files. Customize font, size, color & position — private browser-based processing.',
-      icon: <SubtitlesIcon fontSize="small" color="primary" />,
-      link: '/tools/video/burn-captions',
-      color: 'primary'
-    },
-    {
-      title: 'Video Speed Editor',
-      description: 'Change video speed from -20x (reverse) to +20x with pitch correction. Slow motion & time-lapse effects — no watermark, browser-based.',
-      icon: <SpeedIcon fontSize="small" color="secondary" />,
-      link: '/tools/video/playback',
-      color: 'secondary'
-    },
-  ];
+  // Auto-advance slider every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
+    }, 3000);
 
-const audioTools: {
-  title: string;
-  description: string;
-  icon: JSX.Element;
-  link: string;
-  color: "primary" | "secondary" | "warning" | "info" | "success" | "error" | "inherit";
-}[] = [
+    return () => clearInterval(interval);
+  }, []);
+
+  const benefits = [
     {
-      title: 'Audio Converter',
-      description: 'Convert MP3, WAV, AAC, FLAC, OGG, M4A locally in your browser. Choose bitrate (128k–320k) or lossless — no uploads, no signup, no watermark.',
-      icon: <SwapHorizIcon fontSize="small" color="primary" />,
-      link: '/tools/audio/convert',
-      color: 'primary'
+      title: '100% Private & Secure',
+      description: 'All processing happens locally in your browser. Your files never leave your device or get uploaded to any server.',
+      icon: <SecurityIcon fontSize="large" />,
+      color: theme.palette.success.main
     },
     {
-      title: 'Audio Trimmer',
-      description: 'Trim and cut audio files with precision timing for podcasts, music, or voiceovers. Local processing — private & watermark-free.',
-      icon: <ContentCutIcon fontSize="small" color="secondary" />,
-      link: '/tools/audio/trim',
-      color: 'secondary'
+      title: 'No Installation Required',
+      description: 'Use professional-grade tools directly in your browser. No software downloads, no setup, no account creation.',
+      icon: <DevicesIcon fontSize="large" />,
+      color: theme.palette.info.main
     },
     {
-      title: 'Audio Merger',
-      description: 'Join multiple audio tracks into one file instantly. Combine MP3, WAV, AAC files in your browser — no uploads or signup required.',
-      icon: <MergeTypeIcon fontSize="small" color="warning" />,
-      link: '/tools/audio/merge',
-      color: 'warning'
+      title: 'Always Free',
+      description: 'All tools are completely free with no limitations, watermarks, or hidden fees. Perfect for personal and commercial use.',
+      icon: <FreeBreakfastIcon fontSize="large" />,
+      color: theme.palette.warning.main
     },
     {
-      title: 'Audio Effects',
-      description: 'Apply fades, normalization, pitch adjustment, speed changes & volume control to audio files. Professional effects in your browser.',
-      icon: <GraphicEqIcon fontSize="small" color="info" />,
-      link: '/tools/audio/effects',
-      color: 'info'
+      title: 'Lightning Fast',
+      description: 'Powered by WebAssembly and modern web technologies for near-native performance right in your browser.',
+      icon: <SpeedOutlinedIcon fontSize="large" />,
+      color: theme.palette.primary.main
     },
     {
-      title: 'Audio Speed Editor',
-      description: 'Change audio speed with pitch correction or reverse tracks completely. Export processed audio with no watermark — 100% browser-based.',
-      icon: <SpeedIcon fontSize="small" color="success" />,
-      link: '/tools/audio/playback',
-      color: 'success'
+      title: 'Trusted by Thousands',
+      description: 'Used by content creators, businesses, and professionals worldwide for reliable multimedia processing.',
+      icon: <VerifiedUserIcon fontSize="large" />,
+      color: theme.palette.secondary.main
+    },
+    {
+      title: 'Constantly Improving',
+      description: 'Regular updates with new features, format support, and performance improvements based on user feedback.',
+      icon: <TrendingUpIcon fontSize="large" />,
+      color: theme.palette.error.main
     }
   ];
 
-const imageTools: {
-  title: string;
-  description: string;
-  icon: JSX.Element;
-  link: string;
-  color: "primary" | "secondary" | "warning" | "info" | "success" | "error" | "inherit";
-}[] = [
+  const videoTools = [
+    {
+      title: 'Video Converter',
+      description: 'Convert between MP4, MOV, MKV, AVI, WebM and more. High-quality conversion with custom settings.',
+      icon: <SwapHorizIcon color="primary" />,
+      link: '/tools/video/convert',
+      color: theme.palette.primary.main
+    },
+    {
+      title: 'Video Compressor',
+      description: 'Reduce file size while maintaining quality. Perfect for sharing and storage optimization.',
+      icon: <CompressIcon color="primary" />,
+      link: '/tools/video/compression',
+      color: theme.palette.primary.main
+    },
+    {
+      title: 'Video Resizer',
+      description: 'Change resolution, aspect ratio, and dimensions. Optimize for different platforms and devices.',
+      icon: <AspectRatioIcon color="primary" />,
+      link: '/tools/video/resize',
+      color: theme.palette.primary.main
+    },
+    {
+      title: 'Video Trimmer',
+      description: 'Cut and trim videos precisely. Remove unwanted sections with frame-accurate editing.',
+      icon: <ContentCutIcon color="primary" />,
+      link: '/tools/video/trim',
+      color: theme.palette.primary.main
+    },
+    {
+      title: 'Video Merger',
+      description: 'Combine multiple videos into one seamless file. Support for different formats and resolutions.',
+      icon: <MergeTypeIcon color="primary" />,
+      link: '/tools/video/merge',
+      color: theme.palette.primary.main
+    },
+    {
+      title: 'Speed Controller',
+      description: 'Adjust playback speed from 0.25x to 4x. Create slow-motion or time-lapse effects.',
+      icon: <SpeedIcon color="primary" />,
+      link: '/tools/video/playback',
+      color: theme.palette.primary.main
+    },
+    {
+      title: 'Subtitle Burner',
+      description: 'Embed subtitles directly into videos. Support for SRT, VTT, and text overlay.',
+      icon: <SubtitlesIcon color="primary" />,
+      link: '/tools/video/burn-caption',
+      color: theme.palette.primary.main
+    }
+  ];
+
+  const audioTools = [
+    {
+      title: 'Audio Converter',
+      description: 'Convert between MP3, WAV, AAC, FLAC, OGG formats with customizable quality settings.',
+      icon: <MusicNoteIcon color="secondary" />,
+      link: '/tools/audio/convert',
+      color: theme.palette.secondary.main
+    },
+    {
+      title: 'Audio Trimmer',
+      description: 'Precision audio editing with waveform visualization. Cut, trim, and extract segments.',
+      icon: <ContentCutIcon color="secondary" />,
+      link: '/tools/audio/trim',
+      color: theme.palette.secondary.main
+    },
+    {
+      title: 'Audio Merger',
+      description: 'Combine multiple audio tracks seamlessly. Perfect for podcasts and music production.',
+      icon: <MergeTypeIcon color="secondary" />,
+      link: '/tools/audio/merge',
+      color: theme.palette.secondary.main
+    },
+    {
+      title: 'Audio Effects',
+      description: 'Apply professional effects: normalize, fade in/out, amplify, and audio enhancement.',
+      icon: <GraphicEqIcon color="secondary" />,
+      link: '/tools/audio/effects',
+      color: theme.palette.secondary.main
+    },
+    {
+      title: 'Speed & Pitch',
+      description: 'Adjust playback speed and pitch independently. Perfect for music and voice editing.',
+      icon: <SpeedIcon color="secondary" />,
+      link: '/tools/audio/playback',
+      color: theme.palette.secondary.main
+    },
+    {
+      title: 'Extract Audio',
+      description: 'Extract high-quality audio tracks from videos in any format you need.',
+      icon: <GraphicEqIcon color="secondary" />,
+      link: '/tools/audio/extract',
+      color: theme.palette.secondary.main
+    }
+  ];
+
+  const imageTools = [
     {
       title: 'Image Converter & Editor',
       description: 'Convert, resize, crop, rotate, and apply filters to JPG, PNG, WebP, GIF images. Local processing in your browser — fast, secure, no watermark.',
-      icon: <ImageIcon fontSize="small" color="primary" />,
+      icon: <ImageIcon fontSize="large" color="warning" />,
       link: '/tools/image/convert',
-      color: 'primary'
+      color: theme.palette.warning.main
     },
     {
       title: 'Thumbnail Generator',
       description: 'Extract high-quality thumbnails from videos instantly. Generate preview images in multiple sizes — no watermark, no signup required.',
-      icon: <PhotoSizeSelectActualIcon fontSize="small" color="secondary" />,
+      icon: <PhotoSizeSelectActualIcon fontSize="large" color="warning" />,
       link: '/tools/image/thumbnail',
-      color: 'secondary'
-    },
+      color: theme.palette.warning.main
+    }
   ];
 
-export default Home
+  return (
+    <Root>
+      <Helmet>
+        <title>Free Online Video, Audio & Image Tools - VideoTools</title>
+        <meta name="description" content="Professional video, audio, and image processing tools that work entirely in your browser. Convert, edit, compress, and enhance multimedia files privately and for free." />
+        <meta name="keywords" content="video converter, audio editor, image tools, online multimedia, ffmpeg, browser processing" />
+        <meta property="og:title" content="Free Online Video, Audio & Image Tools - VideoTools" />
+        <meta property="og:description" content="Professional multimedia processing tools that work entirely in your browser. Private, fast, and always free." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Free Online Video, Audio & Image Tools - VideoTools" />
+        <meta name="twitter:description" content="Professional multimedia processing tools that work entirely in your browser. Private, fast, and always free." />
+      </Helmet>
+
+      {/* Hero Section */}
+      <section className='hero'>
+        <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
+          <Grid container spacing={6} alignItems="center">
+            <Grid size={{ xs: 12, lg: 7 }}>
+              <Stack direction="row" spacing={2} sx={{ mb: 4 }}>
+                <Chip
+                  label="100% Private"
+                  color="success"
+                  size='medium'
+                  icon={<SecurityIcon />}
+                  sx={{ alignSelf: 'flex-start' }}
+                />
+                <Chip
+                  label="No Uploads"
+                  color="info"
+                  size='medium'
+                  icon={<CloudOffIcon />}
+                  sx={{ alignSelf: 'flex-start' }}
+                />
+                <Chip
+                  label="Always Free"
+                  color="warning"
+                  size='medium'
+                  icon={<MoneyOffIcon />}
+                  sx={{ alignSelf: 'flex-start' }}
+                />
+              </Stack>
+
+              <Typography
+                variant="h1"
+                component="h1"
+                sx={{
+                  fontSize: { xs: '2rem', md: '2.5rem', lg: '3.5rem' },
+                  fontWeight: 800,
+                  lineHeight: 1.1,
+                  mb: 3
+                }}
+              >
+                Professional
+                <Typography
+                  className='gradient-text-primary'
+                  sx={{
+                    fontSize: 'inherit',
+                    fontWeight: 'inherit'
+                  }}
+                >
+                  Multimedia Tools
+                </Typography>
+                in Your Browser
+              </Typography>
+
+              <Typography
+                variant="h5"
+                color="text.secondary"
+                sx={{
+                  mb: 4,
+                  lineHeight: 1.4,
+                  fontWeight: 400
+                }}
+              >
+                Convert, edit, and enhance videos, audio, and images with professional-grade tools.
+                All processing happens locally — your files stay private and secure.
+              </Typography>
+
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 6 }}>
+                <Button
+                  component={RouterLink}
+                  to="/tools/video/convert"
+                  variant="contained"
+                  size="large"
+                  startIcon={<PlayArrowIcon />}
+                  sx={{
+                    py: 1.5,
+                    px: 4,
+                    fontSize: '1.1rem',
+                    fontWeight: 600
+                  }}
+                >
+                  Start Processing
+                </Button>
+                <Button
+                  component={RouterLink}
+                  to="/about"
+                  variant="outlined"
+                  size="large"
+                  startIcon={<InfoIcon />}
+                  sx={{
+                    py: 1.5,
+                    px: 4,
+                    fontSize: '1.1rem'
+                  }}
+                >
+                  Learn More
+                </Button>
+              </Stack>
+
+              <Paper
+                elevation={0}
+                sx={{
+                  p: 2,
+                  bgcolor: alpha(theme.palette.success.main, 0.08),
+                  border: `1px solid ${alpha(theme.palette.success.main, 0.2)}`
+                }}
+              >
+                <Typography variant="body1" sx={{ display: 'flex', alignItems: 'center', fontWeight: 500 }}>
+                  <CheckCircleIcon color="success" sx={{ mr: 1 }} />
+                  Trusted by 1000s creators worldwide
+                </Typography>
+              </Paper>
+            </Grid>
+
+            <Grid size={{ xs: 12, lg: 5 }}>
+              <HeroSlider>
+                {/* Placeholder image for proper sizing */}
+                <img
+                  className="slider-placeholder"
+                  src={sliderImages[0]}
+                  alt=""
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                  }}
+                />
+                {/* Actual slider images */}
+                {sliderImages.map((image, index) => (
+                  <img
+                    key={index}
+                    className={`slider-image ${index === currentSlide ? 'active' : ''}`}
+                    src={image}
+                    alt={sliderAltTexts[index]}
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                    }}
+                  />
+                ))}
+              </HeroSlider>
+            </Grid>
+          </Grid>
+        </Container>
+      </section>
+
+      {/* Key Benefits Section */}
+      <section className='benefits' style={{ background: `url('/images/backgrounds/bg1.jpg') no-repeat center/cover fixed` }}>
+        <Container maxWidth="lg" sx={{ py: 10 }}>
+          <Typography variant="h2" component="h2" align="center" gutterBottom fontWeight={700} sx={{ mb: 2 }}>
+            Why Choose {APP_INFO.name}?
+          </Typography>
+          <Typography variant="h6" component="p" align="center" color="text.secondary" sx={{ mb: 6, maxWidth: 800, mx: 'auto' }}>
+            We've built the most comprehensive, secure, and user-friendly media processing platform that works entirely in your browser.
+          </Typography>
+
+          <Grid container spacing={4}>
+            {benefits.map((benefit, index) => (
+              <Grid key={index} size={{ xs: 12, md: 6, lg: 4 }}>
+                <Card elevation={0} sx={{ height: '100%', bgcolor: alpha(theme.palette.background.paper, 0.5), backdropFilter: 'blur(5px)', transition: 'all 0.3s ease', '&:hover': { transform: 'translateY(-4px)', boxShadow: theme.shadows[4] } }}>
+                  <CardContent sx={{ textAlign: 'center', p: 3 }}>
+                    <Box sx={{ mb: 2, color: benefit.color }}>
+                      {benefit.icon}
+                    </Box>
+                    <Typography variant="h6" component="h3" gutterBottom fontWeight={600}>
+                      {benefit.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
+                      {benefit.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </section>
+
+      {/* Video Tools Section */}
+      <section className='tools video'>
+        <Container maxWidth="lg" sx={{ py: 10 }}>
+          <Grid container spacing={6}>
+            <Grid size={{ xs: 12, lg: 5 }}>
+              <Box sx={{ position: 'sticky', top: 100 }}>
+                <Typography variant="h2" component="h2" gutterBottom fontWeight={700}>
+                  <VideocamIcon fontSize="large" sx={{ mr: 2, verticalAlign: 'middle' }} />
+                  Video Tools
+                </Typography>
+                <Typography variant="h6" color="text.secondary" sx={{ mb: 4, lineHeight: 1.6 }}>
+                  Professional video processing tools that work entirely in your browser. Convert formats,
+                  compress files, edit content, and apply effects without any software installation.
+                </Typography>
+
+                <Paper elevation={1} sx={{ p: 3, mb: 4, bgcolor: alpha(theme.palette.info.main, 0.05) }}>
+                  <Typography variant="h6" gutterBottom fontWeight={600}>
+                    What You Can Do:
+                  </Typography>
+                  <List dense>
+                    <ListItem>
+                      <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                      <ListItemText primary="Convert MP4, MOV, MKV, AVI, WebM formats" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                      <ListItemText primary="Compress videos while maintaining quality" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                      <ListItemText primary="Resize and change aspect ratios" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                      <ListItemText primary="Trim, merge, and edit video clips" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                      <ListItemText primary="Extract audio and burn subtitles" />
+                    </ListItem>
+                  </List>
+                </Paper>
+
+                <Button
+                  component={RouterLink}
+                  to="/tools/video/convert"
+                  variant="contained"
+                  size="large"
+                  fullWidth
+                  startIcon={<VideocamIcon />}
+                >
+                  Start with Video Tools
+                </Button>
+              </Box>
+            </Grid>
+            <Grid size={{ xs: 12, lg: 7 }}>
+              <Grid container spacing={3}>
+                {videoTools.map((tool) => (
+                  <Grid key={tool.title} size={{ xs: 12, sm: 6 }}>
+                    <Card
+                      component={RouterLink}
+                      to={tool.link}
+                      elevation={0}
+                      sx={{
+                        display: 'block',
+                        height: '100%',
+                        textDecoration: 'none',
+                        background: alpha(theme.palette.background.paper, 0.5),
+                        backdropFilter: 'blur(5px)',
+                        border: `1px dotted ${theme.palette.divider}`,
+                        transition: 'all 0.3s ease',
+                        '&:hover': {
+                          transform: 'translateY(-2px)',
+                          boxShadow: theme.shadows[4],
+                          borderColor: tool.color
+                        }
+                      }}
+                    >
+                      <CardContent sx={{ p: 3 }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                          {tool.icon}
+                          <Typography variant="h6" component="h3" sx={{ ml: 1, fontWeight: 600 }}>
+                            {tool.title}
+                          </Typography>
+                        </Box>
+                        <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.5 }}>
+                          {tool.description}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            </Grid>
+          </Grid>
+        </Container>
+      </section>
+
+      {/* Audio Tools Section */}
+      <section className='tools audio'>
+        <Container maxWidth="lg" sx={{ py: 10 }}>
+          <Grid container spacing={6}>
+            <Grid size={{ xs: 12, lg: 7 }}>
+              <Grid container spacing={3}>
+                {audioTools.map((tool) => (
+                  <Grid key={tool.title} size={{ xs: 12, sm: 6 }}>
+                    <Card
+                      component={RouterLink}
+                      to={tool.link}
+                      elevation={0}
+                      sx={{
+                        display: 'block',
+                        height: '100%',
+                        textDecoration: 'none',
+                        background: alpha(theme.palette.background.paper, 0.5),
+                        backdropFilter: 'blur(5px)',
+                        border: `1px dotted ${theme.palette.divider}`,
+                        transition: 'all 0.3s ease',
+                        '&:hover': {
+                          transform: 'translateY(-2px)',
+                          boxShadow: theme.shadows[4],
+                          borderColor: tool.color
+                        }
+                      }}
+                    >
+                      <CardContent sx={{ p: 3 }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                          {tool.icon}
+                          <Typography variant="h6" component="h3" sx={{ ml: 1, fontWeight: 600 }}>
+                            {tool.title}
+                          </Typography>
+                        </Box>
+                        <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.5 }}>
+                          {tool.description}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            </Grid>
+            <Grid size={{ xs: 12, lg: 5 }}>
+              <Box sx={{ position: 'sticky', top: 100 }}>
+                <Typography variant="h2" component="h2" gutterBottom fontWeight={700}>
+                  <MusicNoteIcon fontSize="large" sx={{ mr: 2, verticalAlign: 'middle' }} />
+                  Audio Tools
+                </Typography>
+                <Typography variant="h6" color="text.secondary" sx={{ mb: 4, lineHeight: 1.6 }}>
+                  Professional audio processing capabilities for podcasters, musicians, and content creators.
+                  Edit, convert, and enhance audio files with studio-quality results.
+                </Typography>
+
+                <Paper elevation={1} sx={{ p: 3, mb: 4, bgcolor: alpha(theme.palette.secondary.main, 0.05) }}>
+                  <Typography variant="h6" gutterBottom fontWeight={600}>
+                    Audio Capabilities:
+                  </Typography>
+                  <List dense>
+                    <ListItem>
+                      <ListItemIcon sx={{ minWidth: 40 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                      <ListItemText primary="Convert MP3, WAV, AAC, FLAC, OGG formats" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon sx={{ minWidth: 40 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                      <ListItemText primary="Precision trimming and seamless merging" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon sx={{ minWidth: 40 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                      <ListItemText primary="Professional effects and normalization" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon sx={{ minWidth: 40 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                      <ListItemText primary="Adjustable bitrates and quality settings" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon sx={{ minWidth: 40 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                      <ListItemText primary="Speed control with pitch correction" />
+                    </ListItem>
+                  </List>
+                </Paper>
+
+                <Button
+                  component={RouterLink}
+                  to="/tools/audio/convert"
+                  variant="contained"
+                  color="secondary"
+                  size="large"
+                  fullWidth
+                  startIcon={<MusicNoteIcon />}
+                >
+                  Explore Audio Tools
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </section>
+
+      {/* Image Tools Section */}
+      <section className='tools image'>
+        <Container maxWidth="lg" sx={{ py: 10 }}>
+          <Grid container spacing={6}>
+            <Grid size={{ xs: 12, lg: 5 }}>
+              <Box sx={{ position: 'sticky', top: 100 }}>
+                <Typography variant="h2" component="h2" gutterBottom fontWeight={700}>
+                  <ImageIcon fontSize="large" sx={{ mr: 2, verticalAlign: 'middle' }} />
+                  Image Tools
+                </Typography>
+                <Typography variant="h6" color="text.secondary" sx={{ mb: 4, lineHeight: 1.6 }}>
+                  Comprehensive image processing and editing tools for photographers, designers, and content creators.
+                  Transform images with professional-grade features that work entirely in your browser.
+                </Typography>
+
+                <Paper elevation={1} sx={{ p: 3, mb: 4, bgcolor: alpha(theme.palette.warning.main, 0.05) }}>
+                  <Typography variant="h6" gutterBottom fontWeight={600}>
+                    Image Capabilities:
+                  </Typography>
+                  <List dense>
+                    <ListItem>
+                      <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                      <ListItemText primary="Convert JPG, PNG, WebP, GIF formats" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                      <ListItemText primary="Resize, crop, and rotate images" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                      <ListItemText primary="Apply filters and adjustments" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                      <ListItemText primary="Generate video thumbnails" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                      <ListItemText primary="Batch processing support" />
+                    </ListItem>
+                  </List>
+                </Paper>
+
+                <Button
+                  component={RouterLink}
+                  to="/tools/image/convert"
+                  variant="contained"
+                  color="warning"
+                  size="large"
+                  fullWidth
+                  startIcon={<ImageIcon />}
+                >
+                  Start with Image Tools
+                </Button>
+              </Box>
+            </Grid>
+            <Grid size={{ xs: 12, lg: 7 }}>
+              <Grid container spacing={3}>
+                {imageTools.map((tool) => (
+                  <Grid key={tool.title} size={{ xs: 12, sm: 6 }}>
+                    <Card
+                      component={RouterLink}
+                      to={tool.link}
+                      elevation={0}
+                      sx={{
+                        display: 'block',
+                        height: '100%',
+                        textDecoration: 'none',
+                        background: alpha(theme.palette.background.paper, 0.5),
+                        backdropFilter: 'blur(5px)',
+                        border: `1px dotted ${theme.palette.divider}`,
+                        transition: 'all 0.3s ease',
+                        '&:hover': {
+                          transform: 'translateY(-2px)',
+                          boxShadow: theme.shadows[4],
+                          borderColor: tool.color
+                        }
+                      }}
+                    >
+                      <CardContent sx={{ p: 3 }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                          {tool.icon}
+                          <Typography variant="h6" component="h3" sx={{ ml: 1, fontWeight: 600 }}>
+                            {tool.title}
+                          </Typography>
+                        </Box>
+                        <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.5 }}>
+                          {tool.description}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            </Grid>
+          </Grid>
+        </Container>
+      </section>
+
+      {/* FAQ Section */}
+      <section className='faq' style={{ background: `url('/images/backgrounds/bg1.jpg') no-repeat center/cover fixed` }}>
+        <Container maxWidth="md" sx={{ py: 10 }}>
+          <Typography variant="h2" component="h2" align="center" gutterBottom fontWeight={700} sx={{ mb: 6 }}>
+            Frequently Asked Questions
+          </Typography>
+
+          <Accordion elevation={0} sx={{ mb: 2, border: `1px solid ${theme.palette.divider}` }}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography variant="h6" fontWeight={600}>Is this really free to use?</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                Yes, completely free! All our tools are open-source and run entirely in your browser.
+                There are no hidden fees, subscriptions, or limitations on usage. We believe in keeping
+                multimedia processing accessible to everyone.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+
+          <Accordion elevation={0} sx={{ mb: 2, border: `1px solid ${theme.palette.divider}` }}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography variant="h6" fontWeight={600}>How is my privacy protected?</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                Your files never leave your device. All processing happens locally in your browser using
+                WebAssembly technology. We don't upload, store, or have access to your files. What you
+                process stays completely private.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+
+          <Accordion elevation={0} sx={{ mb: 2, border: `1px solid ${theme.palette.divider}` }}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography variant="h6" fontWeight={600}>What file formats are supported?</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                We support all major formats: MP4, MOV, MKV, AVI, WebM for video; MP3, WAV, AAC, FLAC,
+                OGG for audio; and JPG, PNG, WebP, GIF for images. Our tools can convert between these
+                formats and many others.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+
+          <Accordion elevation={0} sx={{ mb: 2, border: `1px solid ${theme.palette.divider}` }}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography variant="h6" fontWeight={600}>Are there file size limits?</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                File size limits depend on your device's memory and processing power. Generally, files up
+                to several GB can be processed. Larger files may take longer to process but there are no
+                artificial restrictions imposed by our service.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+
+          <Accordion elevation={0} sx={{ mb: 2, border: `1px solid ${theme.palette.divider}` }}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography variant="h6" fontWeight={600}>Do I need to install anything?</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                No installation required! Our tools work directly in your web browser. We use modern web
+                technologies like WebAssembly to bring desktop-quality processing to the browser. Just
+                visit our site and start using the tools immediately.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+
+          <Accordion elevation={0} sx={{ border: `1px solid ${theme.palette.divider}` }}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography variant="h6" fontWeight={600}>Can I use this for commercial projects?</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                Absolutely! Our tools are free for both personal and commercial use. Whether you're a
+                content creator, business, or enterprise, you can use our platform without restrictions
+                or licensing fees.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+        </Container>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className='cta'>
+        <Container maxWidth="md" sx={{ py: 10 }}>
+          <Paper
+            elevation={0}
+            sx={{
+              p: 6,
+              textAlign: 'center',
+              background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+              color: 'white',
+              borderRadius: 3
+            }}
+          >
+            <Typography variant="h3" component="h2" gutterBottom fontWeight={700}>
+              Ready to Get Started?
+            </Typography>
+            <Typography variant="h6" sx={{ mb: 4, opacity: 0.9 }}>
+              Join thousands of creators who trust our platform for their multimedia processing needs.
+              No signups, no downloads, no hassle.
+            </Typography>
+
+            <Stack
+              direction={{ xs: 'column', sm: 'row' }}
+              spacing={2}
+              justifyContent="center"
+              sx={{ mb: 4 }}
+            >
+              <Button
+                component={RouterLink}
+                to="/tools/video/convert"
+                variant="contained"
+                size="large"
+                sx={{
+                  bgcolor: 'white',
+                  color: theme.palette.primary.main,
+                  '&:hover': { bgcolor: alpha('#fff', 0.9) }
+                }}
+                startIcon={<VideocamIcon />}
+              >
+                Start with Video
+              </Button>
+              <Button
+                component={RouterLink}
+                to="/tools/audio/convert"
+                variant="outlined"
+                size="large"
+                sx={{
+                  borderColor: 'white',
+                  color: 'white',
+                  '&:hover': {
+                    borderColor: 'white',
+                    bgcolor: alpha('#fff', 0.1)
+                  }
+                }}
+                startIcon={<MusicNoteIcon />}
+              >
+                Try Audio Tools
+              </Button>
+            </Stack>
+
+            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 4, opacity: 0.8 }}>
+              <Box sx={{ textAlign: 'center' }}>
+                <SecurityIcon color='success' sx={{ fontSize: 40, mb: 1 }} />
+                <Typography variant="body2">100% Private</Typography>
+              </Box>
+              <Box sx={{ textAlign: 'center' }}>
+                <CloudOffIcon color='info' sx={{ fontSize: 40, mb: 1 }} />
+                <Typography variant="body2">No Uploads</Typography>
+              </Box>
+              <Box sx={{ textAlign: 'center' }}>
+                <MoneyOffIcon color='warning' sx={{ fontSize: 40, mb: 1 }} />
+                <Typography variant="body2">Always Free</Typography>
+              </Box>
+            </Box>
+          </Paper>
+        </Container>
+      </section>
+    </Root>
+  );
+}
+
+export default Home;
