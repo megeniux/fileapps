@@ -50,27 +50,44 @@ import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
 const Root = styled('div')(({ theme }) => ({
+  '& > section:not(.cta)': {
+    display: 'flex',
+    alignItems: 'center',
+    minHeight: '100dvh',
+    paddingBlock: theme.spacing(10),
+  },
   '& .hero': {
-    background: `url('/images/backgrounds/bg1.jpg') no-repeat center/cover fixed`,
+    background: `url('/images/backgrounds/bg0.jpg') no-repeat center/cover fixed`,
+  },
+  '& .benefits': {
+    background: `url('/images/backgrounds/bg0.jpg') no-repeat center/cover fixed`,
   },
   '& .tools': {
-    background: `url('/images/backgrounds/bg2.jpg') no-repeat center/cover fixed`,
     '&.video': {
+      background: `url('/images/backgrounds/bg1.jpg') no-repeat center/cover fixed`,
       '& h2': {
         color: theme.palette.primary.main,
       },
     },
     '&.audio': {
+      background: `url('/images/backgrounds/bg2.jpg') no-repeat center/cover fixed`,
       '& h2': {
         color: theme.palette.secondary.main,
       },
     },
     '&.image': {
+      background: `url('/images/backgrounds/bg3.jpg') no-repeat center/cover fixed`,
       '& h2': {
         color: theme.palette.warning.main,
       },
     },
   },
+  '& .faq': {
+    background: `url('/images/backgrounds/bg0.jpg') no-repeat center/cover fixed`,
+  },
+  '& .cta': {
+    paddingBlock: theme.spacing(10),
+  }
 }));
 
 // Slider component for hero images
@@ -440,8 +457,8 @@ function Home() {
       </section>
 
       {/* Key Benefits Section */}
-      <section className='benefits' style={{ background: `url('/images/backgrounds/bg1.jpg') no-repeat center/cover fixed` }}>
-        <Container maxWidth="lg" sx={{ py: 10 }}>
+      <section className='benefits'>
+        <Container maxWidth="lg">
           <Typography variant="h2" component="h2" align="center" gutterBottom fontWeight={700} sx={{ mb: 2 }}>
             Why Choose {APP_INFO.name}?
           </Typography>
@@ -473,7 +490,7 @@ function Home() {
 
       {/* Video Tools Section */}
       <section className='tools video'>
-        <Container maxWidth="lg" sx={{ py: 10 }}>
+        <Container maxWidth="lg">
           <Grid container spacing={6}>
             <Grid size={{ xs: 12, lg: 5 }}>
               <Box sx={{ position: 'sticky', top: 100 }}>
@@ -571,7 +588,7 @@ function Home() {
 
       {/* Audio Tools Section */}
       <section className='tools audio'>
-        <Container maxWidth="lg" sx={{ py: 10 }}>
+        <Container maxWidth="lg">
           <Grid container spacing={6}>
             <Grid size={{ xs: 12, lg: 7 }}>
               <Grid container spacing={3}>
@@ -670,7 +687,7 @@ function Home() {
 
       {/* Image Tools Section */}
       <section className='tools image'>
-        <Container maxWidth="lg" sx={{ py: 10 }}>
+        <Container maxWidth="lg">
           <Grid container spacing={6}>
             <Grid size={{ xs: 12, lg: 5 }}>
               <Box sx={{ position: 'sticky', top: 100 }}>
@@ -768,13 +785,16 @@ function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section className='faq' style={{ background: `url('/images/backgrounds/bg1.jpg') no-repeat center/cover fixed` }}>
-        <Container maxWidth="md" sx={{ py: 10 }}>
+      <section className='faq'>
+        <Container maxWidth="md">
           <Typography variant="h2" component="h2" align="center" gutterBottom fontWeight={700} sx={{ mb: 6 }}>
             Frequently Asked Questions
           </Typography>
 
-          <Accordion elevation={0} sx={{ mb: 2, border: `1px solid ${theme.palette.divider}` }}>
+          <Accordion elevation={0} variant='outlined' sx={{
+            mb: 2, background: alpha(theme.palette.background.paper, 0.5),
+            backdropFilter: 'blur(5px)', border: `1px solid ${theme.palette.divider}`, borderRadius: 1
+          }}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography variant="h6" fontWeight={600}>Is this really free to use?</Typography>
             </AccordionSummary>
@@ -787,7 +807,10 @@ function Home() {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion elevation={0} sx={{ mb: 2, border: `1px solid ${theme.palette.divider}` }}>
+          <Accordion elevation={0} sx={{
+            mb: 2, background: alpha(theme.palette.background.paper, 0.5),
+            backdropFilter: 'blur(5px)', border: `1px solid ${theme.palette.divider}`, borderRadius: 1
+          }}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography variant="h6" fontWeight={600}>How is my privacy protected?</Typography>
             </AccordionSummary>
@@ -800,7 +823,10 @@ function Home() {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion elevation={0} sx={{ mb: 2, border: `1px solid ${theme.palette.divider}` }}>
+          <Accordion elevation={0} sx={{
+            mb: 2, background: alpha(theme.palette.background.paper, 0.5),
+            backdropFilter: 'blur(5px)', border: `1px solid ${theme.palette.divider}`, borderRadius: 1
+          }}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography variant="h6" fontWeight={600}>What file formats are supported?</Typography>
             </AccordionSummary>
@@ -813,7 +839,10 @@ function Home() {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion elevation={0} sx={{ mb: 2, border: `1px solid ${theme.palette.divider}` }}>
+          <Accordion elevation={0} sx={{
+            mb: 2, background: alpha(theme.palette.background.paper, 0.5),
+            backdropFilter: 'blur(5px)', border: `1px solid ${theme.palette.divider}`, borderRadius: 1
+          }}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography variant="h6" fontWeight={600}>Are there file size limits?</Typography>
             </AccordionSummary>
@@ -826,7 +855,10 @@ function Home() {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion elevation={0} sx={{ mb: 2, border: `1px solid ${theme.palette.divider}` }}>
+          <Accordion elevation={0} sx={{
+            mb: 2, background: alpha(theme.palette.background.paper, 0.5),
+            backdropFilter: 'blur(5px)', border: `1px solid ${theme.palette.divider}`, borderRadius: 1
+          }}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography variant="h6" fontWeight={600}>Do I need to install anything?</Typography>
             </AccordionSummary>
@@ -839,7 +871,10 @@ function Home() {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion elevation={0} sx={{ border: `1px solid ${theme.palette.divider}` }}>
+          <Accordion elevation={0} sx={{
+            mb: 2, background: alpha(theme.palette.background.paper, 0.5),
+            backdropFilter: 'blur(5px)', border: `1px solid ${theme.palette.divider}`, borderRadius: 1
+          }}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography variant="h6" fontWeight={600}>Can I use this for commercial projects?</Typography>
             </AccordionSummary>
@@ -856,7 +891,7 @@ function Home() {
 
       {/* Final CTA Section */}
       <section className='cta'>
-        <Container maxWidth="md" sx={{ py: 10 }}>
+        <Container maxWidth="md">
           <Paper
             elevation={0}
             sx={{
