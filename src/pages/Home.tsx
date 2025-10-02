@@ -50,19 +50,18 @@ import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
 const Root = styled('div')(({ theme }) => ({
-  '& > section:not(.cta)': {
+  '& > section': {
     display: 'flex',
     alignItems: 'center',
-    minHeight: '100dvh',
-    paddingBlock: theme.spacing(10),
+    paddingBlock: theme.spacing(15),
     [theme.breakpoints.down('md')]: {
-      minHeight: '50dvh',
       paddingBlock: theme.spacing(5),
     }
   },
-  '& .hero': {
+  '& > .hero': {
     background: `url('/images/backgrounds/bg0.jpg') no-repeat center/cover fixed`,
-    '& .left':{
+    paddingBottom: `0`,
+    '& .left': {
       [theme.breakpoints.down('sm')]: {
         textAlign: 'center',
       }
@@ -95,7 +94,8 @@ const Root = styled('div')(({ theme }) => ({
     background: `url('/images/backgrounds/bg0.jpg') no-repeat center/cover fixed`,
   },
   '& .cta': {
-    paddingBlock: theme.spacing(10),
+    paddingTop: theme.spacing(10),
+    paddingBottom: theme.spacing(15),
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(15),
     }
@@ -105,10 +105,8 @@ const Root = styled('div')(({ theme }) => ({
 // Slider component for hero images
 const HeroSlider = styled(Box)(({ theme }) => ({
   position: 'relative',
-  width: '100%',
-  height: 'auto',
   overflow: 'hidden',
-  borderRadius: 16,
+  borderRadius: theme.spacing(2),
   '& .slider-image': {
     position: 'absolute',
     top: 0,
@@ -323,6 +321,64 @@ function Home() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Online Video, Audio & Image Tools - VideoTools" />
         <meta name="twitter:description" content="Professional multimedia processing tools that work entirely in your browser. Private, fast, and always free." />
+        
+        {/* FAQ Schema Markup */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Is this really free to use?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, completely free! All our tools are open-source and run entirely in your browser. There are no hidden fees, subscriptions, or limitations on usage. We believe in keeping multimedia processing accessible to everyone."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How is my privacy protected?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Your files never leave your device. All processing happens locally in your browser using WebAssembly technology. We don't upload, store, or have access to your files. What you process stays completely private."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What file formats are supported?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We support all major formats: MP4, MOV, MKV, AVI, WebM for video; MP3, WAV, AAC, FLAC, OGG for audio; and JPG, PNG, WebP, GIF for images. Our tools can convert between these formats and many others."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Are there file size limits?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "File size limits depend on your device's memory and processing power. Generally, files up to several GB can be processed. Larger files may take longer to process but there are no artificial restrictions imposed by our service."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need to install anything?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No installation required! Our tools work directly in your web browser. We use modern web technologies like WebAssembly to bring desktop-quality processing to the browser. Just visit our site and start using the tools immediately."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I use this for commercial projects?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Absolutely! Our tools are free for both personal and commercial use. Whether you're a content creator, business, or enterprise, you can use our platform without restrictions or licensing fees."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       {/* Hero Section */}
@@ -437,7 +493,7 @@ function Home() {
               </Paper>
             </Grid>
 
-            <Grid size={{ xs: 12, md: 6, lg: 5 }} className="right">
+            <Grid container size={{ xs: 12, md: 6, lg: 5 }} justifyContent={{md: 'flex-end'}} alignItems="center" className="right">
               <HeroSlider>
                 {/* Placeholder image for proper sizing */}
                 <img
@@ -460,7 +516,7 @@ function Home() {
                     style={{
                       width: '100%',
                       height: 'auto',
-                      maxWidth: 400,
+                      maxWidth: 600,
                     }}
                   />
                 ))}
@@ -641,6 +697,35 @@ function Home() {
                     </Card>
                   </Grid>
                 ))}
+                <Grid size={12}>
+                  <Paper elevation={1} sx={{ p: 3, bgcolor: alpha(theme.palette.secondary.main, 0.05) }}>
+                    <Typography variant="h6" gutterBottom fontWeight={600}>
+                      Audio Capabilities:
+                    </Typography>
+                    <List dense>
+                      <ListItem>
+                        <ListItemIcon sx={{ minWidth: 40 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                        <ListItemText primary="Convert MP3, WAV, AAC, FLAC, OGG formats" />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemIcon sx={{ minWidth: 40 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                        <ListItemText primary="Precision trimming and seamless merging" />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemIcon sx={{ minWidth: 40 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                        <ListItemText primary="Professional effects and normalization" />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemIcon sx={{ minWidth: 40 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                        <ListItemText primary="Adjustable bitrates and quality settings" />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemIcon sx={{ minWidth: 40 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                        <ListItemText primary="Speed control with pitch correction" />
+                      </ListItem>
+                    </List>
+                  </Paper>
+                </Grid>
               </Grid>
             </Grid>
             <Grid size={{ xs: 12, lg: 5 }}>
@@ -653,34 +738,6 @@ function Home() {
                   Professional audio processing capabilities for podcasters, musicians, and content creators.
                   Edit, convert, and enhance audio files with studio-quality results.
                 </Typography>
-
-                <Paper elevation={1} sx={{ p: 3, mb: 4, bgcolor: alpha(theme.palette.secondary.main, 0.05) }}>
-                  <Typography variant="h6" gutterBottom fontWeight={600}>
-                    Audio Capabilities:
-                  </Typography>
-                  <List dense>
-                    <ListItem>
-                      <ListItemIcon sx={{ minWidth: 40 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
-                      <ListItemText primary="Convert MP3, WAV, AAC, FLAC, OGG formats" />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon sx={{ minWidth: 40 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
-                      <ListItemText primary="Precision trimming and seamless merging" />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon sx={{ minWidth: 40 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
-                      <ListItemText primary="Professional effects and normalization" />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon sx={{ minWidth: 40 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
-                      <ListItemText primary="Adjustable bitrates and quality settings" />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon sx={{ minWidth: 40 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
-                      <ListItemText primary="Speed control with pitch correction" />
-                    </ListItem>
-                  </List>
-                </Paper>
 
                 <Button
                   component={RouterLink}
@@ -713,34 +770,6 @@ function Home() {
                   Comprehensive image processing and editing tools for photographers, designers, and content creators.
                   Transform images with professional-grade features that work entirely in your browser.
                 </Typography>
-
-                <Paper elevation={1} sx={{ p: 3, mb: 4, bgcolor: alpha(theme.palette.warning.main, 0.05) }}>
-                  <Typography variant="h6" gutterBottom fontWeight={600}>
-                    Image Capabilities:
-                  </Typography>
-                  <List dense>
-                    <ListItem>
-                      <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
-                      <ListItemText primary="Convert JPG, PNG, WebP, GIF formats" />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
-                      <ListItemText primary="Resize, crop, and rotate images" />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
-                      <ListItemText primary="Apply filters and adjustments" />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
-                      <ListItemText primary="Generate video thumbnails" />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
-                      <ListItemText primary="Batch processing support" />
-                    </ListItem>
-                  </List>
-                </Paper>
 
                 <Button
                   component={RouterLink}
@@ -792,6 +821,35 @@ function Home() {
                     </Card>
                   </Grid>
                 ))}
+                <Grid size={12}>
+                  <Paper elevation={1} sx={{ p: 3, bgcolor: alpha(theme.palette.warning.main, 0.05) }}>
+                    <Typography variant="h6" gutterBottom fontWeight={600}>
+                      Image Capabilities:
+                    </Typography>
+                    <List dense>
+                      <ListItem>
+                        <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                        <ListItemText primary="Convert JPG, PNG, WebP, GIF formats" />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                        <ListItemText primary="Resize, crop, and rotate images" />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                        <ListItemText primary="Apply filters and adjustments" />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                        <ListItemText primary="Generate video thumbnails" />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemIcon sx={{ minWidth: 30 }}><CheckCircleIcon color="success" fontSize="small" /></ListItemIcon>
+                        <ListItemText primary="Batch processing support" />
+                      </ListItem>
+                    </List>
+                  </Paper>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>

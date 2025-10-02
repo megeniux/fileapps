@@ -19,6 +19,7 @@ const Root = styled(Box)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     height: '100dvh',
+    background: `url('/images/backgrounds/bg.jpg'), ${theme.palette.background.default}`,
     paddingTop: theme.spacing(3),
     overflowY: 'auto',
   }
