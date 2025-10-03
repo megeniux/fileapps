@@ -3,7 +3,7 @@ export const defaultState = {
   height: '',
   maintainAspectRatio: true,
   quality: 90,
-  format: 'original',
+  format: 'png',
   crop: { x: 0, y: 0, w: 0, h: 0 },
   rotate: 0,
   grayscale: false,

@@ -11,15 +11,15 @@
 8. **VideoPlayback** - ✅ Refactored with Twitter meta tags + Root styling
 9. **VideoResize** - ✅ Refactored with Twitter meta tags + Root styling  
 10. **VideoTrim** - ✅ Refactored with Twitter meta tags + Root styling
+11. **AudioMerge** - ✅ Refactored to match AudioConvert pattern exactly
+12. **ImageConvert** - ✅ Refactored to match AudioConvert pattern exactly
+13. **ThumbnailGenerator** - ✅ Refactored to match AudioConvert pattern exactly
 
 ## To Refactor 🔄
 
-### Main Components (5 remaining - Complex modules)
-1. **AudioMerge** - `AudioMerge.tsx` ⚠️ (Complex - multiple files)
-2. **BurnCaption** - `BurnCaption.tsx` ⚠️ (Complex - subtitle handling)
-3. **ImageConvert** - `ImageConvert.tsx` ⚠️ (Complex - dimensions display, partially done)
-4. **ThumbnailGenerator** - `ThumbnailGenerator.tsx` ⚠️ (Complex - grid display)
-5. **VideoMerge** - `VideoMerge.tsx` ⚠️ (Complex - multiple files)
+### Main Components (2 remaining - Complex modules)
+1. **BurnCaption** - `BurnCaption.tsx` ⚠️ (Complex - subtitle handling)
+2. **VideoMerge** - `VideoMerge.tsx` ⚠️ (Complex - multiple files)
 
 ## 🔧 Critical Issues Fixed
 - **FFmpeg Reset Problems**: Fixed improper FFmpeg instance cleanup in reset/stop functions

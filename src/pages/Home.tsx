@@ -60,6 +60,7 @@ const Root = styled('div')(({ theme }) => ({
   },
   '& > .hero': {
     background: `url('/images/backgrounds/bg0.jpg') no-repeat center/cover fixed`,
+    paddingTop: theme.spacing(5),
     paddingBottom: `0`,
     '& .left': {
       [theme.breakpoints.down('sm')]: {
@@ -207,7 +208,7 @@ function Home() {
       title: 'Video Compressor',
       description: 'Reduce file size while maintaining quality. Perfect for sharing and storage optimization.',
       icon: <CompressIcon color="primary" />,
-      link: '/tools/video/compression',
+      link: '/tools/video/compress',
       color: theme.palette.primary.main
     },
     {
@@ -242,7 +243,7 @@ function Home() {
       title: 'Subtitle Burner',
       description: 'Embed subtitles directly into videos. Support for SRT, VTT, and text overlay.',
       icon: <SubtitlesIcon color="primary" />,
-      link: '/tools/video/burn-caption',
+      link: '/tools/video/burn-captions',
       color: theme.palette.primary.main
     }
   ];
@@ -287,7 +288,7 @@ function Home() {
       title: 'Extract Audio',
       description: 'Extract high-quality audio tracks from videos in any format you need.',
       icon: <GraphicEqIcon color="secondary" />,
-      link: '/tools/audio/extract',
+      link: '/tools/video/extract-audio',
       color: theme.palette.secondary.main
     }
   ];

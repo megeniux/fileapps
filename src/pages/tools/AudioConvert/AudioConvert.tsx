@@ -144,7 +144,7 @@ function AudioConvert() {
       title: 'Extract Audio',
       description: 'Extract audio from video files',
       icon: <AudiotrackIcon color="secondary" />,
-      link: '/tools/audio/extract'
+      link: '/tools/video/extract-audio'
     }
   ];
 

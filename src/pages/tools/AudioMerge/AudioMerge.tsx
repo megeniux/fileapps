@@ -33,7 +33,6 @@ import DevicesIcon from '@mui/icons-material/Devices';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import InfoIcon from '@mui/icons-material/Info';
 import SpeedIcon from '@mui/icons-material/Speed';
-import AudiotrackIcon from '@mui/icons-material/Audiotrack';
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import ContentCutIcon from '@mui/icons-material/ContentCut';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
