@@ -78,3 +78,15 @@ const Root = styled(Container)(({ theme }) => ({
   {/* content */}
 </Root>
 ```
+
+
+
+Transform [TARGET_COMPONENT] to exactly match the AudioConvert.tsx pattern with:
+1. Complete landing page structure (Hero, Tool, Benefits, How It Works, FAQ, Related Tools, CTA sections)
+2. Similar UI components and import style (individual MUI imports, same icons pattern)
+3. Keep the existing tool Card section untouched since it has the core functionality
+4. Match the responsive CSS Grid layouts (avoid MUI Grid component)
+5. Include comprehensive SEO metadata and JSON-LD schema
+6. Use the same section className structure and styling patterns
+7. Adapt content to be specific to [TARGET_TOOL_NAME] while maintaining the exact same component structure and layout
+8. Maintain the same responsive design patterns and hover effects

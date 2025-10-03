@@ -312,14 +312,14 @@ function Home() {
   return (
     <Root>
       <Helmet>
-        <title>Free Online Video, Audio & Image Tools - VideoTools</title>
+        <title>Free Online Video, Audio & Image Tools</title>
         <meta name="description" content="Professional video, audio, and image processing tools that work entirely in your browser. Convert, edit, compress, and enhance multimedia files privately and for free." />
         <meta name="keywords" content="video converter, audio editor, image tools, online multimedia, ffmpeg, browser processing" />
-        <meta property="og:title" content="Free Online Video, Audio & Image Tools - VideoTools" />
+        <meta property="og:title" content="Free Online Video, Audio & Image Tools" />
         <meta property="og:description" content="Professional multimedia processing tools that work entirely in your browser. Private, fast, and always free." />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Online Video, Audio & Image Tools - VideoTools" />
+        <meta name="twitter:title" content="Free Online Video, Audio & Image Tools" />
         <meta name="twitter:description" content="Professional multimedia processing tools that work entirely in your browser. Private, fast, and always free." />
         
         {/* FAQ Schema Markup */}
