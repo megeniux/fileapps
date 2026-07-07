@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import { ToolShell } from "@/components/tools/tool-shell";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -211,6 +211,7 @@ function WaveformTimeline({
 
 function AudioTrimForm({
   file,
+  previewUrl,
   ffmpeg,
   setOutput,
   setError,
@@ -218,6 +219,7 @@ function AudioTrimForm({
   setProcessingState,
 }: {
   file: File;
+  previewUrl: string | null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ffmpeg: any;
   setOutput: (o: { name: string; data: Uint8Array; mime: string }) => void;
@@ -234,25 +236,28 @@ function AudioTrimForm({
   const [playhead, setPlayhead]     = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const rafRef   = useRef<number>(0);
+  const resolvedPreviewUrl = useMemo(() => previewUrl ?? URL.createObjectURL(file), [file, previewUrl]);
 
   useEffect(() => {
-    const tryBind = () => {
-      const aud = document.querySelector<HTMLAudioElement>("audio");
-      if (!aud) return;
-      audioRef.current = aud;
-      const onMeta = () => {
-        const dur = aud.duration;
-        if (dur && !isNaN(dur) && dur !== Infinity) {
-          setDuration(dur);
-          setEndTime(dur);
-        }
-      };
-      if (aud.readyState >= 1 && aud.duration) onMeta();
-      else aud.addEventListener("loadedmetadata", onMeta, { once: true });
+    if (previewUrl) return;
+    return () => URL.revokeObjectURL(resolvedPreviewUrl);
+  }, [previewUrl, resolvedPreviewUrl]);
+
+  useEffect(() => {
+    const aud = audioRef.current;
+    if (!aud) return;
+
+    const onMeta = () => {
+      const dur = aud.duration;
+      if (dur && !isNaN(dur) && dur !== Infinity) {
+        setDuration(dur);
+        setEndTime(dur);
+      }
     };
-    const t = setTimeout(tryBind, 150);
-    return () => clearTimeout(t);
-  }, []);
+
+    if (aud.readyState >= 1 && aud.duration) onMeta();
+    else aud.addEventListener("loadedmetadata", onMeta, { once: true });
+  }, [resolvedPreviewUrl]);
 
   // Playhead animation
   useEffect(() => {
@@ -352,6 +357,25 @@ function AudioTrimForm({
 
   return (
     <div className="space-y-5">
+      <div className="space-y-1.5">
+        <Label>Preview and Position Playhead</Label>
+        <audio
+          ref={audioRef}
+          controls
+          preload="metadata"
+          className="w-full"
+          src={resolvedPreviewUrl}
+          onPlay={() => setPlaying(true)}
+          onPause={() => setPlaying(false)}
+          onEnded={() => setPlaying(false)}
+          onTimeUpdate={() => {
+            if (audioRef.current) {
+              setPlayhead(audioRef.current.currentTime);
+            }
+          }}
+        />
+      </div>
+
       {/* Waveform timeline */}
       <div className="space-y-1.5">
         <div className="flex items-center justify-between">

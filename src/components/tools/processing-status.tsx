@@ -2,6 +2,7 @@
 
 import { Loader2 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface ProcessingStatusProps {
@@ -13,9 +14,10 @@ interface ProcessingStatusProps {
     label: string;
     state: "pending" | "active" | "done";
   }>;
+  onCancel?: () => void;
 }
 
-export function ProcessingStatus({ progress, status, message, logs, items }: ProcessingStatusProps) {
+export function ProcessingStatus({ progress, status, message, logs, items, onCancel }: ProcessingStatusProps) {
   // Treat 0 as indeterminate (engine loading / file reading stage)
   const isIndeterminate = progress <= 0;
 
@@ -71,6 +73,12 @@ export function ProcessingStatus({ progress, status, message, logs, items }: Pro
             </p>
           ))}
         </div>
+      )}
+
+      {onCancel && (
+        <Button type="button" variant="outline" onClick={onCancel}>
+          Cancel Processing
+        </Button>
       )}
     </div>
   );

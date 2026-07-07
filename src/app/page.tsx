@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   Video,
@@ -10,7 +11,6 @@ import {
   WifiOff,
   Infinity,
   Lock,
-  ArrowRight,
   FileDown,
   Scissors,
   Combine,
@@ -32,10 +32,29 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { categories, tools } from "@/lib/tools";
 import { SITE } from "@/lib/constants";
+
+export const metadata: Metadata = {
+  title: "Privacy-First Browser File Tools",
+  description: SITE.description,
+  alternates: {
+    canonical: SITE.url,
+  },
+  openGraph: {
+    title: SITE.name,
+    description: SITE.description,
+    url: SITE.url,
+    images: [{ url: SITE.ogImage }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE.name,
+    description: SITE.description,
+    images: [SITE.ogImage],
+  },
+};
 
 const categoryIcons = {
   video: Video,
@@ -110,11 +129,11 @@ const faqs = [
   },
   {
     q: "What browsers and devices are supported?",
-    a: "Any modern browser works — Chrome, Edge, Firefox, Safari, and Opera on desktop or mobile.",
+    a: "Any modern browser works - Chrome, Edge, Firefox, Safari, and Opera on desktop or mobile.",
   },
   {
     q: "Are there any file size or usage limits?",
-    a: "There are no artificial limits from us. The only constraint is your device\'s available memory and processing power.",
+    a: "There are no artificial limits from us. The only constraint is your device's available memory and processing power.",
   },
   {
     q: "Can I use the tools offline?",
@@ -145,13 +164,12 @@ export default function HomePage() {
         }}
       />
 
-      {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-b from-background via-primary/5 to-background">
         <div className="container py-24 md:py-32">
           <div className="mx-auto max-w-3xl text-center">
             <div className="mb-6 inline-flex items-center gap-1.5 rounded-full border border-purple-200 bg-purple-50 px-3 py-1 text-sm font-medium text-purple-700">
               <Lock className="h-3.5 w-3.5" />
-              100% private — files stay on your device
+              100% private - files stay on your device
             </div>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
               Media tools that work{" "}
@@ -177,7 +195,6 @@ export default function HomePage() {
                 </Link>
               </Button>
             </div>
-            {/* Trust bar */}
             <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
               <span className="flex items-center gap-1.5"><Shield className="h-4 w-4 text-purple-500" /> No file uploads</span>
               <span className="flex items-center gap-1.5"><Zap className="h-4 w-4 text-yellow-500" /> Browser-native FFmpeg</span>
@@ -188,7 +205,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Tool grid */}
       <section className="py-16 md:py-24">
         <div className="container">
           <div className="text-center mb-10">
@@ -241,7 +257,7 @@ export default function HomePage() {
                           </div>
                         </div>
                         <div className="mt-3 text-xs font-medium text-primary group-hover:underline">
-                          Open →
+                          Open {"->"}
                         </div>
                       </Link>
                     );
@@ -253,7 +269,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features */}
       <section className="py-16 md:py-24 bg-muted/40">
         <div className="container">
           <div className="text-center mb-12">
@@ -276,7 +291,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FAQ */}
       <section className="py-16 md:py-24">
         <div className="container max-w-3xl">
           <div className="text-center mb-12">
@@ -301,14 +315,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary/90 to-purple-700 text-primary-foreground">
         <div className="container text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Process Your Media?
           </h2>
           <p className="text-lg opacity-90 mb-8 max-w-xl mx-auto">
-            Pick a category and start using professional tools instantly — no account required
+            Pick a category and start using professional tools instantly - no account required
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             {categories.map((cat) => {

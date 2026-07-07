@@ -33,6 +33,23 @@ export const metadata: Metadata = {
   },
   description: SITE.description,
   metadataBase: new URL(SITE.url),
+  alternates: {
+    canonical: SITE.url,
+  },
+  openGraph: {
+    type: "website",
+    url: SITE.url,
+    title: SITE.name,
+    description: SITE.description,
+    siteName: SITE.name,
+    images: [{ url: SITE.ogImage }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE.name,
+    description: SITE.description,
+    images: [SITE.ogImage],
+  },
 };
 
 const softwareAppSchema = {
@@ -44,7 +61,7 @@ const softwareAppSchema = {
   operatingSystem: "Any (browser-based)",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   description:
-    "Free online tools to convert, compress, trim, and edit video, audio, and image files — 100% in your browser, no upload required.",
+    "Free online tools to convert, compress, trim, and edit video, audio, and image files - 100% in your browser, no upload required.",
 };
 
 export default function RootLayout({

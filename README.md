@@ -1,4 +1,4 @@
-# FileAppsV2
+# FileApps
 
 Browser-based media tools built with Next.js, React, TypeScript, Tailwind CSS v4, shadcn/ui, and FFmpeg.wasm.
 

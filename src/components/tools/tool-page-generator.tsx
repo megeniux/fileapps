@@ -16,6 +16,7 @@ import { ToolFormRenderer } from "@/components/tools/tool-form-renderer";
 import { Button } from "@/components/ui/button";
 import { fetchFile } from "@/lib/ffmpeg";
 import type { ToolPageConfig } from "@/lib/tool-types";
+import { validateToolValues } from "@/lib/tool-validation";
 
 function getMimeForExt(ext: string, action: string) {
   const videoExt = ["mp4", "webm", "avi", "mkv", "mov", "flv", "wmv", "m4v"];
@@ -75,6 +76,12 @@ function ConfigStepForm({
   const [processing, setProcessing] = useState(false);
 
   const handleProcess = useCallback(async () => {
+    const valueValidation = validateToolValues(config.sections, values);
+    if (valueValidation.errors.length > 0) {
+      setError(valueValidation.errors[0].message);
+      return;
+    }
+
     if (!ffmpeg.instance?.current?.loaded) {
       setError("Media engine not loaded. Please refresh and try again.");
       return;
@@ -90,19 +97,26 @@ function ConfigStepForm({
       const outputExt = config.outputExtension || values.format || ext;
       const outputName = `output.${outputExt}`;
 
-      setProcessingState({ status: "Reading file…" });
+      ffmpeg.markStage?.("reading-file");
+      setProcessingState({ status: "Reading file..." });
       await inst.writeFile(inputName, await fetchFile(file));
       const args = config
         .buildArgs(file, values, outputExt)
         .map((arg) => (arg === "input" ? inputName : arg));
 
-      setProcessingState({ status: "Processing…", message: "This may take a while for large files." });
+      ffmpeg.markStage?.("processing");
+      setProcessingState({
+        status: "Processing...",
+        message: "This may take a while for large files.",
+      });
       await inst.exec(args);
 
-      setProcessingState({ status: "Writing output…", progress: 95 });
+      ffmpeg.markStage?.("writing-output");
+      setProcessingState({ status: "Writing output...", progress: 95 });
       const data = await inst.readFile(outputName);
       await inst.deleteFile(inputName).catch(() => {});
       await inst.deleteFile(outputName).catch(() => {});
+      ffmpeg.markDone?.();
 
       setOutput({
         name: config.outputName(values, outputExt),

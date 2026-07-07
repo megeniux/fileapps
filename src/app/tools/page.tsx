@@ -4,16 +4,26 @@ import {
   Video,
   Music,
   ImageIcon,
+  FileText,
   ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { tools, categories } from "@/lib/tools";
+import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "All Media Tools",
   description: `Browse all ${tools.length} free online media tools. Convert, compress, trim, merge, and edit video, audio, and image files directly in your browser.`,
+  alternates: {
+    canonical: `${SITE.url}/tools`,
+  },
+  openGraph: {
+    title: "All Media Tools",
+    description: `Browse all ${tools.length} free online media tools. Convert, compress, trim, merge, and edit video, audio, and image files directly in your browser.`,
+    url: `${SITE.url}/tools`,
+  },
 };
 
 const iconMap = {
@@ -22,7 +32,12 @@ const iconMap = {
   ImageUp: ImageIcon, Maximize: ImageIcon, Files: ImageIcon,
 } as Record<string, React.ElementType>;
 
-const categoryIcons = { video: Video, audio: Music, image: ImageIcon } as Record<string, React.ElementType>;
+const categoryIcons = {
+  video: Video,
+  audio: Music,
+  image: ImageIcon,
+  pdf: FileText,
+} as Record<string, React.ElementType>;
 
 export default function ToolsPage() {
   return (
@@ -36,7 +51,7 @@ export default function ToolsPage() {
             All Media Tools
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Professional-grade video, audio, and image processing tools — all free, all in your browser.
+            Professional-grade video, audio, and image processing tools - all free, all in your browser.
           </p>
         </div>
       </section>

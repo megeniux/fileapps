@@ -1,4 +1,5 @@
 import type {
+  ToolControlDefinition,
   ToolError,
   ToolFileRequirement,
   ToolValidationRule,
@@ -7,6 +8,10 @@ import type {
 export interface ToolValidationResult {
   errors: ToolError[];
   warnings: ToolValidationRule[];
+}
+
+export interface ToolValueValidationResult {
+  errors: ToolError[];
 }
 
 function matchesAccept(file: File, accept: string): boolean {
@@ -65,6 +70,42 @@ export function validateFiles(
     });
   }
 
+  const totalSize = files.reduce((sum, file) => sum + file.size, 0);
+
+  if (
+    requirement.maxTotalSizeBytes &&
+    totalSize > requirement.maxTotalSizeBytes
+  ) {
+    result.errors.push({
+      code: "memory-pressure",
+      message: "The combined file size is too large for this browser workflow.",
+      recoverySuggestion: "Use fewer files, smaller files, or process them in smaller batches.",
+    });
+  } else if (
+    requirement.warningTotalSizeBytes &&
+    totalSize > requirement.warningTotalSizeBytes
+  ) {
+    result.warnings.push({
+      code: "warning:large-batch",
+      message: "This batch is large and may be slow or memory-intensive on some devices.",
+      level: "warning",
+    });
+  }
+
+  if (
+    typeof navigator !== "undefined" &&
+    "deviceMemory" in navigator &&
+    typeof navigator.deviceMemory === "number" &&
+    navigator.deviceMemory <= 4 &&
+    totalSize > 500 * 1024 * 1024
+  ) {
+    result.warnings.push({
+      code: "warning:device-memory",
+      message: "Your device may have limited memory for a job this large.",
+      level: "warning",
+    });
+  }
+
   for (const file of files) {
     if (!matchesAccept(file, requirement.accept)) {
       result.errors.push({
@@ -96,4 +137,67 @@ export function validateFiles(
   }
 
   return result;
+}
+
+export function validateToolValues(
+  controls: ToolControlDefinition[],
+  values: Record<string, string>
+): ToolValueValidationResult {
+  const errors: ToolError[] = [];
+
+  for (const control of controls) {
+    const isVisible =
+      !control.visibility ||
+      String(values[control.visibility.field] ?? "") ===
+        String(control.visibility.equals);
+
+    if (!isVisible) {
+      continue;
+    }
+
+    const value = values[control.key] ?? control.defaultValue ?? "";
+
+    if (control.required && value.trim() === "") {
+      errors.push({
+        code: "invalid-input",
+        message: `${control.label} is required.`,
+        recoverySuggestion: "Fill in the missing field and try again.",
+      });
+      continue;
+    }
+
+    if (
+      (control.type === "number" || control.type === "range") &&
+      value.trim() !== ""
+    ) {
+      const numericValue = Number(value);
+
+      if (!Number.isFinite(numericValue)) {
+        errors.push({
+          code: "invalid-input",
+          message: `${control.label} must be a valid number.`,
+          recoverySuggestion: "Adjust the value and try again.",
+        });
+        continue;
+      }
+
+      if (control.min !== undefined && numericValue < control.min) {
+        errors.push({
+          code: "invalid-input",
+          message: `${control.label} must be at least ${control.min}.`,
+          recoverySuggestion: "Increase the value and try again.",
+        });
+      }
+
+      if (control.max !== undefined && numericValue > control.max) {
+        errors.push({
+          code: "invalid-input",
+          message: `${control.label} must be ${control.max} or less.`,
+          recoverySuggestion: "Lower the value and try again.",
+        });
+      }
+    }
+  }
+
+  return { errors };
 }

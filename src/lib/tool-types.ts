@@ -116,6 +116,7 @@ interface ToolControlBase {
   placeholder?: string;
   defaultValue?: string;
   helpText?: string;
+  required?: boolean;
   min?: number;
   max?: number;
   step?: number;
@@ -166,6 +167,8 @@ export interface ToolFileRequirement {
   maxCount?: number;
   maxFileSizeBytes?: number;
   warningFileSizeBytes?: number;
+  maxTotalSizeBytes?: number;
+  warningTotalSizeBytes?: number;
 }
 
 export interface ToolAuxiliaryInputDefinition {

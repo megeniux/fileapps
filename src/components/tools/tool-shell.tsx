@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useCallback, useEffect, useMemo } from "react";
-import { Download, RotateCcw } from "lucide-react";
+import { useState, useCallback, useEffect, useMemo, useRef } from "react";
+import { AlertTriangle, Download, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 import { zipSync } from "fflate";
 import { ToolAuxiliaryInputs } from "@/components/tools/tool-auxiliary-inputs";
@@ -24,7 +24,7 @@ import { usePathname } from "next/navigation";
 import { tools } from "@/lib/tools";
 import { cn, formatFileSize, toBlob } from "@/lib/utils";
 
-type ToolStep = "upload" | "configure" | "processing" | "done";
+type ToolStep = "upload" | "inspect" | "configure" | "processing" | "result" | "error";
 
 export interface OutputFile {
   name: string;
@@ -45,6 +45,7 @@ interface ToolProcessingState {
 interface ToolShellChildrenProps {
   file: File;
   files: File[];
+  previewUrl: string | null;
   auxiliaryFiles: Record<string, File | null>;
   inspections: ToolFileInspection[];
   ffmpeg: ReturnType<typeof useFFmpeg>;
@@ -128,12 +129,14 @@ export function ToolShell({
   const pathname = usePathname();
   const currentCategory = pathname.split("/")[2] ?? "";
   const relatedTools = tools.filter(t => t.category === currentCategory && t.href !== pathname).slice(0, 4);
-  const [step, setStep] = useState<ToolStep>(initialSelectedFiles.length > 0 ? "configure" : "upload");
+  const [step, setStep] = useState<ToolStep>(initialSelectedFiles.length > 0 ? "inspect" : "upload");
   const [files, setFiles] = useState<File[]>(initialSelectedFiles);
   const [auxiliaryFiles, setAuxiliaryFiles] = useState<Record<string, File | null>>({});
   const [inspections, setInspections] = useState<ToolFileInspection[]>([]);
   const [outputs, setOutputs] = useState<OutputFile[]>([]);
   const [processingState, setProcessingState] = useState<ToolProcessingState>({});
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const processingActiveRef = useRef(false);
   const file = files[0] ?? null;
   const output = outputs[0] ?? null;
   const filePreviewUrl = useObjectUrl(file);
@@ -156,11 +159,13 @@ export function ToolShell({
       .then((nextInspections) => {
         if (!cancelled) {
           setInspections(nextInspections);
+          setStep("configure");
         }
       })
       .catch(() => {
         if (!cancelled) {
           setInspections([]);
+          setStep("configure");
         }
       });
 
@@ -184,7 +189,8 @@ export function ToolShell({
     setFiles(nextFiles);
     setInspections([]);
     setOutputs([]);
-    setStep("configure");
+    setErrorMessage(null);
+    setStep("inspect");
     // Pre-load FFmpeg in the background as soon as a file is selected.
     // By the time the user configures settings and clicks Convert it will be ready.
     // browser-image tools (Canvas-based) never need FFmpeg.
@@ -194,21 +200,31 @@ export function ToolShell({
   }, [resolvedFileRequirement, engine, ffmpeg]);
 
   const handleSetOutput = useCallback((nextOutput: OutputFile) => {
+    if (!processingActiveRef.current) return;
     setOutputs([nextOutput]);
-    setStep("done");
+    setErrorMessage(null);
+    setStep("result");
+    processingActiveRef.current = false;
   }, []);
 
   const handleSetOutputs = useCallback((nextOutputs: OutputFile[]) => {
+    if (!processingActiveRef.current) return;
     setOutputs(nextOutputs);
-    setStep("done");
+    setErrorMessage(null);
+    setStep("result");
+    processingActiveRef.current = false;
   }, []);
 
   const handleSetError = useCallback((message: string) => {
+    if (!processingActiveRef.current) return;
     toast.error(message);
-    setStep("configure");
+    setErrorMessage(message);
+    setStep("error");
+    processingActiveRef.current = false;
   }, []);
 
   const handleStartProcessing = useCallback(async (state?: ToolProcessingState) => {
+    processingActiveRef.current = true;
     setProcessingState(state ?? {});
     setStep("processing");
 
@@ -217,18 +233,30 @@ export function ToolShell({
     if (engine !== "browser-image" && !ffmpeg.instance.current?.loaded) {
       const loaded = await ffmpeg.load();
       if (!loaded) {
+        processingActiveRef.current = false;
         toast.error("Failed to load media engine. Check your connection and try again.");
+        setErrorMessage("Failed to load media engine. Check your connection and try again.");
         setStep("configure");
       }
     }
   }, [engine, ffmpeg]);
 
+  const handleCancelProcessing = useCallback(() => {
+    processingActiveRef.current = false;
+    ffmpeg.terminate();
+    setProcessingState({});
+    setErrorMessage("Processing was cancelled.");
+    setStep(files.length > 0 ? "configure" : "upload");
+  }, [ffmpeg, files.length]);
+
   const handleReset = useCallback(() => {
+    processingActiveRef.current = false;
     setFiles([]);
     setAuxiliaryFiles({});
     setInspections([]);
     setOutputs([]);
     setProcessingState({});
+    setErrorMessage(null);
     setStep("upload");
     ffmpeg.terminate();
   }, [ffmpeg]);
@@ -258,7 +286,10 @@ export function ToolShell({
       if (nextFiles.length === 0) {
         setInspections([]);
         setOutputs([]);
+        setErrorMessage(null);
         setStep("upload");
+      } else {
+        setStep("inspect");
       }
 
       return nextFiles;
@@ -348,27 +379,35 @@ export function ToolShell({
         </div>
 
         <div className="mb-8 flex items-center justify-center gap-2">
-          {(["upload", "configure", "processing", "done"] as ToolStep[]).map((currentStep, index) => (
+          {(["upload", "inspect", "configure", "processing", "result"] as ToolStep[]).map((currentStep, index) => (
             <div key={currentStep} className="flex items-center gap-2">
               <div
                 className={cn(
                   "flex h-8 w-8 items-center justify-center rounded-full border-2 text-sm font-medium transition-colors",
                   step === currentStep
                     ? "border-primary bg-primary text-primary-foreground"
-                    : ["processing", "done"].includes(step) && ["upload", "configure"].includes(currentStep)
+                    : (["processing", "result", "error"] as ToolStep[]).includes(step) && (["upload", "inspect", "configure"] as ToolStep[]).includes(currentStep)
                       ? "border-primary bg-primary/10 text-primary"
-                      : "border-muted-foreground/30 text-muted-foreground"
+                    : "border-muted-foreground/30 text-muted-foreground"
                 )}
               >
-                {["processing", "done"].includes(step) && ["upload", "configure"].includes(currentStep)
+                {(["processing", "result", "error"] as ToolStep[]).includes(step) && (["upload", "inspect", "configure"] as ToolStep[]).includes(currentStep)
                   ? "OK"
                   : index + 1}
               </div>
-              {index < 3 && (
+              {index < 4 && (
                 <div
                   className={cn(
                     "h-0.5 w-8",
-                    step === currentStep ? "bg-primary" : "bg-muted-foreground/20"
+                    (["inspect", "configure", "processing", "result", "error"] as ToolStep[]).includes(step) && index === 0
+                      ? "bg-primary"
+                      : (["configure", "processing", "result", "error"] as ToolStep[]).includes(step) && index === 1
+                      ? "bg-primary"
+                      : (["processing", "result", "error"] as ToolStep[]).includes(step) && index === 2
+                      ? "bg-primary"
+                      : (["result"] as ToolStep[]).includes(step) && index === 3
+                      ? "bg-primary"
+                      : "bg-muted-foreground/20"
                   )}
                 />
               )}
@@ -387,10 +426,31 @@ export function ToolShell({
             />
           )}
 
+          {step === "inspect" && (
+            <ProcessingStatus
+              progress={0}
+              status="Inspecting selected files"
+              message="Reading lightweight file metadata before configuration."
+              items={files.map((nextFile) => ({
+                label: nextFile.name,
+                state: "active",
+              }))}
+            />
+          )}
+
           {step === "configure" && file && (
             <div className="flex gap-6">
               <div className="flex-1 min-w-0">
               <div className="space-y-6">
+              {errorMessage && (
+                <div className="flex items-start gap-3 rounded-lg border border-destructive/30 bg-destructive/5 p-4 text-sm">
+                  <AlertTriangle className="mt-0.5 h-4 w-4 text-destructive" />
+                  <div className="space-y-1">
+                    <p className="font-medium text-destructive">Previous attempt failed</p>
+                    <p className="text-muted-foreground">{errorMessage}</p>
+                  </div>
+                </div>
+              )}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   {files.length === 1 ? (
@@ -421,6 +481,7 @@ export function ToolShell({
                     setAuxiliaryFiles({});
                     setInspections([]);
                     setOutputs([]);
+                    setErrorMessage(null);
                   }}
                 >
                   Change {files.length > 1 ? "files" : "file"}
@@ -480,6 +541,7 @@ export function ToolShell({
               {children({
                 file,
                 files,
+                previewUrl: filePreviewUrl,
                 auxiliaryFiles,
                 inspections,
                 ffmpeg,
@@ -519,10 +581,35 @@ export function ToolShell({
               }
               items={processingState.items}
               logs={ffmpeg.logs}
+              onCancel={handleCancelProcessing}
             />
           )}
 
-          {step === "done" && outputs.length > 0 && (
+          {step === "error" && (
+            <div className="space-y-4">
+              <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4">
+                <div className="flex items-start gap-3">
+                  <AlertTriangle className="mt-0.5 h-5 w-5 text-destructive" />
+                  <div>
+                    <p className="font-medium text-destructive">Processing failed</p>
+                    <p className="text-sm text-muted-foreground">
+                      {errorMessage ?? "Something went wrong while processing your file."}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <Button onClick={() => setStep("configure")} className="flex-1">
+                  Try Again
+                </Button>
+                <Button variant="outline" onClick={handleReset}>
+                  Reset Tool
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {step === "result" && outputs.length > 0 && (
             renderDone ? (
               renderDone({
                 output,

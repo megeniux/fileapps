@@ -9,6 +9,9 @@ import { Label } from "@/components/ui/label";
 export const metadata: Metadata = {
   title: "Contact Us",
   description: `Get in touch with the ${SITE.name} team. Send us your questions, feedback, or feature requests.`,
+  alternates: {
+    canonical: `${SITE.url}/contact`,
+  },
 };
 
 export default function ContactPage() {

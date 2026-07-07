@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { tools, categories } from "@/lib/tools";
 import { CategoryHero } from "@/components/tools/category-hero";
+import { SITE } from "@/lib/constants";
 
 const iconMap: Record<string, React.ElementType> = {
   Video, FileDown, Scissors, Combine, Sparkles, Subtitles: Video,
@@ -31,6 +32,14 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   return {
     title: cat.label,
     description: cat.description,
+    alternates: {
+      canonical: `${SITE.url}/tools/${cat.id}`,
+    },
+    openGraph: {
+      title: cat.label,
+      description: cat.description,
+      url: `${SITE.url}/tools/${cat.id}`,
+    },
   };
 }
 

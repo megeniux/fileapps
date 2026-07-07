@@ -1,8 +1,10 @@
 "use client";
 
+import { useRef } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 import type { ToolControlDefinition } from "@/lib/tool-types";
 
 interface ToolFormRendererProps {
@@ -116,6 +118,51 @@ export function ToolFormRenderer({
               />
             )}
 
+            {(control.type === "file" || control.type === "file[]") && (
+              <FileControl
+                accept={control.accept}
+                controlKey={control.key}
+                multiple={control.type === "file[]"}
+                value={value}
+                onValueChange={onValueChange}
+              />
+            )}
+
+            {control.type === "preset-group" && (
+              <div className="flex flex-wrap gap-2">
+                {(control.options ?? []).map((option) => {
+                  const active = value === option.value;
+                  return (
+                    <Button
+                      key={option.value}
+                      type="button"
+                      variant={active ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => onValueChange(control.key, option.value)}
+                    >
+                      {option.label}
+                    </Button>
+                  );
+                })}
+              </div>
+            )}
+
+            {control.type === "sortable-list" && (
+              <textarea
+                id={control.key}
+                value={value}
+                placeholder={control.placeholder ?? "Enter one item per line"}
+                onChange={(event) => onValueChange(control.key, event.target.value)}
+                className="min-h-24 w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring/50"
+              />
+            )}
+
+            {(control.type === "timeline" || control.type === "crop-box") && (
+              <div className="rounded-md border bg-background px-3 py-2 text-sm text-muted-foreground">
+                {control.helpText ?? "This advanced control is configured by the tool workflow."}
+              </div>
+            )}
+
             {control.description && (
               <p className="text-xs text-muted-foreground">{control.description}</p>
             )}
@@ -125,6 +172,46 @@ export function ToolFormRenderer({
           </div>
         );
       })}
+    </div>
+  );
+}
+
+function FileControl({
+  accept,
+  controlKey,
+  multiple,
+  value,
+  onValueChange,
+}: {
+  accept?: string;
+  controlKey: string;
+  multiple: boolean;
+  value: string;
+  onValueChange: (key: string, value: string) => void;
+}) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  return (
+    <div className="space-y-2">
+      <input
+        ref={inputRef}
+        type="file"
+        accept={accept}
+        multiple={multiple}
+        className="hidden"
+        onChange={(event) => {
+          const fileNames = Array.from(event.target.files ?? []).map((file) => file.name);
+          onValueChange(controlKey, fileNames.join(", "));
+        }}
+      />
+      <div className="flex items-center gap-2">
+        <Button type="button" variant="outline" onClick={() => inputRef.current?.click()}>
+          Choose {multiple ? "Files" : "File"}
+        </Button>
+        <span className="truncate text-xs text-muted-foreground">
+          {value || "No file selected"}
+        </span>
+      </div>
     </div>
   );
 }

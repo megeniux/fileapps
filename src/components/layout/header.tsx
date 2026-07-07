@@ -188,11 +188,25 @@ export function Header() {
 
                     <div className="border-t mt-2 pt-2">
                       <Link
+                        href="/about"
+                        onClick={() => setSheetOpen(false)}
+                        className="flex items-center gap-2 px-2 py-2.5 text-base font-medium rounded-md hover:bg-muted transition-colors text-muted-foreground"
+                      >
+                        About
+                      </Link>
+                      <Link
                         href="/contact"
                         onClick={() => setSheetOpen(false)}
                         className="flex items-center gap-2 px-2 py-2.5 text-base font-medium rounded-md hover:bg-muted transition-colors text-muted-foreground"
                       >
                         Contact
+                      </Link>
+                      <Link
+                        href="/disclaimer"
+                        onClick={() => setSheetOpen(false)}
+                        className="flex items-center gap-2 px-2 py-2.5 text-base font-medium rounded-md hover:bg-muted transition-colors text-muted-foreground"
+                      >
+                        Disclaimer
                       </Link>
                     </div>
                   </nav>

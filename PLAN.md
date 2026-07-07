@@ -1,4 +1,4 @@
-# FileApps V2 Product Plan
+# FileApps Product Plan
 
 ## Purpose
 This plan turns FileApps V2 into a privacy-first, browser-based tool platform that is strong enough to publish publicly, rank in search, and become eligible for AdSense.

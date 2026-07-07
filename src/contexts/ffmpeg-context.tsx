@@ -114,9 +114,12 @@ export function FFmpegProvider({ children }: { children: ReactNode }) {
   }, [load]);
 
   const terminate = useCallback(() => {
+    resetFFmpeg();
+    ffmpegRef.current = null;
     setStatus({ type: "idle" });
     setProgress(0);
     setStage("idle");
+    setLogs([]);
   }, []);
 
   const value: FFmpegContextValue = {

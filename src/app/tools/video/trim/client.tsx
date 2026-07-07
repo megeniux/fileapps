@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import { ToolShell } from "@/components/tools/tool-shell";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -220,6 +220,7 @@ function FilmstripTimeline({
 
 function VideoTrimForm({
   file,
+  previewUrl,
   ffmpeg,
   setOutput,
   setError,
@@ -227,6 +228,7 @@ function VideoTrimForm({
   setProcessingState,
 }: {
   file: File;
+  previewUrl: string | null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ffmpeg: any;
   setOutput: (o: { name: string; data: Uint8Array; mime: string }) => void;
@@ -242,35 +244,45 @@ function VideoTrimForm({
   const [thumbs, setThumbs]         = useState<string[]>([]);
   const [generating, setGenerating] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const resolvedPreviewUrl = useMemo(() => previewUrl ?? URL.createObjectURL(file), [file, previewUrl]);
 
   useEffect(() => {
-    const tryBind = async () => {
-      const vid = document.querySelector<HTMLVideoElement>("video");
-      if (!vid) return;
-      videoRef.current = vid;
+    if (previewUrl) return;
+    return () => URL.revokeObjectURL(resolvedPreviewUrl);
+  }, [previewUrl, resolvedPreviewUrl]);
 
-      const setup = async () => {
-        const dur = vid.duration;
-        if (!dur || isNaN(dur) || dur === Infinity) return;
-        setDuration(dur);
-        setEndTime(dur);
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (!vid) return;
 
-        setGenerating(true);
-        const frames = await generateFilmstrip(vid, FILMSTRIP_FRAMES);
+    let cancelled = false;
+
+    const setup = async () => {
+      const dur = vid.duration;
+      if (!dur || isNaN(dur) || dur === Infinity || cancelled) return;
+      setDuration(dur);
+      setEndTime(dur);
+
+      setGenerating(true);
+      const frames = await generateFilmstrip(vid, FILMSTRIP_FRAMES);
+      if (!cancelled) {
         setThumbs(frames);
         setGenerating(false);
-      };
-
-      if (vid.readyState >= 1 && vid.duration && !isNaN(vid.duration)) {
-        await setup();
-      } else {
-        vid.addEventListener("loadedmetadata", () => { void setup(); }, { once: true });
       }
     };
 
-    const timer = setTimeout(() => { void tryBind(); }, 150);
-    return () => clearTimeout(timer);
-  }, []);
+    if (vid.readyState >= 1 && vid.duration && !isNaN(vid.duration)) {
+      void setup();
+    } else {
+      vid.addEventListener("loadedmetadata", () => {
+        void setup();
+      }, { once: true });
+    }
+
+    return () => {
+      cancelled = true;
+    };
+  }, [resolvedPreviewUrl]);
 
   const applyPreset = useCallback((preset: string) => {
     switch (preset) {
@@ -341,6 +353,19 @@ function VideoTrimForm({
 
   return (
     <div className="space-y-5">
+      <div className="space-y-1.5">
+        <Label>Preview and Position Playhead</Label>
+        <div className="relative w-full overflow-hidden rounded-lg border bg-black" style={{ aspectRatio: "16/9", maxHeight: "16rem" }}>
+          <video
+            ref={videoRef}
+            controls
+            preload="metadata"
+            className="h-full w-full object-contain"
+            src={resolvedPreviewUrl}
+          />
+        </div>
+      </div>
+
       {/* Visual filmstrip timeline */}
       <div className="space-y-1.5">
         <Label>Trim Range</Label>
