@@ -1,69 +1,53 @@
-# React + TypeScript + Vite
+# FileAppsV2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Browser-based media tools built with Next.js, React, TypeScript, Tailwind CSS v4, shadcn/ui, and FFmpeg.wasm.
 
-Currently, two official plugins are available:
+## What this app does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+FileAppsV2 provides a set of client-side tools for working with video, audio, and image files directly in the browser. Files are processed locally and are not uploaded to a server.
 
-## Expanding the ESLint configuration
+Current tool families:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Video: convert, compress, trim, merge, effects, burn captions
+- Audio: convert, compress, trim, merge, effects
+- Image: convert, compress, resize, batch compress
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Architecture
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- Each tool has a server `page.tsx` for metadata and routing.
+- Interactive UI lives in a matching client component, usually `client.tsx`.
+- Media tools share `ToolShell`, which handles upload, configure, processing, and done states.
+- FFmpeg is loaded client-side through the `useFFmpeg` hook.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Setup
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open `http://localhost:3000` after the dev server starts.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Current source of truth
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+This README is the canonical place for project notes, implementation order, and ongoing work.
+
+## Implementation roadmap
+
+Work is being done one item at a time, in order:
+
+1. Fix media preview layout instability in `ToolShell`
+2. Add a hero section to each tool landing page
+3. Improve control grouping, labels, and iconography across tool forms
+4. Upgrade `ToolPageGenerator` to support richer section metadata
+5. Add browser-only document tools
+6. Add browser-only utility tools for images and QR/color workflows
+7. Improve the step indicator and processing status UI
+8. Polish SEO and metadata
+
+## Notes
+
+- The repo uses the Next.js app router.
+- Root metadata lives in `src/app/layout.tsx`.
+- Tool definitions live in `src/lib/tools.ts`.
+- Tool-specific form configs live in `src/lib/tool-configs.ts`.
