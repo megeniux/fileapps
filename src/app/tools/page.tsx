@@ -7,9 +7,13 @@ import {
   FileText,
   ArrowRight,
 } from "lucide-react";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
+import { BreadcrumbNav } from "@/components/seo/breadcrumb-nav";
+import { JsonLd } from "@/components/seo/json-ld";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { getToolsIndexBreadcrumbs } from "@/lib/breadcrumbs";
 import { tools, categories } from "@/lib/tools";
 import { SITE } from "@/lib/constants";
 
@@ -40,10 +44,33 @@ const categoryIcons = {
 } as Record<string, React.ElementType>;
 
 export default function ToolsPage() {
+  const breadcrumbs = getToolsIndexBreadcrumbs();
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "All FileApps tools",
+    url: `${SITE.url}/tools`,
+    description: `Browse all ${tools.length} browser-based media and document tools on FileApps.`,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: tools.map((tool, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `${SITE.url}${tool.href}`,
+        name: tool.title,
+      })),
+    },
+  };
+
   return (
     <>
+      <BreadcrumbJsonLd items={breadcrumbs} />
+      <JsonLd data={collectionSchema} />
       <section className="py-12 md:py-16 bg-gradient-to-b from-background via-primary/5 to-background">
         <div className="container text-center">
+          <div className="mb-5 flex justify-center">
+            <BreadcrumbNav items={breadcrumbs} />
+          </div>
           <Badge variant="secondary" className="mb-4">
             {tools.length} Free Tools
           </Badge>

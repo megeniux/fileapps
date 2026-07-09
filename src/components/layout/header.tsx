@@ -208,6 +208,20 @@ export function Header() {
                       >
                         Disclaimer
                       </Link>
+                      <Link
+                        href="/eula"
+                        onClick={() => setSheetOpen(false)}
+                        className="flex items-center gap-2 px-2 py-2.5 text-base font-medium rounded-md hover:bg-muted transition-colors text-muted-foreground"
+                      >
+                        EULA
+                      </Link>
+                      <Link
+                        href="/ads-disclosure"
+                        onClick={() => setSheetOpen(false)}
+                        className="flex items-center gap-2 px-2 py-2.5 text-base font-medium rounded-md hover:bg-muted transition-colors text-muted-foreground"
+                      >
+                        Ads Disclosure
+                      </Link>
                     </div>
                   </nav>
                 </SheetContent>

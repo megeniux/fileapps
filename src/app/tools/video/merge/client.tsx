@@ -6,7 +6,11 @@ import { ToolShell, type OutputFile } from "@/components/tools/tool-shell";
 import { ToolFormRenderer } from "@/components/tools/tool-form-renderer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { fetchFile } from "@/lib/ffmpeg";
+import {
+  buildFFmpegProgressItems,
+  cleanupFFmpegWorkspaceFiles,
+  writeFFmpegWorkspaceFiles,
+} from "@/lib/ffmpeg-jobs";
 import { formatFileSize } from "@/lib/utils";
 import type { ToolControlDefinition } from "@/lib/tool-types";
 import { getToolById } from "@/lib/tools";
@@ -46,18 +50,6 @@ const controls: ToolControlDefinition[] = [
 function buildVideoConcatFilter(fileCount: number) {
   const inputs = Array.from({ length: fileCount }, (_, index) => `[${index}:v:0][${index}:a:0]`).join("");
   return `${inputs}concat=n=${fileCount}:v=1:a=1[outv][outa]`;
-}
-
-function buildMergeItems(files: File[], activeIndex: number, completedCount: number) {
-  return files.map((file, index) => ({
-    label: file.name,
-    state:
-      index < completedCount
-        ? "done"
-        : index === activeIndex
-        ? "active"
-        : "pending",
-  })) as Array<{ label: string; state: "pending" | "active" | "done" }>;
 }
 
 function VideoMergeDone({
@@ -167,42 +159,35 @@ function VideoMergeForm({
       progress: 0,
       status: `Preparing ${files.length} clips`,
       message: "Writing source clips into the processing workspace...",
-      items: buildMergeItems(files, 0, 0),
+      items: buildFFmpegProgressItems(files, 0, 0),
     });
 
     try {
       const inst = ffmpeg.instance.current;
       const outputExt = values.format || "mp4";
       const outputName = `output.${outputExt}`;
-      const inputNames: string[] = [];
-
-      for (let index = 0; index < files.length; index += 1) {
-        const currentFile = files[index];
-        setProcessingState({
-          progress: Math.round((index / Math.max(files.length, 1)) * 30),
-          status: `Loading clip ${index + 1} of ${files.length}`,
-          message: currentFile.name,
-          items: buildMergeItems(files, index, index),
-        });
-        const inputExt = currentFile.name.split(".").pop()?.toLowerCase() || "mp4";
-        const inputName = `input-${index}.${inputExt}`;
-        inputNames.push(inputName);
-        setProcessingState({ status: "Reading files…" });
-      await inst.writeFile(inputName, await fetchFile(currentFile));
-      }
+      const inputNames = await writeFFmpegWorkspaceFiles({
+        ffmpeg,
+        files,
+        setProcessingState,
+        getInputName: (currentFile, index) => {
+          const inputExt = currentFile.name.split(".").pop()?.toLowerCase() || "mp4";
+          return `input-${index}.${inputExt}`;
+        },
+        getStatus: (index, total) => `Loading clip ${index + 1} of ${total}`,
+      });
 
       if (values.method === "concat") {
         setProcessingState({
           progress: 45,
           status: "Concatenating clips",
           message: "Using concat mode for faster merging.",
-          items: buildMergeItems(files, files.length - 1, 0),
+          items: buildFFmpegProgressItems(files, files.length - 1, 0),
         });
         const listContent = inputNames.map((name) => `file '${name}'`).join("\n");
-        setProcessingState({ status: "Reading file…" });
-      await inst.writeFile("concat-list.txt", new TextEncoder().encode(listContent));
-        setProcessingState({ status: "Processing…", message: "This may take a while for large files." });
-      await inst.exec([
+        await inst.writeFile("concat-list.txt", new TextEncoder().encode(listContent));
+        setProcessingState({ status: "Processing...", message: "This may take a while for large files." });
+        await inst.exec([
           "-f", "concat",
           "-safe", "0",
           "-i", "concat-list.txt",
@@ -214,7 +199,7 @@ function VideoMergeForm({
           progress: 45,
           status: "Re-encoding merged video",
           message: "Building a compatibility-first merged export...",
-          items: buildMergeItems(files, files.length - 1, 0),
+          items: buildFFmpegProgressItems(files, files.length - 1, 0),
         });
         const args: string[] = [];
         inputNames.forEach((name) => {
@@ -234,24 +219,20 @@ function VideoMergeForm({
         }
 
         args.push(outputName);
-        setProcessingState({ status: "Processing…", message: "This may take a while for large files." });
-      await inst.exec(args);
+        setProcessingState({ status: "Processing...", message: "This may take a while for large files." });
+        await inst.exec(args);
       }
 
-      setProcessingState({ status: "Writing output…", progress: 95 });
+      setProcessingState({ status: "Writing output...", progress: 95 });
       const data = await inst.readFile(outputName) as Uint8Array;
       setProcessingState({
         progress: 95,
         status: "Finalizing merged video",
         message: "Preparing your download...",
-        items: buildMergeItems(files, files.length - 1, files.length),
+        items: buildFFmpegProgressItems(files, files.length - 1, files.length),
       });
 
-      await Promise.all(
-        inputNames.map((name) => inst.deleteFile(name).catch(() => {}))
-      );
-      await inst.deleteFile("concat-list.txt").catch(() => {});
-      await inst.deleteFile(outputName).catch(() => {});
+      await cleanupFFmpegWorkspaceFiles(ffmpeg, [...inputNames, "concat-list.txt", outputName]);
 
       const customStem = values.filenameStem?.trim() || "merged-video";
       setOutput({

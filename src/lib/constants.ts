@@ -3,7 +3,7 @@ export const SITE = {
   tagline: "Professional media tools in your browser",
   description:
     "Free online video, audio, and image tools powered by FFmpeg. Convert, compress, trim, merge, and edit media files directly in your browser with no uploads required.",
-  url: "https://fileapps.click",
+  url: "https://www.fileapps.click",
   ogImage: "/images/branding/logo-xl-96x96.png",
   links: {
     github: "https://github.com/fileapps",

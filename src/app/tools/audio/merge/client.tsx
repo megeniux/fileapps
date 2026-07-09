@@ -6,7 +6,11 @@ import { ToolShell, type OutputFile } from "@/components/tools/tool-shell";
 import { ToolFormRenderer } from "@/components/tools/tool-form-renderer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { fetchFile } from "@/lib/ffmpeg";
+import {
+  buildFFmpegProgressItems,
+  cleanupFFmpegWorkspaceFiles,
+  writeFFmpegWorkspaceFiles,
+} from "@/lib/ffmpeg-jobs";
 import { formatFileSize } from "@/lib/utils";
 import type { ToolControlDefinition } from "@/lib/tool-types";
 import { getToolById } from "@/lib/tools";
@@ -64,18 +68,6 @@ function buildAudioConcatFilter(fileCount: number) {
 function buildAudioMixFilter(fileCount: number) {
   const inputs = Array.from({ length: fileCount }, (_, index) => `[${index}:a:0]`).join("");
   return `${inputs}amix=inputs=${fileCount}:duration=longest:normalize=0[outa]`;
-}
-
-function buildMergeItems(files: File[], activeIndex: number, completedCount: number) {
-  return files.map((file, index) => ({
-    label: file.name,
-    state:
-      index < completedCount
-        ? "done"
-        : index === activeIndex
-        ? "active"
-        : "pending",
-  })) as Array<{ label: string; state: "pending" | "active" | "done" }>;
 }
 
 function AudioMergeDone({
@@ -164,29 +156,23 @@ function AudioMergeForm({
       progress: 0,
       status: `Preparing ${files.length} tracks`,
       message: "Writing source audio files into the processing workspace...",
-      items: buildMergeItems(files, 0, 0),
+      items: buildFFmpegProgressItems(files, 0, 0),
     });
 
     try {
       const inst = ffmpeg.instance.current;
       const outputExt = values.format || "mp3";
       const outputName = `output.${outputExt}`;
-      const inputNames: string[] = [];
-
-      for (let index = 0; index < files.length; index += 1) {
-        const currentFile = files[index];
-        setProcessingState({
-          progress: Math.round((index / Math.max(files.length, 1)) * 30),
-          status: `Loading track ${index + 1} of ${files.length}`,
-          message: currentFile.name,
-          items: buildMergeItems(files, index, index),
-        });
-        const inputExt = currentFile.name.split(".").pop()?.toLowerCase() || "mp3";
-        const inputName = `input-${index}.${inputExt}`;
-        inputNames.push(inputName);
-        setProcessingState({ status: "Reading file…" });
-      await inst.writeFile(inputName, await fetchFile(currentFile));
-      }
+      const inputNames = await writeFFmpegWorkspaceFiles({
+        ffmpeg,
+        files,
+        setProcessingState,
+        getInputName: (currentFile, index) => {
+          const inputExt = currentFile.name.split(".").pop()?.toLowerCase() || "mp3";
+          return `input-${index}.${inputExt}`;
+        },
+        getStatus: (index, total) => `Loading track ${index + 1} of ${total}`,
+      });
 
       const args: string[] = [];
       inputNames.forEach((name) => {
@@ -205,7 +191,7 @@ function AudioMergeForm({
         progress: 50,
         status: values.method === "mix" ? "Mixing tracks together" : "Concatenating tracks",
         message: values.method === "mix" ? "Overlaying all selected audio tracks..." : "Joining tracks in the selected order...",
-        items: buildMergeItems(files, files.length - 1, 0),
+        items: buildFFmpegProgressItems(files, files.length - 1, 0),
       });
 
       if (outputExt === "wav") {
@@ -217,22 +203,19 @@ function AudioMergeForm({
       }
 
       args.push(outputName);
-      setProcessingState({ status: "Processing…", message: "This may take a while for large files." });
+      setProcessingState({ status: "Processing...", message: "This may take a while for large files." });
       await inst.exec(args);
 
-      setProcessingState({ status: "Writing output…", progress: 95 });
+      setProcessingState({ status: "Writing output...", progress: 95 });
       const data = await inst.readFile(outputName) as Uint8Array;
       setProcessingState({
         progress: 95,
         status: "Finalizing merged audio",
         message: "Preparing your download...",
-        items: buildMergeItems(files, files.length - 1, files.length),
+        items: buildFFmpegProgressItems(files, files.length - 1, files.length),
       });
 
-      await Promise.all(
-        inputNames.map((name) => inst.deleteFile(name).catch(() => {}))
-      );
-      await inst.deleteFile(outputName).catch(() => {});
+      await cleanupFFmpegWorkspaceFiles(ffmpeg, [...inputNames, outputName]);
 
       const customStem = values.filenameStem?.trim() || "merged-audio";
       const mime =

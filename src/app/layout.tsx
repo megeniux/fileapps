@@ -36,6 +36,17 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SITE.url,
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     type: "website",
     url: SITE.url,
@@ -56,7 +67,7 @@ const softwareAppSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   name: "FileApps",
-  url: "https://fileapps.click",
+  url: SITE.url,
   applicationCategory: "MultimediaApplication",
   operatingSystem: "Any (browser-based)",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

@@ -1,21 +1,13 @@
-import type { Metadata } from "next";
+import { ToolPageScaffold } from "@/components/tools/tool-page-scaffold";
+import { buildToolMetadata } from "@/lib/tool-metadata";
 import { BatchCompressClient } from "./client";
-import { ToolContentSection } from "@/components/tools/tool-content";
-import { ToolHero } from "@/components/tools/tool-hero";
-import { ToolSeoContent } from "@/components/tools/tool-seo-content";
 
-export const metadata: Metadata = {
-  title: "Batch Image Compressor",
-  description: "Compress multiple images at once online for free. Batch optimize JPG, PNG, and WebP files.",
-};
+export const metadata = buildToolMetadata("image-batch-compress");
 
 export default function Page() {
   return (
-    <>
-      <ToolHero toolId="image-batch-compress" />
+    <ToolPageScaffold toolId="image-batch-compress">
       <BatchCompressClient />
-      <ToolContentSection toolId="image-batch-compress" />
-      <ToolSeoContent toolId="image-batch-compress" />
-    </>
+    </ToolPageScaffold>
   );
 }

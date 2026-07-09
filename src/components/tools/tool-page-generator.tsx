@@ -14,7 +14,7 @@ import {
 import { ToolShell } from "@/components/tools/tool-shell";
 import { ToolFormRenderer } from "@/components/tools/tool-form-renderer";
 import { Button } from "@/components/ui/button";
-import { fetchFile } from "@/lib/ffmpeg";
+import { runSingleFFmpegJob } from "@/lib/ffmpeg-jobs";
 import type { ToolPageConfig } from "@/lib/tool-types";
 import { validateToolValues } from "@/lib/tool-validation";
 
@@ -91,32 +91,18 @@ function ConfigStepForm({
     startProcessing();
 
     try {
-      const inst = ffmpeg.instance.current;
       const ext = file.name.split(".").pop() || "file";
-      const inputName = `input.${ext}`;
       const outputExt = config.outputExtension || values.format || ext;
-      const outputName = `output.${outputExt}`;
-
-      ffmpeg.markStage?.("reading-file");
-      setProcessingState({ status: "Reading file..." });
-      await inst.writeFile(inputName, await fetchFile(file));
-      const args = config
-        .buildArgs(file, values, outputExt)
-        .map((arg) => (arg === "input" ? inputName : arg));
-
-      ffmpeg.markStage?.("processing");
-      setProcessingState({
-        status: "Processing...",
-        message: "This may take a while for large files.",
+      const data = await runSingleFFmpegJob({
+        ffmpeg,
+        file,
+        outputExt,
+        setProcessingState,
+        buildArgs: (inputName, outputName) =>
+          config
+            .buildArgs(file, values, outputExt)
+            .map((arg) => (arg === "input" ? inputName : arg === `output.${outputExt}` ? outputName : arg)),
       });
-      await inst.exec(args);
-
-      ffmpeg.markStage?.("writing-output");
-      setProcessingState({ status: "Writing output...", progress: 95 });
-      const data = await inst.readFile(outputName);
-      await inst.deleteFile(inputName).catch(() => {});
-      await inst.deleteFile(outputName).catch(() => {});
-      ffmpeg.markDone?.();
 
       setOutput({
         name: config.outputName(values, outputExt),

@@ -1,21 +1,13 @@
-import type { Metadata } from "next";
+import { ToolPageScaffold } from "@/components/tools/tool-page-scaffold";
+import { buildToolMetadata } from "@/lib/tool-metadata";
 import { BurnCaptionClient } from "./client";
-import { ToolContentSection } from "@/components/tools/tool-content";
-import { ToolHero } from "@/components/tools/tool-hero";
-import { ToolSeoContent } from "@/components/tools/tool-seo-content";
 
-export const metadata: Metadata = {
-  title: "Burn Captions into Video",
-  description: "Permanently burn SRT/VTT subtitles or custom text captions into your videos online for free.",
-};
+export const metadata = buildToolMetadata("video-burn-caption");
 
 export default function Page() {
   return (
-    <>
-      <ToolHero toolId="video-burn-caption" />
+    <ToolPageScaffold toolId="video-burn-caption">
       <BurnCaptionClient />
-      <ToolContentSection toolId="video-burn-caption" />
-      <ToolSeoContent toolId="video-burn-caption" />
-    </>
+    </ToolPageScaffold>
   );
 }

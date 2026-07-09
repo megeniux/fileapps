@@ -6,9 +6,14 @@ import {
   VolumeX, Clapperboard, ArrowRight, FileDown, FileImage, Files, Maximize,
   Sparkles, Gauge, AudioLines, PenTool, FilePlus,
 } from "lucide-react";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
+import { JsonLd } from "@/components/seo/json-ld";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { CategoryContent } from "@/components/tools/category-content";
+import { getCategoryBreadcrumbs } from "@/lib/breadcrumbs";
+import { categorySeoDataMap } from "@/lib/category-seo-data";
 import { tools, categories } from "@/lib/tools";
 import { CategoryHero } from "@/components/tools/category-hero";
 import { SITE } from "@/lib/constants";
@@ -39,6 +44,15 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
       title: cat.label,
       description: cat.description,
       url: `${SITE.url}/tools/${cat.id}`,
+      images: [{ url: SITE.ogImage }],
+      siteName: SITE.name,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: cat.label,
+      description: cat.description,
+      images: [SITE.ogImage],
     },
   };
 }
@@ -49,9 +63,44 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
   if (!cat) notFound();
 
   const catTools = tools.filter((t) => t.category === cat.id);
+  const breadcrumbs = getCategoryBreadcrumbs(cat.id);
+  const categorySeo = categorySeoDataMap[cat.id];
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: cat.label,
+    url: `${SITE.url}/tools/${cat.id}`,
+    description: cat.description,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: catTools.map((tool, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `${SITE.url}${tool.href}`,
+        name: tool.title,
+      })),
+    },
+  };
+  const faqSchema = categorySeo
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: categorySeo.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      }
+    : null;
 
   return (
     <>
+      <BreadcrumbJsonLd items={breadcrumbs} />
+      <JsonLd data={collectionSchema} />
+      {faqSchema && <JsonLd data={faqSchema} />}
       <CategoryHero categoryId={cat.id} toolCount={catTools.length} />
 
       <section className="py-12">
@@ -91,6 +140,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           </div>
         </div>
       </section>
+      <CategoryContent categoryId={cat.id} />
     </>
   );
 }

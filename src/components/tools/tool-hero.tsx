@@ -24,6 +24,8 @@ import {
   FilePlus,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { BreadcrumbNav } from "@/components/seo/breadcrumb-nav";
+import { getToolBreadcrumbs } from "@/lib/breadcrumbs";
 import { cn } from "@/lib/utils";
 import { categories, getToolById, type ToolCategory } from "@/lib/tools";
 
@@ -63,6 +65,7 @@ export function ToolHero({ toolId }: { toolId: string }) {
   if (!tool) return null;
 
   const category = categories.find((item) => item.id === tool.category);
+  const breadcrumbs = getToolBreadcrumbs(toolId);
   const ToolIcon = toolIconMap[tool.icon] || WandSparkles;
   const CategoryIcon = categoryIconMap[tool.category];
   const featureItems = tool.features.slice(0, 3);
@@ -72,6 +75,8 @@ export function ToolHero({ toolId }: { toolId: string }) {
       <div className="container py-10 md:py-14">
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.25fr)_auto]">
           <div className="space-y-5">
+            <BreadcrumbNav items={breadcrumbs} />
+
             <div className="flex flex-wrap items-center gap-3">
               {category && (
                 <Badge

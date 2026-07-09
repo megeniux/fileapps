@@ -15,6 +15,17 @@ export interface FormatRow {
   quality: string;
 }
 
+export interface BestSettingsRow {
+  label: string;
+  recommendation: string;
+  why: string;
+}
+
+export interface CompatibilityNote {
+  title: string;
+  body: string;
+}
+
 export interface ToolSeoData {
   toolId: string;
   h1: string;
@@ -23,5 +34,9 @@ export interface ToolSeoData {
   howToSteps: HowToStep[];
   settingsGuide: string;
   formatTable?: FormatRow[];
+  bestSettings?: BestSettingsRow[];
+  compatibilityNotes?: CompatibilityNote[];
+  limitations?: string[];
+  privacyNote?: string;
   faqs: ToolFaq[];
 }

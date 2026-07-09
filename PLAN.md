@@ -1,741 +1,442 @@
-# FileApps Product Plan
+# FileApps Master Plan
 
-## Purpose
-This plan turns FileApps V2 into a privacy-first, browser-based tool platform that is strong enough to publish publicly, rank in search, and become eligible for AdSense.
+## Working Rules
+- This file is the source of truth for roadmap, sprint order, and delivery status.
+- Every meaningful implementation pass must update:
+  - phase status
+  - sprint status
+  - shipped items
+  - current focus
+  - next execution order
+- Status labels:
+  - `[done]` shipped and verified
+  - `[in-progress]` partially shipped or currently being implemented
+  - `[planned]` intentionally queued, not started
+  - `[blocked]` waiting on a prerequisite or decision
 
-The main business goals are:
-- Wide variety of tools
-- Wide variety of options within each tool
-- Maximum client hardware usage where possible
-- Reliable processing with clear error handling
-- Better progress, preview, save, and completion UX
-- Strong SEO so pages are not seen as low-value utility pages
-- A future-ready base for documents, images, video, and audio tools
+## Product Goal
+Build a browser-only file tools suite in the style of 123apps, but with deeper controls, stronger privacy, better content quality, and a more trustworthy publishing surface.
 
-## Product Direction
-FileApps should compete on:
-- Privacy first: files stay on the device
-- Speed: use browser-native APIs before heavy wasm when possible
-- Serious controls: not just one-button utilities
-- Clear UX: upload, inspect, configure, process, preview, download
-- Useful content: every tool page should teach, not just process
+### Non-Negotiables
+- all important processing should stay in the browser
+- no required upload-processing backend
+- advanced controls should be real, not decorative
+- SEO copy must match implementation truthfully
+- trust, legal, and publishing pages must exist before broad launch
+- the platform should scale without turning every tool into a bespoke one-off
 
-## Current State Summary
-The current repo already has:
-- Next.js app router setup
-- Individual tool routes
-- Shared tool shell
-- Client-side FFmpeg loading
-- Basic metadata and content sections
+## Current Product Snapshot
 
-The current repo still needs major platform work:
-- Shared tool engine only supports simple single-file, select-based forms
-- Some pages promise features not fully implemented yet
-- Multi-file workflows are not truly supported
-- Image tools still rely too much on FFmpeg instead of browser-native paths
-- SEO foundation is incomplete
-- Error handling, ETA, queueing, and advanced previews are still limited
+### Public Surface Shipped
+- `[done]` Homepage
+- `[done]` Tool index page
+- `[done]` Category landing pages for `video`, `audio`, `image`, and `pdf`
+- `[done]` Trust and policy pages:
+  - `about`
+  - `contact`
+  - `privacy`
+  - `terms`
+  - `disclaimer`
+  - `eula`
+  - `ads-disclosure`
+- `[done]` Technical crawl surface:
+  - `sitemap.ts`
+  - `robots.ts`
+  - canonical metadata on key public pages
 
-## Guiding Principles
-1. Build the platform before scaling tool count.
-2. Do not claim features in SEO copy unless the tool really supports them.
-3. Prefer native browser APIs for simple image and document work.
-4. Use FFmpeg.wasm for broad compatibility and advanced media operations.
-5. Move heavy work off the main thread.
-6. Make every tool feel trustworthy, predictable, and recoverable.
+### Tools Currently Present In The App
+#### Video
+- `[done]` compress
+- `[done]` convert
+- `[done]` crop
+- `[done]` burn caption
+- `[done]` effects
+- `[done]` extract audio
+- `[done]` gif
+- `[done]` merge
+- `[done]` mute
+- `[done]` reverse
+- `[done]` speed
+- `[done]` trim
 
-## Phase Overview
-1. Phase 1: Core platform rebuild
-2. Phase 2: Reliability and processing UX
-3. Phase 3: High-value tool upgrades
-4. Phase 4: Document and image expansion
-5. Phase 5: SEO, publishing, and AdSense readiness
-6. Phase 6: Performance and advanced hardware usage
-7. Phase 7: Scale-out and growth content
+#### Audio
+- `[done]` compress
+- `[done]` convert
+- `[done]` effects
+- `[done]` merge
+- `[done]` trim
+
+#### Image
+- `[done]` batch compress
+- `[done]` compress
+- `[done]` convert
+- `[done]` crop
+- `[done]` filters
+- `[done]` resize
+- `[done]` rotate
+- `[done]` watermark
+
+#### PDF
+- `[done]` from images
+- `[done]` merge
+- `[done]` to images
+
+## Current Overall Status
+- Core shared platform: `[in-progress]`
+- Reliability and processing UX: `[in-progress]`
+- Flagship depth for top tools: `[in-progress]`
+- Document and image suite expansion: `[in-progress]`
+- SEO and trust surface: `[in-progress]`
+- Performance and worker architecture: `[in-progress]`
+- Long-tail suite expansion: `[planned]`
+- Public-launch polish: `[planned]`
 
 ---
 
-## Phase 1: Core Platform Rebuild
+## Phase 1: Shared Platform Foundation
+**Status:** `[in-progress]`
+**Goal:** Make new tools cheaper to build and existing tools less bespoke.
 
-### Goal
-Create a reusable tool framework that can power advanced tools instead of only simple dropdown-based pages.
+### Delivered
+- `[done]` shared tool schema in `src/lib/tool-types.ts`
+- `[done]` shared validation layer in `src/lib/tool-validation.ts`
+- `[done]` shared tool form renderer
+- `[done]` shared stateful tool shell flow
+- `[done]` shared tool page generator/scaffold direction
+- `[done]` engine abstraction for `ffmpeg`, `browser-image`, and `document`
+- `[done]` generic processing path validates tool values before work starts
 
-### Outcomes
-- One shared schema for tool controls
-- One shared execution model for single-file and multi-file tools
-- One shared result model for preview, download, retry, and errors
-- Ability to build richer tools without rewriting everything per page
+### In Progress
+- `[in-progress]` remove bespoke assumptions from older media clients
+- `[in-progress]` keep advanced controls aligned with real implementation behavior
+- `[in-progress]` standardize page scaffolding across all important tool pages
 
-### Implementation
-- Expand the tool config system to support:
-  - `select`
-  - `number`
-  - `range`
-  - `toggle`
-  - `text`
-  - `textarea`
-  - `color`
-  - `file`
-  - `file[]`
-  - `sortable-list`
-  - `preset-group`
-  - `timeline`
-  - `crop-box`
-- Split tool definitions into:
-  - marketing metadata
-  - UI schema
-  - processing schema
-  - SEO content
-- Refactor `ToolShell` into a more flexible container with:
-  - upload state
-  - inspect state
-  - configure state
-  - processing state
-  - result state
-  - error state
-- Add shared interfaces for:
-  - `ToolInput`
-  - `ToolJob`
-  - `ToolProgress`
-  - `ToolResult`
-  - `ToolError`
-- Add support for true multi-file workflows
-- Add shared validation rules:
-  - accepted types
-  - max file count
-  - per-file max size
-  - estimated memory risk
-  - unsupported browser capability checks
-
-### Files Likely Touched
-- `src/components/tools/tool-shell.tsx`
-- `src/components/tools/tool-page-generator.tsx`
-- `src/lib/tool-configs.ts`
-- `src/lib/tools.ts`
-- `src/lib/constants.ts`
-- `src/lib/utils.ts`
-
-### Phase 1 Execution Checklist
-
-#### Step 1: Define the New Shared Types
-Goal:
-Create the type system that the rest of the platform will use.
-
-Tasks:
-- Create a shared tool model file, preferably `src/lib/tool-types.ts`
-- Define:
-  - `ToolControlType`
-  - `ToolControlOption`
-  - `ToolControlDefinition`
-  - `ToolFileRequirement`
-  - `ToolValidationRule`
-  - `ToolProgressStage`
-  - `ToolErrorCode`
-  - `ToolResult`
-  - `ToolJobContext`
-  - `ToolEngine`
-- Split definitions clearly between:
-  - page metadata
-  - UI controls
-  - processing config
-  - content/SEO config
-
-Deliverable:
-- A typed schema that can describe both simple and advanced tools
-
-#### Step 2: Restructure Tool Data
-Goal:
-Stop mixing marketing content, page metadata, and processing behavior in one loose structure.
-
-Tasks:
-- Refactor `src/lib/tools.ts` into richer tool definitions
-- Keep lightweight list data for homepage/category cards
-- Move processing config to `src/lib/tool-configs.ts` or a new `src/lib/tool-definitions.ts`
-- Add fields for:
-  - supported input count
-  - accepted mime groups
-  - output capabilities
-  - feature flags
-  - SEO content sections
-- Make sure feature bullets only describe implemented behavior
-
-Deliverable:
-- Tool definitions that can drive cards, pages, forms, and execution consistently
-
-#### Step 3: Rebuild the Control Schema
-Goal:
-Move beyond select-only controls.
-
-Tasks:
-- Expand `ToolPageConfig` or replace it with a better schema
-- Support controls for:
-  - `select`
-  - `number`
-  - `range`
-  - `toggle`
-  - `text`
-  - `textarea`
-  - `color`
-  - `file`
-  - `file[]`
-  - `sortable-list`
-- Add optional control metadata:
-  - label
-  - help text
-  - placeholder
-  - min/max/step
-  - default value
-  - visibility conditions
-  - validation rules
-  - preset tags
-
-Deliverable:
-- A schema that can render real production-grade tool forms
-
-#### Step 4: Build a Shared Tool Form Renderer
-Goal:
-Render controls from schema instead of hardcoding every tool page.
-
-Tasks:
-- Create or refactor a renderer component, such as `src/components/tools/tool-form-renderer.tsx`
-- Render each control type from the shared schema
-- Add inline validation messages
-- Add support for conditional fields
-- Keep layout mobile-friendly and section-based
-
-Deliverable:
-- One reusable form renderer for most tool pages
-
-#### Step 5: Refactor ToolShell into a State-Based Container
-Goal:
-Make the shell support richer workflows, not just upload/configure/done.
-
-Tasks:
-- Replace the current loose step handling with a clearer state model:
-  - upload
-  - inspect
-  - configure
-  - processing
-  - result
-  - error
-- Add support for:
-  - one file
-  - multiple files
-  - file reordering
-  - file removal
-  - per-file metadata display
-- Stop relying on DOM assumptions like grabbing the first `video` or `audio` element from the page
-- Pass preview refs and media metadata through React state instead
-
-Deliverable:
-- A shell that supports both simple and advanced tool flows safely
-
-#### Step 6: Add a Validation Layer
-Goal:
-Catch bad inputs before processing starts.
-
-Tasks:
-- Add a new helper such as `src/lib/tool-validation.ts`
-- Validate:
-  - file count
-  - file type
-  - per-file size
-  - total size
-  - missing required options
-  - unsafe option combinations
-- Return typed validation errors with friendly user messages
-- Show warnings separately from hard-blocking errors
-
-Deliverable:
-- Consistent pre-processing validation across all tools
-
-#### Step 7: Add an Input Inspection Layer
-Goal:
-Prepare tools to show useful file information before processing.
-
-Tasks:
-- Add a lightweight inspect step that reads:
-  - file name
-  - size
-  - mime type
-  - image dimensions when possible
-  - media duration when possible
-- Store inspection results in shared state
-- Surface this information in the configure view
-
-Deliverable:
-- Every tool can show users what was detected from their file before they process it
-
-#### Step 8: Add Engine Abstraction
-Goal:
-Prepare for FFmpeg, browser-native image processing, and later document engines.
-
-Tasks:
-- Add a minimal execution abstraction:
-  - `ffmpeg` engine
-  - `browser-image` engine
-  - future `document` engine
-- Let each tool declare which engine it uses
-- Keep the shell and form renderer engine-agnostic
-
-Deliverable:
-- A platform that can grow beyond FFmpeg-only execution
-
-#### Step 9: Migrate Two Reference Tools
-Goal:
-Prove the new platform before migrating everything.
-
-Tasks:
-- Migrate one simple single-file tool:
-  - recommended: `image-convert` or `audio-convert`
-- Migrate one true multi-file tool:
-  - recommended: `video-merge` or `image-batch-compress`
-- Confirm both work on the new shared schema and shell
-
-Deliverable:
-- Two working reference implementations on the new platform
-
-#### Step 10: Remove Platform Debt
-Goal:
-Avoid carrying misleading or temporary platform assumptions forward.
-
-Tasks:
-- Remove or rewrite any feature copy that overpromises
-- Mark unfinished capabilities clearly in config, not in public content
-- Delete dead assumptions from old generator logic once replacements exist
-- Update README to reflect the new architecture after migration is stable
-
-Deliverable:
-- Cleaner foundation with less mismatch between UI, code, and SEO copy
-
-### Phase 1 Suggested File Plan
-
-#### New Files to Add
-- `src/lib/tool-types.ts`
-- `src/lib/tool-validation.ts`
-- `src/components/tools/tool-form-renderer.tsx`
-- `src/components/tools/tool-preview.tsx`
-- `src/components/tools/tool-file-list.tsx`
-
-#### Existing Files to Refactor First
-- `src/components/tools/tool-page-generator.tsx`
-- `src/components/tools/tool-shell.tsx`
-- `src/lib/tool-configs.ts`
-- `src/lib/tools.ts`
-
-#### Files to Migrate Later in Phase 1
-- `src/app/tools/video/merge/client.tsx`
-- `src/app/tools/image/batch-compress/client.tsx`
-- One simpler client page such as:
-  - `src/app/tools/image/convert/client.tsx`
-  - `src/app/tools/audio/convert/client.tsx`
-
-### Phase 1 Suggested Coding Order
-1. Create shared types
-2. Rework tool config structure
-3. Build validation layer
-4. Build form renderer
-5. Refactor tool shell
-6. Add inspection layer
-7. Add engine abstraction
-8. Migrate one single-file tool
-9. Migrate one multi-file tool
-10. Remove old assumptions and cleanup
-
-### Phase 1 Testing Checklist
-- Single-file upload still works
-- Multi-file upload works
-- Invalid file type is blocked cleanly
-- Oversized file shows warning or hard stop
-- Controls render correctly from schema
-- Conditional controls show and hide correctly
-- Processing output still downloads correctly
-- Reset and retry still work
-- Mobile layout remains usable
-- No public tool page claims missing features after migration
+### Remaining
+- `[planned]` normalize more custom clients onto shared job helpers
+- `[planned]` reduce duplicated preview, cleanup, and result-summary logic
+- `[planned]` expose richer control types only where processing support is truly present
 
 ### Exit Criteria
-- At least one single-file tool and one multi-file tool use the new shared platform
-- The platform supports more than dropdown-only controls
-- Merge and batch pages are no longer pretending to be advanced while using shallow config
+- `[done]` at least one single-file and one multi-file tool use the shared platform
+- `[in-progress]` most important tools avoid bespoke state and processing code where shared primitives fit
 
 ---
 
-## Phase 2: Reliability and Processing UX
+## Phase 2: Reliability And Processing UX
+**Status:** `[in-progress]`
+**Goal:** Make long-running browser jobs feel dependable and understandable.
 
-### Goal
-Make processing feel dependable and professional.
+### Delivered
+- `[done]` clearer staged processing states
+- `[done]` cancellation and reset support in the shared UI
+- `[done]` warnings for large file sizes and larger batches
+- `[done]` improved processing status presentation
 
-### Outcomes
-- Better progress reporting
-- Better failures and recovery
-- Better device-aware behavior
-- Better previews before and after processing
+### In Progress
+- `[in-progress]` move more heavy work into worker/job architecture
+- `[in-progress]` expand actionable recovery guidance
+- `[in-progress]` improve cleanup of temporary files and object URLs
+- `[in-progress]` standardize progress reporting across bespoke FFmpeg tools
 
-### Implementation
-- Move heavy operations into Web Workers
-- Separate progress into stages:
-  - preparing engine
-  - reading files
-  - analyzing input
-  - processing
-  - finalizing output
-- Add user-facing progress details:
-  - percent complete
-  - current step
-  - live status messages
-  - estimated remaining time when possible
-- Add stronger error categories:
-  - invalid input
-  - unsupported format
-  - browser limitation
-  - memory pressure
-  - FFmpeg load failure
-  - processing command failure
-- Show recovery actions:
-  - retry
-  - lower quality
-  - use smaller file
-  - switch browser
-  - switch format
-- Add cancellation support
-- Add auto-cleanup for virtual files and object URLs
-- Add warnings before expensive jobs based on:
-  - file size
-  - file count
-  - browser capabilities
-  - device concurrency
-
-### Hardware Utilization Plan
-- Use `navigator.hardwareConcurrency` to tune worker count
-- Use `navigator.deviceMemory` when available to reduce risky jobs
-- Use `OffscreenCanvas` for image operations off the main thread
-- Explore `WebCodecs` fast paths for preview, thumbnails, and some encode/decode tasks
-- Keep fallback paths for browsers without these APIs
+### Remaining
+- `[planned]` shared queueing for batch and sequential jobs
+- `[planned]` ETA estimation where practical
+- `[planned]` richer result summaries and comparisons
+- `[planned]` device-aware tuning using hardware concurrency and memory signals
 
 ### Exit Criteria
-- Every tool shows proper status and actionable failure messages
-- Long-running tasks no longer look frozen
-- Users can cancel and retry without refreshing the page
+- `[in-progress]` every major tool shows useful progress and understandable failure states
+- `[done]` users can cancel and retry without refreshing
+- `[planned]` long-running heavy jobs no longer feel page-blocking
 
 ---
 
-## Phase 3: High-Value Tool Upgrades
+## Phase 3: Flagship Tool Quality
+**Status:** `[in-progress]`
+**Goal:** Make the most important tools feel strong enough to compete.
 
-### Goal
-Upgrade the current highest-potential tools until they are genuinely competitive.
+### Current Flagship Group
+- Video Compress: `[in-progress]`
+- Video Convert: `[in-progress]`
+- Video Trim: `[in-progress]`
+- Image Compress: `[in-progress]`
+- Image Convert: `[in-progress]`
+- Audio Compress: `[in-progress]`
+- Audio Convert: `[in-progress]`
+- Audio Trim: `[in-progress]`
 
-### Priority Order
-1. Video Compress
-2. Video Convert
-3. Video Trim
-4. Image Compress
-5. Image Convert
-6. Audio Compress
-7. Audio Convert
-8. Audio Trim
+### Delivered
+- `[done]` video trim has a timeline and preview-thumbnails foundation
+- `[done]` audio trim has a waveform/timeline foundation
+- `[done]` image compress has comparison-style output UX
+- `[done]` video compress has useful preset-driven UX
+- `[done]` worker-backed browser-image processing now powers image compress
+- `[done]` shared SEO content layer now supports best-settings, privacy, compatibility, limitations, and FAQ blocks on flagship pages
 
-### Required Improvements Per Tool
-- More control depth
-- Better preview
-- Better defaults
-- Better output naming
-- Better validation
-- Better result summaries
+### Remaining By Tool
+#### Video Compress
+- `[planned]` codec selection
+- `[planned]` bitrate mode choice
+- `[planned]` FPS control
+- `[planned]` richer audio codec and bitrate controls
+- `[in-progress]` stronger preset guidance and expected-size guidance
 
-### Video Compress
-- Add codec selection
-- Add preset selection
-- Add CRF slider
-- Add bitrate mode choice
-- Add resolution presets
-- Add FPS option
-- Add audio codec and bitrate options
-- Add estimated size guidance
-- Add "best for WhatsApp / email / web / archive" presets
+#### Video Convert
+- `[planned]` clearer codec vs container controls
+- `[planned]` audio passthrough vs transcode choice
+- `[planned]` subtitle preservation when practical
+- `[planned]` social/export presets
+- `[planned]` advanced `faststart` toggle
 
-### Video Convert
-- Add codec/container distinction
-- Add audio passthrough or transcode options
-- Add subtitle preservation options where possible
-- Add faststart option for MP4
-- Add social/export presets
+#### Video Trim
+- `[in-progress]` stream-copy vs re-encode guidance
+- `[planned]` better cut-accuracy explanation
 
-### Video Trim
-- Replace simple time inputs with a visual timeline
-- Add frame preview thumbnails
-- Add quick segment presets
-- Add stream-copy vs re-encode mode
-- Add better cut accuracy messaging
+#### Image Compress
+- `[in-progress]` browser-native-first strategy
+- `[planned]` explicit lossless vs lossy modes
+- `[planned]` metadata preserve/remove choices
 
-### Image Compress
-- Use browser-native path first for JPEG/PNG/WebP/AVIF where feasible
-- Add lossless/lossy modes
-- Add metadata stripping option
-- Add resize-before-compress option
-- Add side-by-side before/after preview
+#### Image Convert
+- `[in-progress]` metadata stripping control
+- `[planned]` transparency/background handling
+- `[planned]` batch conversion flow
 
-### Image Convert
-- Add transparency handling
-- Add background fill for non-transparent formats
-- Add metadata preserve/remove option
-- Add simple batch conversion
-
-### Audio Compress / Convert / Trim
-- Add sample rate, channel, and codec control
-- Add waveform preview for trim
-- Add normalize and loudness presets
-- Add speech/music presets
+#### Audio Compress / Convert / Trim
+- `[in-progress]` codec / sample-rate / channel-depth controls
+- `[planned]` normalize and loudness presets
+- `[planned]` speech vs music presets
 
 ### Exit Criteria
-- These core tools feel meaningfully deeper than basic online utilities
-- At least 8 tools are polished enough to act as flagship pages
+- `[planned]` 8 to 12 top tools feel genuinely polished, not just present
+- `[in-progress]` top tools are already deeper than generic low-effort utility sites
 
 ---
 
-## Phase 4: Document and Image Expansion
+## Phase 4: Document And Image Breadth
+**Status:** `[in-progress]`
+**Goal:** Grow beyond simple media conversion without losing the browser-only model.
 
-### Goal
-Expand beyond current media tools into broader utility categories without breaking the privacy-first model.
+### Delivered
+#### PDF
+- `[done]` PDF to images
+- `[done]` images to PDF
+- `[done]` PDF merge
 
-### Document Tool Priorities
-1. PDF to JPG/PNG
-2. JPG/PNG to PDF
-3. PDF merge
-4. PDF split
-5. PDF reorder pages
-6. PDF compress
-7. Extract images from PDF
-8. Document image cleanup
+#### Image Utility
+- `[done]` crop
+- `[done]` resize
+- `[done]` rotate
+- `[done]` watermark
+- `[done]` filters
 
-### Implementation Notes
-- Do not force all document workflows through FFmpeg
-- Use document-specific client libraries where appropriate
-- Use canvas-based rendering for previews
-- Reuse the shared upload, inspect, progress, result, and error layers
+### Remaining
+#### PDF
+- `[planned]` PDF split
+- `[planned]` PDF reorder pages
+- `[planned]` PDF compress
+- `[planned]` extract images from PDF
 
-### Image Tool Expansion
-1. Crop
-2. Rotate/flip
-3. Watermark
-4. Metadata remover
-5. Social media resizer
-6. Thumbnail generator
-7. Blur/redact
-8. Favicon/app icon generator
+#### Image
+- `[planned]` metadata remover
+- `[planned]` thumbnail generator
+- `[planned]` blur / redact
+- `[planned]` favicon / app icon generator
+- `[planned]` social media resizer presets
 
 ### Exit Criteria
-- FileApps is no longer only "media convert/compress"
-- Documents and image utilities broaden searchable surface area
+- `[in-progress]` the app is already more than just convert/compress
+- `[planned]` document and utility breadth materially increase searchable surface area
 
 ---
 
-## Phase 5: SEO, Publishing, and AdSense Readiness
+## Phase 5: SEO, Trust, And AdSense Readiness
+**Status:** `[in-progress]`
+**Goal:** Be publishable, crawlable, and trustworthy before scale-out.
 
-### Goal
-Make the site publish-ready and reduce the risk of being seen as thin, low-value content.
+### Delivered
+- `[done]` sitemap and robots routes
+- `[done]` canonical handling on key public pages
+- `[done]` canonical host and metadata base are now aligned with the live `www` domain
+- `[done]` breadcrumb navigation and breadcrumb schema
+- `[done]` shared structured data support for tool and browse pages
+- `[done]` category pages upgraded from simple grids to real landing pages
+- `[done]` trust and legal page set exists and is linked into the site
 
-### Technical SEO Tasks
-- Add `sitemap.ts`
-- Add `robots.ts`
-- Add canonical URL handling
-- Improve Open Graph and Twitter metadata
-- Add breadcrumb schema
-- Add per-tool structured data where appropriate
-- Add category landing pages with unique intros
-- Add proper internal linking between related tools
+### In Progress
+- `[in-progress]` Open Graph and Twitter metadata coverage
+- `[in-progress]` stronger internal linking between related tools
+- `[in-progress]` richer unique copy on top tool pages
+- `[in-progress]` richer intent- and comparison-oriented category content
+- `[in-progress]` keep workflow UI clean and trustworthy for future monetization
 
-### Content SEO Tasks
-Each important tool page should include:
-- a unique intro
-- a real "how to use it" section
-- best settings guidance
-- format comparison notes
-- privacy explanation
-- limitations and compatibility notes
-- FAQ based on real use cases
-- links to related tools
-
-### Publishing Pages Required
-- About
-- Contact
-- Privacy Policy
-- Terms
-- Disclaimer
-- Ads disclosure if needed
-
-### AdSense Readiness Tasks
-- Add `ads.txt` when ready
-- Avoid aggressive ad placement inside workflows
-- Prefer ads on:
-  - homepage
-  - category pages
-  - content sections
-  - result pages
-- Keep tool UI fast and uncluttered
+### Remaining
+- `[planned]` `ads.txt` once monetization is activated
+- `[planned]` conservative ad placement strategy
+- `[planned]` more original educational sections on top traffic pages
+- `[planned]` search-intent content such as best-settings and format-comparison guides
 
 ### Exit Criteria
-- Site is technically crawlable and well-structured
-- Top pages contain useful original content
-- The site is ready for a public launch and later AdSense review
+- `[in-progress]` site is technically crawlable and trust-complete
+- `[planned]` top landing pages have enough original content for public launch and AdSense review
 
 ---
 
-## Phase 6: Performance and Advanced Hardware Usage
+## Phase 6: Performance And Worker Architecture
+**Status:** `[in-progress]`
+**Goal:** Push browser-side performance without making the UX fragile.
 
-### Goal
-Push browser-side performance as far as practical without sacrificing reliability.
+### Delivered
+- `[done]` worker-backed browser-image job foundation
+- `[done]` shared FFmpeg single-job runner for custom and generator-based media flows
+- `[done]` shared multi-file FFmpeg workspace helpers for merge-style flows
+- `[done]` native/browser-first processing is already used for some lighter image and document paths
 
-### Implementation
-- Add worker pool support
-- Add adaptive concurrency rules
-- Profile large jobs on low-end and high-end devices
-- Prefer native browser APIs for simple jobs
-- Only load heavy engines when required
-- Add optional fast paths for:
-  - thumbnails
-  - frame extraction
-  - image resize/compress
-  - preview rendering
+### In Progress
+- `[in-progress]` extend shared FFmpeg job helpers into more bespoke media clients
+- `[in-progress]` reduce duplicated FFmpeg lifecycle code
+- `[in-progress]` only load heavy engines when a tool truly needs them
 
-### Advanced Research Track
-- Evaluate WebCodecs for:
-  - decode previews
-  - thumbnail extraction
-  - lightweight re-encode cases
-- Evaluate WebGPU or GPU-assisted browser APIs only if they provide real value
-- Keep compatibility-first fallbacks
+### Remaining
+- `[planned]` push more heavy FFmpeg work into workers
+- `[planned]` adaptive concurrency rules
+- `[planned]` better profiling on low-end vs high-end hardware
+- `[planned]` fast-path preview generation for thumbnails, frame grabs, and simple transforms
+- `[planned]` evaluate WebCodecs where it gives real wins
 
 ### Exit Criteria
-- Heavy jobs no longer block the page
-- Performance scales better on stronger hardware
-- Simple jobs avoid unnecessary FFmpeg overhead
+- `[planned]` heavy work avoids blocking the page
+- `[planned]` strong devices get measurable wins
+- `[planned]` simple jobs avoid unnecessary FFmpeg overhead
 
 ---
 
-## Phase 7: Scale-Out and Growth Content
+## Phase 7: Long-Tail Tool Expansion
+**Status:** `[planned]`
+**Goal:** Expand breadth after the platform and flagship experiences are strong enough.
 
-### Goal
-Grow the site in breadth only after the platform and flagship tools are strong.
+### Planned Video Additions
+- `[planned]` resize for social
+- `[planned]` subtitle convert
+- `[planned]` thumbnail generator
+- `[planned]` watermark overlay
 
-### New Tool Families
-- Video:
-  - mute video
-  - extract audio
-  - crop video
-  - resize for social
-  - subtitle convert
-  - thumbnail generator
-  - watermark overlay
-- Audio:
-  - noise reduction
-  - silence remover
-  - volume normalize
-  - metadata editor
-  - ringtone maker
-- Image:
-  - meme maker
-  - poster maker
-  - color palette extractor
-  - QR utility tools
-- Document:
-  - page extractor
-  - page rotator
-  - OCR prep tools
+### Planned Audio Additions
+- `[planned]` noise reduction
+- `[planned]` silence remover
+- `[planned]` volume normalize
+- `[planned]` metadata editor
+- `[planned]` ringtone maker
 
-### Growth Content
-- "Best settings" guides
-- format comparison articles
-- troubleshooting articles
-- privacy-first comparison pages
-- "tool vs tool" pages
-- landing pages for real intents like:
-  - compress video for WhatsApp
-  - convert image to WebP for website speed
-  - trim MP3 for ringtone
+### Planned Image Additions
+- `[planned]` meme maker
+- `[planned]` poster maker
+- `[planned]` color palette extractor
+- `[planned]` QR utility tools
+
+### Planned Document Additions
+- `[planned]` page extractor
+- `[planned]` page rotator
+- `[planned]` OCR prep tools
 
 ### Exit Criteria
-- New tools launch on a strong shared foundation
-- SEO growth is supported by real content and real utility
+- `[planned]` new tools launch on top of shared architecture, not fresh duplication
+- `[planned]` SEO growth is supported by real utility and original content
 
 ---
 
-## Cross-Phase Standards
+## Sprint Tracker
 
-### UX Standard for Every Tool
-Every tool should eventually support:
-- upload with validation
-- file info preview
-- configurable options
-- progress state
-- meaningful errors
-- downloadable result
-- reset and retry
-- mobile-friendly layout
+### Sprint 1: Platform Rebuild
+**Status:** `[done]`
+- `[done]` rebuild tool schema
+- `[done]` rebuild tool shell states
+- `[done]` add validation and typed error flow
 
-### Content Standard for Every Tool Page
-Every important page should eventually have:
-- unique title and description
-- unique H1 and intro
-- feature list that matches the actual implementation
-- how-it-works section
-- FAQ
-- related tools
+### Sprint 2: Shared Execution Foundations
+**Status:** `[in-progress]`
+- `[done]` add worker-backed browser-image processing foundation
+- `[done]` consolidate FFmpeg execution for generator-based tools and audio compress
+- `[in-progress]` continue moving heavy tools toward shared job execution
+- `[in-progress]` strengthen processing phases and cleanup behavior
 
-### Quality Standard
-Before marking any tool "done":
-- verify it works with several real files
-- verify the output opens correctly
-- verify errors are understandable
-- verify page copy does not overpromise
-- verify mobile layout is usable
+### Sprint 3: Editing UX And Real Multi-File Flows
+**Status:** `[in-progress]`
+- `[done]` upgrade video trim with timeline foundation
+- `[done]` upgrade audio trim with waveform/timeline foundation
+- `[done]` upgrade merge flows to real multi-file handling
+- `[in-progress]` standardize more bespoke FFmpeg-heavy flows on shared helpers
 
----
+### Sprint 4: Documents And Crawlability
+**Status:** `[done]`
+- `[done]` add first PDF tool family
+- `[done]` add sitemap, robots, canonicals, and richer metadata foundation
+- `[done]` improve homepage and browse-page content depth
 
-## Suggested Build Order
+### Sprint 5: Landing Pages And Flagship SEO Depth
+**Status:** `[in-progress]`
+- `[done]` standardize tool-page breadcrumbs, metadata, and structured data through a shared scaffold
+- `[done]` turn category pages into real landing pages with educational copy and FAQ/schema
+- `[done]` add deeper best-settings, privacy, compatibility, and limitations guidance to flagship tool pages
+- `[in-progress]` continue expanding richer original content to additional top tool pages
+- `[planned]` add richer result summaries and comparison content consistently
 
-### Sprint 1
-- Rebuild tool schema
-- Rebuild tool shell states
-- Add validation and typed errors
+### Sprint 6: Performance Consolidation
+**Status:** `[in-progress]`
+- `[done]` consolidate shared FFmpeg workspace/progress handling for merge flows
+- `[in-progress]` extend the shared worker/job architecture into more bespoke FFmpeg-heavy tools
+- `[planned]` add adaptive concurrency and better profiling
+- `[planned]` reduce main-thread pressure for the heaviest tasks
 
-### Sprint 2
-- Add worker-based processing and progress phases
-- Upgrade video compress
-- Upgrade image compress
+### Sprint 7: Launch Surface And Monetization Readiness
+**Status:** `[in-progress]`
+- `[done]` complete the core trust/legal page set
+- `[done]` align live canonical host signals and explicit robots metadata with the deployed `www` domain
+- `[in-progress]` keep the site content-rich and AdSense-safe
+- `[planned]` add `ads.txt` when monetization is switched on
+- `[planned]` finalize Open Graph and internal linking coverage
 
-### Sprint 3
-- Upgrade video trim with timeline foundation
-- Upgrade audio trim with waveform/timeline foundation
-- Upgrade merge and batch flows to real multi-file handling
-
-### Sprint 4
-- Add first document tools
-- Add sitemap, robots, canonical, and richer metadata
-- Improve content on homepage, category pages, and top tool pages
-
-### Sprint 5
-- Add additional flagship tools
-- Add before/after preview, ETA, queueing, and result summaries
-- Prepare site for public launch
+### Sprint 8: Breadth Expansion
+**Status:** `[planned]`
+- `[planned]` add more document and utility tools
+- `[planned]` add search-intent landing content
+- `[planned]` expand long-tail tool families on top of the shared platform
 
 ---
 
-## Risks to Watch
-- Browser memory limits on large files
-- Overusing FFmpeg where native APIs would be better
-- Shipping too many shallow tools too early
-- SEO copy getting ahead of real functionality
-- Letting ads harm UX before search trust is established
+## What Is Actually Done Right Now
+- `[done]` the app has a meaningful browser-only media/image/PDF tool surface
+- `[done]` the public trust/legal page set is present
+- `[done]` `/tools` and category pages have a real SEO/navigation foundation
+- `[done]` the first generation of shared worker/job abstractions is in place
+- `[done]` the build has been brought back to a successful state after the `/tools` prerender issue
 
-## Final Strategy
-Do not optimize for tool count first.
+## What Is Actively Being Worked Through
+- `[in-progress]` moving more bespoke FFmpeg-heavy clients to shared execution helpers
+- `[in-progress]` deepening flagship tools rather than just adding more shallow ones
+- `[in-progress]` strengthening category and tool-page content for launch readiness
+- `[in-progress]` reducing duplicated media-processing logic before broader expansion
 
-Optimize for:
-1. Strong shared platform
-2. 8 to 12 genuinely useful flagship tools
-3. Solid SEO and trust pages
-4. Publish and validate
-5. Scale only after quality is proven
+## Highest-Value Remaining Work
+1. Extend shared FFmpeg job/worker architecture into the remaining bespoke media clients.
+2. Improve flagship controls and result summaries for `video-convert`, `audio-convert`, and `image-convert`.
+3. Expand PDF and image utility breadth with tools like split, reorder, metadata removal, and thumbnail generation.
+4. Finish launch-surface SEO work: OG/Twitter metadata, internal linking, and more original educational content.
+5. Activate monetization support safely later with `ads.txt` and conservative ad placement.
 
-This is the path most likely to help FileApps become a real product instead of just another thin browser utility site.
+## Execution Order From Here
+1. Finish performance consolidation on the remaining custom FFmpeg clients.
+2. Upgrade the top flagship tools until their controls and guidance are genuinely competitive.
+3. Add the next PDF and image utility tools.
+4. Finish launch-readiness SEO and trust polishing.
+5. Scale out into broader tool families only after the above is stable.
+
+## Risks To Watch
+- browser memory limits on very large files
+- FFmpeg overuse where browser APIs would be simpler and faster
+- content volume outpacing true tool depth
+- launch/SEO copy promising features not fully implemented yet
+- monetization harming trust or workflow clarity
+
+## Shipping Rule
+When a sprint task or phase item is completed, mark it in this file during the same work pass so the tracker always reflects reality.

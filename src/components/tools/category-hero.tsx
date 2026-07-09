@@ -1,5 +1,7 @@
 import { AudioLines, ImageIcon, Video, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { BreadcrumbNav } from "@/components/seo/breadcrumb-nav";
+import { getCategoryBreadcrumbs } from "@/lib/breadcrumbs";
 import { cn } from "@/lib/utils";
 import { categories, type ToolCategory } from "@/lib/tools";
 
@@ -21,12 +23,18 @@ export function CategoryHero({
   if (!category) return null;
 
   const CategoryIcon = categoryIconMap[category.id];
+  const breadcrumbs = getCategoryBreadcrumbs(category.id);
 
   return (
     <section className="border-b bg-gradient-to-b from-background via-muted/20 to-background">
       <div className="container py-12 md:py-16">
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.15fr)_auto]">
           <div className="space-y-5 text-center lg:text-left">
+            <BreadcrumbNav
+              items={breadcrumbs}
+              className="flex justify-center lg:justify-start"
+            />
+
             <div className="flex flex-wrap items-center justify-center gap-3 lg:justify-start">
               <Badge
                 variant="secondary"
