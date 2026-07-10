@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { buildStaticMetadata } from "@/lib/static-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildStaticMetadata({
   title: "End User License Agreement",
   description: `${SITE.name} EULA covering your license to use the browser-based tools, restrictions, and ownership terms.`,
-  alternates: {
-    canonical: `${SITE.url}/eula`,
-  },
-};
+  path: "/eula",
+});
 
 export default function EulaPage() {
   return (

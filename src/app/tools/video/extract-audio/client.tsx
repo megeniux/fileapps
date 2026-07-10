@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useFFmpegContext } from "@/contexts/ffmpeg-context";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -11,6 +11,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { runSingleFFmpegJob } from "@/lib/ffmpeg-jobs";
+import { getMediaPerformanceGuidance, getRuntimePerformanceProfile } from "@/lib/runtime-performance";
 import { UploadCloud, Download, RotateCcw, Loader2, Music } from "lucide-react";
 import { formatFileSize } from "@/lib/utils";
 
@@ -24,44 +26,45 @@ const FORMAT_OPTIONS = [
 
 export function VideoExtractAudioClient() {
   const ffmpeg = useFFmpegContext();
+  const runtimeProfile = useMemo(() => getRuntimePerformanceProfile(), []);
+  const guidance = useMemo(() => getMediaPerformanceGuidance(runtimeProfile), [runtimeProfile]);
   const [file, setFile] = useState<File | null>(null);
   const [format, setFormat] = useState("mp3");
   const [processing, setProcessing] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
   const [resultSize, setResultSize] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  function pickFile(f: File) {
-    setFile(f);
+  function pickFile(nextFile: File) {
+    setFile(nextFile);
     setResultUrl(null);
     setError(null);
   }
 
   async function extract() {
     if (!file) return;
-    const fmt = FORMAT_OPTIONS.find((f) => f.value === format)!;
+    const fmt = FORMAT_OPTIONS.find((item) => item.value === format)!;
     setProcessing(true);
-    setProgress(0);
     setError(null);
+
     try {
       const inst = await ffmpeg.load();
       if (!inst) throw new Error("Media engine failed to load");
-      inst.on("progress", ({ progress: p }: { progress: number }) => setProgress(Math.round(p * 100)));
-      const inputName = "input" + file.name.slice(file.name.lastIndexOf("."));
-      const outputName = `output.${fmt.ext}`;
-      await inst.writeFile(inputName, new Uint8Array(await file.arrayBuffer()));
-      const args = ["-i", inputName, "-vn", "-c:a", fmt.codec, ...fmt.qualityArg, outputName];
-      await inst.exec(args);
-      const data = await inst.readFile(outputName) as Uint8Array;
+
+      const data = await runSingleFFmpegJob({
+        ffmpeg,
+        file,
+        outputExt: fmt.ext,
+        setProcessingState: () => {},
+        buildArgs: (inputName, outputName) => ["-i", inputName, "-vn", "-c:a", fmt.codec, ...fmt.qualityArg, outputName],
+      });
+
       const blob = new Blob([data as unknown as BlobPart], { type: fmt.mime });
       setResultUrl(URL.createObjectURL(blob));
       setResultSize(blob.size);
-      await inst.deleteFile(inputName).catch(() => {});
-      await inst.deleteFile(outputName).catch(() => {});
-    } catch (err) {
-      setError(String(err));
+    } catch (nextError) {
+      setError(String(nextError));
     } finally {
       setProcessing(false);
     }
@@ -71,10 +74,9 @@ export function VideoExtractAudioClient() {
     setFile(null);
     setResultUrl(null);
     setError(null);
-    setProgress(0);
   }
 
-  const fmt = FORMAT_OPTIONS.find((f) => f.value === format)!;
+  const fmt = FORMAT_OPTIONS.find((item) => item.value === format)!;
   const baseName = file ? file.name.replace(/\.[^.]+$/, "") : "audio";
 
   if (resultUrl) {
@@ -106,8 +108,12 @@ export function VideoExtractAudioClient() {
     <div className="container max-w-2xl py-10 space-y-6">
       {!file ? (
         <div
-          onDragOver={(e) => e.preventDefault()}
-          onDrop={(e) => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f?.type.startsWith("video/")) pickFile(f); }}
+          onDragOver={(event) => event.preventDefault()}
+          onDrop={(event) => {
+            event.preventDefault();
+            const droppedFile = event.dataTransfer.files[0];
+            if (droppedFile?.type.startsWith("video/")) pickFile(droppedFile);
+          }}
           onClick={() => inputRef.current?.click()}
           className="border-2 border-dashed rounded-xl p-12 text-center cursor-pointer hover:border-primary transition-colors"
         >
@@ -115,7 +121,7 @@ export function VideoExtractAudioClient() {
           <p className="font-medium">Drop a video file here</p>
           <p className="text-sm text-muted-foreground mt-1">MP4, WebM, MOV, AVI, MKV supported</p>
           <input ref={inputRef} type="file" accept="video/*" className="hidden"
-            onChange={(e) => { const f = e.target.files?.[0]; if (f) pickFile(f); }} />
+            onChange={(event) => { const nextFile = event.target.files?.[0]; if (nextFile) pickFile(nextFile); }} />
         </div>
       ) : (
         <div className="rounded-xl border bg-card p-5 space-y-5">
@@ -132,28 +138,34 @@ export function VideoExtractAudioClient() {
             <Select value={format} onValueChange={setFormat}>
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
-                {FORMAT_OPTIONS.map((f) => (
-                  <SelectItem key={f.value} value={f.value}>{f.label}</SelectItem>
+                {FORMAT_OPTIONS.map((item) => (
+                  <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
             <p className="text-xs text-muted-foreground">
-              {format === "mp3" && "Best compatibility — works everywhere"}
-              {format === "aac" && "Great quality, small file — ideal for Apple devices"}
-              {format === "wav" && "Uncompressed lossless — large file"}
-              {format === "ogg" && "Open format — good for web and gaming"}
-              {format === "flac" && "Lossless compressed — audiophile quality"}
+              {format === "mp3" && "Best compatibility - works everywhere"}
+              {format === "aac" && "Great quality, small file - ideal for Apple devices"}
+              {format === "wav" && "Uncompressed lossless - large file"}
+              {format === "ogg" && "Open format - good for web and gaming"}
+              {format === "flac" && "Lossless compressed - audiophile quality"}
             </p>
           </div>
+
+          {file.size >= guidance.largeFileWarningThresholdBytes && (
+            <div className="rounded-lg border bg-muted/30 p-3 text-xs text-muted-foreground">
+              Large videos can take longer to demux on this device. Audio extraction is still lighter than a full re-encode, but it may need extra time for very big files.
+            </div>
+          )}
 
           {processing ? (
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Loader2 className="w-4 h-4 animate-spin" />
-                Extracting audio… {progress}%
+                Extracting audio... {ffmpeg.progress}%
               </div>
               <div className="h-2 rounded-full bg-muted overflow-hidden">
-                <div className="h-full bg-primary transition-all" style={{ width: `${progress}%` }} />
+                <div className="h-full bg-primary transition-all" style={{ width: `${ffmpeg.progress}%` }} />
               </div>
             </div>
           ) : (

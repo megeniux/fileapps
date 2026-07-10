@@ -237,6 +237,8 @@ function AudioTrimForm({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const rafRef   = useRef<number>(0);
   const resolvedPreviewUrl = useMemo(() => previewUrl ?? URL.createObjectURL(file), [file, previewUrl]);
+  const inputFormat = file.name.split(".").pop()?.toLowerCase() || "";
+  const sameFormat = format === inputFormat;
 
   useEffect(() => {
     if (previewUrl) return;
@@ -435,6 +437,18 @@ function AudioTrimForm({
             ? "✓ Same as input — fast stream copy"
             : "Re-encoding to new format"}
         </p>
+      </div>
+
+      <div className="rounded-md border bg-muted/40 px-4 py-3 text-xs text-muted-foreground">
+        {sameFormat ? (
+          <p>
+            Fast trim mode avoids a full re-encode. It is usually the best choice for quick edits, although some compressed formats can start or end a fraction away from the exact playhead position.
+          </p>
+        ) : (
+          <p>
+            Re-encode mode is slower, but it is a safer choice when you want tighter trim boundaries or need to export the clip in a different format.
+          </p>
+        )}
       </div>
 
       {/* Quick presets */}

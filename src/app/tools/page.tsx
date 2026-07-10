@@ -16,24 +16,19 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { getToolsIndexBreadcrumbs } from "@/lib/breadcrumbs";
 import { tools, categories } from "@/lib/tools";
 import { SITE } from "@/lib/constants";
+import { buildStaticMetadata } from "@/lib/static-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildStaticMetadata({
   title: "All Media Tools",
   description: `Browse all ${tools.length} free online media tools. Convert, compress, trim, merge, and edit video, audio, and image files directly in your browser.`,
-  alternates: {
-    canonical: `${SITE.url}/tools`,
-  },
-  openGraph: {
-    title: "All Media Tools",
-    description: `Browse all ${tools.length} free online media tools. Convert, compress, trim, merge, and edit video, audio, and image files directly in your browser.`,
-    url: `${SITE.url}/tools`,
-  },
-};
+  path: "/tools",
+});
 
 const iconMap = {
   Video, FileDown: Video, Scissors: Video, Combine: Video,
   Sparkles: Video, Subtitles: Video, AudioLines: Music,
   ImageUp: ImageIcon, Maximize: ImageIcon, Files: ImageIcon,
+  FileImage: ImageIcon, Crop: ImageIcon, FileText,
 } as Record<string, React.ElementType>;
 
 const categoryIcons = {

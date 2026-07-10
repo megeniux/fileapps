@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { runBrowserImageWorkerJob } from "@/lib/worker-jobs";
+import { runSingleFFmpegJob } from "@/lib/ffmpeg-jobs";
 import { cn, formatFileSize, toBlob } from "@/lib/utils";
 import { FileDown, TrendingDown, Download, RotateCcw, ArrowLeftRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -25,6 +26,16 @@ const OUTPUT_FORMATS = [
   { value: "png", label: "PNG (lossless)" },
   { value: "avif", label: "AVIF (next-gen, smallest)" },
   { value: "same", label: "Keep original format" },
+];
+
+const COMPRESSION_MODES = [
+  { value: "lossy", label: "Lossy (smaller files)" },
+  { value: "lossless", label: "Lossless (no visible data loss)" },
+];
+
+const METADATA_MODES = [
+  { value: "strip", label: "Strip metadata (recommended for privacy)" },
+  { value: "preserve", label: "Preserve metadata (slower, FFmpeg path)" },
 ];
 
 function estimateReduction(preset: string, format: string, resize: boolean): string {
@@ -187,21 +198,29 @@ function ImageCompareDone({
 
 function ImageCompressForm({
   file,
+  ffmpeg,
   setOutput,
   setError,
   startProcessing,
   setProcessingState,
 }: {
   file: File;
-  ffmpeg: unknown;
+  ffmpeg: {
+    instance: { current: { loaded?: boolean } | null };
+    load: () => Promise<{ loaded?: boolean } | null>;
+    markStage?: (stage: "reading-file" | "processing" | "writing-output") => void;
+    markDone?: () => void;
+  };
   setOutput: (o: OutputFile) => void;
   setError: (msg: string) => void;
-  startProcessing: (state?: { status?: string }) => void;
-  setProcessingState: (state: { progress?: number; status?: string }) => void;
+  startProcessing: (state?: { progress?: number; status?: string; message?: string }) => void;
+  setProcessingState: (state: { progress?: number; status?: string; message?: string }) => void;
   [key: string]: unknown;
 }) {
   const [preset, setPreset] = useState("medium");
   const [customQuality, setCustomQuality] = useState("75");
+  const [compressionMode, setCompressionMode] = useState("lossy");
+  const [metadataMode, setMetadataMode] = useState("strip");
   const [outputFormat, setOutputFormat] = useState("webp");
   const [resizeBefore, setResizeBefore] = useState(false);
   const [maxWidth, setMaxWidth] = useState("1920");
@@ -228,15 +247,87 @@ function ImageCompressForm({
     return "jpg";
   }, [outputFormat, file]);
 
+  const effectiveFormat = useMemo(() => {
+    if (compressionMode === "lossless") {
+      if (resolvedFormat === "jpg" || resolvedFormat === "avif") {
+        return "png";
+      }
+    }
+    return resolvedFormat;
+  }, [compressionMode, resolvedFormat]);
+
   const handleCompress = useCallback(async () => {
     setProcessing(true);
-    startProcessing({ status: "Compressing image with worker" });
+    startProcessing({
+      status: metadataMode === "preserve" ? "Preparing FFmpeg image compression..." : "Compressing image with worker",
+    });
     try {
+      if (metadataMode === "preserve") {
+        const loaded = await ffmpeg.load();
+        if (!loaded) {
+          throw new Error("Media engine failed to load. Please try again.");
+        }
+
+        const result = await runSingleFFmpegJob({
+          ffmpeg,
+          file,
+          outputExt: effectiveFormat,
+          setProcessingState,
+          buildArgs: (inputName, outputName) => {
+            const args = ["-i", inputName];
+            const filters: string[] = [];
+            const normalizedQuality = compressionMode === "lossless" ? 100 : quality;
+
+            if (resizeBefore) {
+              filters.push(`scale='min(iw,${parseInt(maxWidth, 10) || 1920})':'min(ih,${parseInt(maxHeight, 10) || 1080})':force_original_aspect_ratio=decrease`);
+            }
+            if (filters.length > 0) {
+              args.push("-vf", filters.join(","));
+            }
+
+            args.push("-map_metadata", "0");
+
+            if (effectiveFormat === "webp") {
+              args.push("-c:v", "libwebp");
+              if (compressionMode === "lossless") {
+                args.push("-lossless", "1");
+              } else {
+                args.push("-quality", String(normalizedQuality));
+              }
+            } else if (effectiveFormat === "png") {
+              args.push("-c:v", "png", "-compression_level", String(Math.min(9, Math.max(0, Math.round((100 - normalizedQuality) / 10)))));
+            } else if (effectiveFormat === "avif") {
+              args.push("-c:v", "libaom-av1");
+              args.push("-crf", String(Math.min(63, Math.max(0, 63 - Math.round((normalizedQuality / 100) * 40)))));
+            } else {
+              args.push("-q:v", String(Math.max(1, Math.round((100 - normalizedQuality) / 10))));
+            }
+
+            args.push(outputName);
+            return args;
+          },
+        });
+
+        const baseName = file.name.replace(/\.[^/.]+$/, "");
+        const mimeMap: Record<string, string> = {
+          jpg: "image/jpeg",
+          png: "image/png",
+          webp: "image/webp",
+          avif: "image/avif",
+        };
+        setOutput({
+          name: `compressed_${baseName}.${effectiveFormat}`,
+          data: result,
+          mime: mimeMap[effectiveFormat] ?? "image/jpeg",
+        });
+        return;
+      }
+
       const result = await runBrowserImageWorkerJob(
         file,
         {
-          outputFormat: resolvedFormat,
-          quality,
+          outputFormat: effectiveFormat,
+          quality: compressionMode === "lossless" ? 100 : quality,
           ...(resizeBefore
             ? {
                 maxWidth: parseInt(maxWidth) || 1920,
@@ -258,7 +349,10 @@ function ImageCompressForm({
       setProcessing(false);
     }
   }, [
-    resolvedFormat,
+    compressionMode,
+    metadataMode,
+    effectiveFormat,
+    ffmpeg,
     quality,
     resizeBefore,
     maxWidth,
@@ -274,6 +368,21 @@ function ImageCompressForm({
     <div className="space-y-5">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
+          <Label>Compression Mode</Label>
+          <Select value={compressionMode} onValueChange={setCompressionMode}>
+            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectContent>
+              {COMPRESSION_MODES.map((mode) => (
+                <SelectItem key={mode.value} value={mode.value}>{mode.label}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <p className="text-xs text-muted-foreground">
+            Lossy reduces file size more aggressively. Lossless keeps pixel data safer but usually saves less.
+          </p>
+        </div>
+
+        <div className="space-y-1.5">
           <Label>Compression Level</Label>
           <Select value={preset} onValueChange={setPreset}>
             <SelectTrigger><SelectValue /></SelectTrigger>
@@ -284,6 +393,7 @@ function ImageCompressForm({
             </SelectContent>
           </Select>
         </div>
+
         <div className="space-y-1.5">
           <Label>Output Format</Label>
           <Select value={outputFormat} onValueChange={setOutputFormat}>
@@ -295,9 +405,21 @@ function ImageCompressForm({
             </SelectContent>
           </Select>
         </div>
+
+        <div className="space-y-1.5">
+          <Label>Metadata</Label>
+          <Select value={metadataMode} onValueChange={setMetadataMode}>
+            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectContent>
+              {METADATA_MODES.map((mode) => (
+                <SelectItem key={mode.value} value={mode.value}>{mode.label}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
-      {preset === "custom" && (
+      {compressionMode === "lossy" && preset === "custom" && (
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <Label>Custom Quality</Label>
@@ -318,6 +440,18 @@ function ImageCompressForm({
           </div>
         </div>
       )}
+
+      {compressionMode === "lossless" && (
+        <div className="rounded-md border border-emerald-200 bg-emerald-50 px-4 py-2.5 text-xs text-muted-foreground dark:border-emerald-800 dark:bg-emerald-950/30">
+          Lossless mode keeps visual data intact. If you choose a lossy-only destination like JPEG, the export will fall back to PNG automatically.
+        </div>
+      )}
+
+      <div className="rounded-md border bg-muted/40 px-4 py-2.5 text-xs text-muted-foreground">
+        {metadataMode === "preserve"
+          ? "Metadata preserve mode uses the FFmpeg path instead of the faster browser worker so the output can keep embedded tags when the destination format supports them."
+          : "Browser-based compression removes embedded metadata such as EXIF camera details, GPS information, and orientation tags from the exported image. That is useful for privacy, but it is not the right workflow if you need to preserve original metadata."}
+      </div>
 
       <div className="space-y-3">
         <label className="flex cursor-pointer select-none items-center gap-2">

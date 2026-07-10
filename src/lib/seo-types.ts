@@ -26,10 +26,18 @@ export interface CompatibilityNote {
   body: string;
 }
 
+export interface EditorialSection {
+  title: string;
+  body: string;
+  points?: string[];
+}
+
 export interface ToolSeoData {
   toolId: string;
   h1: string;
+  metaTitle?: string;
   metaDescription: string;
+  keywords?: string[];
   howToTitle: string;
   howToSteps: HowToStep[];
   settingsGuide: string;
@@ -38,5 +46,6 @@ export interface ToolSeoData {
   compatibilityNotes?: CompatibilityNote[];
   limitations?: string[];
   privacyNote?: string;
+  editorialSections?: EditorialSection[];
   faqs: ToolFaq[];
 }

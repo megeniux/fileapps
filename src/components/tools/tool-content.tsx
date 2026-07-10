@@ -18,7 +18,7 @@ import {
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { categories, getToolById, getToolsByCategory, type ToolDefinition } from "@/lib/tools";
+import { categories, getRelatedTools, getToolById, type ToolDefinition } from "@/lib/tools";
 
 const featureIconMatchers: Array<{ test: RegExp; icon: React.ElementType }> = [
   { test: /(format|convert|output)/i, icon: FileOutput },
@@ -44,6 +44,9 @@ const relatedIconMap: Record<string, React.ElementType> = {
   ImageUp: ImageIcon,
   Maximize: Maximize2,
   Files: FileOutput,
+  FileImage: ImageIcon,
+  FileText: FileOutput,
+  Crop: Maximize2,
 };
 
 function getFeatureIcon(feature: string) {
@@ -109,9 +112,7 @@ function Features({ items }: { items: string[] }) {
 }
 
 function RelatedTools({ tool }: { tool: ToolDefinition }) {
-  const relatedTools = getToolsByCategory(tool.category)
-    .filter((relatedTool) => relatedTool.id !== tool.id)
-    .slice(0, 3);
+  const relatedTools = getRelatedTools(tool.id, 4);
 
   if (!relatedTools.length) return null;
 
@@ -123,7 +124,7 @@ function RelatedTools({ tool }: { tool: ToolDefinition }) {
         <div className="space-y-1">
           <h2 className="text-2xl font-bold">Related Tools</h2>
           <p className="text-sm text-muted-foreground">
-            More {categoryLabel.toLowerCase()} you can use right now.
+            Nearby workflows people often use before or after this {categoryLabel.toLowerCase().slice(0, -1)}.
           </p>
         </div>
         <Badge variant="outline" className="hidden rounded-full md:inline-flex">
@@ -131,7 +132,7 @@ function RelatedTools({ tool }: { tool: ToolDefinition }) {
         </Badge>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         {relatedTools.map((relatedTool) => {
           const Icon = relatedIconMap[relatedTool.icon] || Video;
           return (

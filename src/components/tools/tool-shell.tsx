@@ -21,7 +21,7 @@ import type {
 } from "@/lib/tool-types";
 import { validateFiles } from "@/lib/tool-validation";
 import { usePathname } from "next/navigation";
-import { tools } from "@/lib/tools";
+import { getRelatedTools, getToolByHref } from "@/lib/tools";
 import { cn, formatFileSize, toBlob } from "@/lib/utils";
 
 type ToolStep = "upload" | "inspect" | "configure" | "processing" | "result" | "error";
@@ -83,6 +83,52 @@ interface ToolShellProps {
   renderDone?: (props: RenderDoneProps) => React.ReactNode;
 }
 
+function getEditorIntro(action: ToolAction) {
+  switch (action) {
+    case "convert":
+      return {
+        title: "Choose output settings",
+        description: "Pick the format, quality, and export options you want before processing.",
+      };
+    case "compress":
+    case "batch-compress":
+      return {
+        title: "Adjust compression settings",
+        description: "Balance file size, quality, and output format before you start.",
+      };
+    case "trim":
+      return {
+        title: "Choose the part to keep",
+        description: "Set the section you want to keep, then export the trimmed result.",
+      };
+    case "merge":
+      return {
+        title: "Arrange files and merge",
+        description: "Add your files, set their order, and combine them into one output.",
+      };
+    case "effects":
+      return {
+        title: "Choose the effects to apply",
+        description: "Preview your changes, tune the settings, and export the final version.",
+      };
+    case "burn-caption":
+      return {
+        title: "Set caption and export options",
+        description: "Choose how captions should appear, then render them into the video.",
+      };
+    case "resize":
+      return {
+        title: "Set resize options",
+        description: "Pick your target dimensions and export format before processing.",
+      };
+    default:
+      return {
+        title: "Set your processing options",
+        description: "Review the file, adjust settings, and export the result.",
+      };
+  }
+}
+
 function useObjectUrl(source: Blob | File | null) {
   const url = useMemo(() => {
     if (!source) return null;
@@ -102,7 +148,7 @@ function useObjectUrl(source: Blob | File | null) {
 
 export function ToolShell({
   title,
-  description,
+  action,
   accept,
   formats,
   engine = "ffmpeg",
@@ -112,6 +158,7 @@ export function ToolShell({
   children,
   renderDone,
 }: ToolShellProps) {
+  const editorIntro = useMemo(() => getEditorIntro(action), [action]);
   const resolvedFileRequirement = useMemo<ToolFileRequirement>(
     () => fileRequirement ?? { accept, formats, minCount: 1, maxCount: 1 },
     [accept, fileRequirement, formats]
@@ -127,8 +174,11 @@ export function ToolShell({
 
   const ffmpeg = useFFmpeg();
   const pathname = usePathname();
-  const currentCategory = pathname.split("/")[2] ?? "";
-  const relatedTools = tools.filter(t => t.category === currentCategory && t.href !== pathname).slice(0, 4);
+  const currentTool = useMemo(() => getToolByHref(pathname), [pathname]);
+  const relatedTools = useMemo(
+    () => (currentTool ? getRelatedTools(currentTool.id, 4) : []),
+    [currentTool]
+  );
   const [step, setStep] = useState<ToolStep>(initialSelectedFiles.length > 0 ? "inspect" : "upload");
   const [files, setFiles] = useState<File[]>(initialSelectedFiles);
   const [auxiliaryFiles, setAuxiliaryFiles] = useState<Record<string, File | null>>({});
@@ -374,8 +424,8 @@ export function ToolShell({
     <div className="container py-8">
       <div className="mx-auto max-w-3xl">
         <div className="mb-8 text-center">
-          <h1 className="mb-2 text-3xl font-bold md:text-4xl">{title}</h1>
-          <p className="text-muted-foreground">{description}</p>
+          <h2 className="mb-2 text-3xl font-bold md:text-4xl">{editorIntro.title}</h2>
+          <p className="text-muted-foreground">{editorIntro.description}</p>
         </div>
 
         <div className="mb-8 flex items-center justify-center gap-2">

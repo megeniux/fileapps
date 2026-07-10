@@ -4,10 +4,10 @@ export interface FFmpegJobAdapter {
   instance: {
     current: {
       loaded?: boolean;
-      writeFile?: (path: string, data: Uint8Array) => Promise<void>;
-      exec?: (args: string[]) => Promise<void>;
-      readFile?: (path: string) => Promise<Uint8Array>;
-      deleteFile?: (path: string) => Promise<void>;
+      writeFile?: (path: string, data: Uint8Array) => Promise<unknown>;
+      exec?: (args: string[]) => Promise<unknown>;
+      readFile?: (path: string) => Promise<unknown>;
+      deleteFile?: (path: string) => Promise<unknown>;
     } | null;
   };
   markStage?: (stage: "reading-file" | "processing" | "writing-output") => void;
@@ -131,7 +131,7 @@ export async function runSingleFFmpegJob({
 
     ffmpeg.markStage?.("writing-output");
     setProcessingState({ status: "Writing output...", progress: 95 });
-    const data = await inst.readFile(outputName);
+    const data = await inst.readFile(outputName) as Uint8Array;
     ffmpeg.markDone?.();
     return data;
   } finally {

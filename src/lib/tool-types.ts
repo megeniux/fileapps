@@ -28,7 +28,16 @@ export type ToolId =
   | "image-watermark"
   | "video-reverse"
   | "pdf-merge"
-  | "video-crop";
+  | "video-crop"
+  | "pdf-split"
+  | "image-thumbnail"
+  | "pdf-reorder"
+  | "pdf-compress"
+  | "pdf-extract-images"
+  | "image-metadata"
+  | "image-blur-redact"
+  | "image-icons"
+  | "image-social-resize";
 
 export type ToolAction =
   | "convert"
@@ -52,7 +61,16 @@ export type ToolAction =
   | "image-watermark"
   | "video-reverse"
   | "pdf-merge"
-  | "video-crop";
+  | "video-crop"
+  | "pdf-split"
+  | "image-thumbnail"
+  | "pdf-reorder"
+  | "pdf-compress"
+  | "pdf-extract-images"
+  | "image-metadata"
+  | "image-blur-redact"
+  | "image-icons"
+  | "image-social-resize";
 
 export type ToolEngine = "ffmpeg" | "browser-image" | "document";
 

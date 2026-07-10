@@ -2,7 +2,7 @@
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
-import { seoDataMap } from "@/lib/seo-data";
+import { getToolSeoData, normalizeSeoText, normalizeToolSeoData } from "@/lib/tool-seo";
 import { toolSeoExtensions } from "@/lib/tool-seo-extensions";
 import { getToolById } from "@/lib/tools";
 
@@ -66,13 +66,19 @@ function buildLimitations(toolId: string, explicitLimitations?: string[]) {
 }
 
 export function ToolSeoContent({ toolId }: { toolId: string }) {
-  const baseData = seoDataMap[toolId];
+  const baseData = getToolSeoData(toolId);
   if (!baseData) return null;
-  const data = { ...baseData, ...toolSeoExtensions[toolId] };
+  const data = normalizeToolSeoData({ ...baseData, ...toolSeoExtensions[toolId] });
+  if (!data) return null;
 
-  const privacyNote = buildPrivacyNote(toolId, data.privacyNote);
-  const compatibilityNotes = buildCompatibilityNotes(toolId, data.compatibilityNotes);
-  const limitations = buildLimitations(toolId, data.limitations);
+  const privacyNote = data.privacyNote
+    ? normalizeSeoText(data.privacyNote)
+    : normalizeSeoText(buildPrivacyNote(toolId, data.privacyNote) ?? "");
+  const compatibilityNotes = buildCompatibilityNotes(toolId, data.compatibilityNotes).map((note) => ({
+    title: normalizeSeoText(note.title),
+    body: normalizeSeoText(note.body),
+  }));
+  const limitations = buildLimitations(toolId, data.limitations).map(normalizeSeoText);
 
   return (
     <div className="border-t bg-muted/20">
@@ -140,6 +146,31 @@ export function ToolSeoContent({ toolId }: { toolId: string }) {
                   ))}
                 </tbody>
               </table>
+            </div>
+          </section>
+        )}
+
+        {data.editorialSections && data.editorialSections.length > 0 && (
+          <section className="space-y-6">
+            <h2 className="text-2xl font-bold">Practical guidance</h2>
+            <div className="grid gap-4 md:grid-cols-2">
+              {data.editorialSections.map((section) => (
+                <Card key={section.title} className="border-border/70 bg-background/70 shadow-sm">
+                  <CardContent className="space-y-3 p-4">
+                    <p className="text-sm font-semibold">{section.title}</p>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{section.body}</p>
+                    {section.points && section.points.length > 0 && (
+                      <ul className="space-y-2">
+                        {section.points.map((point) => (
+                          <li key={point} className="text-sm leading-relaxed text-muted-foreground">
+                            {point}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </section>
         )}

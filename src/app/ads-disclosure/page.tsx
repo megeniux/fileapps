@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { buildStaticMetadata } from "@/lib/static-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildStaticMetadata({
   title: "Advertising Disclosure",
   description: `${SITE.name} advertising disclosure explaining where ads may appear and how they are separated from the tool experience.`,
-  alternates: {
-    canonical: `${SITE.url}/ads-disclosure`,
-  },
-};
+  path: "/ads-disclosure",
+});
 
 export default function AdsDisclosurePage() {
   return (

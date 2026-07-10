@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { buildStaticMetadata } from "@/lib/static-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildStaticMetadata({
   title: "Terms of Service",
   description: `${SITE.name} terms of service. Understand the rules and guidelines for using our free online tools.`,
-  alternates: {
-    canonical: `${SITE.url}/terms`,
-  },
-};
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (

@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { buildStaticMetadata } from "@/lib/static-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildStaticMetadata({
   title: "About",
   description: `Learn what ${SITE.name} is, how it works, and why it keeps file processing inside your browser.`,
-  alternates: {
-    canonical: `${SITE.url}/about`,
-  },
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { buildStaticMetadata } from "@/lib/static-metadata";
 import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildStaticMetadata({
   title: "Contact Us",
   description: `Get in touch with the ${SITE.name} team. Send us your questions, feedback, or feature requests.`,
-  alternates: {
-    canonical: `${SITE.url}/contact`,
-  },
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

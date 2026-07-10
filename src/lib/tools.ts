@@ -42,7 +42,7 @@ export const categoryDefinitions: ToolCategoryDefinition[] = [
 export const toolCatalog: ToolDefinition[] = [
   {
     id: "video-convert",
-    title: "Video Convert",
+    title: "Video Converter",
     description: "Convert videos between MP4, WebM, AVI, MOV, MKV, and more with quality control.",
     category: "video",
     icon: "Video",
@@ -75,7 +75,7 @@ export const toolCatalog: ToolDefinition[] = [
   },
   {
     id: "video-compress",
-    title: "Video Compress",
+    title: "Video Compressor",
     description: "Reduce video file size without significant quality loss using CRF optimization.",
     category: "video",
     icon: "FileDown",
@@ -275,7 +275,7 @@ export const toolCatalog: ToolDefinition[] = [
   },
   {
     id: "audio-convert",
-    title: "Audio Convert",
+    title: "Audio Converter",
     description: "Convert audio files between MP3, WAV, AAC, OGG, FLAC, M4A, and WMA.",
     category: "audio",
     icon: "AudioLines",
@@ -298,7 +298,7 @@ export const toolCatalog: ToolDefinition[] = [
       "Convert between 7+ audio formats",
       "Adjustable audio bitrate and sample rate",
       "Preserve or convert channel layout",
-      "Batch convert multiple files",
+      "Set bit depth for WAV and FLAC style exports",
     ],
     howItWorks: [
       "Upload your audio file in any supported format.",
@@ -308,7 +308,7 @@ export const toolCatalog: ToolDefinition[] = [
   },
   {
     id: "audio-compress",
-    title: "Audio Compress",
+    title: "Audio Compressor",
     description: "Reduce audio file size with adjustable bitrate and quality optimization.",
     category: "audio",
     icon: "FileDown",
@@ -445,7 +445,7 @@ export const toolCatalog: ToolDefinition[] = [
   },
   {
     id: "image-convert",
-    title: "Image Convert",
+    title: "Image Converter",
     description: "Convert images between JPG, PNG, WebP, GIF, BMP, TIFF, and AVIF formats.",
     category: "image",
     icon: "ImageUp",
@@ -458,7 +458,7 @@ export const toolCatalog: ToolDefinition[] = [
         accept: "image/*",
         formats: "JPG, PNG, WebP, GIF, BMP, TIFF, AVIF",
         minCount: 1,
-        maxCount: 1,
+        maxCount: 20,
         warningFileSizeBytes: FILE_SIZE_LIMITS.warning,
         maxFileSizeBytes: FILE_SIZE_LIMITS.max,
       },
@@ -476,14 +476,14 @@ export const toolCatalog: ToolDefinition[] = [
       "Batch conversion for multiple images",
     ],
     howItWorks: [
-      "Upload your image in any supported format.",
+      "Upload one image or a small batch in any supported format.",
       "Choose your target format and quality setting.",
-      "Convert and download your optimized image.",
+      "Convert and download the new image files.",
     ],
   },
   {
     id: "image-compress",
-    title: "Image Compress",
+    title: "Image Compressor",
     description: "Optimize and compress images to reduce file size while maintaining quality.",
     category: "image",
     icon: "FileDown",
@@ -511,11 +511,11 @@ export const toolCatalog: ToolDefinition[] = [
       "Quality-based compression with preview",
       "Lossy and lossless compression options",
       "Real-time file size comparison",
-      "Preserve EXIF data option",
+      "Choose privacy-first stripping or slower metadata-preserve export",
     ],
     howItWorks: [
       "Upload your image to compress.",
-      "Adjust the quality slider to balance size and quality.",
+      "Adjust quality, output format, and metadata handling to balance size, compatibility, and privacy.",
       "Compress and download the optimized image.",
     ],
   },
@@ -559,7 +559,7 @@ export const toolCatalog: ToolDefinition[] = [
   },
   {
     id: "image-batch-compress",
-    title: "Batch Image Compress",
+    title: "Batch Image Compressor",
     description: "Compress multiple images at once with consistent quality settings.",
     category: "image",
     icon: "Files",
@@ -922,6 +922,134 @@ export const toolCatalog: ToolDefinition[] = [
       capabilities: { multiFile: true, outputDownload: true },
     },
   },
+  {
+    id: "pdf-split",
+    title: "Split PDF",
+    description: "Split one PDF into separate pages or custom page ranges directly in your browser.",
+    category: "pdf" as ToolCategory,
+    icon: "Scissors",
+    href: "/tools/pdf/split",
+    formats: ["PDF"],
+    features: [
+      "Split every page into its own PDF",
+      "Create custom page-range files like 1-3, 4-6, 10",
+      "Download individual outputs or one ZIP archive",
+      "Browser-only workflow with no document upload",
+    ],
+    howItWorks: [
+      "Upload a PDF file and choose whether to split every page or export custom ranges.",
+      "Enter page ranges when needed and review the planned output groups.",
+      "Split the document and download each PDF separately or as a ZIP archive.",
+    ],
+    runtime: {
+      action: "pdf-split",
+      engines: ["document"],
+      input: {
+        accept: "application/pdf,.pdf",
+        formats: "PDF",
+        minCount: 1,
+        maxCount: 1,
+        maxFileSizeBytes: FILE_SIZE_LIMITS.max,
+      },
+      capabilities: { outputDownload: true },
+    },
+  },
+  {
+    id: "pdf-reorder",
+    title: "Reorder PDF Pages",
+    description: "Rearrange PDF page order in your browser and save the updated document without uploading it.",
+    category: "pdf" as ToolCategory,
+    icon: "Combine",
+    href: "/tools/pdf/reorder",
+    formats: ["PDF"],
+    features: [
+      "Move pages up or down before saving",
+      "Keep the document private in your browser",
+      "Save a clean reordered PDF",
+      "Useful for reports, contracts, and scan packets",
+    ],
+    howItWorks: [
+      "Upload one PDF and review its page list.",
+      "Move pages into the order you want and confirm the sequence.",
+      "Save the reordered PDF and download the updated file.",
+    ],
+    runtime: {
+      action: "pdf-reorder",
+      engines: ["document"],
+      input: {
+        accept: "application/pdf,.pdf",
+        formats: "PDF",
+        minCount: 1,
+        maxCount: 1,
+        maxFileSizeBytes: FILE_SIZE_LIMITS.max,
+      },
+      capabilities: { outputDownload: true },
+    },
+  },
+  {
+    id: "pdf-compress",
+    title: "Compress PDF",
+    description: "Reduce PDF size in the browser by rebuilding pages with lighter image settings for sharing and upload limits.",
+    category: "pdf" as ToolCategory,
+    icon: "FileDown",
+    href: "/tools/pdf/compress",
+    formats: ["PDF"],
+    features: [
+      "Reduce PDF size with lower render scale and JPEG quality",
+      "Useful for email, portals, and strict upload limits",
+      "Runs locally in your browser with no upload",
+      "Shows before-and-after file size so the tradeoff is clear",
+    ],
+    howItWorks: [
+      "Upload your PDF and choose a compression preset or custom quality.",
+      "The tool redraws each page with lighter settings to reduce size.",
+      "Download the rebuilt PDF once compression finishes.",
+    ],
+    runtime: {
+      action: "pdf-compress",
+      engines: ["document"],
+      input: {
+        accept: "application/pdf,.pdf",
+        formats: "PDF",
+        minCount: 1,
+        maxCount: 1,
+        maxFileSizeBytes: FILE_SIZE_LIMITS.max,
+      },
+      capabilities: { outputDownload: true },
+    },
+  },
+  {
+    id: "pdf-extract-images",
+    title: "Extract Images from PDF",
+    description: "Pull embedded raster images out of a PDF in your browser and download them individually or as a ZIP.",
+    category: "pdf" as ToolCategory,
+    icon: "FileImage",
+    href: "/tools/pdf/extract-images",
+    formats: ["PNG"],
+    features: [
+      "Best-effort extraction of embedded raster images",
+      "Download each extracted image or one ZIP archive",
+      "Keeps the source PDF on your device",
+      "Useful for brochures, scans, and design PDFs that contain placed images",
+    ],
+    howItWorks: [
+      "Upload a PDF and let the tool inspect each page for embedded raster images.",
+      "Review the extracted images that were found in the document.",
+      "Download individual files or export everything as a ZIP archive.",
+    ],
+    runtime: {
+      action: "pdf-extract-images",
+      engines: ["document"],
+      input: {
+        accept: "application/pdf,.pdf",
+        formats: "PDF",
+        minCount: 1,
+        maxCount: 1,
+        maxFileSizeBytes: FILE_SIZE_LIMITS.max,
+      },
+      capabilities: { outputDownload: true },
+    },
+  },
 
   {
     id: "video-crop",
@@ -954,10 +1082,220 @@ export const toolCatalog: ToolDefinition[] = [
       capabilities: { outputPreview: true, outputDownload: true },
     },
   },
+  {
+    id: "image-thumbnail",
+    title: "Thumbnail Generator",
+    description: "Create clean image thumbnails for YouTube, blogs, product cards, and social previews.",
+    category: "image",
+    icon: "ImageUp",
+    href: "/tools/image/thumbnail",
+    formats: ["JPG", "PNG", "WebP"],
+    features: [
+      "One-click thumbnail presets for video, blog, store, and social use",
+      "Keep aspect ratio or force an exact thumbnail size",
+      "Choose JPG, PNG, or WebP output",
+      "Fast browser-native resizing with no uploads",
+    ],
+    howItWorks: [
+      "Upload an image and choose a thumbnail preset or set custom dimensions.",
+      "Pick the output format and quality that fit your destination.",
+      "Generate the thumbnail and download the resized image instantly.",
+    ],
+    runtime: {
+      action: "image-thumbnail",
+      engines: ["browser-image"],
+      input: {
+        accept: "image/*",
+        formats: "JPG, PNG, WebP, AVIF",
+        minCount: 1,
+        maxCount: 1,
+        warningFileSizeBytes: FILE_SIZE_LIMITS.warning,
+        maxFileSizeBytes: FILE_SIZE_LIMITS.max,
+      },
+      capabilities: {
+        browserNativePreferred: true,
+        metadataInspection: true,
+        outputPreview: true,
+        outputDownload: true,
+      },
+    },
+  },
+  {
+    id: "image-metadata",
+    title: "Image Metadata Remover",
+    description: "Strip EXIF and similar metadata from images in your browser for privacy-safe sharing.",
+    category: "image",
+    icon: "Sparkles",
+    href: "/tools/image/metadata",
+    formats: ["JPG", "PNG", "WebP"],
+    features: [
+      "Remove EXIF, GPS, and camera metadata from exported images",
+      "Keep image work local in the browser",
+      "Choose JPG, PNG, or WebP output",
+      "Useful before sharing photos or screenshots publicly",
+    ],
+    howItWorks: [
+      "Upload your image and choose the output format you want.",
+      "The tool rebuilds the image without carrying over embedded metadata.",
+      "Download the privacy-clean export and share it with less hidden data attached.",
+    ],
+    runtime: {
+      action: "image-metadata",
+      engines: ["browser-image"],
+      input: {
+        accept: "image/*",
+        formats: "JPG, PNG, WebP, AVIF",
+        minCount: 1,
+        maxCount: 1,
+        warningFileSizeBytes: FILE_SIZE_LIMITS.warning,
+        maxFileSizeBytes: FILE_SIZE_LIMITS.max,
+      },
+      capabilities: { browserNativePreferred: true, metadataInspection: true, outputPreview: true, outputDownload: true },
+    },
+  },
+  {
+    id: "image-blur-redact",
+    title: "Blur or Redact Image",
+    description: "Hide part of an image with a blur region or solid redaction block directly in your browser.",
+    category: "image",
+    icon: "Crop",
+    href: "/tools/image/blur-redact",
+    formats: ["JPG", "PNG", "WebP"],
+    features: [
+      "Select a region to hide on the image preview",
+      "Choose blur for softer hiding or redact for solid blocking",
+      "Control blur strength and redaction color",
+      "Keep everything local in your browser with no upload",
+    ],
+    howItWorks: [
+      "Upload an image and drag over the area you want to hide.",
+      "Choose blur or redact mode and fine-tune the settings.",
+      "Apply the change and download the protected image.",
+    ],
+    runtime: {
+      action: "image-blur-redact",
+      engines: ["browser-image"],
+      input: {
+        accept: "image/*",
+        formats: "JPG, PNG, WebP, AVIF",
+        minCount: 1,
+        maxCount: 1,
+        warningFileSizeBytes: FILE_SIZE_LIMITS.warning,
+        maxFileSizeBytes: FILE_SIZE_LIMITS.max,
+      },
+      capabilities: { browserNativePreferred: true, metadataInspection: true, outputPreview: true, outputDownload: true },
+    },
+  },
+  {
+    id: "image-icons",
+    title: "Favicon and App Icon Generator",
+    description: "Generate a practical favicon and app-icon PNG set from one source image in your browser.",
+    category: "image",
+    icon: "Files",
+    href: "/tools/image/icons",
+    formats: ["PNG", "ZIP"],
+    features: [
+      "Generate multiple favicon and app-icon sizes from one image",
+      "Includes common browser, Apple touch, and PWA icon dimensions",
+      "Download individual PNGs or one ZIP archive",
+      "Useful for websites, web apps, and installable PWAs",
+    ],
+    howItWorks: [
+      "Upload a square-friendly source image with enough resolution for larger icons.",
+      "Generate the icon set and review the common favicon and app sizes.",
+      "Download the whole PNG pack or save individual sizes you need.",
+    ],
+    runtime: {
+      action: "image-icons",
+      engines: ["browser-image"],
+      input: {
+        accept: "image/*",
+        formats: "JPG, PNG, WebP, AVIF",
+        minCount: 1,
+        maxCount: 1,
+        warningFileSizeBytes: FILE_SIZE_LIMITS.warning,
+        maxFileSizeBytes: FILE_SIZE_LIMITS.max,
+      },
+      capabilities: { browserNativePreferred: true, metadataInspection: true, outputPreview: true, outputDownload: true },
+    },
+  },
+  {
+    id: "image-social-resize",
+    title: "Social Media Image Resizer",
+    description: "Resize images for common social, blog, and ad placements with ready-to-use browser-side presets.",
+    category: "image",
+    icon: "Maximize",
+    href: "/tools/image/social-resize",
+    formats: ["JPG", "PNG", "WebP"],
+    features: [
+      "Preset sizes for Instagram, X, Facebook, LinkedIn, YouTube, and Open Graph",
+      "Generate one size or a whole platform pack",
+      "Choose JPG, PNG, or WebP output",
+      "Fast browser-native resizing without uploads",
+    ],
+    howItWorks: [
+      "Upload your image and choose the social placement you want to target.",
+      "Generate one preset or a batch of related sizes for that platform.",
+      "Download the ready-to-post exports individually or as a ZIP archive.",
+    ],
+    runtime: {
+      action: "image-social-resize",
+      engines: ["browser-image"],
+      input: {
+        accept: "image/*",
+        formats: "JPG, PNG, WebP, AVIF",
+        minCount: 1,
+        maxCount: 1,
+        warningFileSizeBytes: FILE_SIZE_LIMITS.warning,
+        maxFileSizeBytes: FILE_SIZE_LIMITS.max,
+      },
+      capabilities: { browserNativePreferred: true, metadataInspection: true, outputPreview: true, outputDownload: true },
+    },
+  },
 ];
 
 export const categories = categoryDefinitions;
 export const tools = toolCatalog;
+
+const relatedToolOrder: Partial<Record<ToolId, ToolId[]>> = {
+  "video-convert": ["video-compress", "video-trim", "video-merge", "video-burn-caption", "video-extract-audio"],
+  "video-compress": ["video-convert", "video-trim", "video-mute", "video-gif", "video-crop"],
+  "video-trim": ["video-convert", "video-compress", "video-gif", "video-burn-caption", "video-merge"],
+  "video-merge": ["video-trim", "video-convert", "video-compress", "video-effects", "video-burn-caption"],
+  "video-effects": ["video-convert", "video-trim", "video-reverse", "video-speed", "video-crop"],
+  "video-burn-caption": ["video-convert", "video-trim", "video-compress", "video-mute", "video-merge"],
+  "video-extract-audio": ["audio-convert", "audio-compress", "audio-trim", "video-mute", "video-convert"],
+  "video-gif": ["video-trim", "video-compress", "video-convert", "video-crop", "image-compress"],
+  "video-mute": ["video-compress", "video-convert", "video-trim", "video-extract-audio", "video-merge"],
+  "video-reverse": ["video-effects", "video-trim", "video-convert", "video-speed", "video-compress"],
+  "video-speed": ["video-effects", "video-trim", "video-convert", "audio-effects", "video-compress"],
+  "video-crop": ["video-trim", "video-compress", "video-convert", "video-gif", "video-burn-caption"],
+  "audio-convert": ["audio-compress", "audio-trim", "audio-effects", "audio-merge", "video-extract-audio"],
+  "audio-compress": ["audio-convert", "audio-trim", "audio-effects", "video-extract-audio", "audio-merge"],
+  "audio-trim": ["audio-convert", "audio-compress", "audio-merge", "audio-effects", "video-trim"],
+  "audio-merge": ["audio-trim", "audio-convert", "audio-compress", "audio-effects", "video-merge"],
+  "audio-effects": ["audio-trim", "audio-convert", "audio-compress", "video-speed", "video-extract-audio"],
+  "image-convert": ["image-compress", "image-resize", "image-crop", "image-rotate", "image-batch-compress"],
+  "image-compress": ["image-convert", "image-resize", "image-batch-compress", "image-crop", "image-filters"],
+  "image-resize": ["image-compress", "image-convert", "image-crop", "image-watermark", "image-filters"],
+  "image-batch-compress": ["image-compress", "image-convert", "image-resize", "image-watermark", "image-filters"],
+  "image-crop": ["image-resize", "image-convert", "image-rotate", "image-watermark", "image-filters"],
+  "image-rotate": ["image-crop", "image-resize", "image-convert", "image-filters", "image-watermark"],
+  "image-filters": ["image-compress", "image-watermark", "image-crop", "image-resize", "image-convert"],
+  "image-watermark": ["image-resize", "image-crop", "image-compress", "image-convert", "image-filters"],
+  "pdf-to-images": ["pdf-from-images", "pdf-merge", "image-convert", "image-compress", "image-resize"],
+  "pdf-from-images": ["pdf-to-images", "pdf-merge", "image-resize", "image-compress", "image-convert"],
+  "pdf-merge": ["pdf-to-images", "pdf-from-images", "image-convert", "image-compress", "image-resize"],
+  "pdf-split": ["pdf-merge", "pdf-to-images", "pdf-from-images", "image-thumbnail", "image-resize"],
+  "image-thumbnail": ["image-resize", "image-convert", "image-compress", "image-crop", "pdf-to-images"],
+  "pdf-reorder": ["pdf-split", "pdf-merge", "pdf-compress", "pdf-to-images", "pdf-extract-images"],
+  "pdf-compress": ["pdf-split", "pdf-merge", "pdf-to-images", "pdf-extract-images", "image-compress"],
+  "pdf-extract-images": ["pdf-to-images", "pdf-split", "image-convert", "image-thumbnail", "image-social-resize"],
+  "image-metadata": ["image-convert", "image-compress", "image-social-resize", "image-thumbnail", "image-icons"],
+  "image-blur-redact": ["image-crop", "image-resize", "image-watermark", "image-social-resize", "image-convert"],
+  "image-icons": ["image-thumbnail", "image-social-resize", "image-resize", "image-convert", "image-compress"],
+  "image-social-resize": ["image-resize", "image-thumbnail", "image-convert", "image-compress", "image-icons"],
+};
 
 export function getToolsByCategory(category: ToolCategory): ToolDefinition[] {
   return toolCatalog.filter((tool) => tool.category === category);
@@ -965,6 +1303,55 @@ export function getToolsByCategory(category: ToolCategory): ToolDefinition[] {
 
 export function getToolById(id: ToolId | string): ToolDefinition | undefined {
   return toolCatalog.find((tool) => tool.id === id);
+}
+
+export function getToolByHref(href: string): ToolDefinition | undefined {
+  return toolCatalog.find((tool) => tool.href === href);
+}
+
+export function getRelatedTools(toolId: ToolId | string, limit = 4): ToolDefinition[] {
+  const baseTool = getToolById(toolId);
+  if (!baseTool) return [];
+
+  const seen = new Set<string>([baseTool.id]);
+  const related: ToolDefinition[] = [];
+
+  const pushTool = (tool: ToolDefinition | undefined) => {
+    if (!tool || seen.has(tool.id)) return;
+    seen.add(tool.id);
+    related.push(tool);
+  };
+
+  for (const candidateId of relatedToolOrder[baseTool.id] ?? []) {
+    pushTool(getToolById(candidateId));
+    if (related.length >= limit) return related;
+  }
+
+  for (const candidate of toolCatalog) {
+    if (candidate.id === baseTool.id) continue;
+    if (candidate.category === baseTool.category && candidate.runtime.action === baseTool.runtime.action) {
+      pushTool(candidate);
+      if (related.length >= limit) return related;
+    }
+  }
+
+  for (const candidate of toolCatalog) {
+    if (candidate.id === baseTool.id) continue;
+    if (candidate.category === baseTool.category) {
+      pushTool(candidate);
+      if (related.length >= limit) return related;
+    }
+  }
+
+  for (const candidate of toolCatalog) {
+    if (candidate.id === baseTool.id) continue;
+    if (candidate.runtime.action === baseTool.runtime.action) {
+      pushTool(candidate);
+      if (related.length >= limit) return related;
+    }
+  }
+
+  return related;
 }
 
 export function getCategoryById(category: ToolCategory): ToolCategoryDefinition | undefined {

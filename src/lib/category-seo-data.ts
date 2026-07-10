@@ -9,6 +9,10 @@ export interface CategorySeoData {
   bestForPoints: string[];
   privacyTitle: string;
   privacyBody: string;
+  decisionGuideTitle: string;
+  decisionGuide: string[];
+  comparisonTitle: string;
+  comparisonPoints: string[];
   faqs: Array<{
     question: string;
     answer: string;
@@ -42,6 +46,18 @@ export const categorySeoDataMap: Record<ToolCategory, CategorySeoData> = {
     privacyTitle: "Why these video tools are privacy-friendly",
     privacyBody:
       "Video files often contain personal footage, screen recordings, meeting captures, or family clips. Keeping processing in the browser reduces the need to trust an external upload pipeline for routine edits.",
+    decisionGuideTitle: "How to choose the right video tool",
+    decisionGuide: [
+      "Use Video Compress when the file already works but is simply too large for upload, email, or chat apps.",
+      "Use Video Convert when the real problem is compatibility, container format, codec choice, or a destination platform requirement.",
+      "Use Video Trim before compression when only a short highlight matters. Removing extra footage first usually saves more bytes than pushing compression harder.",
+    ],
+    comparisonTitle: "Common video workflow patterns",
+    comparisonPoints: [
+      "Trim -> compress is usually the smartest order when you only need a short section from a long source.",
+      "Convert -> compress is useful when the source format is awkward for your destination or player.",
+      "Compress only is enough when the file already plays correctly and you mainly need a smaller upload.",
+    ],
     faqs: [
       {
         question: "Which video tool should I use first if my file is too large?",
@@ -86,6 +102,18 @@ export const categorySeoDataMap: Record<ToolCategory, CategorySeoData> = {
     privacyTitle: "Why local audio processing matters",
     privacyBody:
       "Audio can contain meetings, interviews, medical notes, lectures, or personal voice messages. Running conversions and trims locally gives users a safer default for sensitive recordings.",
+    decisionGuideTitle: "How to choose the right audio tool",
+    decisionGuide: [
+      "Use Audio Convert when playback compatibility is the main issue and you need MP3, AAC, WAV, FLAC, or another destination format.",
+      "Use Audio Compress when the file already works but takes too much space for sharing, publishing, or storage.",
+      "Use Audio Trim when the easiest size reduction is simply removing silence, intro material, or unused sections first.",
+    ],
+    comparisonTitle: "Common audio workflow patterns",
+    comparisonPoints: [
+      "Trim -> compress is usually best for podcasts, meetings, and voice notes with extra dead space.",
+      "Convert -> compress is useful when a device or app rejects the source format and you also need a smaller file.",
+      "Higher bitrates matter more for music than for speech, so voice recordings can often be reduced more aggressively.",
+    ],
     faqs: [
       {
         question: "Which audio format is safest for compatibility?",
@@ -130,6 +158,18 @@ export const categorySeoDataMap: Record<ToolCategory, CategorySeoData> = {
     privacyTitle: "Why browser-based image editing is useful",
     privacyBody:
       "Screenshots, scanned forms, invoices, mockups, and personal photos often contain sensitive information. Local image processing is a strong default for privacy and for quick turnaround.",
+    decisionGuideTitle: "How to choose the right image tool",
+    decisionGuide: [
+      "Use Image Compress when the format is already acceptable and the main goal is reducing file size.",
+      "Use Image Convert when the destination needs a different format such as WebP, PNG, JPG, or AVIF.",
+      "Use Image Resize when the real problem is oversized dimensions rather than compression quality alone.",
+    ],
+    comparisonTitle: "Common image workflow patterns",
+    comparisonPoints: [
+      "Resize -> compress is often the best sequence for website images because oversized dimensions waste more bytes than many people expect.",
+      "Convert -> compress is useful when a more efficient format like WebP or AVIF fits the destination workflow.",
+      "PNG is better for transparency and graphics, while JPG or WebP is usually better for photographic size reduction.",
+    ],
     faqs: [
       {
         question: "Which image tool should I use to improve website speed?",
@@ -174,6 +214,18 @@ export const categorySeoDataMap: Record<ToolCategory, CategorySeoData> = {
     privacyTitle: "Why browser-side PDF handling is valuable",
     privacyBody:
       "PDFs often contain contracts, IDs, invoices, academic records, or business documents. Keeping routine document manipulation on-device is a better privacy posture than uploading every file to an online converter.",
+    decisionGuideTitle: "How to choose the right PDF tool",
+    decisionGuide: [
+      "Use PDF to Images when the destination needs separate pages, previews, or page graphics instead of a document file.",
+      "Use Images to PDF when the source starts as screenshots, scans, or photos that need to become one document.",
+      "Use Merge PDF when you already have document files and only need to combine them in the correct order.",
+    ],
+    comparisonTitle: "Common PDF workflow patterns",
+    comparisonPoints: [
+      "Images -> PDF is the better starting point for mobile scans, receipts, and photographed paperwork.",
+      "PDF -> images is useful when a page needs to be reused in a presentation, website, or upload flow that does not accept PDF directly.",
+      "Merge only is enough when the files are already PDFs and you mainly need a single final document.",
+    ],
     faqs: [
       {
         question: "What is the best PDF tool to start with for scanned pages?",

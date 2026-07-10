@@ -202,7 +202,7 @@ export const seoDataMap: Record<string, ToolSeoData> = {
       { question: "Will converting JPEG to PNG improve quality?", answer: "No. PNG is lossless, meaning no additional compression artefacts are introduced during conversion — but any artefacts already in the JPEG are preserved in the PNG. The file will be larger, not better looking." },
       { question: "Does converting to WebP work on all browsers?", answer: "WebP is supported by all modern browsers (Chrome, Firefox, Safari 14+, Edge). Safari added WebP support in 2020. If you need to support very old Safari (pre-2020), stick with JPEG or PNG." },
       { question: "Why is my PNG output so much larger than the JPEG?", answer: "JPEG uses lossy compression that is very efficient for photographs. PNG is lossless and stores pixel data precisely — for a complex photograph, a PNG can be 5–10× larger than the equivalent JPEG." },
-      { question: "Can I batch convert multiple images?", answer: "Use the Batch Image Compressor to process multiple images with consistent settings. It supports format conversion alongside compression." },
+      { question: "Can I batch convert multiple images?", answer: "Yes. The image converter now supports small batch runs in the browser, so you can convert several images with the same format and quality settings in one pass." },
     ],
   },
 

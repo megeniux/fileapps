@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { buildStaticMetadata } from "@/lib/static-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildStaticMetadata({
   title: "Disclaimer",
   description: `${SITE.name} disclaimer covering accuracy, browser limitations, and user responsibility when using the tools.`,
-  alternates: {
-    canonical: `${SITE.url}/disclaimer`,
-  },
-};
+  path: "/disclaimer",
+});
 
 export default function DisclaimerPage() {
   return (

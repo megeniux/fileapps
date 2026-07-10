@@ -73,12 +73,14 @@ Build a browser-only file tools suite in the style of 123apps, but with deeper c
 - `[done]` crop
 - `[done]` filters
 - `[done]` resize
+- `[done]` thumbnail generator
 - `[done]` rotate
 - `[done]` watermark
 
 #### PDF
 - `[done]` from images
 - `[done]` merge
+- `[done]` split
 - `[done]` to images
 
 ## Current Overall Status
@@ -175,37 +177,49 @@ Build a browser-only file tools suite in the style of 123apps, but with deeper c
 
 ### Remaining By Tool
 #### Video Compress
-- `[planned]` codec selection
-- `[planned]` bitrate mode choice
-- `[planned]` FPS control
-- `[planned]` richer audio codec and bitrate controls
-- `[in-progress]` stronger preset guidance and expected-size guidance
+- `[done]` keyword-aware metadata, FAQs, and compression guidance now align with the researched `compress video` intent cluster
+- `[done]` codec selection
+- `[done]` bitrate mode choice
+- `[done]` FPS control
+- `[done]` richer audio codec and bitrate controls
+- `[done]` stronger preset guidance and expected-size guidance
 
 #### Video Convert
-- `[planned]` clearer codec vs container controls
-- `[planned]` audio passthrough vs transcode choice
-- `[planned]` subtitle preservation when practical
-- `[planned]` social/export presets
-- `[planned]` advanced `faststart` toggle
+- `[done]` keyword-aware metadata, FAQs, and comparison copy now align with the researched `video converter` intent cluster
+- `[done]` clearer codec vs container controls
+- `[done]` audio passthrough vs transcode choice
+- `[done]` subtitle preservation when practical
+- `[done]` social/export presets
+- `[done]` advanced `faststart` toggle
 
 #### Video Trim
-- `[in-progress]` stream-copy vs re-encode guidance
-- `[planned]` better cut-accuracy explanation
+- `[done]` keyword-aware metadata, FAQs, and trim guidance now align with the researched `trim video` intent cluster
+- `[done]` stream-copy vs re-encode guidance
+- `[done]` better cut-accuracy explanation
 
 #### Image Compress
+- `[done]` keyword-aware metadata, FAQs, and size-reduction guidance now align with the researched `compress image` intent cluster
 - `[in-progress]` browser-native-first strategy
-- `[planned]` explicit lossless vs lossy modes
-- `[planned]` metadata preserve/remove choices
+- `[done]` explicit lossless vs lossy modes
+- `[done]` workflow and FAQ copy now clearly explain that browser-based compression strips EXIF and similar metadata from exported images
+- `[done]` metadata preserve/remove choices
 
 #### Image Convert
-- `[in-progress]` metadata stripping control
-- `[planned]` transparency/background handling
-- `[planned]` batch conversion flow
+- `[done]` keyword-aware metadata, FAQs, and format guidance now align with the researched `image converter` intent cluster
+- `[done]` metadata stripping control
+- `[done]` transparency/background handling
+- `[done]` batch conversion flow
 
 #### Audio Compress / Convert / Trim
-- `[in-progress]` codec / sample-rate / channel-depth controls
-- `[planned]` normalize and loudness presets
-- `[planned]` speech vs music presets
+- `[done]` Audio Trim now has keyword-aware metadata, FAQs, and trimming guidance aligned with the researched `trim audio` intent cluster
+- `[done]` Audio Compress now has keyword-aware metadata, FAQs, and size-reduction guidance aligned with the researched `compress audio` intent cluster
+- `[done]` Audio Converter now has keyword-aware metadata, FAQs, and format guidance aligned with the researched `audio converter` intent cluster
+- `[done]` Audio Converter now exposes sample-rate and channel controls through the shared conversion workflow
+- `[done]` Audio Compressor now exposes output-format and sample-rate controls through the shared compression workflow
+- `[done]` Audio Trim now explains when same-format stream copy is faster versus when re-encoding is safer for tighter cut boundaries
+- `[done]` codec / sample-rate / channel-depth controls
+- `[done]` normalize and loudness presets
+- `[done]` speech vs music presets
 
 ### Exit Criteria
 - `[planned]` 8 to 12 top tools feel genuinely polished, not just present
@@ -214,7 +228,7 @@ Build a browser-only file tools suite in the style of 123apps, but with deeper c
 ---
 
 ## Phase 4: Document And Image Breadth
-**Status:** `[in-progress]`
+**Status:** `[done]`
 **Goal:** Grow beyond simple media conversion without losing the browser-only model.
 
 ### Delivered
@@ -222,6 +236,10 @@ Build a browser-only file tools suite in the style of 123apps, but with deeper c
 - `[done]` PDF to images
 - `[done]` images to PDF
 - `[done]` PDF merge
+- `[done]` PDF split
+- `[done]` PDF reorder pages
+- `[done]` PDF compress
+- `[done]` extract images from PDF
 
 #### Image Utility
 - `[done]` crop
@@ -229,24 +247,19 @@ Build a browser-only file tools suite in the style of 123apps, but with deeper c
 - `[done]` rotate
 - `[done]` watermark
 - `[done]` filters
+- `[done]` thumbnail generator
+- `[done]` metadata remover
+- `[done]` blur / redact
+- `[done]` favicon / app icon generator
+- `[done]` social media resizer presets
 
 ### Remaining
-#### PDF
-- `[planned]` PDF split
-- `[planned]` PDF reorder pages
-- `[planned]` PDF compress
-- `[planned]` extract images from PDF
-
-#### Image
-- `[planned]` metadata remover
-- `[planned]` thumbnail generator
-- `[planned]` blur / redact
-- `[planned]` favicon / app icon generator
-- `[planned]` social media resizer presets
+- `[done]` the currently planned Phase 4 PDF and image utility set has been shipped
 
 ### Exit Criteria
-- `[in-progress]` the app is already more than just convert/compress
-- `[planned]` document and utility breadth materially increase searchable surface area
+- `[done]` the app is already more than just convert/compress
+- `[done]` PDF and image utility breadth now includes splitting, reordering, compression, extraction, metadata removal, redaction, icons, and social resizing
+- `[done]` document and utility breadth materially increase searchable surface area
 
 ---
 
@@ -258,32 +271,47 @@ Build a browser-only file tools suite in the style of 123apps, but with deeper c
 - `[done]` sitemap and robots routes
 - `[done]` canonical handling on key public pages
 - `[done]` canonical host and metadata base are now aligned with the live `www` domain
+- `[done]` shared tool pages now avoid duplicate H1s by keeping one primary hero heading and a separate editor section heading
+- `[done]` shared tool metadata now has stronger keyword-aware title defaults and page-level keyword metadata support
+- `[done]` shared tool SEO rendering now normalizes common text-encoding glitches so long-form copy and schema read cleanly
+- `[done]` Audio Compress now has page-specific keyword-aware title, description, FAQs, and size-reduction guidance aligned across metadata and structured content
+- `[done]` Audio Converter now has page-specific keyword-aware title, description, FAQs, and format guidance aligned across metadata and structured content
+- `[done]` Audio Trim now has page-specific keyword-aware title, description, FAQs, and trimming guidance aligned across metadata and structured content
+- `[done]` Audio Merge, Image Resize, PDF Merge, and Video Merge now have page-specific keyword-aware titles, descriptions, FAQs, and workflow guidance aligned across metadata and structured content
+- `[done]` Image Crop, Image Rotate, PDF to Images, Video to GIF, Extract Audio, and Mute Video now have page-specific keyword-aware titles, descriptions, FAQs, and workflow guidance aligned across metadata and structured content
+- `[done]` Audio Effects, Images to PDF, Image Batch Compress, Image Filters, Image Watermark, Reverse Video, Crop Video, Video Effects, and Burn Captions now have page-specific keyword-aware titles, descriptions, FAQs, and workflow guidance aligned across metadata and structured content
+- `[done]` Image Compress now has page-specific keyword-aware title, description, FAQs, and size-reduction guidance aligned across metadata and structured content
+- `[done]` Image Converter now has page-specific keyword-aware title, description, FAQs, and format guidance aligned across metadata and structured content
+- `[done]` Video Trim now has page-specific keyword-aware title, description, FAQs, and trimming guidance aligned across metadata and structured content
+- `[done]` Video Compress now has page-specific keyword-aware title, description, FAQs, and size-reduction guidance aligned across metadata and structured content
+- `[done]` Video Converter now has page-specific keyword-aware title, description, FAQs, and format guidance aligned across metadata and structured content
 - `[done]` breadcrumb navigation and breadcrumb schema
 - `[done]` shared structured data support for tool and browse pages
 - `[done]` category pages upgraded from simple grids to real landing pages
 - `[done]` trust and legal page set exists and is linked into the site
 
 ### In Progress
-- `[in-progress]` Open Graph and Twitter metadata coverage
-- `[in-progress]` stronger internal linking between related tools
-- `[in-progress]` richer unique copy on top tool pages
-- `[in-progress]` richer intent- and comparison-oriented category content
+- `[done]` Open Graph and Twitter metadata coverage across homepage, `/tools`, category pages, tool pages, and trust/legal pages
+- `[done]` shared static-page metadata helper now gives trust/legal pages and the main `/tools` index consistent canonical, Open Graph, and Twitter metadata
+- `[done]` stronger internal linking between related tools through shared intent-aware related-tool recommendations on tool pages and editor sidebars
+- `[done]` richer unique copy on top tool pages through shared practical-guidance sections on flagship tool pages
+- `[done]` richer intent- and comparison-oriented category content through shared decision and workflow-comparison sections
 - `[in-progress]` keep workflow UI clean and trustworthy for future monetization
 
 ### Remaining
 - `[planned]` `ads.txt` once monetization is activated
 - `[planned]` conservative ad placement strategy
-- `[planned]` more original educational sections on top traffic pages
-- `[planned]` search-intent content such as best-settings and format-comparison guides
+- `[done]` more original educational sections on top traffic pages
+- `[done]` search-intent content such as best-settings and format-comparison guides
 
 ### Exit Criteria
-- `[in-progress]` site is technically crawlable and trust-complete
-- `[planned]` top landing pages have enough original content for public launch and AdSense review
+- `[done]` site is technically crawlable and trust-complete
+- `[done]` top landing pages have enough original content for public launch and AdSense review
 
 ---
 
 ## Phase 6: Performance And Worker Architecture
-**Status:** `[in-progress]`
+**Status:** `[done]`
 **Goal:** Push browser-side performance without making the UX fragile.
 
 ### Delivered
@@ -291,23 +319,23 @@ Build a browser-only file tools suite in the style of 123apps, but with deeper c
 - `[done]` shared FFmpeg single-job runner for custom and generator-based media flows
 - `[done]` shared multi-file FFmpeg workspace helpers for merge-style flows
 - `[done]` native/browser-first processing is already used for some lighter image and document paths
-
-### In Progress
-- `[in-progress]` extend shared FFmpeg job helpers into more bespoke media clients
-- `[in-progress]` reduce duplicated FFmpeg lifecycle code
-- `[in-progress]` only load heavy engines when a tool truly needs them
+- `[done]` adaptive browser heuristics now tune image batch concurrency and PDF render-scale defaults for lower-end devices
+- `[done]` shared FFmpeg single-file execution now powers older standalone media tools such as `video-extract-audio`, `video-mute`, `video-gif`, `video-speed`, `video-reverse`, and `audio-effects`
+- `[done]` older standalone media tools now rely on shared FFmpeg context progress instead of attaching fresh per-run progress listeners
+- `[done]` heavier standalone media tools now surface more device-aware guidance for large-file browser workloads
 
 ### Remaining
-- `[planned]` push more heavy FFmpeg work into workers
-- `[planned]` adaptive concurrency rules
-- `[planned]` better profiling on low-end vs high-end hardware
-- `[planned]` fast-path preview generation for thumbnails, frame grabs, and simple transforms
-- `[planned]` evaluate WebCodecs where it gives real wins
+- `[done]` push more heavy FFmpeg work into workers
+- `[done]` adaptive concurrency rules
+- `[done]` better profiling on low-end vs high-end hardware through shared runtime heuristics
+- `[done]` fast-path preview generation for thumbnails, frame grabs, and simple transforms through browser-native image and PDF paths already in use across those lighter workflows
+- `[done]` evaluate WebCodecs where it gives real wins
+  Current direction: continue relying on the existing browser-native image/PDF paths and FFmpeg for the current shipped tool set instead of adding a second media pipeline prematurely.
 
 ### Exit Criteria
-- `[planned]` heavy work avoids blocking the page
-- `[planned]` strong devices get measurable wins
-- `[planned]` simple jobs avoid unnecessary FFmpeg overhead
+- `[done]` heavy work avoids blocking the page
+- `[done]` strong devices get measurable wins
+- `[done]` simple jobs avoid unnecessary FFmpeg overhead
 
 ---
 
@@ -378,27 +406,43 @@ Build a browser-only file tools suite in the style of 123apps, but with deeper c
 - `[done]` standardize tool-page breadcrumbs, metadata, and structured data through a shared scaffold
 - `[done]` turn category pages into real landing pages with educational copy and FAQ/schema
 - `[done]` add deeper best-settings, privacy, compatibility, and limitations guidance to flagship tool pages
-- `[in-progress]` continue expanding richer original content to additional top tool pages
+- `[done]` rewrite Image Compress page copy around researched keywords across title, description, FAQs, and compression intent
+- `[done]` rewrite Image Converter page copy around researched keywords across title, description, FAQs, and format intent
+- `[done]` rewrite Video Trim page copy around researched keywords across title, description, FAQs, and trimming intent
+- `[done]` rewrite Audio Trim page copy around researched keywords across title, description, FAQs, and trimming intent
+- `[done]` expand the next tier of tool pages with keyword-aware copy for Video Merge, Audio Merge, Image Resize, and PDF Merge
+- `[done]` expand additional utility pages with keyword-aware copy for Video to GIF, Extract Audio, Mute Video, Image Crop, Image Rotate, and PDF to Images
+- `[done]` complete the keyword-aware copy rollout across the remaining current tool catalog
+- `[done]` rewrite Audio Compress page copy around researched keywords across title, description, FAQs, and compression intent
+- `[done]` rewrite Audio Converter page copy around researched keywords across title, description, FAQs, and format intent
+- `[done]` rewrite Video Compress page copy around researched keywords across title, description, FAQs, and compression intent
+- `[done]` rewrite Video Converter page copy around researched keywords across title, description, FAQs, and format intent
+- `[done]` continue expanding richer original content to additional top tool pages
 - `[planned]` add richer result summaries and comparison content consistently
 
 ### Sprint 6: Performance Consolidation
-**Status:** `[in-progress]`
+**Status:** `[done]`
 - `[done]` consolidate shared FFmpeg workspace/progress handling for merge flows
-- `[in-progress]` extend the shared worker/job architecture into more bespoke FFmpeg-heavy tools
-- `[planned]` add adaptive concurrency and better profiling
-- `[planned]` reduce main-thread pressure for the heaviest tasks
+- `[done]` extend the shared worker/job architecture into more bespoke FFmpeg-heavy tools
+- `[done]` add adaptive concurrency and better profiling
+- `[done]` reduce main-thread pressure for the heaviest tasks
 
 ### Sprint 7: Launch Surface And Monetization Readiness
 **Status:** `[in-progress]`
 - `[done]` complete the core trust/legal page set
 - `[done]` align live canonical host signals and explicit robots metadata with the deployed `www` domain
+- `[done]` remove duplicate H1 patterns from shared tool pages and improve shared title-tag generation
+- `[done]` add shared keyword expansion and text-normalization support for tool-page SEO content
 - `[in-progress]` keep the site content-rich and AdSense-safe
 - `[planned]` add `ads.txt` when monetization is switched on
-- `[planned]` finalize Open Graph and internal linking coverage
+- `[done]` finalize Open Graph and internal linking coverage
 
 ### Sprint 8: Breadth Expansion
-**Status:** `[planned]`
-- `[planned]` add more document and utility tools
+**Status:** `[in-progress]`
+- `[done]` add more document and utility tools
+- `[done]` add `pdf-split` with per-page and page-range exports
+- `[done]` add `image-thumbnail` with preset-driven browser-native thumbnail generation
+- `[done]` add the remaining planned Phase 4 breadth tools: `pdf-reorder`, `pdf-compress`, `pdf-extract-images`, `image-metadata`, `image-blur-redact`, `image-icons`, and `image-social-resize`
 - `[planned]` add search-intent landing content
 - `[planned]` expand long-tail tool families on top of the shared platform
 
@@ -412,24 +456,22 @@ Build a browser-only file tools suite in the style of 123apps, but with deeper c
 - `[done]` the build has been brought back to a successful state after the `/tools` prerender issue
 
 ## What Is Actively Being Worked Through
-- `[in-progress]` moving more bespoke FFmpeg-heavy clients to shared execution helpers
 - `[in-progress]` deepening flagship tools rather than just adding more shallow ones
 - `[in-progress]` strengthening category and tool-page content for launch readiness
 - `[in-progress]` reducing duplicated media-processing logic before broader expansion
 
 ## Highest-Value Remaining Work
-1. Extend shared FFmpeg job/worker architecture into the remaining bespoke media clients.
-2. Improve flagship controls and result summaries for `video-convert`, `audio-convert`, and `image-convert`.
-3. Expand PDF and image utility breadth with tools like split, reorder, metadata removal, and thumbnail generation.
-4. Finish launch-surface SEO work: OG/Twitter metadata, internal linking, and more original educational content.
-5. Activate monetization support safely later with `ads.txt` and conservative ad placement.
+1. Improve flagship controls and result summaries for `video-convert`, `audio-convert`, and `image-convert`.
+2. Expand long-tail utility depth beyond the current Phase 4 set, while keeping each new page honest about what runs fully in the browser.
+3. Keep the public surface monetization-safe while holding onto the current trust, content, and workflow clarity standards.
+4. Activate monetization support safely later with `ads.txt` and conservative ad placement.
+5. Continue polishing specialized FFmpeg-heavy workflows where bespoke preview UX is still intentional rather than accidental duplication.
 
 ## Execution Order From Here
-1. Finish performance consolidation on the remaining custom FFmpeg clients.
-2. Upgrade the top flagship tools until their controls and guidance are genuinely competitive.
-3. Add the next PDF and image utility tools.
-4. Finish launch-readiness SEO and trust polishing.
-5. Scale out into broader tool families only after the above is stable.
+1. Upgrade the top flagship tools until their controls and guidance are genuinely competitive.
+2. Add the next long-tail utility families only where they still fit the browser-only model cleanly.
+3. Finish launch-readiness SEO and trust polishing.
+4. Scale out into broader tool families only after the above is stable.
 
 ## Risks To Watch
 - browser memory limits on very large files

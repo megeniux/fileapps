@@ -3,7 +3,7 @@ import type { ToolSeoData } from "@/lib/seo-types";
 type ToolSeoExtension = Partial<
   Pick<
     ToolSeoData,
-    "bestSettings" | "compatibilityNotes" | "limitations" | "privacyNote"
+    "bestSettings" | "compatibilityNotes" | "limitations" | "privacyNote" | "editorialSections"
   >
 >;
 
@@ -35,6 +35,17 @@ export const toolSeoExtensions: Record<string, ToolSeoExtension> = {
       "Very large 4K or long-duration conversions will still take time in a browser compared with native desktop software.",
       "Switching to a less efficient codec or keeping a high resolution can make the output larger than the original file.",
     ],
+    editorialSections: [
+      {
+        title: "When to convert video instead of compressing it",
+        body: "Format conversion solves a different problem than size reduction. If a file refuses to play on a device, editor, or social platform, container and codec compatibility are usually the first things to fix.",
+        points: [
+          "Choose conversion first when the destination rejects the source format or codec.",
+          "Choose compression first when the file already works but is too large for upload or sharing.",
+          "Use both when you need a more compatible format and a smaller final file.",
+        ],
+      },
+    ],
     privacyNote:
       "Video conversions often involve personal recordings, course captures, or internal business footage. Running the conversion in your browser avoids sending the full source file to an external conversion service.",
   },
@@ -60,6 +71,17 @@ export const toolSeoExtensions: Record<string, ToolSeoExtension> = {
     limitations: [
       "Compression is always a tradeoff, so aggressive settings can make motion, text, and fine detail look softer or blockier.",
       "Long clips may still exceed strict messaging limits even after compression, in which case trimming first is often the better move.",
+    ],
+    editorialSections: [
+      {
+        title: "The fastest way to shrink a video",
+        body: "People often push compression too hard when the real win comes from changing the workflow order. Shorter duration and sensible resolution almost always matter more than tiny codec tweaks.",
+        points: [
+          "Trim the clip first if you only need a highlight instead of the full recording.",
+          "Drop from 1080p to 720p before sacrificing too much quality on text-heavy or motion-heavy clips.",
+          "Use bitrate mode only when a strict upload ceiling matters more than visual consistency.",
+        ],
+      },
     ],
     privacyNote:
       "Compression is often used on personal phone videos, family clips, or internal recordings. Keeping that process local avoids uploading raw footage just to make it small enough for sharing.",
@@ -87,6 +109,17 @@ export const toolSeoExtensions: Record<string, ToolSeoExtension> = {
       "A single trim operation extracts one continuous range rather than building a multi-cut timeline.",
       "Exact frame-level cuts are harder to guarantee in copy mode because they depend on how the source file was encoded.",
     ],
+    editorialSections: [
+      {
+        title: "Trim before you optimize",
+        body: "Trimming is often the smartest first step because it removes content you never wanted to keep. That usually reduces file size, processing time, and later editing complexity all at once.",
+        points: [
+          "Use trim first for highlights, teasers, reels, and support clips.",
+          "Use copy mode when speed matters more than frame-perfect precision.",
+          "Re-encode when the start and end points need to feel cleaner to the viewer.",
+        ],
+      },
+    ],
     privacyNote:
       "Trim jobs often involve recordings that contain extra personal or confidential footage around the part you actually need. Local trimming helps remove that excess without uploading the raw original anywhere.",
   },
@@ -112,6 +145,17 @@ export const toolSeoExtensions: Record<string, ToolSeoExtension> = {
     limitations: [
       "Converting from one lossy format to another does not restore detail that was already discarded in the original source.",
       "Very large or long recordings still depend on browser memory, especially when converting from video sources.",
+    ],
+    editorialSections: [
+      {
+        title: "How to choose the right audio output",
+        body: "The best destination format depends on what happens after the conversion. Playback compatibility, editing needs, archive goals, and file size all point toward different answers.",
+        points: [
+          "Use MP3 when you want the safest all-purpose output.",
+          "Use AAC or M4A for strong mobile efficiency, especially in Apple-focused workflows.",
+          "Use WAV or FLAC when future editing or archive quality matters more than file size.",
+        ],
+      },
     ],
     privacyNote:
       "Audio conversions often involve interviews, meetings, lectures, or personal voice recordings. Local processing lets you change format without pushing those files through a remote converter.",
@@ -139,6 +183,17 @@ export const toolSeoExtensions: Record<string, ToolSeoExtension> = {
       "Very aggressive compression can introduce obvious artefacts, especially on music, ambience, and dense high-frequency content.",
       "Shrinking speech files is usually easier than shrinking music files to the same quality standard.",
     ],
+    editorialSections: [
+      {
+        title: "Speech files and music files should not use the same settings",
+        body: "A voice note, interview, or meeting recording can often sound fine at settings that would noticeably damage a song. Matching the compression profile to the content is more important than chasing one universal bitrate.",
+        points: [
+          "Mono and lower sample rates are often acceptable for speech-first material.",
+          "Music usually deserves higher bitrate and stereo output to avoid obvious damage.",
+          "If you are unsure, start with a moderate preset and listen before reducing more aggressively.",
+        ],
+      },
+    ],
     privacyNote:
       "Audio compression is often used on recordings that include conversations, meetings, or interviews. Keeping the job local makes it easier to handle those files without relying on a hosted upload service.",
   },
@@ -164,6 +219,17 @@ export const toolSeoExtensions: Record<string, ToolSeoExtension> = {
     limitations: [
       "This tool extracts one continuous region at a time rather than assembling several separate clips into one export.",
       "Automatic silence detection is not the primary workflow here, so manual selection remains the most reliable approach.",
+    ],
+    editorialSections: [
+      {
+        title: "When trimming solves the size problem better than compression",
+        body: "A surprising number of audio files are only large because they contain dead air, repeated takes, or irrelevant material. Cutting those sections first often preserves quality better than lowering bitrate aggressively.",
+        points: [
+          "Use trim first for lectures, meetings, podcasts, and long voice notes.",
+          "Keep the same format if you want the fastest export path.",
+          "Re-encode only when you also need a different destination format or cleaner boundaries.",
+        ],
+      },
     ],
     privacyNote:
       "Local audio trimming is especially useful when the beginning or end of a recording contains private context that should never leave your device before it is removed.",
@@ -195,6 +261,17 @@ export const toolSeoExtensions: Record<string, ToolSeoExtension> = {
       "Converting a lossy source into a lossless format does not restore detail that was already lost in the original image.",
       "Newer formats like AVIF can be more efficient, but some older software and workflows still behave more predictably with JPEG or PNG.",
     ],
+    editorialSections: [
+      {
+        title: "Convert format for the destination, not just for the smallest file",
+        body: "The most efficient format is not automatically the best choice if the next app, marketplace, or editor has stricter support expectations. Compatibility still matters.",
+        points: [
+          "Use WebP or AVIF when the target is modern web delivery and smaller files matter.",
+          "Use PNG when transparency or editing predictability matters more than size.",
+          "Use JPEG when broad compatibility is more important than advanced format efficiency.",
+        ],
+      },
+    ],
     privacyNote:
       "Image conversion is often used on screenshots, receipts, mockups, forms, and product photos. Running it locally helps keep those assets on-device during routine prep work.",
   },
@@ -220,6 +297,17 @@ export const toolSeoExtensions: Record<string, ToolSeoExtension> = {
     limitations: [
       "Compression can soften edges, fine text, and very detailed textures if the quality level is pushed too low.",
       "Image compression does not fix oversized pixel dimensions on its own, so very large source images may still need resizing for the best web result.",
+    ],
+    editorialSections: [
+      {
+        title: "The best image optimization order for most websites",
+        body: "Many large images stay large because the dimensions are bigger than the layout needs. Compression helps, but right-sized dimensions and the right format usually matter just as much.",
+        points: [
+          "Resize to the real display size before chasing lower quality settings.",
+          "Use WebP when browser support in the destination workflow is already acceptable.",
+          "Preserve metadata only when you truly need it, because stripping it is better for privacy and sometimes for size.",
+        ],
+      },
     ],
     privacyNote:
       "Image compression is commonly used on screenshots, scanned forms, and personal photos. Local processing helps keep those originals private while you optimize them for upload or storage.",

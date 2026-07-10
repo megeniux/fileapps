@@ -1,14 +1,11 @@
 import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getToolBreadcrumbs, toAbsoluteUrl } from "@/lib/breadcrumbs";
-import { seoDataMap } from "@/lib/seo-data";
-import { getToolById } from "@/lib/tools";
+import { getToolSeoSummary, normalizeSeoText } from "@/lib/tool-seo";
 
 export function ToolStructuredData({ toolId }: { toolId: string }) {
-  const tool = getToolById(toolId);
+  const { tool, data, heroTitle, metaTitle, metaDescription, keywords } = getToolSeoSummary(toolId);
   if (!tool) return null;
-
-  const data = seoDataMap[toolId];
   const breadcrumbs = getToolBreadcrumbs(toolId);
 
   const howToSchema = data
@@ -17,7 +14,7 @@ export function ToolStructuredData({ toolId }: { toolId: string }) {
         "@type": "HowTo",
         name: data.howToTitle,
         totalTime: "PT2M",
-        tool: { "@type": "HowToTool", name: `FileApps ${tool.title}` },
+        tool: { "@type": "HowToTool", name: `FileApps ${normalizeSeoText(tool.title)}` },
         step: data.howToSteps.map((step) => ({
           "@type": "HowToStep",
           name: step.name,
@@ -41,13 +38,15 @@ export function ToolStructuredData({ toolId }: { toolId: string }) {
   const softwareSchema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    name: tool.title,
+    name: heroTitle,
+    alternateName: metaTitle,
     applicationCategory: "MultimediaApplication",
     operatingSystem: "Any",
     isAccessibleForFree: true,
     url: toAbsoluteUrl(tool.href),
-    description: data?.metaDescription ?? tool.description,
-    featureList: tool.features,
+    description: metaDescription,
+    keywords: keywords.join(", "),
+    featureList: tool.features.map(normalizeSeoText),
   };
 
   return (

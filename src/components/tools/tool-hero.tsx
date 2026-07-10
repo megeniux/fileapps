@@ -26,6 +26,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { BreadcrumbNav } from "@/components/seo/breadcrumb-nav";
 import { getToolBreadcrumbs } from "@/lib/breadcrumbs";
+import { getToolHeroTitle, getToolSeoData, normalizeSeoText } from "@/lib/tool-seo";
 import { cn } from "@/lib/utils";
 import { categories, getToolById, type ToolCategory } from "@/lib/tools";
 
@@ -66,9 +67,12 @@ export function ToolHero({ toolId }: { toolId: string }) {
 
   const category = categories.find((item) => item.id === tool.category);
   const breadcrumbs = getToolBreadcrumbs(toolId);
+  const data = getToolSeoData(toolId);
   const ToolIcon = toolIconMap[tool.icon] || WandSparkles;
   const CategoryIcon = categoryIconMap[tool.category];
   const featureItems = tool.features.slice(0, 3);
+  const heroTitle = getToolHeroTitle(toolId);
+  const heroDescription = data?.metaDescription ?? normalizeSeoText(tool.description);
 
   return (
     <section className="border-b bg-gradient-to-b from-background to-muted/30">
@@ -97,10 +101,10 @@ export function ToolHero({ toolId }: { toolId: string }) {
 
             <div className="space-y-3">
               <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-                {tool.title}
+                {heroTitle}
               </h1>
               <p className="max-w-2xl text-base text-muted-foreground md:text-lg">
-                {tool.description}
+                {heroDescription}
               </p>
             </div>
 
@@ -113,7 +117,7 @@ export function ToolHero({ toolId }: { toolId: string }) {
                   <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
                     <Check className="h-3.5 w-3.5" />
                   </span>
-                  <span>{feature}</span>
+                  <span>{normalizeSeoText(feature)}</span>
                 </li>
               ))}
             </ul>

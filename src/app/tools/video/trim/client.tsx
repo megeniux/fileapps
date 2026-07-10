@@ -245,6 +245,8 @@ function VideoTrimForm({
   const [generating, setGenerating] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const resolvedPreviewUrl = useMemo(() => previewUrl ?? URL.createObjectURL(file), [file, previewUrl]);
+  const inputFormat = file.name.split(".").pop()?.toLowerCase() || "";
+  const sameFormat = format === inputFormat;
 
   useEffect(() => {
     if (previewUrl) return;
@@ -410,6 +412,18 @@ function VideoTrimForm({
             ? "⚠ WebM requires full re-encoding (slowest)"
             : "Re-encoding required (slower than stream copy)"}
         </p>
+      </div>
+
+      <div className="rounded-md border bg-muted/40 px-4 py-3 text-xs text-muted-foreground">
+        {sameFormat ? (
+          <p>
+            Fast trim mode keeps the original streams when possible. That is quickest, but cuts can land on the nearest keyframe instead of the exact frame you selected.
+          </p>
+        ) : (
+          <p>
+            Precision trim mode re-encodes the selected section. It takes longer, but it is the better choice when you need cleaner in and out points for highlights, tutorials, or social clips.
+          </p>
+        )}
       </div>
 
       {/* Quick presets */}

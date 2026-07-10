@@ -84,6 +84,34 @@ export function CategoryContent({ categoryId }: { categoryId: ToolCategory }) {
           </div>
         </div>
 
+        <div className="grid gap-6 lg:grid-cols-2">
+          <Card className="border-border/70 bg-background/70 shadow-sm">
+            <CardContent className="space-y-4 p-5">
+              <h2 className="text-2xl font-bold">{data.decisionGuideTitle}</h2>
+              <ul className="space-y-3 text-sm text-muted-foreground">
+                {data.decisionGuide.map((item) => (
+                  <li key={item} className="leading-relaxed">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="border-border/70 bg-background/70 shadow-sm">
+            <CardContent className="space-y-4 p-5">
+              <h2 className="text-2xl font-bold">{data.comparisonTitle}</h2>
+              <ul className="space-y-3 text-sm text-muted-foreground">
+                {data.comparisonPoints.map((item) => (
+                  <li key={item} className="leading-relaxed">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+
         <div className="space-y-5">
           <div className="space-y-2">
             <h2 className="text-2xl font-bold">Frequently asked questions</h2>

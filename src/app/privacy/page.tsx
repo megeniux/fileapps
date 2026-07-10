@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { buildStaticMetadata } from "@/lib/static-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildStaticMetadata({
   title: "Privacy Policy",
   description: `${SITE.name} privacy policy. Learn how we handle your data and protect your privacy.`,
-  alternates: {
-    canonical: `${SITE.url}/privacy`,
-  },
-};
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (
